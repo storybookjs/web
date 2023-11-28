@@ -3,6 +3,7 @@ import { Nunito_Sans as FontSans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { cn } from "@/lib/utils";
+import { Providers } from "./providers";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -21,15 +22,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}
       >
-        <Header />
-        {children}
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   );
