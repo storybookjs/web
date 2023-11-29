@@ -7,7 +7,6 @@ import {
   BookmarkHollowIcon,
   ChevronSmallDownIcon,
   GlobeIcon,
-  MenuIcon,
   RSSIcon,
   StarHollowIcon,
 } from "@storybook/icons";
@@ -15,6 +14,8 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Search } from "./search";
+import { MobileMenu } from "./mobile-menu";
+import { Submenu } from "./submenu";
 import { Button } from "../ui/button";
 
 interface HeaderProps {
@@ -22,6 +23,8 @@ interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
+  const pathname = usePathname();
+
   return (
     <header
       className={cn(
@@ -42,24 +45,63 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
         >
           <div className="flex gap-6 items-center">
             <Link href="/">
-              <StorybookLogo />
+              <StorybookLogo color={variant === "home" ? "white" : "system"} />
             </Link>
             <NavigationMenu.Root className="max-[864px]:hidden">
               <NavigationMenu.List className="flex gap-2">
                 <NavigationMenu.Item>
-                  <NavigationMenuLink title="Why" href="#" />
+                  <NavigationMenu.Link asChild>
+                    <Button
+                      asChild
+                      variant={variant === "home" ? "ghostHome" : "ghostSystem"}
+                    >
+                      <a href="#">Why</a>
+                    </Button>
+                  </NavigationMenu.Link>
                 </NavigationMenu.Item>
                 <NavigationMenu.Item>
-                  <NavigationMenuLink title="Showcase" href="#" />
+                  <NavigationMenu.Link asChild>
+                    <Button
+                      asChild
+                      variant={variant === "home" ? "ghostHome" : "ghostSystem"}
+                    >
+                      <a href="#">Showcase</a>
+                    </Button>
+                  </NavigationMenu.Link>
                 </NavigationMenu.Item>
                 <NavigationMenu.Item>
-                  <NavigationMenuLink title="Docs" href="/docs" />
+                  <NavigationMenu.Link asChild>
+                    <Button
+                      asChild
+                      active={pathname === "/docs"}
+                      variant={variant === "home" ? "ghostHome" : "ghostSystem"}
+                    >
+                      <Link href="/docs">Docs</Link>
+                    </Button>
+                  </NavigationMenu.Link>
                 </NavigationMenu.Item>
                 <NavigationMenu.Item>
-                  <NavigationMenuLink title="Integrations" href="#" />
+                  <NavigationMenu.Link asChild>
+                    <Button
+                      asChild
+                      variant={variant === "home" ? "ghostHome" : "ghostSystem"}
+                    >
+                      <a href="#">Integrations</a>
+                    </Button>
+                  </NavigationMenu.Link>
                 </NavigationMenu.Item>
                 <NavigationMenu.Item className="relative">
-                  <NavigationMenuTrigger title="Community" />
+                  <NavigationMenu.Trigger asChild>
+                    <Button
+                      variant={variant === "home" ? "ghostHome" : "ghostSystem"}
+                    >
+                      Community
+                      <ChevronSmallDownIcon
+                        className="top-px transition-transform ease-in group-data-[state=open]:-rotate-180"
+                        aria-hidden
+                      />
+                    </Button>
+                  </NavigationMenu.Trigger>
                   <NavigationMenu.Content className="absolute top-8 left-0 p-3 shadow-xl z-30 bg-white min-w-[288px] rounded">
                     <DropdownLink
                       href="#"
@@ -95,44 +137,24 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
                   </NavigationMenu.Content>
                 </NavigationMenu.Item>
                 <NavigationMenu.Item>
-                  <NavigationMenuLink title="Enterprise" href="#" />
+                  <NavigationMenu.Link asChild>
+                    <Button
+                      asChild
+                      variant={variant === "home" ? "ghostHome" : "ghostSystem"}
+                    >
+                      <a href="#">Enterprise</a>
+                    </Button>
+                  </NavigationMenu.Link>
                 </NavigationMenu.Item>
               </NavigationMenu.List>
             </NavigationMenu.Root>
           </div>
-          <Search />
-          <Button variant="ghost" size="iconSm" className="min-[864px]:hidden">
-            <MenuIcon />
-          </Button>
+          <Search variant={variant} />
+          <MobileMenu variant={variant} />
         </div>
-        <div
-          className={cn(
-            "flex items-center p-4 lg:hidden",
-            variant === "home" && "border-b border-zinc-700",
-            variant === "docs" &&
-              "border-b border-zinc-200 dark:border-zinc-700"
-          )}
-        >
-          Submenu
-        </div>
+        {pathname === "/docs" && <Submenu variant={variant} />}
       </div>
     </header>
-  );
-};
-
-interface NavigationMenuTriggerProps {
-  title: string;
-}
-
-const NavigationMenuTrigger: FC<NavigationMenuTriggerProps> = ({ title }) => {
-  return (
-    <NavigationMenu.Trigger className="h-8 hover:bg-blue-100 text-slate-500 hover:text-blue-500 transition-colors group flex select-none items-center justify-between gap-1 rounded px-2 text-sm font-bold dark:text-white dark:hover:bg-blue-900">
-      {title}
-      <ChevronSmallDownIcon
-        className="text-violet10 relative top-[1px] transition-transform ease-in group-data-[state=open]:-rotate-180"
-        aria-hidden
-      />
-    </NavigationMenu.Trigger>
   );
 };
 
@@ -145,14 +167,8 @@ const NavigationMenuLink: FC<NavigationMenuLinkProps> = ({ title, href }) => {
   const pathname = usePathname();
 
   return (
-    <NavigationMenu.Link
-      className={cn(
-        "h-8 hover:bg-blue-100 text-slate-500 hover:text-blue-500 transition-colors group flex select-none items-center justify-between gap-2 rounded px-2 text-sm font-bold dark:text-white dark:hover:bg-blue-900",
-        pathname === href && "bg-blue-100 text-blue-500"
-      )}
-      href={href}
-    >
-      {title}
+    <NavigationMenu.Link href={href}>
+      <Button active={pathname === href ? true : false}>{title}</Button>
     </NavigationMenu.Link>
   );
 };

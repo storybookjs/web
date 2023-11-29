@@ -1,12 +1,11 @@
 import { Footer } from "@/components/footer/footer";
 import { Header } from "@/components/header/header";
-import { Fragment } from "react";
 
 export default function Home() {
   return (
-    <Fragment>
+    <>
       <Header variant="home" />
-      <main className="max-w-8xl mx-auto px-4 lg:px-8 py-12">
+      <main className="max-w-8xl mx-auto px-4 lg:px-8 py-12 bg-zinc-900 text-white">
         <div>Hello Home</div>
         <div>Hello Home</div>
         <div>Hello Home</div>
@@ -261,6 +260,6 @@ export default function Home() {
         <div>Hello Home</div>
       </main>
       <Footer variant="home" />
-    </Fragment>
+    </>
   );
 }

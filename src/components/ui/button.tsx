@@ -9,29 +9,27 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "bg-slate-900 text-slate-50 hover:bg-slate-900/90 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90",
-        destructive:
-          "bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90",
-        outline:
-          "border border-slate-200 bg-white hover:bg-slate-100 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50",
-        secondary:
-          "bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80",
-        ghost:
-          "hover:bg-blue-100 text-slate-500 hover:text-blue-500 transition-colors dark:text-white dark:hover:bg-blue-900",
+        ghostHome:
+          "group flex items-center justify-center gap-2 rounded text-sm text-white font-bold hover:bg-blue-500/10 hover:text-blue-500 transition-colors",
+        ghostSystem:
+          "group flex items-center justify-center gap-2 rounded text-sm text-zinc-500 font-bold hover:bg-blue-100 hover:text-blue-500 transition-colors dark:text-white dark:hover:bg-blue-500/10",
         link: "text-slate-900 underline-offset-4 hover:underline dark:text-slate-50",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
+        sm: "h-7 rounded-md px-2",
+        lg: "h-8 rounded-md px-2",
         iconSm: "h-7 w-7",
         iconLg: "h-10 w-10",
       },
+      active: {
+        true: "bg-blue-100 text-blue-500 dark:bg-blue-500/10 dark:text-blue-500",
+        false: "",
+      },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: "ghostSystem",
+      size: "lg",
+      active: false,
     },
   }
 );
@@ -43,11 +41,11 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, active, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, active, size, className }))}
         ref={ref}
         {...props}
       />
