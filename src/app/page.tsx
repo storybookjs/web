@@ -1,3 +1,4 @@
+import { Footer } from "@/components/footer/footer";
 import { Header } from "@/components/header/header";
 import { Fragment } from "react";
 
@@ -259,6 +260,7 @@ export default function Home() {
         <div>Hello Home</div>
         <div>Hello Home</div>
       </main>
+      <Footer variant="home" />
     </Fragment>
   );
 }

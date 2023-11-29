@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/header/header";
 import { Fragment } from "react";
+import { Footer } from "@/components/footer/footer";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -17,6 +18,7 @@ export default function RootLayout({
     <Fragment>
       <Header variant="docs" />
       {children}
+      <Footer />
     </Fragment>
   );
 }

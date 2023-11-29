@@ -16,7 +16,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const headerVariants = cva(
-  "w-full lg:border-b lg:border-slate-100 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90",
+  "w-full lg:border-b lg:border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90",
   {
     variants: {
       variant: {
