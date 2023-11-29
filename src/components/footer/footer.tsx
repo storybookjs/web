@@ -2,20 +2,18 @@ import { cn } from "@/lib/utils";
 import { VariantProps, cva } from "class-variance-authority";
 import { FC } from "react";
 
-const footerVariants = cva(
-  "w-full min-h-[400px] lg:border-t lg:border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90",
-  {
-    variants: {
-      variant: {
-        default: "bg-slate-50 text-slate-800",
-        home: "bg-zinc-900 text-white",
-      },
+const footerVariants = cva("w-full min-h-[400px]", {
+  variants: {
+    variant: {
+      default:
+        "bg-slate-50 text-slate-800 border-t border-t-slate-200 dark:border-t-slate-700",
+      home: "bg-zinc-900 text-white border-t border-t-zinc-700",
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 export interface FooterProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,

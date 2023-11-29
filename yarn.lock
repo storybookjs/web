@@ -335,10 +335,10 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.5.1.tgz#5f1b518ec5fa54437c0b7c4a821546c64fed6922"
   integrity sha512-6i/8UoL0P5y4leBIGzvkZdS85RDMG9y1ihZzmTZQ5LdHUYmZ7pKFoj8X0236s3lusPs1Fa5HTQUpwI+UfTcmeA==
 
-"@storybook/icons@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@storybook/icons/-/icons-1.2.2.tgz#220f5f453a4ff69072fcc0c4e296d15356bb96f9"
-  integrity sha512-KynbDfvBh5Sb/JrSmFgb+FBwqejNsryBhd86yyfQZyKqNrAzG82YyxX9crbXSs5FOesUGZvDXqV6OHtbEOlkAw==
+"@storybook/icons@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@storybook/icons/-/icons-1.2.3.tgz#097d2b35b59ff2c178723ad0552f8059ec60c539"
+  integrity sha512-A2egQFgdX8sQqcC/u/JUzKG8iO1g2CdkvIn88fZUy3kf4DTgHXSO8TK/KePHlaHReBvdW7egmegfzS6s3qLjVw==
 
 "@swc/helpers@0.5.2":
   version "0.5.2"
