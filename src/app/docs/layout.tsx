@@ -19,7 +19,7 @@ export default function RootLayout({
     <Fragment>
       <Header variant="docs" />
       <Image
-        src="/bubbles.jpg"
+        src="/bubbles.png"
         alt="Storybook Docs"
         width={1800}
         height={339}
