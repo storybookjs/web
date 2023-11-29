@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Nunito_Sans as FontSans } from "next/font/google";
-import "./globals.css";
-import { Header } from "@/components/header";
 import { cn } from "@/lib/utils";
 import { Providers } from "./providers";
+import "./globals.css";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -25,14 +24,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-white dark:bg-slate-900 font-sans antialiased",
           fontSans.variable
         )}
       >
-        <Providers>
-          <Header />
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

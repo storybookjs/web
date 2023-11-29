@@ -13,6 +13,20 @@ const config: Config = {
       height: {
         18: "4.5rem",
       },
+      colors: {
+        blue: {
+          50: "#F3F9FE",
+          100: "#E3F2FF",
+          200: "#AFDAFF",
+          300: "#8FCBFF",
+          400: "#52AFFF",
+          500: "#029CFD",
+          600: "#1778E9",
+          700: "#0D64CA",
+          800: "#1E4FAF",
+          900: "#1E3A8A",
+        },
+      },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
