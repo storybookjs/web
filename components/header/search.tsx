@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { SearchIcon } from "@storybook/icons";
 import { FC } from "react";
 
