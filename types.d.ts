@@ -1,10 +1,11 @@
 type Meta = {
   id: string;
   title: string;
-  sidebar_title?: string;
+  sidebarTitle: string;
+  href: string;
 };
 
-type BlogPost = {
+type PageProps = {
   meta: Meta;
   content: ReactElement<any, string | JSXElementConstructor<any>>;
 };

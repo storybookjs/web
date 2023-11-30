@@ -15,7 +15,7 @@ type Filetree = {
 
 export async function getPostByName(
   fileName: string
-): Promise<BlogPost | undefined> {
+): Promise<PageProps | undefined> {
   const res = await fetch(
     `https://raw.githubusercontent.com/storybookjs/web/main/${fileName}`,
     {
@@ -37,6 +37,7 @@ export async function getPostByName(
 
   const { frontmatter, content } = await compileMDX<{
     title: string;
+    sidebar_title: string;
   }>({
     source: rawMDX,
     components: {
@@ -62,15 +63,17 @@ export async function getPostByName(
 
   const id = fileName.replace(/\.mdx$/, "");
 
-  const blogPostObj: BlogPost = {
+  const pageObj: PageProps = {
     meta: {
       id,
+      href: `/${id}`,
       title: frontmatter.title,
+      sidebarTitle: frontmatter.sidebar_title || frontmatter.title || "",
     },
     content,
   };
 
-  return blogPostObj;
+  return pageObj;
 }
 
 export async function getDocsMeta(): Promise<Meta[] | undefined> {
@@ -112,5 +115,3 @@ export async function getDocsMeta(): Promise<Meta[] | undefined> {
 
   return pages;
 }
-
-// https://github.com/storybookjs/storybook
