@@ -4,6 +4,7 @@ type Meta = {
   sidebarTitle: string;
   href: string;
   paths: string[];
+  isTab: boolean;
 };
 
 type PageProps = {

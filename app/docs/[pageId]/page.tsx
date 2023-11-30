@@ -1,8 +1,7 @@
-import getFormattedDate from "@/lib/getFormattedDate";
-import { getDocsMeta, getPostByName } from "@/lib/docs";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import "highlight.js/styles/github-dark.css";
+import { getTree } from "@/lib/getTree";
+import { getPageByName } from "@/lib/getPageByName";
 
 // export const revalidate = 86400;
 export const revalidate = 0;
@@ -13,52 +12,52 @@ type Props = {
   };
 };
 
-// export async function generateStaticParams() {
-//   const pages = await getDocsMeta(); //deduped!
+export async function generateStaticParams() {
+  const pages = await getTree();
 
-//   if (!pages) return [];
+  if (!pages) return [];
 
-//   return pages.map((page) => ({
-//     pageId: page.id,
-//   }));
-// }
+  return pages.map((page) => ({
+    pageId: page.id,
+  }));
+}
 
-// export async function generateMetadata({ params: { pageId } }: Props) {
-//   const page = await getPostByName(`${pageId}.mdx`); //deduped!
+export async function generateMetadata({ params: { pageId } }: Props) {
+  // Check if the page exists on its own
+  const page = await getPageByName(`docs/${pageId}.mdx`);
 
-//   if (!page) {
-//     return {
-//       title: "Post Not Found",
-//     };
-//   }
+  // if not, check if it exists as an index
+  const pageIndex = await getPageByName(`docs/${pageId}/index.mdx`);
 
-//   return {
-//     title: page.meta.title,
-//   };
-// }
+  if (!page && !pageIndex) {
+    return {
+      title: "Page Not Found",
+    };
+  }
+
+  const meta = page ? page.meta : pageIndex?.meta;
+
+  return {
+    title: meta?.title || "Storybook",
+  };
+}
 
 export default async function Post({ params: { pageId } }: Props) {
-  // const post = await getPostByName(`${pageId}.md`); //deduped!
-  const page = await getPostByName(`docs/${pageId}.mdx`); //deduped!
+  // Check if the page exists on its own
+  const page = await getPageByName(`docs/${pageId}.mdx`);
 
-  if (!page) notFound();
+  // if not, check if it exists as an index
+  const pageIndex = await getPageByName(`docs/${pageId}/index.mdx`);
 
-  const { meta, content } = page;
+  if (!page && !pageIndex) notFound();
+
+  const meta = page ? page.meta : pageIndex?.meta;
+  const content = page ? page.content : pageIndex?.content;
 
   return (
     <>
-      <h2 className="text-3xl mt-4 mb-0">{meta.title}</h2>
+      <h2 className="text-3xl mt-4 mb-0">{meta?.title || ""}</h2>
       <article>{content}</article>
-      {/* <h2 className="text-3xl mt-4 mb-0">{meta.title}</h2>
-      <p className="mt-0 text-sm">{pubDate}</p>
-      <article>{content}</article>
-      <section>
-        <h3>Related:</h3>
-        <div className="flex flex-row gap-4">{tags}</div>
-      </section>
-      <p className="mb-10">
-        <Link href="/">← Back to home</Link>
-      </p> */}
     </>
   );
 }

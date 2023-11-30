@@ -29,7 +29,8 @@ export async function getPageByName(
 
   const { frontmatter, content } = await compileMDX<{
     title: string;
-    sidebar_title: string;
+    sidebar_title?: string;
+    is_tab?: boolean;
   }>({
     source: rawMDX,
     components: {
@@ -65,6 +66,7 @@ export async function getPageByName(
       href: `/${id}`,
       title: frontmatter.title,
       sidebarTitle: frontmatter.sidebar_title || frontmatter.title || "",
+      isTab: frontmatter.is_tab || false,
     },
     content,
   };

@@ -1,13 +1,5 @@
 import { getPageByName } from "./getPageByName";
 
-type Filetree = {
-  tree: [
-    {
-      path: string;
-    }
-  ];
-};
-
 export async function getTree(): Promise<TreeNodeProps[] | undefined> {
   const res = await fetch(
     "https://api.github.com/repos/storybookjs/web/git/trees/main?recursive=1",
@@ -24,7 +16,9 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
 
   if (!res.ok) return undefined;
 
-  const repoFiletree: Filetree = await res.json();
+  const repoFiletree: {
+    tree: [{ path: string }];
+  } = await res.json();
 
   const filesArray = repoFiletree.tree
     .map((obj) => obj.path)
@@ -53,7 +47,7 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
       if (existingPath) {
         currentLevel = existingPath.children;
       } else {
-        var newPart = {
+        const newPart = {
           name: path,
           ...page,
           children: [],

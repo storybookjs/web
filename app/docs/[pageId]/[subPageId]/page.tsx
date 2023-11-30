@@ -1,8 +1,7 @@
-import getFormattedDate from "@/lib/getFormattedDate";
-import { getDocsMeta, getPostByName } from "@/lib/docs";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import "highlight.js/styles/github-dark.css";
+import { getTree } from "@/lib/getTree";
+import { getPageByName } from "@/lib/getPageByName";
 
 // export const revalidate = 86400;
 export const revalidate = 0;
@@ -15,7 +14,7 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  const pages = await getDocsMeta(); //deduped!
+  const pages = await getTree();
 
   if (!pages) return [];
 
@@ -24,30 +23,55 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params: { pageId } }: Props) {
-  const page = await getPostByName(`${pageId}.mdx`); //deduped!
+export async function generateMetadata({
+  params: { pageId, subPageId },
+}: Props) {
+  // Check if the page exists on its own
+  const page = await getPageByName(`docs/${pageId}/${subPageId}.mdx`);
 
-  if (!page) {
+  // if not, check if it exists as an index
+  const pageIndex = await getPageByName(
+    `docs/${pageId}/${subPageId}/index.mdx`
+  );
+
+  if (!page && !pageIndex) {
     return {
-      title: "Post Not Found",
+      title: "Page Not Found",
     };
   }
 
+  const meta = page ? page.meta : pageIndex?.meta;
+
   return {
-    title: page.meta.title,
+    title: meta?.title || "Storybook",
   };
 }
 
 export default async function Post({ params: { pageId, subPageId } }: Props) {
-  const page = await getPostByName(`docs/${pageId}/${subPageId}.mdx`); //deduped!
+  // Check if the page exists on its own
+  const page = await getPageByName(`docs/${pageId}/${subPageId}.mdx`);
 
-  if (!page) notFound();
+  // if not, check if it exists as an index
+  const pageIndex = await getPageByName(
+    `docs/${pageId}/${subPageId}/index.mdx`
+  );
 
-  const { meta, content } = page;
+  if (!page && !pageIndex) notFound();
+
+  if (!page && pageIndex) {
+    // This mean that we are going to have multiple tabs
+    // 1. Get all the adjacent pages in the same folder
+    // 2. Build the data with all pages
+  }
+
+  const meta = page ? page.meta : pageIndex?.meta;
+  const content = page ? page.content : pageIndex?.content;
+
+  console.log(meta, content);
 
   return (
     <>
-      <h2 className="text-3xl mt-4 mb-0">{meta.title}</h2>
+      <h2 className="text-3xl mt-4 mb-0">{meta?.title || ""}</h2>
       <article>{content}</article>
     </>
   );

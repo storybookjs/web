@@ -3,7 +3,6 @@ import { Header } from "../../components/header/header";
 import { Fragment } from "react";
 import { Footer } from "../../components/footer/footer";
 import Image from "next/image";
-import { getDocsMeta } from "@/lib/docs";
 import Link from "next/link";
 import { getTree } from "@/lib/getTree";
 
@@ -19,6 +18,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const tree = await getTree();
+
+  console.log(tree);
 
   return (
     <Fragment>
