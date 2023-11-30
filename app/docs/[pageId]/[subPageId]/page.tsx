@@ -39,8 +39,7 @@ type Props = {
 // }
 
 export default async function Post({ params: { pageId, subPageId } }: Props) {
-  // const post = await getPostByName(`${pageId}.md`); //deduped!
-  const page = await getPostByName(`docs/${pageId}/${subPageId}.md`); //deduped!
+  const page = await getPostByName(`docs/${pageId}/${subPageId}.mdx`); //deduped!
 
   if (!page) notFound();
 

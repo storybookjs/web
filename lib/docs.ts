@@ -18,7 +18,7 @@ export async function getPostByName(
 ): Promise<BlogPost | undefined> {
   console.log("fetching", fileName);
   const res = await fetch(
-    `https://raw.githubusercontent.com/storybookjs/storybook/main/${fileName}`,
+    `https://raw.githubusercontent.com/storybookjs/web/main/${fileName}`,
     {
       headers: {
         Accept: "application/vnd.github+json",
@@ -26,6 +26,7 @@ export async function getPostByName(
         "X-GitHub-Api-Version": "2022-11-28",
         "User-Agent": "storybook-bot",
       },
+      cache: "no-store", // To remove when solving the cache error
     }
   );
 
@@ -34,6 +35,8 @@ export async function getPostByName(
   const rawMDX = await res.text();
 
   if (rawMDX === "404: Not Found") return undefined;
+
+  console.log(rawMDX);
 
   const { frontmatter, content } = await compileMDX<{
     title: string;
@@ -75,7 +78,7 @@ export async function getPostByName(
 
 export async function getDocsMeta(): Promise<Meta[] | undefined> {
   const res = await fetch(
-    "https://api.github.com/repos/storybookjs/storybook/git/trees/main?recursive=1",
+    "https://api.github.com/repos/storybookjs/web/git/trees/main?recursive=1",
     {
       headers: {
         Accept: "application/vnd.github+json",

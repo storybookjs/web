@@ -40,7 +40,7 @@ type Props = {
 export default async function Post({ params: { pageId } }: Props) {
   console.log(pageId);
   // const post = await getPostByName(`${pageId}.md`); //deduped!
-  const page = await getPostByName(`docs/get-started/conclusion.md`); //deduped!
+  const page = await getPostByName(`docs/${pageId}.mdx`); //deduped!
 
   if (!page) notFound();
 
