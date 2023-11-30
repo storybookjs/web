@@ -5,15 +5,7 @@ import rehypeSlug from "rehype-slug";
 import { Callout } from "@/components/Callout";
 import { CodeSnippets } from "@/components/CodeSnippets";
 
-type Filetree = {
-  tree: [
-    {
-      path: string;
-    }
-  ];
-};
-
-export async function getPostByName(
+export async function getPageByName(
   fileName: string
 ): Promise<PageProps | undefined> {
   const res = await fetch(
@@ -63,9 +55,13 @@ export async function getPostByName(
 
   const id = fileName.replace(/\.mdx$/, "");
 
+  const raw = id.replace("docs/", "");
+  const split = raw.split("/");
+
   const pageObj: PageProps = {
     meta: {
       id,
+      paths: split,
       href: `/${id}`,
       title: frontmatter.title,
       sidebarTitle: frontmatter.sidebar_title || frontmatter.title || "",
@@ -74,42 +70,4 @@ export async function getPostByName(
   };
 
   return pageObj;
-}
-
-export async function getDocsMeta(): Promise<Meta[] | undefined> {
-  const res = await fetch(
-    "https://api.github.com/repos/storybookjs/web/git/trees/main?recursive=1",
-    {
-      headers: {
-        Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${process.env.GITHUB_STORYBOOK_BOT_PAT}`,
-        "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "storybook-bot",
-      },
-      cache: "no-store", // To remove when solving the cache error
-    }
-  );
-
-  if (!res.ok) return undefined;
-
-  const repoFiletree: Filetree = await res.json();
-
-  const filesArray = repoFiletree.tree
-    .map((obj) => obj.path)
-    .filter(
-      (path) =>
-        [".mdx", "md"].some((e) => path.endsWith(e)) && path.startsWith("docs/")
-    );
-
-  const pages: Meta[] = [];
-
-  for (const file of filesArray) {
-    const post = await getPostByName(file);
-    if (post) {
-      const { meta } = post;
-      pages.push(meta);
-    }
-  }
-
-  return pages;
 }

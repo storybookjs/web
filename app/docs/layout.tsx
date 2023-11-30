@@ -5,6 +5,7 @@ import { Footer } from "../../components/footer/footer";
 import Image from "next/image";
 import { getDocsMeta } from "@/lib/docs";
 import Link from "next/link";
+import { getTree } from "@/lib/getTree";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -17,7 +18,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pages = await getDocsMeta();
+  const tree = await getTree();
 
   return (
     <Fragment>
@@ -33,10 +34,24 @@ export default async function RootLayout({
         <div className="w-[228px] bg-zinc-400/10 dark:bg-zinc-600/10 min-h-[1400px] max-[848px]:hidden">
           <nav className="sticky top-0">
             <ul className="mt-8">
-              {pages
-                ? pages.map((page) => (
+              {tree
+                ? tree.map((page) => (
                     <li key={page.id}>
-                      <Link href={page.href}>{page.sidebarTitle}</Link>
+                      <Link href={page.href}>{page.name}</Link>
+                      <ul>
+                        {page.children.map((child) => (
+                          <li key={child.id} className="ml-3">
+                            <Link href={child.href}>{child.name}</Link>
+                            <ul>
+                              {child.children.map((child2) => (
+                                <li key={child2.id} className="ml-6">
+                                  <Link href={child2.href}>{child2.name}</Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </li>
+                        ))}
+                      </ul>
                     </li>
                   ))
                 : []}
