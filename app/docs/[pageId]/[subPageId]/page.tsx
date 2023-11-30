@@ -63,8 +63,6 @@ export default async function Post({ params: { pageId, subPageId } }: Props) {
   const meta = page ? page.meta : pageIndex?.meta;
   const content = page ? page.content : pageIndex?.content;
 
-  console.log(meta, content);
-
   return (
     <>
       <h2 className="text-3xl mt-4 mb-0">{meta?.title || ""}</h2>

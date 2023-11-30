@@ -3,7 +3,7 @@ type Meta = {
   title: string;
   sidebarTitle: string;
   href: string;
-  paths: string[];
+  segments: string[];
 };
 
 type PageProps = {
@@ -12,6 +12,6 @@ type PageProps = {
 };
 
 interface TreeNodeProps extends Meta {
-  name: string;
+  segment: string;
   children: TreeNodeProps[];
 }

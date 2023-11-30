@@ -57,10 +57,10 @@ export async function getPage(
   const pageObj: PageProps = {
     meta: {
       id,
-      paths: id.replace("docs/", "").split("/"),
       href: `/${id}`,
       title: frontmatter.title,
       sidebarTitle: frontmatter.sidebar_title || frontmatter.title || "",
+      segments: id.replace("docs/", "").split("/"),
     },
     content,
   };

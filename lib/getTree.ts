@@ -41,15 +41,15 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
 
   pages.forEach((page) => {
     let currentLevel = tree;
-    page.paths.forEach((path, j) => {
-      const existingPath = currentLevel.find((e) => e.name === path);
+    page.segments.forEach((segment) => {
+      const existingPath = currentLevel.find((e) => e.segment === segment);
 
       if (existingPath) {
         currentLevel = existingPath.children;
       } else {
         const newPart = {
-          name: path,
           ...page,
+          segment,
           children: [],
         };
 
