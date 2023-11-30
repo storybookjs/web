@@ -2,8 +2,8 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
-import Video from "@/components/Video";
-import CustomImage from "@/components/CustomImage";
+import { Callout } from "@/components/Callout";
+import { CodeSnippets } from "@/components/CodeSnippets";
 
 type Filetree = {
   tree: [
@@ -36,21 +36,19 @@ export async function getPostByName(
 
   if (rawMDX === "404: Not Found") return undefined;
 
-  console.log(rawMDX);
-
   const { frontmatter, content } = await compileMDX<{
     title: string;
   }>({
     source: rawMDX,
     components: {
-      Video,
-      CustomImage,
+      CodeSnippets,
+      Callout,
     },
     options: {
       parseFrontmatter: true,
       mdxOptions: {
         rehypePlugins: [
-          rehypeHighlight,
+          // [rehypeHighlight, {}],
           rehypeSlug,
           [
             rehypeAutolinkHeadings,
@@ -112,8 +110,6 @@ export async function getDocsMeta(): Promise<Meta[] | undefined> {
       pages.push(meta);
     }
   }
-
-  console.log(pages);
 
   return pages;
 }

@@ -49,6 +49,7 @@ export default async function Post({ params: { pageId } }: Props) {
   return (
     <>
       <h2 className="text-3xl mt-4 mb-0">{meta.title}</h2>
+      <article>{content}</article>
       {/* <h2 className="text-3xl mt-4 mb-0">{meta.title}</h2>
       <p className="mt-0 text-sm">{pubDate}</p>
       <article>{content}</article>
