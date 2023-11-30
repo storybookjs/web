@@ -5,9 +5,10 @@ import rehypeSlug from "rehype-slug";
 import { Callout } from "@/components/Callout";
 import { CodeSnippets } from "@/components/CodeSnippets";
 
-export async function getPageByName(
+export async function getPage(
   fileName: string
 ): Promise<PageProps | undefined> {
+  const id = fileName.replace(/\.mdx$/, "");
   const res = await fetch(
     `https://raw.githubusercontent.com/storybookjs/web/main/${fileName}`,
     {
@@ -30,7 +31,6 @@ export async function getPageByName(
   const { frontmatter, content } = await compileMDX<{
     title: string;
     sidebar_title?: string;
-    is_tab?: boolean;
   }>({
     source: rawMDX,
     components: {
@@ -54,19 +54,13 @@ export async function getPageByName(
     },
   });
 
-  const id = fileName.replace(/\.mdx$/, "");
-
-  const raw = id.replace("docs/", "");
-  const split = raw.split("/");
-
   const pageObj: PageProps = {
     meta: {
       id,
-      paths: split,
+      paths: id.replace("docs/", "").split("/"),
       href: `/${id}`,
       title: frontmatter.title,
       sidebarTitle: frontmatter.sidebar_title || frontmatter.title || "",
-      isTab: frontmatter.is_tab || false,
     },
     content,
   };

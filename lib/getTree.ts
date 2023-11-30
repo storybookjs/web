@@ -1,4 +1,4 @@
-import { getPageByName } from "./getPageByName";
+import { getPage } from "./getPage";
 
 export async function getTree(): Promise<TreeNodeProps[] | undefined> {
   const res = await fetch(
@@ -30,7 +30,7 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
   const pages: Meta[] = [];
 
   for (const file of filesArray) {
-    const post = await getPageByName(file);
+    const post = await getPage(file);
     if (post) {
       const { meta } = post;
       pages.push(meta);

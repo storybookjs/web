@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import "highlight.js/styles/github-dark.css";
 import { getTree } from "@/lib/getTree";
-import { getPageByName } from "@/lib/getPageByName";
+import { getPage } from "@/lib/getPage";
 
 // export const revalidate = 86400;
 export const revalidate = 0;
@@ -27,12 +27,10 @@ export async function generateMetadata({
   params: { pageId, subPageId },
 }: Props) {
   // Check if the page exists on its own
-  const page = await getPageByName(`docs/${pageId}/${subPageId}.mdx`);
+  const page = await getPage(`docs/${pageId}/${subPageId}.mdx`);
 
   // if not, check if it exists as an index
-  const pageIndex = await getPageByName(
-    `docs/${pageId}/${subPageId}/index.mdx`
-  );
+  const pageIndex = await getPage(`docs/${pageId}/${subPageId}/index.mdx`);
 
   if (!page && !pageIndex) {
     return {
@@ -49,12 +47,10 @@ export async function generateMetadata({
 
 export default async function Post({ params: { pageId, subPageId } }: Props) {
   // Check if the page exists on its own
-  const page = await getPageByName(`docs/${pageId}/${subPageId}.mdx`);
+  const page = await getPage(`docs/${pageId}/${subPageId}.mdx`);
 
   // if not, check if it exists as an index
-  const pageIndex = await getPageByName(
-    `docs/${pageId}/${subPageId}/index.mdx`
-  );
+  const pageIndex = await getPage(`docs/${pageId}/${subPageId}/index.mdx`);
 
   if (!page && !pageIndex) notFound();
 
