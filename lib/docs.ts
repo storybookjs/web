@@ -16,7 +16,6 @@ type Filetree = {
 export async function getPostByName(
   fileName: string
 ): Promise<BlogPost | undefined> {
-  console.log("fetching", fileName);
   const res = await fetch(
     `https://raw.githubusercontent.com/storybookjs/web/main/${fileName}`,
     {
@@ -99,17 +98,17 @@ export async function getDocsMeta(): Promise<Meta[] | undefined> {
         [".mdx", "md"].some((e) => path.endsWith(e)) && path.startsWith("docs/")
     );
 
-  const testFirst100 = filesArray.slice(0, 100);
-
   const pages: Meta[] = [];
 
-  for (const file of testFirst100) {
+  for (const file of filesArray) {
     const post = await getPostByName(file);
     if (post) {
       const { meta } = post;
       pages.push(meta);
     }
   }
+
+  console.log(pages);
 
   return pages;
 }

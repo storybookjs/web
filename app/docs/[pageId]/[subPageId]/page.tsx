@@ -14,29 +14,29 @@ type Props = {
   };
 };
 
-// export async function generateStaticParams() {
-//   const pages = await getDocsMeta(); //deduped!
+export async function generateStaticParams() {
+  const pages = await getDocsMeta(); //deduped!
 
-//   if (!pages) return [];
+  if (!pages) return [];
 
-//   return pages.map((page) => ({
-//     pageId: page.id,
-//   }));
-// }
+  return pages.map((page) => ({
+    pageId: page.id,
+  }));
+}
 
-// export async function generateMetadata({ params: { pageId } }: Props) {
-//   const page = await getPostByName(`${pageId}.mdx`); //deduped!
+export async function generateMetadata({ params: { pageId } }: Props) {
+  const page = await getPostByName(`${pageId}.mdx`); //deduped!
 
-//   if (!page) {
-//     return {
-//       title: "Post Not Found",
-//     };
-//   }
+  if (!page) {
+    return {
+      title: "Post Not Found",
+    };
+  }
 
-//   return {
-//     title: page.meta.title,
-//   };
-// }
+  return {
+    title: page.meta.title,
+  };
+}
 
 export default async function Post({ params: { pageId, subPageId } }: Props) {
   const page = await getPostByName(`docs/${pageId}/${subPageId}.mdx`); //deduped!

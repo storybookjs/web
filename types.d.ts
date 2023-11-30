@@ -1,6 +1,7 @@
 type Meta = {
   id: string;
   title: string;
+  sidebar_title?: string;
 };
 
 type BlogPost = {
