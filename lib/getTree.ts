@@ -72,6 +72,8 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
   // New test
   // -----------------------------------------------------------------------
 
+  // console.dir({ tree }, { depth: null });
+
   const newTree = tree.map((node) => {
     const findPage = pages.find((page) => page.id === node.id);
     // if doesn't have children, it's a leaf node, bring data from page
@@ -109,12 +111,42 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
       const childrenData: any[] = [];
 
       node.children.forEach((child: any) => {
-        const findChildPage = pages.find((page) => page.id === child.id);
-        const findTreeChild = tree.find(
-          (treeChild) => treeChild.id === child.id
-        );
-        console.log("PAAAAAAAAAGE", findChildPage);
-        console.log("TREEEEEEEEEE", findTreeChild);
+        if (child.children.length > 0) {
+          // Find if one of the children as currentSegment as "index"
+          const indexPage = child.children.find(
+            (c: any) => c.currentSegment === "index"
+          );
+
+          const level2Data = {};
+
+          if (indexPage) {
+            // if it has an index file, bring data from index page
+            const findIndexPage = pages.find(
+              (page) => page.id === indexPage.id
+            );
+            const newData = { ...findIndexPage };
+            delete newData.segments;
+            Object.assign(level2Data, newData);
+          } else {
+            Object.assign(level2Data, {
+              id: child.id,
+              title: child.currentSegment,
+              sidebarTitle: child.currentSegment,
+            });
+          }
+
+          childrenData.push(level2Data);
+        }
+
+        // Coco boule
+        // const findChildPage = pages.find((page) => page.id === child.id);
+        // const findTreeChild = tree.find(
+        //   (treeChild) => treeChild.id === child.id
+        // );
+        // if (findTreeChild?.id.startsWith("docs/02-stories")) {
+        //   console.log("PAAAAAAAAAGE", findChildPage);
+        //   console.log("TREEEEEEEEEEE", findTreeChild);
+        // }
         //   if (child.children.length === 0) {
         //     const newData = { ...findChildPage };
         //     delete newData.segments;
@@ -146,7 +178,6 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     }
   });
 
-  // console.dir({ tree }, { depth: null });
   console.dir({ newTree }, { depth: null });
 
   // -----------------------------------------------------------------------
