@@ -54,13 +54,22 @@ export async function getPage(
     },
   });
 
+  const segments = id.replace("docs/", "").split("/");
+  const lastSegment = id.split("/").pop();
+  const lastRealSegment =
+    lastSegment === "index" ? segments[segments.length - 2] : lastSegment;
+  const slug =
+    lastRealSegment && lastRealSegment.match(/^\d+-/)
+      ? lastRealSegment.replace(/^\d+-/, "")
+      : lastRealSegment;
+
   const pageObj: PageProps = {
     meta: {
       id,
-      href: `/${id}`,
+      slug: slug || "",
       title: frontmatter.title,
       sidebarTitle: frontmatter.sidebar_title || frontmatter.title || "",
-      segments: id.replace("docs/", "").split("/"),
+      segments,
     },
     content,
   };

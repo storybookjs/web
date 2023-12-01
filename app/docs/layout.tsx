@@ -36,17 +36,25 @@ export default async function RootLayout({
           <nav className="sticky top-0">
             <ul className="mt-8">
               {tree
-                ? tree.map((page) => (
-                    <li key={page.id}>
-                      <Link href={page.href}>{page.sidebarTitle}</Link>
+                ? tree.map((lvl1) => (
+                    <li key={lvl1.id}>
+                      <Link href={`/docs/${lvl1.slug}`}>
+                        {lvl1.sidebarTitle}
+                      </Link>
                       <ul>
-                        {page.children.map((child) => (
-                          <li key={child.id} className="ml-3">
-                            <Link href={child.href}>{child.sidebarTitle}</Link>
+                        {lvl1.children.map((lvl2) => (
+                          <li key={lvl2.id} className="ml-3">
+                            <Link href={`/docs/${lvl1.slug}/${lvl2.slug}`}>
+                              {lvl2.sidebarTitle}
+                            </Link>
                             <ul>
-                              {child.children.map((child2) => (
-                                <li key={child2.id} className="ml-6">
-                                  <Link href="#">{child2.sidebarTitle}</Link>
+                              {lvl2.children.map((lvl3) => (
+                                <li key={lvl3.id} className="ml-6">
+                                  <Link
+                                    href={`/docs/${lvl1.slug}/${lvl2.slug}/${lvl3.slug}`}
+                                  >
+                                    {lvl3.sidebarTitle}
+                                  </Link>
                                 </li>
                               ))}
                             </ul>

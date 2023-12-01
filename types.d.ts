@@ -2,7 +2,7 @@ type Meta = {
   id: string;
   title: string;
   sidebarTitle: string;
-  href: string;
+  slug: string;
   segments: string[];
 };
 

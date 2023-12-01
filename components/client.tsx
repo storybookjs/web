@@ -5,7 +5,7 @@ export const ClientComponent = ({
 }: {
   tree: TreeNodeProps[] | undefined;
 }) => {
-  console.log(tree);
+  // console.dir({ tree }, { depth: 10 });
 
   return null;
 };
