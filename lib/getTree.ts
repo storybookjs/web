@@ -111,18 +111,47 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
 
   miniTree.forEach((node, i) => {
     let currentLevel = miniTree;
+
+    // First try to find the index
     const pageIndex = pages.find(
       (page) =>
         page.segments[0] === node.segment && page.segments[1] === "index"
     );
 
-    console.log("page", pageIndex);
+    // if not try to find the first page
+    const page = pages.find((page) => page.id === `docs/${node.segment}`);
 
-    if (pageIndex?.segments.length === 2 && pageIndex.segments[1] === "index") {
+    // Reconcile the data
+    const pageData = pageIndex || page;
+
+    if (pageData) {
       currentLevel[i] = {
         ...node,
-        ...pageIndex,
+        ...pageData,
       };
+    }
+
+    if (node.children.length > 0) {
+      node.children.forEach((child, j) => {
+        // First try to find the index
+        const pageIndexLvl2 = pages.find(
+          (e) => e.segments[1] === child.segment && e.segments[2] === "index"
+        );
+
+        const pageLvl2 = pages.find(
+          (b) => b.id === `docs/${node.segment}/${child.segment}`
+        );
+
+        // Reconcile the data
+        const pageDataLvl2 = pageIndexLvl2 || pageLvl2;
+
+        if (pageDataLvl2) {
+          currentLevel[i].children[j] = {
+            ...child,
+            ...pageDataLvl2,
+          };
+        }
+      });
     }
   });
 
