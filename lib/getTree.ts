@@ -39,54 +39,8 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
 
   const tree: TreeNodeProps[] = [];
 
-  const map = pages.map((page) => page.segments);
-  console.log("mappy", map);
-
-  const miniTree: any[] = [];
-
-  // pages.forEach((page) => {
-  //   let currentLevel = miniTree;
-
-  //   if (page.segments.length === 1) {
-  //     const newData = {
-  //       segment: page.segments[0],
-  //       children: [],
-  //     };
-
-  //     currentLevel.push(newData);
-  //   }
-
-  //   if (page.segments.length === 2) {
-  //     let existingPath = currentLevel.find(
-  //       (e) => e.segment === page.segments[0]
-  //     );
-
-  //     if (existingPath) {
-  //       if (page.segments[1] !== "index") {
-  //         const newData = {
-  //           segment: page.segments[1],
-  //           children: [],
-  //         };
-  //         existingPath.children.push(newData);
-  //       }
-  //     } else {
-  //       const newData = {
-  //         segment: page.segments[0],
-  //         children: [
-  //           {
-  //             segment: page.segments[1],
-  //             children: [],
-  //           },
-  //         ],
-  //       };
-
-  //       currentLevel.push(newData);
-  //     }
-  //   }
-  // });
-
   pages.forEach((page) => {
-    let currentLevel = miniTree;
+    let currentLevel = tree;
 
     page.segments.forEach((segment) => {
       const existingPath = currentLevel.find((e) => e.segment === segment);
@@ -107,10 +61,8 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     });
   });
 
-  console.log(pages);
-
-  miniTree.forEach((node, i) => {
-    let currentLevel = miniTree;
+  tree.forEach((node, i) => {
+    let currentLevel = tree;
 
     // First try to find the index
     const pageIndex = pages.find(
@@ -155,31 +107,5 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     }
   });
 
-  pages.forEach((page) => {
-    let currentLevel = tree;
-
-    page.segments.forEach((segment) => {
-      const existingPath = currentLevel.find((e) => e.segment === segment);
-
-      if (existingPath) {
-        currentLevel = existingPath.children;
-      } else {
-        const newPart = {
-          ...page,
-          segment,
-          children: [],
-        };
-
-        if (segment === "index") {
-          // currentLevel.push(newPart);
-          // currentLevel = newPart.children;
-        } else {
-          currentLevel.push(newPart);
-          currentLevel = newPart.children;
-        }
-      }
-    });
-  });
-
-  return miniTree;
+  return tree;
 }
