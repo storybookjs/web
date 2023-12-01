@@ -74,19 +74,19 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
 
   // console.dir({ tree }, { depth: null });
 
-  const newTree = tree.map((node) => {
-    const findPage = pages.find((page) => page.id === node.id);
+  const newTree = tree.map((lvl1) => {
     // if doesn't have children, it's a leaf node, bring data from page
-    if (node.children.length === 0) {
+    if (lvl1.children.length === 0 && lvl1.currentSegment !== "index") {
+      const findPage = pages.find((page) => page.id === lvl1.id);
       const newData = { ...findPage };
       delete newData.segments;
       return newData;
     }
 
     // if has children, it's a folder
-    if (node.children.length > 0) {
+    if (lvl1.children.length > 0) {
       // First check if this folder has an index file
-      const indexPage = node.children.find(
+      const indexPage = lvl1.children.find(
         (c: any) => c.currentSegment === "index"
       );
 
@@ -102,22 +102,30 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
         // if it doesn't have an index file, well ... damage control.
         // To control the sidebar, you need to have an index file.
         Object.assign(parentData, {
-          id: node.id,
-          title: node.currentSegment,
-          sidebarTitle: node.currentSegment,
+          id: lvl1.id,
+          title: lvl1.currentSegment,
+          sidebarTitle: lvl1.currentSegment,
         });
       }
 
       const childrenData: any[] = [];
 
-      node.children.forEach((child: any) => {
-        if (child.children.length > 0) {
+      lvl1.children.forEach((lvl2: any) => {
+        // if doesn't have children, it's a leaf node, bring data from page
+        if (lvl2.children.length === 0 && lvl2.currentSegment !== "index") {
+          const findPage = pages.find((page) => page.id === lvl2.id);
+          const newData = { ...findPage };
+          delete newData.segments;
+          childrenData.push(newData);
+        }
+
+        if (lvl2.children.length > 0) {
           // Find if one of the children as currentSegment as "index"
-          const indexPage = child.children.find(
+          const indexPage = lvl2.children.find(
             (c: any) => c.currentSegment === "index"
           );
 
-          const level2Data = {};
+          const level2Root = {};
 
           if (indexPage) {
             // if it has an index file, bring data from index page
@@ -126,48 +134,27 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
             );
             const newData = { ...findIndexPage };
             delete newData.segments;
-            Object.assign(level2Data, newData);
+            Object.assign(level2Root, newData);
           } else {
-            Object.assign(level2Data, {
-              id: child.id,
-              title: child.currentSegment,
-              sidebarTitle: child.currentSegment,
+            Object.assign(level2Root, {
+              id: lvl2.id,
+              title: lvl2.currentSegment,
+              sidebarTitle: lvl2.currentSegment,
             });
           }
 
-          childrenData.push(level2Data);
-        }
+          // Filter out the index file from the children
+          const filteredChildren = lvl2.children.filter(
+            (c) => c.currentSegment !== "index"
+          );
 
-        // Coco boule
-        // const findChildPage = pages.find((page) => page.id === child.id);
-        // const findTreeChild = tree.find(
-        //   (treeChild) => treeChild.id === child.id
-        // );
-        // if (findTreeChild?.id.startsWith("docs/02-stories")) {
-        //   console.log("PAAAAAAAAAGE", findChildPage);
-        //   console.log("TREEEEEEEEEEE", findTreeChild);
-        // }
-        //   if (child.children.length === 0) {
-        //     const newData = { ...findChildPage };
-        //     delete newData.segments;
-        //     if (child.currentSegment !== "index") {
-        //       childrenData.push(newData);
-        //     }
-        //   }
-        //   if (child.children.length > 0) {
-        //     const newData = { ...findChildPage };
-        //     delete newData.segments;
-        //     // Hello
-        //     // const lvl2Data: any[] = [];
-        //     // child.children.forEach((lvl2: any) => {
-        //     //   const findLvl2Page = pages.find((page) => page.id === lvl2.id);
-        //     //   const newData = { ...findLvl2Page };
-        //     //   delete newData.segments;
-        //     //   lvl2Data.push(newData);
-        //     // });
-        //     // newData.children = lvl2Data;
-        //     childrenData.push(newData);
-        //   }
+          const level2FullData = {
+            ...level2Root,
+            children: filteredChildren,
+          };
+
+          childrenData.push(level2FullData);
+        }
       });
 
       // and finally, return the data
