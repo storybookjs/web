@@ -12,11 +12,12 @@ type PageProps = {
 };
 
 interface TemporaryTreeNodeProps {
-  segment: string;
-  children: TreeNodeProps[];
+  currentSegment: string;
+  id: string;
+  children: TemporaryTreeNodeProps[];
 }
 
 interface TreeNodeProps extends Meta {
-  segment: string;
+  currentSegment: string;
   children: TreeNodeProps[];
 }
