@@ -5,6 +5,7 @@ import { Footer } from "../../components/footer/footer";
 import Image from "next/image";
 import Link from "next/link";
 import { getTree } from "@/lib/getTree";
+import { ClientComponent } from "@/components/client";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -19,11 +20,10 @@ export default async function RootLayout({
 }) {
   const tree = await getTree();
 
-  console.log(tree);
-
   return (
     <Fragment>
       <Header variant="docs" />
+      <ClientComponent tree={tree} />
       <Image
         src="/bubbles.png"
         alt="Storybook Docs"
@@ -38,17 +38,15 @@ export default async function RootLayout({
               {tree
                 ? tree.map((page) => (
                     <li key={page.id}>
-                      <Link href={page.href}>{page.sidebarTitle}</Link>
+                      <Link href="#">{page.sidebarTitle}</Link>
                       <ul>
                         {page.children.map((child) => (
                           <li key={child.id} className="ml-3">
-                            <Link href={child.href}>{child.sidebarTitle}</Link>
+                            <Link href="#">{child.sidebarTitle}</Link>
                             <ul>
                               {child.children.map((child2) => (
                                 <li key={child2.id} className="ml-6">
-                                  <Link href={child2.href}>
-                                    {child2.sidebarTitle}
-                                  </Link>
+                                  <Link href="#">{child2.sidebarTitle}</Link>
                                 </li>
                               ))}
                             </ul>

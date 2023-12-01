@@ -39,8 +39,96 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
 
   const tree: TreeNodeProps[] = [];
 
+  const map = pages.map((page) => page.segments);
+  console.log("mappy", map);
+
+  const miniTree: any[] = [];
+
+  // pages.forEach((page) => {
+  //   let currentLevel = miniTree;
+
+  //   if (page.segments.length === 1) {
+  //     const newData = {
+  //       segment: page.segments[0],
+  //       children: [],
+  //     };
+
+  //     currentLevel.push(newData);
+  //   }
+
+  //   if (page.segments.length === 2) {
+  //     let existingPath = currentLevel.find(
+  //       (e) => e.segment === page.segments[0]
+  //     );
+
+  //     if (existingPath) {
+  //       if (page.segments[1] !== "index") {
+  //         const newData = {
+  //           segment: page.segments[1],
+  //           children: [],
+  //         };
+  //         existingPath.children.push(newData);
+  //       }
+  //     } else {
+  //       const newData = {
+  //         segment: page.segments[0],
+  //         children: [
+  //           {
+  //             segment: page.segments[1],
+  //             children: [],
+  //           },
+  //         ],
+  //       };
+
+  //       currentLevel.push(newData);
+  //     }
+  //   }
+  // });
+
+  pages.forEach((page) => {
+    let currentLevel = miniTree;
+
+    page.segments.forEach((segment) => {
+      const existingPath = currentLevel.find((e) => e.segment === segment);
+
+      if (existingPath) {
+        currentLevel = existingPath.children;
+      } else {
+        const newPart = {
+          segment,
+          children: [],
+        };
+
+        if (segment !== "index") {
+          currentLevel.push(newPart);
+          currentLevel = newPart.children;
+        }
+      }
+    });
+  });
+
+  console.log(pages);
+
+  miniTree.forEach((node, i) => {
+    let currentLevel = miniTree;
+    const pageIndex = pages.find(
+      (page) =>
+        page.segments[0] === node.segment && page.segments[1] === "index"
+    );
+
+    console.log("page", pageIndex);
+
+    if (pageIndex?.segments.length === 2 && pageIndex.segments[1] === "index") {
+      currentLevel[i] = {
+        ...node,
+        ...pageIndex,
+      };
+    }
+  });
+
   pages.forEach((page) => {
     let currentLevel = tree;
+
     page.segments.forEach((segment) => {
       const existingPath = currentLevel.find((e) => e.segment === segment);
 
@@ -53,11 +141,16 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
           children: [],
         };
 
-        currentLevel.push(newPart);
-        currentLevel = newPart.children;
+        if (segment === "index") {
+          // currentLevel.push(newPart);
+          // currentLevel = newPart.children;
+        } else {
+          currentLevel.push(newPart);
+          currentLevel = newPart.children;
+        }
       }
     });
   });
 
-  return tree;
+  return miniTree;
 }
