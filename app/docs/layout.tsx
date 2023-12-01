@@ -38,11 +38,11 @@ export default async function RootLayout({
               {tree
                 ? tree.map((page) => (
                     <li key={page.id}>
-                      <Link href="#">{page.sidebarTitle}</Link>
+                      <Link href={page.href}>{page.sidebarTitle}</Link>
                       <ul>
                         {page.children.map((child) => (
                           <li key={child.id} className="ml-3">
-                            <Link href="#">{child.sidebarTitle}</Link>
+                            <Link href={child.href}>{child.sidebarTitle}</Link>
                             <ul>
                               {child.children.map((child2) => (
                                 <li key={child2.id} className="ml-6">

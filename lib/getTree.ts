@@ -37,10 +37,12 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     }
   }
 
-  const tree: TreeNodeProps[] = [];
+  // -----------------------------------------------------------------------
 
+  // Create a temporary tree
+  const tempTree: TemporaryTreeNodeProps[] = [];
   pages.forEach((page) => {
-    let currentLevel = tree;
+    let currentLevel = tempTree;
 
     page.segments.forEach((segment) => {
       const existingPath = currentLevel.find((e) => e.segment === segment);
@@ -61,7 +63,66 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     });
   });
 
-  tree.forEach((node, i) => {
+  console.log(pages);
+  console.dir({ tempTree }, { depth: 10 });
+
+  // loop over root level
+  // if end (no children) then exit
+  // else call self loop again with children
+
+  // -----------------------------------------------------------------------
+
+  const tree1: TreeNodeProps[] = [];
+
+  // create a recursive function for all children in pages
+  function updateTreeNode(t: TemporaryTreeNodeProps[]) {
+    t.forEach((child) => {
+      let currentLevel = tree1;
+      // console.log(child);
+
+      // Find the index page
+      const pageIndex = pages.find(
+        (page) =>
+          page.segments[0] === child.segment && page.segments[1] === "index"
+      );
+
+      // if not try to find the first page
+      const page = pages.find((page) => page.id === `docs/${child.segment}`);
+
+      // Reconcile the data
+      const pageData = pageIndex || page;
+
+      if (pageData) {
+        currentLevel = pageData;
+      }
+
+      if (child.children.length > 0) {
+        // console.log(child.children);
+        // child.children = childPages;
+      }
+      if (child.children.length > 0) {
+        updateTreeNode(child.children);
+      }
+    });
+
+    // children.forEach((child) => {
+    //   const { segments } = child;
+    //   const childPages = pages.filter((page) => page.segments[0] === segments[0]);
+    //   if (childPages.length > 0) {
+    //     child.children = childPages;
+    //   }
+    //   if (child.children.length > 0) {
+    //     updateTreeNode(child.children);
+    //   }
+    // });
+  }
+
+  // updateTreeNode(tempTree);
+
+  // -----------------------------------------------------------------------
+
+  const tree: TreeNodeProps[] = [];
+  tempTree.forEach((node, i) => {
     let currentLevel = tree;
 
     // First try to find the index

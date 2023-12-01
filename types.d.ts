@@ -11,6 +11,11 @@ type PageProps = {
   content: ReactElement<any, string | JSXElementConstructor<any>>;
 };
 
+interface TemporaryTreeNodeProps {
+  segment: string;
+  children: TreeNodeProps[];
+}
+
 interface TreeNodeProps extends Meta {
   segment: string;
   children: TreeNodeProps[];
