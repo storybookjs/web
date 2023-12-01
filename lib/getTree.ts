@@ -143,15 +143,19 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
             });
           }
 
-          // Filter out the index file from the children
-          const filteredChildren = lvl2.children.filter(
-            (c) => c.currentSegment !== "index"
-          );
+          // Filter out  lvl2.children if currentSegment is equal to 'index' or 'api'
+          // const filteredChildren = lvl2.children.filter(
+          //   (c: any) =>
+          //     c.currentSegment !== "index" && c.currentSegment !== "api"
+          // );
 
           const level2FullData = {
             ...level2Root,
-            children: filteredChildren,
+            children: lvl2.children,
           };
+
+          if (lvl2.children.find((c: any) => c.currentSegment === "api"))
+            level2FullData.showAsTabs = true;
 
           childrenData.push(level2FullData);
         }
@@ -165,7 +169,7 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     }
   });
 
-  console.dir({ newTree }, { depth: null });
+  // console.dir({ newTree }, { depth: null });
 
   // -----------------------------------------------------------------------
   // Add the correct data to the tree
