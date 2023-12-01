@@ -35,7 +35,7 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                           key={lvl2.id}
                         >
                           <li>
-                            {lvl2?.children.length === 0 && (
+                            {!lvl2.children && (
                               <Link
                                 href={`/docs/${lvl1.slug}/${lvl2.slug}`}
                                 className="block text-sm h-8"
@@ -43,7 +43,7 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                                 {lvl2.sidebarTitle}
                               </Link>
                             )}
-                            {lvl2?.children.length > 0 && (
+                            {lvl2.children && lvl2.children.length > 0 && (
                               <Accordion.Item value="item-1">
                                 <Accordion.Trigger asChild>
                                   <button className="group flex justify-between items-center text-sm w-full h-8">

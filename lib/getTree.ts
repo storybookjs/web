@@ -69,6 +69,87 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
   });
 
   // -----------------------------------------------------------------------
+  // New test
+  // -----------------------------------------------------------------------
+
+  const newTree = tree.map((node) => {
+    const findPage = pages.find((page) => page.id === node.id);
+    // if doesn't have children, it's a leaf node, bring data from page
+    if (node.children.length === 0) {
+      const newData = { ...findPage };
+      delete newData.segments;
+      return newData;
+    }
+
+    // if has children, it's a folder
+    if (node.children.length > 0) {
+      // First check if this folder has an index file
+      const indexPage = node.children.find(
+        (c: any) => c.currentSegment === "index"
+      );
+
+      const parentData = {};
+
+      if (indexPage) {
+        // if it has an index file, bring data from index page
+        const findIndexPage = pages.find((page) => page.id === indexPage.id);
+        const newData = { ...findIndexPage };
+        delete newData.segments;
+        Object.assign(parentData, newData);
+      } else {
+        // if it doesn't have an index file, well ... damage control.
+        // To control the sidebar, you need to have an index file.
+        Object.assign(parentData, {
+          id: node.id,
+          title: node.currentSegment,
+          sidebarTitle: node.currentSegment,
+        });
+      }
+
+      const childrenData: any[] = [];
+
+      node.children.forEach((child: any) => {
+        const findChildPage = pages.find((page) => page.id === child.id);
+        const findTreeChild = tree.find(
+          (treeChild) => treeChild.id === child.id
+        );
+        console.log("PAAAAAAAAAGE", findChildPage);
+        console.log("TREEEEEEEEEE", findTreeChild);
+        //   if (child.children.length === 0) {
+        //     const newData = { ...findChildPage };
+        //     delete newData.segments;
+        //     if (child.currentSegment !== "index") {
+        //       childrenData.push(newData);
+        //     }
+        //   }
+        //   if (child.children.length > 0) {
+        //     const newData = { ...findChildPage };
+        //     delete newData.segments;
+        //     // Hello
+        //     // const lvl2Data: any[] = [];
+        //     // child.children.forEach((lvl2: any) => {
+        //     //   const findLvl2Page = pages.find((page) => page.id === lvl2.id);
+        //     //   const newData = { ...findLvl2Page };
+        //     //   delete newData.segments;
+        //     //   lvl2Data.push(newData);
+        //     // });
+        //     // newData.children = lvl2Data;
+        //     childrenData.push(newData);
+        //   }
+      });
+
+      // and finally, return the data
+      return {
+        ...parentData,
+        children: childrenData,
+      };
+    }
+  });
+
+  // console.dir({ tree }, { depth: null });
+  console.dir({ newTree }, { depth: null });
+
+  // -----------------------------------------------------------------------
   // Add the correct data to the tree
   // If a folder has an index file (index.mdx), then the folder's data
   // should be the index file's data. If a folder doesn't have an index
@@ -115,5 +196,5 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
   );
 
   // And then we need to cast it back to TreeNodeProps
-  return tree as TreeNodeProps[];
+  return newTree as TreeNodeProps[];
 }

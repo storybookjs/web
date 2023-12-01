@@ -4,7 +4,6 @@ import { Fragment } from "react";
 import { Footer } from "../../components/footer/footer";
 import Image from "next/image";
 import { getTree } from "@/lib/getTree";
-import { ClientComponent } from "@/components/client";
 import { Sidebar } from "@/components/sidebar";
 import { TableOfContent } from "@/components/table-of-content";
 
@@ -24,7 +23,6 @@ export default async function RootLayout({
   return (
     <Fragment>
       <Header variant="docs" />
-      <ClientComponent tree={tree} />
       <Image
         src="/bubbles.png"
         alt="Storybook Docs"
