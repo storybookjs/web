@@ -3,9 +3,10 @@ import { Header } from "../../components/header/header";
 import { Fragment } from "react";
 import { Footer } from "../../components/footer/footer";
 import Image from "next/image";
-import Link from "next/link";
 import { getTree } from "@/lib/getTree";
 import { ClientComponent } from "@/components/client";
+import { Sidebar } from "@/components/sidebar";
+import { TableOfContent } from "@/components/table-of-content";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -31,46 +32,10 @@ export default async function RootLayout({
         height={339}
         className="w-full absolute top-0 left-0 -z-10"
       />
-      <main className="max-w-8xl mx-auto px-4 lg:px-8 py-12 flex gap-4">
-        <div className="w-[228px] bg-zinc-400/10 dark:bg-zinc-600/10 min-h-[1400px] max-[848px]:hidden">
-          <nav className="sticky top-0">
-            <ul className="mt-8">
-              {tree
-                ? tree.map((lvl1) => (
-                    <li key={lvl1.id}>
-                      <Link href={`/docs/${lvl1.slug}`}>
-                        {lvl1.sidebarTitle}
-                      </Link>
-                      <ul>
-                        {lvl1.children.map((lvl2) => (
-                          <li key={lvl2.id} className="ml-3">
-                            <Link href={`/docs/${lvl1.slug}/${lvl2.slug}`}>
-                              {lvl2.sidebarTitle}
-                            </Link>
-                            <ul>
-                              {lvl2.children.map((lvl3) => (
-                                <li key={lvl3.id} className="ml-6">
-                                  <Link
-                                    href={`/docs/${lvl1.slug}/${lvl2.slug}/${lvl3.slug}`}
-                                  >
-                                    {lvl3.sidebarTitle}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                  ))
-                : []}
-            </ul>
-          </nav>
-        </div>
-        <div className="w-full flex-1 bg-zinc-400/10 dark:bg-zinc-600/10 min-h-[1400px]">
-          {children}
-        </div>
-        <div className="w-[228px] bg-zinc-400/10 dark:bg-zinc-600/10 min-h-[1400px] max-[1148px]:hidden" />
+      <main className="max-w-8xl mx-auto px-4 lg:px-8 flex gap-4">
+        <Sidebar tree={tree} />
+        <div className="w-full flex-1 min-h-[1400px] py-12">{children}</div>
+        <TableOfContent />
       </main>
       <Footer />
     </Fragment>
