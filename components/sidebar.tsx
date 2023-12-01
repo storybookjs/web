@@ -57,10 +57,10 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                                 <Accordion.Content>
                                   <ul>
                                     {lvl2.children.map((lvl3) => (
-                                      <li key={lvl3.id} className="ml-6">
+                                      <li key={lvl3.id} className="ml-4">
                                         <Link
                                           href={`/docs/${lvl1.slug}/${lvl2.slug}/${lvl3.slug}`}
-                                          className="block text-sm h-8"
+                                          className="flex items-center text-sm h-8 border-l border-zinc-200 p-4"
                                         >
                                           {lvl3.sidebarTitle}
                                         </Link>

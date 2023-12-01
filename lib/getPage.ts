@@ -2,8 +2,11 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
-import { Callout } from "@/components/Callout";
-import { CodeSnippets } from "@/components/CodeSnippets";
+import { Callout } from "@/components/mdx/Callout";
+import { CodeSnippets } from "@/components/mdx/CodeSnippets";
+import { IfRenderer } from "@/components/mdx/IfRenderer";
+import { YouTubeCallout } from "@/components/mdx/YouTubeCallout";
+import { FeatureSnippets } from "@/components/mdx/FeatureSnippets";
 
 export async function getPage(
   fileName: string
@@ -36,6 +39,9 @@ export async function getPage(
     components: {
       CodeSnippets,
       Callout,
+      IfRenderer,
+      YouTubeCallout,
+      FeatureSnippets,
     },
     options: {
       parseFrontmatter: true,
