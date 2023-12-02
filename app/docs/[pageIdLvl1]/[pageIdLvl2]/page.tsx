@@ -60,20 +60,18 @@ export default async function Post({
   if (!page) notFound();
 
   // Check if page is a tabs
-  const showTabs = page?.meta.showAsTabs || page.meta.slug === "api";
+  const showTabs = page?.meta.showAsTabs;
 
-  // Create path guide for tabs
-  const pathGuide = page.meta.showAsTabs
-    ? `/docs/${pageIdLvl1}/${pageIdLvl2}`
-    : `/docs/${pageIdLvl1}`;
+  const isLeaf = pageInTree?.children?.length === 0 || !pageInTree?.children;
 
   return (
     <>
       <h2 className="text-3xl mt-4 mb-0">{page.meta?.title || ""}</h2>
       {showTabs && pageInTree && (
         <Tabs
-          pathGuide={pathGuide}
-          pageInTree={pageInTree}
+          pathGuide={
+            isLeaf ? `/docs/${pageIdLvl1}` : `/docs/${pageIdLvl1}/${pageIdLvl2}`
+          }
           lastSegment={pageIdLvl2}
         />
       )}

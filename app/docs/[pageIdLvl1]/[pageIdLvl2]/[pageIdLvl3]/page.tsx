@@ -70,18 +70,19 @@ export default async function Post({
   const showTabs = page?.meta.showAsTabs;
 
   // Create path guide for tabs
-  const pathGuide = page.meta.showAsTabs
-    ? `/docs/${pageIdLvl1}/${pageIdLvl2}/${pageIdLvl3}`
-    : `/docs/${pageIdLvl1}/${pageIdLvl2}`;
+  const isLeaf = pageInTree?.children?.length === 0 || !pageInTree?.children;
 
   return (
     <>
       <h2 className="text-3xl mt-4 mb-0">{page.meta?.title || ""}</h2>
       {showTabs && pageInTree && (
         <Tabs
-          pathGuide={pathGuide}
-          pageInTree={pageInTree}
-          lastSegment={pageIdLvl3}
+          lastSegment={pageIdLvl1}
+          pathGuide={
+            isLeaf
+              ? `/docs/${pageIdLvl1}/${pageIdLvl2}`
+              : `/docs/${pageIdLvl1}/${pageIdLvl2}/${pageIdLvl3}`
+          }
         />
       )}
       <article>{page.content}</article>

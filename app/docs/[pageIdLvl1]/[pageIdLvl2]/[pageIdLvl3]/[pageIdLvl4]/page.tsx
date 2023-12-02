@@ -69,16 +69,19 @@ export default async function Post({
 
   if (!page) notFound();
 
-  console.log("Fuck", pageIdLvl4);
+  const isLeaf = pageInTree?.children?.length === 0 || !pageInTree?.children;
 
   return (
     <>
       <h2 className="text-3xl mt-4 mb-0">{page.meta?.title || ""}</h2>
       {showTabs && pageInTree && (
         <Tabs
-          pathGuide={`/docs/${pageIdLvl1}/${pageIdLvl2}/${pageIdLvl3}`}
-          pageInTree={pageInTree}
-          lastSegment={pageIdLvl4}
+          lastSegment={pageIdLvl1}
+          pathGuide={
+            isLeaf
+              ? `/docs/${pageIdLvl1}/${pageIdLvl2}/${pageIdLvl3}`
+              : `/docs/${pageIdLvl1}/${pageIdLvl2}/${pageIdLvl3}/${pageIdLvl4}`
+          }
         />
       )}
       <article>{page.content}</article>
