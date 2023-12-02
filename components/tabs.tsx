@@ -3,28 +3,28 @@ import Link from "next/link";
 import { FC } from "react";
 
 interface Props {
-  tabAPI?: TreeNodeProps;
-  lastSegment: string;
-  pathGuide: string;
+  path: string;
+  isIndex: boolean;
+  isApi: boolean;
 }
 
-export const Tabs: FC<Props> = ({ pathGuide, lastSegment }) => {
+export const Tabs: FC<Props> = ({ path, isIndex, isApi }) => {
   return (
     <div className="flex gap-4 mt-6">
       <Link
-        href={pathGuide}
+        href={path}
         className={cn(
           "border-b",
-          lastSegment !== "api" && "border-b border-blue-500 text-blue-500"
+          isIndex && "border-b border-blue-500 text-blue-500"
         )}
       >
         Guide
       </Link>
       <Link
-        href={`${pathGuide}/api`}
+        href={`${path}/api`}
         className={cn(
           "border-b",
-          lastSegment === "api" && "border-b border-blue-500 text-blue-500"
+          isApi && "border-b border-blue-500 text-blue-500"
         )}
       >
         API
