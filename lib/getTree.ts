@@ -178,14 +178,31 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     node: TemporaryTreeNodeProps,
     parent: TemporaryTreeNodeProps
   ) => {
+    if (node.children.length > 0) {
+      // Check if folders have an index file
+      const indexPage = node.children.find(
+        (c: any) => c.currentSegment === "index"
+      );
+      // if it doesn't have an index file, well ... damage control.
+      // To control the sidebar, you need to have an index file.
+      if (!indexPage) {
+        Object.assign(node, {
+          id: node.id,
+          title: node.currentSegment,
+          sidebarTitle: node.currentSegment,
+          slug: null,
+        });
+      }
+    }
+
+    // we're at a leaf node, an actual file
     if (node.children.length === 0) {
       const findPage = pages.find((page) => page.id === node.id);
       const newData = { ...findPage };
       delete newData.segments;
 
-      // we're at a leaf node, an actual file
+      //this leaf node is an index page that needs to be added to the parent node
       if (node.currentSegment === "index") {
-        //this leaf node is an index page that needs to be added to the parent node
         Object.assign(parent, newData);
         // Remove the index page from the children array
         parent.children.splice(parent.children.indexOf(node), 1);
@@ -213,7 +230,7 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     tree as any
   );
 
-  console.dir({ tree }, { depth: null });
+  console.dir({ tree }, { depth: 2 });
 
   // -----------------------------------------------------------------------
   // Add the correct data to the tree
