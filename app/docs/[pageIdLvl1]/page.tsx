@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import "highlight.js/styles/github-dark.css";
 import { getTree } from "@/lib/getTree";
 import { getPage } from "@/lib/getPage";
+import { Tabs } from "@/components/tabs";
 
 // export const revalidate = 86400;
 export const revalidate = 0;
@@ -44,18 +45,28 @@ export async function generateMetadata({ params: { pageIdLvl1 } }: Props) {
 
 export default async function Post({ params: { pageIdLvl1 } }: Props) {
   const tree = await getTree();
-  const findPageInTree = tree && tree.find((page) => page.slug === pageIdLvl1);
-  const pageDataId = findPageInTree?.id;
+  const pageInTree = tree && tree.find((page) => page.slug === pageIdLvl1);
+  const pageDataId = pageInTree?.id;
   const page = await getPage(`${pageDataId}.mdx`);
 
+  if (!page) notFound();
+
+  // Check if page is a tabs
   const showTabs = page?.meta.showAsTabs;
 
-  if (!page) notFound();
+  // Create path guide for tabs
+  const pathGuide = page.meta.showAsTabs ? `/docs/${pageIdLvl1}` : `/docs`;
 
   return (
     <>
       <h2 className="text-3xl mt-4 mb-0">{page.meta.title || ""}</h2>
-      {showTabs && <div>tabs</div>}
+      {showTabs && pageInTree && (
+        <Tabs
+          pathGuide={pathGuide}
+          pageInTree={pageInTree}
+          lastSegment={pageIdLvl1}
+        />
+      )}
       <article>{page.content}</article>
     </>
   );

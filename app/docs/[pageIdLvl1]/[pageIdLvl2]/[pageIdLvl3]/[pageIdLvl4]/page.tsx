@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import "highlight.js/styles/github-dark.css";
 import { getTree } from "@/lib/getTree";
 import { getPage } from "@/lib/getPage";
-import Link from "next/link";
 import { Tabs } from "@/components/tabs";
 
 // export const revalidate = 86400;
@@ -13,6 +12,7 @@ type Props = {
     pageIdLvl1: string;
     pageIdLvl2: string;
     pageIdLvl3: string;
+    pageIdLvl4: string;
   };
 };
 
@@ -46,7 +46,7 @@ export async function generateMetadata({
 }
 
 export default async function Post({
-  params: { pageIdLvl1, pageIdLvl2, pageIdLvl3 },
+  params: { pageIdLvl1, pageIdLvl2, pageIdLvl3, pageIdLvl4 },
 }: Props) {
   // Get the tree
   const tree = await getTree();
@@ -64,24 +64,21 @@ export default async function Post({
   const pageDataId = pageInTree?.id;
   const page = await getPage(`${pageDataId}.mdx`);
 
-  if (!page) notFound();
-
   // Check if page is a tabs
   const showTabs = page?.meta.showAsTabs;
 
-  // Create path guide for tabs
-  const pathGuide = page.meta.showAsTabs
-    ? `/docs/${pageIdLvl1}/${pageIdLvl2}/${pageIdLvl3}`
-    : `/docs/${pageIdLvl1}/${pageIdLvl2}`;
+  if (!page) notFound();
+
+  console.log("Fuck", pageIdLvl4);
 
   return (
     <>
       <h2 className="text-3xl mt-4 mb-0">{page.meta?.title || ""}</h2>
       {showTabs && pageInTree && (
         <Tabs
-          pathGuide={pathGuide}
+          pathGuide={`/docs/${pageIdLvl1}/${pageIdLvl2}/${pageIdLvl3}`}
           pageInTree={pageInTree}
-          lastSegment={pageIdLvl3}
+          lastSegment={pageIdLvl4}
         />
       )}
       <article>{page.content}</article>
