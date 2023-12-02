@@ -1,4 +1,5 @@
 import { getPage } from "./getPage";
+import { getSlug } from "./getSlug";
 
 export async function getTree(): Promise<TreeNodeProps[] | undefined> {
   // -----------------------------------------------------------------------
@@ -175,12 +176,14 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
   // Use case 6 - Folder with showAsTabs in frontmatter in level 3
   // -----------------------------------------------------------------------
 
-  console.dir({ pages }, { depth: null });
-
   const addPageDataToTreeNode2 = (
     node: TemporaryTreeNodeProps,
     parent: TemporaryTreeNodeProps
   ) => {
+    const findPage = pages.find((page) => page.id === node.id);
+    const newData = { ...findPage };
+    delete newData.segments;
+
     // We have a folder with children
     if (node.children.length > 0) {
       // Check if folders have an index file
@@ -194,7 +197,7 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
           id: node.id,
           title: node.currentSegment,
           shortTitle: node.currentSegment,
-          slug: null,
+          slug: getSlug(node.currentSegment),
           showAsTabs: false,
         });
       }
@@ -202,10 +205,6 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
 
     // we're at a leaf node, an actual file
     if (node.children.length === 0) {
-      const findPage = pages.find((page) => page.id === node.id);
-      const newData = { ...findPage };
-      delete newData.segments;
-
       //this leaf node is an index page that needs to be added to the parent node
       if (node.currentSegment === "index") {
         Object.assign(parent, newData);
@@ -213,14 +212,6 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
         parent.children.splice(parent.children.indexOf(node), 1);
         return;
       }
-
-      // console.log("node", newData);
-
-      // Check if this folder has showAsTabs in frontmatter.
-      // console.log("search lycos", newData);
-      // if (newData.showAsTabs) {
-      //   console.log("showAsTabs found", node);
-      // }
 
       // this leaf node is a page whose info needs to be added to the current node
       Object.assign(node, newData, { children: null });
@@ -244,7 +235,7 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     tree as any
   );
 
-  // console.dir({ tree }, { depth: null });
+  console.dir({ tree }, { depth: null });
 
   // -----------------------------------------------------------------------
   // Add the correct data to the tree

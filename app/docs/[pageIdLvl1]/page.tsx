@@ -48,11 +48,14 @@ export default async function Post({ params: { pageIdLvl1 } }: Props) {
   const pageDataId = findPageInTree?.id;
   const page = await getPage(`${pageDataId}.mdx`);
 
+  const showTabs = page?.meta.showAsTabs;
+
   if (!page) notFound();
 
   return (
     <>
       <h2 className="text-3xl mt-4 mb-0">{page.meta.title || ""}</h2>
+      {showTabs && <div>tabs</div>}
       <article>{page.content}</article>
     </>
   );

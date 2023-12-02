@@ -7,6 +7,7 @@ import { CodeSnippets } from "@/components/mdx/CodeSnippets";
 import { IfRenderer } from "@/components/mdx/IfRenderer";
 import { YouTubeCallout } from "@/components/mdx/YouTubeCallout";
 import { FeatureSnippets } from "@/components/mdx/FeatureSnippets";
+import { getSlug } from "./getSlug";
 
 export async function getPage(
   fileName: string
@@ -65,10 +66,7 @@ export async function getPage(
   const lastSegment = id.split("/").pop();
   const lastRealSegment =
     lastSegment === "index" ? segments[segments.length - 2] : lastSegment;
-  const slug =
-    lastRealSegment && lastRealSegment.match(/^\d+-/)
-      ? lastRealSegment.replace(/^\d+-/, "")
-      : lastRealSegment;
+  const slug = getSlug(lastRealSegment);
 
   const pageObj: PageProps = {
     meta: {
