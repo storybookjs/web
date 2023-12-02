@@ -175,6 +175,8 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
   // Use case 6 - Folder with showAsTabs in frontmatter in level 3
   // -----------------------------------------------------------------------
 
+  console.dir({ pages }, { depth: null });
+
   const addPageDataToTreeNode2 = (
     node: TemporaryTreeNodeProps,
     parent: TemporaryTreeNodeProps
@@ -211,15 +213,19 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
         parent.children.splice(parent.children.indexOf(node), 1);
         return;
       }
+
+      // console.log("node", newData);
+
+      // Check if this folder has showAsTabs in frontmatter.
+      // console.log("search lycos", newData);
+      // if (newData.showAsTabs) {
+      //   console.log("showAsTabs found", node);
+      // }
+
       // this leaf node is a page whose info needs to be added to the current node
       Object.assign(node, newData, { children: null });
 
       return;
-    }
-
-    // Check if this folder has showAsTabs in frontmatter
-    if (node.children.find((c: any) => c.showAsTabs)) {
-      console.log("showAsTabs found", node);
     }
 
     // we're not at a leaf node, so we need to keep traversing the tree
@@ -238,7 +244,7 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     tree as any
   );
 
-  console.dir({ tree }, { depth: null });
+  // console.dir({ tree }, { depth: null });
 
   // -----------------------------------------------------------------------
   // Add the correct data to the tree
