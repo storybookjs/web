@@ -174,10 +174,12 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
   // Use case 5 - Folder with showAsTabs in frontmatter in level 2
   // Use case 6 - Folder with showAsTabs in frontmatter in level 3
   // -----------------------------------------------------------------------
+
   const addPageDataToTreeNode2 = (
     node: TemporaryTreeNodeProps,
     parent: TemporaryTreeNodeProps
   ) => {
+    // We have a folder with children
     if (node.children.length > 0) {
       // Check if folders have an index file
       const indexPage = node.children.find(
@@ -189,8 +191,9 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
         Object.assign(node, {
           id: node.id,
           title: node.currentSegment,
-          sidebarTitle: node.currentSegment,
+          shortTitle: node.currentSegment,
           slug: null,
+          showAsTabs: false,
         });
       }
     }
@@ -214,6 +217,11 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
       return;
     }
 
+    // Check if this folder has showAsTabs in frontmatter
+    if (node.children.find((c: any) => c.showAsTabs)) {
+      console.log("showAsTabs found", node);
+    }
+
     // we're not at a leaf node, so we need to keep traversing the tree
     node.children.forEach((child) => {
       addPageDataToTreeNode2(child, node);
@@ -230,7 +238,7 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     tree as any
   );
 
-  console.dir({ tree }, { depth: 2 });
+  console.dir({ tree }, { depth: null });
 
   // -----------------------------------------------------------------------
   // Add the correct data to the tree

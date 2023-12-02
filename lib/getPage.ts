@@ -34,6 +34,7 @@ export async function getPage(
   const { frontmatter, content } = await compileMDX<{
     title: string;
     short_title?: string;
+    show_as_tabs?: boolean;
   }>({
     source: rawMDX,
     components: {
@@ -74,7 +75,8 @@ export async function getPage(
       id,
       slug: slug || "",
       title: frontmatter.title,
-      sidebarTitle: frontmatter.short_title || frontmatter.title || "",
+      shortTitle: frontmatter.short_title || frontmatter.title || "",
+      showAsTabs: frontmatter.show_as_tabs || false,
       segments,
     },
     content,

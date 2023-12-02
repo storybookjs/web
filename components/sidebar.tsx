@@ -23,7 +23,7 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                     href={`/docs/${lvl1.slug}`}
                     className="block text-sm font-bold mt-6 h-8"
                   >
-                    {lvl1.sidebarTitle}
+                    {lvl1.shortTitle}
                   </Link>
                   {lvl1.children && lvl1.children.length > 0 && (
                     <ul>
@@ -40,7 +40,7 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                                 href={`/docs/${lvl1.slug}/${lvl2.slug}`}
                                 className="flex items-center text-sm h-8"
                               >
-                                {lvl2.sidebarTitle}
+                                {lvl2.shortTitle}
                               </Link>
                             )}
                             {!lvl2.showAsTabs &&
@@ -49,7 +49,7 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                                 <Accordion.Item value="item-1">
                                   <Accordion.Trigger asChild>
                                     <button className="group flex justify-between items-center text-sm w-full h-8">
-                                      {lvl2.sidebarTitle}
+                                      {lvl2.shortTitle}
                                       <ChevronSmallRightIcon
                                         className="ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-90"
                                         aria-hidden
@@ -64,7 +64,7 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                                             href={`/docs/${lvl1.slug}/${lvl2.slug}/${lvl3.slug}`}
                                             className="flex items-center text-sm h-8 border-l border-zinc-200 p-4"
                                           >
-                                            {lvl3.sidebarTitle}
+                                            {lvl3.shortTitle}
                                           </Link>
                                         </li>
                                       ))}

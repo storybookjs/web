@@ -1,8 +1,9 @@
 type Meta = {
   id: string;
   title: string;
-  sidebarTitle: string;
+  shortTitle: string;
   slug: string;
+  showAsTabs: boolean;
   segments: string[];
 };
 
