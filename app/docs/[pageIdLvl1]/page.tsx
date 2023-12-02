@@ -51,20 +51,17 @@ export default async function Post({ params: { pageIdLvl1 } }: Props) {
 
   if (!page) notFound();
 
-  // Check if page is a tabs
-  const showTabs = page?.meta.showAsTabs;
+  // Two ways to show the tabs
+  const isIndex = page?.meta.showAsTabs;
+  const isApi = pageInTree?.currentSegment === "api";
 
-  // Create path guide for tabs
-  const isLeaf = pageInTree?.children?.length === 0 || !pageInTree?.children;
+  console.log(isIndex, isApi);
 
   return (
     <>
       <h2 className="text-3xl mt-4 mb-0">{page.meta.title || ""}</h2>
-      {showTabs && pageInTree && (
-        <Tabs
-          lastSegment={pageIdLvl1}
-          pathGuide={isLeaf ? `/docs` : `/docs/${pageIdLvl1}`}
-        />
+      {(isIndex || isApi) && (
+        <Tabs path={`/docs/${pageIdLvl1}`} isIndex={isIndex} isApi={isApi} />
       )}
       <article>{page.content}</article>
     </>

@@ -64,17 +64,16 @@ export default async function Post({
   const isApi = pageInTree?.currentSegment === "api";
 
   console.log(isIndex, isApi);
+  console.log(page);
 
   return (
     <>
       <h2 className="text-3xl mt-4 mb-0">{page.meta?.title || ""}</h2>
       {(isIndex || isApi) && (
         <Tabs
-          path={`/docs/${pageIdLvl1}`}
+          path={`/docs/${pageIdLvl1}/${pageIdLvl2}`}
           isIndex={isIndex}
           isApi={isApi}
-          // pathIndex={`/docs/${pageIdLvl1}`}
-          // pathApi={`/docs/${pageIdLvl1}/api`}
         />
       )}
       <article>{page.content}</article>
