@@ -28,13 +28,10 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                   </Link>
                   {lvl1.children && lvl1.children.length > 0 && (
                     <ul>
-                      {lvl1.children
-                        .filter(
-                          (child) =>
-                            child.currentSegment !== "index" &&
-                            child.currentSegment !== "api"
-                        )
-                        .map((lvl2) => (
+                      {lvl1.children.map((lvl2) => {
+                        if (lvl2.currentSegment === "index") return null;
+                        if (lvl2.currentSegment === "api") return null;
+                        return (
                           <Accordion.Root
                             type="single"
                             collapsible
@@ -42,7 +39,9 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                             key={lvl2.id}
                           >
                             <li>
-                              {(!lvl2.children || lvl2.showAsTabs) && (
+                              {(!lvl2.children ||
+                                lvl2.children.length === 0 ||
+                                lvl2.showAsTabs) && (
                                 <Link
                                   href={`/docs/${lvl1.slug}/${lvl2.slug}`}
                                   className="flex items-center text-sm h-8"
@@ -50,42 +49,45 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                                   {lvl2.shortTitle}
                                 </Link>
                               )}
-                              {lvl2.children && lvl2.children.length > 0 && (
-                                <Accordion.Item value="item-1">
-                                  <Accordion.Trigger asChild>
-                                    <button className="group flex justify-between items-center text-sm w-full h-8">
-                                      {lvl2.shortTitle}
-                                      <ChevronSmallRightIcon
-                                        className="ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-90"
-                                        aria-hidden
-                                      />
-                                    </button>
-                                  </Accordion.Trigger>
-                                  <Accordion.Content>
-                                    <ul>
-                                      {lvl2.children
-                                        .filter(
-                                          (child) =>
-                                            child.currentSegment !== "index" &&
-                                            child.currentSegment !== "api"
-                                        )
-                                        .map((lvl3) => (
-                                          <li key={lvl3.id} className="ml-4">
-                                            <Link
-                                              href={`/docs/${lvl1.slug}/${lvl2.slug}/${lvl3.slug}`}
-                                              className="flex items-center text-sm h-8 border-l border-zinc-200 p-4"
-                                            >
-                                              {lvl3.shortTitle}
-                                            </Link>
-                                          </li>
-                                        ))}
-                                    </ul>
-                                  </Accordion.Content>
-                                </Accordion.Item>
-                              )}
+                              {lvl2.children &&
+                                lvl2.children.length > 0 &&
+                                !lvl2.showAsTabs && (
+                                  <Accordion.Item value="item-1">
+                                    <Accordion.Trigger asChild>
+                                      <button className="group flex justify-between items-center text-sm w-full h-8">
+                                        {lvl2.shortTitle}
+                                        <ChevronSmallRightIcon
+                                          className="ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-90"
+                                          aria-hidden
+                                        />
+                                      </button>
+                                    </Accordion.Trigger>
+                                    <Accordion.Content>
+                                      <ul>
+                                        {lvl2.children.map((lvl3) => {
+                                          if (lvl3.currentSegment === "index")
+                                            return null;
+                                          if (lvl3.currentSegment === "api")
+                                            return null;
+                                          return (
+                                            <li key={lvl3.id} className="ml-4">
+                                              <Link
+                                                href={`/docs/${lvl1.slug}/${lvl2.slug}/${lvl3.slug}`}
+                                                className="flex items-center text-sm h-8 border-l border-zinc-200 p-4"
+                                              >
+                                                {lvl3.shortTitle}
+                                              </Link>
+                                            </li>
+                                          );
+                                        })}
+                                      </ul>
+                                    </Accordion.Content>
+                                  </Accordion.Item>
+                                )}
                             </li>
                           </Accordion.Root>
-                        ))}
+                        );
+                      })}
                     </ul>
                   )}
                 </li>
