@@ -3,6 +3,7 @@ import "highlight.js/styles/github-dark.css";
 import { getTree } from "@/lib/getTree";
 import { getPage } from "@/lib/getPage";
 import { Tabs } from "@/components/tabs";
+import { H1 } from "@/components/mdx";
 
 // export const revalidate = 86400;
 export const revalidate = 0;
@@ -57,7 +58,7 @@ export default async function Post({ params: { pageIdLvl1 } }: Props) {
 
   return (
     <>
-      <h2 className="text-3xl mt-4 mb-0">{page.meta.title || ""}</h2>
+      <H1>{page.meta.title || ""}</H1>
       {(isIndex || isApi) && (
         <Tabs
           pathIndex={`/docs/${pageIdLvl1}`}

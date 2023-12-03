@@ -2,12 +2,14 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
+import { common } from "lowlight";
 import { Callout } from "@/components/mdx/Callout";
 import { CodeSnippets } from "@/components/mdx/CodeSnippets";
 import { IfRenderer } from "@/components/mdx/IfRenderer";
 import { YouTubeCallout } from "@/components/mdx/YouTubeCallout";
 import { FeatureSnippets } from "@/components/mdx/FeatureSnippets";
 import { getSlug } from "./getSlug";
+import { P, H1, H3 } from "@/components/mdx";
 
 export async function getPage(
   fileName: string
@@ -39,6 +41,11 @@ export async function getPage(
   }>({
     source: rawMDX,
     components: {
+      h1: H1,
+      h2: H1,
+      h3: H3,
+      h4: H1,
+      p: P,
       CodeSnippets,
       Callout,
       IfRenderer,
@@ -49,7 +56,14 @@ export async function getPage(
       parseFrontmatter: true,
       mdxOptions: {
         rehypePlugins: [
-          // [rehypeHighlight, {}],
+          [
+            // @ts-ignore TODO: fix types
+            rehypeHighlight,
+            {
+              languages: { ...common },
+              subset: false,
+            },
+          ],
           rehypeSlug,
           [
             rehypeAutolinkHeadings,
