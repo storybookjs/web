@@ -12,6 +12,7 @@ interface SidebarProps {
 }
 
 export const Sidebar: FC<SidebarProps> = ({ tree }) => {
+  console.log(tree);
   return (
     <nav className="w-[228px] max-[848px]:hidden block sticky self-start top-[72px]">
       <ScrollArea className="h-[calc(100vh-72px)] w-full">
@@ -25,11 +26,15 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                   >
                     {lvl1.shortTitle}
                   </Link>
-                  {lvl1.children &&
-                    lvl1.children.length > 0 &&
-                    lvl1.showAsTabs === false && (
-                      <ul>
-                        {lvl1.children.map((lvl2) => (
+                  {lvl1.children && lvl1.children.length > 0 && (
+                    <ul>
+                      {lvl1.children
+                        .filter(
+                          (child) =>
+                            child.currentSegment !== "index" &&
+                            child.currentSegment !== "api"
+                        )
+                        .map((lvl2) => (
                           <Accordion.Root
                             type="single"
                             collapsible
@@ -77,8 +82,8 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                             </li>
                           </Accordion.Root>
                         ))}
-                      </ul>
-                    )}
+                    </ul>
+                  )}
                 </li>
               ))
             : []}
