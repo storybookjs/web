@@ -55,13 +55,16 @@ export default async function Post({ params: { pageIdLvl1 } }: Props) {
   const isIndex = page?.meta.showAsTabs;
   const isApi = pageInTree?.currentSegment === "api";
 
-  console.log(isIndex, isApi);
-
   return (
     <>
       <h2 className="text-3xl mt-4 mb-0">{page.meta.title || ""}</h2>
       {(isIndex || isApi) && (
-        <Tabs path={`/docs/${pageIdLvl1}`} isIndex={isIndex} isApi={isApi} />
+        <Tabs
+          pathIndex={`/docs/${pageIdLvl1}`}
+          pathApi="/docs"
+          isIndex={isIndex}
+          isApi={isApi}
+        />
       )}
       <article>{page.content}</article>
     </>

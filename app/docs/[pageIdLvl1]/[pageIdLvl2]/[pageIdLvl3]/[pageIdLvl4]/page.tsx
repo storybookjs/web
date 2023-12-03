@@ -64,24 +64,21 @@ export default async function Post({
   const pageDataId = pageInTree?.id;
   const page = await getPage(`${pageDataId}.mdx`);
 
-  // Check if page is a tabs
-  const showTabs = page?.meta.showAsTabs;
-
   if (!page) notFound();
 
-  const isLeaf = pageInTree?.children?.length === 0 || !pageInTree?.children;
+  // Two ways to show the tabs
+  const isIndex = page?.meta.showAsTabs;
+  const isApi = pageInTree?.currentSegment === "api";
 
   return (
     <>
       <h2 className="text-3xl mt-4 mb-0">{page.meta?.title || ""}</h2>
-      {showTabs && pageInTree && (
+      {(isIndex || isApi) && (
         <Tabs
-          lastSegment={pageIdLvl1}
-          pathGuide={
-            isLeaf
-              ? `/docs/${pageIdLvl1}/${pageIdLvl2}/${pageIdLvl3}`
-              : `/docs/${pageIdLvl1}/${pageIdLvl2}/${pageIdLvl3}/${pageIdLvl4}`
-          }
+          pathIndex={`/docs/${pageIdLvl1}/${pageIdLvl2}/${pageIdLvl3}/${pageIdLvl4}`}
+          pathApi={`/docs/${pageIdLvl1}/${pageIdLvl2}/${pageIdLvl3}`}
+          isIndex={isIndex}
+          isApi={isApi}
         />
       )}
       <article>{page.content}</article>
