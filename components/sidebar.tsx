@@ -50,22 +50,26 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                                   {lvl2.shortTitle}
                                 </Link>
                               )}
-                              {!lvl2.showAsTabs &&
-                                lvl2.children &&
-                                lvl2.children.length > 0 && (
-                                  <Accordion.Item value="item-1">
-                                    <Accordion.Trigger asChild>
-                                      <button className="group flex justify-between items-center text-sm w-full h-8">
-                                        {lvl2.shortTitle}
-                                        <ChevronSmallRightIcon
-                                          className="ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-90"
-                                          aria-hidden
-                                        />
-                                      </button>
-                                    </Accordion.Trigger>
-                                    <Accordion.Content>
-                                      <ul>
-                                        {lvl2.children.map((lvl3) => (
+                              {lvl2.children && lvl2.children.length > 0 && (
+                                <Accordion.Item value="item-1">
+                                  <Accordion.Trigger asChild>
+                                    <button className="group flex justify-between items-center text-sm w-full h-8">
+                                      {lvl2.shortTitle}
+                                      <ChevronSmallRightIcon
+                                        className="ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-90"
+                                        aria-hidden
+                                      />
+                                    </button>
+                                  </Accordion.Trigger>
+                                  <Accordion.Content>
+                                    <ul>
+                                      {lvl2.children
+                                        .filter(
+                                          (child) =>
+                                            child.currentSegment !== "index" &&
+                                            child.currentSegment !== "api"
+                                        )
+                                        .map((lvl3) => (
                                           <li key={lvl3.id} className="ml-4">
                                             <Link
                                               href={`/docs/${lvl1.slug}/${lvl2.slug}/${lvl3.slug}`}
@@ -75,10 +79,10 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                                             </Link>
                                           </li>
                                         ))}
-                                      </ul>
-                                    </Accordion.Content>
-                                  </Accordion.Item>
-                                )}
+                                    </ul>
+                                  </Accordion.Content>
+                                </Accordion.Item>
+                              )}
                             </li>
                           </Accordion.Root>
                         ))}
