@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import "highlight.js/styles/github-dark.css";
 import { getTree } from "@/lib/getTree";
 import { getPage } from "@/lib/getPage";
-import { Article } from "@/components/mdx/article";
+import { Article } from "@/components/article";
 
 // export const revalidate = 86400;
 export const revalidate = 0;
