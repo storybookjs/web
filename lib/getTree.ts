@@ -1,45 +1,14 @@
-import { getPage } from "./getPage";
+import { getPages } from "./getPages";
 import { getSlug } from "./getSlug";
 
 export async function getTree(): Promise<TreeNodeProps[] | undefined> {
   // -----------------------------------------------------------------------
-  // Fetch all docs pages from the repo
+  // Fetch pages from Storybook monorepo
   // -----------------------------------------------------------------------
-  const res = await fetch(
-    "https://api.github.com/repos/storybookjs/web/git/trees/main?recursive=1",
-    {
-      headers: {
-        Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${process.env.GITHUB_STORYBOOK_BOT_PAT}`,
-        "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "storybook-bot",
-      },
-      cache: "no-store", // To remove when solving the cache error
-    }
-  );
+  const pages = await getPages();
+  if (!pages) return undefined;
 
-  if (!res.ok) return undefined;
-
-  const repoFiletree: {
-    tree: [{ path: string }];
-  } = await res.json();
-
-  const filesArray = repoFiletree.tree
-    .map((obj) => obj.path)
-    .filter(
-      (path) =>
-        [".mdx", "md"].some((e) => path.endsWith(e)) && path.startsWith("docs/")
-    );
-
-  const pages: Meta[] = [];
-
-  for (const file of filesArray) {
-    const post = await getPage(file);
-    if (post) {
-      const { meta } = post;
-      pages.push(meta);
-    }
-  }
+  console.log(pages);
 
   // -----------------------------------------------------------------------
   // Create temporary tree
@@ -86,9 +55,6 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     const findNode = pages.find((page) => page.id === node.id);
     const nodeData = { ...findNode };
     delete nodeData.segments;
-
-    const findParent = pages.find((page) => page.id === parent.id);
-    const parentData = { ...findParent };
 
     // We have a folder with children
     if (node.children.length > 0) {

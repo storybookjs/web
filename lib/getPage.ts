@@ -15,8 +15,11 @@ export async function getPage(
   fileName: string
 ): Promise<PageProps | undefined> {
   const id = fileName.replace(/\.mdx$/, "");
+
+  console.log("getPage", id);
+
   const res = await fetch(
-    `https://raw.githubusercontent.com/storybookjs/web/main/${fileName}`,
+    `https://raw.githubusercontent.com/storybookjs/storybook/charles-docs-new-structure/docs/${fileName}`,
     {
       headers: {
         Accept: "application/vnd.github+json",
