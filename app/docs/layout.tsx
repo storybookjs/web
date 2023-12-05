@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { Footer } from "../../components/footer/footer";
 import Image from "next/image";
 import { getTree } from "@/lib/getTree";
-import { Sidebar } from "@/components/sidebar";
+import { Sidebar } from "@/components/sidebar/sidebar";
 import { TableOfContent } from "@/components/table-of-content";
 
 export const metadata: Metadata = {
