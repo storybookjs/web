@@ -22,12 +22,12 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
     <nav className="w-[228px] max-[848px]:hidden block sticky self-start top-[72px]">
       <ScrollAreaPrimitive.Root className="relative overflow-hidden h-[calc(100vh-72px)] w-full">
         <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
-          <div className="py-12 pr-4">
-            <nav className="flex flex-col gap-3 text-sm font-medium">
+          <div className="py-12 pr-4 pl-1">
+            <nav className="flex flex-col gap-1.5 text-sm font-medium">
               <Link
                 href="/docs"
                 className={cn(
-                  "flex items-center gap-3 hover:text-blue-500 transition-colors",
+                  "flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8",
                   pathname === "/docs" && "text-blue-500"
                 )}
               >
@@ -37,7 +37,7 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
               <Link
                 href="#"
                 className={cn(
-                  "flex items-center gap-3 hover:text-blue-500 transition-colors",
+                  "flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8",
                   pathname === "/tutorials" && "text-blue-500"
                 )}
               >
@@ -47,7 +47,7 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
               <Link
                 href="#"
                 className={cn(
-                  "flex items-center gap-3 hover:text-blue-500 transition-colors",
+                  "flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8",
                   pathname === "/changelog" && "text-blue-500"
                 )}
               >
@@ -62,7 +62,7 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                     <li key={lvl1.path}>
                       <Link
                         href={`/docs/${lvl1.slug}`}
-                        className="block text-sm font-bold mt-6 h-8 hover:text-blue-500 transition-colors"
+                        className="flex items-center text-sm font-bold mt-6 h-8 hover:text-blue-500 transition-colors px-2"
                       >
                         {lvl1.shortTitle}
                       </Link>
@@ -84,7 +84,7 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                                     lvl2.showAsTabs) && (
                                     <Link
                                       href={`/docs/${lvl1.slug}/${lvl2.slug}`}
-                                      className="flex items-center text-sm h-8 text-zinc-600 hover:text-blue-500 transition-colors"
+                                      className="flex items-center text-sm h-8 text-zinc-600 hover:text-blue-500 transition-colors px-2"
                                     >
                                       {lvl2.shortTitle}
                                     </Link>

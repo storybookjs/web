@@ -10,7 +10,7 @@ export const TableOfContent: FC<TableOfContentProps> = () => {
     <nav className="w-[228px] max-[1148px]:hidden block sticky self-start top-[72px]">
       <ScrollArea className="h-[calc(100vh-72px)] w-full">
         <div className="py-12 ">
-          <div className="block text-sm font-bold mt-6 h-8">On this page</div>
+          <div className="block text-sm font-bold h-8">On this page</div>
         </div>
       </ScrollArea>
     </nav>
