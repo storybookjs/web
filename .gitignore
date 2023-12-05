@@ -34,3 +34,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated docs content
+/content
+/public/docs
+
+# Other stuff
+TODO.txt

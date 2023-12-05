@@ -10,39 +10,20 @@ import { YouTubeCallout } from "@/components/mdx/YouTubeCallout";
 import { FeatureSnippets } from "@/components/mdx/FeatureSnippets";
 import { getSlug } from "./getSlug";
 import { P, H1, H3 } from "@/components/mdx";
+import fs from "fs";
 
-export async function getPage(
-  fileName: string
-): Promise<PageProps | undefined> {
-  const id = fileName.replace(/\.mdx$/, "");
+export async function getPage(path: string) {
+  if (!path) return undefined;
+  const id = path.replace(/\.mdx$/, "");
 
-  console.log("getPage", id);
-
-  const res = await fetch(
-    `https://raw.githubusercontent.com/storybookjs/storybook/charles-docs-new-structure/docs/${fileName}`,
-    {
-      headers: {
-        Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${process.env.GITHUB_STORYBOOK_BOT_PAT}`,
-        "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "storybook-bot",
-      },
-      cache: "no-store", // To remove when solving the cache error
-    }
-  );
-
-  if (!res.ok) return undefined;
-
-  const rawMDX = await res.text();
-
-  if (rawMDX === "404: Not Found") return undefined;
+  const fileContents = fs.readFileSync(`content/${path}`, "utf8");
 
   const { frontmatter, content } = await compileMDX<{
     title: string;
     short_title?: string;
     show_as_tab?: boolean;
   }>({
-    source: rawMDX,
+    source: fileContents,
     components: {
       h1: H1,
       h2: H1,
@@ -99,3 +80,5 @@ export async function getPage(
 
   return pageObj;
 }
+
+getPage("content/docs/01-get-started/setup.mdx");

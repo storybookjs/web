@@ -8,8 +8,6 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
   const pages = await getPages();
   if (!pages) return undefined;
 
-  console.log(pages);
-
   // -----------------------------------------------------------------------
   // Create temporary tree
   // This helps to create the scaffolding for the tree
@@ -109,8 +107,6 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     },
     tree as any
   );
-
-  // console.dir({ tree }, { depth: null });
 
   // And then we need to cast it back to TreeNodeProps
   return tree as TreeNodeProps[];
