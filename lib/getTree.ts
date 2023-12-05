@@ -1,9 +1,41 @@
-import { getPages } from "./getPages";
+import fs from "fs";
+import path from "path";
 import { getSlug } from "./getSlug";
+import { getPage } from "./getPage";
 import dirTree from "directory-tree";
 
 export async function getTree(): Promise<TreeNodeProps[] | undefined> {
-  const pages = await getPages();
+  // -----------------------------------------------------------------------
+  // Get all pages + metadata
+  // -----------------------------------------------------------------------
+
+  const listOfPaths: string[] = [];
+  const pages: Meta[] = [];
+
+  function walkDir(dir: string, callback: (filePath: string) => void) {
+    fs.readdirSync(dir).forEach((f) => {
+      let dirPath = path.join(dir, f);
+      let isDirectory = fs.statSync(dirPath).isDirectory();
+      isDirectory ? walkDir(dirPath, callback) : callback(path.join(dir, f));
+    });
+  }
+
+  walkDir("content/docs", function (filePath: string) {
+    listOfPaths.push(filePath);
+  });
+
+  const listOfPathsWithoutContent = listOfPaths.map((path) =>
+    path.replace("content/", "")
+  );
+
+  for (const file of listOfPathsWithoutContent) {
+    const post = await getPage(file);
+    if (post) {
+      const { meta } = post;
+      pages.push(meta);
+    }
+  }
+
   if (!pages) return undefined;
 
   // -----------------------------------------------------------------------
