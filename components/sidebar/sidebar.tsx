@@ -9,6 +9,7 @@ import { ChangelogIcon, DocsIcon, TutorialsIcon } from "./icons";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
+import { VersionSelector } from "./version-selector";
 
 interface SidebarProps {
   tree: TreeNodeProps[] | undefined;
@@ -22,7 +23,7 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
       <ScrollAreaPrimitive.Root className="relative overflow-hidden h-[calc(100vh-72px)] w-full">
         <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
           <div className="py-12 pr-4">
-            <nav className="flex flex-col gap-3 text-sm font-semibold">
+            <nav className="flex flex-col gap-3 text-sm font-medium">
               <Link
                 href="/docs"
                 className={cn(
@@ -33,22 +34,35 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                 <DocsIcon />
                 Documentation
               </Link>
-              <Link href="#" className="flex items-center gap-3">
+              <Link
+                href="#"
+                className={cn(
+                  "flex items-center gap-3 hover:text-blue-500 transition-colors",
+                  pathname === "/tutorials" && "text-blue-500"
+                )}
+              >
                 <TutorialsIcon />
                 Tutorials
               </Link>
-              <Link href="#" className="flex items-center gap-3">
+              <Link
+                href="#"
+                className={cn(
+                  "flex items-center gap-3 hover:text-blue-500 transition-colors",
+                  pathname === "/changelog" && "text-blue-500"
+                )}
+              >
                 <ChangelogIcon />
                 Changelog
               </Link>
             </nav>
-            <ul>
+            <VersionSelector />
+            <ul className="mt-9">
               {tree
                 ? tree.map((lvl1) => (
                     <li key={lvl1.path}>
                       <Link
                         href={`/docs/${lvl1.slug}`}
-                        className="block text-sm font-bold mt-6 h-8"
+                        className="block text-sm font-bold mt-6 h-8 hover:text-blue-500 transition-colors"
                       >
                         {lvl1.shortTitle}
                       </Link>
@@ -70,7 +84,7 @@ export const Sidebar: FC<SidebarProps> = ({ tree }) => {
                                     lvl2.showAsTabs) && (
                                     <Link
                                       href={`/docs/${lvl1.slug}/${lvl2.slug}`}
-                                      className="flex items-center text-sm h-8"
+                                      className="flex items-center text-sm h-8 text-zinc-600 hover:text-blue-500 transition-colors"
                                     >
                                       {lvl2.shortTitle}
                                     </Link>
