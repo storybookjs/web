@@ -12,7 +12,6 @@ interface SidebarProps {
 }
 
 export const Sidebar: FC<SidebarProps> = ({ tree }) => {
-  console.log(tree);
   return (
     <nav className="w-[228px] max-[848px]:hidden block sticky self-start top-[72px]">
       <ScrollArea className="h-[calc(100vh-72px)] w-full">

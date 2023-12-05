@@ -13,35 +13,35 @@ type Props = {
   };
 };
 
-export async function generateStaticParams() {
-  const pages = await getTree();
+// export async function generateStaticParams() {
+//   const pages = await getTree();
 
-  if (!pages) return [];
+//   if (!pages) return [];
 
-  return pages.map((page) => ({
-    pageIdLvl1: page.id,
-  }));
-}
+//   return pages.map((page) => ({
+//     pageIdLvl1: page.id,
+//   }));
+// }
 
-export async function generateMetadata({ params: { pageIdLvl1 } }: Props) {
-  // Check if the page exists on its own
-  const page = await getPage(`docs/${pageIdLvl1}.mdx`);
+// export async function generateMetadata({ params: { pageIdLvl1 } }: Props) {
+//   // Check if the page exists on its own
+//   const page = await getPage(`docs/${pageIdLvl1}.mdx`);
 
-  // if not, check if it exists as an index
-  const pageIndex = await getPage(`docs/${pageIdLvl1}/index.mdx`);
+//   // if not, check if it exists as an index
+//   const pageIndex = await getPage(`docs/${pageIdLvl1}/index.mdx`);
 
-  if (!page && !pageIndex) {
-    return {
-      title: "Page Not Found",
-    };
-  }
+//   if (!page && !pageIndex) {
+//     return {
+//       title: "Page Not Found",
+//     };
+//   }
 
-  const meta = page ? page.meta : pageIndex?.meta;
+//   const meta = page ? page.meta : pageIndex?.meta;
 
-  return {
-    title: meta?.title || "Storybook",
-  };
-}
+//   return {
+//     title: meta?.title || "Storybook",
+//   };
+// }
 
 export default async function Post({ params: { pageIdLvl1 } }: Props) {
   const tree = await getTree();

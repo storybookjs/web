@@ -80,5 +80,3 @@ export async function getPage(path: string) {
 
   return pageObj;
 }
-
-getPage("content/docs/01-get-started/setup.mdx");
