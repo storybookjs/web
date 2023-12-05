@@ -1,72 +1,137 @@
 import { cn } from "../../lib/utils";
-import { VariantProps, cva } from "class-variance-authority";
 import { FC } from "react";
 import { Form } from "./form";
 import Link from "next/link";
+import { StorybookLogo } from "../logos/storybook";
+import { ChromaticLogo } from "../logos/chromatic";
 
-const footerVariants = cva("w-full min-h-[400px]", {
-  variants: {
-    variant: {
-      default:
-        "bg-slate-50 text-slate-800 border-t border-zinc-200 dark:bg-zinc-900 dark:text-white dark:border-zinc-700",
-      home: "bg-zinc-900 text-white border-t border-zinc-700",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-  },
-});
+export interface FooterProps {
+  variant?: "system" | "home";
+}
 
-export interface FooterProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof footerVariants> {}
-
-export const Footer: FC<FooterProps> = ({ variant }) => {
+export const Footer: FC<FooterProps> = ({ variant = "system" }) => {
   return (
-    <div className={cn(footerVariants({ variant }))}>
+    <div
+      className={cn(
+        variant !== "home" &&
+          "bg-slate-50 text-slate-800 border-t border-zinc-200 dark:bg-zinc-900 dark:text-white dark:border-zinc-700",
+        variant === "home" && "bg-zinc-900 text-white border-t border-zinc-700"
+      )}
+    >
       <div className="max-w-8xl mx-auto px-4 lg:px-8 py-12">
-        <Form />
-        <div className="flex">
+        <Form variant={variant} />
+        <div className="flex mb-14">
           <div className="flex-1 flex flex-col gap-3">
             <div className="text-md font-bold">Why</div>
-            <A href="/docs/get-started/why-storybook">Why Storybook</A>
-            <A href="https://componentdriven.org/" isExternal>
+            <A variant={variant} href="/docs/get-started/why-storybook">
+              Why Storybook
+            </A>
+            <A variant={variant} href="https://componentdriven.org/" isExternal>
               Component driven UI
             </A>
           </div>
           <div className="flex-1 flex flex-col gap-3">
             <div className="text-md font-bold">Docs</div>
-            <A href="/docs">Guides</A>
-            <A href="/tutorials">Tutorials</A>
-            <A href="/releases">Changelog</A>
-            <A href="/docs/configure/telemetry">Telemetry</A>
-            <A href="/status">Status</A>
+            <A variant={variant} href="/docs">
+              Guides
+            </A>
+            <A variant={variant} href="/tutorials">
+              Tutorials
+            </A>
+            <A variant={variant} href="/releases">
+              Changelog
+            </A>
+            <A variant={variant} href="/docs/configure/telemetry">
+              Telemetry
+            </A>
+            <A variant={variant} href="/status">
+              Status
+            </A>
           </div>
           <div className="flex-1 flex flex-col gap-3">
             <div className="text-md font-bold">Community</div>
-            <A href="/integrations">Integrations</A>
-            <A href="/community">Get involved</A>
-            <A href="/releases">Blog</A>
+            <A variant={variant} href="/integrations">
+              Integrations
+            </A>
+            <A variant={variant} href="/community">
+              Get involved
+            </A>
+            <A variant={variant} href="/releases">
+              Blog
+            </A>
             <A
+              variant={variant}
               href="https://chromatic-ui.notion.site/Storybook-Jobs-Board-950e001e4a114a39980a5b09c3a3b3e1?pvs=4"
               isExternal
             >
               Find jobs
             </A>
-            <A href="https://chromatic-ui.notion.site/Give-a-conference-talk-about-Storybook-e8d8e78d4d0a448a811a8d927194c527?pvs=4">
+            <A
+              variant={variant}
+              href="https://chromatic-ui.notion.site/Give-a-conference-talk-about-Storybook-e8d8e78d4d0a448a811a8d927194c527?pvs=4"
+            >
               Speak at conferences
             </A>
           </div>
           <div className="flex-1 flex flex-col gap-3">
             <div className="text-md font-bold">Showcase</div>
-            <A href="/showcase" isExternal>
+            <A variant={variant} href="/showcase" isExternal>
               Find jobs
             </A>
-            <A href="/showcase/projects" isExternal>
+            <A variant={variant} href="/showcase/projects" isExternal>
               Speak at conferences
             </A>
-            <A href="/showcase/glossary" isExternal>
+            <A variant={variant} href="/showcase/glossary" isExternal>
               Component glossary
+            </A>
+          </div>
+        </div>
+        <div className="flex justify-between">
+          <div className="flex gap-8">
+            <div
+              className={cn(
+                "border-r border-zinc-200 pr-8 dark:border-zinc-600",
+                variant === "home" && "border-zinc-600"
+              )}
+            >
+              <div
+                className={cn(
+                  "text-md mb-2",
+                  variant === "home" && "text-zinc-400",
+                  variant !== "home" && "text-zinc-600 dark:text-zinc-400"
+                )}
+              >
+                Open source software
+              </div>
+              <StorybookLogo color={variant === "home" ? "white" : "system"} />
+            </div>
+            <div>
+              <div
+                className={cn(
+                  "text-md mb-2",
+                  variant === "home" && "text-zinc-400",
+                  variant !== "home" && "text-zinc-600 dark:text-zinc-400"
+                )}
+              >
+                Maintained by
+              </div>
+              <ChromaticLogo color={variant === "home" ? "white" : "system"} />
+            </div>
+          </div>
+          <div
+            className={cn(
+              "text-md",
+              variant === "home" && "text-zinc-400",
+              variant !== "home" && "text-zinc-600 dark:text-zinc-400"
+            )}
+          >
+            Special thanks to{" "}
+            <A variant={variant} href="https://netlify.com" isExternal>
+              Netlify
+            </A>{" "}
+            and{" "}
+            <A variant={variant} href="https://circleci.com" isExternal>
+              CircleCi
             </A>
           </div>
         </div>
@@ -79,15 +144,20 @@ interface AProps {
   href: string;
   children: string;
   isExternal?: boolean;
+  variant: FooterProps["variant"];
 }
 
-const A: FC<AProps> = ({ href, children, isExternal }) => {
+const A: FC<AProps> = ({ href, children, isExternal, variant }) => {
   if (isExternal)
     return (
       <a
         href={href}
         target="_blank"
-        className="text-zinc-600 hover:text-blue-500 transition-colors text-md"
+        className={cn(
+          "text-zinc-600 hover:text-blue-500 transition-colors text-md",
+          variant === "home" && "text-zinc-400",
+          variant !== "home" && "text-zinc-600 dark:text-zinc-400"
+        )}
       >
         {children}
       </a>
@@ -96,7 +166,11 @@ const A: FC<AProps> = ({ href, children, isExternal }) => {
   return (
     <Link
       href={href}
-      className="text-zinc-600 hover:text-blue-500 transition-colors text-md"
+      className={cn(
+        "text-zinc-600 hover:text-blue-500 transition-colors text-md",
+        variant === "home" && "text-zinc-400",
+        variant !== "home" && "text-zinc-600 dark:text-zinc-400"
+      )}
     >
       {children}
     </Link>
