@@ -13,7 +13,6 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
 
   const tree = dirTree("content/docs") as unknown;
   const docsTree = tree as TemporaryTreeNodeProps;
-  // console.dir({ docsTree }, { depth: 3 });
 
   // -----------------------------------------------------------------------
   // Add the correct data to the tree
