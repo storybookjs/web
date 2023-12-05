@@ -16,15 +16,15 @@ type Props = {
   };
 };
 
-export async function generateStaticParams() {
-  const pages = await getTree();
+// export async function generateStaticParams() {
+//   const pages = await getTree();
 
-  if (!pages) return [];
+//   if (!pages) return [];
 
-  return pages.map((page) => ({
-    pageId: page.id,
-  }));
-}
+//   return pages.map((page) => ({
+//     pageId: page.id,
+//   }));
+// }
 
 export async function generateMetadata({
   params: { pageIdLvl1, pageIdLvl2, pageIdLvl3 },
@@ -33,10 +33,9 @@ export async function generateMetadata({
   const findLvl1 = tree && tree.find((page) => page.slug === pageIdLvl1);
   const findLvl2 =
     findLvl1 && findLvl1.children.find((page) => page.slug === pageIdLvl2);
-  const findPageInTree =
+  const pageInTree =
     findLvl2 && findLvl2.children.find((page) => page.slug === pageIdLvl3);
-  const pageDataId = findPageInTree?.id;
-  const page = await getPage(`${pageDataId}.mdx`);
+  const page = await getPage(pageInTree?.path || "");
 
   if (!page) return { title: "Page Not Found" };
 
@@ -58,9 +57,7 @@ export default async function Post({
     (page) => page.slug === pageIdLvl3
   );
 
-  // Get page content and metadata
-  const pageDataId = pageInTree?.id;
-  const page = await getPage(`${pageDataId}.mdx`);
+  const page = await getPage(pageInTree?.path || "");
 
   if (!page) notFound();
 
@@ -68,7 +65,7 @@ export default async function Post({
     <Article
       title={page.meta.title}
       isIndex={page?.meta.showAsTabs}
-      isApi={pageInTree?.currentSegment === "api"}
+      isApi={pageInTree?.name === "api.mdx"}
       pathIndex={`/docs/${pageIdLvl1}/${pageIdLvl2}/${pageIdLvl3}/${pageIdLvl4}`}
       pathApi={`/docs/${pageIdLvl1}/${pageIdLvl2}/${pageIdLvl3}`}
       content={page.content}

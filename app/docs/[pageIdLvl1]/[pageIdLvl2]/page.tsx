@@ -14,35 +14,58 @@ type Props = {
   };
 };
 
-export async function generateStaticParams() {
-  const pages = await getTree();
+// export async function generateStaticParams() {
+//   const pages = await getTree();
 
-  if (!pages) return [];
+//   if (!pages) return [];
 
-  return pages.map((page) => ({
-    pageId: page.id,
-  }));
-}
+//   return pages.map((page) => ({
+//     pageId: page.id,
+//   }));
+// }
+
+// export async function generateMetadata({
+//   params: { pageIdLvl1, pageIdLvl2 },
+// }: Props) {
+//   // Check if the page exists on its own
+//   const page = await getPage(`docs/${pageIdLvl1}/${pageIdLvl2}.mdx`);
+
+//   // if not, check if it exists as an index
+//   const pageIndex = await getPage(`docs/${pageIdLvl1}/${pageIdLvl2}/index.mdx`);
+
+//   if (!page && !pageIndex) {
+//     return {
+//       title: "Page Not Found",
+//     };
+//   }
+
+//   const meta = page ? page.meta : pageIndex?.meta;
+
+//   return {
+//     title: meta?.title || "Storybook",
+//   };
+// }
 
 export async function generateMetadata({
   params: { pageIdLvl1, pageIdLvl2 },
 }: Props) {
+  const tree = await getTree();
+  const findLvl1 = tree && tree.find((page) => page.slug === pageIdLvl1);
+  const pageInTree = findLvl1?.children.find(
+    (page) => page.slug === pageIdLvl2
+  );
+
   // Check if the page exists on its own
-  const page = await getPage(`docs/${pageIdLvl1}/${pageIdLvl2}.mdx`);
+  const page = await getPage(pageInTree?.path || "");
 
-  // if not, check if it exists as an index
-  const pageIndex = await getPage(`docs/${pageIdLvl1}/${pageIdLvl2}/index.mdx`);
-
-  if (!page && !pageIndex) {
+  if (!page) {
     return {
       title: "Page Not Found",
     };
   }
 
-  const meta = page ? page.meta : pageIndex?.meta;
-
   return {
-    title: meta?.title || "Storybook",
+    title: page.meta?.title || "Storybook",
   };
 }
 
@@ -51,10 +74,11 @@ export default async function Post({
 }: Props) {
   const tree = await getTree();
   const findLvl1 = tree && tree.find((page) => page.slug === pageIdLvl1);
-  const pageInTree =
-    findLvl1 && findLvl1.children.find((page) => page.slug === pageIdLvl2);
-  const pageDataId = pageInTree?.id;
-  const page = await getPage(`${pageDataId}.mdx`);
+  const pageInTree = findLvl1?.children.find(
+    (page) => page.slug === pageIdLvl2
+  );
+
+  const page = await getPage(pageInTree?.path || "");
 
   if (!page) notFound();
 
@@ -62,7 +86,7 @@ export default async function Post({
     <Article
       title={page.meta.title}
       isIndex={page?.meta.showAsTabs}
-      isApi={pageInTree?.currentSegment === "api"}
+      isApi={pageInTree?.name === "api"}
       pathIndex={`/docs/${pageIdLvl1}/${pageIdLvl2}`}
       pathApi={`/docs/${pageIdLvl1}`}
       content={page.content}

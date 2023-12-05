@@ -14,7 +14,6 @@ import fs from "fs";
 
 export async function getPage(path: string) {
   if (!path) return undefined;
-  const id = path.replace(/\.mdx$/, "");
 
   const fileContents = fs.readFileSync(`content/${path}`, "utf8");
 
@@ -60,6 +59,7 @@ export async function getPage(path: string) {
     },
   });
 
+  const id = path.replace(/\.mdx$/, "");
   const segments = id.replace("docs/", "").split("/");
   const lastSegment = id.split("/").pop();
   const lastRealSegment =
@@ -68,7 +68,8 @@ export async function getPage(path: string) {
 
   const pageObj: PageProps = {
     meta: {
-      id,
+      path,
+      name: path.split("/").pop() || "",
       slug: slug || "",
       title: frontmatter.title,
       shortTitle: frontmatter.short_title || frontmatter.title || "",

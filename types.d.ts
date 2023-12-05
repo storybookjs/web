@@ -1,6 +1,7 @@
 type Meta = {
-  id: string;
+  path: string;
   title: string;
+  name: string;
   shortTitle: string;
   slug: string;
   showAsTabs: boolean;
@@ -13,12 +14,12 @@ type PageProps = {
 };
 
 interface TemporaryTreeNodeProps {
-  currentSegment: string;
-  id: string;
+  path: string;
+  name: string;
   children: TemporaryTreeNodeProps[];
 }
 
 interface TreeNodeProps extends Meta {
-  currentSegment: string;
+  name: string;
   children: TreeNodeProps[];
 }

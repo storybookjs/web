@@ -23,31 +23,28 @@ type Props = {
 //   }));
 // }
 
-// export async function generateMetadata({ params: { pageIdLvl1 } }: Props) {
-//   // Check if the page exists on its own
-//   const page = await getPage(`docs/${pageIdLvl1}.mdx`);
+export async function generateMetadata({ params: { pageIdLvl1 } }: Props) {
+  const tree = await getTree();
+  const pageInTree = tree && tree.find((page) => page.slug === pageIdLvl1);
 
-//   // if not, check if it exists as an index
-//   const pageIndex = await getPage(`docs/${pageIdLvl1}/index.mdx`);
+  // Check if the page exists on its own
+  const page = await getPage(pageInTree?.path || "");
 
-//   if (!page && !pageIndex) {
-//     return {
-//       title: "Page Not Found",
-//     };
-//   }
+  if (!page) {
+    return {
+      title: "Page Not Found",
+    };
+  }
 
-//   const meta = page ? page.meta : pageIndex?.meta;
-
-//   return {
-//     title: meta?.title || "Storybook",
-//   };
-// }
+  return {
+    title: page.meta?.title || "Storybook",
+  };
+}
 
 export default async function Post({ params: { pageIdLvl1 } }: Props) {
   const tree = await getTree();
   const pageInTree = tree && tree.find((page) => page.slug === pageIdLvl1);
-  const pageDataId = pageInTree?.id;
-  const page = await getPage(`${pageDataId}.mdx`);
+  const page = await getPage(pageInTree?.path || "");
 
   if (!page) notFound();
 
@@ -55,7 +52,7 @@ export default async function Post({ params: { pageIdLvl1 } }: Props) {
     <Article
       title={page.meta.title}
       isIndex={page?.meta.showAsTabs}
-      isApi={pageInTree?.currentSegment === "api"}
+      isApi={pageInTree?.name === "api"}
       pathIndex={`/docs/${pageIdLvl1}`}
       pathApi="/docs"
       content={page.content}
