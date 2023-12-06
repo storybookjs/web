@@ -11,7 +11,7 @@ import Link from "next/link";
 export const Hero: FC = () => {
   return (
     <div>
-      <div className="max-w-8xl mx-auto px-4 lg:px-8 pt-12 md:pt-24 pb-12 sm:pb-60 text-white md:flex justify-between gap-20">
+      <div className="max-w-8xl mx-auto px-4 lg:px-8 pt-12 md:pt-24 pb-12 sm:pb-72 text-white md:flex justify-between gap-20">
         <h1 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Build UIs without the grunt work
         </h1>
