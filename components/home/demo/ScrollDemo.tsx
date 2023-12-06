@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { styled } from "@storybook/theming";
-import { styles } from "@storybook/components-marketing";
 import { motion, MotionValue, useTransform } from "framer-motion";
 import { Sidebar } from "./Sidebar";
 import { AddonsPanel } from "./AddonsPanel";
@@ -8,40 +6,7 @@ import { RangeSlider } from "./RangeSlider";
 import { VSCode } from "./VSCode";
 import { App } from "./App";
 import { Connector } from "../Connector";
-import { useMediaQuery } from "../../../lib/useMediaQuery";
-
-const { breakpoints } = styles;
-
-const Frame = styled(motion.img)`
-  display: block;
-  height: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-`;
-
-const Wrapper = styled(motion.div)`
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 69.10907577%;
-`;
-
-const Scrim = styled(motion.div)`
-  position: absolute;
-  height: 75vh;
-  top: -35vh;
-  left: 0;
-  right: 0;
-  background: linear-gradient(
-    0deg,
-    rgba(23, 28, 35, 0%) 0%,
-    rgba(23, 28, 35, 100%) 10%
-  );
-  pointer-events: none;
-  user-select: none;
-`;
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 interface ScrollDemoProps {
   appearProgress: MotionValue;
@@ -56,16 +21,6 @@ const rangeSlider = {
   stories: ["default", "no-selection", "input-range", "default"],
   addons: ["controls", "interactions", "design", "a11y", "controls"],
 };
-
-const StyledConnector = styled(Connector)`
-  width: 24%;
-  height: auto;
-  position: absolute;
-  top: 20%;
-  left: 17.8%;
-  transform: rotate(-56deg);
-  z-index: 2;
-`;
 
 export const ScrollDemo = ({
   appearProgress,
@@ -102,7 +57,7 @@ export const ScrollDemo = ({
       latestIsolationProgress - latestDropInProgress
   );
 
-  const [stacked] = useMediaQuery(`(min-width: ${breakpoints[2]}px)`);
+  const [stacked] = useMediaQuery(`(min-width: 648px)`);
 
   const scale = useTransform(zoom, [0, 1], [1, stacked ? 1.25 : 1], {
     clamp: true,
@@ -127,9 +82,23 @@ export const ScrollDemo = ({
   });
 
   return (
-    <Wrapper style={{ scale, x }} transition={{ delay: 0.4 }} {...props}>
-      <Scrim style={{ y: scrimY, opacity: scrimOpacity }} />
-      <Frame
+    <motion.div
+      className="relative w-full h-0 pb-[69.10907577%]"
+      style={{ scale, x }}
+      transition={{ delay: 0.4 }}
+      {...props}
+    >
+      <motion.div
+        className="absolute h-[75vh] top-[-35vh] left-0 right-0 pointer-events-none user-select-none"
+        style={{
+          y: scrimY,
+          opacity: scrimOpacity,
+          background:
+            "linear-gradient(0deg, rgba(23, 28, 35, 0%) 0%, rgba(23, 28, 35, 100%) 10%",
+        }}
+      />
+      <motion.img
+        className="block h-auto absolute top-0 left-0 w-full"
         src="/develop/storybook-frame.svg"
         alt=""
         style={{
@@ -154,7 +123,11 @@ export const ScrollDemo = ({
         }}
       />
       <App scrollProgress={dropInProgress} />
-      <StyledConnector name="rs-to-app" progress={connectorProgress} />
+      <Connector
+        name="rs-to-app"
+        progress={connectorProgress}
+        className="w-[24%] h-auto absolute top-[20%] left[17.8%] rotate[-56deg] z-[2]"
+      />
       <RangeSlider
         activeStory={activeStory}
         scrollProgress={dropInProgress}
@@ -164,6 +137,6 @@ export const ScrollDemo = ({
         appearProgress={appearProgress}
         scrollProgress={isolationProgress}
       />
-    </Wrapper>
+    </motion.div>
   );
 };

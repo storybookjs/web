@@ -1,39 +1,5 @@
 import React from "react";
-import { styled } from "@storybook/theming";
-import { styles } from "@storybook/components-marketing";
 import { motion, useTransform } from "framer-motion";
-
-const { breakpoints } = styles;
-
-const Img = styled(motion.img)`
-  display: block;
-  height: auto;
-  position: absolute;
-  width: 97.2%;
-  top: -2.2%;
-  left: 50%;
-
-  @media (min-width: ${breakpoints[2]}px) {
-    width: 101%;
-    top: -5%;
-  }
-`;
-
-const Clip = styled(motion.div)`
-  background: #232a35;
-  position: absolute;
-  top: 9%;
-  left: 75%;
-  width: 50%;
-  height: 89.9%;
-
-  @media (min-width: ${breakpoints[2]}px) {
-    top: 5%;
-    left: 76%;
-    width: 60%;
-    height: 96.1%;
-  }
-`;
 
 export const VSCode = ({ scrollProgress, appearProgress }) => {
   const x = useTransform(scrollProgress, [0, 1], ["0%", "40%"]);
@@ -42,13 +8,17 @@ export const VSCode = ({ scrollProgress, appearProgress }) => {
 
   return (
     <>
-      <Img
+      <motion.img
+        className="block h-auto absolute w-[97.2%] top-[-2.2%] left-[50%] md:w-[101%] md:top-[-5%]"
         src="/develop/vscode.svg"
         width="1280"
         height="993"
         style={{ x, opacity }}
       />
-      <Clip style={{ transformOrigin: "center bottom", x, opacity, scaleY }} />
+      <motion.div
+        className="bg-[#232a35] absolute top-[9%] left-[75%] w-[50%] h-[89.9%] md:top-[5%] md:left-[76%] md:w-[60%] md:h-[96.1%]"
+        style={{ transformOrigin: "center bottom", x, opacity, scaleY }}
+      />
     </>
   );
 };

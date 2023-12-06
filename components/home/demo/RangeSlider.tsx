@@ -1,38 +1,5 @@
 import React from "react";
-import { styled } from "@storybook/theming";
 import { motion, useTransform, MotionValue } from "framer-motion";
-
-const RangeSliderWrapper = styled(motion.div)`
-  position: absolute;
-  z-index: 2;
-  width: 26.23762376%;
-  height: 0;
-  padding-bottom: 21.48648648%;
-  top: 12%;
-  left: 24%;
-`;
-
-const RangeSliderVariant = styled(motion.img)`
-  display: block;
-  width: 100%;
-  height: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-RangeSliderVariant.defaultProps = {
-  width: "370",
-  height: "303",
-};
-
-const Check = styled(motion.img)`
-  width: 10%;
-  height: auto;
-  display: block;
-  position: absolute;
-  top: -3%;
-  right: -1%;
-`;
 
 interface RangeSliderProps {
   activeStory: string;
@@ -65,14 +32,15 @@ export const RangeSlider = ({
     ["grayscale(100%)", "grayscale(100%)", "grayscale(0%)"],
     { clamp: true }
   );
-
   return (
-    <RangeSliderWrapper
+    <motion.div
+      className="absolute z-[2] w-[26.23762376%] h-0 pb-[21.48648648%] top-[12%] left-[24%]"
       style={{ x, y, opacity: appearProgress, filter }}
       {...props}
     >
       {stories.map((id) => (
-        <RangeSliderVariant
+        <motion.img
+          className="block w-full h-auto absolute top-0 left-0"
           key={id}
           src={`/develop/range-slider-${id}.svg`}
           alt=""
@@ -82,11 +50,12 @@ export const RangeSlider = ({
           transition={{ duration: 0.1 }}
         />
       ))}
-      <Check
+      <motion.img
+        className="w-[10%] h-auto block absolute top-[-3%] right-[-1%]"
         src="/home/automate/ci-check-green.svg"
         alt=""
         style={{ scale: check, opacity: check }}
       />
-    </RangeSliderWrapper>
+    </motion.div>
   );
 };

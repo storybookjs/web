@@ -22,17 +22,18 @@ const buttonVariants = cva(
       size: {
         sm: "h-7 px-2",
         md: "h-8 px-2",
-        lg: "h-10 px-5",
+        lg: "h-10 px-4",
         iconSm: "h-7 w-7",
         iconLg: "h-10 w-10",
       },
       rounded: {
         md: "rounded-md",
-        full: "rounded-full",
+        full: "rounded-full px-4",
       },
       active: {
-        true: "bg-blue-100 text-blue-500 dark:bg-blue-500/10 dark:text-blue-500",
-        false: "",
+        system:
+          "bg-blue-100 text-blue-500 dark:bg-blue-500/10 dark:text-blue-500",
+        home: "text-blue-500 dark:bg-blue-500/10 dark:text-blue-500",
       },
       jumpOnHover: {
         true: "hover:-translate-y-0.5",
@@ -43,7 +44,6 @@ const buttonVariants = cva(
       variant: "ghostSystem",
       size: "lg",
       rounded: "md",
-      active: false,
       jumpOnHover: false,
     },
   }

@@ -20,7 +20,7 @@ export const Footer: FC<FooterProps> = ({ variant = "system" }) => {
     >
       <div className="max-w-8xl mx-auto px-4 lg:px-8 py-12">
         <Form variant={variant} />
-        <div className="flex mb-14">
+        <div className="flex mb-20">
           <div className="flex-1 flex flex-col gap-3">
             <div className="text-md font-bold">Why</div>
             <A variant={variant} href="/docs/get-started/why-storybook">

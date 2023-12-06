@@ -75,7 +75,7 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
                   <NavigationMenu.Link asChild>
                     <Button
                       asChild
-                      active={pathname === "/docs"}
+                      active={pathname === "/docs" ? "system" : undefined}
                       variant={variant === "home" ? "ghostHome" : "ghostSystem"}
                       size="md"
                     >
