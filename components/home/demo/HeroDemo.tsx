@@ -1,29 +1,8 @@
 import React, { FC, useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useAnimationControls,
-  AnimationControls,
-  useInView,
-} from "framer-motion";
+import { motion, useAnimationControls, useInView } from "framer-motion";
 import { Sidebar } from "./Sidebar";
 import { Controls } from "./Controls";
 import { TimeFrame } from "./TimeFrame";
-
-const click = async (controls: AnimationControls, callback: () => void) => {
-  return Promise.all([
-    new Promise((res) => setTimeout(res, 440)).then(callback),
-    controls.start({
-      scale: [1, 0.9, 1],
-      transition: {
-        type: "spring",
-        stiffness: 700,
-        damping: 80,
-        duration: 0.3,
-        delay: 0.4,
-      },
-    }),
-  ]);
-};
 
 export const HeroDemo: FC = () => {
   const ref = useRef(null);
@@ -36,6 +15,7 @@ export const HeroDemo: FC = () => {
   useEffect(() => {
     const sequence = async () => {
       // Cycle through stories
+      console.log("1");
       await pointerControls.start({
         opacity: [0, 1],
         x: "-730%",
@@ -46,9 +26,14 @@ export const HeroDemo: FC = () => {
           opacity: { duration: 0.4 },
         },
       });
-      await click(pointerControls, () => {
-        setActiveStory("last-hour");
+      await pointerControls.start({
+        scale: [1, 0.9, 1],
+        transition: {
+          duration: 0.3,
+          delay: 0.4,
+        },
       });
+      setActiveStory("last-hour");
       await pointerControls.start({
         x: "-700%",
         y: "-368%",
@@ -57,9 +42,14 @@ export const HeroDemo: FC = () => {
           duration: 0.4,
         },
       });
-      await click(pointerControls, () => {
-        setActiveStory("all-day");
+      await pointerControls.start({
+        scale: [1, 0.9, 1],
+        transition: {
+          duration: 0.3,
+          delay: 0.4,
+        },
       });
+      setActiveStory("all-day");
       // Update startTime control
       await pointerControls.start({
         x: "560%",
@@ -117,9 +107,14 @@ export const HeroDemo: FC = () => {
         y: "-470%",
         transition: { delay: 1, duration: 1, opacity: { duration: 0.2 } },
       });
-      await click(pointerControls, () => {
-        setActiveStory("overview");
+      await pointerControls.start({
+        scale: [1, 0.9, 1],
+        transition: {
+          duration: 0.3,
+          delay: 0.4,
+        },
       });
+      setActiveStory("overview");
 
       // Reset state
       await pointerControls.start({
@@ -130,9 +125,14 @@ export const HeroDemo: FC = () => {
           duration: 1,
         },
       });
-      await click(pointerControls, () => {
-        setActiveStory("no-selection");
+      await pointerControls.start({
+        scale: [1, 0.9, 1],
+        transition: {
+          duration: 0.3,
+          delay: 0.4,
+        },
       });
+      setActiveStory("no-selection");
       await Promise.all([
         pointerControls.start({
           x: "0%",
@@ -143,10 +143,6 @@ export const HeroDemo: FC = () => {
         endTimeControls.set("initial"),
         startTimeControls.set("initial"),
       ]);
-
-      if (inView) {
-        sequence();
-      }
     };
 
     const stop = async () => {

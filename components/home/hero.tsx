@@ -6,6 +6,7 @@ import { HeroDemo } from "./demo/HeroDemo";
 import { Button } from "@/components/ui/button";
 import { PlayIcon } from "@storybook/icons";
 import SocialProof from "./socialProof";
+import Link from "next/link";
 
 export const Hero: FC = () => {
   return (
@@ -21,8 +22,14 @@ export const Hero: FC = () => {
             testing, and documentation. It&apos;s open source and free.
           </p>
           <div className="flex gap-4 mb-6">
-            <Button variant="solid" size="lg" rounded="full" jumpOnHover>
-              Get Started
+            <Button
+              variant="solid"
+              size="lg"
+              rounded="full"
+              jumpOnHover
+              asChild
+            >
+              <Link href="/docs">Get Started</Link>
             </Button>
             <Button variant="outlineHome" rounded="full" jumpOnHover>
               <PlayIcon />

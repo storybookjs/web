@@ -9,7 +9,7 @@ export const GradientBackdrop: FC = () => {
       className="absolute top-0 left-0 w-full h-full z-0"
       preserveAspectRatio="none"
     >
-      <g clip-path="url(#a)">
+      <g clipPath="url(#a)">
         <path fill="#fff" d="M0 0h1200v682H0z" />
         <circle cx="-299.5" cy="939.5" r="915.5" fill="url(#b)" />
         <circle cx="-299.5" cy="-22.5" r="915.5" fill="url(#c)" />
@@ -27,8 +27,8 @@ export const GradientBackdrop: FC = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="rotate(90 -619.5 320) scale(915.5)"
         >
-          <stop stop-color="#F77" />
-          <stop offset="1" stop-color="#F77" stop-opacity="0" />
+          <stop stopColor="#F77" />
+          <stop offset="1" stopColor="#F77" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="c"
@@ -38,8 +38,8 @@ export const GradientBackdrop: FC = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="rotate(90 -138.5 -161) scale(915.5)"
         >
-          <stop stop-color="#FFC077" />
-          <stop offset="1" stop-color="#FFC077" stop-opacity="0" />
+          <stop stopColor="#FFC077" />
+          <stop offset="1" stopColor="#FFC077" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="d"
@@ -49,8 +49,8 @@ export const GradientBackdrop: FC = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="rotate(90 311 288.5) scale(915.5)"
         >
-          <stop stop-color="#FDFF93" />
-          <stop offset="1" stop-color="#FDFF93" stop-opacity="0" />
+          <stop stopColor="#FDFF93" />
+          <stop offset="1" stopColor="#FDFF93" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="e"
@@ -60,8 +60,8 @@ export const GradientBackdrop: FC = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="rotate(90 -170 769.5) scale(915.5)"
         >
-          <stop stop-color="#FDFF93" />
-          <stop offset="1" stop-color="#FDFF93" stop-opacity="0" />
+          <stop stopColor="#FDFF93" />
+          <stop offset="1" stopColor="#FDFF93" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="f"
@@ -71,8 +71,8 @@ export const GradientBackdrop: FC = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="rotate(90 761 738.5) scale(915.5)"
         >
-          <stop stop-color="#FF778F" />
-          <stop offset="1" stop-color="#FF778F" stop-opacity="0" />
+          <stop stopColor="#FF778F" />
+          <stop offset="1" stopColor="#FF778F" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="g"
@@ -82,8 +82,8 @@ export const GradientBackdrop: FC = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="rotate(90 280 1219.5) scale(915.5)"
         >
-          <stop stop-color="#77FFF7" />
-          <stop offset="1" stop-color="#77FFF7" stop-opacity="0" />
+          <stop stopColor="#77FFF7" />
+          <stop offset="1" stopColor="#77FFF7" stopOpacity="0" />
         </radialGradient>
         <clipPath id="a">
           <path fill="#fff" d="M0 0h1200v682H0z" />
