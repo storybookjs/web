@@ -24,11 +24,8 @@ export const Form: FC<FormProps> = ({ variant }) => {
               type="text"
               placeholder="you@domain.com"
               className={cn(
-                "rounded-md pl-4 pr-[100px] w-full h-full border focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-color",
-                variant === "home" &&
-                  "bg-zinc-800 border border-zinc-700 hover:border-zinc-400",
-                variant !== "home" &&
-                  "bg-white border border-zinc-200 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:border-zinc-500"
+                "rounded-md pl-4 pr-[100px] w-full h-full transition-color bg-white text-zinc-800",
+                variant !== "home" && "border border-zinc-200"
               )}
             />
             <Button
