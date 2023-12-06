@@ -25,9 +25,9 @@ export const Sidebar = ({
       {type === "rangeSlider" &&
         rangeSliderStories.map((id) => (
           <motion.img
-            className="absolute top-0 left-0 w-full"
+            className="absolute top-0 left-0 h-full"
             key={id}
-            src={`images/develop/sidebar-rs-${id}.svg`}
+            src={`/develop/sidebar-rs-${id}.svg`}
             alt=""
             animate={{ opacity: storyID === id ? 1 : 0 }}
             transition={{ duration: 0.1 }}
@@ -36,9 +36,9 @@ export const Sidebar = ({
       {type === "timeFrame" &&
         timeFrameStories.map((id) => (
           <motion.img
-            className="absolute top-0 left-0 w-full"
+            className="absolute top-0 left-0 h-full"
             key={id}
-            src={`images/develop/sidebar-tf-${id}.svg`}
+            src={`/develop/sidebar-tf-${id}.svg`}
             alt=""
             animate={{ opacity: storyID === id ? 1 : 0 }}
             transition={{ duration: 0.1 }}

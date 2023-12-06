@@ -6,7 +6,7 @@ export const GradientBackdrop: FC = () => {
       viewBox="0 0 1200 682"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
+      className="absolute top-0 left-0 w-full h-full z-0"
       preserveAspectRatio="none"
     >
       <g clip-path="url(#a)">

@@ -168,36 +168,9 @@ export const HeroDemo: FC = () => {
     }
   }, [pointerControls, startTimeControls, endTimeControls, inView]);
 
-  // const Wrapper = styled(motion.div)`
-  //   position: relative;
-  //   width: 100%;
-  //   height: 0;
-  //   padding-bottom: 69.10907577%;
-
-  //   &:after {
-  //     content: "";
-  //     position: absolute;
-  //     top: 0;
-  //     right: 0;
-  //     left: 0;
-  //     bottom: 0;
-  //     border-radius: 8px;
-
-  //     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
-  //       0px 10px 20px 0px rgba(0, 0, 0, 0.1),
-  //       0px 20px 40px 0px rgba(0, 0, 0, 0.05),
-  //       0px 40px 30px 0px rgba(0, 0, 0, 0.05);
-  //   }
-
-  //   @media (min-width: ${breakpoints[1]}px) {
-  //     margin-top: -12.625rem;
-  //   }
-  // `;
-
   return (
     <motion.div
-      // TODO: Add the box shadow to the wrapper
-      className="relative w-full h-0 pb-[69.10907577%] sm: mt-[-12.625rem]"
+      className="relative w-full h-0 pb-[69.10907577%] sm:mt-[-12.625rem] after:content-[''] after:absolute after:top-0 after:right-0 after:left-0 after:bottom-0 after:rounded-lg after:shadow-lg"
       data-chromatic="ignore"
       ref={ref}
     >

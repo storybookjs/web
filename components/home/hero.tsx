@@ -5,11 +5,12 @@ import { GradientBackdrop } from "./gradient-backdrop";
 import { HeroDemo } from "./demo/HeroDemo";
 import { Button } from "@/components/ui/button";
 import { PlayIcon } from "@storybook/icons";
+import SocialProof from "./socialProof";
 
 export const Hero: FC = () => {
   return (
     <div>
-      <div className="max-w-8xl mx-auto px-4 lg:px-8 pt-12 md:pt-24 pb-60 text-white md:flex justify-between gap-20">
+      <div className="max-w-8xl mx-auto px-4 lg:px-8 pt-12 md:pt-24 pb-12 sm:pb-60 text-white md:flex justify-between gap-20">
         <h1 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Build UIs without the grunt work
         </h1>
@@ -44,8 +45,11 @@ export const Hero: FC = () => {
           </div>
         </div>
       </div>
-      <div className="w-full h-[100px] bg-red-100">
-        <figure className="pt-3 px-6 w-auto ">{/* <HeroDemo /> */}</figure>
+      <div className="w-full relative">
+        <figure className="pt-8 sm:pt-3 px-6 sm:max-w-8xl sm:mx-auto relative z-10">
+          <HeroDemo />
+        </figure>
+        <SocialProof />
         <GradientBackdrop />
       </div>
     </div>
