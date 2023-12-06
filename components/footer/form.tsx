@@ -34,6 +34,7 @@ export const Form: FC<FormProps> = ({ variant }) => {
             <Button
               variant="solid"
               type="submit"
+              size="md"
               className="absolute right-2 top-1/2 -translate-y-1/2"
             >
               Subscribe

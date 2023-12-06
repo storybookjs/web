@@ -54,6 +54,7 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
                     <Button
                       asChild
                       variant={variant === "home" ? "ghostHome" : "ghostSystem"}
+                      size="md"
                     >
                       <a href="#">Why</a>
                     </Button>
@@ -64,6 +65,7 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
                     <Button
                       asChild
                       variant={variant === "home" ? "ghostHome" : "ghostSystem"}
+                      size="md"
                     >
                       <a href="#">Showcase</a>
                     </Button>
@@ -75,6 +77,7 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
                       asChild
                       active={pathname === "/docs"}
                       variant={variant === "home" ? "ghostHome" : "ghostSystem"}
+                      size="md"
                     >
                       <Link href="/docs">Docs</Link>
                     </Button>
@@ -85,6 +88,7 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
                     <Button
                       asChild
                       variant={variant === "home" ? "ghostHome" : "ghostSystem"}
+                      size="md"
                     >
                       <a href="#">Integrations</a>
                     </Button>
@@ -94,6 +98,7 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
                   <NavigationMenu.Trigger asChild>
                     <Button
                       variant={variant === "home" ? "ghostHome" : "ghostSystem"}
+                      size="md"
                     >
                       Community
                       <ChevronSmallDownIcon
@@ -141,6 +146,7 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
                     <Button
                       asChild
                       variant={variant === "home" ? "ghostHome" : "ghostSystem"}
+                      size="md"
                     >
                       <a href="#">Enterprise</a>
                     </Button>
