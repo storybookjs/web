@@ -1,12 +1,13 @@
 "use client";
 
-import { FC } from "react";
-import { GradientBackdrop } from "./gradient-backdrop";
-import { HeroDemo } from "./demo/HeroDemo";
+import { FC, useState } from "react";
+import { GradientBackdrop } from "../gradient-backdrop";
+import { HeroDemo } from "../demo/HeroDemo";
 import { Button } from "@/components/ui/button";
 import { PlayIcon } from "@storybook/icons";
-import SocialProof from "./socialProof";
+import SocialProof from "../socialProof";
 import Link from "next/link";
+import { Video } from "./video";
 
 export const Hero: FC = () => {
   return (
@@ -31,10 +32,7 @@ export const Hero: FC = () => {
             >
               <Link href="/docs">Get Started</Link>
             </Button>
-            <Button variant="outlineHome" rounded="full" jumpOnHover>
-              <PlayIcon />
-              Watch video
-            </Button>
+            <Video />
           </div>
           <div className="flex gap-10">
             <div>
