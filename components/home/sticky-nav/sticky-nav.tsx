@@ -57,13 +57,8 @@ export const StickyNav = ({
           ))}
         </div>
         <div className="flex items-center gap-5">
-          <Button
-            asChild
-            variant="ghostHome"
-            size="md"
-            className="hidden md:block"
-          >
-            <a href="#page-top">
+          <Button asChild variant="ghostHome" size="md">
+            <a href="#page-top" className="hidden md:flex items-center">
               <ArrowUpIcon />
               Jump to top
             </a>

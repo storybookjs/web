@@ -16,7 +16,7 @@ export const Footer: FC<FooterProps> = ({ variant = "system" }) => {
       className={cn(
         variant !== "home" &&
           "bg-slate-50 text-slate-800 border-t border-zinc-200 dark:bg-zinc-900 dark:text-white dark:border-zinc-700",
-        variant === "home" && "bg-zinc-900 text-white border-t border-zinc-700"
+        variant === "home" && "bg-[#181C22] text-white border-t border-zinc-700"
       )}
     >
       <div className="max-w-8xl mx-auto px-4 lg:px-8 py-12">
