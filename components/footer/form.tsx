@@ -17,9 +17,9 @@ export const Form: FC<FormProps> = ({ variant }) => {
   return (
     <div className="mb-14">
       <div className="text-md font-bold mb-4">Join the community</div>
-      <div className="flex justify-between items-center">
-        <div className="flex items-center gap-6">
-          <form className="relative w-[360px] h-12">
+      <div className="flex flex-col lg:flex-row gap-8 items-start lg:justify-between lg:items-center">
+        <div className="flex-1 w-full flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+          <form className="relative w-full max-w-[360px] h-12">
             <input
               type="text"
               placeholder="you@domain.com"
@@ -37,7 +37,7 @@ export const Form: FC<FormProps> = ({ variant }) => {
               Subscribe
             </Button>
           </form>
-          <div>6,378 developers and counting</div>
+          <div className="text-zinc-400">6,378 developers and counting</div>
         </div>
         <div className="flex items-center gap-4">
           <Circle href="http://github.com/storybookjs" variant={variant}>

@@ -127,6 +127,7 @@ export function Develop() {
         <motion.figure
           className="sticky w-full -order-1 z-[999] m-0 self-start top-[34%] translate-y-[var(--mobile-y)] md:w-[150%] md:max-w-[800px] md:col-[2/3] md:top-[50vh] md:translate-y-[calc(-50%+36px)]"
           // TODO: Fix that - Probably by passing the value directly to the style prop
+          // @ts-ignore
           style={{ "--mobile-y": y }}
         >
           <ScrollDemo

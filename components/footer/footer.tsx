@@ -4,6 +4,7 @@ import { Form } from "./form";
 import Link from "next/link";
 import { StorybookLogo } from "../logos/storybook";
 import { ChromaticLogo } from "../logos/chromatic";
+import { footerNav } from "./nav";
 
 export interface FooterProps {
   variant?: "system" | "home";
@@ -20,83 +21,56 @@ export const Footer: FC<FooterProps> = ({ variant = "system" }) => {
     >
       <div className="max-w-8xl mx-auto px-4 lg:px-8 py-12">
         <Form variant={variant} />
-        <div className="flex mb-20">
-          <div className="flex-1 flex flex-col gap-3">
-            <div className="text-md font-bold">Why</div>
-            <A variant={variant} href="/docs/get-started/why-storybook">
-              Why Storybook
-            </A>
-            <A variant={variant} href="https://componentdriven.org/" isExternal>
-              Component driven UI
-            </A>
-          </div>
-          <div className="flex-1 flex flex-col gap-3">
-            <div className="text-md font-bold">Docs</div>
-            <A variant={variant} href="/docs">
-              Guides
-            </A>
-            <A variant={variant} href="/tutorials">
-              Tutorials
-            </A>
-            <A variant={variant} href="/releases">
-              Changelog
-            </A>
-            <A variant={variant} href="/docs/configure/telemetry">
-              Telemetry
-            </A>
-            <A variant={variant} href="/status">
-              Status
-            </A>
-          </div>
-          <div className="flex-1 flex flex-col gap-3">
-            <div className="text-md font-bold">Community</div>
-            <A variant={variant} href="/integrations">
-              Integrations
-            </A>
-            <A variant={variant} href="/community">
-              Get involved
-            </A>
-            <A variant={variant} href="/releases">
-              Blog
-            </A>
-            <A
-              variant={variant}
-              href="https://chromatic-ui.notion.site/Storybook-Jobs-Board-950e001e4a114a39980a5b09c3a3b3e1?pvs=4"
-              isExternal
+        <div className="flex mb-6 sm:mb-20 flex-wrap">
+          {footerNav.map((nav) => (
+            <div
+              key={nav.title}
+              className="w-full sm:w-1/2 md:flex-1 flex flex-col gap-3 mb-12 md:mb-0"
             >
-              Find jobs
-            </A>
-            <A
-              variant={variant}
-              href="https://chromatic-ui.notion.site/Give-a-conference-talk-about-Storybook-e8d8e78d4d0a448a811a8d927194c527?pvs=4"
-            >
-              Speak at conferences
-            </A>
-          </div>
-          <div className="flex-1 flex flex-col gap-3">
-            <div className="text-md font-bold">Showcase</div>
-            <A variant={variant} href="/showcase" isExternal>
-              Find jobs
-            </A>
-            <A variant={variant} href="/showcase/projects" isExternal>
-              Speak at conferences
-            </A>
-            <A variant={variant} href="/showcase/glossary" isExternal>
-              Component glossary
-            </A>
-          </div>
+              <div className="text-md font-bold">{nav.title}</div>
+              {nav.links.map((link) => {
+                if (link.isExternal)
+                  return (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      className={cn(
+                        "text-zinc-600 hover:text-blue-500 transition-colors text-md",
+                        variant === "home" && "text-zinc-400",
+                        variant !== "home" && "text-zinc-600 dark:text-zinc-400"
+                      )}
+                    >
+                      {link.title}
+                    </a>
+                  );
+                return (
+                  <Link
+                    key={link.title}
+                    href={link.href}
+                    className={cn(
+                      "text-zinc-600 hover:text-blue-500 transition-colors text-md",
+                      variant === "home" && "text-zinc-400",
+                      variant !== "home" && "text-zinc-600 dark:text-zinc-400"
+                    )}
+                  >
+                    {link.title}
+                  </Link>
+                );
+              })}
+            </div>
+          ))}
         </div>
-        <div className="flex justify-between">
-          <div className="flex gap-8">
+        <div className="flex flex-col sm:flex-row justify-between gap-12 sm:gap-0">
+          <div className="flex gap-4 sm:gap-8">
             <div
               className={cn(
-                "border-r border-zinc-200 pr-8 dark:border-zinc-600",
+                "border-r border-zinc-200 pr-4 sm:pr-8 dark:border-zinc-600",
                 variant === "home" && "border-zinc-600"
               )}
             >
               <div
                 className={cn(
-                  "text-md mb-2",
+                  "text-sm mb-2",
                   variant === "home" && "text-zinc-400",
                   variant !== "home" && "text-zinc-600 dark:text-zinc-400"
                 )}
@@ -108,7 +82,7 @@ export const Footer: FC<FooterProps> = ({ variant = "system" }) => {
             <div>
               <div
                 className={cn(
-                  "text-md mb-2",
+                  "text-sm mb-2",
                   variant === "home" && "text-zinc-400",
                   variant !== "home" && "text-zinc-600 dark:text-zinc-400"
                 )}
@@ -120,59 +94,36 @@ export const Footer: FC<FooterProps> = ({ variant = "system" }) => {
           </div>
           <div
             className={cn(
-              "text-md",
+              "text-sm",
               variant === "home" && "text-zinc-400",
               variant !== "home" && "text-zinc-600 dark:text-zinc-400"
             )}
           >
             Special thanks to{" "}
-            <A variant={variant} href="https://netlify.com" isExternal>
+            <a
+              className={cn(
+                "text-zinc-600 hover:text-blue-500 transition-colors text-md",
+                variant === "home" && "text-white",
+                variant !== "home" && "text-zinc-600 dark:text-white"
+              )}
+              href="https://netlify.com"
+            >
               Netlify
-            </A>{" "}
+            </a>{" "}
             and{" "}
-            <A variant={variant} href="https://circleci.com" isExternal>
+            <a
+              className={cn(
+                "text-zinc-600 hover:text-blue-500 transition-colors text-md",
+                variant === "home" && "text-white",
+                variant !== "home" && "text-zinc-600 dark:text-white"
+              )}
+              href="https://circleci.com"
+            >
               CircleCi
-            </A>
+            </a>
           </div>
         </div>
       </div>
     </div>
-  );
-};
-
-interface AProps {
-  href: string;
-  children: string;
-  isExternal?: boolean;
-  variant: FooterProps["variant"];
-}
-
-const A: FC<AProps> = ({ href, children, isExternal, variant }) => {
-  if (isExternal)
-    return (
-      <a
-        href={href}
-        target="_blank"
-        className={cn(
-          "text-zinc-600 hover:text-blue-500 transition-colors text-md",
-          variant === "home" && "text-zinc-400",
-          variant !== "home" && "text-zinc-600 dark:text-zinc-400"
-        )}
-      >
-        {children}
-      </a>
-    );
-
-  return (
-    <Link
-      href={href}
-      className={cn(
-        "text-zinc-600 hover:text-blue-500 transition-colors text-md",
-        variant === "home" && "text-zinc-400",
-        variant !== "home" && "text-zinc-600 dark:text-zinc-400"
-      )}
-    >
-      {children}
-    </Link>
   );
 };

@@ -169,16 +169,6 @@ interface NavigationMenuLinkProps {
   href: string;
 }
 
-const NavigationMenuLink: FC<NavigationMenuLinkProps> = ({ title, href }) => {
-  const pathname = usePathname();
-
-  return (
-    <NavigationMenu.Link href={href}>
-      <Button active={pathname === href ? true : false}>{title}</Button>
-    </NavigationMenu.Link>
-  );
-};
-
 interface DropdownLinkProps {
   title: string;
   description: string;
