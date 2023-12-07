@@ -15,6 +15,7 @@ import Link from "next/link";
 import { Angular, Vue, WebComponents, HTML5, ReactLogo } from "./logos";
 import { ScrollDemo } from "../demo/ScrollDemo";
 import { ChevronSmallRightIcon } from "@storybook/icons";
+import { Integrations } from "../integrations/Integrations";
 // import GatsbyLinkWrapper from "../../basics/GatsbyLinkWrapper";
 // import { Stat } from "../../basics/Stat";
 // import AtomicDesignLogoSVG from "../../../images/logos/user/logo-atomicdesign.svg";
@@ -227,30 +228,42 @@ export function Develop() {
           <div className="h-[56rem] hidden md:block" />
         </div>
       </div>
-      {/* <IntegrationsContent>
-        <ValuePropIntegrations
-          inverse
-          heading="Integrate with the tools you already use"
-          description="Storybook is incrementally adoptable and integrates with industry-standard tools. That means your team doesn’t have to change their workflow."
-          links={
-            <Link
-              containsIcon
-              withArrow
-              href="/addons"
-              LinkWrapper={GatsbyLinkWrapper}
-            >
-              Browse integrations
-            </Link>
-          }
-          meta={
-            <Stats>
-              <Stat count="400+" text="Integrations" noPlural />
-              <Stat count="35M" text="Downloads per week" noPlural />
-            </Stats>
-          }
-        />
-        <IntegrationsGrid docs={docs} />
-      </IntegrationsContent> */}
+      <div className="max-w-8xl px-4 mx-auto pt-28 grid grid-cols-1 justify-items-center items-center gap-12 grid-flow-dense md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-24">
+        <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white">
+          <h3 className="text-2xl font-bold">
+            Integrate with the tools you already use
+          </h3>
+          <p className="text-md leading-7">
+            Storybook is incrementally adoptable and integrates with
+            industry-standard tools. That means your team doesn&apos;t have to
+            change their workflow.
+          </p>
+          <Link
+            href="/addons"
+            className="flex gap-2 items-center text-blue-500 font-bold"
+          >
+            Browse integrations
+            <ChevronSmallRightIcon />
+          </Link>
+          <div className="mt-5">
+            <div className="flex gap-8">
+              <div className="flex gap-10">
+                <div>
+                  <div className="text-sm text-white">400+</div>
+                  <div className="text-sm text-zinc-500">Integrations</div>
+                </div>
+                <div>
+                  <div className="text-sm text-white">35M</div>
+                  <div className="text-sm text-zinc-500">
+                    Downloads per week
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Integrations />
+      </div>
       {/* <Testimonial
         inverse
         text={
