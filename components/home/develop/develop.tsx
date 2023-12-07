@@ -125,7 +125,7 @@ export function Develop() {
       </div>
       <div className="max-w-8xl mx-auto px-5 pt-28 grid justify-items-center gap-24 grid-flow-dense md:pt-[27rem] md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr]">
         <motion.figure
-          className="sticky w-full -order-1 z-[999] m-0 self-start top-[34%] translate-y-[var(--mobile-y)] md:w-[150%] md:max-w-[800px] col-[2/3] md:top-[50vh] md:translate-y-[calc(-50%+36px)]"
+          className="sticky w-full -order-1 z-[999] m-0 self-start top-[34%] translate-y-[var(--mobile-y)] md:w-[150%] md:max-w-[800px] md:col-[2/3] md:top-[50vh] md:translate-y-[calc(-50%+36px)]"
           // TODO: Fix that - Probably by passing the value directly to the style prop
           style={{ "--mobile-y": y }}
         >
