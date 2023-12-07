@@ -89,7 +89,7 @@ export function Develop() {
   );
 
   return (
-    <section className="pt-[calc(3rem-40px)] border-bottom border-zinc-600 sm:pt-[calc(5rem-40px)] md:pt-[calc(7rem-72px)]">
+    <section className="pt-[calc(3rem-40px)] border-b border-zinc-700 sm:pt-[calc(5rem-40px)] md:pt-[calc(7rem-72px)]">
       <div className="max-w-8xl mx-auto px-4 lg:px-8 text-white md:flex justify-between gap-20">
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Develop durable user interfaces

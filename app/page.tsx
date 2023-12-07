@@ -7,6 +7,7 @@ import { Develop } from "@/components/home/develop/develop";
 import { StickyNav } from "@/components/home/sticky-nav";
 import { useMemo, useRef } from "react";
 import { useInView } from "framer-motion";
+import { Test } from "@/components/home/test/Test";
 
 export default function Home() {
   const developRef = useRef(null);
@@ -52,7 +53,9 @@ export default function Home() {
       <div style={{ contain: "paint" }} ref={developRef}>
         <Develop />
       </div>
-      <div ref={testRef}>{/* <Test docs={docs} id="test" /> */}</div>
+      <div ref={testRef}>
+        <Test />
+      </div>
       <div ref={documentRef}>
         {/* <Document docs={docs} id="document" /> */}
       </div>
