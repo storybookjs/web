@@ -14,6 +14,7 @@ import { useScroll, useTransform, useSpring, motion } from "framer-motion";
 import Link from "next/link";
 import { Angular, Vue, WebComponents, HTML5, ReactLogo } from "./logos";
 import { ScrollDemo } from "../demo/ScrollDemo";
+import { ChevronSmallRightIcon } from "@storybook/icons";
 // import GatsbyLinkWrapper from "../../basics/GatsbyLinkWrapper";
 // import { Stat } from "../../basics/Stat";
 // import AtomicDesignLogoSVG from "../../../images/logos/user/logo-atomicdesign.svg";
@@ -86,8 +87,8 @@ export function Develop() {
   );
 
   return (
-    <div className="pt-[calc(3rem-40px)] border-bottom border-zinc-600 sm:pt-[calc(5rem-40px)] md:pt-[calc(7rem-72px)]">
-      <div className="max-w-8xl mx-auto px-4 lg:px-8 pt-12 md:pt-24 pb-12 sm:pb-72 text-white md:flex justify-between gap-20">
+    <section className="pt-[calc(3rem-40px)] border-bottom border-zinc-600 sm:pt-[calc(5rem-40px)] md:pt-[calc(7rem-72px)]">
+      <div className="max-w-8xl mx-auto px-4 lg:px-8 text-white md:flex justify-between gap-20">
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Develop durable user interfaces
         </h2>
@@ -122,10 +123,11 @@ export function Develop() {
           </div>
         </div>
       </div>
-      <div className="max-w-8xl mx-auto px-4 pt-28 grid grid-cols-1 justify-center gap-24 grid-flow-dense md:pt-[27rem] md:justify-start md:grid-cols-[minmax(max-content,_320px)_1fr]">
+      <div className="max-w-8xl mx-auto px-5 pt-28 grid justify-items-center gap-24 grid-flow-dense md:pt-[27rem] md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr]">
         <motion.figure
-        // TODO: Fix that
-        // style={{ "--mobile-y": y }}
+          className="sticky w-full -order-1 z-[999] m-0 self-start top-[34%] translate-y-[var(--mobile-y)] md:w-[150%] md:max-w-[800px] col-[2/3] md:top-[50vh] md:translate-y-[calc(-50%+36px)]"
+          // TODO: Fix that - Probably by passing the value directly to the style prop
+          style={{ "--mobile-y": y }}
         >
           <ScrollDemo
             storyIndex={activeStory}
@@ -136,66 +138,88 @@ export function Develop() {
             dropInProgress={smoothDropInProgress}
           />
         </motion.figure>
-        <div className="col[1_/_2] w-full" ref={isolationRef}>
+        <div className="col-[1/2] w-full" ref={isolationRef}>
           <div className="h-[64rem] md:hidden" />
-          <div>
-            <h3>Build UI components and pages in isolation</h3>
-            <p>
+          <div className="sticky bottom-8 md:max-w-[320px] md:bottom-0 md:top-[50vh] md:translate-y-[-50%] text-white flex flex-col gap-6">
+            <h3 className="text-2xl font-bold">
+              Build UI components and pages in isolation
+            </h3>
+            <p className="text-md leading-7">
               Implement components and pages without needing to fuss with data,
               APIs, or business logic.
             </p>
-            <div>
-              <Link href="/docs/get-started/why-storybook">
-                Why build UIs in isolation?
-              </Link>
-            </div>
+            <Link
+              href="/docs/get-started/why-storybook"
+              className="flex gap-2 items-center text-blue-500 font-bold"
+            >
+              Why build UIs in isolation?
+              <ChevronSmallRightIcon />
+            </Link>
           </div>
           <div className="h-[64rem] hidden md:block" />
         </div>
-        <div className="col[1_/_2] w-full" ref={storiesRef}>
+        <div className="col-[1/2] w-full" ref={storiesRef}>
           <div className="h-[64rem] md:hidden" />
-          <div>
-            <h3>Mock hard-to-reach edge cases as stories</h3>
-            <p>
+          <div className="sticky bottom-8 md:max-w-[320px] md:bottom-0 md:top-[50vh] md:translate-y-[-50%] text-white flex flex-col gap-6">
+            <h3 className="text-2xl font-bold">
+              Mock hard-to-reach edge cases as stories
+            </h3>
+            <p className="text-md leading-7">
               Render components in key states that are tricky to reproduce in an
               app. Then save those states as stories to revisit during
               development, testing, and QA.
             </p>
-            <div>
-              <Link href="/docs/get-started/whats-a-story">
-                How to write a story
-              </Link>
-            </div>
+            <Link
+              href="/docs/get-started/whats-a-story"
+              className="flex gap-2 items-center text-blue-500 font-bold"
+            >
+              How to write a story
+              <ChevronSmallRightIcon />
+            </Link>
           </div>
           <div className="h-[96rem] hidden md:block" />
         </div>
-        <div className="col[1_/_2] w-full" ref={addonsRef}>
+        <div className="col-[1/2] w-full" ref={addonsRef}>
           <div className="h-[64rem] md:hidden" />
-          <div>
-            <h3>Supercharge your workflow with addons</h3>
-            <p>
+          <div className="sticky bottom-8 md:max-w-[320px] md:bottom-0 md:top-[50vh] md:translate-y-[-50%] text-white flex flex-col gap-6">
+            <h3 className="text-2xl font-bold">
+              Supercharge your workflow with addons
+            </h3>
+            <p className="text-md leading-7">
               Addons extend and customize your UI development workflow. There
               are hundreds of addons that help you build UI faster, document
               component libraries, and integrate with other tools.
             </p>
             <div>
-              <Link href="/docs/addons/introduction">Learn about addons</Link>
+              <Link
+                href="/docs/addons/introduction"
+                className="flex gap-2 items-center text-blue-500 font-bold"
+              >
+                Learn about addons
+                <ChevronSmallRightIcon />
+              </Link>
             </div>
           </div>
           <div className="h-[96rem] hidden md:block" />
         </div>
-        <div className="col[1_/_2] w-full" ref={dropInRef}>
+        <div className="col-[1/2] w-full" ref={dropInRef}>
           <div className="h-[64rem] md:hidden" />
-          <div>
-            <h3>Drop the finished UI components into your app</h3>
-            <p>
+          <div className="sticky bottom-8 md:max-w-[320px] md:bottom-0 md:top-[50vh] md:translate-y-[-50%] text-white flex flex-col gap-6">
+            <h3 className="text-2xl font-bold">
+              Drop the finished UI components into your app
+            </h3>
+            <p className="text-md leading-7">
               Once you finish developing UI components in isolation, drop them
               into your app. You&apos;ll have confidence that the components are
               hardened to support every possible edge case.
             </p>
             <div>
-              <Link href="/docs/get-started/why-storybook">
+              <Link
+                href="/docs/get-started/why-storybook"
+                className="flex gap-2 items-center text-blue-500 font-bold"
+              >
                 Why build UIs in isolation?
+                <ChevronSmallRightIcon />
               </Link>
             </div>
           </div>
@@ -241,6 +265,6 @@ export function Develop() {
         jobTitle="Author of Atomic Design"
         logo={AtomicDesignLogoSVG}
       /> */}
-    </div>
+    </section>
   );
 }
