@@ -16,9 +16,10 @@ import { Angular, Vue, WebComponents, HTML5, ReactLogo } from "./logos";
 import { ScrollDemo } from "../demo/ScrollDemo";
 import { ChevronSmallRightIcon } from "@storybook/icons";
 import { Integrations } from "../integrations/Integrations";
+import { Testimonial } from "../testimonial";
 // import GatsbyLinkWrapper from "../../basics/GatsbyLinkWrapper";
 // import { Stat } from "../../basics/Stat";
-// import AtomicDesignLogoSVG from "../../../images/logos/user/logo-atomicdesign.svg";
+import AtomicDesignLogoSVG from "/images/logos/user/logo-atomicdesign.svg";
 // import { Integrations } from "./Integrations";
 // import buildPathWithVersion from "../../../util/build-path-with-version";
 
@@ -264,21 +265,17 @@ export function Develop() {
         </div>
         <Integrations />
       </div>
-      {/* <Testimonial
-        inverse
-        text={
-          <span>
-            “Storybook is a powerful frontend workshop environment tool that
+      <Testimonial
+        text="“Storybook is a powerful frontend workshop environment tool that
             allows teams to design, build, and organize UI components (and even
             full screens!) without getting tripped up over business logic and
-            plumbing.”
-          </span>
-        }
+            plumbing.”"
         avatarUrl="https://avatars3.githubusercontent.com/u/383701?s=460&v=4"
         name="Brad Frost"
         jobTitle="Author of Atomic Design"
-        logo={AtomicDesignLogoSVG}
-      /> */}
+        logo="/logos/user/logo-atomicdesign.svg"
+        logoDimensions={{ width: 32, height: 32 }}
+      />
     </section>
   );
 }
