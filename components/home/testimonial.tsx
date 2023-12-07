@@ -29,7 +29,7 @@ export const Testimonial: FC<TestimonialProps> = ({
       <cite className="flex items-stretch text not-italic">
         <div className="flex items-center">
           <Image
-            className="inline-block h-6 w-6 rounded-full"
+            className="inline-block rounded-full"
             width={40}
             height={40}
             src={avatarUrl}
