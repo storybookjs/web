@@ -32,6 +32,7 @@ export const Footer: FC<FooterProps> = ({ variant = "system" }) => {
                 if (link.isExternal)
                   return (
                     <a
+                      key={link.title}
                       href={link.href}
                       target="_blank"
                       className={cn(

@@ -34,11 +34,9 @@ export const StickyNav = ({
 }: StickyNavProps) => {
   // const activeItem = items.find((item) => item.id === activeSection);
 
-  console.log(isVisible);
-
   return (
     <motion.div
-      className="bg-zinc-900 sticky h-18 top-0 z-50"
+      className="bg-zinc-900 sticky h-10 md:h-18 top-0 z-50"
       animate={{ opacity: isVisible ? 1 : 0 }}
       {...props}
     >
@@ -58,7 +56,7 @@ export const StickyNav = ({
             </Button>
           ))}
         </div>
-        <div className="flex items-center gap-5">
+        <div className="flex w-full md:w-auto justify-between md:justify-normal items-center gap-5">
           <Button asChild variant="ghostHome" size="md">
             <a href="#page-top">
               <ArrowUpIcon />

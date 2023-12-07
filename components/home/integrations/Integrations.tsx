@@ -219,6 +219,7 @@ export function Integrations() {
           if (isExternal)
             return (
               <a
+                key={name}
                 className="w-full h-auto flex items-center justify-center rounded-sm shadow-md pointer-events-none select-none md:pointer-events-auto"
                 {...integration}
               >

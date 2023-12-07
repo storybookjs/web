@@ -113,7 +113,7 @@ export const Test: FC = () => {
         avatarUrl="https://avatars2.githubusercontent.com/u/1247751?s=100&v=4"
         name="Adam Neary"
         jobTitle="Tech lead"
-        logo="/logos/user/logo-airbnb.svg"
+        logo="/logos/logo-airbnb.svg"
         logoDimensions={{ width: 90, height: 20 }}
       />
     </div>

@@ -46,7 +46,7 @@ export default function Home() {
   ]);
 
   return (
-    <div className="bg-[#181C22]">
+    <div className="bg-[#181C22]" id="page-top">
       <Header variant="home" />
       <Hero />
       <StickyNav isVisible={!!activeSection} activeSection={activeSection} />

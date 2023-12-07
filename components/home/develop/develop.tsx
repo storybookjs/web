@@ -273,7 +273,7 @@ export function Develop() {
         avatarUrl="https://avatars3.githubusercontent.com/u/383701?s=460&v=4"
         name="Brad Frost"
         jobTitle="Author of Atomic Design"
-        logo="/logos/user/logo-atomicdesign.svg"
+        logo="/logos/logo-atomicdesign.svg"
         logoDimensions={{ width: 32, height: 32 }}
       />
     </section>

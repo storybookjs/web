@@ -15,7 +15,6 @@ export const HeroDemo: FC = () => {
   useEffect(() => {
     const sequence = async () => {
       // Cycle through stories
-      console.log("1");
       await pointerControls.start({
         opacity: [0, 1],
         x: "-730%",

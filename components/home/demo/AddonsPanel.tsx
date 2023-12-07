@@ -27,7 +27,7 @@ export const AddonsPanel = ({
         <motion.img
           className="absolute top-0 left-0 h-full"
           key={id}
-          src={`images/develop/addons-${id}.svg`}
+          src={`/develop/addons-${id}.svg`}
           alt=""
           animate={{ opacity: id === activePanel ? 1 : 0 }}
           style={{ y }}
