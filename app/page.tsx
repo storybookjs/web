@@ -4,7 +4,7 @@ import { Hero } from "@/components/home/hero";
 import { Footer } from "@/components/footer/footer";
 import { Header } from "@/components/header/header";
 import { Develop } from "@/components/home/develop/develop";
-import { StickyNav } from "@/components/home/sticky-nav";
+import { StickyNav } from "@/components/home/sticky-nav/sticky-nav";
 import { useMemo, useRef } from "react";
 import { useInView } from "framer-motion";
 import { Test } from "@/components/home/test/Test";
@@ -50,17 +50,19 @@ export default function Home() {
       <Header variant="home" />
       <Hero />
       <StickyNav isVisible={!!activeSection} activeSection={activeSection} />
-      <div style={{ contain: "paint" }} ref={developRef}>
+      <div style={{ contain: "paint" }} ref={developRef} id="develop">
         <Develop />
       </div>
-      <div ref={testRef}>
+      <div ref={testRef} id="test">
         <Test />
       </div>
-      <div ref={documentRef}>
+      <div ref={documentRef} id="document">
         {/* <Document docs={docs} id="document" /> */}
       </div>
-      <div ref={shareRef}>{/* <Share docs={docs} id="share" /> */}</div>
-      <div style={{ contain: "paint" }} ref={automateRef}>
+      <div ref={shareRef} id="share">
+        {/* <Share docs={docs} id="share" /> */}
+      </div>
+      <div style={{ contain: "paint" }} ref={automateRef} id="automate">
         {/* <Automate docs={docs} id="automate" /> */}
       </div>
       <div ref={whoRef}>
