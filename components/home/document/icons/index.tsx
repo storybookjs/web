@@ -1,4 +1,4 @@
-export { Branch } from "./Branch";
-export { Document } from "./Document";
-export { Overlap } from "./Overlap";
-export { Search } from "./Search";
+export { Branch } from "./branch";
+export { Document } from "./document";
+export { Overlap } from "./overlap";
+export { Search } from "./search";
