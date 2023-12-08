@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { motion, MotionValue, useTransform } from "framer-motion";
-import { Sidebar } from "./Sidebar";
-import { AddonsPanel } from "./AddonsPanel";
-import { RangeSlider } from "./RangeSlider";
-import { VSCode } from "./VSCode";
-import { App } from "./App";
-import { Connector } from "../connector2";
+import { Sidebar } from "./sidebar2";
+import { AddonsPanel } from "./addons-panel";
+import { RangeSlider } from "./range-slider";
+import { VSCode } from "./vscode";
+import { App } from "./app2";
+import { Connector } from "../connector";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 
 interface ScrollDemoProps {

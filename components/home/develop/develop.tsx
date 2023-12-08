@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import { useScroll, useTransform, useSpring, motion } from "framer-motion";
 import Link from "next/link";
 import { Angular, Vue, WebComponents, HTML5, ReactLogo } from "./logos";
-import { ScrollDemo } from "../demo/ScrollDemo";
+import { ScrollDemo } from "../demo/scroll-demo";
 import { ChevronSmallRightIcon } from "@storybook/icons";
 import { Integrations } from "../integrations/Integrations";
 import { Testimonial } from "../testimonial";

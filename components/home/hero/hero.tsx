@@ -2,9 +2,8 @@
 
 import { FC, useState } from "react";
 import { GradientBackdrop } from "../gradient-backdrop";
-import { HeroDemo } from "../demo/HeroDemo";
+import { HeroDemo } from "../demo/hero-demo";
 import { Button } from "@/components/ui/button";
-import { PlayIcon } from "@storybook/icons";
 import SocialProof from "../social-proof";
 import Link from "next/link";
 import { Video } from "./video";
