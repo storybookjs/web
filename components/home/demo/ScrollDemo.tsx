@@ -5,7 +5,7 @@ import { AddonsPanel } from "./AddonsPanel";
 import { RangeSlider } from "./RangeSlider";
 import { VSCode } from "./VSCode";
 import { App } from "./App";
-import { Connector } from "../Connector";
+import { Connector } from "../connector2";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 
 interface ScrollDemoProps {

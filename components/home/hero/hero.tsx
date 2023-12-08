@@ -5,7 +5,7 @@ import { GradientBackdrop } from "../gradient-backdrop";
 import { HeroDemo } from "../demo/HeroDemo";
 import { Button } from "@/components/ui/button";
 import { PlayIcon } from "@storybook/icons";
-import SocialProof from "../socialProof";
+import SocialProof from "../social-proof";
 import Link from "next/link";
 import { Video } from "./video";
 

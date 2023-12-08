@@ -20,7 +20,7 @@ export const MobileMenu: FC<MenuProps> = ({ items, label }) => {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <DropdownMenu.Trigger asChild>
-          <Button variant="ghostHome" size="sm">
+          <Button variant="ghostHome" size="sm" className="md:hidden">
             {label} <ChevronSmallDownIcon />
           </Button>
         </DropdownMenu.Trigger>
