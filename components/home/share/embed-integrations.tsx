@@ -1,56 +1,16 @@
-import React from 'react';
-import { styled } from '@storybook/theming';
-import { styles, IntegrationsCarousel, AspectRatio } from '@storybook/components-marketing';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { FC } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { IntegrationsCarousel } from "./integrations-carousel";
 
-const { breakpoints } = styles;
-
-const EmbedPane = styled.img`
-  display: block;
-  width: 100%;
-  height: auto;
-`;
-
-const TimeFramePicker = styled.img`
-  display: block;
-  width: 56%;
-  max-width: 440px;
-  height: auto;
-  position: absolute;
-  top: 22%;
-  left: -30px;
-  opacity: 0;
-  user-select: none;
-  pointer-events: none;
-
-  @media (min-width: ${breakpoints[1]}px) {
-    left: -60px;
-  }
-
-  @media (min-width: ${breakpoints[2]}px) {
-    left: -60px;
-  }
-
-  @media (min-width: ${breakpoints[3]}px) {
-    left: -120px;
-  }
-`;
-TimeFramePicker.defaultProps = {
-  src: 'images/embed/time-frame-picker.svg',
-  alt: '',
-};
-
-const SVG = styled(motion.svg)`
-  display: block;
-  width: 24%;
-  height: auto;
-  position: absolute;
-`;
-
-const Connector = ({ name, ...props }) => {
+const Connector: FC<{ name: string; style: any; transition: any }> = ({
+  name,
+  ...props
+}) => {
   return (
     <AnimatePresence>
-      <SVG
+      <motion.svg
+        className="block w-[24%] h-auto absolute"
         data-chromatic="ignore"
         width="263"
         height="145"
@@ -64,9 +24,9 @@ const Connector = ({ name, ...props }) => {
           animate: { opacity: 1 },
         }}
         viewport={{
-          margin: '-25% 0px -25% 0px',
+          margin: "-25% 0px -25% 0px",
         }}
-        transition={{ duration: 0.4, when: 'beforeChildren' }}
+        transition={{ duration: 0.4, when: "beforeChildren" }}
         {...props}
       >
         <motion.circle
@@ -102,78 +62,86 @@ const Connector = ({ name, ...props }) => {
             />
           </mask>
         </defs>
-      </SVG>
+      </motion.svg>
     </AnimatePresence>
   );
 };
 
 const embedIntegrations = [
   {
-    name: 'NextJS',
-    image: '/images/home/next-js.svg',
-    color: '#000',
+    name: "NextJS",
+    image: "/home/share/next-js.svg",
+    color: "#000",
     media: (
       // transform is to prevent the slight jump before the animation starts
-      <AspectRatio ratio={`${1202} / ${910}`} style={{ transform: 'translate(0, 0)' }}>
-        <EmbedPane
-          src="/images/embed/next.png"
+      <AspectRatio ratio={1202 / 910} style={{ transform: "translate(0, 0)" }}>
+        <img
+          className="block w-full h-auto"
+          src="/home/share/next.png"
           alt="Embed stories using iframes in your NextJS sites"
         />
-        <Connector key="nextjs" name="NextJS" style={{ top: '51%', left: '37%' }} />
+        <Connector
+          key="nextjs"
+          name="NextJS"
+          style={{ top: "51%", left: "37%" }}
+        />
       </AspectRatio>
     ),
   },
   {
-    name: 'Figma',
-    image: '/images/home/figma.svg',
-    color: '#000',
+    name: "Figma",
+    image: "/home/share/figma.svg",
+    color: "#000",
     media: (
-      <AspectRatio ratio={`${1202} / ${910}`} style={{ transform: 'translate(0, 0)' }}>
-        <EmbedPane
-          src="/images/embed/figma.png"
+      <AspectRatio ratio={1202 / 910} style={{ transform: "translate(0, 0)" }}>
+        <img
+          className="block w-full h-auto"
+          src="/home/share/figma.png"
           alt="Use the Storybook Connect plugin to embed stories in a Figma file"
         />
         <Connector
           key="figma"
           name="Figma"
-          style={{ top: '52%', left: '1%' }}
+          style={{ top: "52%", left: "1%" }}
           transition={{ duration: 0.4 }}
         />
       </AspectRatio>
     ),
   },
   {
-    name: 'Notion',
-    image: '/images/home/notion.svg',
-    color: '#fff',
+    name: "Notion",
+    image: "/home/share/notion.svg",
+    color: "#fff",
     media: (
-      <AspectRatio ratio={`${1202} / ${910}`} style={{ transform: 'translate(0, 0)' }}>
-        <EmbedPane
-          src="/images/embed/notion.png"
+      <AspectRatio ratio={1202 / 910} style={{ transform: "translate(0, 0)" }}>
+        <img
+          className="block w-full h-auto"
+          src="/home/share/notion.png"
           alt="Embed stories in Notion documents using the oEmbed support"
         />
         <Connector
           key="notion"
           name="Notion"
-          style={{ top: '55%', left: '7%' }}
+          style={{ top: "55%", left: "7%" }}
           transition={{ duration: 0.4 }}
         />
       </AspectRatio>
     ),
   },
   {
-    name: 'Medium',
-    image: '/images/home/medium.svg',
-    color: '#F5C347',
+    name: "Medium",
+    image: "/home/share/medium.svg",
+    color: "#F5C347",
     media: (
-      <AspectRatio ratio={`${1202} / ${910}`} style={{ transform: 'translate(0, 0)' }}>
-        <EmbedPane
-          src="/images/embed/medium.png"
+      <AspectRatio ratio={1202 / 910} style={{ transform: "translate(0, 0)" }}>
+        <img
+          className="block w-full h-auto"
+          src="/home/share/medium.png"
           alt="Embed stories in Medium articles using the oEmbed support"
         />
         <Connector
           name="Medium"
-          style={{ top: '53%', left: '28%' }}
+          style={{ top: "53%", left: "28%" }}
           transition={{ duration: 0.4 }}
         />
       </AspectRatio>
@@ -181,30 +149,21 @@ const embedIntegrations = [
   },
 ];
 
-const EmbedIntegrationsWrapper = styled.div`
-  width: 100%;
-  position: relative;
-  max-width: 800px;
-  margin-left: 30px;
-
-  @media (min-width: ${breakpoints[1]}px) {
-    margin-left: 30px;
-  }
-
-  @media (min-width: ${breakpoints[2]}px) {
-    width: 150%;
-    grid-column: 2 / 3;
-  }
-  @media (min-width: ${breakpoints[3]}px) {
-    margin-left: 120px;
-  }
-`;
-
-export const EmbedIntegrations = React.forwardRef((props, ref) => {
+export const EmbedIntegrations = React.forwardRef((_, ref) => {
   return (
-    <EmbedIntegrationsWrapper>
-      <IntegrationsCarousel integrations={embedIntegrations} overflowLabel="+ and more" />
-      <TimeFramePicker ref={ref} width="458" height="244" style={{ opacity: 0 }} />
-    </EmbedIntegrationsWrapper>
+    <div className="w-full relative max-w-[800px] ml-[30px] sm:ml-[30px] md:w-[150%] md:col-[2/3] lg:ml-[120px]">
+      <IntegrationsCarousel integrations={embedIntegrations} />
+      <img
+        className="block w-[56%] max-w-[440px] h-auto absolute top-[22%] left-[-30%] opacity-0 user-select-none pointer-events-none sm:left-[-60px] lg:[-120px]"
+        src="/home/share/time-frame-picker.svg"
+        alt=""
+        ref={ref}
+        width="458"
+        height="244"
+        style={{ opacity: 0 }}
+      />
+    </div>
   );
 });
+
+EmbedIntegrations.displayName = "EmbedIntegrations";

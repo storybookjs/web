@@ -6,6 +6,7 @@ import { Testimonial } from "../testimonial";
 import { useEventListener } from "@/hooks/use-event-listener";
 import { LogoCloudbees } from "./Logo-cloudbees";
 import { PublishIntegrations } from "./publish-integrations";
+import { EmbedIntegrations } from "./embed-integrations";
 
 export function Share() {
   const publishRef = useRef<HTMLImageElement | null>(null);
@@ -139,7 +140,7 @@ export function Share() {
             <ChevronSmallRightIcon />
           </Link>
         </div>
-        {/* <EmbedIntegrations ref={embedRef} /> */}
+        <EmbedIntegrations ref={embedRef} />
         <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white col-[1/-1] first-of-type:pt-0 sm:max-w-full sm:pt-16 md:col-[1/2]">
           <h3 className="text-2xl font-bold">
             <span className="inline-block border border-zinc-600 bg-zinc-800 rounded px-2 font-mono text-[19px]">
