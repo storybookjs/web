@@ -1,36 +1,142 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Storybook (new) website
 
-## Getting Started
+Storybook is the most popular UI component explorer! This is the website for https://storybook.js.org/.
 
-First, run the development server:
+**Note**: This is not the docs, those are located [here](https://github.com/storybooks/storybook/tree/next/docs).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Todo list
+
+- [x] Translate extract-monorepo-docs into node & make it work with Next.js
+- [x] Update getPage to get data from the right place
+- [x] Create extract assets script to fetch images
+- [ ] /public/latest/..., /public/7.6/...
+- [ ] Update sync-docs task in monorepo
+- [ ] Add support for Mailchimp in the footer
+- [x] Add modal for video when clicking "Watch video"
+- [ ] Add Algolia on press search
+- [x] Finish footer mobile
+- [ ] Add the correct data (live) on the hero underneath the buttons
+- [x] Bring back Test part of the home
+- [x] Bring back Development part of the home
+- [ ] Bring back share part of the home
+- [ ] Bring back automate part of the home
+- [ ] Bring back socialValidation part of the home
+- [ ] Add Favicon
+- [ ] Add pages metadata
+- [ ] Add pages social preview images
+
+## 🛠 Contributing
+
+Contributions welcome! If it’s something small like grammar or punctuation, open up a pull request. If it’s a bigger change or new feature, add an issue for discussion.
+
+**Workflow**
+
+1. Feature idea or bugfix?
+2. Build new UI or tweak existing UI in Storybook first
+3. Integrate with Gatsby
+4. Ensure tests pass in [Circle CI storybooks/frontpage](https://circleci.com/gh/storybooks/frontpage)
+5. Ensure site works and is QAed via Netlify previews
+6. Ensure no visual bugs in [Chromatic storybooks/frontpage](https://www.chromatic.com/builds?appId=5be26744d2f6250024a9117d)
+7. Pull request
+
+## Running the project locally
+
+### 📕 Storybook instructions
+
+The Storybook for Storybook contains every UI component. The UI is built following [Component-Driven Development](https://blog.hichroma.com/component-driven-development-ce1109d56c8e), a process that builds UIs from the “bottom up” starting with components and ending with screens. That means contributors should compose UIs in Storybook _before_ integration with the Gatsby app.
+
+1. yarn install
+2. yarn build
+3. yarn run storybook
+
+### Gatsby instructions
+
+Gatsby is used for basic routing and static site generation.
+
+1. `yarn start` to run the entire site
+
+2. `yarn start:skip-addons` to skip building the addon catalog
+
+3. `yarn start:docs-only` to mock the home page and build the docs pages
+
+#### Docs content
+
+The content for the documentation section is in the `docs/` subdirectory of the Storybook monorepo: https://github.com/storybookjs/storybook/tree/next/docs.
+
+To run this app while editing those files, checkout both this repository and the monorepo, then:
+
+#### Inside the `storybook` monorepo:
+
+1. Run the `yarn task` command and then select the `Synchronize documentation (sync-docs)` option.
+
+2. Provide the path to the `frontpage` project.
+
+With this, the folders `storybook/docs` and `frontpage/src/content/docs` will be synchronized, ensuring that any changes made to the documentation in the Storybook monorepo will be reflected in the Storybook website docs.
+
+#### Inside the `frontpage` repository:
+
+To run the website documentation, use the following command:
+
+```
+yarn start:docs-only
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The project will be visualized in the browser at `http://localhost:8000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Release notes
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Release notes are stored in the src/content/releases directory as `.md` files. The name of the file corresponds with the version (major.minor) of the release and will be used to populate the link to the specific release from the releases page.
 
-## Learn More
+Within the release's `.md` file, frontmatter is used to create a page title, while the rest of the content is parsed using `gatsby-transformer-remark` and styled with selectors in `src/styles/formatting.js`.
 
-To learn more about Next.js, take a look at the following resources:
+### Publishing new versions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[See detailed docs](docs/versioning.md)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Environment variables
 
-## Deploy on Vercel
+In development and with local production builds, environment variables can be configured with `.env` files as [explained here](https://www.gatsbyjs.com/docs/environment-variables/#client-side-javascript). Variables are prefixed with `GATSBY_` when that variable needs to be available in client-side code.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+In deploy previews and production deploys, these variables are set with Netlify's build variables.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### Search
+
+Search within the docs is powered by [DocSearch](https://docsearch.algolia.com/). In order for this to work, an environment variable is required:
+
+`GATSBY_ALGOLIA_API_KEY`
+
+How to setup on your machine:
+
+1. Create a .env.development file locally
+2. Get the key here: https://app.netlify.com/sites/storybook-frontpage/settings/deploys#environment
+3. Add `GATSBY_ALGOLIA_API_KEY=key` to the file from step 1
+
+The site is crawled every 24 hours so any updates will be reflected in that amount of time.
+
+#### Blog posts
+
+The latest blog post is fetched from [Ghost](https://ghost.org). You will need to add in order for this to work, an environment variable is required:
+
+`GHOST_STORYBOOK_API_KEY`
+
+How to setup on your machine:
+
+1. Create a .env.development file locally
+2. Get the key here: https://storybookblog.ghost.io/ghost
+3. Add `GHOST_STORYBOOK_API_KEY=key` to the file from step 1
+
+## Tooling
+
+This project uses these tools to make our job easier.
+
+### 💫 Deploys by [Netlify](https://netlify.com)
+
+Main and branches are automatically deployed by Netlify every commit.
+
+### 🖼 Visual testing by [Chromatic](https://www.chromatic.com/library?appId=5be26744d2f6250024a9117d)
+
+All stories in the Storybook are automatically visual tested on desktop and mobile each commit. Ensure all baselines are ✅ accepted before merging.
+
+### 🚦 Continuous integration by [Circle CI](https://circleci.com/gh/storybookjs/frontpage)
+
+Every build a test suite runs. Ensure there are no errors before merging.
