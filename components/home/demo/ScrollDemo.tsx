@@ -49,6 +49,7 @@ export const ScrollDemo = ({
       unsubscribeStoryIndex();
       unsubscribePanel();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const zoom = useTransform(
