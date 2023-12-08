@@ -5,6 +5,6 @@ Todos:
 [ ] /public/latest/..., /public/7.6/...
 [ ] Update sync-docs task in monorepo
 [ ] Add support for Mailchimp in the footer
-[ ] Add modal for video when clicking "Watch video"
+[x] Add modal for video when clicking "Watch video"
 [ ] Add Algolia on press search
-[ ] Finish footer mobile
+[x] Finish footer mobile
