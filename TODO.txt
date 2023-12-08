@@ -14,3 +14,6 @@ Todos:
 [ ] Bring back share part of the home
 [ ] Bring back automate part of the home
 [ ] Bring back socialValidation part of the home
+[ ] Add Favicon
+[ ] Add pages metadata
+[ ] Add pages social preview images
