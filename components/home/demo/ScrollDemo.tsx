@@ -38,12 +38,12 @@ export const ScrollDemo = ({
     function updateId() {
       setActiveStory(rangeSlider.stories[storyIndex.get()]);
     }
-    const unsubscribeStoryIndex = storyIndex.onChange(updateId);
+    const unsubscribeStoryIndex = storyIndex.on("change", updateId);
 
     function updatePanel() {
       setActivePanel(rangeSlider.addons[panelIndex.get()]);
     }
-    const unsubscribePanel = panelIndex.onChange(updatePanel);
+    const unsubscribePanel = panelIndex.on("change", updatePanel);
 
     return () => {
       unsubscribeStoryIndex();

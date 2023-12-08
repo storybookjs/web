@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Branch, Document as Doc, Overlap, Search } from "./icons";
 import { Testimonial } from "../testimonial";
 import { IllustratedFeatureList } from "../IllustratedFeatureList";
+import { LogoGitlab } from "./LogoGitlab";
 
 const features = [
   {
@@ -84,8 +85,7 @@ export const Document: FC = () => {
         avatarUrl="https://avatars0.githubusercontent.com/u/3028593?s=460&v=4"
         name="Taurie Davis"
         jobTitle="Author of Building Design Systems"
-        logo="/home/logos/logo-gitlab.svg"
-        logoDimensions={{ width: 90, height: 20 }}
+        logo={<LogoGitlab />}
       />
     </div>
   );

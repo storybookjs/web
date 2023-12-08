@@ -8,6 +8,7 @@ import { ScrollDemo } from "../demo/ScrollDemo";
 import { ChevronSmallRightIcon } from "@storybook/icons";
 import { Integrations } from "../integrations/Integrations";
 import { Testimonial } from "../testimonial";
+import { LogoAtomicDesign } from "./LogoAtomicdesign";
 
 export function Develop() {
   // Step 1
@@ -257,8 +258,7 @@ export function Develop() {
         avatarUrl="https://avatars3.githubusercontent.com/u/383701?s=460&v=4"
         name="Brad Frost"
         jobTitle="Author of Atomic Design"
-        logo="/home/logos/logo-atomicdesign.svg"
-        logoDimensions={{ width: 32, height: 32 }}
+        logo={<LogoAtomicDesign />}
       />
     </section>
   );

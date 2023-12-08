@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 interface TestimonialProps {
   text: React.ReactNode;
@@ -7,8 +7,7 @@ interface TestimonialProps {
   name: string;
   jobTitle: string;
   companyName?: string;
-  logo: string;
-  logoDimensions: { width: number; height: number };
+  logo: ReactNode;
 }
 
 export const Testimonial: FC<TestimonialProps> = ({
@@ -18,7 +17,6 @@ export const Testimonial: FC<TestimonialProps> = ({
   jobTitle,
   logo,
   companyName,
-  logoDimensions,
   ...props
 }) => (
   <div className="max-w-8xl mx-auto px-4" {...props}>
@@ -40,14 +38,8 @@ export const Testimonial: FC<TestimonialProps> = ({
             <div className="text-zinc-400 text-sm">{jobTitle}</div>
           </div>
         </div>
-        <div className="relative h-8 border-l border-zinc-600 ml-5 pl-5 flex items-center sm:ml-12 sm:pl-10">
-          <Image
-            src={logo}
-            alt={companyName || ""}
-            loading="lazy"
-            width={logoDimensions.width}
-            height={logoDimensions.height}
-          />
+        <div className="border-l border-zinc-600 ml-5 pl-5 flex items-center sm:ml-12 sm:pl-10">
+          {logo}
         </div>
       </cite>
     </div>

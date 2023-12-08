@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Accessibility, Code, Eye, Interact, Pixel, Projects } from "./icons";
 import { Testimonial } from "../testimonial";
 import { IllustratedFeatureList } from "../IllustratedFeatureList";
+import { LogoAirbnb } from "./LogoAirbnb";
 
 const features = [
   {
@@ -104,8 +105,7 @@ export const Test: FC = () => {
         avatarUrl="https://avatars2.githubusercontent.com/u/1247751?s=100&v=4"
         name="Adam Neary"
         jobTitle="Tech lead"
-        logo="/home/logos/logo-airbnb.svg"
-        logoDimensions={{ width: 90, height: 20 }}
+        logo={<LogoAirbnb />}
       />
     </div>
   );
