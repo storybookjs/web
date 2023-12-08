@@ -9,6 +9,7 @@ import { useMemo, useRef } from "react";
 import { useInView } from "framer-motion";
 import { Test } from "@/components/home/test/test";
 import { Document } from "@/components/home/document/document";
+import { Share } from "@/components/home/share/share";
 
 export default function Home() {
   const developRef = useRef(null);
@@ -61,7 +62,7 @@ export default function Home() {
         <Document />
       </div>
       <div ref={shareRef} id="share">
-        {/* <Share docs={docs} id="share" /> */}
+        <Share />
       </div>
       <div style={{ contain: "paint" }} ref={automateRef} id="automate">
         {/* <Automate docs={docs} id="automate" /> */}
