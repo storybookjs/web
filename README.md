@@ -15,15 +15,19 @@ Storybook is the most popular UI component explorer! This is the website for htt
 - [x] Add modal for video when clicking "Watch video"
 - [ ] Add Algolia on press search
 - [x] Finish footer mobile
-- [ ] Add the correct data (live) on the hero underneath the buttons
-- [x] Bring back Test part of the home
-- [x] Bring back Development part of the home
-- [ ] Bring back share part of the home
-- [ ] Bring back automate part of the home
-- [ ] Bring back socialValidation part of the home
+- [ ] Home - Add the correct data (live) on the hero underneath the buttons
+- [x] Home - Bring back Test part of the home
+- [x] Home - Bring back Development part of the home
+- [ ] Home - Bring back share part of the home
+- [ ] Home - Bring back automate part of the home
+- [ ] Home - Bring back socialValidation part of the home
 - [ ] Add Favicon
 - [ ] Add pages metadata
 - [ ] Add pages social preview images
+- [ ] Review SEO
+- [ ] Docs - Add table of content
+- [ ] Docs - Add edit on github
+- [ ] Docs - Style all components on the page
 
 ## 🛠 Contributing
 
