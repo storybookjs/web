@@ -1,12 +1,9 @@
 import { FC, useState } from "react";
-// import { styled, css } from '@storybook/theming';
-// import { Button, Icon } from '@storybook/design-system';
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ArrowRightIcon, ChevronSmallRightIcon } from "@storybook/icons";
 import { Button } from "../ui/button";
 import Link from "next/link";
-// import { spacing, color, breakpoints, typography, pageMargins, pageMargin } from './shared/styles';
 
 type Alignment = "left" | "right";
 
@@ -23,6 +20,7 @@ interface IllustratedFeatureListProps {
   features: FeatureItem[];
   alignment?: Alignment;
   lockUpHeight?: number;
+  bgColor?: string;
 }
 
 const duration = 0.3;
@@ -51,6 +49,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
   features,
   alignment = "left",
   lockUpHeight,
+  bgColor,
   ...props
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -65,11 +64,12 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
       {/* Desktop video */}
       <div
         className={cn(
-          "rounded-lg relative overflow-hidden hidden bg-[#FDDD9C] h-full min-h-[640px] md:block lg:max-h-[640px] min-[1416px]:ml-0 min-[1416px]:mr-0 min-[1416px]:rounded",
+          "rounded-lg relative overflow-hidden hidden h-full min-h-[640px] md:block lg:max-h-[640px] min-[1416px]:ml-0 min-[1416px]:mr-0 min-[1416px]:rounded",
           alignment === "left"
             ? "order-1 md:ml-[calc(-4vw-20px)] md:rounded-tl-0 md:-border-bl-0 lg:ml-[calc(-8vw-20px)]"
             : "order-2 md:mr-[calc(-4vw-20px)] md:rounded-tr-0 md:-border-br-0 lg:mr-[calc(-8vw-20px)]"
         )}
+        style={{ backgroundColor: bgColor }}
       >
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
@@ -151,7 +151,10 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
                       ease: [0.04, 0.62, 0.23, 0.98],
                     }}
                   >
-                    <div className="rounded relative overflow-hidden bg-[#FDDD9C] block aspect-square md:hidden">
+                    <div
+                      className="rounded relative overflow-hidden block aspect-square md:hidden"
+                      style={{ backgroundColor: bgColor }}
+                    >
                       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
                       <video
                         src={feature.media}

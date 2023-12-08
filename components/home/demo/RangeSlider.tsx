@@ -42,7 +42,7 @@ export const RangeSlider = ({
         <motion.img
           className="block w-full h-auto absolute top-0 left-0"
           key={id}
-          src={`/develop/range-slider-${id}.svg`}
+          src={`/home/develop/range-slider-${id}.svg`}
           alt=""
           width="370"
           height="303"
@@ -52,7 +52,7 @@ export const RangeSlider = ({
       ))}
       <motion.img
         className="w-[10%] h-auto block absolute top-[-3%] right-[-1%]"
-        src="/home/automate/ci-check-green.svg"
+        src="/home/demo/ci-check-green.svg"
         alt=""
         style={{ scale: check, opacity: check }}
       />

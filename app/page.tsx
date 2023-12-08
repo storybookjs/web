@@ -8,6 +8,7 @@ import { StickyNav } from "@/components/home/sticky-nav/sticky-nav";
 import { useMemo, useRef } from "react";
 import { useInView } from "framer-motion";
 import { Test } from "@/components/home/test/Test";
+import { Document } from "@/components/home/document/document";
 
 export default function Home() {
   const developRef = useRef(null);
@@ -57,7 +58,7 @@ export default function Home() {
         <Test />
       </div>
       <div ref={documentRef} id="document">
-        {/* <Document docs={docs} id="document" /> */}
+        <Document />
       </div>
       <div ref={shareRef} id="share">
         {/* <Share docs={docs} id="share" /> */}

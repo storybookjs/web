@@ -12,7 +12,7 @@ export const App = ({ scrollProgress }: AppProps) => {
   return (
     <motion.img
       className="block w-[84%] h-auto absolute top-[-2%] left-[100%] z-[2]"
-      src="/develop/app.svg"
+      src="/home/develop/app.svg"
       width="1280"
       height="1000"
       style={{ x, opacity }}

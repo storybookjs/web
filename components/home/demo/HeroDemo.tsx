@@ -171,7 +171,7 @@ export const HeroDemo: FC = () => {
     >
       <motion.img
         className="block h-auto absolute top-0 left-0 w-full"
-        src="/develop/storybook-frame.svg"
+        src="/home/develop/storybook-frame.svg"
         width="1201"
         height="830"
         alt=""
@@ -186,7 +186,7 @@ export const HeroDemo: FC = () => {
         className="block absolute w-[5.66%] h-auto top-[100%] left-[50%]"
         data-chromatic="ignore"
         animate={pointerControls}
-        src="/develop/pointer.svg"
+        src="/home/develop/pointer.svg"
         alt=""
       />
     </motion.div>

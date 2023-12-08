@@ -1,15 +1,6 @@
 "use client";
 
 import React, { useRef } from "react";
-// import { styled } from "@storybook/theming";
-// import { Link } from "@storybook/design-system";
-// import {
-//   styles,
-//   SectionLede,
-//   IntegrationsList,
-//   ValuePropCopy,
-//   Testimonial,
-// } from "@storybook/components-marketing";
 import { useScroll, useTransform, useSpring, motion } from "framer-motion";
 import Link from "next/link";
 import { Angular, Vue, WebComponents, HTML5, ReactLogo } from "./logos";
@@ -17,13 +8,6 @@ import { ScrollDemo } from "../demo/ScrollDemo";
 import { ChevronSmallRightIcon } from "@storybook/icons";
 import { Integrations } from "../integrations/Integrations";
 import { Testimonial } from "../testimonial";
-// import GatsbyLinkWrapper from "../../basics/GatsbyLinkWrapper";
-// import { Stat } from "../../basics/Stat";
-import AtomicDesignLogoSVG from "/images/logos/user/logo-atomicdesign.svg";
-// import { Integrations } from "./Integrations";
-// import buildPathWithVersion from "../../../util/build-path-with-version";
-
-// const { subheading, breakpoints, pageMargins } = styles;
 
 export function Develop() {
   // Step 1
@@ -273,7 +257,7 @@ export function Develop() {
         avatarUrl="https://avatars3.githubusercontent.com/u/383701?s=460&v=4"
         name="Brad Frost"
         jobTitle="Author of Atomic Design"
-        logo="/logos/logo-atomicdesign.svg"
+        logo="/home/logos/logo-atomicdesign.svg"
         logoDimensions={{ width: 32, height: 32 }}
       />
     </section>

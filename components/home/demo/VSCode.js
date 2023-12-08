@@ -10,7 +10,7 @@ export const VSCode = ({ scrollProgress, appearProgress }) => {
     <>
       <motion.img
         className="block h-auto absolute w-[97.2%] top-[-2.2%] left-[50%] md:w-[101%] md:top-[-5%]"
-        src="/develop/vscode.svg"
+        src="/home/develop/vscode.svg"
         width="1280"
         height="993"
         style={{ x, opacity }}

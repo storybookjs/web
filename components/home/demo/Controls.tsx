@@ -31,7 +31,7 @@ export const Controls = ({
     >
       <motion.img
         className="absolute top-0 left-0 w-full"
-        src="/develop/time-frame-controls.svg"
+        src="/home/develop/time-frame-controls.svg"
         alt=""
       />
       <motion.svg

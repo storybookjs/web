@@ -97,7 +97,7 @@ export const ScrollDemo = ({
       />
       <motion.img
         className="block h-auto absolute top-0 left-0 w-full"
-        src="/develop/storybook-frame.svg"
+        src="/home/develop/storybook-frame.svg"
         alt=""
         style={{
           scale: frameScale,

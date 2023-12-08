@@ -27,7 +27,7 @@ export const Sidebar = ({
           <motion.img
             className="absolute top-0 left-0 h-full"
             key={id}
-            src={`/develop/sidebar-rs-${id}.svg`}
+            src={`/home/develop/sidebar-rs-${id}.svg`}
             alt=""
             animate={{ opacity: storyID === id ? 1 : 0 }}
             transition={{ duration: 0.1 }}
@@ -38,7 +38,7 @@ export const Sidebar = ({
           <motion.img
             className="absolute top-0 left-0 h-full"
             key={id}
-            src={`/develop/sidebar-tf-${id}.svg`}
+            src={`/home/develop/sidebar-tf-${id}.svg`}
             alt=""
             animate={{ opacity: storyID === id ? 1 : 0 }}
             transition={{ duration: 0.1 }}

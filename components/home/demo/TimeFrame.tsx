@@ -21,7 +21,7 @@ export const TimeFrame = ({ activeStory }: TimeFrameProps) => {
           <motion.img
             key={id}
             className="block w-full h-auto absolute top-0 left-0"
-            src={`/develop/time-frame-${id}.svg`}
+            src={`/home/develop/time-frame-${id}.svg`}
             alt=""
             width="370"
             height="303"
@@ -33,7 +33,7 @@ export const TimeFrame = ({ activeStory }: TimeFrameProps) => {
       </motion.div>
       <motion.img
         className="block absolute top-[4%] left-[21%] w-[78.9%] rounded"
-        src="/develop/time-frame-overview.svg"
+        src="/home/develop/time-frame-overview.svg"
         alt=""
         initial={false}
         animate={{ opacity: activeStory === "overview" ? 1 : 0 }}

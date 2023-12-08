@@ -1,13 +1,4 @@
 import { FC } from "react";
-
-// import {
-//   styles,
-//   SectionLede,
-//   IllustratedFeatureList,
-//   Testimonial,
-// } from '@storybook/components-marketing';
-// import GatsbyLinkWrapper from '../../basics/GatsbyLinkWrapper';
-// import AirBnBLogoSVG from "../../../images/logos/user/logo-airbnb.svg";
 import Link from "next/link";
 import { Accessibility, Code, Eye, Interact, Pixel, Projects } from "./icons";
 import { Testimonial } from "../testimonial";
@@ -22,8 +13,8 @@ const features = [
       label: "Learn about UI tests",
       href: "/docs/writing-tests/introduction",
     },
-    media: "/test/homepage-spot-testing-lg.mp4",
-    poster: "/test/homepage-spot-testing-poster-lg.jpg",
+    media: "/home/test/homepage-spot-testing-lg.mp4",
+    poster: "/home/test/homepage-spot-testing-poster-lg.jpg",
   },
   {
     icon: <Pixel />,
@@ -33,8 +24,8 @@ const features = [
       label: "Learn about visual tests",
       href: "/docs/writing-tests/visual-testing",
     },
-    media: "/test/homepage-visual-testing-lg.mp4",
-    poster: "/test/homepage-visual-testing-poster-lg.jpg",
+    media: "/home/test/homepage-visual-testing-lg.mp4",
+    poster: "/home/test/homepage-visual-testing-poster-lg.jpg",
   },
   {
     icon: <Interact />,
@@ -44,8 +35,8 @@ const features = [
       label: "Learn about interaction tests",
       href: "/docs/writing-tests/interaction-testing",
     },
-    media: "/test/homepage-interaction-testing-lg.mp4",
-    poster: "/test/homepage-interaction-testing-poster-lg.jpg",
+    media: "/home/test/homepage-interaction-testing-lg.mp4",
+    poster: "/home/test/homepage-interaction-testing-poster-lg.jpg",
   },
   {
     icon: <Accessibility />,
@@ -55,8 +46,8 @@ const features = [
       label: "Learn about accessibility tests",
       href: "/docs/writing-tests/accessibility-testing",
     },
-    media: "/test/homepage-accessibility-testing-lg.mp4",
-    poster: "/test/homepage-accessibility-testing-poster-lg.jpg",
+    media: "/home/test/homepage-accessibility-testing-lg.mp4",
+    poster: "/home/test/homepage-accessibility-testing-poster-lg.jpg",
   },
   {
     icon: <Code />,
@@ -66,8 +57,8 @@ const features = [
       label: "Learn about snapshot tests",
       href: "/docs/writing-tests/snapshot-testing",
     },
-    media: "/test/homepage-snapshot-testing-lg.mp4",
-    poster: "/test/homepage-snapshot-testing-poster-lg.jpg",
+    media: "/home/test/homepage-snapshot-testing-lg.mp4",
+    poster: "/home/test/homepage-snapshot-testing-poster-lg.jpg",
   },
   {
     icon: <Projects />,
@@ -77,8 +68,8 @@ const features = [
       label: "Learn about importing stories in tests",
       href: "/docs/writing-tests/stories-in-unit-tests",
     },
-    media: "/test/homepage-reuse-testing-lg.mp4",
-    poster: "/test/homepage-reuse-testing-poster-lg.jpg",
+    media: "/home/test/homepage-reuse-testing-lg.mp4",
+    poster: "/home/test/homepage-reuse-testing-poster-lg.jpg",
   },
 ];
 
@@ -105,7 +96,7 @@ export const Test: FC = () => {
           </p>
         </div>
       </div>
-      <IllustratedFeatureList features={features} />
+      <IllustratedFeatureList features={features} bgColor="#FDDD9C" />
       <Testimonial
         text="“The tool we use for editing UI is Storybook. It is the perfect
             place to make sure your work aligns with designs to the pixel across
@@ -113,7 +104,7 @@ export const Test: FC = () => {
         avatarUrl="https://avatars2.githubusercontent.com/u/1247751?s=100&v=4"
         name="Adam Neary"
         jobTitle="Tech lead"
-        logo="/logos/logo-airbnb.svg"
+        logo="/home/logos/logo-airbnb.svg"
         logoDimensions={{ width: 90, height: 20 }}
       />
     </div>
