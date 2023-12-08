@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Angular, Vue, WebComponents, HTML5, ReactLogo } from "./logos";
 import { ScrollDemo } from "../demo/scroll-demo";
 import { ChevronSmallRightIcon } from "@storybook/icons";
-import { Integrations } from "../integrations/integrations2";
+import { Integrations } from "../integrations/integrations";
 import { Testimonial } from "../testimonial";
 import { LogoAtomicDesign } from "./logo-atomic-design";
 

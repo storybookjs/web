@@ -7,7 +7,7 @@ import { Develop } from "@/components/home/develop/develop";
 import { StickyNav } from "@/components/home/sticky-nav/sticky-nav";
 import { useMemo, useRef } from "react";
 import { useInView } from "framer-motion";
-import { Test } from "@/components/home/test/Test";
+import { Test } from "@/components/home/test/test";
 import { Document } from "@/components/home/document/document";
 
 export default function Home() {

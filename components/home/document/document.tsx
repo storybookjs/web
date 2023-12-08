@@ -2,8 +2,8 @@ import { FC } from "react";
 import Link from "next/link";
 import { Branch, Document as Doc, Overlap, Search } from "./icons";
 import { Testimonial } from "../testimonial";
-import { IllustratedFeatureList } from "../IllustratedFeatureList";
-import { LogoGitlab } from "./LogoGitlab";
+import { IllustratedFeatureList } from "../illustrated-feature-list";
+import { LogoGitlab } from "./logo-gitlab";
 
 const features = [
   {
