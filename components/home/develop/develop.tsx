@@ -8,7 +8,7 @@ import { ScrollDemo } from "../demo/scroll-demo";
 import { ChevronSmallRightIcon } from "@storybook/icons";
 import { Integrations } from "../integrations/Integrations";
 import { Testimonial } from "../testimonial";
-import { LogoAtomicDesign } from "./LogoAtomicdesign";
+import { LogoAtomicDesign } from "./logo-atomic-design";
 
 export function Develop() {
   // Step 1

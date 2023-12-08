@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { motion, MotionValue, useTransform } from "framer-motion";
-import { Sidebar } from "./sidebar2";
+import { Sidebar } from "./sidebar";
 import { AddonsPanel } from "./addons-panel";
 import { RangeSlider } from "./range-slider";
 import { VSCode } from "./vscode";
-import { App } from "./app2";
+import { App } from "./app";
 import { Connector } from "../connector";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 

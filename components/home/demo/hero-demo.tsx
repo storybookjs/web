@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import { motion, useAnimationControls, useInView } from "framer-motion";
-import { Sidebar } from "./sidebar2";
-import { Controls } from "./controls2";
-import { TimeFrame } from "./time-frame";
+import { Sidebar } from "./sidebar";
+import { Controls } from "./controls";
+import { TimeFrame } from "./timeframe";
 
 export const HeroDemo: FC = () => {
   const ref = useRef(null);

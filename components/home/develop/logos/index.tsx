@@ -1,5 +1,5 @@
-export { Angular } from "./Angularlogo";
-export { Vue } from "./Vuelogo";
-export { WebComponents } from "./WebComponents";
-export { HTML5 } from "./HTML5";
-export { ReactLogo } from "./React";
+export { Angular } from "./angular";
+export { Vue } from "./vue2";
+export { WebComponents } from "./web-components";
+export { HTML5 } from "./html";
+export { ReactLogo } from "./react2";
