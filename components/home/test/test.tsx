@@ -2,8 +2,8 @@ import { FC } from "react";
 import Link from "next/link";
 import { Accessibility, Code, Eye, Interact, Pixel, Projects } from "./icons";
 import { Testimonial } from "../testimonial";
-import { IllustratedFeatureList } from "../IllustratedFeatureList";
-import { LogoAirbnb } from "./LogoAirbnb";
+import { IllustratedFeatureList } from "../illustrated-feature-list";
+import { LogoAirbnb } from "./logo-airbnb";
 
 const features = [
   {
