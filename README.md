@@ -28,6 +28,7 @@ Storybook is the most popular UI component explorer! This is the website for htt
 - [ ] Docs - Add table of content
 - [ ] Docs - Add edit on github
 - [ ] Docs - Style all components on the page
+- [ ] Docs - Add menu for renderers (More button)
 
 ## 🛠 Contributing
 
