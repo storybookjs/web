@@ -1,36 +1,17 @@
-import React, { FC, ReactNode, useLayoutEffect } from "react";
-import Prism from "prismjs";
-import "prismjs/components/prism-jsx";
+import React, { FC } from "react";
 import "prismjs/themes/prism-tomorrow.css";
-import styles from "./code-example.module.css";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import jsx from "react-syntax-highlighter/dist/esm/languages/prism/jsx";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-interface CodeExampleProps {
+SyntaxHighlighter.registerLanguage("jsx", jsx);
+
+interface CodeProps {
   fileName?: string;
-  children: ReactNode;
-  language:
-    | "mdx"
-    | "bash"
-    | "javascript"
-    | "typescript"
-    | "json"
-    | "css"
-    | "yaml"
-    | "markdown"
-    | "md"
-    | "jsx"
-    | "tsx";
+  code: string;
 }
 
-export const CodeExample: FC<CodeExampleProps> = ({
-  language,
-  fileName,
-  children,
-  ...props
-}) => {
-  useLayoutEffect(() => {
-    Prism.highlightAll();
-  }, [fileName]);
-
+export const Code: FC<CodeProps> = ({ fileName, code, ...props }) => {
   return (
     <div
       className="w-full max-w-[800px] h-[550px] text-[10px] sm:h-[550px] sm:text-sm lg:text-md border border-zinc-600 rounded-lg overflow-hidden flex flex-col shadow-md"
@@ -46,11 +27,18 @@ export const CodeExample: FC<CodeExampleProps> = ({
           </div>
         )}
       </div>
-      <div className={styles.codeHighlight}>
-        <pre className={`language-${language} m-0`}>
-          <code className={`language-${language}`}>{children}</code>
-        </pre>
-      </div>
+      <SyntaxHighlighter
+        language="jsx"
+        style={oneDark}
+        customStyle={{
+          background: "#232a35",
+          margin: 0,
+          borderRadius: 0,
+          padding: 20,
+        }}
+      >
+        {code}
+      </SyntaxHighlighter>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import * as snippets from "./embed-snippets";
-import { CodeExample } from "./code-example";
+import { Code } from "./code";
 import { IntegrationsCarousel } from "./integrations-carousel";
 
 const testIntegrations = [
@@ -10,11 +10,7 @@ const testIntegrations = [
     name: "Jest",
     image: "/home/share/jest.svg",
     color: "#99424F",
-    media: (
-      <CodeExample language="jsx" fileName="UserCard.test.js">
-        {snippets.jest}
-      </CodeExample>
-    ),
+    media: <Code fileName="UserCard.test.js" code={snippets.jest} />,
   },
   {
     index: 2,
@@ -22,9 +18,7 @@ const testIntegrations = [
     image: "/home/share/testing-lib.png",
     color: "#E3F3FF",
     media: (
-      <CodeExample language="jsx" fileName="RangePicker.test.js">
-        {snippets.testingLibrary}
-      </CodeExample>
+      <Code fileName="RangePicker.test.js" code={snippets.testingLibrary} />
     ),
   },
   {
@@ -32,22 +26,14 @@ const testIntegrations = [
     name: "Cypress",
     image: "/home/share/cypress.svg",
     color: "#3C3C3C",
-    media: (
-      <CodeExample language="jsx" fileName="SearchInput.spec.js">
-        {snippets.cypress}
-      </CodeExample>
-    ),
+    media: <Code fileName="SearchInput.spec.js" code={snippets.cypress} />,
   },
   {
     index: 4,
     name: "Jasmine",
     image: "/home/share/jasmine.svg",
     color: "#8A4182",
-    media: (
-      <CodeExample language="javascript" fileName="delete-customer.spec.js">
-        {snippets.jasmine}
-      </CodeExample>
-    ),
+    media: <Code fileName="delete-customer.spec.js" code={snippets.jasmine} />,
   },
 ];
 
