@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { useScroll, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
 import { ChevronSmallRightIcon } from "@storybook/icons";
@@ -7,11 +7,12 @@ import { useEventListener } from "@/hooks/use-event-listener";
 import { LogoCloudbees } from "./Logo-cloudbees";
 import { PublishIntegrations } from "./publish-integrations";
 import { EmbedIntegrations } from "./embed-integrations";
+import { TestIntegrations } from "./test-integrations";
 
 export function Share() {
   const publishRef = useRef<HTMLImageElement | null>(null);
   const embedRef = useRef<HTMLDivElement | null>(null);
-  const testRef = useRef<HTMLDivElement | null>(null);
+  const testRef = useRef<HTMLImageElement | null>(null);
 
   const { scrollYProgress: publishYProgress } = useScroll({
     target: embedRef,
@@ -42,6 +43,10 @@ export function Share() {
     const publish = publishRef && publishRef.current?.getBoundingClientRect();
     const test = testRef && testRef.current?.getBoundingClientRect();
 
+    console.log("embed", embed);
+    console.log("publish", publish);
+    console.log("test", test);
+
     if (embed && publish && test) {
       const deltaX1 = embed.left - publish.left;
       const deltaX2 = test.left - publish.left;
@@ -58,11 +63,15 @@ export function Share() {
     }
   };
 
+  useLayoutEffect(() => {
+    handleResize();
+  }, []);
+
   useEventListener("resize", handleResize);
 
   const scrollProgress = useTransform(
     [smoothPublishProgress, smoothTestProgress],
-    ([latestPublishProgress, latestTestProgress]) =>
+    ([latestPublishProgress, latestTestProgress]: number[]) =>
       latestPublishProgress + latestTestProgress
   );
 
@@ -160,7 +169,7 @@ export function Share() {
             <ChevronSmallRightIcon />
           </Link>
         </div>
-        {/* <TestIntegrations ref={testRef} /> */}
+        <TestIntegrations ref={testRef} />
       </div>
       <Testimonial
         text="“Storybook is my go-to when starting a new design system. It makes

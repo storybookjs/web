@@ -1,112 +1,84 @@
-import React from 'react';
-import { styled } from '@storybook/theming';
-import { styles, IntegrationsCarousel } from '@storybook/components-marketing';
-import { motion } from 'framer-motion';
-import { CodeExample } from '../../../basics/CodeExample';
-import * as snippets from './embed-snippets';
-
-const { typography, breakpoints } = styles;
-
-const StyledCodeExample = styled(CodeExample)`
-  width: 100%;
-  max-width: 800px;
-  height: 550px;
-  font-size: 10px;
-
-  @media (min-width: ${breakpoints[1]}px) {
-    height: 600px;
-    font-size: ${typography.size.s1}px;
-  }
-
-  @media (min-width: ${breakpoints[3]}px) {
-    font-size: ${typography.size.s2}px;
-  }
-`;
+import React from "react";
+import { motion } from "framer-motion";
+import * as snippets from "./embed-snippets";
+import { CodeExample } from "./code-example";
+import { IntegrationsCarousel } from "./integrations-carousel";
 
 const testIntegrations = [
   {
-    name: 'Jest',
-    image: '/images/home/jest.svg',
-    color: '#99424F',
+    index: 1,
+    name: "Jest",
+    image: "/home/share/jest.svg",
+    color: "#99424F",
     media: (
-      <StyledCodeExample language="jsx" fileName="UserCard.test.js">
+      <CodeExample language="jsx" fileName="UserCard.test.js">
         {snippets.jest}
-      </StyledCodeExample>
+      </CodeExample>
     ),
   },
   {
-    name: 'Testing Library',
-    image: '/images/home/testing-lib.png',
-    color: '#E3F3FF',
+    index: 2,
+    name: "Testing Library",
+    image: "/home/share/testing-lib.png",
+    color: "#E3F3FF",
     media: (
-      <StyledCodeExample language="jsx" fileName="RangePicker.test.js">
+      <CodeExample language="jsx" fileName="RangePicker.test.js">
         {snippets.testingLibrary}
-      </StyledCodeExample>
+      </CodeExample>
     ),
   },
   {
-    name: 'Cypress',
-    image: '/images/home/cypress.svg',
-    color: '#3C3C3C',
+    index: 3,
+    name: "Cypress",
+    image: "/home/share/cypress.svg",
+    color: "#3C3C3C",
     media: (
-      <StyledCodeExample language="jsx" fileName="SearchInput.spec.js">
+      <CodeExample language="jsx" fileName="SearchInput.spec.js">
         {snippets.cypress}
-      </StyledCodeExample>
+      </CodeExample>
     ),
   },
   {
-    name: 'Jasmine',
-    image: '/images/home/jasmine.svg',
-    color: '#8A4182',
+    index: 4,
+    name: "Jasmine",
+    image: "/home/share/jasmine.svg",
+    color: "#8A4182",
     media: (
-      <StyledCodeExample language="javascript" fileName="delete-customer.spec.js">
+      <CodeExample language="javascript" fileName="delete-customer.spec.js">
         {snippets.jasmine}
-      </StyledCodeExample>
+      </CodeExample>
     ),
   },
 ];
 
-const TestIntegrationsCarousel = styled(IntegrationsCarousel)`
-  width: 100%;
-  display: grid;
+// const TestIntegrationsCarousel = styled(IntegrationsCarousel)`
+//   width: 100%;
+//   display: grid;
 
-  @media (min-width: ${breakpoints[2]}px) {
-    width: 125%;
-  }
+//   @media (min-width: ${breakpoints[2]}px) {
+//     width: 125%;
+//   }
 
-  figure {
-    display: contents;
-  }
-`;
+//   figure {
+//     display: contents;
+//   }
+// `;
 
-const TimeFramePicker = styled(motion.img)`
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  user-select: none;
-  pointer-events: none;
-`;
-TimeFramePicker.defaultProps = {
-  src: 'images/embed/time-frame-picker.svg',
-  alt: '',
-};
-
-const TestIntegrationsWrapper = styled.div`
-  position: relative;
-  width: 100%;
-
-  @media (min-width: ${breakpoints[2]}px) {
-    grid-column: 2 / 3;
-  }
-`;
-
-export const TestIntegrations = React.forwardRef((props, ref) => {
+export const TestIntegrations = React.forwardRef<HTMLImageElement>((_, ref) => {
   return (
-    <TestIntegrationsWrapper>
-      <TestIntegrationsCarousel integrations={testIntegrations} overflowLabel="+ and more" />
-      <TimeFramePicker ref={ref} width="458" height="244" style={{ opacity: 0 }} />
-    </TestIntegrationsWrapper>
+    <div className="relative w-full md:col-[2/3]">
+      <IntegrationsCarousel integrations={testIntegrations} />
+      <motion.img
+        className="block absolute top-0 left-0 w-full select-none pointer-events-none"
+        src="/home/share/time-frame-picker.svg"
+        alt=""
+        ref={ref}
+        width="458"
+        height="244"
+        style={{ opacity: 0 }}
+      />
+    </div>
   );
 });
+
+TestIntegrations.displayName = "TestIntegrations";
