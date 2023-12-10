@@ -67,10 +67,10 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
       {/* Desktop video */}
       <div
         className={cn(
-          "rounded-lg relative overflow-hidden hidden h-full min-h-[640px] md:block lg:max-h-[640px] min-[1416px]:ml-0 min-[1416px]:mr-0 min-[1416px]:rounded",
+          "rounded-lg relative overflow-hidden hidden h-full min-h-[640px] md:block lg:max-h-[640px] min-[1416px]:ml-0 min-[1416px]:mr-0 min-[1416px]:rounded-lg",
           alignment === "left"
-            ? "order-1 md:ml-[calc(-4vw-20px)] md:rounded-tl-0 md:-border-bl-0 lg:ml-[calc(-8vw-20px)]"
-            : "order-2 md:mr-[calc(-4vw-20px)] md:rounded-tr-0 md:-border-br-0 lg:mr-[calc(-8vw-20px)]"
+            ? "order-1 md:-ml-12 md:rounded-tl-none md:-border-bl-none"
+            : "order-2 md:-mr-12 md:rounded-tr-none md:-border-br-none"
         )}
         style={{ backgroundColor: bgColor }}
       >
@@ -102,7 +102,10 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
         </AnimatePresence>
         <Link
           href={activeFeature.link.href}
-          className="absolute top-5 right-5 z-10 flex gap-2 items-center bg-black/50 text-white pl-4 pr-3 rounded-full text-xs font-bold h-7 hover:bg-black/60 transition-all hover:-translate-y-0.5"
+          className={cn(
+            "absolute top-5 z-10 flex gap-2 items-center bg-black/50 text-white pl-4 pr-3 rounded-full text-xs font-bold h-7 hover:bg-black/60 transition-all hover:-translate-y-0.5",
+            alignment === "left" ? "right-5" : "left-5"
+          )}
         >
           {activeFeature.link.label} <ChevronSmallRightIcon />
         </Link>
