@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { cn, container } from "@/lib/utils";
 import { FeatureStep } from "./feature-step";
 import { MergeIcon } from "@storybook/icons";
+import { Publish } from "./publish";
 
 export const Automate: FC = () => {
   return (
@@ -22,7 +23,7 @@ export const Automate: FC = () => {
           href="/docs/react/sharing/publish-storybook/"
           linkLabel="Publish Storybook for your team"
         />
-        {/* <Publish /> */}
+        <Publish />
         <FeatureStep
           title="UI Tests"
           description="Test every facet of your UI: interaction, visual, accessibility, and snapshot, in CI to detect UI bugs down to the component."

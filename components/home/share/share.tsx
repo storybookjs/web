@@ -44,10 +44,6 @@ export function Share() {
     const publish = publishRef && publishRef.current?.getBoundingClientRect();
     const test = testRef && testRef.current?.getBoundingClientRect();
 
-    console.log("embed", embed);
-    console.log("publish", publish);
-    console.log("test", test);
-
     if (embed && publish && test) {
       const deltaX1 = embed.left - publish.left;
       const deltaX2 = test.left - publish.left;
