@@ -1,3 +1,4 @@
+import { cn, container } from "@/lib/utils";
 import Image from "next/image";
 import { FC, ReactNode } from "react";
 
@@ -19,7 +20,7 @@ export const Testimonial: FC<TestimonialProps> = ({
   companyName,
   ...props
 }) => (
-  <div className="max-w-8xl mx-auto px-4" {...props}>
+  <div className={cn(container)} {...props}>
     <div className="flex items-center justify-center flex-col py-12 sm:py-28">
       <blockquote className="text-white max-w-[590px] text-xl leading-8 text-center mb-8">
         {text}

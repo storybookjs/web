@@ -4,6 +4,7 @@ import { Accessibility, Code, Eye, Interact, Pixel, Projects } from "./icons";
 import { Testimonial } from "../testimonial";
 import { IllustratedFeatureList } from "../illustrated-feature-list";
 import { LogoAirbnb } from "./logo-airbnb";
+import { cn, container } from "@/lib/utils";
 
 const features = [
   {
@@ -85,7 +86,12 @@ export const Test: FC = () => {
           href={feature.media}
         />
       ))}
-      <div className="max-w-8xl mx-auto px-4 lg:px-8 text-white md:flex justify-between gap-20">
+      <div
+        className={cn(
+          container,
+          "lg:px-8 text-white md:flex justify-between gap-20"
+        )}
+      >
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Test UIs with less effort and no flake
         </h2>

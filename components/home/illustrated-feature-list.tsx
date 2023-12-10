@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { cn, container } from "@/lib/utils";
 import { ArrowRightIcon, ChevronSmallRightIcon } from "@storybook/icons";
 import { Button } from "../ui/button";
 import Link from "next/link";
@@ -58,7 +58,10 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
 
   return (
     <div
-      className="max-w-8xl px-4 mx-auto flex items-center flex-col pb-0 pt-12 sm:pt-20 md:grid md:justify-center md:items-start md:grid-cols-[repeat(2,_minmax(auto,_1fr))] md:grid-rows-[minmax(50vh,_max-content)] md:gap-20 md:pt-28 lg:grid-cols-[repeat(2,_minmax(auto,_1fr))] min-[1416px]:grid-cols-[repeat(2,_1fr)]"
+      className={cn(
+        container,
+        "flex items-center flex-col pb-0 pt-12 sm:pt-20 md:grid md:justify-center md:items-start md:grid-cols-[repeat(2,_minmax(auto,_1fr))] md:grid-rows-[minmax(50vh,_max-content)] md:gap-20 md:pt-28 lg:grid-cols-[repeat(2,_minmax(auto,_1fr))] min-[1416px]:grid-cols-[repeat(2,_1fr)]"
+      )}
       {...props}
     >
       {/* Desktop video */}

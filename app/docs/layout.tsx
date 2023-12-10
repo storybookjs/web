@@ -6,6 +6,7 @@ import Image from "next/image";
 import { getTree } from "@/lib/getTree";
 import { Sidebar } from "@/components/sidebar/sidebar";
 import { TableOfContent } from "@/components/table-of-content";
+import { cn, container } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -30,7 +31,7 @@ export default async function RootLayout({
         height={339}
         className="w-full absolute top-0 left-0 -z-10"
       />
-      <main className="max-w-8xl mx-auto px-4 lg:pl-5 lg:pr-8 flex gap-4">
+      <main className={cn(container, "lg:pl-5 lg:pr-8 flex gap-4")}>
         <Sidebar tree={tree} />
         <div className="w-full flex-1 min-h-[1400px] py-12">{children}</div>
         <TableOfContent />

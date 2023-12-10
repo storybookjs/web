@@ -4,6 +4,7 @@ import { Branch, Document as Doc, Overlap, Search } from "./icons";
 import { Testimonial } from "../testimonial";
 import { IllustratedFeatureList } from "../illustrated-feature-list";
 import { LogoGitlab } from "./logo-gitlab";
+import { cn, container } from "@/lib/utils";
 
 const features = [
   {
@@ -64,7 +65,12 @@ export const Document: FC = () => {
           href={feature.media}
         />
       ))}
-      <div className="max-w-8xl mx-auto px-4 lg:px-8 text-white md:flex justify-between gap-20">
+      <div
+        className={cn(
+          container,
+          "lg:px-8 text-white md:flex justify-between gap-20"
+        )}
+      >
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Document UI for your team to reuse
         </h2>

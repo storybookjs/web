@@ -9,6 +9,7 @@ import { ChevronSmallRightIcon } from "@storybook/icons";
 import { Integrations } from "../integrations/integrations";
 import { Testimonial } from "../testimonial";
 import { LogoAtomicDesign } from "./logo-atomic-design";
+import { cn, container } from "@/lib/utils";
 
 export function Develop() {
   // Step 1
@@ -75,7 +76,12 @@ export function Develop() {
 
   return (
     <section className="pt-[calc(3rem-40px)] border-b border-zinc-700 sm:pt-[calc(5rem-40px)] md:pt-[calc(7rem-72px)]">
-      <div className="max-w-8xl mx-auto px-4 lg:px-8 text-white md:flex justify-between gap-20">
+      <div
+        className={cn(
+          container,
+          "lg:px-8 text-white md:flex justify-between gap-20"
+        )}
+      >
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Develop durable user interfaces
         </h2>
@@ -110,7 +116,12 @@ export function Develop() {
           </div>
         </div>
       </div>
-      <div className="max-w-8xl mx-auto px-5 pt-28 grid justify-items-center gap-24 grid-flow-dense md:pt-[27rem] md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr]">
+      <div
+        className={cn(
+          container,
+          "pt-28 grid justify-items-center gap-24 grid-flow-dense md:pt-[27rem] md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr]"
+        )}
+      >
         <motion.figure
           className="sticky w-full -order-1 z-[999] m-0 self-start top-[34%] translate-y-[var(--mobile-y)] md:w-[150%] md:max-w-[800px] md:col-[2/3] md:top-[50vh] md:translate-y-[calc(-50%+36px)]"
           // TODO: Fix that - Probably by passing the value directly to the style prop
@@ -214,7 +225,12 @@ export function Develop() {
           <div className="h-[56rem] hidden md:block" />
         </div>
       </div>
-      <div className="max-w-8xl px-4 mx-auto pt-28 grid grid-cols-1 justify-items-center items-center gap-12 grid-flow-dense md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-24">
+      <div
+        className={cn(
+          container,
+          "pt-28 grid grid-cols-1 justify-items-center items-center gap-12 grid-flow-dense md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-24"
+        )}
+      >
         <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white">
           <h3 className="text-2xl font-bold">
             Integrate with the tools you already use

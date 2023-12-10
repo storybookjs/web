@@ -1,4 +1,4 @@
-import { cn } from "../../lib/utils";
+import { cn, container } from "../../lib/utils";
 import { FC } from "react";
 import { Form } from "./form";
 import Link from "next/link";
@@ -19,7 +19,7 @@ export const Footer: FC<FooterProps> = ({ variant = "system" }) => {
         variant === "home" && "bg-[#181C22] text-white border-t border-zinc-700"
       )}
     >
-      <div className="max-w-8xl mx-auto px-4 lg:px-8 py-12">
+      <div className={cn(container, "lg:px-8 py-12")}>
         <Form variant={variant} />
         <div className="flex mb-6 sm:mb-20 flex-wrap">
           {footerNav.map((nav) => (

@@ -7,11 +7,17 @@ import { Button } from "@/components/ui/button";
 import SocialProof from "../social-proof";
 import Link from "next/link";
 import { Video } from "./video";
+import { cn, container } from "@/lib/utils";
 
 export const Hero: FC = () => {
   return (
     <div>
-      <div className="max-w-8xl mx-auto px-4 lg:px-8 pt-12 md:pt-24 pb-12 sm:pb-72 text-white md:flex justify-between gap-20">
+      <div
+        className={cn(
+          container,
+          "lg:px-8 pt-12 md:pt-24 pb-12 sm:pb-72 text-white md:flex justify-between gap-20"
+        )}
+      >
         <h1 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Build UIs without the grunt work
         </h1>
