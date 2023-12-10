@@ -10,6 +10,7 @@ import { useInView } from "framer-motion";
 import { Test } from "@/components/home/test/test";
 import { Document } from "@/components/home/document/document";
 import { Share } from "@/components/home/share/share";
+import { Automate } from "@/components/home/automate/automate";
 
 export default function Home() {
   const developRef = useRef(null);
@@ -65,7 +66,7 @@ export default function Home() {
         <Share />
       </div>
       <div style={{ contain: "paint" }} ref={automateRef} id="automate">
-        {/* <Automate docs={docs} id="automate" /> */}
+        <Automate />
       </div>
       <div ref={whoRef}>
         {/* <SocialValidation
