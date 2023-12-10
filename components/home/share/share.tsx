@@ -11,7 +11,7 @@ import { TestIntegrations } from "./test-integrations";
 
 export function Share() {
   const publishRef = useRef<HTMLImageElement | null>(null);
-  const embedRef = useRef<HTMLDivElement | null>(null);
+  const embedRef = useRef<HTMLImageElement | null>(null);
   const testRef = useRef<HTMLImageElement | null>(null);
 
   const { scrollYProgress: publishYProgress } = useScroll({

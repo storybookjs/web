@@ -51,23 +51,13 @@ const testIntegrations = [
   },
 ];
 
-// const TestIntegrationsCarousel = styled(IntegrationsCarousel)`
-//   width: 100%;
-//   display: grid;
-
-//   @media (min-width: ${breakpoints[2]}px) {
-//     width: 125%;
-//   }
-
-//   figure {
-//     display: contents;
-//   }
-// `;
-
 export const TestIntegrations = React.forwardRef<HTMLImageElement>((_, ref) => {
   return (
     <div className="relative w-full md:col-[2/3]">
-      <IntegrationsCarousel integrations={testIntegrations} />
+      <IntegrationsCarousel
+        integrations={testIntegrations}
+        className="w-full grid md:-w-[125%]"
+      />
       <motion.img
         className="block absolute top-0 left-0 w-full select-none pointer-events-none"
         src="/home/share/time-frame-picker.svg"

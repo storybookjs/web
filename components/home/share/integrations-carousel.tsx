@@ -1,52 +1,6 @@
 import { Button } from "@/components/ui/button";
-import React, { useState, ComponentProps, ReactNode, useRef } from "react";
-
-// const Integration = styled(Button)<{
-//   inverse?: boolean;
-//   active?: boolean;
-//   color: string;
-// }>`
-//   border-radius: ${spacing.borderRadius.small}px;
-//   padding: 8px;
-//   background-color: ${(props) => props.color || "transparent"};
-
-//   ${(props) =>
-//     props.inverse &&
-//     css`
-//       box-shadow: rgb(255 255 255 / 10%) 0 0 0 1px inset;
-
-//       &:hover,
-//       &:active,
-//       &:focus,
-//       &:active:focus:hover {
-//         box-shadow: ${color.secondary} 0 0 0 1px inset;
-//       }
-//     `}
-
-//   ${(props) =>
-//     props.active
-//       ? css`
-//           box-shadow: ${color.secondary} 0 0 0 1px inset;
-//         `
-//       : css`
-//           opacity: 0.5;
-//         `}
-
-//   span {
-//     display: block;
-//   }
-
-//   img {
-//     display: block;
-//     width: 24px;
-//     height: 24px;
-//     object-fit: contain;
-//   }
-// `;
-// Integration.defaultProps = {
-//   appearance: "outline",
-//   containsIcon: true,
-// };
+import { cn } from "@/lib/utils";
+import React, { useState, ComponentProps, ReactNode, useRef, FC } from "react";
 
 interface IntegrationProps extends ComponentProps<typeof Button> {
   image: string;
@@ -57,31 +11,37 @@ interface IntegrationProps extends ComponentProps<typeof Button> {
 interface IntegrationsCarouselProps {
   integrations: (IntegrationProps & { media: ReactNode })[];
   animationDisabled?: boolean;
+  className?: string;
 }
 
-export const IntegrationsCarousel = ({
+export const IntegrationsCarousel: FC<IntegrationsCarouselProps> = ({
   integrations,
-  ...props
-}: IntegrationsCarouselProps) => {
+  className,
+}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeIntegration = integrations[activeIndex];
   const ref = useRef(null);
 
   return (
-    <div ref={ref} {...props}>
+    <div ref={ref} className={className}>
       <figure className="m-0">{activeIntegration.media}</figure>
       <div className="flex items-center gap-[10px] mt-5">
         {integrations.map(({ media, name, image, ...integration }, index) => (
-          <Button
+          <button
+            className={cn(
+              "rounded w-10 h-10 flex items-center justify-center p-2 opacity-50 hover:opacity-100 transition-all duration-200 border border-transparent hover:border-blue-500",
+              name === activeIntegration.name &&
+                "opacity-100 border border-blue-500"
+            )}
             key={name}
-            // active={name === activeIntegration.name}
+            style={{ backgroundColor: integration.color }}
             onClick={() => {
               setActiveIndex(index);
             }}
             {...integration}
           >
             <img src={image} alt={name} />
-          </Button>
+          </button>
         ))}
         <div className="text-zinc-600">+ and more</div>
       </div>

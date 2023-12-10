@@ -2,11 +2,9 @@ import React, { FC } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { IntegrationsCarousel } from "./integrations-carousel";
+import Image from "next/image";
 
-const Connector: FC<{ name: string; style: any; transition: any }> = ({
-  name,
-  ...props
-}) => {
+const Connector: FC<{ name: string; style: any }> = ({ name, ...props }) => {
   return (
     <AnimatePresence>
       <motion.svg
@@ -69,6 +67,7 @@ const Connector: FC<{ name: string; style: any; transition: any }> = ({
 
 const embedIntegrations = [
   {
+    index: 1,
     name: "NextJS",
     image: "/home/share/next-js.svg",
     color: "#000",
@@ -89,6 +88,7 @@ const embedIntegrations = [
     ),
   },
   {
+    index: 2,
     name: "Figma",
     image: "/home/share/figma.svg",
     color: "#000",
@@ -103,12 +103,12 @@ const embedIntegrations = [
           key="figma"
           name="Figma"
           style={{ top: "52%", left: "1%" }}
-          transition={{ duration: 0.4 }}
         />
       </AspectRatio>
     ),
   },
   {
+    index: 3,
     name: "Notion",
     image: "/home/share/notion.svg",
     color: "#fff",
@@ -123,12 +123,12 @@ const embedIntegrations = [
           key="notion"
           name="Notion"
           style={{ top: "55%", left: "7%" }}
-          transition={{ duration: 0.4 }}
         />
       </AspectRatio>
     ),
   },
   {
+    index: 4,
     name: "Medium",
     image: "/home/share/medium.svg",
     color: "#F5C347",
@@ -139,31 +139,29 @@ const embedIntegrations = [
           src="/home/share/medium.png"
           alt="Embed stories in Medium articles using the oEmbed support"
         />
-        <Connector
-          name="Medium"
-          style={{ top: "53%", left: "28%" }}
-          transition={{ duration: 0.4 }}
-        />
+        <Connector name="Medium" style={{ top: "53%", left: "28%" }} />
       </AspectRatio>
     ),
   },
 ];
 
-export const EmbedIntegrations = React.forwardRef((_, ref) => {
-  return (
-    <div className="w-full relative max-w-[800px] ml-[30px] sm:ml-[30px] md:w-[150%] md:col-[2/3] lg:ml-[120px]">
-      <IntegrationsCarousel integrations={embedIntegrations} />
-      <img
-        className="block w-[56%] max-w-[440px] h-auto absolute top-[22%] left-[-30%] opacity-0 user-select-none pointer-events-none sm:left-[-60px] lg:[-120px]"
-        src="/home/share/time-frame-picker.svg"
-        alt=""
-        ref={ref}
-        width="458"
-        height="244"
-        style={{ opacity: 0 }}
-      />
-    </div>
-  );
-});
+export const EmbedIntegrations = React.forwardRef<HTMLImageElement>(
+  (_, ref) => {
+    return (
+      <div className="w-full relative max-w-[800px] ml-[30px] sm:ml-[30px] md:w-[150%] md:col-[2/3] lg:ml-[120px]">
+        <IntegrationsCarousel integrations={embedIntegrations} />
+        <Image
+          className="block w-[56%] max-w-[440px] h-auto absolute top-[22%] left-[-30%] opacity-100 user-select-none pointer-events-none sm:left-[-60px] lg:[-120px]"
+          src="/home/share/time-frame-picker.svg"
+          alt=""
+          ref={ref}
+          width="458"
+          height="244"
+          style={{ opacity: 0 }}
+        />
+      </div>
+    );
+  }
+);
 
 EmbedIntegrations.displayName = "EmbedIntegrations";
