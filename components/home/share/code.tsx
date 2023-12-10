@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import "prismjs/themes/prism-tomorrow.css";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import jsx from "react-syntax-highlighter/dist/esm/languages/prism/jsx";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
