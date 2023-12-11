@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Community } from "./community";
 
 const projects = [
   {
@@ -270,7 +271,7 @@ export const SocialValidation: FC = () => {
           </a>
         ))}
       </div>
-      {/* <Community inverse /> */}
+      <Community />
       {/*<SocialCTAs>
         <SocialCard
           inverse
