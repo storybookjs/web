@@ -3,6 +3,7 @@ import { cn, container } from "@/lib/utils";
 import { FeatureStep } from "./feature-step";
 import { MergeIcon } from "@storybook/icons";
 import { Publish } from "./publish";
+import { UITests } from "./ui-tests/ui-tests";
 
 export const Automate: FC = () => {
   return (
@@ -30,7 +31,7 @@ export const Automate: FC = () => {
           href="/docs/react/writing-tests/test-runner"
           linkLabel="Auto-detect UI bugs"
         />
-        {/* <UITests /> */}
+        <UITests />
         <FeatureStep
           title="UI Review"
           description="Request feedback from teammates to verify UI implementation. Discuss UI changes together then assign reviewers for sign off."

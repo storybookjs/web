@@ -56,6 +56,40 @@ const config: Config = {
           from: { opacity: "0", transform: "translateX(-2px)" },
           to: { opacity: "1", transform: "translateX(0)" },
         },
+        homeAutomateHorizontal: {
+          "0%": { opacity: "1", transform: "translateX(-100%)" },
+          "25%, 40%": {
+            transform: "translateX(0)",
+            "box-shadow": "0 1px 7px 0 #fc521f",
+          },
+          "75%": { transform: "translateX(0) translateY(213px)" },
+          "85%": {
+            opacity: "1",
+            transform: "translateX(0) translateY(213px)",
+            "box-shadow": "0 1px 7px 0 #fc521f",
+          },
+          "100%": {
+            opacity: "0",
+            transform: "translateX(30%) translateY(213px)",
+          },
+        },
+        homeAutomateVertical: {
+          "0%": { opacity: "1", transform: "translateY(-100%)" },
+          "25%, 40%": {
+            transform: "translateY(0)",
+            "box-shadow": "0 1px 7px 0 #fc521f",
+          },
+          "75%": { transform: "translateY(0) translateX(213px)" },
+          "85%": {
+            opacity: "1",
+            transform: "translateY(0) translateX(213px)",
+            "box-shadow": "0 1px 7px 0 #fc521f",
+          },
+          "100%": {
+            opacity: "0",
+            transform: "translateY(30%) translateX(213px)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
