@@ -5,6 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Community } from "./community";
+import {
+  DiscordIcon,
+  GithubIcon,
+  TwitterIcon,
+  YoutubeIcon,
+} from "@storybook/icons";
 
 const projects = [
   {
@@ -171,10 +177,13 @@ const discordMemberCount = 20218;
 const twitterFollowerCount = 18350;
 const youTubeSubscriberCount = 6340;
 
+const socialCard =
+  "flex flex-col justify-start items-start gap-6 border border-zinc-600 rounded-md p-6 sm:border-transparent";
+
 export const SocialValidation: FC = () => {
   return (
     <section
-      className="pt-12 border-b border-zinc-600 sm:pt-20 md:pt-28"
+      className="pt-12 sm:pt-20 md:pt-28"
       style={{ scrollbarWidth: "none" }}
     >
       <div
@@ -272,72 +281,81 @@ export const SocialValidation: FC = () => {
         ))}
       </div>
       <Community />
-      {/*<SocialCTAs>
-        <SocialCard
-          inverse
-          icon={<ColoredIcon icon="github" aria-label="Github" color="#fff" />}
-          description={`Join ${githubContributorCount.toLocaleString()}+ contributors building the future of UI development.`}
-          link={{
-            label: "Star on GitHub",
-            href: "https://github.com/storybookjs/storybook",
-          }}
-          stat={{
-            count: `${githubContributorCount.toLocaleString()}+`,
-            label: "Contributors",
-          }}
-        />
-        <SocialCard
-          inverse
-          icon={
-            <ColoredIcon icon="discord" aria-label="Discord" color="#5A65EA" />
-          }
-          description={`Chat with ${discordMemberCount.toLocaleString()}+ frontend developers.`}
-          link={{
-            label: "Join Discord server",
-            href: "https://discord.gg/storybook",
-          }}
-          stat={{
-            count: `${discordMemberCount.toLocaleString()}+`,
-            label: "Server members",
-          }}
-        />
-        <SocialCard
-          inverse
-          icon={
-            <ColoredIcon icon="twitter" aria-label="Twitter" color="#4999E9" />
-          }
-          description="Get the latest news and updates from Storybook maintainers."
-          link={{
-            label: "Follow on Twitter",
-            href: "https://twitter.com/storybookjs",
-          }}
-          stat={{
-            count: `${twitterFollowerCount.toLocaleString()}+`,
-            label: "Followers",
-          }}
-        />
-        <SocialCard
-          inverse
-          icon={
-            <YouTubeIcon>
-              <ColoredIcon
-                icon="youtube"
-                aria-label="YouTube"
-                color="#EA3223"
-              />
-            </YouTubeIcon>
-          }
-          description="Watch tutorials, feature previews, and interviews."
-          link={{
-            label: "Watch on YouTube",
-            href: "https://www.youtube.com/channel/UCr7Quur3eIyA_oe8FNYexfg",
-          }}
-          stat={{
-            count: `${youTubeSubscriberCount.toLocaleString()}+`,
-            label: "Subscribers",
-          }}
-        />
-      </SocialCTAs> */}
+      <div
+        className={cn(
+          container,
+          "pb-12 grid grid-cols-[1fr] md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(4,_1fr)] gap-8"
+        )}
+      >
+        <div className={cn(socialCard)}>
+          <GithubIcon aria-label="Discord" className="text-white" size={48} />
+          <div className="text-white text-md">
+            {`Join ${githubContributorCount.toLocaleString()}+ contributors building the future of UI development.`}
+          </div>
+          <Button variant="outlineHome" rounded="full" jumpOnHover asChild>
+            <a href="https://github.com/storybookjs/storybook">
+              Star on Github
+            </a>
+          </Button>
+          <div>
+            <div className="text-sm text-white">{`${githubContributorCount.toLocaleString()}+`}</div>
+            <div className="text-sm text-zinc-500">Contributors</div>
+          </div>
+        </div>
+        <div className={cn(socialCard)}>
+          <DiscordIcon
+            aria-label="Discord"
+            className="text-[#5A65EA]"
+            size={48}
+          />
+          <div className="text-white text-md">
+            {`Chat with ${discordMemberCount.toLocaleString()}+ frontend developers.`}
+          </div>
+          <Button variant="outlineHome" rounded="full" jumpOnHover asChild>
+            <a href="https://discord.gg/storybook">Join Discord server</a>
+          </Button>
+          <div>
+            <div className="text-sm text-white">{`${discordMemberCount.toLocaleString()}+`}</div>
+            <div className="text-sm text-zinc-500">Server members</div>
+          </div>
+        </div>
+        <div className={cn(socialCard)}>
+          <TwitterIcon
+            aria-label="Discord"
+            className="text-[#4999E9]"
+            size={48}
+          />
+          <div className="text-white text-md">
+            Get the latest news and updates from Storybook maintainers.
+          </div>
+          <Button variant="outlineHome" rounded="full" jumpOnHover asChild>
+            <a href="https://twitter.com/storybookjs">Follow on Twitter</a>
+          </Button>
+          <div>
+            <div className="text-sm text-white">{`${twitterFollowerCount.toLocaleString()}+`}</div>
+            <div className="text-sm text-zinc-500">Followers</div>
+          </div>
+        </div>
+        <div className={cn(socialCard)}>
+          <YoutubeIcon
+            aria-label="Discord"
+            className="text-[#EA3223]"
+            size={48}
+          />
+          <div className="text-white text-md">
+            Watch tutorials, feature previews, and interviews.
+          </div>
+          <Button variant="outlineHome" rounded="full" jumpOnHover asChild>
+            <a href="https://www.youtube.com/channel/UCr7Quur3eIyA_oe8FNYexfg">
+              Watch on YouTube
+            </a>
+          </Button>
+          <div>
+            <div className="text-sm text-white">{`${youTubeSubscriberCount.toLocaleString()}+`}</div>
+            <div className="text-sm text-zinc-500">Subscribers</div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
