@@ -1,5 +1,10 @@
 import React, { FC, useEffect, useRef, useState } from "react";
-import { motion, useAnimationControls, useInView } from "framer-motion";
+import {
+  motion,
+  useAnimate,
+  useAnimationControls,
+  useInView,
+} from "framer-motion";
 import { Sidebar } from "./sidebar";
 import { Controls } from "./controls";
 import { TimeFrame } from "./timeframe";
@@ -9,13 +14,14 @@ export const HeroDemo: FC = () => {
   const inView = useInView(ref, { amount: 0.5 });
   const [activeStory, setActiveStory] = useState("no-selection");
   const pointerControls = useAnimationControls();
+  const [scopePointerControls, animatePointerControls] = useAnimate();
   const startTimeControls = useAnimationControls();
   const endTimeControls = useAnimationControls();
 
   useEffect(() => {
     const sequence = async () => {
       // Cycle through stories
-      await pointerControls.start({
+      await animatePointerControls(scopePointerControls.current, {
         opacity: [0, 1],
         x: "-730%",
         y: "-402%",
@@ -25,63 +31,63 @@ export const HeroDemo: FC = () => {
           opacity: { duration: 0.4 },
         },
       });
-      await pointerControls.start({
+      await animatePointerControls(scopePointerControls.current, {
         scale: [1, 0.9, 1],
         transition: {
           duration: 0.3,
           delay: 0.4,
         },
-      });
-      setActiveStory("last-hour");
-      await pointerControls.start({
+      }),
+        setActiveStory("last-hour");
+      await animatePointerControls(scopePointerControls.current, {
         x: "-700%",
         y: "-368%",
         transition: {
           delay: 1,
           duration: 0.4,
         },
-      });
-      await pointerControls.start({
-        scale: [1, 0.9, 1],
-        transition: {
-          duration: 0.3,
-          delay: 0.4,
-        },
-      });
-      setActiveStory("all-day");
+      }),
+        await animatePointerControls(scopePointerControls.current, {
+          scale: [1, 0.9, 1],
+          transition: {
+            duration: 0.3,
+            delay: 0.4,
+          },
+        }),
+        setActiveStory("all-day");
       // Update startTime control
-      await pointerControls.start({
+      await animatePointerControls(scopePointerControls.current, {
         x: "560%",
         y: "-214%",
         transition: { delay: 1, duration: 1 },
-      });
-      await Promise.all([
-        pointerControls.start({
-          scale: 0.9,
-          opacity: 0,
-          transition: {
-            scale: {
-              type: "spring",
-              stiffness: 700,
-              damping: 80,
-              duration: 0.4,
-              delay: 0.4,
+      }),
+        await Promise.all([
+          await animatePointerControls(scopePointerControls.current, {
+            scale: 0.9,
+            opacity: 0,
+            transition: {
+              scale: {
+                type: "spring",
+                stiffness: 700,
+                damping: 80,
+                duration: 0.4,
+                delay: 0.4,
+              },
+              opacity: { delay: 0.4, duration: 0.1 },
             },
-            opacity: { delay: 0.4, duration: 0.1 },
-          },
-        }),
-        startTimeControls.start("visible"),
-      ]);
+          }),
+          startTimeControls.start("visible"),
+        ]);
       setActiveStory("start-time");
       // Update endTime control
-      await pointerControls.start({
+      await animatePointerControls(scopePointerControls.current, {
         opacity: 1,
         x: "580%",
         y: "-148%",
         transition: { delay: 1, duration: 1, opacity: { duration: 0.2 } },
       });
       await Promise.all([
-        pointerControls.start({
+        animatePointerControls(scopePointerControls.current, {
           scale: 0.9,
           opacity: 0,
           transition: {
@@ -100,13 +106,13 @@ export const HeroDemo: FC = () => {
       setActiveStory("end-time");
 
       // Show docs
-      await pointerControls.start({
+      await animatePointerControls(scopePointerControls.current, {
         opacity: 1,
         x: "-720%",
         y: "-470%",
         transition: { delay: 1, duration: 1, opacity: { duration: 0.2 } },
       });
-      await pointerControls.start({
+      await animatePointerControls(scopePointerControls.current, {
         scale: [1, 0.9, 1],
         transition: {
           duration: 0.3,
@@ -116,7 +122,7 @@ export const HeroDemo: FC = () => {
       setActiveStory("overview");
 
       // Reset state
-      await pointerControls.start({
+      await animatePointerControls(scopePointerControls.current, {
         x: "-730%",
         y: "-436%",
         transition: {
@@ -124,7 +130,7 @@ export const HeroDemo: FC = () => {
           duration: 1,
         },
       });
-      await pointerControls.start({
+      await animatePointerControls(scopePointerControls.current, {
         scale: [1, 0.9, 1],
         transition: {
           duration: 0.3,
@@ -133,7 +139,7 @@ export const HeroDemo: FC = () => {
       });
       setActiveStory("no-selection");
       await Promise.all([
-        pointerControls.start({
+        animatePointerControls(scopePointerControls.current, {
           x: "0%",
           y: "0%",
           opacity: 0,
@@ -161,7 +167,14 @@ export const HeroDemo: FC = () => {
     } else {
       stop();
     }
-  }, [pointerControls, startTimeControls, endTimeControls, inView]);
+  }, [
+    pointerControls,
+    startTimeControls,
+    endTimeControls,
+    inView,
+    animatePointerControls,
+    scopePointerControls,
+  ]);
 
   return (
     <motion.div
@@ -182,10 +195,10 @@ export const HeroDemo: FC = () => {
         endTimeControls={endTimeControls}
       />
       <TimeFrame activeStory={activeStory} />
-      <motion.img
+      <img
         className="block absolute w-[5.66%] h-auto top-[100%] left-[50%]"
         data-chromatic="ignore"
-        animate={pointerControls}
+        ref={scopePointerControls}
         src="/home/develop/pointer.svg"
         alt=""
       />
