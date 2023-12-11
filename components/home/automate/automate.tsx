@@ -5,6 +5,7 @@ import { MergeIcon } from "@storybook/icons";
 import { Publish } from "./publish";
 import { UITests } from "./ui-tests/ui-tests";
 import { UIReview } from "./ui-review";
+import { MergeAndShip } from "./merge-and-ship";
 
 export const Automate: FC = () => {
   return (
@@ -48,7 +49,7 @@ export const Automate: FC = () => {
           linkLabel=" Integrate with Git version control"
           logoBgColor="bg-purple-500"
         />
-        {/* <MergeAndShip /> */}
+        <MergeAndShip />
       </div>
     </div>
   );

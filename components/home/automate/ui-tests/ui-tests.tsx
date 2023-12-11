@@ -168,7 +168,6 @@ export const baseWorkflows = [
 ];
 
 export function UITests() {
-  console.log(baseWorkflows);
   const ref = useRef(null);
   // Pause animation if not in viewport
   const isInView = useInView(ref, { once: true, amount: "all" });
