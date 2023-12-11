@@ -90,7 +90,7 @@ export function Share() {
   const opacity = useTransform(scrollProgress, [0, 1, 2], [1, 1, 0]);
 
   return (
-    <div className="pt-12 border-b border-zinc-600 sm:pt-20 md:pt-28">
+    <div className="pt-12 border-b border-zinc-600 sm:pt-20 md:pt-28 overflow-hidden">
       <div
         className={cn(
           container,

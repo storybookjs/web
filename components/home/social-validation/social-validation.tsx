@@ -13,6 +13,7 @@ import React, { FC } from "react";
 import { cn, container } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 const projects = [
   {
@@ -88,72 +89,80 @@ const projects = [
 const storybooks = [
   {
     name: "Monday.com",
+    url: "https://style.monday.com/",
     logo: "https://avatars.githubusercontent.com/u/61420283?v=4",
     image: {
-      src: "images/home/storybooks/monday-com.webp",
+      src: "/home/community/storybooks/monday-com.webp",
       width: 1440,
       height: 1050,
     },
   },
   {
     name: "Microsoft",
+    url: "https://master--628d031b55e942004ac95df1.chromatic.com/",
     logo: "https://avatars.githubusercontent.com/u/6154722?v=4",
     image: {
-      src: "images/home/storybooks/microsoft.webp",
+      src: "/home/community/storybooks/microsoft.webp",
       width: 1440,
       height: 1050,
     },
   },
   {
     name: "D2IQ",
+    url: "http://design-system.d2iq.com/",
     logo: "https://avatars.githubusercontent.com/u/19392808?v=4",
     image: {
-      src: "images/home/storybooks/d2iq.webp",
+      src: "/home/community/storybooks/d2iq.webp",
       width: 1440,
       height: 1050,
     },
   },
   {
     name: "Drei",
+    url: "https://drei.pmnd.rs/",
     logo: "https://avatars.githubusercontent.com/u/45790596?v=4",
     image: {
-      src: "images/home/storybooks/drei.webp",
+      src: "/home/community/storybooks/drei.webp",
       width: 1440,
       height: 1050,
     },
   },
   {
     name: "Shopify",
+    url: "https://main--5d559397bae39100201eedc1.chromatic.com/",
     logo: "https://avatars.githubusercontent.com/u/8085?v=4",
     image: {
-      src: "images/home/storybooks/shopify.webp",
+      src: "/home/community/storybooks/shopify.webp",
       width: 1440,
       height: 1050,
     },
   },
   {
     name: "kickstartDS",
+    url: "https://www.kickstartds.com/storybook/",
     logo: "https://avatars.githubusercontent.com/u/79609753?v=4",
     image: {
-      src: "images/home/storybooks/kickstart-ds.webp",
+      src: "/home/community/storybooks/kickstart-ds.webp",
       width: 1440,
       height: 1050,
     },
   },
   {
     name: "Grommet",
+    url: "https://master--5d9774839a6eff00203f5cbf.chromatic.com/",
     logo: "https://avatars.githubusercontent.com/u/14203820?v=4",
     image: {
-      src: "images/home/storybooks/grommet.webp",
+      src: "/home/community/storybooks/grommet.webp",
       width: 1440,
       height: 1050,
     },
   },
   {
     name: "JSTOR",
+    url: "https://develop--60919c26122bd50039b34644.chromatic.com/",
     logo: "https://avatars.githubusercontent.com/u/74469?v=4",
     image: {
-      src: "images/home/storybooks/jstor.webp",
+      src: "/home/community/storybooks/jstor.webp",
       width: 1440,
       height: 1050,
     },
@@ -177,7 +186,10 @@ const youTubeSubscriberCount = 6340;
 
 export const SocialValidation: FC = () => {
   return (
-    <section className="pt-12 border-b border-zinc-600 sm:pt-20 md:pt-28">
+    <section
+      className="pt-12 border-b border-zinc-600 sm:pt-20 md:pt-28"
+      style={{ scrollbarWidth: "none" }}
+    >
       <div
         className={cn(
           container,
@@ -199,9 +211,11 @@ export const SocialValidation: FC = () => {
             </Button>
             <div className="min-w-0 flex items-center flex-row-reverse">
               {contributors.map((image) => (
-                <img
+                <Image
                   className="block w-10 h-10 rounded-full -ml-1 last:ml-0 odd:none sm:odd:block"
                   loading="lazy"
+                  width={40}
+                  height={40}
                   key={image}
                   src={image}
                   alt=""
@@ -211,19 +225,42 @@ export const SocialValidation: FC = () => {
           </div>
         </div>
       </div>
-      {/* <Storybooks gap="30px" scrollPadding="0 30px">
+      <div className="px-8 py-0 pb-4 mt-12 text-white flex gap-8 scroll-p-8 sm:mt-20 mb-[calc(5rem-1rem)] md:mt-28 overflow-scroll snap-x">
         {storybooks.map((storybookProject) => (
-          <StorybookLink
+          <a
+            className="block no-underline w-[240px] sm:w-[480px] flex-none"
             href={storybookProject.url}
             key={storybookProject.name}
             target="_blank"
             rel="noopener nofollow noreferrer"
           >
-            <StorybookProject {...storybookProject} />
-          </StorybookLink>
+            <div className="rounded-md overflow-hidden">
+              <div className="h-4 bg-zinc-200 border-y border-t-transparent border-b-zinc-300 w-full flex items-center pl-2 gap-1">
+                <div className="bg-red-500 w-[5px] h-[5px] rounded-full" />
+                <div className="bg-yellow-500 w-[5px] h-[5px] rounded-full" />
+                <div className="bg-green-500 w-[5px] h-[5px] rounded-full" />
+              </div>
+              <Image
+                src={storybookProject.image.src}
+                alt={storybookProject.name}
+                width={storybookProject.image.width}
+                height={storybookProject.image.height}
+              />
+            </div>
+            <div className="flex items-center mt-3 text-white">
+              <Image
+                className="w-5 h-5 mr-2"
+                src={storybookProject.logo}
+                width={20}
+                height={20}
+                alt={storybookProject.name}
+              />
+              <span className="text-sm">{storybookProject.name}</span>
+            </div>
+          </a>
         ))}
-      </Storybooks>
-      <Projects gap="30px" scrollPadding="0 30px">
+      </div>
+      {/* <Projects gap="30px" scrollPadding="0 30px">
         {projects.map((project) => (
           <ProjectCard key={project.logoAlt} {...project} />
         ))}
