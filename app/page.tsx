@@ -11,6 +11,7 @@ import { Test } from "@/components/home/test/test";
 import { Document } from "@/components/home/document/document";
 import { Share } from "@/components/home/share/share";
 import { Automate } from "@/components/home/automate/automate";
+import { SocialValidation } from "@/components/home/social-validation/social-validation";
 
 export default function Home() {
   const developRef = useRef(null);
@@ -68,17 +69,8 @@ export default function Home() {
       <div style={{ contain: "paint" }} ref={automateRef} id="automate">
         <Automate />
       </div>
-      <div ref={whoRef}>
-        {/* <SocialValidation
-          docs={docs}
-          projects={projects}
-          storybooks={storybooks}
-          id="who"
-          twitterFollowerCount={twitterFollowerCount}
-          discordMemberCount={discordMemberCount}
-          githubContributorCount={githubContributorCount}
-          youTubeSubscriberCount={youTubeSubscriberCount}
-        /> */}
+      <div ref={whoRef} id="who">
+        <SocialValidation />
       </div>
       <Footer variant="home" />
     </div>
