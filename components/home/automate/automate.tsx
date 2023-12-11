@@ -4,6 +4,7 @@ import { FeatureStep } from "./feature-step";
 import { MergeIcon } from "@storybook/icons";
 import { Publish } from "./publish";
 import { UITests } from "./ui-tests/ui-tests";
+import { UIReview } from "./ui-review";
 
 export const Automate: FC = () => {
   return (
@@ -38,7 +39,7 @@ export const Automate: FC = () => {
           href="/docs/react/sharing/publish-storybook#review-with-your-team"
           linkLabel="Review with your team"
         />
-        {/* <UIReview /> */}
+        <UIReview />
         <FeatureStep
           icon={<MergeIcon size={24} />}
           title="Merge and ship"
