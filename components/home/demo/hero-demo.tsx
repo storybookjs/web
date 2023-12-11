@@ -13,7 +13,6 @@ export const HeroDemo: FC = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { amount: 0.5 });
   const [activeStory, setActiveStory] = useState("no-selection");
-  const pointerControls = useAnimationControls();
   const [scopePointerControls, animatePointerControls] = useAnimate();
   const startTimeControls = useAnimationControls();
   const endTimeControls = useAnimationControls();
@@ -153,11 +152,13 @@ export const HeroDemo: FC = () => {
     const stop = async () => {
       // Reset state
       setActiveStory("no-selection");
-      pointerControls.set({ x: "0%", y: "0%", opacity: 0 });
+      // TODO: Fix this - Try to find a way to do .set() with the new api
+      // pointerControls.set({ x: "0%", y: "0%", opacity: 0 });
       endTimeControls.set("initial");
       startTimeControls.set("initial");
       // stop animations
-      pointerControls.stop();
+      // TODO: Fix this  - Try to find a way to do .stop() with the new api
+      // pointerControls.stop();
       startTimeControls.stop();
       endTimeControls.stop();
     };
@@ -168,7 +169,6 @@ export const HeroDemo: FC = () => {
       stop();
     }
   }, [
-    pointerControls,
     startTimeControls,
     endTimeControls,
     inView,
