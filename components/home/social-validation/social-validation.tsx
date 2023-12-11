@@ -1,88 +1,74 @@
 import React, { FC } from "react";
-// import {
-//   styles,
-//   SectionLede,
-//   ProjectCard,
-//   HorizontalScroll,
-//   StorybookProject,
-//   SocialCard,
-//   ColoredIcon,
-// } from "@storybook/components-marketing";
-// import GatsbyLinkWrapper from "../../basics/GatsbyLinkWrapper";
-// import { Community } from "../../layout/Community";
 import { cn, container } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const projects = [
   {
-    name: "Design System",
-    accentColor: {
-      hex: "#4c35f5",
-    },
-    height: 288,
-    width: 746,
-    logoAlt: "Monday.com",
-    logoUrl: "https://media.graphassets.com/BBM6cBTiTuLlPvAGtXab",
-    projectUrl:
-      "https://storybook.js.org/showcase/mondaycom-vibe-design-system",
-  },
-  {
     name: "Polaris",
-    accentColor: {
-      hex: "#377e62",
-    },
-    height: 33,
-    width: 118,
+    bgColor: "#377e62",
+    width: 100,
+    height: 28,
     logoAlt: "Shopify",
-    logoUrl: "https://media.graphassets.com/GNpyBL6rTJyyruBSsG4v",
+    logoUrl: "/home/community/logos/shopify.svg",
     projectUrl: "https://storybook.js.org/showcase/shopify-polaris-react",
   },
   {
-    name: "React Spectrum",
-    accentColor: {
-      hex: "#e03422",
-    },
-    height: 32,
-    width: 130,
-    logoAlt: "Adobe",
-    logoUrl: "https://media.graphassets.com/voJpj5ySbjALyJ7RUlfw",
-    projectUrl:
-      "https://storybook.js.org/showcase/adobe-spectrum-web-components",
-  },
-  {
     name: "Psammead",
-    accentColor: {
-      hex: "#8F1F19",
-    },
-    height: 32,
-    width: 120,
+    bgColor: "#8F1F19",
+    width: 102,
+    height: 28,
     logoAlt: "BBC",
-    logoUrl: "https://media.graphassets.com/To5iQm5VRRGdr5upBBml",
+    logoUrl: "/home/community/logos/bbc.svg",
     projectUrl: "https://storybook.js.org/showcase/bbc-psammead",
   },
   {
     name: "UI React",
-    accentColor: {
-      hex: "#000000",
-    },
-    height: 99,
-    width: 284,
+    bgColor: "#333333",
+    width: 88,
+    height: 30,
     logoAlt: "Audi",
-    logoUrl: "https://media.graphassets.com/rdYLCbE5Qgm5xGeUfxxJ",
+    logoUrl: "/home/community/logos/audi.svg",
     projectUrl: "https://storybook.js.org/showcase/audi-ui-react",
   },
   {
+    name: "Fluent UI React",
+    bgColor: "#0078d4",
+    width: 40,
+    height: 70,
+    logoAlt: "Audi",
+    logoUrl: "/home/community/logos/fluent.svg",
+    projectUrl: "https://storybook.js.org/showcase/microsoft-fluent-ui-react",
+  },
+  {
     name: "Gutenberg",
-    accentColor: {
-      hex: "#3171A6",
-    },
-    height: 80,
-    width: 80,
+    bgColor: "#3171A6",
+    width: 52,
+    height: 52,
     logoAlt: "WordPress",
-    logoUrl: "https://media.graphassets.com/b6N8K1VSuym28UndT2wW",
+    logoUrl: "/home/community/logos/wordpress.svg",
     projectUrl: "https://storybook.js.org/showcase/wordpress-gutenberg",
+  },
+  {
+    name: "Explorer 1",
+    bgColor: "#0b3d91",
+    width: 100,
+    height: 28,
+    logoAlt: "WordPress",
+    logoUrl: "/home/community/logos/nasa.svg",
+    projectUrl: "https://storybook.js.org/showcase/nasa-jpl-explorer-1",
+  },
+  {
+    name: "React Spectrum",
+    bgColor: "#e03422",
+    width: 56,
+    height: 48,
+    logoAlt: "Adobe",
+    logoUrl: "/home/community/logos/adobe.svg",
+    projectUrl:
+      "https://storybook.js.org/showcase/adobe-spectrum-web-components",
   },
 ];
 
@@ -260,13 +246,32 @@ export const SocialValidation: FC = () => {
           </a>
         ))}
       </div>
-      {/* <Projects gap="30px" scrollPadding="0 30px">
+      <div className="px-8 py-0 pb-4 mt-12 flex gap-8 scroll-p-8 sm:mt-20 mb-[calc(5rem-1rem)] md:mt-28 overflow-scroll snap-x">
         {projects.map((project) => (
-          <ProjectCard key={project.logoAlt} {...project} />
+          <a
+            href={project.projectUrl}
+            target="_blank"
+            key={project.logoAlt}
+            className="w-[240px] flex-none bg-red-500 rounded-md"
+            style={{ backgroundColor: project.bgColor }}
+          >
+            <AspectRatio
+              ratio={4 / 3}
+              className="flex flex-col gap-2 items-center justify-center font-bold text-white"
+            >
+              <Image
+                src={project.logoUrl}
+                alt={project.logoAlt}
+                width={project.width}
+                height={project.height}
+              />
+              {project.name}
+            </AspectRatio>
+          </a>
         ))}
-      </Projects>
-      <Community inverse />
-      <SocialCTAs>
+      </div>
+      {/* <Community inverse /> */}
+      {/*<SocialCTAs>
         <SocialCard
           inverse
           icon={<ColoredIcon icon="github" aria-label="Github" color="#fff" />}
