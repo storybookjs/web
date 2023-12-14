@@ -7,6 +7,7 @@ import { getTree } from "@/lib/getTree";
 import { Sidebar } from "@/components/sidebar/sidebar";
 import { TableOfContent } from "@/components/table-of-content";
 import { cn, container } from "@/lib/utils";
+import { NavDocs } from "@/components/sidebar/nav-docs";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -23,7 +24,7 @@ export default async function RootLayout({
 
   return (
     <Fragment>
-      <Header variant="docs" />
+      <Header variant="system" />
       <Image
         src="/bubbles.png"
         alt="Storybook Docs"
@@ -32,7 +33,9 @@ export default async function RootLayout({
         className="w-full absolute top-0 left-0 -z-10"
       />
       <main className={cn(container, "lg:pl-5 lg:pr-8 flex gap-4")}>
-        <Sidebar tree={tree} />
+        <Sidebar>
+          <NavDocs tree={tree} />
+        </Sidebar>
         <div className="w-full flex-1 min-h-[1400px] py-12">{children}</div>
         <TableOfContent />
       </main>

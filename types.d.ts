@@ -1,3 +1,7 @@
+interface HeaderProps {
+  variant?: "home" | "system";
+}
+
 type Meta = {
   path: string;
   title: string;

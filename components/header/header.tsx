@@ -18,10 +18,6 @@ import { MobileMenu } from "./mobile-menu";
 import { Submenu } from "./submenu";
 import { Button } from "../ui/button";
 
-interface HeaderProps {
-  variant?: "home" | "docs";
-}
-
 export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
   const pathname = usePathname();
 
@@ -30,7 +26,7 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
       className={cn(
         "w-full",
         variant === "home" && "bg-[#181C22] lg:border-b lg:border-zinc-700",
-        variant === "docs" &&
+        variant === "system" &&
           "sticky top-0 z-40 backdrop-blur bg-white/80 dark:bg-zinc-900/80 lg:border-b lg:border-zinc-200 dark:border-zinc-700"
       )}
     >
@@ -39,7 +35,7 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
           className={cn(
             "h-18 py-4 lg:px-8 lg:border-0 mx-4 lg:mx-0 flex items-center justify-between",
             variant === "home" && "border-b border-zinc-700",
-            variant === "docs" &&
+            variant === "system" &&
               "border-b border-zinc-200 dark:border-zinc-700"
           )}
         >
@@ -163,12 +159,6 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
     </header>
   );
 };
-
-interface NavigationMenuLinkProps {
-  title: string;
-  href: string;
-}
-
 interface DropdownLinkProps {
   title: string;
   description: string;

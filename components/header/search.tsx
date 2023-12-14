@@ -2,18 +2,14 @@ import { cn } from "../../lib/utils";
 import { SearchIcon } from "@storybook/icons";
 import { FC } from "react";
 
-interface SearchProps {
-  variant: "home" | "docs";
-}
-
-export const Search: FC<SearchProps> = ({ variant }) => {
+export const Search: FC<HeaderProps> = ({ variant }) => {
   return (
     <button
       type="button"
       className={cn(
         "w-44 h-8 rounded-full text-sm flex items-center justify-between px-3 max-[440px]:hidden",
         variant === "home" && "border border-zinc-700 text-white",
-        variant === "docs" &&
+        variant === "system" &&
           "border border-zinc-200 dark:border-zinc-700 text-zinc-500 dark:text-white"
       )}
     >
