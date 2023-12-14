@@ -35,8 +35,6 @@ export default function Home({
 }) {
   const pathname = usePathname();
 
-  console.log(slug);
-
   return (
     <Fragment>
       <Header variant="system" />
