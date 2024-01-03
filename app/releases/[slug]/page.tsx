@@ -41,12 +41,12 @@ export default async function Home({
               ))}
           </div>
         </Sidebar>
-        <div className="w-full flex-1 min-h-[1400px] py-12">
+        <article className="w-full flex-1 py-12 max-w-3xl">
           <h1 className="text-4xl mt-0 mb-6 font-bold">
             {page?.frontmatter.title || "Page Not Found"}
           </h1>
-          <article>{page?.content}</article>
-        </div>
+          {page?.content}
+        </article>
       </main>
       <Footer />
     </Fragment>

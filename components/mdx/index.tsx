@@ -1,7 +1,9 @@
 export { P } from "./p";
+export { A } from "./a";
 export { H1 } from "./h1";
-// export { H2 } from "./h2";
+export { H2 } from "./h2";
 export { H3 } from "./h3";
+export { Hr } from "./hr";
 export { Callout } from "./callout";
 export { CodeSnippets } from "./code-snippets";
 export { CustomImage } from "./custom-image";
@@ -9,3 +11,4 @@ export { FeatureSnippets } from "./feature-snippets";
 export { IfRenderer } from "./if-renderer";
 export { Video } from "./video";
 export { YouTubeCallout } from "./youtube-callout";
+export { UnorderedList, List } from "./unordered-list";

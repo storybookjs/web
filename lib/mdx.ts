@@ -7,6 +7,11 @@ import {
   IfRenderer,
   YouTubeCallout,
   FeatureSnippets,
+  UnorderedList,
+  List,
+  Hr,
+  H2,
+  A,
 } from "@/components/mdx";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
@@ -21,10 +26,14 @@ const remarkExpressiveCodeOptions = {
 
 export const mdxComponents = {
   h1: H1,
-  h2: H1,
+  h2: H2,
   h3: H3,
   h4: H1,
+  a: A,
   p: P,
+  hr: Hr,
+  ul: UnorderedList,
+  li: List,
   CodeSnippets,
   Callout,
   IfRenderer,
