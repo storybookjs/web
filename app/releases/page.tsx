@@ -1,7 +1,8 @@
+import { getReleases } from "@/lib/getReleases";
 import { redirect } from "next/navigation";
 
 export default function Page() {
-  redirect("/releases/7.6");
+  const releases = getReleases();
 
-  return null;
+  redirect(`/releases/${releases[releases.length - 1]}`);
 }

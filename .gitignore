@@ -36,5 +36,6 @@ yarn-error.log*
 next-env.d.ts
 
 # Generated docs content
-/content
+/content/docs
+/content/snippets
 /public/docs
