@@ -1,4 +1,3 @@
-import { cn, container } from "@/lib/utils";
 import { getRelease } from "@/lib/getRelease";
 import fs from "fs";
 
@@ -15,7 +14,7 @@ export default async function Home({
   });
 
   return (
-    <main className={cn(container, "lg:pl-5 lg:pr-8 flex gap-4")}>
+    <main className="w-full max-w-4xl mx-auto px-4 lg:px-8 mt-10">
       <h1 className="text-4xl mt-0 mb-6 font-bold">
         {page?.frontmatter.title || "Page Not Found"}
       </h1>
