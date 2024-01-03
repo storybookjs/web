@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { FC } from "react";
 
 type Props = {
   src: string;
@@ -6,7 +7,7 @@ type Props = {
   priority?: string;
 };
 
-export default function CustomImage({ src, alt, priority }: Props) {
+export const CustomImage: FC<Props> = ({ src, alt, priority }) => {
   const prty = priority ? true : false;
 
   return (
@@ -21,4 +22,4 @@ export default function CustomImage({ src, alt, priority }: Props) {
       />
     </div>
   );
-}
+};

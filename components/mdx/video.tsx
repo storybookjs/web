@@ -1,8 +1,10 @@
+import { FC } from "react";
+
 type Props = {
   id: string;
 };
 
-export default function Video({ id }: Props) {
+export const Video: FC<Props> = ({ id }) => {
   return (
     <div className="aspect-w-16 aspect-h-9">
       <iframe
@@ -12,4 +14,4 @@ export default function Video({ id }: Props) {
       />
     </div>
   );
-}
+};
