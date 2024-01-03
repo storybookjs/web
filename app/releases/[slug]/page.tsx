@@ -45,6 +45,7 @@ export default async function Home({
           <h1 className="text-4xl mt-0 mb-6 font-bold">
             {page?.frontmatter.title || "Page Not Found"}
           </h1>
+          <article>{page?.content}</article>
         </div>
       </main>
       <Footer />
