@@ -1,3 +1,9 @@
+import { ThemePicker } from "@/components/mdx/theme-picker/theme-picker";
+
 export default function Docs() {
-  return <div>Hello World</div>;
+  return (
+    <div>
+      <ThemePicker />
+    </div>
+  );
 }
