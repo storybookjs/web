@@ -57,10 +57,10 @@ export const mdxOptions: {
         },
       ],
     ],
-    remarkPlugins: [
-      // The nested array structure below is used
-      // to pass options to the remark plugin
-      [remarkExpressiveCode, remarkExpressiveCodeOptions],
-    ],
+    // remarkPlugins: [
+    //   // The nested array structure below is used
+    //   // to pass options to the remark plugin
+    //   [remarkExpressiveCode, remarkExpressiveCodeOptions],
+    // ],
   },
 };

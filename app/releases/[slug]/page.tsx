@@ -6,6 +6,7 @@ import { Sidebar } from "@/components/sidebar/sidebar";
 import Link from "next/link";
 import { getRelease } from "@/lib/getRelease";
 import fs from "fs";
+import { ReleaseNewsletter } from "@/components/release-newsletter";
 
 export default async function Home({
   params: { slug },
@@ -46,6 +47,7 @@ export default async function Home({
             {page?.frontmatter.title || "Page Not Found"}
           </h1>
           {page?.content}
+          <ReleaseNewsletter />
         </article>
       </main>
       <Footer />
