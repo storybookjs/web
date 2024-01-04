@@ -11,6 +11,8 @@ import { Support } from "@/components/community/support";
 import { Events } from "@/components/community/events";
 import { BrandAndResources } from "@/components/community/brand";
 import { Team } from "@/components/community/team";
+import { Contribute } from "@/components/community/contribute";
+import { Sponsor } from "@/components/community/sponsor";
 
 export default function Page() {
   return (
@@ -41,6 +43,8 @@ export default function Page() {
             <Events />
             <BrandAndResources />
             <Team />
+            <Contribute />
+            <Sponsor />
           </div>
         </div>
       </main>

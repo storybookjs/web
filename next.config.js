@@ -22,6 +22,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "avatars.githubusercontent.com",
       },
+      {
+        protocol: "https",
+        hostname: "images.opencollective.com",
+      },
     ],
   },
   // This was added to fix the error with remarkExpressiveCode
