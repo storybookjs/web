@@ -6,3 +6,4 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const container = "max-w-8xl mx-auto px-4 sm:px-8 md:px-12";
+export const smallContainer = "max-w-7xl mx-auto px-4 sm:px-8 md:px-12";
