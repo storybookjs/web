@@ -3,10 +3,14 @@
 import { NavTop } from "@/components/community/nav-top";
 import { Footer } from "@/components/footer/footer";
 import { Header } from "@/components/header/header";
-import { Community } from "@/components/home/community";
+import { Community } from "@/components/community";
 import { NewsletterForm } from "@/components/newsletter-form/form";
 import { cn, smallContainer } from "@/lib/utils";
 import { Fragment } from "react";
+import { Numbers } from "@/components/community/numbers";
+import { NavSide } from "@/components/community/nav-side";
+import { Support } from "@/components/community/support";
+import { Events } from "@/components/community/events";
 
 export default function Page() {
   return (
@@ -29,6 +33,14 @@ export default function Page() {
           </div>
         </div>
         <Community />
+        <Numbers />
+        <div className="flex gap-16">
+          <NavSide />
+          <div className="flex-1">
+            <Support />
+            <Events />
+          </div>
+        </div>
       </main>
       <Footer />
     </Fragment>
