@@ -1,5 +1,3 @@
-"use client";
-
 import { NavTop } from "@/components/community/nav-top";
 import { Footer } from "@/components/footer/footer";
 import { Header } from "@/components/header/header";
@@ -11,6 +9,8 @@ import { Numbers } from "@/components/community/numbers";
 import { NavSide } from "@/components/community/nav-side";
 import { Support } from "@/components/community/support";
 import { Events } from "@/components/community/events";
+import { BrandAndResources } from "@/components/community/brand";
+import { Team } from "@/components/community/team";
 
 export default function Page() {
   return (
@@ -39,6 +39,8 @@ export default function Page() {
           <div className="flex-1">
             <Support />
             <Events />
+            <BrandAndResources />
+            <Team />
           </div>
         </div>
       </main>

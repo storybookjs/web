@@ -1,6 +1,7 @@
+"use client";
+
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { cn, container } from "@/lib/utils";
 
 const images = [
   "/home/community/community-michele.webp",
