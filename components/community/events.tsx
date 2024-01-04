@@ -1,4 +1,5 @@
 import {
+  CalendarIcon,
   ChevronSmallRightIcon,
   DiscordIcon,
   TwitterIcon,
@@ -184,7 +185,24 @@ export const Events: FC = () => {
         <h3 className="font-bold text-lg mb-3 mt-6">Upcoming</h3>
         <ul>
           {localizedSessions.upcoming.map((session) => (
-            <li key={session.id}>Hello</li>
+            <li
+              key={session.id}
+              className="flex items-center h-11 border-b border-b-zinc-300 justify-between"
+            >
+              <div className="flex items-center gap-4">
+                <CalendarIcon className="w-4 h-4 text-zinc-500" />
+                <div className="text-md font-bold">{session.title}</div>
+                <div> — </div>
+                <div className="text-md text-zinc-500">{session.dateShort}</div>
+              </div>
+              <a
+                href={session.registrationLink}
+                target="_blank"
+                className="flex gap-2 items-center text-blue-500"
+              >
+                Register <ChevronSmallRightIcon />
+              </a>
+            </li>
           ))}
         </ul>
         {localizedSessions.upcoming.length === 0 && (
@@ -196,7 +214,17 @@ export const Events: FC = () => {
         <h3 className="font-bold text-lg mb-3 mt-6">Past</h3>
         <ul>
           {localizedSessions.past.map((session) => (
-            <li key={session.id}>Hello</li>
+            <li
+              key={session.id}
+              className="flex items-center h-11 border-b border-b-zinc-300"
+            >
+              <div className="flex items-center gap-4">
+                <CalendarIcon className="w-4 h-4 text-zinc-500" />
+                <div className="text-md font-bold">{session.title}</div>
+                <div> — </div>
+                <div className="text-md text-zinc-500">{session.dateShort}</div>
+              </div>
+            </li>
           ))}
         </ul>
       </div>
