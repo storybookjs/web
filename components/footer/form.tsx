@@ -1,5 +1,4 @@
 import { FC, ReactNode } from "react";
-import { Button } from "../ui/button";
 import {
   DiscordIcon,
   GithubIcon,
@@ -8,6 +7,7 @@ import {
 } from "@storybook/icons";
 import { FooterProps } from "./footer";
 import { cn } from "@/lib/utils";
+import { NewsletterForm } from "../newsletter-form/form";
 
 interface FormProps {
   variant?: FooterProps["variant"];
@@ -19,24 +19,7 @@ export const Form: FC<FormProps> = ({ variant }) => {
       <div className="text-md font-bold mb-4">Join the community</div>
       <div className="flex flex-col lg:flex-row gap-8 items-start lg:justify-between lg:items-center">
         <div className="flex-1 w-full flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-          <form className="relative w-full max-w-[360px] h-12">
-            <input
-              type="text"
-              placeholder="you@domain.com"
-              className={cn(
-                "rounded-md pl-4 pr-[100px] w-full h-full transition-color bg-white text-zinc-800",
-                variant !== "home" && "border border-zinc-200"
-              )}
-            />
-            <Button
-              variant="solid"
-              type="submit"
-              size="md"
-              className="absolute right-2 top-1/2 -translate-y-1/2"
-            >
-              Subscribe
-            </Button>
-          </form>
+          <NewsletterForm variant={variant === "home" ? "dark" : "system"} />
           <div className="text-zinc-400">6,378 developers and counting</div>
         </div>
         <div className="flex items-center gap-4">
