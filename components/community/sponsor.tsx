@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export const Sponsor: FC = () => {
   return (
-    <div className="mb-8 md:mb-16">
+    <div>
       <h2 className="font-bold text-2xl mb-2">Sponsor the community</h2>
       <p className="mb-8">
         Donations help the community keep going. They are used for web hosting,
@@ -18,7 +18,7 @@ export const Sponsor: FC = () => {
           </a>
         </Button>
       </div>
-      <ul className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-8 gap-4 mb-8">
+      <ul className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-8 gap-4">
         {sponsors.map((sponsor) => (
           <li key={sponsor.name} className="w-12 h-12 flex-shrink-0">
             <a

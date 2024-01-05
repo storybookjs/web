@@ -13,6 +13,7 @@ import { BrandAndResources } from "@/components/community/brand";
 import { Team } from "@/components/community/team";
 import { Contribute } from "@/components/community/contribute";
 import { Sponsor } from "@/components/community/sponsor";
+import { Testimonials } from "@/components/community/testimonials";
 
 export default function Page() {
   return (
@@ -36,7 +37,7 @@ export default function Page() {
         </div>
         <Community />
         <Numbers />
-        <div className="flex gap-16">
+        <div className="flex gap-16 border-b border-b-zinc-300 pb-20 mb-20">
           <NavSide />
           <div className="flex-1">
             <Support />
@@ -47,6 +48,7 @@ export default function Page() {
             <Sponsor />
           </div>
         </div>
+        <Testimonials />
       </main>
       <Footer />
     </Fragment>
