@@ -16,8 +16,6 @@ const CommunityContext = createContext<CommunityContextType>({
 export const CommunityProvider: FC<PropsWithChildren> = ({ children }) => {
   const [activeSegment, setActiveSegment] = useState<string | null>(null);
 
-  console.log("activeSegment", activeSegment);
-
   return (
     <CommunityContext.Provider
       value={{
