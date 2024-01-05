@@ -4,11 +4,11 @@ import {
   SearchIcon,
 } from "@storybook/icons";
 import { FC } from "react";
+import { Section } from "./section";
 
 export const Support: FC = () => {
   return (
-    <div className="relative mb-8 md:mb-16">
-      <div id="support" className="absolute -top-28" />
+    <Section id="support" className="relative mb-8 md:mb-16">
       <h2 className="font-bold text-2xl mb-2">Get Support</h2>
       <p className="mb-8">
         Storybook&apos;s thriving community can help answer your questions.
@@ -90,6 +90,6 @@ export const Support: FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Section>
   );
 };

@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
+import { Section } from "./section";
 
 export const Sponsor: FC = () => {
   return (
-    <div className="relative">
-      <div id="sponsor" className="absolute -top-28" />
+    <Section id="sponsor" className="relative">
       <h2 className="font-bold text-2xl mb-2">Sponsor the community</h2>
       <p className="mb-8">
         Donations help the community keep going. They are used for web hosting,
@@ -31,13 +31,14 @@ export const Sponsor: FC = () => {
                 src={sponsor.image}
                 alt={sponsor.name}
                 fill
-                objectFit="contain"
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </a>
           </li>
         ))}
       </ul>
-    </div>
+    </Section>
   );
 };
 

@@ -2,11 +2,11 @@ import { GithubIcon, TwitterIcon } from "@storybook/icons";
 import Image from "next/image";
 import { FC } from "react";
 import { Button } from "../ui/button";
+import { Section } from "./section";
 
 export const Team: FC = () => {
   return (
-    <div className="relative mb-8 md:mb-16">
-      <div id="maintainer-team" className="absolute -top-28" />
+    <Section id="maintainer-team" className="relative mb-8 md:mb-16">
       <h2 className="font-bold text-2xl mb-2">Maintainer team</h2>
       <p className="mb-8">
         Storybook is maintained by thousands of contributors worldwide and
@@ -75,7 +75,7 @@ export const Team: FC = () => {
           </a>
         </Button>
       </div>
-    </div>
+    </Section>
   );
 };
 

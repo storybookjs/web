@@ -1,10 +1,10 @@
 import { ChevronSmallRightIcon, DiscordIcon } from "@storybook/icons";
 import { FC } from "react";
+import { Section } from "./section";
 
 export const Contribute: FC = () => {
   return (
-    <div className="relative mb-8 md:mb-16">
-      <div id="contribute" className="absolute -top-28" />
+    <Section id="contribute" className="relative mb-8 md:mb-16">
       <h2 className="font-bold text-2xl mb-2">Contribute to Storybook</h2>
       <p className="mb-8">
         Join 2,137+ open source contributors building Storybook, the
@@ -203,6 +203,6 @@ export const Contribute: FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Section>
   );
 };

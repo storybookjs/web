@@ -1,10 +1,10 @@
 import { ChevronSmallRightIcon, StorybookIcon } from "@storybook/icons";
 import { FC } from "react";
+import { Section } from "./section";
 
 export const BrandAndResources: FC = () => {
   return (
-    <div className="relative mb-8 md:mb-16">
-      <div id="brand-resources" className="absolute -top-28" />
+    <Section id="brand-resources" className="relative mb-8 md:mb-16">
       <h2 className="font-bold text-2xl mb-2">
         Use brand & presentation resources
       </h2>
@@ -80,6 +80,6 @@ export const BrandAndResources: FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Section>
   );
 };

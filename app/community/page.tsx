@@ -4,7 +4,6 @@ import { Header } from "@/components/header/header";
 import { Community } from "@/components/community";
 import { NewsletterForm } from "@/components/newsletter-form/form";
 import { cn, smallContainer } from "@/lib/utils";
-import { Fragment } from "react";
 import { Numbers } from "@/components/community/numbers";
 import { NavSide } from "@/components/community/nav-side";
 import { Support } from "@/components/community/support";
@@ -14,10 +13,11 @@ import { Team } from "@/components/community/team";
 import { Contribute } from "@/components/community/contribute";
 import { Sponsor } from "@/components/community/sponsor";
 import { Testimonials } from "@/components/community/testimonials";
+import { CommunityProvider } from "./provider";
 
 export default function Page() {
   return (
-    <Fragment>
+    <CommunityProvider>
       <Header variant="system" />
       <NavTop />
       <main className={cn(smallContainer, " mt-10 md:mt-20")}>
@@ -51,6 +51,6 @@ export default function Page() {
         <Testimonials />
       </main>
       <Footer />
-    </Fragment>
+    </CommunityProvider>
   );
 }

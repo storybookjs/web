@@ -8,6 +8,7 @@ import {
 import { FC, useMemo } from "react";
 import { zonedTimeToUtc, format } from "date-fns-tz";
 import { isPast } from "date-fns";
+import { Section } from "./section";
 
 const rezoneDate = (date: Date) => zonedTimeToUtc(date, "America/Los_Angeles");
 
@@ -89,8 +90,7 @@ export const Events: FC = () => {
   }, []);
 
   return (
-    <div className="relative mb-8 md:mb-16">
-      <div id="events-streams" className="absolute -top-28" />
+    <Section id="events-streams" className="relative mb-8 md:mb-16">
       <h2 className="font-bold text-2xl mb-2">Join live events & streams</h2>
       <p className="mb-8">
         Storybook&apos;s thriving community can help answer your questions.
@@ -229,6 +229,6 @@ export const Events: FC = () => {
           ))}
         </ul>
       </div>
-    </div>
+    </Section>
   );
 };
