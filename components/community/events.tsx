@@ -89,7 +89,8 @@ export const Events: FC = () => {
   }, []);
 
   return (
-    <div className="mb-8 md:mb-16">
+    <div className="relative mb-8 md:mb-16">
+      <div id="events-streams" className="absolute -top-28" />
       <h2 className="font-bold text-2xl mb-2">Join live events & streams</h2>
       <p className="mb-8">
         Storybook&apos;s thriving community can help answer your questions.

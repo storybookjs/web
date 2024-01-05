@@ -3,7 +3,8 @@ import { FC } from "react";
 
 export const BrandAndResources: FC = () => {
   return (
-    <div className="mb-8 md:mb-16">
+    <div className="relative mb-8 md:mb-16">
+      <div id="brand-resources" className="absolute -top-28" />
       <h2 className="font-bold text-2xl mb-2">
         Use brand & presentation resources
       </h2>

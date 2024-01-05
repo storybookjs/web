@@ -2,7 +2,7 @@ import { FC } from "react";
 
 export const NavSide: FC = () => {
   return (
-    <div className="w-[200px] hidden lg:block">
+    <div className="w-[200px] hidden lg:block sticky self-start top-28">
       {[
         { label: "⭐  Support", href: "#support" },
         { label: "🎪  Events & streams", href: "#events-streams" },

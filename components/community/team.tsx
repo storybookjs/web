@@ -5,7 +5,8 @@ import { Button } from "../ui/button";
 
 export const Team: FC = () => {
   return (
-    <div className="mb-8 md:mb-16">
+    <div className="relative mb-8 md:mb-16">
+      <div id="maintainer-team" className="absolute -top-28" />
       <h2 className="font-bold text-2xl mb-2">Maintainer team</h2>
       <p className="mb-8">
         Storybook is maintained by thousands of contributors worldwide and

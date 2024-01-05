@@ -4,7 +4,8 @@ import Image from "next/image";
 
 export const Sponsor: FC = () => {
   return (
-    <div>
+    <div className="relative">
+      <div id="sponsor" className="absolute -top-28" />
       <h2 className="font-bold text-2xl mb-2">Sponsor the community</h2>
       <p className="mb-8">
         Donations help the community keep going. They are used for web hosting,
