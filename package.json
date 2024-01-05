@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "fetch-docs": "tsx lib/getLocalDocs.ts",
+    "fetch-docs": "tsx scripts/getLocalDocs.ts",
     "fetch-test": "fetch-docs charles-docs-new-structure"
   },
   "dependencies": {
