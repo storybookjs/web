@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Community } from "./community";
+import { Community } from "../../community";
 import {
   DiscordIcon,
   GithubIcon,
@@ -280,7 +280,9 @@ export const SocialValidation: FC = () => {
           </a>
         ))}
       </div>
-      <Community />
+      <div className={cn(container, "pt-0 pb-12 sm:pb-20 md:pb-28")}>
+        <Community />
+      </div>
       <div
         className={cn(
           container,

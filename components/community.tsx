@@ -1,12 +1,7 @@
+"use client";
+
 import React, { useState, useEffect, useRef } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useInView,
-  HTMLMotionProps,
-  ForwardRefComponent,
-} from "framer-motion";
-import { cn, container } from "@/lib/utils";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 
 const images = [
   "/home/community/community-michele.webp",
@@ -120,10 +115,7 @@ export function Community() {
   return (
     <div
       ref={sectionRef}
-      className={cn(
-        container,
-        "grid grid-cols-[repeat(4,_1fr)] auto-rows-[280px] gap-8 pt-0 pb-12 sm:pb-20 md:pb-28"
-      )}
+      className="grid grid-cols-[repeat(4,_1fr)] auto-rows-[280px] gap-8"
     >
       <div className="relative col-[1_/_-1] rounded-lg bg-zinc-600 sm:col-[1_/_3]">
         <AnimatePresence initial={false}>

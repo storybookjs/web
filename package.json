@@ -23,6 +23,8 @@
     "chalk-animation": "^2.0.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "date-fns": "2",
+    "date-fns-tz": "^2.0.0",
     "directory-tree": "^3.5.1",
     "framer-motion": "^10.16.14",
     "fs-extra": "^11.2.0",
