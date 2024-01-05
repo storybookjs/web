@@ -4,13 +4,16 @@ import { getSlug } from "./getSlug";
 import { getPage } from "./getPage";
 import dirTree from "directory-tree";
 
-export async function getTree(): Promise<TreeNodeProps[] | undefined> {
+export async function getTree(
+  version: string
+): Promise<TreeNodeProps[] | undefined> {
   // -----------------------------------------------------------------------
   // Get all pages + metadata
   // -----------------------------------------------------------------------
 
   const listOfPaths: string[] = [];
   const pages: Meta[] = [];
+  const rootTree = `content/docs/${version}/docs`;
 
   function walkDir(dir: string, callback: (filePath: string) => void) {
     fs.readdirSync(dir).forEach((f) => {
@@ -20,7 +23,7 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
     });
   }
 
-  walkDir("content/docs", function (filePath: string) {
+  walkDir(rootTree, function (filePath: string) {
     listOfPaths.push(filePath);
   });
 
@@ -43,7 +46,7 @@ export async function getTree(): Promise<TreeNodeProps[] | undefined> {
   // This helps to create the scaffolding for the tree
   // -----------------------------------------------------------------------
 
-  const tree = dirTree("content/docs") as unknown;
+  const tree = dirTree(rootTree) as unknown;
   const docsTree = tree as TemporaryTreeNodeProps;
 
   // -----------------------------------------------------------------------

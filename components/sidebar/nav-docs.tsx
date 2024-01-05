@@ -5,15 +5,17 @@ import * as Accordion from "@radix-ui/react-accordion";
 import { FC, Fragment } from "react";
 import { ChevronSmallRightIcon } from "@storybook/icons";
 import { VersionSelector } from "./version-selector";
+import { DocsVersion } from "@/docs-versions";
 
 interface NavDocsProps {
   tree: TreeNodeProps[] | undefined;
+  activeVersion: DocsVersion;
 }
 
-export const NavDocs: FC<NavDocsProps> = ({ tree }) => {
+export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
   return (
     <Fragment>
-      <VersionSelector />
+      <VersionSelector activeVersion={activeVersion} />
       <ul className="mt-9">
         {tree
           ? tree.map((lvl1) => (

@@ -2,11 +2,15 @@ import { FC } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { ChevronSmallDownIcon } from "@storybook/icons";
 import Link from "next/link";
+import { DocsVersion, docsVersions } from "@/docs-versions";
 
-export const VersionSelector: FC = () => {
-  const version = "6.3.0";
-  const versions = ["7.6.0", "6.5.0"];
+interface VersionSelectorProps {
+  activeVersion: DocsVersion;
+}
 
+export const VersionSelector: FC<VersionSelectorProps> = ({
+  activeVersion,
+}) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -16,7 +20,7 @@ export const VersionSelector: FC = () => {
           aria-label="Customise options"
         >
           <div className="flex items-center justify-between text-sm w-full h-full border-b border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 transition-all select-none">
-            Version {version}
+            {activeVersion.label}
             <ChevronSmallDownIcon />
           </div>
         </DropdownMenu.Trigger>
@@ -28,16 +32,19 @@ export const VersionSelector: FC = () => {
           sideOffset={4}
         >
           <DropdownMenu.Group>
-            {versions.map((version) => (
-              <DropdownMenu.Item key={version} asChild>
-                <Link
-                  href="#"
-                  className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
-                >
-                  Version {version}
-                </Link>
-              </DropdownMenu.Item>
-            ))}
+            {docsVersions.map((version) => {
+              const isFirstVersion = version.id === docsVersions[0].id;
+              return (
+                <DropdownMenu.Item key={version.id} asChild>
+                  <Link
+                    href={isFirstVersion ? "/docs" : `/docs/${version.id}`}
+                    className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
+                  >
+                    {version.label}
+                  </Link>
+                </DropdownMenu.Item>
+              );
+            })}
           </DropdownMenu.Group>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
