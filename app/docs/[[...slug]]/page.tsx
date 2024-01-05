@@ -1,7 +1,14 @@
 import { docsVersions } from "@/docs-versions";
 import { getVersion } from "@/lib/getVersion";
+import { H1 } from "@/components/mdx";
+import { getPage } from "@/lib/getPage";
+import { getTree } from "@/lib/getTree";
 
-export default function TestPage({ params }: { params: { slug: string[] } }) {
+export default async function TestPage({
+  params,
+}: {
+  params: { slug: string[] };
+}) {
   // Get the latest version
   const activeVersion = getVersion(params.slug);
 
@@ -12,10 +19,16 @@ export default function TestPage({ params }: { params: { slug: string[] } }) {
       return params.slug[0] === version.id;
     });
 
+  // Get article
+  const tree = await getTree(activeVersion.id);
+  const pageInTree = tree && tree.find((page) => page.slug === params.slug[0]);
+  const page = await getPage(pageInTree?.path || "");
+
+  console.log(page);
+
   return (
     <div>
-      Latest version {activeVersion.label} - {activeVersion.id}
-      <div>{hasVersionInUrl ? "true" : "false"}</div>
+      <H1>{page?.meta.title || "Title is missing"}</H1>
     </div>
   );
 }
