@@ -1,18 +1,12 @@
 import fs from "fs";
 import path from "path";
-import { getSlug } from "./getSlug";
 import { getPage } from "./getPage";
-import dirTree from "directory-tree";
 
 export async function getTree(
   version: string
-): Promise<TreeNodeProps[] | undefined> {
-  // -----------------------------------------------------------------------
-  // Get all pages + metadata
-  // -----------------------------------------------------------------------
-
+): Promise<PageProps[] | undefined> {
   const listOfPaths: string[] = [];
-  const pages: Meta[] = [];
+  const pages: PageProps[] = [];
   const rootTree = `content/docs/${version}/docs`;
 
   function walkDir(dir: string, callback: (filePath: string) => void) {
@@ -27,103 +21,29 @@ export async function getTree(
     listOfPaths.push(filePath);
   });
 
-  const listOfPathsWithoutContent = listOfPaths.map((path) =>
-    path.replace("content/", "")
-  );
-
-  for (const file of listOfPathsWithoutContent) {
+  for (const file of listOfPaths) {
     const post = await getPage(file);
-    if (post) {
-      const { meta } = post;
-      pages.push(meta);
-    }
+    if (post) pages.push(post);
   }
 
-  if (!pages) return undefined;
+  const rootPages = pages.filter((page) => page.level === 1);
 
-  // -----------------------------------------------------------------------
-  // Create temporary tree
-  // This helps to create the scaffolding for the tree
-  // -----------------------------------------------------------------------
+  const rootPagesWithChildren: PageProps[] = rootPages.map((rootPage) => {
+    const level2 = pages
+      .filter((page) => page.level === 2)
+      .filter((child) => child.parent === rootPage.id);
 
-  const tree = dirTree(rootTree) as unknown;
-  const docsTree = tree as TemporaryTreeNodeProps;
+    const children = level2.map((child) => {
+      const level3 = pages
+        .filter((page) => page.level === 3)
+        .filter((lvl3) => lvl3.parent === child.id);
 
-  // -----------------------------------------------------------------------
-  // Add the correct data to the tree
-  // Use case 1 - Folder with only leafs (no index file)
-  // Use case 2 - Folder with only leafs (with index file)
-  // Use case 3 - Folder with leaf + folders (no index file)
-  // Use case 4 - Folder with leaf + folders (with index file)
-  // Use case 5 - Folder with showAsTabs in frontmatter in level 2
-  // Use case 6 - Folder with showAsTabs in frontmatter in level 3
-  // -----------------------------------------------------------------------
-
-  const addPageDataToTreeNode = (
-    node: TemporaryTreeNodeProps,
-    parent: TemporaryTreeNodeProps
-  ) => {
-    const findNode = pages.find(
-      (page) => page.path === node.path.replace("content/", "")
-    );
-    const nodeData = { ...findNode };
-    delete nodeData.segments;
-
-    // We have a folder with children
-    if (node.children && node.children.length > 0) {
-      // Check if folders have an index file
-      const indexPage = node.children.find((c: any) => c.name === "index.mdx");
-      // if it doesn't have an index file, well ... damage control.
-      // To control the sidebar, you need to have an index file.
-      if (!indexPage) {
-        Object.assign(node, {
-          path: node.path,
-          title: node.name,
-          shortTitle: node.name,
-          slug: getSlug(node.name),
-          showAsTabs: false,
-        });
-      }
-    }
-
-    // we're at a leaf node, an actual file
-    if (!node.children) {
-      //this leaf node is an index page that needs to be added to the parent node
-      if (node.name === "index.mdx") {
-        Object.assign(parent, nodeData);
-
-        // Remove the index page from the children array
-        // Except if it has showAsTabs in the frontmatter
-        if (nodeData.showAsTabs === false) {
-          parent.children.splice(parent.children.indexOf(node), 1);
-        }
-
-        return;
-      }
-
-      // this leaf node is a page whose info needs to be added to the current node
-      Object.assign(node, nodeData);
-
-      return;
-    }
-
-    // we're not at a leaf node, so we need to keep traversing the tree
-    node.children.forEach((child) => {
-      addPageDataToTreeNode(child, node);
+      if (child.showAsTabs) return { ...child, tabs: level3 };
+      return { ...child, children: level3 };
     });
-  };
 
-  // Since we are mutating the tree, we need to cast it to any
-  addPageDataToTreeNode(
-    {
-      path: "",
-      name: "",
-      children: [docsTree],
-    },
-    docsTree
-  );
+    return { ...rootPage, children };
+  });
 
-  // And then we need to cast it back to TreeNodeProps
-  const treeToReturn = tree as TreeNodeProps;
-  return treeToReturn.children;
+  return rootPagesWithChildren;
 }

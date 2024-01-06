@@ -5,25 +5,24 @@ interface HeaderProps {
 type Meta = {
   path: string;
   title: string;
-  name: string;
   shortTitle: string;
-  slug: string;
-  showAsTabs: boolean;
   segments: string[];
+  isRoot: boolean;
+  group: string | null;
+  tab: string | null;
 };
 
 type PageProps = {
-  meta: Meta;
-  content: ReactElement<any, string | JSXElementConstructor<any>>;
-};
-
-interface TemporaryTreeNodeProps {
+  id: string;
   path: string;
-  name: string;
-  children: TemporaryTreeNodeProps[];
-}
-
-interface TreeNodeProps extends Meta {
-  name: string;
-  children: TreeNodeProps[];
-}
+  slug: string;
+  title: string;
+  shortTitle: string;
+  segments: string[];
+  parent: string | null;
+  showAsTabs: boolean;
+  level: number;
+  content: ReactElement<any, string | JSXElementConstructor<any>>;
+  children?: PageProps[];
+  tabs?: PageProps[];
+};

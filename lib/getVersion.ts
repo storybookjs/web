@@ -10,7 +10,5 @@ export const getVersion = (slug: string[]) => {
   // If the version is not found, use the latest version
   const activeVersion = versionFromUrl || docsVersions[0];
 
-  console.log("activeVersion", activeVersion);
-
   return activeVersion;
 };
