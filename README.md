@@ -9,9 +9,9 @@ Storybook is the most popular UI component explorer! This is the website for htt
 - [x] Translate extract-monorepo-docs into node & make it work with Next.js
 - [x] Update getPage to get data from the right place
 - [x] Create extract assets script to fetch images
-- [ ] /public/latest/..., /public/7.6/...
+- [x] /public/latest/..., /public/7.6/...
 - [ ] Update sync-docs task in monorepo
-- [ ] Add support for Mailchimp in the footer
+- [x] Add support for Mailchimp in the footer
 - [x] Add modal for video when clicking "Watch video"
 - [ ] Add Algolia on press search
 - [x] Finish footer mobile

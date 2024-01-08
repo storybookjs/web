@@ -4,7 +4,7 @@ import { mdxComponents, mdxOptions } from "./mdx";
 import { getListOfPaths } from "./getListOfPaths";
 import { rootPath } from "./getTree";
 
-export async function getPage(
+export async function getPageData(
   path: string,
   version: string,
   options?: { metaOnly?: boolean }
@@ -82,7 +82,7 @@ export async function getPage(
 
   // Create slug
   let slug = `/docs/${id}`;
-
+  if (relativePath == "index.mdx") slug = "/docs";
   if (parent && parent.includes("[index]")) slug = slug.replace("/[index]", "");
 
   const page: PageMetaProps = {

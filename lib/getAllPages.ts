@@ -1,4 +1,4 @@
-import { getPage } from "./getPage";
+import { getPageData } from "./get-page-data";
 import { getListOfPaths } from "./getListOfPaths";
 
 export async function getAllPages(
@@ -9,7 +9,7 @@ export async function getAllPages(
 
   // For every path, get the page
   for (const file of listOfPaths) {
-    const post = await getPage(file, version, { metaOnly: true });
+    const post = await getPageData(file, version, { metaOnly: true });
     if (post) pages.push(post);
   }
 

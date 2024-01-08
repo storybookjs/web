@@ -1,7 +1,7 @@
-import { getPage } from "./getPage";
+import { getPageData } from "./get-page-data";
 import { getListOfPaths } from "./getListOfPaths";
 
-export const rootPath = "content/test-docs/";
+export const rootPath = "content/docs/";
 
 export async function getTree(
   version: string,
@@ -12,7 +12,7 @@ export async function getTree(
 
   // For every path, get the page
   for (const file of listOfPaths) {
-    const post = await getPage(file, version, { metaOnly: true });
+    const post = await getPageData(file, version, { metaOnly: true });
     if (post) pages.push(post);
   }
 
@@ -31,6 +31,9 @@ export async function getTree(
       const isLeaf = lastSegment !== "index";
 
       let level = 0;
+
+      // Home
+      if (isIndex && segments.length === 1) level = 0;
 
       // Level 1
       if (isIndex && segments.length === 2) level = 1;

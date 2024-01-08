@@ -1,48 +1,79 @@
-import { docsVersions } from "@/docs-versions";
 import { getVersion } from "@/lib/getVersion";
 import { H1 } from "@/components/mdx";
-import { getPage } from "@/lib/getPage";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getAllPages } from "@/lib/getAllPages";
+import { cn } from "@/lib/utils";
+import { findPage } from "@/lib/find-page";
 
-export default async function TestPage({
-  params,
+const renderers = [
+  { id: "react", title: "React" },
+  { id: "vue", title: "Vue" },
+  { id: "angular", title: "angular" },
+  { id: "web-components", title: "Web Components" },
+  { id: "ember", title: "Ember" },
+  { id: "html", title: "HTML" },
+  { id: "svelte", title: "Svelte" },
+  { id: "preact", title: "Preact" },
+  { id: "qwik", title: "Qwik" },
+  { id: "solid", title: "Solid" },
+];
+
+export async function generateMetadata({
+  params: { slug },
 }: {
-  params: { slug: string[] };
+  params: {
+    slug: string[];
+  };
 }) {
+  // Get the latest version
+  const activeVersion = getVersion(slug);
+
+  // Get all pages in a flat list
+  const allPages = await getAllPages(activeVersion.id);
+  const page = await findPage(allPages, slug, activeVersion.id);
+
+  if (!page) {
+    return {
+      title: "Page Not Found",
+    };
+  }
+
+  return {
+    title: `${page.title} • Storybook docs` || "Storybook • Storybook docs",
+  };
+}
+
+export default async function Page({ params }: { params: { slug: string[] } }) {
+  const active = "react";
+
   // Get the latest version
   const activeVersion = getVersion(params.slug);
 
   // Get all pages in a flat list
   const allPages = await getAllPages(activeVersion.id);
-
-  // Get path - Make sure to take the right version
-  const hasVersionInUrl =
-    params.slug &&
-    docsVersions.some((version) => {
-      return params.slug[0] === version.id;
-    });
-
-  // Find the page in all pages
-  const pageInTree =
-    allPages &&
-    allPages.find((page) => {
-      const pageSlug = `${activeVersion.id}${page.slug}`;
-      const path = hasVersionInUrl
-        ? `${params.slug[0]}/docs/${params.slug.slice(1).join("/")}`
-        : `${activeVersion.id}/docs/${params.slug.join("/")}`;
-      return pageSlug === path;
-    });
-  const page = await getPage(pageInTree?.path || "", activeVersion.id);
+  const page = await findPage(allPages, params.slug, activeVersion.id);
 
   if (!page) notFound();
 
   return (
     <div>
       <H1>{page.title || "Title is missing"}</H1>
+      <div className="flex gap-2 mb-8">
+        {renderers.slice(0, 4).map((renderer) => (
+          <button
+            className={cn(
+              "inline-flex items-center justify-center h-7 rounded border border-zinc-300 text-sm px-2 hover:border-blue-500 transition-colors text-zinc-800 hover:text-blue-500",
+              renderer.id === active && "border-blue-500 text-blue-500"
+            )}
+            key={renderer.id}
+          >
+            {renderer.title}
+          </button>
+        ))}
+      </div>
       {page.tabs && page.tabs.length > 0 && (
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-8 border-b border-zinc-200">
           {page.tabs.map((tab, index) => {
             let href = "";
             if (index === 0 && !page.isTab) href = page.slug;
@@ -54,10 +85,18 @@ export default async function TestPage({
                 .split("/")
                 .slice(0, -1)
                 .join("/"))}/${tab}`;
+            const isActive = href === page.slug;
 
             return (
-              <Link key={tab} href={href}>
-                {tab}
+              <Link
+                key={tab}
+                href={href}
+                className={cn(
+                  "border-b -mb-px pb-2 hover:text-blue-500 transition-colors px-2 text-sm capitalize",
+                  isActive && "border-b border-blue-500 text-blue-500"
+                )}
+              >
+                {index === 0 ? "Guide" : tab}
               </Link>
             );
           })}

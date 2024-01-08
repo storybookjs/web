@@ -13,7 +13,6 @@ interface NavDocsProps {
 }
 
 export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
-  // console.log(tree);
   return (
     <Fragment>
       <VersionSelector activeVersion={activeVersion} />
