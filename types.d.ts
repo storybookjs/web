@@ -29,5 +29,6 @@ type PageProps = {
 type PageMetaProps = Omit<PageProps, "content">;
 
 interface TreeProps extends PageMetaProps {
+  level?: number;
   children?: TreeProps[];
 }

@@ -2,7 +2,8 @@ import { getPage } from "./getPage";
 import { getListOfPaths } from "./getListOfPaths";
 
 export async function getTree(
-  version: string
+  version: string,
+  option?: { flat?: true }
 ): Promise<TreeProps[] | undefined> {
   const listOfPaths = getListOfPaths(version);
   const pages: PageMetaProps[] = [];
@@ -46,7 +47,7 @@ export async function getTree(
       };
     });
 
-  const tree: TreeProps[] = flatTree
+  const tree = flatTree
     .filter((page) => page.level === 1)
     .map((level1) => {
       const level2 = flatTree
@@ -66,6 +67,10 @@ export async function getTree(
       return { ...level1, children };
     })
     .sort((a, b) => a.order - b.order); // Sort level 1 pages by order
+
+  // console.dir(tree, { depth: null });
+
+  if (option?.flat) return flatTree;
 
   return tree;
 }

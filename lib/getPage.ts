@@ -34,6 +34,8 @@ export async function getPage(path: string, options?: { metaOnly?: boolean }) {
     ? pathWithoutExtension.replace("/index", "")
     : pathWithoutExtension;
 
+  const parent = id.split("/").slice(0, -1).join("/") || null;
+
   // Is tab
   const regex = /.*\[[^\]]*\].*/;
   const isTab = regex.test(pathWithoutExtension);
@@ -73,21 +75,24 @@ export async function getPage(path: string, options?: { metaOnly?: boolean }) {
     tabs.push(...listOfTabs);
   }
 
-  // Create type with omit for the content on PageProps
+  // Create slug
+  let slug = `/docs/${id}`;
+
+  if (parent && parent.includes("[index]")) slug = slug.replace("/[index]", "");
 
   const page: PageMetaProps = {
     id,
     path,
-    slug: `/docs/${id}`,
+    slug: slug.replace(/\[|\]/g, ""),
     title: frontmatter.title,
     shortTitle: frontmatter?.sidebar?.title || frontmatter?.title || "",
-    parent: id.split("/").slice(0, -1).join("/") || null,
+    parent,
     isTab,
     tabs,
     order: frontmatter?.sidebar?.order || 0,
   };
 
-  if (!options?.metaOnly) return page;
+  if (options?.metaOnly === true) return page;
 
   const pageWithContent: PageProps = {
     ...page,
