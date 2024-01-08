@@ -3,13 +3,13 @@ import { getListOfPaths } from "./getListOfPaths";
 
 export async function getTree(
   version: string
-): Promise<PageProps[] | undefined> {
+): Promise<TreeProps[] | undefined> {
   const listOfPaths = getListOfPaths(version);
-  const pages: PageProps[] = [];
+  const pages: PageMetaProps[] = [];
 
   // For every path, get the page
   for (const file of listOfPaths) {
-    const post = await getPage(file);
+    const post = await getPage(file, { metaOnly: true });
     if (post) pages.push(post);
   }
 
@@ -46,7 +46,7 @@ export async function getTree(
       };
     });
 
-  const tree: PageProps[] = flatTree
+  const tree: TreeProps[] = flatTree
     .filter((page) => page.level === 1)
     .map((level1) => {
       const level2 = flatTree
@@ -66,8 +66,6 @@ export async function getTree(
       return { ...level1, children };
     })
     .sort((a, b) => a.order - b.order); // Sort level 1 pages by order
-
-  console.dir(tree, { depth: null });
 
   return tree;
 }

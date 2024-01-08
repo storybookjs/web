@@ -18,13 +18,16 @@ type PageProps = {
   slug: string;
   title: string;
   shortTitle: string;
-  segments: string[];
   parent: string | null;
-  showAsTabs: boolean;
-  level: number;
-  content: ReactElement<any, string | JSXElementConstructor<any>>;
-  children?: PageProps[];
-  tabs?: string[];
+  tabs: string[];
   isTab: boolean;
   order: number;
+  content: ReactElement<any, string | JSXElementConstructor<any>>;
+  children?: PageProps[];
 };
+
+type PageMetaProps = Omit<PageProps, "content">;
+
+interface TreeProps extends PageMetaProps {
+  children?: TreeProps[];
+}

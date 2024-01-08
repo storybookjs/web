@@ -3,7 +3,7 @@ import fs from "fs";
 import { mdxComponents, mdxOptions } from "./mdx";
 import { getListOfPaths } from "./getListOfPaths";
 
-export async function getPage(path: string) {
+export async function getPage(path: string, options?: { metaOnly?: boolean }) {
   if (!path) return undefined;
 
   const fileContents = fs.readFileSync(path, "utf8");
@@ -28,7 +28,11 @@ export async function getPage(path: string) {
   const segments = pathWithoutExtension.split("/");
   const lastSegment = pathWithoutExtension.split("/").pop() || "";
   const isIndex = lastSegment === "index";
-  const isLeaf = lastSegment !== "index";
+
+  // Create index - Used also for the slug
+  const id = isIndex
+    ? pathWithoutExtension.replace("/index", "")
+    : pathWithoutExtension;
 
   // Is tab
   const regex = /.*\[[^\]]*\].*/;
@@ -69,37 +73,12 @@ export async function getPage(path: string) {
     tabs.push(...listOfTabs);
   }
 
-  const id = isIndex
-    ? pathWithoutExtension.replace("/index", "")
-    : pathWithoutExtension;
+  // Create type with omit for the content on PageProps
 
-  // Create slug
-  let slug = "/docs/";
-  // const removeOrderNumber = (segment: string) => segment.replace(/^\d+-/, "");
-  // const pathPlace = (n: number) => (lastSegment === "index" ? n : n - 1);
-
-  // if (lastSegment === "index" && level === 1) {
-  //   const path1 = removeOrderNumber(segments[segments.length - pathPlace(2)]);
-  //   slug = `/docs/${path1}`;
-  // }
-  // if (level === 2) {
-  //   const path1 = removeOrderNumber(segments[segments.length - pathPlace(3)]);
-  //   const path2 = removeOrderNumber(segments[segments.length - pathPlace(2)]);
-  //   slug = `/docs/${path1}/${path2}`;
-  // }
-  // if (level === 3) {
-  //   const path1 = removeOrderNumber(segments[segments.length - pathPlace(4)]);
-  //   const path2 = removeOrderNumber(segments[segments.length - pathPlace(3)]);
-  //   const path3 = removeOrderNumber(segments[segments.length - pathPlace(2)]);
-  //   slug = `/docs/${path1}/${path2}/${path3}`;
-  // }
-
-  // console.log(frontmatter);
-
-  const pageObj: PageProps = {
+  const page: PageMetaProps = {
     id,
     path,
-    slug,
+    slug: `/docs/${id}`,
     title: frontmatter.title,
     shortTitle: frontmatter?.sidebar?.title || frontmatter?.title || "",
     parent: id.split("/").slice(0, -1).join("/") || null,
@@ -108,5 +87,12 @@ export async function getPage(path: string) {
     order: frontmatter?.sidebar?.order || 0,
   };
 
-  return pageObj;
+  if (!options?.metaOnly) return page;
+
+  const pageWithContent: PageProps = {
+    ...page,
+    content,
+  };
+
+  return pageWithContent;
 }
