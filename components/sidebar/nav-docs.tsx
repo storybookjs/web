@@ -5,7 +5,7 @@ import * as Accordion from "@radix-ui/react-accordion";
 import { FC, Fragment } from "react";
 import { ChevronSmallRightIcon } from "@storybook/icons";
 import { VersionSelector } from "./version-selector";
-import { DocsVersion } from "@/docs-versions";
+import { DocsVersion, docsVersions } from "@/docs-versions";
 
 interface NavDocsProps {
   tree: TreeProps[] | undefined;
@@ -13,6 +13,12 @@ interface NavDocsProps {
 }
 
 export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
+  const isLatestVersion = activeVersion.id === docsVersions[0].id;
+  const getSlug = (slug: string) =>
+    isLatestVersion
+      ? slug
+      : `${slug.replace("/docs", `/docs/${activeVersion.id}`)}`;
+
   return (
     <Fragment>
       <VersionSelector activeVersion={activeVersion} />
@@ -21,7 +27,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
           ? tree.map((lvl1) => (
               <li key={lvl1.path}>
                 <Link
-                  href={lvl1.slug}
+                  href={getSlug(lvl1.slug)}
                   className="flex items-center text-sm font-bold mt-6 h-8 hover:text-blue-500 transition-colors px-2"
                 >
                   {lvl1.shortTitle}
@@ -39,7 +45,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                           <li>
                             {(!lvl2.children || lvl2.children.length === 0) && (
                               <Link
-                                href={lvl2.slug}
+                                href={getSlug(lvl2.slug)}
                                 className="flex items-center text-sm h-8 text-zinc-600 hover:text-blue-500 transition-colors px-2"
                               >
                                 {lvl2.shortTitle}
@@ -62,7 +68,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                                       return (
                                         <li key={lvl3.path} className="ml-4">
                                           <Link
-                                            href={lvl3.slug}
+                                            href={getSlug(lvl3.slug)}
                                             className="flex items-center text-sm h-8 border-l border-zinc-200 p-4"
                                           >
                                             {lvl3.shortTitle}

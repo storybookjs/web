@@ -1,27 +1,19 @@
 import { getPageData } from "./get-page-data";
 import { getListOfPaths } from "./get-list-of-paths";
-import { docsVersions } from "@/docs-versions";
 
 export const rootPath = "content/docs/";
 
 export async function getTree(
-  version: string,
-  slug: string[]
+  version: string
 ): Promise<TreeProps[] | undefined> {
   const listOfPaths = getListOfPaths(version);
   const pages: PageMetaProps[] = [];
-
-  const hasVersionInUrl = slug
-    ? docsVersions.some((version) => {
-        return slug[0] === version.id;
-      })
-    : false;
 
   // For every path, get the page
   for (const file of listOfPaths) {
     const post = await getPageData({
       path: file,
-      version: { id: version, isInTheUrl: hasVersionInUrl },
+      version: { id: version },
       options: { metaOnly: true },
     });
     if (post) pages.push(post);

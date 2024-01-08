@@ -18,17 +18,18 @@ export const findPage = async (
       const pageSlug = page.slug;
       let path = "";
       if (hasVersionInUrl)
-        path = `/docs/${version}${
-          slug.length > 1 ? `/${slug.slice(1).join("/")}` : ""
-        }`;
+        path = `/docs${slug.length > 1 ? `/${slug.slice(1).join("/")}` : ""}`;
       if (!hasVersionInUrl) path = `/docs${slug ? `/${slug.join("/")}` : ""}`;
+
+      console.log("pageSlug", pageSlug);
+      console.log("path", path);
 
       return pageSlug === path;
     });
 
   const page = await getPageData({
     path: pageInTree?.path || "",
-    version: { id: version, isInTheUrl: hasVersionInUrl },
+    version: { id: version },
   });
 
   return page;
