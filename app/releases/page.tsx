@@ -1,4 +1,4 @@
-import { getReleases } from "@/lib/getReleases";
+import { getReleases } from "@/lib/get-releases";
 import { redirect } from "next/navigation";
 
 export default function Page() {

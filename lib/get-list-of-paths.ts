@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { rootPath } from "./getTree";
+import { rootPath } from "./get-tree";
 
 export function getListOfPaths(version: string) {
   const listOfPaths: string[] = [];

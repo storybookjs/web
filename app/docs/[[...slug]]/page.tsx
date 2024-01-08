@@ -1,23 +1,11 @@
-import { getVersion } from "@/lib/getVersion";
+import { getVersion } from "@/lib/get-version";
 import { H1 } from "@/components/mdx";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getAllPages } from "@/lib/getAllPages";
+import { getAllPages } from "@/lib/get-all-pages";
 import { cn } from "@/lib/utils";
 import { findPage } from "@/lib/find-page";
-
-const renderers = [
-  { id: "react", title: "React" },
-  { id: "vue", title: "Vue" },
-  { id: "angular", title: "angular" },
-  { id: "web-components", title: "Web Components" },
-  { id: "ember", title: "Ember" },
-  { id: "html", title: "HTML" },
-  { id: "svelte", title: "Svelte" },
-  { id: "preact", title: "Preact" },
-  { id: "qwik", title: "Qwik" },
-  { id: "solid", title: "Solid" },
-];
+import { renderers } from "@/docs-renderers";
 
 export async function generateMetadata({
   params: { slug },
@@ -26,10 +14,7 @@ export async function generateMetadata({
     slug: string[];
   };
 }) {
-  // Get the latest version
   const activeVersion = getVersion(slug);
-
-  // Get all pages in a flat list
   const allPages = await getAllPages(activeVersion.id);
   const page = await findPage(allPages, slug, activeVersion.id);
 

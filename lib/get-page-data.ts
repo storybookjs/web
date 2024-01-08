@@ -1,8 +1,8 @@
 import { compileMDX } from "next-mdx-remote/rsc";
 import fs from "fs";
 import { mdxComponents, mdxOptions } from "./mdx";
-import { getListOfPaths } from "./getListOfPaths";
-import { rootPath } from "./getTree";
+import { getListOfPaths } from "./get-list-of-paths";
+import { rootPath } from "./get-tree";
 
 export async function getPageData(
   path: string,

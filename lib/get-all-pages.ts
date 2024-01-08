@@ -1,5 +1,5 @@
 import { getPageData } from "./get-page-data";
-import { getListOfPaths } from "./getListOfPaths";
+import { getListOfPaths } from "./get-list-of-paths";
 
 export async function getAllPages(
   version: string

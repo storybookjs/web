@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { Header } from "@/components/header/header";
 import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
-import { getTree } from "@/lib/getTree";
+import { getTree } from "@/lib/get-tree";
 import { Sidebar } from "@/components/sidebar/sidebar";
 import { TableOfContent } from "@/components/table-of-content";
 import { cn, container } from "@/lib/utils";
 import { NavDocs } from "@/components/sidebar/nav-docs";
-import { getVersion } from "@/lib/getVersion";
+import { getVersion } from "@/lib/get-version";
 import { Fragment } from "react";
 
 export const metadata: Metadata = {
