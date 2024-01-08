@@ -27,6 +27,7 @@
     "directory-tree": "^3.5.1",
     "framer-motion": "^10.16.14",
     "fs-extra": "^11.2.0",
+    "gray-matter": "^4.0.3",
     "highlight.js": "^11.9.0",
     "next": "14.0.3",
     "next-mdx-remote": "^4.4.1",

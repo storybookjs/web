@@ -21,9 +21,6 @@ export const findPage = async (
         path = `/docs${slug.length > 1 ? `/${slug.slice(1).join("/")}` : ""}`;
       if (!hasVersionInUrl) path = `/docs${slug ? `/${slug.join("/")}` : ""}`;
 
-      console.log("pageSlug", pageSlug);
-      console.log("path", path);
-
       return pageSlug === path;
     });
 

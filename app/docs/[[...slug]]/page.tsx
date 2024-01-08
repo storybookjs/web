@@ -6,6 +6,7 @@ import { getAllPages } from "@/lib/get-all-pages";
 import { cn } from "@/lib/utils";
 import { findPage } from "@/lib/find-page";
 import { renderers } from "@/docs-renderers";
+import { generateDocsToc } from "@/lib/get-new-tree";
 
 export async function generateMetadata({
   params: { slug },
@@ -38,6 +39,9 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   // Get all pages in a flat list
   const allPages = await getAllPages(activeVersion.id);
   const page = await findPage(allPages, params.slug, activeVersion.id);
+
+  const bim = generateDocsToc();
+  console.dir(bim, { depth: null });
 
   if (!page) notFound();
 
