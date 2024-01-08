@@ -36,7 +36,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const activeVersion = getVersion(params.slug);
 
   // Get all pages in a flat list
-  const allPages = await getAllPages(activeVersion.id);
+  const allPages = await getAllPages(activeVersion.id, params.slug);
   const page = await findPage(allPages, params.slug, activeVersion.id);
 
   if (!page) notFound();

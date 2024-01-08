@@ -3,6 +3,7 @@ import fs from "fs";
 import { mdxComponents, mdxOptions } from "./mdx";
 import { getListOfPaths } from "./get-list-of-paths";
 import { rootPath } from "./get-tree";
+import { docsVersions } from "@/docs-versions";
 
 interface Props {
   path: string;
@@ -86,8 +87,13 @@ export const getPageData = async ({ path, version, options }: Props) => {
   }
 
   // Create slug
-  let slug = `/docs/${pageId}`;
-  if (relativePath == "index.mdx") slug = "/docs";
+  // const isLatestVersion = version.id === docsVersions[0].id;
+  // const hasVersionInUrl = docsVersions.some((version) => {
+  //   return slug[0] === version.id;
+  // });
+  let slug = `/docs${version.isInTheUrl ? `/${version.id}` : ""}/${pageId}`;
+  if (relativePath == "index.mdx")
+    slug = version.isInTheUrl ? `/docs/${version.id}` : "/docs";
   if (parent && parent.includes("[index]")) slug = slug.replace("/[index]", "");
 
   const page: PageMetaProps = {

@@ -27,7 +27,7 @@ export default async function Layout({
   const activeVersion = getVersion(params.slug);
 
   // Get the tree for the version
-  const tree = await getTree(activeVersion.id);
+  const tree = await getTree(activeVersion.id, params.slug);
 
   return (
     <Fragment>
