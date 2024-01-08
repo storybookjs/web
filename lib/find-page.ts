@@ -25,7 +25,10 @@ export const findPage = async (
       return pageSlug === path;
     });
 
-  const page = await getPageData(pageInTree?.path || "", version);
+  const page = await getPageData({
+    path: pageInTree?.path || "",
+    version: { id: version },
+  });
 
   return page;
 };

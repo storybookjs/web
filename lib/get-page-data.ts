@@ -4,11 +4,16 @@ import { mdxComponents, mdxOptions } from "./mdx";
 import { getListOfPaths } from "./get-list-of-paths";
 import { rootPath } from "./get-tree";
 
-export async function getPageData(
-  path: string,
-  version: string,
-  options?: { metaOnly?: boolean }
-) {
+interface Props {
+  path: string;
+  version: {
+    id: string;
+    isInTheUrl?: boolean;
+  };
+  options?: { metaOnly?: boolean };
+}
+
+export const getPageData = async ({ path, version, options }: Props) => {
   if (!path) return undefined;
 
   const fileContents = fs.readFileSync(path, "utf8");
@@ -27,7 +32,7 @@ export async function getPageData(
   });
 
   // Clean up path
-  const relativePath = path.replace(`${rootPath}${version}/docs/`, "");
+  const relativePath = path.replace(`${rootPath}${version.id}/docs/`, "");
   const pathWithoutExtension = relativePath.replace(/\.mdx?$/, "");
 
   const segments = pathWithoutExtension.split("/");
@@ -35,11 +40,11 @@ export async function getPageData(
   const isIndex = lastSegment === "index";
 
   // Create index - Used also for the slug
-  const id = isIndex
+  const pageId = isIndex
     ? pathWithoutExtension.replace("/index", "")
     : pathWithoutExtension;
 
-  const parent = id.split("/").slice(0, -1).join("/") || null;
+  const parent = pageId.split("/").slice(0, -1).join("/") || null;
 
   // Is tab
   const regex = /.*\[[^\]]*\].*/;
@@ -50,7 +55,7 @@ export async function getPageData(
 
   const getTabs = (segment: string, path: string): string[] => {
     const array: string[] = [];
-    const listOfPaths = getListOfPaths(version);
+    const listOfPaths = getListOfPaths(version.id);
     const findTabs = listOfPaths.filter((p) => p.includes(path));
     if (findTabs && findTabs.length > 0) {
       array.push(segment);
@@ -81,12 +86,12 @@ export async function getPageData(
   }
 
   // Create slug
-  let slug = `/docs/${id}`;
+  let slug = `/docs/${pageId}`;
   if (relativePath == "index.mdx") slug = "/docs";
   if (parent && parent.includes("[index]")) slug = slug.replace("/[index]", "");
 
   const page: PageMetaProps = {
-    id,
+    id: pageId,
     path,
     slug: slug.replace(/\[|\]/g, ""),
     title: frontmatter.title,
@@ -105,4 +110,4 @@ export async function getPageData(
   };
 
   return pageWithContent;
-}
+};
