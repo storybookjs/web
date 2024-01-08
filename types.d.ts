@@ -24,5 +24,7 @@ type PageProps = {
   level: number;
   content: ReactElement<any, string | JSXElementConstructor<any>>;
   children?: PageProps[];
-  tabs?: PageProps[];
+  tabs?: string[];
+  isTab: boolean;
+  order: number;
 };

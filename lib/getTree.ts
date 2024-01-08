@@ -1,49 +1,73 @@
-import fs from "fs";
-import path from "path";
 import { getPage } from "./getPage";
+import { getListOfPaths } from "./getListOfPaths";
 
 export async function getTree(
   version: string
 ): Promise<PageProps[] | undefined> {
-  const listOfPaths: string[] = [];
+  const listOfPaths = getListOfPaths(version);
   const pages: PageProps[] = [];
-  const rootTree = `content/docs/${version}/docs`;
 
-  function walkDir(dir: string, callback: (filePath: string) => void) {
-    fs.readdirSync(dir).forEach((f) => {
-      let dirPath = path.join(dir, f);
-      let isDirectory = fs.statSync(dirPath).isDirectory();
-      isDirectory ? walkDir(dirPath, callback) : callback(path.join(dir, f));
-    });
-  }
-
-  walkDir(rootTree, function (filePath: string) {
-    listOfPaths.push(filePath);
-  });
-
+  // For every path, get the page
   for (const file of listOfPaths) {
     const post = await getPage(file);
     if (post) pages.push(post);
   }
 
-  const rootPages = pages.filter((page) => page.level === 1);
+  // Add metadata to pages to create the tree
+  const flatTree = pages
+    .filter((page) => !page.isTab)
+    .map((page) => {
+      // Clean up path
+      const relativePath = page.path.replace("content/test-docs/", "");
+      const relativePathWithoutExtension = relativePath.replace(/\.mdx?$/, "");
 
-  const rootPagesWithChildren: PageProps[] = rootPages.map((rootPage) => {
-    const level2 = pages
-      .filter((page) => page.level === 2)
-      .filter((child) => child.parent === rootPage.id);
+      // Utils
+      const segments = relativePathWithoutExtension.split("/");
+      const lastSegment = relativePathWithoutExtension.split("/").pop() || "";
+      const isIndex = lastSegment === "index";
+      const isLeaf = lastSegment !== "index";
 
-    const children = level2.map((child) => {
-      const level3 = pages
-        .filter((page) => page.level === 3)
-        .filter((lvl3) => lvl3.parent === child.id);
+      let level = 0;
 
-      if (child.showAsTabs) return { ...child, tabs: level3 };
-      return { ...child, children: level3 };
+      // Level 1
+      if (isIndex && segments.length === 2) level = 1;
+      if (isLeaf && segments.length === 1) level = 1;
+
+      // Level 2
+      if (isLeaf && segments.length === 2) level = 2;
+      if (isIndex && segments.length === 3) level = 2;
+
+      // Level 3
+      if (isLeaf && segments.length === 3) level = 3;
+
+      return {
+        ...page,
+        level,
+      };
     });
 
-    return { ...rootPage, children };
-  });
+  const tree: PageProps[] = flatTree
+    .filter((page) => page.level === 1)
+    .map((level1) => {
+      const level2 = flatTree
+        .filter((page) => page.level === 2)
+        .filter((child) => child.parent === level1.id)
+        .sort((a, b) => a.order - b.order); // Sort level 2 pages by order
 
-  return rootPagesWithChildren;
+      const children = level2.map((level2) => {
+        const level3 = flatTree
+          .filter((page) => page.level === 3)
+          .filter((lvl3) => lvl3.parent === level2.id)
+          .sort((a, b) => a.order - b.order); // Sort level 3 pages by order
+
+        return { ...level2, children: level3 };
+      });
+
+      return { ...level1, children };
+    })
+    .sort((a, b) => a.order - b.order); // Sort level 1 pages by order
+
+  console.dir(tree, { depth: null });
+
+  return tree;
 }

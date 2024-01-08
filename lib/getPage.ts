@@ -1,6 +1,7 @@
 import { compileMDX } from "next-mdx-remote/rsc";
 import fs from "fs";
 import { mdxComponents, mdxOptions } from "./mdx";
+import { getListOfPaths } from "./getListOfPaths";
 
 export async function getPage(path: string) {
   if (!path) return undefined;
@@ -9,7 +10,10 @@ export async function getPage(path: string) {
 
   const { frontmatter, content } = await compileMDX<{
     title: string;
-    short_title?: string;
+    sidebar?: {
+      title?: string;
+      order: number;
+    };
     tabs?: string;
   }>({
     source: fileContents,
@@ -17,62 +21,91 @@ export async function getPage(path: string) {
     options: mdxOptions,
   });
 
-  const pathWithoutExtension = path.replace(/\.mdx?$/, "");
+  // Clean up path
+  const relativePath = path.replace("content/test-docs/", "");
+  const pathWithoutExtension = relativePath.replace(/\.mdx?$/, "");
+
   const segments = pathWithoutExtension.split("/");
   const lastSegment = pathWithoutExtension.split("/").pop() || "";
+  const isIndex = lastSegment === "index";
   const isLeaf = lastSegment !== "index";
 
-  const id =
-    lastSegment === "index" ? segments[segments.length - 2] : lastSegment;
+  // Is tab
+  const regex = /.*\[[^\]]*\].*/;
+  const isTab = regex.test(pathWithoutExtension);
 
-  let level = 0;
-  // Find level for all index pages
-  if (lastSegment === "index" && segments.length === 6) level = 1;
-  if (lastSegment === "index" && segments.length === 7) level = 2;
-  if (lastSegment === "index" && segments.length === 8) level = 3;
+  // Find other tabs that
+  const tabs = [];
 
-  // Find level for all leaf pages
-  if (lastSegment !== "index" && segments.length === 7) level = 3;
-  if (lastSegment !== "index" && segments.length === 8) level = 4;
+  const getTabs = (segment: string, path: string): string[] => {
+    const array: string[] = [];
+    const listOfPaths = getListOfPaths("test-docs");
+    const findTabs = listOfPaths.filter((p) => p.includes(path));
+    if (findTabs && findTabs.length > 0) {
+      array.push(segment);
+      array.push(
+        // @ts-ignore
+        ...findTabs.map((path) =>
+          path
+            .replace(/\.mdx?$/, "")
+            .split("/")
+            .pop()
+        )
+      );
+    }
+    return array;
+  };
 
-  let parent = null;
-  if (level === 2 && isLeaf) parent = segments[segments.length - 2];
-  if (level === 2 && !isLeaf) parent = segments[segments.length - 3];
-  if (level === 3 && isLeaf) parent = segments[segments.length - 2];
-  if (level === 3 && !isLeaf) parent = segments[segments.length - 3];
+  if (isTab) {
+    // Find list of tabs for a subpage
+    const tabsParentId = segments[segments.length - 2].replace(/^\[|\]$/g, "");
+    const listOfTabs = getTabs(tabsParentId, segments.slice(0, -1).join("/"));
+    tabs.push(...listOfTabs);
+  } else {
+    // Find list of tabs for the main page
+    const tabPath = pathWithoutExtension.split("/");
+    tabPath[tabPath.length - 1] = `[${tabPath[tabPath.length - 1]}]`;
+    const listOfTabs = getTabs(lastSegment, tabPath.join("/"));
+    tabs.push(...listOfTabs);
+  }
+
+  const id = isIndex
+    ? pathWithoutExtension.replace("/index", "")
+    : pathWithoutExtension;
 
   // Create slug
   let slug = "/docs/";
-  const removeOrderNumber = (segment: string) => segment.replace(/^\d+-/, "");
-  const pathPlace = (n: number) => (lastSegment === "index" ? n : n - 1);
+  // const removeOrderNumber = (segment: string) => segment.replace(/^\d+-/, "");
+  // const pathPlace = (n: number) => (lastSegment === "index" ? n : n - 1);
 
-  if (lastSegment === "index" && level === 1) {
-    const path1 = removeOrderNumber(segments[segments.length - pathPlace(2)]);
-    slug = `/docs/${path1}`;
-  }
-  if (level === 2) {
-    const path1 = removeOrderNumber(segments[segments.length - pathPlace(3)]);
-    const path2 = removeOrderNumber(segments[segments.length - pathPlace(2)]);
-    slug = `/docs/${path1}/${path2}`;
-  }
-  if (level === 3) {
-    const path1 = removeOrderNumber(segments[segments.length - pathPlace(4)]);
-    const path2 = removeOrderNumber(segments[segments.length - pathPlace(3)]);
-    const path3 = removeOrderNumber(segments[segments.length - pathPlace(2)]);
-    slug = `/docs/${path1}/${path2}/${path3}`;
-  }
+  // if (lastSegment === "index" && level === 1) {
+  //   const path1 = removeOrderNumber(segments[segments.length - pathPlace(2)]);
+  //   slug = `/docs/${path1}`;
+  // }
+  // if (level === 2) {
+  //   const path1 = removeOrderNumber(segments[segments.length - pathPlace(3)]);
+  //   const path2 = removeOrderNumber(segments[segments.length - pathPlace(2)]);
+  //   slug = `/docs/${path1}/${path2}`;
+  // }
+  // if (level === 3) {
+  //   const path1 = removeOrderNumber(segments[segments.length - pathPlace(4)]);
+  //   const path2 = removeOrderNumber(segments[segments.length - pathPlace(3)]);
+  //   const path3 = removeOrderNumber(segments[segments.length - pathPlace(2)]);
+  //   slug = `/docs/${path1}/${path2}/${path3}`;
+  // }
+
+  // console.log(frontmatter);
 
   const pageObj: PageProps = {
     id,
     path,
     slug,
     title: frontmatter.title,
-    shortTitle: frontmatter.short_title || frontmatter.title || "",
-    parent,
-    showAsTabs: frontmatter.tabs === "true" ? true : false,
-    segments,
-    level,
-    content,
+    shortTitle: frontmatter?.sidebar?.title || frontmatter?.title || "",
+    parent: id.split("/").slice(0, -1).join("/") || null,
+    isTab,
+    tabs,
+    order: frontmatter?.sidebar?.order || 0,
   };
 
   return pageObj;
