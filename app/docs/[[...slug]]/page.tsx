@@ -2,7 +2,6 @@ import { docsVersions } from "@/docs-versions";
 import { getVersion } from "@/lib/getVersion";
 import { H1 } from "@/components/mdx";
 import { getPage } from "@/lib/getPage";
-import { getTree } from "@/lib/getTree";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getAllPages } from "@/lib/getAllPages";
@@ -15,28 +14,27 @@ export default async function TestPage({
   // Get the latest version
   const activeVersion = getVersion(params.slug);
 
-  // Check if the URL has a version in it
-
-  // Get the path
-
   // Get all pages in a flat list
   const allPages = await getAllPages(activeVersion.id);
 
   // Get path - Make sure to take the right version
-  // const hasVersionInUrl =
-  //   params.slug &&
-  //   docsVersions.some((version) => {
-  //     return params.slug[0] === version.id;
-  //   });
-  const pathFromUrl = params.slug.join("/");
-  // const path = hasVersionInUrl
-  //   ? `/docs/${pathFromUrl}`
-  //   : `/docs/${activeVersion.id}/${pathFromUrl}`;
-  const path = `/docs/${pathFromUrl}`;
+  const hasVersionInUrl =
+    params.slug &&
+    docsVersions.some((version) => {
+      return params.slug[0] === version.id;
+    });
 
   // Find the page in all pages
-  const pageInTree = allPages && allPages.find((page) => page.slug === path);
-  const page = await getPage(pageInTree?.path || "");
+  const pageInTree =
+    allPages &&
+    allPages.find((page) => {
+      const pageSlug = `${activeVersion.id}${page.slug}`;
+      const path = hasVersionInUrl
+        ? `${params.slug[0]}/docs/${params.slug.slice(1).join("/")}`
+        : `${activeVersion.id}/docs/${params.slug.join("/")}`;
+      return pageSlug === path;
+    });
+  const page = await getPage(pageInTree?.path || "", activeVersion.id);
 
   if (!page) notFound();
 

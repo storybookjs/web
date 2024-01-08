@@ -1,6 +1,8 @@
 import { getPage } from "./getPage";
 import { getListOfPaths } from "./getListOfPaths";
 
+export const rootPath = "content/test-docs/";
+
 export async function getTree(
   version: string,
   option?: { flat?: true }
@@ -10,7 +12,7 @@ export async function getTree(
 
   // For every path, get the page
   for (const file of listOfPaths) {
-    const post = await getPage(file, { metaOnly: true });
+    const post = await getPage(file, version, { metaOnly: true });
     if (post) pages.push(post);
   }
 
@@ -19,7 +21,7 @@ export async function getTree(
     .filter((page) => !page.isTab)
     .map((page) => {
       // Clean up path
-      const relativePath = page.path.replace("content/test-docs/", "");
+      const relativePath = page.path.replace(`${rootPath}${version}/docs/`, "");
       const relativePathWithoutExtension = relativePath.replace(/\.mdx?$/, "");
 
       // Utils
@@ -67,8 +69,6 @@ export async function getTree(
       return { ...level1, children };
     })
     .sort((a, b) => a.order - b.order); // Sort level 1 pages by order
-
-  // console.dir(tree, { depth: null });
 
   if (option?.flat) return flatTree;
 

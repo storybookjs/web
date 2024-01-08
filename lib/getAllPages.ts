@@ -9,7 +9,7 @@ export async function getAllPages(
 
   // For every path, get the page
   for (const file of listOfPaths) {
-    const post = await getPage(file, { metaOnly: true });
+    const post = await getPage(file, version, { metaOnly: true });
     if (post) pages.push(post);
   }
 

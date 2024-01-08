@@ -8,11 +8,12 @@ import { VersionSelector } from "./version-selector";
 import { DocsVersion } from "@/docs-versions";
 
 interface NavDocsProps {
-  tree: PageProps[] | undefined;
+  tree: TreeProps[] | undefined;
   activeVersion: DocsVersion;
 }
 
 export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
+  // console.log(tree);
   return (
     <Fragment>
       <VersionSelector activeVersion={activeVersion} />

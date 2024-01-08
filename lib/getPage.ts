@@ -2,8 +2,13 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import fs from "fs";
 import { mdxComponents, mdxOptions } from "./mdx";
 import { getListOfPaths } from "./getListOfPaths";
+import { rootPath } from "./getTree";
 
-export async function getPage(path: string, options?: { metaOnly?: boolean }) {
+export async function getPage(
+  path: string,
+  version: string,
+  options?: { metaOnly?: boolean }
+) {
   if (!path) return undefined;
 
   const fileContents = fs.readFileSync(path, "utf8");
@@ -22,7 +27,7 @@ export async function getPage(path: string, options?: { metaOnly?: boolean }) {
   });
 
   // Clean up path
-  const relativePath = path.replace("content/test-docs/", "");
+  const relativePath = path.replace(`${rootPath}${version}/docs/`, "");
   const pathWithoutExtension = relativePath.replace(/\.mdx?$/, "");
 
   const segments = pathWithoutExtension.split("/");
@@ -45,7 +50,7 @@ export async function getPage(path: string, options?: { metaOnly?: boolean }) {
 
   const getTabs = (segment: string, path: string): string[] => {
     const array: string[] = [];
-    const listOfPaths = getListOfPaths("test-docs");
+    const listOfPaths = getListOfPaths(version);
     const findTabs = listOfPaths.filter((p) => p.includes(path));
     if (findTabs && findTabs.length > 0) {
       array.push(segment);
