@@ -1,5 +1,5 @@
 import { ReleaseNewsletter } from "@/components/release-newsletter";
-import { getRelease } from "@/lib/getRelease";
+import { getRelease } from "@/lib/get-release";
 import fs from "fs";
 
 export default async function Home({

@@ -4,7 +4,7 @@ import { cn, container } from "@/lib/utils";
 import { Fragment } from "react";
 import { Sidebar } from "@/components/sidebar/sidebar";
 import Link from "next/link";
-import { getRelease } from "@/lib/getRelease";
+import { getRelease } from "@/lib/get-release";
 import fs from "fs";
 import { ReleaseNewsletter } from "@/components/release-newsletter";
 
