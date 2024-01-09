@@ -21,9 +21,6 @@ export const getPageData = async (path: string[], activeVersion: string) => {
 
   if (!newPath) return undefined;
 
-  console.log(path);
-  console.log(newPath);
-
   const fileContents = fs.readFileSync(newPath, "utf8");
 
   const { frontmatter, content } = await compileMDX<NewTreeMetaProps>({
@@ -44,7 +41,9 @@ export const getPageData = async (path: string[], activeVersion: string) => {
   const tabs = generateDocsTree({
     pathToFiles,
     activeVersion: activeVersionForSlug,
-  });
+  }).sort((a, b) =>
+    a?.tab?.order && b?.tab?.order ? a.tab.order - b.tab.order : 0
+  );
 
   return {
     ...frontmatter,

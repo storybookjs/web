@@ -39,6 +39,10 @@ interface NewTreeMetaProps {
     title?: string;
     order?: number;
   };
+  tab?: {
+    title?: string;
+    order?: number;
+  };
   isTab?: boolean;
 }
 
