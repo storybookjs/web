@@ -56,8 +56,6 @@ export default async function Page({ params: { slug } }: Props) {
 
   if (!page) notFound();
 
-  console.log(page.tabs);
-
   return (
     <div>
       <H1>{page.title || "Title is missing"}</H1>
