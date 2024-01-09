@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Header } from "@/components/header/header";
 import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
-import { getTree } from "@/lib/get-tree";
 import { Sidebar } from "@/components/sidebar/sidebar";
 import { TableOfContent } from "@/components/table-of-content";
 import { cn, container } from "@/lib/utils";
@@ -10,6 +9,7 @@ import { NavDocs } from "@/components/sidebar/nav-docs";
 import { getVersion } from "@/lib/get-version";
 import { Fragment } from "react";
 import { generateDocsTree } from "@/lib/get-new-tree";
+import { docsVersions } from "@/docs-versions";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -28,10 +28,13 @@ export default async function Layout({
   const activeVersion = getVersion(params.slug);
 
   // Get the tree for the version
-  const tree = await getTree(activeVersion.id);
-  const newTree = generateDocsTree();
-
-  console.dir(newTree, { depth: null });
+  const newTree = generateDocsTree({
+    pathToFiles: `content/test-docs-2/${activeVersion.id}/docs`,
+    activeVersion:
+      (params.slug &&
+        docsVersions.find((version) => params.slug[0] === version.id)) ||
+      null,
+  });
 
   return (
     <Fragment>

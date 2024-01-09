@@ -6,6 +6,8 @@ import { getAllPages } from "@/lib/get-all-pages";
 import { cn } from "@/lib/utils";
 import { findPage } from "@/lib/find-page";
 import { renderers } from "@/docs-renderers";
+import { getPageData } from "@/lib/get-new-page";
+import { docsVersions } from "@/docs-versions";
 
 export async function generateMetadata({
   params: { slug },
@@ -35,9 +37,18 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   // Get the latest version
   const activeVersion = getVersion(params.slug);
 
-  // Get all pages in a flat list
-  const allPages = await getAllPages(activeVersion.id);
-  const page = await findPage(allPages, params.slug, activeVersion.id);
+  const isHomepage =
+    params.slug === undefined ||
+    (params.slug &&
+      params.slug.length === 1 &&
+      docsVersions.some((version) => {
+        return params.slug[0] === version.id;
+      }));
+
+  const page = await getPageData(
+    isHomepage ? ["/"] : params.slug,
+    activeVersion.id
+  );
 
   if (!page) notFound();
 
@@ -57,7 +68,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
           </button>
         ))}
       </div>
-      {page.tabs && page.tabs.length > 0 && (
+      {/* {page.tabs && page.tabs.length > 0 && (
         <div className="flex items-center gap-8 border-b border-zinc-200">
           {page.tabs.map((tab, index) => {
             let href = "";
@@ -86,7 +97,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
             );
           })}
         </div>
-      )}
+      )} */}
     </div>
   );
 }
