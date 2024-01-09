@@ -7,8 +7,15 @@ export const getVersion = (slug: string[]) => {
     return slug[0] === version.id;
   });
 
-  // If the version is not found, use the latest version
-  const activeVersion = versionFromUrl || docsVersions[0];
+  return versionFromUrl || docsVersions[0];
+};
 
-  return activeVersion;
+export const getNullableVersion = (slug: string[]) => {
+  // Find if the URL has a version that matches the docsVersions
+  const versionFromUrl = docsVersions.find((version) => {
+    if (!slug) return undefined;
+    return slug[0] === version.id;
+  });
+
+  return versionFromUrl || null;
 };

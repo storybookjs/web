@@ -34,13 +34,13 @@ export const generateDocsTree = ({
     if (activeVersion)
       slug = filePath
         .replace(
-          `content/test-docs-2/${activeVersion.id}/docs`,
+          `content/docs/${activeVersion.id}/docs`,
           `/docs/${activeVersion.id}`
         )
         .replace(/\.mdx?$|\.md$/, "");
     if (activeVersion === null)
       slug = filePath
-        .replace(`content/test-docs-2/${docsVersions[0].id}/docs`, `/docs`)
+        .replace(`content/docs/${docsVersions[0].id}/docs`, `/docs`)
         .replace(/\.mdx?$|\.md$/, "");
 
     const isDirectory = fs.lstatSync(filePath).isDirectory();
@@ -63,14 +63,14 @@ export const generateDocsTree = ({
           .filter((item) => item.name !== "index.mdx");
         const isTab = indexFile?.isTab || false;
 
-        if (indexFile && !isTab) {
+        if (indexFile) {
           tree.push({
             ...indexFile,
             name: file,
             slug,
             pathSegment: filePath,
             type: "directory",
-            children,
+            children: isTab ? [] : children,
           });
         }
       }

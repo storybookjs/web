@@ -6,10 +6,9 @@ import { Sidebar } from "@/components/sidebar/sidebar";
 import { TableOfContent } from "@/components/table-of-content";
 import { cn, container } from "@/lib/utils";
 import { NavDocs } from "@/components/sidebar/nav-docs";
-import { getVersion } from "@/lib/get-version";
+import { getNullableVersion, getVersion } from "@/lib/get-version";
 import { Fragment } from "react";
 import { generateDocsTree } from "@/lib/get-new-tree";
-import { docsVersions } from "@/docs-versions";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -25,16 +24,16 @@ export default async function Layout({
   params: { slug: string[] };
 }) {
   // Get the latest version
-  const activeVersion = getVersion(params.slug);
+  const activeVersionForPath = getVersion(params.slug);
+  const activeVersionForSlug = getNullableVersion(params.slug);
 
   // Get the tree for the version
-  const newTree = generateDocsTree({
-    pathToFiles: `content/test-docs-2/${activeVersion.id}/docs`,
-    activeVersion:
-      (params.slug &&
-        docsVersions.find((version) => params.slug[0] === version.id)) ||
-      null,
+  const tree = generateDocsTree({
+    pathToFiles: `content/docs/${activeVersionForPath?.id}/docs`,
+    activeVersion: activeVersionForSlug,
   });
+
+  console.dir(tree, { depth: null });
 
   return (
     <Fragment>
@@ -48,7 +47,7 @@ export default async function Layout({
       />
       <main className={cn(container, "lg:pl-5 lg:pr-8 flex gap-4")}>
         <Sidebar>
-          <NavDocs tree={newTree} activeVersion={activeVersion} />
+          <NavDocs tree={tree} activeVersion={activeVersionForPath} />
         </Sidebar>
         <div className="w-full flex-1 min-h-[1400px] py-12">{children}</div>
         <TableOfContent />

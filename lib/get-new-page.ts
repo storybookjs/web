@@ -4,7 +4,7 @@ import { mdxComponents, mdxOptions } from "./mdx";
 
 export const getPageData = async (path: string[], activeVersion: string) => {
   const segment = path ? path.join("/").replace(`${activeVersion}/`, "") : "/";
-  const superRootPath = `content/test-docs-2/${activeVersion}/docs`;
+  const superRootPath = `content/docs/${activeVersion}/docs`;
 
   const indexPath = `${superRootPath}/${segment}/index.mdx`;
   const linkPath =

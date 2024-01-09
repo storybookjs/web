@@ -1,8 +1,11 @@
+"use client";
+
 import { FC } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { ChevronSmallDownIcon } from "@storybook/icons";
 import Link from "next/link";
 import { DocsVersion, docsVersions } from "@/docs-versions";
+import { usePathname } from "next/navigation";
 
 interface VersionSelectorProps {
   activeVersion: DocsVersion;
@@ -11,6 +14,25 @@ interface VersionSelectorProps {
 export const VersionSelector: FC<VersionSelectorProps> = ({
   activeVersion,
 }) => {
+  const pathname = usePathname();
+  const segments = pathname.slice(1).split("/");
+  const activeVersionIndex = segments.findIndex(
+    (segment) => segment === activeVersion.id
+  );
+
+  const getLink = (version: string) => {
+    const isFirstVersion = version === docsVersions[0].id;
+
+    if (activeVersionIndex === -1) return pathname;
+
+    const newSegments = [...segments];
+    newSegments[activeVersionIndex] = version;
+
+    if (isFirstVersion) newSegments.splice(activeVersionIndex, 1);
+
+    return "/" + newSegments.join("/");
+  };
+
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -32,19 +54,16 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
           sideOffset={4}
         >
           <DropdownMenu.Group>
-            {docsVersions.map((version) => {
-              const isFirstVersion = version.id === docsVersions[0].id;
-              return (
-                <DropdownMenu.Item key={version.id} asChild>
-                  <Link
-                    href={isFirstVersion ? "/docs" : `/docs/${version.id}`}
-                    className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
-                  >
-                    {version.label}
-                  </Link>
-                </DropdownMenu.Item>
-              );
-            })}
+            {docsVersions.map((version) => (
+              <DropdownMenu.Item key={version.id} asChild>
+                <Link
+                  href={getLink(version.id)}
+                  className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
+                >
+                  {version.label}
+                </Link>
+              </DropdownMenu.Item>
+            ))}
           </DropdownMenu.Group>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
