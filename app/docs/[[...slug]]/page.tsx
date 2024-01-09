@@ -37,18 +37,21 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   // Get the latest version
   const activeVersion = getVersion(params.slug);
 
+  const { slug } = params;
   const isHomepage =
-    params.slug === undefined ||
-    (params.slug &&
-      params.slug.length === 1 &&
+    slug === undefined ||
+    (slug &&
+      slug.length === 1 &&
       docsVersions.some((version) => {
-        return params.slug[0] === version.id;
+        return slug[0] === version.id;
       }));
 
   const page = await getPageData(
     isHomepage ? ["/"] : params.slug,
     activeVersion.id
   );
+
+  console.log(page);
 
   if (!page) notFound();
 
@@ -68,36 +71,36 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
           </button>
         ))}
       </div>
-      {/* {page.tabs && page.tabs.length > 0 && (
+      {page.tabs && page.tabs.length > 0 && (
         <div className="flex items-center gap-8 border-b border-zinc-200">
           {page.tabs.map((tab, index) => {
-            let href = "";
-            if (index === 0 && !page.isTab) href = page.slug;
-            if (index === 0 && page.isTab)
-              href = page.slug.split("/").slice(0, -1).join("/");
-            if (index > 0 && !page.isTab) href = `${page.slug}/${tab}`;
-            if (index > 0 && page.isTab)
-              href = `${(href = page.slug
-                .split("/")
-                .slice(0, -1)
-                .join("/"))}/${tab}`;
-            const isActive = href === page.slug;
+            // let href = "";
+            // if (index === 0 && !page.isTab) href = page.slug;
+            // if (index === 0 && page.isTab)
+            //   href = page.slug.split("/").slice(0, -1).join("/");
+            // if (index > 0 && !page.isTab) href = `${page.slug}/${tab}`;
+            // if (index > 0 && page.isTab)
+            //   href = `${(href = page.slug
+            //     .split("/")
+            //     .slice(0, -1)
+            //     .join("/"))}/${tab}`;
+            // const isActive = href === page.slug;
 
             return (
               <Link
-                key={tab}
-                href={href}
+                key={tab.name}
+                href={tab.slug}
                 className={cn(
                   "border-b -mb-px pb-2 hover:text-blue-500 transition-colors px-2 text-sm capitalize",
-                  isActive && "border-b border-blue-500 text-blue-500"
+                  true && "border-b border-blue-500 text-blue-500"
                 )}
               >
-                {index === 0 ? "Guide" : tab}
+                {tab.title}
               </Link>
             );
           })}
         </div>
-      )} */}
+      )}
     </div>
   );
 }

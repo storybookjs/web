@@ -33,7 +33,7 @@ export default async function Layout({
     activeVersion: activeVersionForSlug,
   });
 
-  console.dir(tree, { depth: null });
+  // console.dir(tree, { depth: null });
 
   return (
     <Fragment>
