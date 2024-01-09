@@ -25,7 +25,7 @@ export const getPageData = async (path: string[], activeVersion: string) => {
 
   const { frontmatter, content } = await compileMDX<TreeMetaProps>({
     source: fileContents,
-    components: mdxComponents,
+    components: mdxComponents(activeVersion),
     options: mdxOptions,
   });
 

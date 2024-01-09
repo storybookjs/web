@@ -92,6 +92,7 @@ export default async function Page({ params: { slug } }: Props) {
           })}
         </div>
       )}
+      <article>{page.content}</article>
     </div>
   );
 }
