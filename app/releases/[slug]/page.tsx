@@ -7,6 +7,9 @@ import Link from "next/link";
 import { getRelease } from "@/lib/get-release";
 import fs from "fs";
 import { ReleaseNewsletter } from "@/components/release-newsletter";
+import { getMDXComponent } from "mdx-bundler/client";
+import { notFound } from "next/navigation";
+import { A, H1, H2, H3, Hr, P, UnorderedList, List } from "@/components/mdx";
 
 export default async function Home({
   params: { slug },
@@ -19,6 +22,10 @@ export default async function Home({
   fs.readdirSync("content/releases").forEach((f) => {
     releases.push(f.replace(".md", ""));
   });
+
+  if (!page) return notFound();
+
+  const Content = getMDXComponent(page.code);
 
   return (
     <Fragment>
@@ -46,7 +53,20 @@ export default async function Home({
           <h1 className="text-4xl mt-0 mb-6 font-bold">
             {page?.frontmatter.title || "Page Not Found"}
           </h1>
-          {page?.content}
+          <Content
+            components={{
+              h1: H1,
+              h2: H2,
+              h3: H3,
+              h4: H1,
+              a: A,
+              p: P,
+              hr: Hr,
+              ul: UnorderedList,
+              li: List,
+              // img: Img,
+            }}
+          />
           <ReleaseNewsletter />
         </article>
       </main>

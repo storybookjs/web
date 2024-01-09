@@ -1,11 +1,27 @@
 import { getVersion } from "@/lib/get-version";
-import { H1 } from "@/components/mdx";
+import {
+  A,
+  CodeSnippets,
+  H1,
+  H2,
+  H3,
+  Hr,
+  P,
+  UnorderedList,
+  List,
+  ImgDocs,
+  Callout,
+  IfRenderer,
+  YouTubeCallout,
+  FeatureSnippets,
+} from "@/components/mdx";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { renderers } from "@/docs-renderers";
 import { getPageData } from "@/lib/get-page";
 import { docsVersions } from "@/docs-versions";
+import { getMDXComponent } from "mdx-bundler/client";
 
 const isHomepage = (slug: string[]) => {
   return (
@@ -56,6 +72,8 @@ export default async function Page({ params: { slug } }: Props) {
 
   if (!page) notFound();
 
+  const Content = getMDXComponent(page.code);
+
   return (
     <div>
       <H1>{page.title || "Title is missing"}</H1>
@@ -92,7 +110,29 @@ export default async function Page({ params: { slug } }: Props) {
           })}
         </div>
       )}
-      <article>{page.content}</article>
+      <article>
+        <Content
+          components={{
+            h1: H1,
+            h2: H2,
+            h3: H3,
+            h4: H1,
+            a: A,
+            p: P,
+            hr: Hr,
+            ul: UnorderedList,
+            li: List,
+            img: (props: any) => (
+              <ImgDocs activeVersion={activeVersion} {...props} />
+            ),
+            CodeSnippets,
+            Callout,
+            IfRenderer,
+            YouTubeCallout,
+            FeatureSnippets,
+          }}
+        />
+      </article>
     </div>
   );
 }
