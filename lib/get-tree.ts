@@ -3,7 +3,7 @@ import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
 
-function getMetadata(filePath: string) {
+function getMetadata(filePath: string): any {
   const fileContents = fs.readFileSync(filePath, "utf8");
   const {
     data: { navTitle, title, ...data },
@@ -43,8 +43,6 @@ export const generateDocsTree = ({
         .replace(`content/docs/${docsVersions[0].id}/docs`, `/docs`)
         .replace(/\.mdx?$|\.md$/, "");
 
-    console.log(slug);
-
     const isDirectory = fs.lstatSync(filePath).isDirectory();
 
     if (isDirectory) {
@@ -79,9 +77,11 @@ export const generateDocsTree = ({
     } else if (file.endsWith(".mdx") || file.endsWith(".md")) {
       const metaData = getMetadata(filePath);
 
+      const isTab = metaData.isTab || false;
+
       tree.push({
         name: file,
-        slug,
+        slug: isTab ? slug.replace(/\/index$/, "") : slug,
         pathSegment: filePath,
         type: "link",
         ...metaData,
