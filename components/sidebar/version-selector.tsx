@@ -1,11 +1,40 @@
+"use client";
+
 import { FC } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { ChevronSmallDownIcon } from "@storybook/icons";
 import Link from "next/link";
+import { DocsVersion, docsVersions } from "@/docs-versions";
+import { usePathname } from "next/navigation";
 
-export const VersionSelector: FC = () => {
-  const version = "6.3.0";
-  const versions = ["7.6.0", "6.5.0"];
+interface VersionSelectorProps {
+  activeVersion: DocsVersion;
+}
+
+export const VersionSelector: FC<VersionSelectorProps> = ({
+  activeVersion,
+}) => {
+  const pathname = usePathname();
+  const segments = pathname.slice(1).split("/");
+
+  const getLink = (version: string) => {
+    const isFirstVersion = version === docsVersions[0].id;
+    const activeVersionIndex = segments.findIndex(
+      (segment) => segment === activeVersion.id
+    );
+    const isVersionInUrl = activeVersionIndex !== -1;
+
+    const newSegments = [...segments];
+    let newHref = "/" + newSegments.join("/");
+
+    if (!isVersionInUrl && !isFirstVersion)
+      newHref = newHref.replace("/docs", `/docs/${version}`);
+    if (isVersionInUrl) newHref = newHref.replace(activeVersion.id, version);
+    if (isVersionInUrl && isFirstVersion)
+      newHref = newHref.replace(`/${version}`, "");
+
+    return newHref;
+  };
 
   return (
     <DropdownMenu.Root>
@@ -16,7 +45,7 @@ export const VersionSelector: FC = () => {
           aria-label="Customise options"
         >
           <div className="flex items-center justify-between text-sm w-full h-full border-b border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 transition-all select-none">
-            Version {version}
+            {activeVersion.label}
             <ChevronSmallDownIcon />
           </div>
         </DropdownMenu.Trigger>
@@ -28,13 +57,13 @@ export const VersionSelector: FC = () => {
           sideOffset={4}
         >
           <DropdownMenu.Group>
-            {versions.map((version) => (
-              <DropdownMenu.Item key={version} asChild>
+            {docsVersions.map((version) => (
+              <DropdownMenu.Item key={version.id} asChild>
                 <Link
-                  href="#"
+                  href={getLink(version.id)}
                   className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
                 >
-                  Version {version}
+                  {version.label}
                 </Link>
               </DropdownMenu.Item>
             ))}

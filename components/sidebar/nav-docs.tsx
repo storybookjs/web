@@ -5,81 +5,78 @@ import * as Accordion from "@radix-ui/react-accordion";
 import { FC, Fragment } from "react";
 import { ChevronSmallRightIcon } from "@storybook/icons";
 import { VersionSelector } from "./version-selector";
+import { DocsVersion } from "@/docs-versions";
 
 interface NavDocsProps {
-  tree: TreeNodeProps[] | undefined;
+  tree: TreeProps[] | undefined;
+  activeVersion: DocsVersion;
 }
 
-export const NavDocs: FC<NavDocsProps> = ({ tree }) => {
+export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
   return (
     <Fragment>
-      <VersionSelector />
+      <VersionSelector activeVersion={activeVersion} />
       <ul className="mt-9">
         {tree
           ? tree.map((lvl1) => (
-              <li key={lvl1.path}>
+              <li key={lvl1.pathSegment}>
                 <Link
-                  href={`/docs/${lvl1.slug}`}
+                  href={lvl1.slug}
                   className="flex items-center text-sm font-bold mt-6 h-8 hover:text-blue-500 transition-colors px-2"
                 >
-                  {lvl1.shortTitle}
+                  {lvl1?.sidebar?.title || lvl1.title}
                 </Link>
                 {lvl1.children && lvl1.children.length > 0 && (
                   <ul>
                     {lvl1.children.map((lvl2) => {
-                      if (lvl2.name === "index") return null;
-                      if (lvl2.name === "api") return null;
                       return (
                         <Accordion.Root
                           type="single"
                           collapsible
                           asChild
-                          key={lvl2.path}
+                          key={lvl2.pathSegment}
                         >
                           <li>
-                            {(!lvl2.children ||
-                              lvl2.children.length === 0 ||
-                              lvl2.showAsTabs) && (
+                            {(!lvl2.children || lvl2.children.length === 0) && (
                               <Link
-                                href={`/docs/${lvl1.slug}/${lvl2.slug}`}
+                                href={lvl2.slug}
                                 className="flex items-center text-sm h-8 text-zinc-600 hover:text-blue-500 transition-colors px-2"
                               >
-                                {lvl2.shortTitle}
+                                {lvl2?.sidebar?.title || lvl2.title}
                               </Link>
                             )}
-                            {lvl2.children &&
-                              lvl2.children.length > 0 &&
-                              !lvl2.showAsTabs && (
-                                <Accordion.Item value="item-1">
-                                  <Accordion.Trigger asChild>
-                                    <button className="group flex justify-between items-center text-sm w-full h-8">
-                                      {lvl2.shortTitle}
-                                      <ChevronSmallRightIcon
-                                        className="ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-90"
-                                        aria-hidden
-                                      />
-                                    </button>
-                                  </Accordion.Trigger>
-                                  <Accordion.Content>
-                                    <ul>
-                                      {lvl2.children.map((lvl3) => {
-                                        if (lvl3.name === "index") return null;
-                                        if (lvl3.name === "api") return null;
-                                        return (
-                                          <li key={lvl3.path} className="ml-4">
-                                            <Link
-                                              href={`/docs/${lvl1.slug}/${lvl2.slug}/${lvl3.slug}`}
-                                              className="flex items-center text-sm h-8 border-l border-zinc-200 p-4"
-                                            >
-                                              {lvl3.shortTitle}
-                                            </Link>
-                                          </li>
-                                        );
-                                      })}
-                                    </ul>
-                                  </Accordion.Content>
-                                </Accordion.Item>
-                              )}
+                            {lvl2.children && lvl2.children.length > 0 && (
+                              <Accordion.Item value="item-1">
+                                <Accordion.Trigger asChild>
+                                  <button className="group flex justify-between items-center text-sm w-full h-8 px-2">
+                                    {lvl2?.sidebar?.title || lvl2.title}
+                                    <ChevronSmallRightIcon
+                                      className="ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-90"
+                                      aria-hidden
+                                    />
+                                  </button>
+                                </Accordion.Trigger>
+                                <Accordion.Content>
+                                  <ul>
+                                    {lvl2.children.map((lvl3) => {
+                                      return (
+                                        <li
+                                          key={lvl3.pathSegment}
+                                          className="ml-4"
+                                        >
+                                          <Link
+                                            href={lvl3.slug}
+                                            className="flex items-center text-sm h-8 border-l border-zinc-200 p-4"
+                                          >
+                                            {lvl3?.sidebar?.title || lvl3.title}
+                                          </Link>
+                                        </li>
+                                      );
+                                    })}
+                                  </ul>
+                                </Accordion.Content>
+                              </Accordion.Item>
+                            )}
                           </li>
                         </Accordion.Root>
                       );
