@@ -56,6 +56,8 @@ export default async function Page({ params: { slug } }: Props) {
 
   if (!page) notFound();
 
+  console.log(page.tabs);
+
   return (
     <div>
       <H1>{page.title || "Title is missing"}</H1>
@@ -74,18 +76,8 @@ export default async function Page({ params: { slug } }: Props) {
       </div>
       {page.tabs && page.tabs.length > 0 && (
         <div className="flex items-center gap-8 border-b border-zinc-200">
-          {page.tabs.map((tab, index) => {
-            // let href = "";
-            // if (index === 0 && !page.isTab) href = page.slug;
-            // if (index === 0 && page.isTab)
-            //   href = page.slug.split("/").slice(0, -1).join("/");
-            // if (index > 0 && !page.isTab) href = `${page.slug}/${tab}`;
-            // if (index > 0 && page.isTab)
-            //   href = `${(href = page.slug
-            //     .split("/")
-            //     .slice(0, -1)
-            //     .join("/"))}/${tab}`;
-            // const isActive = href === page.slug;
+          {page.tabs.map((tab) => {
+            const isActive = tab.slug === `/docs/${slug.join("/")}`;
 
             return (
               <Link
@@ -93,10 +85,10 @@ export default async function Page({ params: { slug } }: Props) {
                 href={tab.slug}
                 className={cn(
                   "border-b -mb-px pb-2 hover:text-blue-500 transition-colors px-2 text-sm capitalize",
-                  true && "border-b border-blue-500 text-blue-500"
+                  isActive && "border-b border-blue-500 text-blue-500"
                 )}
               >
-                {tab.title}
+                {tab?.tab?.title || tab.title}
               </Link>
             );
           })}
