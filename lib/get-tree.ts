@@ -43,6 +43,8 @@ export const generateDocsTree = ({
         .replace(`content/docs/${docsVersions[0].id}/docs`, `/docs`)
         .replace(/\.mdx?$|\.md$/, "");
 
+    console.log(slug);
+
     const isDirectory = fs.lstatSync(filePath).isDirectory();
 
     if (isDirectory) {
