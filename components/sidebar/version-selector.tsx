@@ -22,19 +22,16 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
     const activeVersionIndex = segments.findIndex(
       (segment) => segment === activeVersion.id
     );
-
-    // if (activeVersionIndex === -1) return "/" + segments.join("/");
+    const isVersionInUrl = activeVersionIndex !== -1;
 
     const newSegments = [...segments];
     let newHref = "/" + newSegments.join("/");
 
-    // if (isFirstVersion) newSegments.splice(activeVersionIndex, 1);
-
-    if (activeVersionIndex === -1 && !isFirstVersion)
+    if (!isVersionInUrl && !isFirstVersion)
       newHref = newHref.replace("/docs", `/docs/${version}`);
-
-    // console.log(version, isFirstVersion, activeVersionIndex);
-    // console.log(newHref);
+    if (isVersionInUrl) newHref = newHref.replace(activeVersion.id, version);
+    if (isVersionInUrl && isFirstVersion)
+      newHref = newHref.replace(`/${version}`, "");
 
     return newHref;
   };
