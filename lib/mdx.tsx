@@ -1,18 +1,3 @@
-import {
-  H1,
-  H3,
-  P,
-  CodeSnippets,
-  Callout,
-  IfRenderer,
-  YouTubeCallout,
-  FeatureSnippets,
-  UnorderedList,
-  List,
-  Hr,
-  H2,
-  A,
-} from "@/components/mdx";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import remarkExpressiveCode from "remark-expressive-code";
@@ -22,23 +7,6 @@ import { CompileOptions } from "@mdx-js/mdx";
 const remarkExpressiveCodeOptions = {
   // You can add configuration options here,
   // see the API section for more information
-};
-
-export const mdxComponents = {
-  h1: H1,
-  h2: H2,
-  h3: H3,
-  h4: H1,
-  a: A,
-  p: P,
-  hr: Hr,
-  ul: UnorderedList,
-  li: List,
-  CodeSnippets,
-  Callout,
-  IfRenderer,
-  YouTubeCallout,
-  FeatureSnippets,
 };
 
 export const mdxOptions: {

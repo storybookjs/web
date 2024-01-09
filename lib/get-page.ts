@@ -1,8 +1,7 @@
 import fs from "fs";
-import { compileMDX } from "next-mdx-remote/rsc";
-import { mdxComponents, mdxOptions } from "./mdx";
 import { generateDocsTree } from "./get-tree";
 import { getNullableVersion } from "./get-version";
+import { bundleMDX } from "mdx-bundler";
 
 export const getPageData = async (path: string[], activeVersion: string) => {
   const segment = path ? path.join("/").replace(`${activeVersion}/`, "") : "/";
@@ -23,10 +22,8 @@ export const getPageData = async (path: string[], activeVersion: string) => {
 
   const fileContents = fs.readFileSync(newPath, "utf8");
 
-  const { frontmatter, content } = await compileMDX<TreeMetaProps>({
+  const { frontmatter, code } = await bundleMDX<TreeMetaProps>({
     source: fileContents,
-    components: mdxComponents,
-    options: mdxOptions,
   });
 
   // Get Tabs
@@ -46,6 +43,6 @@ export const getPageData = async (path: string[], activeVersion: string) => {
   return {
     ...frontmatter,
     tabs: index?.isTab ? parent : [],
-    content,
+    code,
   };
 };

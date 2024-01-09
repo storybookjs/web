@@ -6,11 +6,12 @@ import fs from "fs";
 interface Props {
   src: string;
   alt: string;
+  activeVersion: string;
 }
 
-export const Img: FC<Props> = ({ src, alt }) => {
+export const ImgDocs: FC<Props> = ({ src, alt, activeVersion }) => {
   const pathWithoutDotSlash = src.replace(/^\.\//, "");
-  const path = `/docs/${pathWithoutDotSlash}`;
+  const path = `/docs/${activeVersion}/${pathWithoutDotSlash}`;
   const localPath = `public${path}`;
 
   // Check if the file exists

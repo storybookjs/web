@@ -1,19 +1,12 @@
-import { compileMDX } from "next-mdx-remote/rsc";
 import fs from "fs";
-import { mdxComponents, mdxOptions } from "./mdx";
+import { bundleMDX } from "mdx-bundler";
 
 export async function getRelease(version: string) {
   if (!version) return undefined;
 
   const fileContent = fs.readFileSync(`content/releases/${version}.md`, "utf8");
 
-  return await compileMDX<{
-    title: string;
-    short_title?: string;
-    show_as_tab?: boolean;
-  }>({
+  return await bundleMDX<TreeMetaProps>({
     source: fileContent,
-    components: mdxComponents,
-    options: mdxOptions,
   });
 }
