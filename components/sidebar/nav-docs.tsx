@@ -8,7 +8,7 @@ import { VersionSelector } from "./version-selector";
 import { DocsVersion, docsVersions } from "@/docs-versions";
 
 interface NavDocsProps {
-  tree: TreeProps[] | undefined;
+  tree: NewTreeProps[] | undefined;
   activeVersion: DocsVersion;
 }
 
@@ -25,12 +25,12 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
       <ul className="mt-9">
         {tree
           ? tree.map((lvl1) => (
-              <li key={lvl1.path}>
+              <li key={lvl1.pathSegment}>
                 <Link
                   href={getSlug(lvl1.slug)}
                   className="flex items-center text-sm font-bold mt-6 h-8 hover:text-blue-500 transition-colors px-2"
                 >
-                  {lvl1.shortTitle}
+                  {lvl1?.sidebar?.title || lvl1.title}
                 </Link>
                 {lvl1.children && lvl1.children.length > 0 && (
                   <ul>
@@ -40,7 +40,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                           type="single"
                           collapsible
                           asChild
-                          key={lvl2.path}
+                          key={lvl2.pathSegment}
                         >
                           <li>
                             {(!lvl2.children || lvl2.children.length === 0) && (
@@ -48,14 +48,14 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                                 href={getSlug(lvl2.slug)}
                                 className="flex items-center text-sm h-8 text-zinc-600 hover:text-blue-500 transition-colors px-2"
                               >
-                                {lvl2.shortTitle}
+                                {lvl2?.sidebar?.title || lvl2.title}
                               </Link>
                             )}
                             {lvl2.children && lvl2.children.length > 0 && (
                               <Accordion.Item value="item-1">
                                 <Accordion.Trigger asChild>
                                   <button className="group flex justify-between items-center text-sm w-full h-8 px-2">
-                                    {lvl2.shortTitle}
+                                    {lvl2?.sidebar?.title || lvl2.title}
                                     <ChevronSmallRightIcon
                                       className="ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-90"
                                       aria-hidden
@@ -66,12 +66,15 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                                   <ul>
                                     {lvl2.children.map((lvl3) => {
                                       return (
-                                        <li key={lvl3.path} className="ml-4">
+                                        <li
+                                          key={lvl3.pathSegment}
+                                          className="ml-4"
+                                        >
                                           <Link
                                             href={getSlug(lvl3.slug)}
                                             className="flex items-center text-sm h-8 border-l border-zinc-200 p-4"
                                           >
-                                            {lvl3.shortTitle}
+                                            {lvl3?.sidebar?.title || lvl3.title}
                                           </Link>
                                         </li>
                                       );

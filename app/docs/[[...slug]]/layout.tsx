@@ -9,6 +9,7 @@ import { cn, container } from "@/lib/utils";
 import { NavDocs } from "@/components/sidebar/nav-docs";
 import { getVersion } from "@/lib/get-version";
 import { Fragment } from "react";
+import { generateDocsTree } from "@/lib/get-new-tree";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -28,6 +29,9 @@ export default async function Layout({
 
   // Get the tree for the version
   const tree = await getTree(activeVersion.id);
+  const newTree = generateDocsTree();
+
+  console.dir(newTree, { depth: null });
 
   return (
     <Fragment>
@@ -41,7 +45,7 @@ export default async function Layout({
       />
       <main className={cn(container, "lg:pl-5 lg:pr-8 flex gap-4")}>
         <Sidebar>
-          <NavDocs tree={tree} activeVersion={activeVersion} />
+          <NavDocs tree={newTree} activeVersion={activeVersion} />
         </Sidebar>
         <div className="w-full flex-1 min-h-[1400px] py-12">{children}</div>
         <TableOfContent />

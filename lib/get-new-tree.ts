@@ -13,24 +13,14 @@ function getMetadata(filePath: string) {
   };
 }
 
-interface TOCProps {
-  name: string;
-  slug: string;
-  pathSegment: string;
-  title: string;
-  type: "directory" | "link";
-  children?: TOCProps[];
-}
-
 const rootPath = "content/test-docs-2/8.0-test-1/docs";
 
-export const generateDocsToc = (
-  pathToFiles = "content/test-docs-2/8.0-test-1/docs",
+export const generateDocsTree = (
+  pathToFiles = rootPath,
   docsRoot = pathToFiles
 ) => {
   const files = fs.readdirSync(pathToFiles);
-
-  const toc: TOCProps[] = [];
+  const tree: NewTreeProps[] = [];
 
   files.forEach((file) => {
     const filePath = path.join(pathToFiles, file);
@@ -44,14 +34,21 @@ export const generateDocsToc = (
     const isDirectory = fs.lstatSync(filePath).isDirectory();
 
     if (isDirectory) {
-      const childItems = generateDocsToc(filePath, docsRoot);
+      const childItems = generateDocsTree(filePath, docsRoot);
 
       if (childItems) {
         const indexFile = childItems.find((item) => item.name === "index.mdx");
-        const children = childItems.filter((item) => item.name !== "index.mdx");
+        const children = childItems
+          .sort((a, b) =>
+            a?.sidebar?.order && b?.sidebar?.order
+              ? a.sidebar.order - b.sidebar.order
+              : 0
+          )
+          .filter((item) => item.name !== "index.mdx");
+        const isTab = indexFile?.isTab || false;
 
-        if (indexFile) {
-          toc.push({
+        if (indexFile && !isTab) {
+          tree.push({
             ...indexFile,
             name: file,
             slug,
@@ -64,7 +61,7 @@ export const generateDocsToc = (
     } else if (file.endsWith(".mdx") || file.endsWith(".md")) {
       const metaData = getMetadata(filePath);
 
-      toc.push({
+      tree.push({
         name: file,
         slug,
         pathSegment: filePath,
@@ -74,5 +71,9 @@ export const generateDocsToc = (
     }
   });
 
-  return toc;
+  return tree.sort((a, b) =>
+    a?.sidebar?.order && b?.sidebar?.order
+      ? a.sidebar.order - b.sidebar.order
+      : 0
+  );
 };

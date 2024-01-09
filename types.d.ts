@@ -32,3 +32,17 @@ interface TreeProps extends PageMetaProps {
   level?: number;
   children?: TreeProps[];
 }
+
+interface NewTreeProps {
+  name: string;
+  slug: string;
+  pathSegment: string;
+  type: "directory" | "link" | "tab";
+  title: string;
+  sidebar?: {
+    title?: string;
+    order?: number;
+  };
+  isTab?: boolean;
+  children?: NewTreeProps[];
+}
