@@ -24,7 +24,7 @@ export const generateDocsTree = ({
   activeVersion: DocsVersion | null;
 }) => {
   const files = fs.readdirSync(pathToFiles);
-  const tree: NewTreeProps[] = [];
+  const tree: TreeProps[] = [];
 
   files.forEach((file) => {
     const filePath = path.join(pathToFiles, file);

@@ -16,21 +16,27 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
 }) => {
   const pathname = usePathname();
   const segments = pathname.slice(1).split("/");
-  const activeVersionIndex = segments.findIndex(
-    (segment) => segment === activeVersion.id
-  );
 
   const getLink = (version: string) => {
     const isFirstVersion = version === docsVersions[0].id;
+    const activeVersionIndex = segments.findIndex(
+      (segment) => segment === activeVersion.id
+    );
 
-    if (activeVersionIndex === -1) return pathname;
+    // if (activeVersionIndex === -1) return "/" + segments.join("/");
 
     const newSegments = [...segments];
-    newSegments[activeVersionIndex] = version;
+    let newHref = "/" + newSegments.join("/");
 
-    if (isFirstVersion) newSegments.splice(activeVersionIndex, 1);
+    // if (isFirstVersion) newSegments.splice(activeVersionIndex, 1);
 
-    return "/" + newSegments.join("/");
+    if (activeVersionIndex === -1 && !isFirstVersion)
+      newHref = newHref.replace("/docs", `/docs/${version}`);
+
+    // console.log(version, isFirstVersion, activeVersionIndex);
+    // console.log(newHref);
+
+    return newHref;
   };
 
   return (

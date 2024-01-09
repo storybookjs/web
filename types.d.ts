@@ -12,28 +12,7 @@ type Meta = {
   tab: string | null;
 };
 
-type PageProps = {
-  id: string;
-  path: string;
-  slug: string;
-  title: string;
-  shortTitle: string;
-  parent: string | null;
-  tabs: string[];
-  isTab: boolean;
-  order: number;
-  content: ReactElement<any, string | JSXElementConstructor<any>>;
-  children?: PageProps[];
-};
-
-type PageMetaProps = Omit<PageProps, "content">;
-
-interface TreeProps extends PageMetaProps {
-  level?: number;
-  children?: TreeProps[];
-}
-
-interface NewTreeMetaProps {
+interface TreeMetaProps {
   title: string;
   sidebar?: {
     title?: string;
@@ -46,10 +25,10 @@ interface NewTreeMetaProps {
   isTab?: boolean;
 }
 
-interface NewTreeProps extends NewTreeMetaProps {
+interface TreeProps extends TreeMetaProps {
   name: string;
   slug: string;
   pathSegment: string;
   type: "directory" | "link" | "tab";
-  children?: NewTreeProps[];
+  children?: TreeProps[];
 }

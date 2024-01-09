@@ -2,7 +2,7 @@ import fs from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { mdxComponents, mdxOptions } from "./mdx";
 import { generateDocsTree } from "./get-tree";
-import { getNullableVersion, getVersion } from "./get-version";
+import { getNullableVersion } from "./get-version";
 
 export const getPageData = async (path: string[], activeVersion: string) => {
   const segment = path ? path.join("/").replace(`${activeVersion}/`, "") : "/";
@@ -23,24 +23,20 @@ export const getPageData = async (path: string[], activeVersion: string) => {
 
   const fileContents = fs.readFileSync(newPath, "utf8");
 
-  const { frontmatter, content } = await compileMDX<NewTreeMetaProps>({
+  const { frontmatter, content } = await compileMDX<TreeMetaProps>({
     source: fileContents,
     components: mdxComponents,
     options: mdxOptions,
   });
 
   // Get Tabs
-  const activeVersionForPath = getVersion(path);
-  const activeVersionForSlug = getNullableVersion(path);
-
-  let rootPath = `content/docs/${activeVersionForPath?.id}/docs/`;
-  let pathToFiles = `${rootPath}${
-    isLink ? path.slice(0, -1).join("/") : path.join("/")
-  }`;
+  let pathToFiles = isLink
+    ? `${superRootPath}/${segment}`.split("/").slice(0, -1).join("/")
+    : `${superRootPath}/${segment}`;
 
   const parent = generateDocsTree({
     pathToFiles,
-    activeVersion: activeVersionForSlug,
+    activeVersion: getNullableVersion(path),
   }).sort((a, b) =>
     a?.tab?.order && b?.tab?.order ? a.tab.order - b.tab.order : 0
   );

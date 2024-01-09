@@ -7,45 +7,50 @@ import { renderers } from "@/docs-renderers";
 import { getPageData } from "@/lib/get-page";
 import { docsVersions } from "@/docs-versions";
 
-// export async function generateMetadata({
-//   params: { slug },
-// }: {
-//   params: {
-//     slug: string[];
-//   };
-// }) {
-//   const activeVersion = getVersion(slug);
-//   const allPages = await getAllPages(activeVersion.id);
-//   const page = await findPage(allPages, slug, activeVersion.id);
-
-//   if (!page) {
-//     return {
-//       title: "Page Not Found",
-//     };
-//   }
-
-//   return {
-//     title: `${page.title} • Storybook docs` || "Storybook • Storybook docs",
-//   };
-// }
-
-export default async function Page({ params }: { params: { slug: string[] } }) {
-  const active = "react";
-
-  // Get the latest version
-  const activeVersion = getVersion(params.slug);
-
-  const { slug } = params;
-  const isHomepage =
+const isHomepage = (slug: string[]) => {
+  return (
     slug === undefined ||
     (slug &&
       slug.length === 1 &&
       docsVersions.some((version) => {
         return slug[0] === version.id;
-      }));
+      }))
+  );
+};
+
+interface Props {
+  params: {
+    slug: string[];
+  };
+}
+
+export async function generateMetadata({ params: { slug } }: Props) {
+  const activeVersion = getVersion(slug);
 
   const page = await getPageData(
-    isHomepage ? ["/"] : params.slug,
+    isHomepage(slug) ? ["/"] : slug,
+    activeVersion.id
+  );
+
+  if (!page) {
+    return {
+      title: "Page Not Found",
+    };
+  }
+
+  return {
+    title: `${page.title} • Storybook docs` || "Storybook • Storybook docs",
+  };
+}
+
+export default async function Page({ params: { slug } }: Props) {
+  const active = "react";
+
+  // Get the latest version
+  const activeVersion = getVersion(slug);
+
+  const page = await getPageData(
+    isHomepage(slug) ? ["/"] : slug,
     activeVersion.id
   );
 
