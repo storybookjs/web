@@ -2,34 +2,32 @@ import { getVersion } from "@/lib/get-version";
 import { H1 } from "@/components/mdx";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getAllPages } from "@/lib/get-all-pages";
 import { cn } from "@/lib/utils";
-import { findPage } from "@/lib/find-page";
 import { renderers } from "@/docs-renderers";
-import { getPageData } from "@/lib/get-new-page";
+import { getPageData } from "@/lib/get-page";
 import { docsVersions } from "@/docs-versions";
 
-export async function generateMetadata({
-  params: { slug },
-}: {
-  params: {
-    slug: string[];
-  };
-}) {
-  const activeVersion = getVersion(slug);
-  const allPages = await getAllPages(activeVersion.id);
-  const page = await findPage(allPages, slug, activeVersion.id);
+// export async function generateMetadata({
+//   params: { slug },
+// }: {
+//   params: {
+//     slug: string[];
+//   };
+// }) {
+//   const activeVersion = getVersion(slug);
+//   const allPages = await getAllPages(activeVersion.id);
+//   const page = await findPage(allPages, slug, activeVersion.id);
 
-  if (!page) {
-    return {
-      title: "Page Not Found",
-    };
-  }
+//   if (!page) {
+//     return {
+//       title: "Page Not Found",
+//     };
+//   }
 
-  return {
-    title: `${page.title} • Storybook docs` || "Storybook • Storybook docs",
-  };
-}
+//   return {
+//     title: `${page.title} • Storybook docs` || "Storybook • Storybook docs",
+//   };
+// }
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const active = "react";
@@ -50,8 +48,6 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     isHomepage ? ["/"] : params.slug,
     activeVersion.id
   );
-
-  console.log(page);
 
   if (!page) notFound();
 

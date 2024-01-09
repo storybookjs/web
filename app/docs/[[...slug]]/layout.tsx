@@ -8,7 +8,7 @@ import { cn, container } from "@/lib/utils";
 import { NavDocs } from "@/components/sidebar/nav-docs";
 import { getNullableVersion, getVersion } from "@/lib/get-version";
 import { Fragment } from "react";
-import { generateDocsTree } from "@/lib/get-new-tree";
+import { generateDocsTree } from "@/lib/get-tree";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -32,8 +32,6 @@ export default async function Layout({
     pathToFiles: `content/docs/${activeVersionForPath?.id}/docs`,
     activeVersion: activeVersionForSlug,
   });
-
-  // console.dir(tree, { depth: null });
 
   return (
     <Fragment>

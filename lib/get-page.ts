@@ -1,7 +1,7 @@
 import fs from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { mdxComponents, mdxOptions } from "./mdx";
-import { generateDocsTree } from "./get-new-tree";
+import { generateDocsTree } from "./get-tree";
 import { getNullableVersion, getVersion } from "./get-version";
 
 export const getPageData = async (path: string[], activeVersion: string) => {
@@ -38,16 +38,18 @@ export const getPageData = async (path: string[], activeVersion: string) => {
     isLink ? path.slice(0, -1).join("/") : path.join("/")
   }`;
 
-  const tabs = generateDocsTree({
+  const parent = generateDocsTree({
     pathToFiles,
     activeVersion: activeVersionForSlug,
   }).sort((a, b) =>
     a?.tab?.order && b?.tab?.order ? a.tab.order - b.tab.order : 0
   );
 
+  const index = parent.find((item) => item.name === "index.mdx");
+
   return {
     ...frontmatter,
-    tabs,
+    tabs: index?.isTab ? parent : [],
     content,
   };
 };

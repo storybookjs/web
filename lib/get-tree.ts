@@ -1,80 +1,97 @@
-import { getPageData } from "./get-page-data";
-import { getListOfPaths } from "./get-list-of-paths";
+import { DocsVersion, docsVersions } from "@/docs-versions";
+import fs from "fs";
+import matter from "gray-matter";
+import path from "path";
 
-export const rootPath = "content/docs/";
+function getMetadata(filePath: string) {
+  const fileContents = fs.readFileSync(filePath, "utf8");
+  const {
+    data: { navTitle, title, ...data },
+  } = matter(fileContents);
+  return {
+    title: navTitle || title,
+    ...data,
+  };
+}
 
-export async function getTree(
-  version: string
-): Promise<TreeProps[] | undefined> {
-  const listOfPaths = getListOfPaths(version);
-  const pages: PageMetaProps[] = [];
+export const generateDocsTree = ({
+  pathToFiles,
+  docsRoot = pathToFiles,
+  activeVersion,
+}: {
+  pathToFiles: string;
+  docsRoot?: string;
+  activeVersion: DocsVersion | null;
+}) => {
+  const files = fs.readdirSync(pathToFiles);
+  const tree: NewTreeProps[] = [];
 
-  // For every path, get the page
-  for (const file of listOfPaths) {
-    const post = await getPageData({
-      path: file,
-      version: { id: version },
-      options: { metaOnly: true },
-    });
-    if (post) pages.push(post);
-  }
+  files.forEach((file) => {
+    const filePath = path.join(pathToFiles, file);
 
-  // Add metadata to pages to create the tree
-  const flatTree = pages
-    .filter((page) => !page.isTab)
-    .map((page) => {
-      // Clean up path
-      const relativePath = page.path.replace(`${rootPath}${version}/docs/`, "");
-      const relativePathWithoutExtension = relativePath.replace(/\.mdx?$/, "");
+    // Slug
+    let slug = filePath;
+    if (activeVersion)
+      slug = filePath
+        .replace(
+          `content/docs/${activeVersion.id}/docs`,
+          `/docs/${activeVersion.id}`
+        )
+        .replace(/\.mdx?$|\.md$/, "");
+    if (activeVersion === null)
+      slug = filePath
+        .replace(`content/docs/${docsVersions[0].id}/docs`, `/docs`)
+        .replace(/\.mdx?$|\.md$/, "");
 
-      // Utils
-      const segments = relativePathWithoutExtension.split("/");
-      const lastSegment = relativePathWithoutExtension.split("/").pop() || "";
-      const isIndex = lastSegment === "index";
-      const isLeaf = lastSegment !== "index";
+    const isDirectory = fs.lstatSync(filePath).isDirectory();
 
-      let level = 0;
-
-      // Home
-      if (isIndex && segments.length === 1) level = 0;
-
-      // Level 1
-      if (isIndex && segments.length === 2) level = 1;
-      if (isLeaf && segments.length === 1) level = 1;
-
-      // Level 2
-      if (isLeaf && segments.length === 2) level = 2;
-      if (isIndex && segments.length === 3) level = 2;
-
-      // Level 3
-      if (isLeaf && segments.length === 3) level = 3;
-
-      return {
-        ...page,
-        level,
-      };
-    });
-
-  const tree = flatTree
-    .filter((page) => page.level === 1)
-    .map((level1) => {
-      const level2 = flatTree
-        .filter((page) => page.level === 2)
-        .filter((child) => child.parent === level1.id)
-        .sort((a, b) => a.order - b.order); // Sort level 2 pages by order
-
-      const children = level2.map((level2) => {
-        const level3 = flatTree
-          .filter((page) => page.level === 3)
-          .filter((lvl3) => lvl3.parent === level2.id)
-          .sort((a, b) => a.order - b.order); // Sort level 3 pages by order
-
-        return { ...level2, children: level3 };
+    if (isDirectory) {
+      const childItems = generateDocsTree({
+        pathToFiles: filePath,
+        docsRoot,
+        activeVersion,
       });
 
-      return { ...level1, children };
-    })
-    .sort((a, b) => a.order - b.order); // Sort level 1 pages by order
+      if (childItems) {
+        const indexFile = childItems.find((item) => item.name === "index.mdx");
+        const children = childItems
+          .sort((a, b) =>
+            a?.sidebar?.order && b?.sidebar?.order
+              ? a.sidebar.order - b.sidebar.order
+              : 0
+          )
+          .filter((item) => item.name !== "index.mdx");
+        const isTab = indexFile?.isTab || false;
 
-  return tree;
-}
+        if (indexFile) {
+          tree.push({
+            ...indexFile,
+            name: file,
+            slug,
+            pathSegment: filePath,
+            type: "directory",
+            children: isTab ? [] : children,
+          });
+        }
+      }
+    } else if (file.endsWith(".mdx") || file.endsWith(".md")) {
+      const metaData = getMetadata(filePath);
+
+      tree.push({
+        name: file,
+        slug,
+        pathSegment: filePath,
+        type: "link",
+        ...metaData,
+      });
+    }
+  });
+
+  return tree
+    .sort((a, b) =>
+      a?.sidebar?.order && b?.sidebar?.order
+        ? a.sidebar.order - b.sidebar.order
+        : 0
+    )
+    .filter((item) => item.slug !== "/docs/index");
+};
