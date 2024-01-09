@@ -4,32 +4,6 @@ Storybook is the most popular UI component explorer! This is the website for htt
 
 **Note**: This is not the docs, those are located [here](https://github.com/storybooks/storybook/tree/next/docs).
 
-## Todo list
-
-- [x] Translate extract-monorepo-docs into node & make it work with Next.js
-- [x] Update getPage to get data from the right place
-- [x] Create extract assets script to fetch images
-- [ ] /public/latest/..., /public/7.6/...
-- [ ] Update sync-docs task in monorepo
-- [ ] Add support for Mailchimp in the footer
-- [x] Add modal for video when clicking "Watch video"
-- [ ] Add Algolia on press search
-- [x] Finish footer mobile
-- [ ] Home - Add the correct data (live) on the hero underneath the buttons
-- [x] Home - Bring back Test part of the home
-- [x] Home - Bring back Development part of the home
-- [ ] Home - Bring back share part of the home
-- [ ] Home - Bring back automate part of the home
-- [ ] Home - Bring back socialValidation part of the home
-- [ ] Add Favicon
-- [ ] Add pages metadata
-- [ ] Add pages social preview images
-- [ ] Review SEO
-- [ ] Docs - Add table of content
-- [ ] Docs - Add edit on github
-- [ ] Docs - Style all components on the page
-- [ ] Docs - Add menu for renderers (More button)
-
 ## 🛠 Contributing
 
 Contributions welcome! If it’s something small like grammar or punctuation, open up a pull request. If it’s a bigger change or new feature, add an issue for discussion.
