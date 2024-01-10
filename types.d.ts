@@ -32,3 +32,11 @@ interface TreeProps extends TreeMetaProps {
   type: "directory" | "link" | "tab";
   children?: TreeProps[];
 }
+
+interface CodeSnippetsProps {
+  path: string;
+  code: string;
+  renderer: string | null;
+  packageManager: string | null;
+  language: string | null;
+}

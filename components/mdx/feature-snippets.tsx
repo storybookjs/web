@@ -5,5 +5,5 @@ type Props = {
 };
 
 export const FeatureSnippets: FC<Props> = ({ id }) => {
-  return <div className="">Code Snippets</div>;
+  return <div className="">Feature Snippets</div>;
 };
