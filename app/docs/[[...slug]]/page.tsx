@@ -1,20 +1,5 @@
 import { getVersion } from "@/lib/get-version";
-import {
-  A,
-  CodeSnippets,
-  H1,
-  H2,
-  H3,
-  Hr,
-  P,
-  UnorderedList,
-  List,
-  ImgDocs,
-  Callout,
-  IfRenderer,
-  YouTubeCallout,
-  FeatureSnippets,
-} from "@/components/mdx";
+import * as MDX from "@/components/mdx";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -76,7 +61,7 @@ export default async function Page({ params: { slug } }: Props) {
 
   return (
     <div>
-      <H1>{page.title || "Title is missing"}</H1>
+      <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
       <div className="flex gap-2 mb-8">
         {renderers.slice(0, 4).map((renderer) => (
           <button
@@ -113,23 +98,23 @@ export default async function Page({ params: { slug } }: Props) {
       <article>
         <Content
           components={{
-            h1: H1,
-            h2: H2,
-            h3: H3,
-            h4: H1,
-            a: A,
-            p: P,
-            hr: Hr,
-            ul: UnorderedList,
-            li: List,
+            h1: MDX.H1,
+            h2: MDX.H2,
+            h3: MDX.H3,
+            h4: MDX.H1,
+            a: MDX.A,
+            p: MDX.P,
+            hr: MDX.Hr,
+            ul: MDX.UnorderedList,
+            li: MDX.List,
             img: (props: any) => (
-              <ImgDocs activeVersion={activeVersion} {...props} />
+              <MDX.ImgDocs activeVersion={activeVersion} {...props} />
             ),
-            CodeSnippets,
-            Callout,
-            IfRenderer,
-            YouTubeCallout,
-            FeatureSnippets,
+            CodeSnippets: MDX.CodeSnippets,
+            Callout: MDX.Callout,
+            IfRenderer: MDX.IfRenderer,
+            YouTubeCallout: MDX.YouTubeCallout,
+            FeatureSnippets: MDX.FeatureSnippets,
           }}
         />
       </article>
