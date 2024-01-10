@@ -1,12 +1,22 @@
+"use client";
+
 import { FC } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { ChevronSmallDownIcon } from "@storybook/icons";
 
 type Props = {
   list: CodeSnippetsFilter[];
+  activeId: string;
+  action: (formData?: FormData) => Promise<void>;
+  type: "language" | "packageManager";
 };
 
-export const Dropdown: FC<Props> = ({ list }) => {
+export const Dropdown: FC<Props> = ({ list, activeId, action, type }) => {
+  const activeItem = list.find((item) => item?.id === activeId);
+  // console.log("list", list);
+  // console.log("activeId", activeId);
+  // console.log("activeItem", activeItem);
+
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -15,7 +25,7 @@ export const Dropdown: FC<Props> = ({ list }) => {
           className="group h-8 gap-1 px-2 flex items-center justify-between text-sm text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 transition-all select-none hover:bg-slate-200 rounded"
           aria-label="Customise options"
         >
-          {list[0]?.title}
+          {activeItem?.title}
           <ChevronSmallDownIcon className="group-data-[state=open]:rotate-180 transition-transform" />
         </DropdownMenu.Trigger>
       </DropdownMenu.Trigger>
@@ -26,14 +36,20 @@ export const Dropdown: FC<Props> = ({ list }) => {
           sideOffset={4}
         >
           <DropdownMenu.Group>
-            {list.map((item) => (
-              <DropdownMenu.Item
-                key={item?.id}
-                className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
-              >
-                {item?.title}
-              </DropdownMenu.Item>
-            ))}
+            {list.map((item) => {
+              const formData = new FormData();
+              if (item?.id) formData.append(type, item?.id);
+
+              return (
+                <DropdownMenu.Item
+                  key={item?.id}
+                  className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
+                  onClick={() => action(formData)}
+                >
+                  {item?.title}
+                </DropdownMenu.Item>
+              );
+            })}
           </DropdownMenu.Group>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>

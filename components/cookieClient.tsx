@@ -1,7 +1,12 @@
 "use client";
 
 import { FC, useEffect } from "react";
-import { setRendererCookie, setVersionCookie } from "../app/actions";
+import {
+  setLanguageCookie,
+  setPackageManagerCookie,
+  setRendererCookie,
+  setVersionCookie,
+} from "../app/actions";
 import { usePathname } from "next/navigation";
 import { docsVersions } from "@/docs-versions";
 
@@ -20,8 +25,10 @@ export const CookieClient: FC = () => {
       setVersionCookie(docsVersions[0].id);
     }
 
-    // Set automatically the renderer to React if there is no cookie
+    // Set automatically the renderer and language if they are not in cookies
     setRendererCookie();
+    setLanguageCookie();
+    setPackageManagerCookie();
   }, [pathname]);
 
   return null;
