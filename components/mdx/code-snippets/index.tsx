@@ -1,7 +1,4 @@
 import { FC } from "react";
-import { TSIcon } from "./icons";
-import { Dropdown } from "./dropdown";
-import { Copy } from "./copy";
 import rehypePrettyCode from "rehype-pretty-code";
 import { bundleMDX } from "mdx-bundler";
 import fs from "fs";
@@ -67,22 +64,39 @@ export const CodeSnippets: FC<Props> = async ({ paths }) => {
 
   const contentWithoutCode = content.map((obj) => (({ code, ...o }) => o)(obj));
 
+  const listOfRenderers = [
+    ...new Set(contentWithoutCode.map((obj) => obj.renderer)),
+  ].filter((r) => r) as string[];
+
+  const renderersWithData = listOfRenderers.map((obj) =>
+    renderers.find((r) => r.id === obj)
+  );
+
+  const listOfLanguages = [
+    ...new Set(contentWithoutCode.map((obj) => obj.language)),
+  ].filter((r) => r !== null) as string[];
+
+  const languagesWithData = listOfLanguages.map((obj) =>
+    languages.find((r) => r.id === obj)
+  );
+
+  const listOfPm = [
+    ...new Set(contentWithoutCode.map((obj) => obj.packageManager)),
+  ].filter((r) => r !== null) as string[];
+
+  const PmWithData = listOfPm.map((obj) =>
+    packageManagers.find((r) => r.id === obj)
+  );
+
+  const filters: CodeSnippetsFiltersProps = {
+    renderers: renderersWithData,
+    languages: languagesWithData,
+    packageManagers: PmWithData,
+  };
+
   console.log(contentWithoutCode);
 
-  return (
-    <div className="border border-zinc-300 rounded overflow-hidden mb-6">
-      <div className="flex items-center justify-between py-2 pl-5 pr-4 border-b border-b-zinc-300 bg-slate-50">
-        <div className="flex items-center gap-2 font-bold text-sm">
-          <TSIcon /> Name to be replaced
-        </div>
-        <div className="flex items-center gap-2">
-          <Dropdown />
-          <Copy />
-        </div>
-      </div>
-      <div className="p-4 text-sm">
-        <CodeSnippetsClient data={content} />
-      </div>
-    </div>
-  );
+  // console.log(filters);
+
+  return <CodeSnippetsClient data={content} filters={filters} />;
 };

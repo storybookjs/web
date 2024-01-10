@@ -40,3 +40,11 @@ interface CodeSnippetsProps {
   packageManager: string | null;
   language: string | null;
 }
+
+type CodeSnippetsFilter = { id: string; title: string } | undefined;
+
+interface CodeSnippetsFiltersProps {
+  languages: CodeSnippetsFilter[];
+  packageManagers: CodeSnippetsFilter[];
+  renderers: CodeSnippetsFilter[];
+}

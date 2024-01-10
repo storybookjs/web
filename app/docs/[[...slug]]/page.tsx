@@ -7,6 +7,8 @@ import { renderers } from "@/docs-renderers";
 import { getPageData } from "@/lib/get-page";
 import { docsVersions } from "@/docs-versions";
 import { getMDXComponent } from "mdx-bundler/client";
+import { cookies } from "next/headers";
+import { Renderers } from "@/components/docs/renderers";
 
 const isHomepage = (slug: string[]) => {
   return (
@@ -45,7 +47,11 @@ export async function generateMetadata({ params: { slug } }: Props) {
 }
 
 export default async function Page({ params: { slug } }: Props) {
-  const active = "react";
+  const cookieStore = cookies();
+  const rendererCookie = cookieStore.get("sb-docs-renderer");
+  const activeRenderer = rendererCookie
+    ? rendererCookie.value
+    : renderers[0].id;
 
   // Get the latest version
   const activeVersion = getVersion(slug);
@@ -62,19 +68,7 @@ export default async function Page({ params: { slug } }: Props) {
   return (
     <div>
       <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
-      <div className="flex gap-2 mb-8">
-        {renderers.slice(0, 4).map((renderer) => (
-          <button
-            className={cn(
-              "inline-flex items-center justify-center h-7 rounded border border-zinc-300 text-sm px-2 hover:border-blue-500 transition-colors text-zinc-800 hover:text-blue-500",
-              renderer.id === active && "border-blue-500 text-blue-500"
-            )}
-            key={renderer.id}
-          >
-            {renderer.title}
-          </button>
-        ))}
-      </div>
+      <Renderers activeRenderer={activeRenderer} />
       {page.tabs && page.tabs.length > 0 && (
         <div className="flex items-center gap-8 border-b border-zinc-200">
           {page.tabs.map((tab) => {

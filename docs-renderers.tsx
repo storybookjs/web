@@ -8,7 +8,7 @@
 export const renderers = [
   { id: "react", title: "React" },
   { id: "vue", title: "Vue" },
-  { id: "angular", title: "angular" },
+  { id: "angular", title: "Angular" },
   { id: "web-components", title: "Web Components" },
   { id: "ember", title: "Ember" },
   { id: "html", title: "HTML" },

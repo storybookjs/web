@@ -1,14 +1,12 @@
-"use client";
-
 import { FC } from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { ChevronSmallDownIcon } from "@storybook/icons";
 
 type Props = {
-  // id: string;
+  list: CodeSnippetsFilter[];
 };
 
-export const Dropdown: FC<Props> = (props) => {
+export const Dropdown: FC<Props> = ({ list }) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -17,7 +15,7 @@ export const Dropdown: FC<Props> = (props) => {
           className="group h-8 gap-1 px-2 flex items-center justify-between text-sm text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 transition-all select-none hover:bg-slate-200 rounded"
           aria-label="Customise options"
         >
-          yarn
+          {list[0]?.title}
           <ChevronSmallDownIcon className="group-data-[state=open]:rotate-180 transition-transform" />
         </DropdownMenu.Trigger>
       </DropdownMenu.Trigger>
@@ -28,15 +26,14 @@ export const Dropdown: FC<Props> = (props) => {
           sideOffset={4}
         >
           <DropdownMenu.Group>
-            <DropdownMenu.Item className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center">
-              yarn
-            </DropdownMenu.Item>
-            <DropdownMenu.Item className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center">
-              pnpm
-            </DropdownMenu.Item>
-            <DropdownMenu.Item className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center">
-              npm
-            </DropdownMenu.Item>
+            {list.map((item) => (
+              <DropdownMenu.Item
+                key={item?.id}
+                className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
+              >
+                {item?.title}
+              </DropdownMenu.Item>
+            ))}
           </DropdownMenu.Group>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
