@@ -101,6 +101,7 @@ export default async function Page({ params: { slug } }: Props) {
             hr: MDX.Hr,
             ul: MDX.UnorderedList,
             li: MDX.List,
+            pre: MDX.Pre,
             img: (props: any) => (
               <MDX.ImgDocs activeVersion={activeVersion} {...props} />
             ),

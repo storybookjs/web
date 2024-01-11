@@ -2,12 +2,12 @@ import { languages } from "@/docs-languages";
 import { packageManagers } from "@/docs-package-managers";
 
 interface Props {
-  content: CodeSnippetsProps[];
+  codeSnippetsContent: CodeSnippetsProps[];
 }
 
-export const getFilters = ({ content }: Props) => {
+export const getFilters = ({ codeSnippetsContent }: Props) => {
   const listOfLanguages = [
-    ...new Set(content.map((obj) => obj.language)),
+    ...new Set(codeSnippetsContent.map((obj) => obj.language)),
   ].filter((r) => r !== null) as string[];
 
   const languagesWithData = listOfLanguages.map((obj) =>
@@ -15,7 +15,7 @@ export const getFilters = ({ content }: Props) => {
   );
 
   // Package managers
-  const transformPackageManager = content.map((pm) => {
+  const transformPackageManager = codeSnippetsContent.map((pm) => {
     if (pm.packageManager === "npx") return "npm";
     return pm.packageManager;
   });

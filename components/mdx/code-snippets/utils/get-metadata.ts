@@ -6,6 +6,7 @@ import { firefoxThemeLight } from "../themes/firefox-theme-vscode";
 import fs from "fs";
 import rehypePrettyCode from "rehype-pretty-code";
 import { languages } from "@/docs-languages";
+import { parseSnippetContent } from "./get-file-name";
 
 interface Props {
   paths: string[];
@@ -41,7 +42,7 @@ export const getMetadata = async ({ paths }: Props) => {
         segments.find((s) => languages.map((p) => p.id).includes(s)) ?? null;
 
       // Get the frontmatter and code from the MDX file
-      const { frontmatter, code, matter } = await bundleMDX({
+      const { matter } = await bundleMDX({
         source,
         mdxOptions(options) {
           options.rehypePlugins = [
@@ -53,7 +54,21 @@ export const getMetadata = async ({ paths }: Props) => {
         },
       });
 
-      console.log(matter);
+      // console.log(matter);
+      const fifi = parseSnippetContent(matter.content);
+      // console.log(fifi);
+
+      const { frontmatter, code } = await bundleMDX({
+        source: fifi[1],
+        mdxOptions(options) {
+          options.rehypePlugins = [
+            ...(options.rehypePlugins ?? []),
+            [rehypePrettyCode, rehypePrettyCodeOptions],
+          ];
+
+          return options;
+        },
+      });
 
       // TODO - Trim matter.content to get the snippet to copy + filename
 

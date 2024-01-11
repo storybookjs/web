@@ -12,6 +12,7 @@ import { setLanguageCookie, setPackageManagerCookie } from "@/app/actions";
 import { getFilters } from "./utils/get-filters";
 import { getMetadata } from "./utils/get-metadata";
 import { getActiveContent } from "./utils/get-active-content";
+import { CodeWrapper } from "./wrapper";
 
 type Props = {
   paths: string[];
@@ -67,12 +68,19 @@ export const CodeSnippets: FC<Props> = async ({ paths }) => {
     },
   ];
 
-  const content: CodeSnippetsProps[] = await getMetadata({ paths });
-  const filters = getFilters({ content });
-  const activeContent = getActiveContent({ content, filters });
+  // Get metadata for all files from the Code Snippets component
+  const codeSnippetsContent: CodeSnippetsProps[] = await getMetadata({ paths });
+
+  // Get filters - If preformatted text, we don't need filters
+  const filters = getFilters({ codeSnippetsContent });
+
+  // Get active content for the Code Snippets component
+  const activeContent = getActiveContent({ codeSnippetsContent, filters });
 
   // Helper
-  const contentWithoutCode = content.map((obj) => (({ code, ...o }) => o)(obj));
+  const contentWithoutCode = codeSnippetsContent?.map((obj) =>
+    (({ code, ...o }) => o)(obj)
+  );
 
   // console.log(renderer, language, packageManager, version);
   // console.log("Content", contentWithoutCode);
@@ -82,13 +90,11 @@ export const CodeSnippets: FC<Props> = async ({ paths }) => {
     : DummyComponent;
 
   return (
-    <div className="border border-zinc-300 rounded overflow-hidden mb-6 w-full">
-      <div className="flex items-center justify-between py-2 pl-5 pr-4 border-b border-b-zinc-300 bg-slate-50">
-        <div className="flex items-center gap-2 font-bold text-sm">
-          <TSIcon /> Name to be replaced
-        </div>
-        <div className="flex items-center gap-2">
-          {filters.languages.length > 1 && (
+    <CodeWrapper
+      title="Code Snippets"
+      options={
+        <>
+          {filters && filters.languages.length > 1 && (
             <Dropdown
               list={filters.languages}
               activeId={language}
@@ -96,7 +102,7 @@ export const CodeSnippets: FC<Props> = async ({ paths }) => {
               action={setLanguageCookie}
             />
           )}
-          {filters.packageManagers.length > 1 && (
+          {filters && filters.packageManagers.length > 1 && (
             <Dropdown
               list={filters.packageManagers}
               activeId={packageManager}
@@ -104,13 +110,11 @@ export const CodeSnippets: FC<Props> = async ({ paths }) => {
               action={setPackageManagerCookie}
             />
           )}
-          <Copy />
-        </div>
-      </div>
-      <div className="p-4 text-sm max-w-full overflow-scroll">
-        <Code />
-      </div>
-    </div>
+        </>
+      }
+    >
+      <Code />
+    </CodeWrapper>
   );
 };
 

@@ -2,6 +2,12 @@ import fs from "fs";
 import { generateDocsTree } from "./get-tree";
 import { getNullableVersion } from "./get-version";
 import { bundleMDX } from "mdx-bundler";
+import { firefoxThemeLight } from "@/components/mdx/code-snippets/themes/firefox-theme-vscode";
+import rehypePrettyCode from "rehype-pretty-code";
+
+const rehypePrettyCodeOptions = {
+  theme: firefoxThemeLight,
+};
 
 export const getPageData = async (path: string[], activeVersion: string) => {
   const segment = path ? path.join("/").replace(`${activeVersion}/`, "") : "/";
@@ -24,6 +30,14 @@ export const getPageData = async (path: string[], activeVersion: string) => {
 
   const { frontmatter, code } = await bundleMDX<TreeMetaProps>({
     source: fileContents,
+    mdxOptions(options) {
+      options.rehypePlugins = [
+        ...(options.rehypePlugins ?? []),
+        [rehypePrettyCode, rehypePrettyCodeOptions],
+      ];
+
+      return options;
+    },
   });
 
   // Get Tabs

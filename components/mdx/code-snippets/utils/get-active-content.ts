@@ -3,12 +3,12 @@ import { packageManagers } from "@/docs-package-managers";
 import { cookies } from "next/headers";
 
 interface Props {
-  content: CodeSnippetsProps[];
+  codeSnippetsContent: CodeSnippetsProps[];
   filters: CodeSnippetsFiltersProps;
 }
 
 export const getActiveContent = ({
-  content,
+  codeSnippetsContent,
   filters,
 }: Props): CodeSnippetsProps | null => {
   const cookieStore = cookies();
@@ -17,7 +17,7 @@ export const getActiveContent = ({
   const cookieLanguage = cookieStore.get("sb-docs-language");
   const language = cookieLanguage?.value ?? languages[0].id;
 
-  const filterByPackageManager = content.filter((item) => {
+  const filterByPackageManager = codeSnippetsContent.filter((item) => {
     // If there is only one package manager, we don't need to filter
     if (filters.packageManagers.length <= 1) return true;
 
