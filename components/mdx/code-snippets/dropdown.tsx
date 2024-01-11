@@ -13,9 +13,6 @@ type Props = {
 
 export const Dropdown: FC<Props> = ({ list, activeId, action, type }) => {
   const activeItem = list.find((item) => item?.id === activeId);
-  // console.log("list", list);
-  // console.log("activeId", activeId);
-  // console.log("activeItem", activeItem);
 
   return (
     <DropdownMenu.Root>

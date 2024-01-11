@@ -2,6 +2,7 @@
 
 import { CheckIcon, CopyIcon } from "@storybook/icons";
 import { FC, useState } from "react";
+import copy from "copy-to-clipboard";
 
 interface CopyProps {}
 
@@ -9,6 +10,7 @@ export const Copy: FC<CopyProps> = ({}) => {
   const [state, setState] = useState<"idle" | "copied">("idle");
 
   const onClick = () => {
+    copy("Text Boom!");
     setState("copied");
     setTimeout(() => setState("idle"), 1000);
   };
