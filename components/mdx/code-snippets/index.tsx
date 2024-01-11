@@ -1,13 +1,9 @@
-import { FC } from "react";
 import { cookies } from "next/headers";
 import { docsVersions } from "@/docs-versions";
 import { packageManagers } from "@/docs-package-managers";
 import { languages } from "@/docs-languages";
 import { renderers } from "@/docs-renderers";
-import { TSIcon } from "./icons";
 import { Dropdown } from "./dropdown";
-import { Copy } from "./copy";
-import { getMDXComponent } from "mdx-bundler/client";
 import { setLanguageCookie, setPackageManagerCookie } from "@/app/actions";
 import { getFilters } from "./utils/get-filters";
 import { getMetadata } from "./utils/get-metadata";
@@ -18,7 +14,7 @@ type Props = {
   paths: string[];
 };
 
-export const CodeSnippets: FC<Props> = async ({ paths }) => {
+export const CodeSnippets = async ({ paths }: Props) => {
   const cookieStore = cookies();
   const cookieVersion = cookieStore.get("sb-docs-version");
   const cookieRenderer = cookieStore.get("sb-docs-renderer");
@@ -79,15 +75,11 @@ export const CodeSnippets: FC<Props> = async ({ paths }) => {
 
   // Helper
   const contentWithoutCode = codeSnippetsContent?.map((obj) =>
-    (({ code, ...o }) => o)(obj)
+    (({ content, ...o }) => o)(obj)
   );
 
   // console.log(renderer, language, packageManager, version);
   // console.log("Content", contentWithoutCode);
-
-  const Code = activeContent
-    ? getMDXComponent(activeContent.code)
-    : DummyComponent;
 
   return (
     <CodeWrapper
@@ -113,17 +105,15 @@ export const CodeSnippets: FC<Props> = async ({ paths }) => {
         </>
       }
     >
-      <Code />
+      {activeContent?.content ?? (
+        <div>
+          <div>Oh no! We could not find the code you are looking for.</div>
+          <div>
+            It would be great if you could report an issue on Github if you see
+            that message.
+          </div>
+        </div>
+      )}
     </CodeWrapper>
   );
 };
-
-const DummyComponent: React.FC = () => (
-  <div>
-    <div>Oh no! We could not find the code you are looking for.</div>
-    <div>
-      It would be great if you could report an issue on Github if you see that
-      message.
-    </div>
-  </div>
-);

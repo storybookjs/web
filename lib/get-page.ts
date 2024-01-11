@@ -1,9 +1,11 @@
 import fs from "fs";
 import { generateDocsTree } from "./get-tree";
 import { getNullableVersion } from "./get-version";
-import { bundleMDX } from "mdx-bundler";
 import { firefoxThemeLight } from "@/components/mdx/code-snippets/themes/firefox-theme-vscode";
 import rehypePrettyCode from "rehype-pretty-code";
+import { compileMDX } from "next-mdx-remote/rsc";
+import * as MDX from "@/components/mdx";
+import rehypeSlug from "rehype-slug";
 
 const rehypePrettyCodeOptions = {
   theme: firefoxThemeLight,
@@ -28,15 +30,38 @@ export const getPageData = async (path: string[], activeVersion: string) => {
 
   const fileContents = fs.readFileSync(newPath, "utf8");
 
-  const { frontmatter, code } = await bundleMDX<TreeMetaProps>({
+  const { content, frontmatter } = await compileMDX<{ title: string }>({
     source: fileContents,
-    mdxOptions(options) {
-      options.rehypePlugins = [
-        ...(options.rehypePlugins ?? []),
-        [rehypePrettyCode, rehypePrettyCodeOptions],
-      ];
-
-      return options;
+    options: {
+      parseFrontmatter: true,
+      mdxOptions: {
+        remarkPlugins: [],
+        rehypePlugins: [
+          rehypeSlug,
+          [rehypePrettyCode, rehypePrettyCodeOptions] as any,
+        ],
+        format: "mdx",
+      },
+    },
+    components: {
+      h1: MDX.H1,
+      h2: MDX.H2,
+      h3: MDX.H3,
+      h4: MDX.H1,
+      a: MDX.A,
+      p: MDX.P,
+      hr: MDX.Hr,
+      ul: MDX.UnorderedList,
+      li: MDX.List,
+      pre: MDX.Pre,
+      // img: (props: any) => (
+      //   <MDX.ImgDocs activeVersion={activeVersion} {...props} />
+      // ),
+      CodeSnippets: MDX.CodeSnippets,
+      Callout: MDX.Callout,
+      IfRenderer: MDX.IfRenderer,
+      YouTubeCallout: MDX.YouTubeCallout,
+      FeatureSnippets: MDX.FeatureSnippets,
     },
   });
 
@@ -57,6 +82,6 @@ export const getPageData = async (path: string[], activeVersion: string) => {
   return {
     ...frontmatter,
     tabs: index?.isTab ? parent : [],
-    code,
+    content,
   };
 };

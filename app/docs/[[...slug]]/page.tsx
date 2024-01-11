@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { renderers } from "@/docs-renderers";
 import { getPageData } from "@/lib/get-page";
 import { docsVersions } from "@/docs-versions";
-import { getMDXComponent } from "mdx-bundler/client";
 import { cookies } from "next/headers";
 import { Renderers } from "@/components/docs/renderers";
 
@@ -63,8 +62,6 @@ export default async function Page({ params: { slug } }: Props) {
 
   if (!page) notFound();
 
-  const Content = getMDXComponent(page.code);
-
   return (
     <div>
       <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
@@ -89,30 +86,7 @@ export default async function Page({ params: { slug } }: Props) {
           })}
         </div>
       )}
-      <article>
-        <Content
-          components={{
-            h1: MDX.H1,
-            h2: MDX.H2,
-            h3: MDX.H3,
-            h4: MDX.H1,
-            a: MDX.A,
-            p: MDX.P,
-            hr: MDX.Hr,
-            ul: MDX.UnorderedList,
-            li: MDX.List,
-            pre: MDX.Pre,
-            img: (props: any) => (
-              <MDX.ImgDocs activeVersion={activeVersion} {...props} />
-            ),
-            CodeSnippets: MDX.CodeSnippets,
-            Callout: MDX.Callout,
-            IfRenderer: MDX.IfRenderer,
-            YouTubeCallout: MDX.YouTubeCallout,
-            FeatureSnippets: MDX.FeatureSnippets,
-          }}
-        />
-      </article>
+      <article>{page.content}</article>
     </div>
   );
 }

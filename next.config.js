@@ -1,3 +1,6 @@
+const withStorybook =
+  require("@storybook/nextjs-server/next-config")(/* sb config */);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -40,4 +43,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withStorybook(nextConfig);

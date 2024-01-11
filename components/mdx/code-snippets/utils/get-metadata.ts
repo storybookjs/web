@@ -1,12 +1,11 @@
 import { packageManagers } from "@/docs-package-managers";
 import { docsVersions } from "@/docs-versions";
-import { bundleMDX } from "mdx-bundler";
+import { compileMDX } from "next-mdx-remote/rsc";
 import { cookies } from "next/headers";
 import { firefoxThemeLight } from "../themes/firefox-theme-vscode";
 import fs from "fs";
 import rehypePrettyCode from "rehype-pretty-code";
 import { languages } from "@/docs-languages";
-import { parseSnippetContent } from "./get-file-name";
 
 interface Props {
   paths: string[];
@@ -41,32 +40,15 @@ export const getMetadata = async ({ paths }: Props) => {
       const language =
         segments.find((s) => languages.map((p) => p.id).includes(s)) ?? null;
 
-      // Get the frontmatter and code from the MDX file
-      const { matter } = await bundleMDX({
+      const { content, frontmatter } = await compileMDX<{ title: string }>({
         source,
-        mdxOptions(options) {
-          options.rehypePlugins = [
-            ...(options.rehypePlugins ?? []),
-            [rehypePrettyCode, rehypePrettyCodeOptions],
-          ];
-
-          return options;
-        },
-      });
-
-      // console.log(matter);
-      const fifi = parseSnippetContent(matter.content);
-      // console.log(fifi);
-
-      const { frontmatter, code } = await bundleMDX({
-        source: fifi[1],
-        mdxOptions(options) {
-          options.rehypePlugins = [
-            ...(options.rehypePlugins ?? []),
-            [rehypePrettyCode, rehypePrettyCodeOptions],
-          ];
-
-          return options;
+        options: {
+          parseFrontmatter: true,
+          mdxOptions: {
+            remarkPlugins: [],
+            rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions] as any],
+            format: "mdx",
+          },
         },
       });
 
@@ -76,7 +58,7 @@ export const getMetadata = async ({ paths }: Props) => {
         path,
         fileName,
         option,
-        code,
+        content,
         renderer,
         packageManager,
         language,

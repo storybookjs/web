@@ -35,7 +35,7 @@ interface TreeProps extends TreeMetaProps {
 
 interface CodeSnippetsProps {
   path: string;
-  code: string;
+  content: ReactNode;
   fileName: string;
   option: string | null;
   renderer: string | null;
