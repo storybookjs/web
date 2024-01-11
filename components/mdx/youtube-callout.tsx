@@ -5,5 +5,5 @@ type Props = {
 };
 
 export const YouTubeCallout: FC<Props> = ({ id }) => {
-  return <div className="">Code Snippets</div>;
+  return <div className="">YouTubeCallout</div>;
 };

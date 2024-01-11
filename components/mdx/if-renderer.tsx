@@ -5,5 +5,5 @@ type Props = {
 };
 
 export const IfRenderer: FC<Props> = ({ id }) => {
-  return <div className="">Code Snippets</div>;
+  return <div className="">IfRenderer</div>;
 };
