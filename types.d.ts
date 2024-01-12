@@ -1,5 +1,6 @@
 interface HeaderProps {
   variant?: "home" | "system";
+  tree?: TreeProps[];
 }
 
 type Meta = {

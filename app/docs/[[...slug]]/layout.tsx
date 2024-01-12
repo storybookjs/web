@@ -35,7 +35,7 @@ export default async function Layout({
 
   return (
     <Fragment>
-      <Header variant="system" />
+      <Header variant="system" tree={tree} />
       <Image
         src="/bubbles.png"
         alt="Storybook Docs"
@@ -43,7 +43,7 @@ export default async function Layout({
         height={339}
         className="w-full absolute top-0 left-0 -z-10"
       />
-      <main className={cn(container, "lg:pl-5 lg:pr-8 flex gap-4")}>
+      <main className={cn(container, "md:pl-5 lg:pr-8 flex gap-4")}>
         <Sidebar>
           <NavDocs tree={tree} activeVersion={activeVersionForPath} />
         </Sidebar>

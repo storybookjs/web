@@ -16,7 +16,7 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
   const pathname = usePathname();
 
   return (
-    <nav className="w-[228px] max-[848px]:hidden block sticky self-start top-[72px]">
+    <nav className="w-[228px] hidden md:block sticky self-start top-[72px]">
       <ScrollAreaPrimitive.Root className="relative overflow-hidden h-[calc(100vh-72px)] w-full">
         <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
           <div className="py-12 pr-4 pl-1">
