@@ -1,5 +1,3 @@
-"use client";
-
 import { setRendererCookie } from "@/app/actions";
 import { renderers } from "@/docs-renderers";
 import { cn } from "@/lib/utils";
