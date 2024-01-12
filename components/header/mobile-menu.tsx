@@ -1,12 +1,11 @@
-import { FC, useState } from "react";
-import { CheckIcon, MenuIcon } from "@storybook/icons";
+import { FC, ReactNode } from "react";
+import { MenuIcon } from "@storybook/icons";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
-  const [bookmarksChecked, setBookmarksChecked] = useState(true);
-  const [urlsChecked, setUrlsChecked] = useState(false);
-
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -21,58 +20,114 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          className="bg-white w-screen h-[80vh] rounded-b-xl shadow-xl p-[5px] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade z-50"
-          sideOffset={22}
+          className="bg-white w-screen md:w-64 h-[80vh] md:h-auto md:max-h-[80vh] rounded-b-lg md:rounded-lg shadow-xl data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade z-50 md:border md:border-zinc-200 mt-6 md:mt-2"
+          align="end"
         >
-          <DropdownMenu.Item className="group text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1">
-            New Tab{" "}
-            <div className="ml-auto pl-[20px] text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8">
-              ⌘+T
-            </div>
-          </DropdownMenu.Item>
-          <DropdownMenu.Item className="group text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1">
-            New Window{" "}
-            <div className="ml-auto pl-[20px] text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8">
-              ⌘+N
-            </div>
-          </DropdownMenu.Item>
-          <DropdownMenu.Item
-            className="group text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
-            disabled
-          >
-            New Private Window{" "}
-            <div className="ml-auto pl-[20px] text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8">
-              ⇧+⌘+N
-            </div>
-          </DropdownMenu.Item>
+          <div className="w-full h-full overflow-y-scroll md:max-h-[80vh] p-4 md:p-6 md:pt-5">
+            <DropdownLabel>Why</DropdownLabel>
+            <DropdownItem href="/docs/get-started/why-storybook">
+              Why Storybook
+            </DropdownItem>
+            <DropdownItem
+              href="https://www.componentdriven.org/"
+              isExternal
+              target="_blank"
+            >
+              Component-driven UI
+            </DropdownItem>
 
-          <DropdownMenu.Separator className="h-[1px] bg-violet6 m-[5px]" />
+            <DropdownLabel>Docs</DropdownLabel>
+            <DropdownItem href="/docs">Guides</DropdownItem>
+            <DropdownItem href="/tutorials">Tutorials</DropdownItem>
+            <DropdownItem href="releases">Changelog</DropdownItem>
 
-          <DropdownMenu.CheckboxItem
-            className="group text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
-            checked={bookmarksChecked}
-            onCheckedChange={setBookmarksChecked}
-          >
-            <DropdownMenu.ItemIndicator className="absolute left-0 w-[25px] inline-flex items-center justify-center">
-              <CheckIcon />
-            </DropdownMenu.ItemIndicator>
-            Show Bookmarks{" "}
-            <div className="ml-auto pl-[20px] text-mauve11 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8">
-              ⌘+B
-            </div>
-          </DropdownMenu.CheckboxItem>
-          <DropdownMenu.CheckboxItem
-            className="text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
-            checked={urlsChecked}
-            onCheckedChange={setUrlsChecked}
-          >
-            <DropdownMenu.ItemIndicator className="absolute left-0 w-[25px] inline-flex items-center justify-center">
-              <CheckIcon />
-            </DropdownMenu.ItemIndicator>
-            Show Full URLs
-          </DropdownMenu.CheckboxItem>
+            <DropdownLabel>Showcase</DropdownLabel>
+            <DropdownItem href="https://storybook.js.org/showcase" isExternal>
+              Explore
+            </DropdownItem>
+            <DropdownItem
+              href="https://storybook.js.org/showcase/projects"
+              isExternal
+            >
+              Projects
+            </DropdownItem>
+            <DropdownItem
+              href="https://storybook.js.org/showcase/glossary"
+              isExternal
+            >
+              Component glossary
+            </DropdownItem>
+
+            <DropdownLabel>Community</DropdownLabel>
+            <DropdownItem href="https://storybook.js.org/integrations">
+              Integrations
+            </DropdownItem>
+            <DropdownItem href="/community">Get involved</DropdownItem>
+            <DropdownItem href="https://storybook.js.org/blog">
+              Blog
+            </DropdownItem>
+            <DropdownItem href="https://chromatic-ui.notion.site/Storybook-Jobs-Board-950e001e4a114a39980a5b09c3a3b3e1?pvs=4">
+              Jobs board
+            </DropdownItem>
+            <DropdownItem href="https://chromatic-ui.notion.site/Give-a-conference-talk-about-Storybook-e8d8e78d4d0a448a811a8d927194c527?pvs=4">
+              Conference board
+            </DropdownItem>
+
+            <DropdownLabel>Chromatic</DropdownLabel>
+            <DropdownItem
+              href="https://www.chromatic.com/?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
+              isExternal
+              target="_blank"
+            >
+              Visual testing
+            </DropdownItem>
+            <DropdownItem
+              href="https://www.chromatic.com/sales?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
+              isExternal
+              target="_blank"
+            >
+              Enterprise
+            </DropdownItem>
+          </div>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
   );
 };
+
+interface DropdownLabelProps {
+  children: ReactNode;
+}
+
+interface DropdownItemProps {
+  children: ReactNode;
+  isExternal?: boolean;
+  href: string;
+  target?: "_blank" | "_self";
+}
+
+const DropdownLabel: FC<DropdownLabelProps> = ({ children }) => (
+  <DropdownMenu.Label className="text-md md:text-sm h-10 flex items-center mt-4 first:mt-0">
+    {children}
+  </DropdownMenu.Label>
+);
+
+const DropdownItem: FC<DropdownItemProps> = ({
+  children,
+  isExternal,
+  href,
+  target = "_self",
+}) => (
+  <DropdownMenu.Item
+    className="text-md md:text-sm h-10 md:h-8 flex items-center border-l border-l-zinc-200 ml-1 pl-3 text-zinc-500"
+    asChild
+  >
+    {isExternal ? (
+      <a href={href} target={target}>
+        {children}
+      </a>
+    ) : (
+      <Link href={href}>{children}</Link>
+    )}
+  </DropdownMenu.Item>
+);
