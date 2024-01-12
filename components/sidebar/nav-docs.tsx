@@ -8,7 +8,7 @@ import { VersionSelector } from "./version-selector";
 import { DocsVersion } from "@/docs-versions";
 
 interface NavDocsProps {
-  tree: TreeProps[] | undefined;
+  tree: TreeProps[] | null | undefined;
   activeVersion: DocsVersion;
 }
 
