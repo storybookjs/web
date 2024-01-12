@@ -1,10 +1,10 @@
 import fs from "fs";
 import { generateDocsTree } from "./get-tree";
 import { getNullableVersion } from "./get-version";
-import { firefoxThemeLight } from "@/components/mdx/code-snippets/themes/firefox-theme-vscode";
+import { firefoxThemeLight } from "@/components/docs/mdx/code-snippets/themes/firefox-theme-vscode";
 import rehypePrettyCode from "rehype-pretty-code";
 import { compileMDX } from "next-mdx-remote/rsc";
-import * as MDX from "@/components/mdx";
+import * as MDX from "@/components/docs/mdx";
 import rehypeSlug from "rehype-slug";
 
 const rehypePrettyCodeOptions = {

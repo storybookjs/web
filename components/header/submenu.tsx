@@ -4,7 +4,7 @@ import { cn } from "../../lib/utils";
 import { usePathname } from "next/navigation";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
-import { NavDocs } from "../sidebar/nav-docs";
+import { NavDocs } from "../docs/sidebar/nav-docs";
 
 export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
   const pathname = usePathname();
@@ -38,10 +38,10 @@ export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
           <DropdownMenu.Content
-            className="bg-white w-screen md:w-64 h-[74vh] md:h-[50vh] rounded-b-lg md:rounded-lg shadow-xl data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade md:border md:border-zinc-200 mt-6 md:mt-2"
+            className="bg-white w-screen md:w-64 h-[74vh] md:h-[50vh] rounded-b-lg md:rounded-lg shadow-xl data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade md:border md:border-zinc-200 mt-[17px] md:mt-2"
             align="end"
           >
-            <ScrollArea.Root className="w-full h-full" type="always">
+            <ScrollArea.Root className="w-full h-full">
               <ScrollArea.Viewport className="w-full h-full p-4 md:p-6 md:pt-5">
                 {activeVersion && (
                   <NavDocs tree={tree} activeVersion={activeVersion} />

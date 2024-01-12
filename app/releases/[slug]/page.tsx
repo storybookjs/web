@@ -2,13 +2,22 @@ import { Footer } from "@/components/footer/footer";
 import { Header } from "@/components/header/header";
 import { cn, container } from "@/lib/utils";
 import { Fragment } from "react";
-import { Sidebar } from "@/components/sidebar/sidebar";
+import { Sidebar } from "@/components/docs/sidebar/sidebar";
 import Link from "next/link";
 import { getRelease } from "@/lib/get-release";
 import fs from "fs";
 import { ReleaseNewsletter } from "@/components/release-newsletter";
 import { notFound } from "next/navigation";
-import { A, H1, H2, H3, Hr, P, UnorderedList, List } from "@/components/mdx";
+import {
+  A,
+  H1,
+  H2,
+  H3,
+  Hr,
+  P,
+  UnorderedList,
+  List,
+} from "@/components/docs/mdx";
 
 export default async function Home({
   params: { slug },
