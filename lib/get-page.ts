@@ -73,11 +73,13 @@ export const getPageData = async (path: string[], activeVersion: string) => {
   const parent = generateDocsTree({
     pathToFiles,
     activeVersion: getNullableVersion(path),
-  }).sort((a, b) =>
+  });
+
+  const sorted = parent?.sort((a, b) =>
     a?.tab?.order && b?.tab?.order ? a.tab.order - b.tab.order : 0
   );
 
-  const index = parent.find((item) => item.name === "index.mdx");
+  const index = sorted?.find((item) => item.name === "index.mdx");
 
   return {
     ...frontmatter,
