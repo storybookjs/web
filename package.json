@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "prebuild": "pnpm fetch-docs",
-    "build": "next build",
+    "build": "pnpm run fetch-docs && next build",
     "start": "next start",
     "lint": "next lint",
     "fetch-docs": "tsx scripts/getLocalDocs.ts"
