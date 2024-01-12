@@ -56,7 +56,6 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
           </div>
         </ScrollAreaPrimitive.Viewport>
         <ScrollBar className="pt-12 pb-6" />
-        <ScrollAreaPrimitive.Corner />
       </ScrollAreaPrimitive.Root>
     </nav>
   );

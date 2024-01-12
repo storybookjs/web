@@ -1,6 +1,13 @@
 interface HeaderProps {
   variant?: "home" | "system";
   tree?: TreeProps[];
+  activeVersion?: {
+    label: string;
+    id: string;
+    branch?: string;
+    tag?: string;
+    commit?: string;
+  };
 }
 
 type Meta = {

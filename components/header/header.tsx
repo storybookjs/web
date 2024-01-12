@@ -18,7 +18,11 @@ import { MobileMenu } from "./mobile-menu";
 import { Submenu } from "./submenu";
 import { Button } from "../ui/button";
 
-export const Header: FC<HeaderProps> = ({ variant = "home", tree }) => {
+export const Header: FC<HeaderProps> = ({
+  variant = "home",
+  tree,
+  activeVersion,
+}) => {
   const pathname = usePathname();
 
   return (
@@ -155,7 +159,11 @@ export const Header: FC<HeaderProps> = ({ variant = "home", tree }) => {
           <MobileMenu variant={variant} />
         </div>
         {pathname.startsWith("/docs") && (
-          <Submenu variant={variant} tree={tree} />
+          <Submenu
+            variant={variant}
+            tree={tree}
+            activeVersion={activeVersion}
+          />
         )}
       </div>
     </header>

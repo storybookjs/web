@@ -35,7 +35,11 @@ export default async function Layout({
 
   return (
     <Fragment>
-      <Header variant="system" tree={tree} />
+      <Header
+        variant="system"
+        tree={tree}
+        activeVersion={activeVersionForPath}
+      />
       <Image
         src="/bubbles.png"
         alt="Storybook Docs"

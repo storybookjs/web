@@ -90,10 +90,10 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
                 Enterprise
               </DropdownItem>
               <ScrollArea.Scrollbar
-                className="flex select-none touch-none p-0.5 bg-blackA3 transition-colors duration-[160ms] ease-out hover:bg-blackA5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+                className="flex select-none touch-none p-1 w-4 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
                 orientation="vertical"
               >
-                <ScrollArea.Thumb className="flex-1 bg-zinc-200 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+                <ScrollArea.Thumb className="flex-1 bg-zinc-200 rounded-full" />
               </ScrollArea.Scrollbar>
             </ScrollArea.Viewport>
           </ScrollArea.Root>
@@ -114,13 +114,13 @@ interface DropdownItemProps {
   target?: "_blank" | "_self";
 }
 
-const DropdownLabel: FC<DropdownLabelProps> = ({ children }) => (
+export const DropdownLabel: FC<DropdownLabelProps> = ({ children }) => (
   <DropdownMenu.Label className="text-md md:text-sm h-10 flex items-center mt-4 first:mt-0">
     {children}
   </DropdownMenu.Label>
 );
 
-const DropdownItem: FC<DropdownItemProps> = ({
+export const DropdownItem: FC<DropdownItemProps> = ({
   children,
   isExternal,
   href,
