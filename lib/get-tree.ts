@@ -23,6 +23,10 @@ export const generateDocsTree = ({
   docsRoot?: string;
   activeVersion: DocsVersion | null;
 }) => {
+  const fileExists = fs.existsSync(pathToFiles);
+
+  if (!fileExists) return null;
+
   const files = fs.readdirSync(pathToFiles);
   const tree: TreeProps[] = [];
 

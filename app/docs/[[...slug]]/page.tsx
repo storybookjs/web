@@ -60,7 +60,15 @@ export default async function Page({ params: { slug } }: Props) {
     activeVersion.id
   );
 
-  if (!page) notFound();
+  // if (!page) notFound();
+
+  if (!page) {
+    return (
+      <div>
+        <MDX.H1>Page Not Found</MDX.H1>
+      </div>
+    );
+  }
 
   return (
     <div>
