@@ -70,6 +70,7 @@ export default async function Page({ params: { slug } }: Props) {
     return (
       <div>
         <MDX.H1>Page Not Found</MDX.H1>
+        <div>Root dir: {getRootDir()}</div>
       </div>
     );
   }
