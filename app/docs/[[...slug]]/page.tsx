@@ -8,6 +8,7 @@ import { getPageData } from "@/lib/get-page";
 import { docsVersions } from "@/docs-versions";
 import { cookies } from "next/headers";
 import { Renderers } from "@/components/docs/renderers";
+import path from "path";
 
 const isHomepage = (slug: string[]) => {
   return (
@@ -60,6 +61,9 @@ export default async function Page({ params: { slug } }: Props) {
     activeVersion.id
   );
 
+  const getRootDir = () => path.parse(process.cwd()).root;
+  console.log(getRootDir());
+
   // if (!page) notFound();
 
   if (!page) {
@@ -73,6 +77,7 @@ export default async function Page({ params: { slug } }: Props) {
   return (
     <div>
       <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
+      <div>Root dir: {getRootDir()}</div>
       <Renderers activeRenderer={activeRenderer} />
       {page.tabs && page.tabs.length > 0 && (
         <div className="flex items-center gap-8 border-b border-zinc-200">
