@@ -20,75 +20,83 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          className="bg-white w-screen md:w-64 h-[80vh] md:h-auto md:max-h-[80vh] rounded-b-lg md:rounded-lg shadow-xl data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade z-50 md:border md:border-zinc-200 mt-6 md:mt-2"
+          className="bg-white w-screen md:w-64 h-[80vh] md:h-[50vh] rounded-b-lg md:rounded-lg shadow-xl data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade z-50 md:border md:border-zinc-200 mt-6 md:mt-2"
           align="end"
         >
-          <div className="w-full h-full overflow-y-scroll md:max-h-[80vh] p-4 md:p-6 md:pt-5">
-            <DropdownLabel>Why</DropdownLabel>
-            <DropdownItem href="/docs/get-started/why-storybook">
-              Why Storybook
-            </DropdownItem>
-            <DropdownItem
-              href="https://www.componentdriven.org/"
-              isExternal
-              target="_blank"
-            >
-              Component-driven UI
-            </DropdownItem>
+          <ScrollArea.Root className="w-full h-full" type="always">
+            <ScrollArea.Viewport className="w-full h-full p-4 md:p-6 md:pt-5">
+              <DropdownLabel>Why</DropdownLabel>
+              <DropdownItem href="/docs/get-started/why-storybook">
+                Why Storybook
+              </DropdownItem>
+              <DropdownItem
+                href="https://www.componentdriven.org/"
+                isExternal
+                target="_blank"
+              >
+                Component-driven UI
+              </DropdownItem>
 
-            <DropdownLabel>Docs</DropdownLabel>
-            <DropdownItem href="/docs">Guides</DropdownItem>
-            <DropdownItem href="/tutorials">Tutorials</DropdownItem>
-            <DropdownItem href="releases">Changelog</DropdownItem>
+              <DropdownLabel>Docs</DropdownLabel>
+              <DropdownItem href="/docs">Guides</DropdownItem>
+              <DropdownItem href="/tutorials">Tutorials</DropdownItem>
+              <DropdownItem href="releases">Changelog</DropdownItem>
 
-            <DropdownLabel>Showcase</DropdownLabel>
-            <DropdownItem href="https://storybook.js.org/showcase" isExternal>
-              Explore
-            </DropdownItem>
-            <DropdownItem
-              href="https://storybook.js.org/showcase/projects"
-              isExternal
-            >
-              Projects
-            </DropdownItem>
-            <DropdownItem
-              href="https://storybook.js.org/showcase/glossary"
-              isExternal
-            >
-              Component glossary
-            </DropdownItem>
+              <DropdownLabel>Showcase</DropdownLabel>
+              <DropdownItem href="https://storybook.js.org/showcase" isExternal>
+                Explore
+              </DropdownItem>
+              <DropdownItem
+                href="https://storybook.js.org/showcase/projects"
+                isExternal
+              >
+                Projects
+              </DropdownItem>
+              <DropdownItem
+                href="https://storybook.js.org/showcase/glossary"
+                isExternal
+              >
+                Component glossary
+              </DropdownItem>
 
-            <DropdownLabel>Community</DropdownLabel>
-            <DropdownItem href="https://storybook.js.org/integrations">
-              Integrations
-            </DropdownItem>
-            <DropdownItem href="/community">Get involved</DropdownItem>
-            <DropdownItem href="https://storybook.js.org/blog">
-              Blog
-            </DropdownItem>
-            <DropdownItem href="https://chromatic-ui.notion.site/Storybook-Jobs-Board-950e001e4a114a39980a5b09c3a3b3e1?pvs=4">
-              Jobs board
-            </DropdownItem>
-            <DropdownItem href="https://chromatic-ui.notion.site/Give-a-conference-talk-about-Storybook-e8d8e78d4d0a448a811a8d927194c527?pvs=4">
-              Conference board
-            </DropdownItem>
+              <DropdownLabel>Community</DropdownLabel>
+              <DropdownItem href="https://storybook.js.org/integrations">
+                Integrations
+              </DropdownItem>
+              <DropdownItem href="/community">Get involved</DropdownItem>
+              <DropdownItem href="https://storybook.js.org/blog">
+                Blog
+              </DropdownItem>
+              <DropdownItem href="https://chromatic-ui.notion.site/Storybook-Jobs-Board-950e001e4a114a39980a5b09c3a3b3e1?pvs=4">
+                Jobs board
+              </DropdownItem>
+              <DropdownItem href="https://chromatic-ui.notion.site/Give-a-conference-talk-about-Storybook-e8d8e78d4d0a448a811a8d927194c527?pvs=4">
+                Conference board
+              </DropdownItem>
 
-            <DropdownLabel>Chromatic</DropdownLabel>
-            <DropdownItem
-              href="https://www.chromatic.com/?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
-              isExternal
-              target="_blank"
-            >
-              Visual testing
-            </DropdownItem>
-            <DropdownItem
-              href="https://www.chromatic.com/sales?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
-              isExternal
-              target="_blank"
-            >
-              Enterprise
-            </DropdownItem>
-          </div>
+              <DropdownLabel>Chromatic</DropdownLabel>
+              <DropdownItem
+                href="https://www.chromatic.com/?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
+                isExternal
+                target="_blank"
+              >
+                Visual testing
+              </DropdownItem>
+              <DropdownItem
+                href="https://www.chromatic.com/sales?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
+                isExternal
+                target="_blank"
+              >
+                Enterprise
+              </DropdownItem>
+              <ScrollArea.Scrollbar
+                className="flex select-none touch-none p-0.5 bg-blackA3 transition-colors duration-[160ms] ease-out hover:bg-blackA5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+                orientation="vertical"
+              >
+                <ScrollArea.Thumb className="flex-1 bg-zinc-200 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+              </ScrollArea.Scrollbar>
+            </ScrollArea.Viewport>
+          </ScrollArea.Root>
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
