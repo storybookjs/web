@@ -59,6 +59,9 @@ dependencies:
   fs-extra:
     specifier: ^11.2.0
     version: 11.2.0
+  fs-find-root:
+    specifier: ^2.0.0
+    version: 2.0.0
   gray-matter:
     specifier: ^4.0.3
     version: 4.0.3
@@ -5205,6 +5208,10 @@ packages:
       is-symbol: 1.0.4
     dev: true
 
+  /es6-promise@3.3.1:
+    resolution: {integrity: sha512-SOp9Phqvqn7jtEUxPWdWfWoLmyt2VaJ6MpvP9Comy1MceMXqE6bxvaTu4iaxpYYPzhny28Lc+M87/c2cPK6lDg==}
+    dev: false
+
   /esbuild-plugin-alias@0.2.1:
     resolution: {integrity: sha512-jyfL/pwPqaFXyKnj8lP8iLk6Z0m099uXR45aSN8Av1XD4vhvQutxxPzgA2bTcAwQpa1zCXDcWOlhFgyP3GKqhQ==}
     dev: true
@@ -5951,6 +5958,12 @@ packages:
       graceful-fs: 4.2.11
       jsonfile: 6.1.0
       universalify: 2.0.1
+
+  /fs-find-root@2.0.0:
+    resolution: {integrity: sha512-LmgsxDwnxd+sfm3EZ66P8nSlUMm69hKz/LdXKChK2a+5xXnrAB7MPn2uo0VCyrgj8lZNqyj6EIdD516ILZAEBg==}
+    dependencies:
+      es6-promise: 3.3.1
+    dev: false
 
   /fs-minipass@2.1.0:
     resolution: {integrity: sha512-V/JgOLFCS+R6Vcq0slCuaeWEdNC3ouDlJMNIsacH2VtALiu9mV4LPrHc5cDl8k5aw6J8jwgWWpiTo5RYhmIzvg==}
