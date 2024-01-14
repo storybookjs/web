@@ -6,7 +6,7 @@ import { Sidebar } from "@/components/sidebar/sidebar";
 import { TableOfContent } from "@/components/table-of-content";
 import { cn, container } from "@/lib/utils";
 import { NavDocs } from "@/components/sidebar/nav-docs";
-import { getNullableVersion, getVersion } from "@/lib/get-version";
+import { getVersion } from "@/lib/get-version";
 import { Fragment } from "react";
 import { generateDocsTree } from "@/lib/get-tree";
 
@@ -23,15 +23,11 @@ export default async function Layout({
   children: React.ReactNode;
   params: { slug: string[] };
 }) {
-  // Get the latest version
-  const activeVersionForPath = getVersion(params.slug);
-  const activeVersionForSlug = getNullableVersion(params.slug);
+  const activeVersion = getVersion(params.slug);
+  const path = `content/docs/${activeVersion.id}`;
+  const tree = generateDocsTree(path);
 
-  // Get the tree for the version
-  const tree = generateDocsTree({
-    pathToFiles: `content/docs/${activeVersionForPath?.id}/docs`,
-    activeVersion: activeVersionForSlug,
-  });
+  // console.dir(tree, { depth: 2 });
 
   return (
     <Fragment>
@@ -45,7 +41,7 @@ export default async function Layout({
       />
       <main className={cn(container, "lg:pl-5 lg:pr-8 flex gap-4")}>
         <Sidebar>
-          <NavDocs tree={tree} activeVersion={activeVersionForPath} />
+          <NavDocs tree={tree} activeVersion={activeVersion} />
         </Sidebar>
         <div className="w-full flex-1 min-h-[1400px] py-12">{children}</div>
         <TableOfContent />

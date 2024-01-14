@@ -8,9 +8,7 @@ import { getPageData } from "@/lib/get-page";
 import { docsVersions } from "@/docs-versions";
 import { cookies } from "next/headers";
 import { Renderers } from "@/components/docs/renderers";
-import path from "path";
-// @ts-ignore
-import find from "fs-find-root";
+import { generateDocsTree } from "@/lib/get-tree";
 
 const isHomepage = (slug: string[]) => {
   return (
@@ -28,6 +26,19 @@ interface Props {
     slug: string[];
   };
 }
+
+// export const generateStaticParams = async () => {
+//   const machin = generateDocsTree3({});
+//   const result = machin
+//     ? machin.map((post) => ({
+//         slug: post.slug.split("/").filter((s) => s !== ""),
+//       }))
+//     : [{ slug: ["/docs"] }];
+
+//   console.log(result);
+
+//   return result;
+// };
 
 export async function generateMetadata({ params: { slug } }: Props) {
   const activeVersion = getVersion(slug);
@@ -63,18 +74,14 @@ export default async function Page({ params: { slug } }: Props) {
     activeVersion.id
   );
 
-  const getRootDir = () => path.parse(process.cwd()).root;
-  console.log(getRootDir());
+  // console.log(page);
 
-  // if (!page) notFound();
-  const superDir = await find.dir("content", process.cwd());
+  if (!page) notFound();
 
   if (!page) {
     return (
       <div>
         <MDX.H1>Page Not Found</MDX.H1>
-        <div>Root dir: {getRootDir()}</div>
-        <div>{superDir}</div>
       </div>
     );
   }
@@ -82,8 +89,6 @@ export default async function Page({ params: { slug } }: Props) {
   return (
     <div>
       <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
-      <div>Root dir: {getRootDir()}</div>
-      <div>{superDir}</div>
       <Renderers activeRenderer={activeRenderer} />
       {page.tabs && page.tabs.length > 0 && (
         <div className="flex items-center gap-8 border-b border-zinc-200">

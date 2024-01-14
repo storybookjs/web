@@ -1,4 +1,3 @@
-import { DocsVersion, docsVersions } from "@/docs-versions";
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
@@ -14,50 +13,25 @@ function getMetadata(filePath: string): any {
   };
 }
 
-export const generateDocsTree = ({
-  pathToFiles,
-  docsRoot = pathToFiles,
-  activeVersion,
-}: {
-  pathToFiles: string;
-  docsRoot?: string;
-  activeVersion: DocsVersion | null;
-}) => {
-  const fileExists = fs.existsSync(pathToFiles);
+export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
+  const newPath = pathToFiles || "content/docs";
+  const newDocsRoot = docsRoot || newPath;
 
-  if (!fileExists) return null;
-
-  const files = fs.readdirSync(pathToFiles);
+  const files = fs.readdirSync(newPath);
   const tree: TreeProps[] = [];
 
   files.forEach((file) => {
-    const filePath = path.join(pathToFiles, file);
-
-    // Slug
-    let slug = filePath;
-    if (activeVersion)
-      slug = filePath
-        .replace(
-          `content/docs/${activeVersion.id}/docs`,
-          `/docs/${activeVersion.id}`
-        )
-        .replace(/\.mdx?$|\.md$/, "");
-    if (activeVersion === null)
-      slug = filePath
-        .replace(`content/docs/${docsVersions[0].id}/docs`, `/docs`)
-        .replace(/\.mdx?$|\.md$/, "");
-
+    const filePath = path.join(newPath, file);
+    const slug = filePath.replace("content/", "").replace(/\.mdx?$|\.md$/, "");
     const isDirectory = fs.lstatSync(filePath).isDirectory();
 
     if (isDirectory) {
-      const childItems = generateDocsTree({
-        pathToFiles: filePath,
-        docsRoot,
-        activeVersion,
-      });
+      const childItems = generateDocsTree(filePath, newDocsRoot);
 
       if (childItems) {
-        const indexFile = childItems.find((item) => item.name === "index.mdx");
+        const indexFile = childItems.find(
+          (item) => item.name === "index.mdx" || item.name === "index.md"
+        );
         const children = childItems
           .sort((a, b) =>
             a?.sidebar?.order && b?.sidebar?.order
@@ -75,6 +49,15 @@ export const generateDocsTree = ({
             pathSegment: filePath,
             type: "directory",
             children: isTab ? [] : children,
+          });
+        } else {
+          tree.push({
+            title: "No title",
+            name: file,
+            slug,
+            pathSegment: filePath,
+            type: "directory",
+            children,
           });
         }
       }
