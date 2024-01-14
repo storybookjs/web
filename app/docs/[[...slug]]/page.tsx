@@ -8,7 +8,7 @@ import { getPageData } from "@/lib/get-page";
 import { docsVersions } from "@/docs-versions";
 import { cookies } from "next/headers";
 import { Renderers } from "@/components/docs/renderers";
-import { generateDocsTree3 } from "@/lib/get-tree-2";
+import { generateDocsTree } from "@/lib/get-tree";
 
 const isHomepage = (slug: string[]) => {
   return (
@@ -27,18 +27,18 @@ interface Props {
   };
 }
 
-export const generateStaticParams = async () => {
-  const machin = generateDocsTree3({});
-  const result = machin
-    ? machin.map((post) => ({
-        slug: post.slug.split("/").filter((s) => s !== ""),
-      }))
-    : [{ slug: ["/docs"] }];
+// export const generateStaticParams = async () => {
+//   const machin = generateDocsTree3({});
+//   const result = machin
+//     ? machin.map((post) => ({
+//         slug: post.slug.split("/").filter((s) => s !== ""),
+//       }))
+//     : [{ slug: ["/docs"] }];
 
-  console.log(result);
+//   console.log(result);
 
-  return result;
-};
+//   return result;
+// };
 
 export async function generateMetadata({ params: { slug } }: Props) {
   const activeVersion = getVersion(slug);
@@ -74,7 +74,9 @@ export default async function Page({ params: { slug } }: Props) {
     activeVersion.id
   );
 
-  // if (!page) notFound();
+  // console.log(page);
+
+  if (!page) notFound();
 
   if (!page) {
     return (
@@ -83,16 +85,6 @@ export default async function Page({ params: { slug } }: Props) {
       </div>
     );
   }
-
-  // const machin = generateDocsTree3({});
-
-  // console.log(machin);
-
-  // console.log(
-  //   machin?.map((post) => ({
-  //     slug: post.slug,
-  //   }))
-  // );
 
   return (
     <div>

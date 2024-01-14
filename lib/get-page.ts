@@ -1,6 +1,5 @@
 import fs from "fs";
 import { generateDocsTree } from "./get-tree";
-import { getNullableVersion } from "./get-version";
 import { firefoxThemeLight } from "@/components/mdx/code-snippets/themes/firefox-theme-vscode";
 import rehypePrettyCode from "rehype-pretty-code";
 import { compileMDX } from "next-mdx-remote/rsc";
@@ -13,7 +12,7 @@ const rehypePrettyCodeOptions = {
 
 export const getPageData = async (path: string[], activeVersion: string) => {
   const segment = path ? path.join("/").replace(`${activeVersion}/`, "") : "/";
-  const superRootPath = `content/docs/${activeVersion}/docs`;
+  const superRootPath = `content/docs/${activeVersion}`;
 
   const indexPath = `${superRootPath}/${segment}/index.mdx`;
   const linkPath =
@@ -70,10 +69,7 @@ export const getPageData = async (path: string[], activeVersion: string) => {
     ? `${superRootPath}/${segment}`.split("/").slice(0, -1).join("/")
     : `${superRootPath}/${segment}`;
 
-  const parent = generateDocsTree({
-    pathToFiles,
-    activeVersion: getNullableVersion(path),
-  });
+  const parent = generateDocsTree(pathToFiles);
 
   const sorted = parent?.sort((a, b) =>
     a?.tab?.order && b?.tab?.order ? a.tab.order - b.tab.order : 0
