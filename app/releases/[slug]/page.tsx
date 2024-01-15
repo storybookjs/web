@@ -34,6 +34,7 @@ export const generateStaticParams = async () => {
 export default async function Page({ params: { slug } }: Props) {
   const releases = getReleases();
 
+  // TODO: This is not really working on prod
   if (releases.includes(slug) === false) return notFound();
 
   const page = await getRelease(slug);

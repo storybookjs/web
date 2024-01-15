@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm fetch-docs && next build",
     "start": "next start",
     "lint": "next lint",
     "fetch-docs": "tsx scripts/getLocalDocs.ts"
