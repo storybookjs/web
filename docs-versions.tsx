@@ -29,11 +29,11 @@ export const docsVersions: DocsVersion[] = [
     id: "8.0-test-2",
     branch: "charles-docs-new-structure",
   },
-  {
-    label: "Version Test 3",
-    id: "8.0-test-3",
-    branch: "charles-docs-new-structure",
-  },
+  // {
+  //   label: "Version Test 3",
+  //   id: "8.0-test-3",
+  //   branch: "charles-docs-new-structure",
+  // },
   // {
   //   label: "Verion 8.0 - Alpha 7",
   //   id: "8.0.0-alpha.7",
