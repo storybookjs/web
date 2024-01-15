@@ -4,22 +4,11 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { renderers } from "@/docs-renderers";
-import { getPageData } from "@/lib/get-page";
+import { getPageData } from "@/lib/get-page2";
 import { docsVersions } from "@/docs-versions";
 import { cookies } from "next/headers";
 import { Renderers } from "@/components/docs/renderers";
 import { generateDocsTree } from "@/lib/get-tree";
-
-const isHomepage = (slug: string[]) => {
-  return (
-    slug === undefined ||
-    (slug &&
-      slug.length === 1 &&
-      docsVersions.some((version) => {
-        return slug[0] === version.id;
-      }))
-  );
-};
 
 interface Props {
   params: {
@@ -35,7 +24,6 @@ export const generateStaticParams = async () => {
   const ids = (data: TreeProps[]) => {
     data.forEach((item) => {
       if ("slug" in item) {
-        // console.log(item.slug);
         result.push({
           slug: item.slug.replace("docs/", "").split("/"),
         });
@@ -48,11 +36,26 @@ export const generateStaticParams = async () => {
 
   ids(tree);
 
-  return result;
+  return [{ slug: ["get-started"] }, { slug: ["8.0-test-1", "get-started"] }];
+
+  // return result;
 };
 
 export default async function Page({ params: { slug } }: Props) {
   const tree = generateDocsTree();
+  const activeVersion = getVersion(slug);
+  const hasVersion = docsVersions.some((version) => slug[0] === version.id);
+  const newSlug = [...slug];
+  if (!hasVersion) newSlug.unshift(activeVersion.id);
 
-  return <div>Slug: {slug}</div>;
+  const page = await getPageData(newSlug);
+
+  console.log(page);
+
+  return (
+    <div>
+      <div>Slug: {slug.join("/")}</div>
+      <div>Title: {page?.title}</div>
+    </div>
+  );
 }
