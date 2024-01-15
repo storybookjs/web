@@ -51,11 +51,11 @@ export default async function Page({ params: { slug } }: Props) {
   const hasVersion = docsVersions.some((version) => slug[0] === version.id);
   const newSlug = [...slug];
   if (!hasVersion) newSlug.unshift(activeVersion.id);
-  const cookieStore = cookies();
-  const rendererCookie = cookieStore.get("sb-docs-renderer");
-  const activeRenderer = rendererCookie
-    ? rendererCookie.value
-    : renderers[0].id;
+  // const cookieStore = cookies();
+  // const rendererCookie = cookieStore.get("sb-docs-renderer");
+  // const activeRenderer = rendererCookie
+  //   ? rendererCookie.value
+  //   : renderers[0].id;
 
   const page = await getPageData(newSlug);
 
@@ -64,7 +64,7 @@ export default async function Page({ params: { slug } }: Props) {
   return (
     <div>
       <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
-      <Renderers activeRenderer={activeRenderer} />
+      {/* <Renderers activeRenderer={activeRenderer} /> */}
       {page.tabs && page.tabs.length > 0 && (
         <div className="flex items-center gap-8 border-b border-zinc-200">
           {page.tabs.map((tab) => {

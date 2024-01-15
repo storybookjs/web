@@ -22,9 +22,6 @@ export const getMetadata = async ({ paths }: Props) => {
 
   const content: CodeSnippetsProps[] = await Promise.all(
     paths.map(async (path) => {
-      // Parse data
-      console.log(path);
-
       const source = await fs.promises.readFile(
         process.cwd() + `/content/snippets/${version}/${path}`,
         "utf8"
