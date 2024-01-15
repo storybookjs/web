@@ -46,7 +46,10 @@ export const CodeSnippets = async ({ paths }: Props) => {
   ];
 
   // Get metadata for all files from the Code Snippets component
+  // This happen on the server since we need to call the file system (fs)
   const codeSnippetsContent: CodeSnippetsProps[] = await getMetadata({ paths });
 
+  // Render the Code Snippets component
+  // This happen on the client since we need to use the context
   return <CodeSnippetsClient content={codeSnippetsContent} />;
 };

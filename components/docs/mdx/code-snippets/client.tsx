@@ -5,6 +5,7 @@ import { CodeWrapper } from "./wrapper";
 import { getFilters } from "./utils/get-filters";
 import { getActiveContent } from "./utils/get-active-content";
 import { useDocs } from "@/app/docs/provider";
+import { Dropdown } from "./dropdown";
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[];
@@ -13,7 +14,12 @@ interface CodeSnippetsClientProps {
 export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   content,
 }) => {
-  const { activeLanguage, activePackageManager } = useDocs();
+  const {
+    activeLanguage,
+    activePackageManager,
+    setLanguage,
+    setPackageManager,
+  } = useDocs();
 
   // Get filters - If preformatted text, we don't need filters
   const filters = getFilters({ codeSnippetsContent: content });
@@ -27,34 +33,31 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   });
 
   // Helper
-  const contentWithoutCode = content?.map((obj) =>
-    (({ content, ...o }) => o)(obj)
-  );
-
-  // console.log(renderer, language, packageManager, version);
-  // console.log("Content", contentWithoutCode);
+  // const contentWithoutCode = content?.map((obj) =>
+  //   (({ content, ...o }) => o)(obj)
+  // );
 
   return (
     <CodeWrapper
       title="Code Snippets"
       options={
         <>
-          {/* {filters && filters.languages.length > 1 && (
-        <Dropdown
-          list={filters.languages}
-          activeId={language}
-          type="language"
-          action={setLanguageCookie}
-        />
-      )}
-      {filters && filters.packageManagers.length > 1 && (
-        <Dropdown
-          list={filters.packageManagers}
-          activeId={packageManager}
-          type="packageManager"
-          action={setPackageManagerCookie}
-        />
-      )} */}
+          {filters && filters.languages.length > 1 && (
+            <Dropdown
+              list={filters.languages}
+              activeId={activeLanguage}
+              type="language"
+              action={setLanguage}
+            />
+          )}
+          {filters && filters.packageManagers.length > 1 && (
+            <Dropdown
+              list={filters.packageManagers}
+              activeId={activePackageManager}
+              type="packageManager"
+              action={setPackageManager}
+            />
+          )}
         </>
       }
     >

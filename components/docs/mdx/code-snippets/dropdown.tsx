@@ -6,8 +6,8 @@ import { ChevronSmallDownIcon } from "@storybook/icons";
 
 type Props = {
   list: CodeSnippetsFilter[];
-  activeId: string;
-  action: (formData?: FormData) => Promise<void>;
+  activeId: string | null;
+  action: (id: string) => void;
   type: "language" | "packageManager";
 };
 
@@ -34,14 +34,11 @@ export const Dropdown: FC<Props> = ({ list, activeId, action, type }) => {
         >
           <DropdownMenu.Group>
             {list.map((item) => {
-              const formData = new FormData();
-              if (item?.id) formData.append(type, item?.id);
-
               return (
                 <DropdownMenu.Item
                   key={item?.id}
                   className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
-                  onClick={() => action(formData)}
+                  onClick={() => item?.id && action(item.id)}
                 >
                   {item?.title}
                 </DropdownMenu.Item>
