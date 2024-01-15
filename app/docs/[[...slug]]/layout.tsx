@@ -8,7 +8,8 @@ import { cn, container } from "@/lib/utils";
 import { NavDocs } from "@/components/docs/sidebar/nav-docs";
 import { getVersion } from "@/lib/get-version";
 import { generateDocsTree } from "@/lib/get-tree";
-import { DocsProvider } from "./provider";
+import { DocsProvider } from "../provider";
+import { DocsVersion, docsVersions } from "@/docs-versions";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -18,12 +19,16 @@ export const metadata: Metadata = {
 
 export default async function Layout({
   children,
-  params,
+  params: { slug },
 }: {
   children: React.ReactNode;
   params: { slug: string[] };
 }) {
-  const activeVersion = getVersion(params.slug);
+  let activeVersion = docsVersions[0];
+  const versionFromUrl =
+    slug?.length >= 1 && docsVersions.find((version) => slug[0] === version.id);
+  if (versionFromUrl) activeVersion = versionFromUrl;
+
   const path = `content/docs/${activeVersion.id}`;
   const tree = generateDocsTree(path);
 
