@@ -1,5 +1,3 @@
-"use client";
-
 import { Dropdown } from "./dropdown";
 import { getFilters } from "./utils/get-filters";
 import { getMetadata } from "./utils/get-metadata";
