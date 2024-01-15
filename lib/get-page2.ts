@@ -13,15 +13,18 @@ const rehypePrettyCodeOptions = {
 export const getPageData = async (path: string[]) => {
   const rootPath = "content/docs";
   const pathString = path.join("/");
-  const indexPath = `content/docs/${pathString}/index.mdx`;
+  const indexPathMDX = `content/docs/${pathString}/index.mdx`;
+  const indexPathMD = `content/docs/${pathString}/index.md`;
   const linkPath =
     `${rootPath}/${pathString}.mdx` || `${rootPath}/${pathString}.md`;
 
-  const isIndex = fs.existsSync(indexPath);
+  const isIndexMDX = fs.existsSync(indexPathMDX);
+  const isIndexMD = fs.existsSync(indexPathMD);
   const isLink = fs.existsSync(linkPath);
 
   let newPath = null;
-  if (isIndex) newPath = indexPath;
+  if (isIndexMDX) newPath = indexPathMDX;
+  if (isIndexMD) newPath = indexPathMD;
   if (isLink) newPath = linkPath;
 
   if (!newPath) return undefined;

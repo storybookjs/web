@@ -23,8 +23,13 @@ export const getMetadata = async ({ paths }: Props) => {
   const content: CodeSnippetsProps[] = await Promise.all(
     paths.map(async (path) => {
       // Parse data
-      const sourcePath = `content/docs/${version}/snippets/${path}`;
-      const source = fs.readFileSync(sourcePath, "utf8");
+      console.log(path);
+
+      const source = await fs.promises.readFile(
+        process.cwd() + `/content/snippets/${version}/${path}`,
+        "utf8"
+      );
+
       const renderer = path.split("/")[0];
       const segments = path
         .split("/")[1]

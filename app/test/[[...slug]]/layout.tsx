@@ -27,8 +27,6 @@ export default async function Layout({
   const path = `content/docs/${activeVersion.id}`;
   const tree = generateDocsTree(path);
 
-  console.dir(tree, { depth: 2 });
-
   return (
     <Fragment>
       <Header variant="system" />

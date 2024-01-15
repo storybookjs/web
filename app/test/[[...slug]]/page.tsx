@@ -36,7 +36,12 @@ export const generateStaticParams = async () => {
 
   ids(tree);
 
-  return [{ slug: ["get-started"] }, { slug: ["8.0-test-1", "get-started"] }];
+  return [
+    { slug: ["get-started"] },
+    { slug: ["8.0-test-1", "get-started"] },
+    { slug: ["stories"] },
+    { slug: ["8.0-test-1", "stories"] },
+  ];
 
   // return result;
 };
@@ -46,15 +51,41 @@ export default async function Page({ params: { slug } }: Props) {
   const hasVersion = docsVersions.some((version) => slug[0] === version.id);
   const newSlug = [...slug];
   if (!hasVersion) newSlug.unshift(activeVersion.id);
+  const cookieStore = cookies();
+  const rendererCookie = cookieStore.get("sb-docs-renderer");
+  const activeRenderer = rendererCookie
+    ? rendererCookie.value
+    : renderers[0].id;
 
   const page = await getPageData(newSlug);
 
-  console.log(page);
+  if (!page) notFound();
 
   return (
     <div>
-      <div>Slug: {slug.join("/")}</div>
-      <div>Title: {page?.title}</div>
+      <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
+      <Renderers activeRenderer={activeRenderer} />
+      {page.tabs && page.tabs.length > 0 && (
+        <div className="flex items-center gap-8 border-b border-zinc-200">
+          {page.tabs.map((tab) => {
+            const isActive = tab.slug === `/docs/${slug.join("/")}`;
+
+            return (
+              <Link
+                key={tab.name}
+                href={tab.slug}
+                className={cn(
+                  "border-b -mb-px pb-2 hover:text-blue-500 transition-colors px-2 text-sm capitalize",
+                  isActive && "border-b border-blue-500 text-blue-500"
+                )}
+              >
+                {tab?.tab?.title || tab.title}
+              </Link>
+            );
+          })}
+        </div>
+      )}
+      <article>{page.content}</article>
     </div>
   );
 }
