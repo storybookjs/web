@@ -8,7 +8,7 @@ import { cn, container } from "@/lib/utils";
 import { NavDocs } from "@/components/sidebar/nav-docs";
 import { getVersion } from "@/lib/get-version";
 import { generateDocsTree } from "@/lib/get-tree";
-import { DocsProvider } from "../provider";
+import { DocsProvider } from "@/app/test/provider";
 
 export const metadata: Metadata = {
   title: "Storybook",

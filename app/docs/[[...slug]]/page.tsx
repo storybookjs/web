@@ -4,22 +4,10 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { renderers } from "@/docs-renderers";
-import { getPageData } from "@/lib/get-page";
+import { getPageData } from "@/lib/get-page2";
 import { docsVersions } from "@/docs-versions";
-import { cookies } from "next/headers";
 import { Renderers } from "@/components/docs/renderers";
 import { generateDocsTree } from "@/lib/get-tree";
-
-const isHomepage = (slug: string[]) => {
-  return (
-    slug === undefined ||
-    (slug &&
-      slug.length === 1 &&
-      docsVersions.some((version) => {
-        return slug[0] === version.id;
-      }))
-  );
-};
 
 interface Props {
   params: {
@@ -27,69 +15,52 @@ interface Props {
   };
 }
 
-// export const generateStaticParams = async () => {
-//   const machin = generateDocsTree3({});
-//   const result = machin
-//     ? machin.map((post) => ({
-//         slug: post.slug.split("/").filter((s) => s !== ""),
-//       }))
-//     : [{ slug: ["/docs"] }];
+export const generateStaticParams = async () => {
+  const tree = generateDocsTree();
 
-//   console.log(result);
+  const result: { slug: string[] }[] = [];
 
-//   return result;
-// };
-
-export async function generateMetadata({ params: { slug } }: Props) {
-  const activeVersion = getVersion(slug);
-
-  const page = await getPageData(
-    isHomepage(slug) ? ["/"] : slug,
-    activeVersion.id
-  );
-
-  if (!page) {
-    return {
-      title: "Page Not Found",
-    };
-  }
-
-  return {
-    title: `${page.title} • Storybook docs` || "Storybook • Storybook docs",
+  const ids = (data: TreeProps[]) => {
+    data.forEach((item) => {
+      if ("slug" in item) {
+        result.push({
+          slug: item.slug.replace("docs/", "").split("/"),
+        });
+      }
+      if (item.children) {
+        ids(item.children);
+      }
+    });
   };
-}
+
+  ids(tree);
+
+  return [
+    { slug: ["get-started"] },
+    { slug: ["8.0-test-1", "get-started"] },
+    { slug: ["stories"] },
+    { slug: ["8.0-test-1", "stories"] },
+    { slug: ["docs"] },
+    { slug: ["8.0-test-1", "docs"] },
+  ];
+
+  // return result;
+};
 
 export default async function Page({ params: { slug } }: Props) {
-  const cookieStore = cookies();
-  const rendererCookie = cookieStore.get("sb-docs-renderer");
-  const activeRenderer = rendererCookie
-    ? rendererCookie.value
-    : renderers[0].id;
-
-  // Get the latest version
   const activeVersion = getVersion(slug);
+  const hasVersion = docsVersions.some((version) => slug[0] === version.id);
+  const newSlug = [...slug];
+  if (!hasVersion) newSlug.unshift(activeVersion.id);
 
-  const page = await getPageData(
-    isHomepage(slug) ? ["/"] : slug,
-    activeVersion.id
-  );
-
-  // console.log(page);
+  const page = await getPageData(newSlug);
 
   if (!page) notFound();
-
-  if (!page) {
-    return (
-      <div>
-        <MDX.H1>Page Not Found</MDX.H1>
-      </div>
-    );
-  }
 
   return (
     <div>
       <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
-      <Renderers activeRenderer={activeRenderer} />
+      <Renderers activeRenderer={renderers[0].id} />
       {page.tabs && page.tabs.length > 0 && (
         <div className="flex items-center gap-8 border-b border-zinc-200">
           {page.tabs.map((tab) => {
