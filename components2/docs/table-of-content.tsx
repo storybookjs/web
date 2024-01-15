@@ -1,6 +1,6 @@
 "use client";
 
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/components2/ui/scroll-area";
 import { FC } from "react";
 
 interface TableOfContentProps {}

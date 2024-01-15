@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ScrollBar } from "@/components/ui/scroll-area";
+import { ScrollBar } from "@/components2/ui/scroll-area";
 import { FC, ReactNode } from "react";
 import { ChangelogIcon, DocsIcon, TutorialsIcon } from "./icons";
 import { cn } from "@/lib/tailwind";

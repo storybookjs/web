@@ -3,7 +3,7 @@
 import { FC, useState } from "react";
 import { GradientBackdrop } from "../gradient-backdrop";
 import { HeroDemo } from "../demo/hero-demo";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components2/ui/button";
 import SocialProof from "../social-proof";
 import Link from "next/link";
 import { Video } from "./video";

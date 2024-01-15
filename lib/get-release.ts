@@ -1,6 +1,6 @@
 import fs from "fs";
 import { compileMDX } from "next-mdx-remote/rsc";
-import * as MDX from "@/components/docs/mdx";
+import * as MDX from "@/components2/docs/mdx";
 
 export async function getRelease(version: string) {
   if (!version) return undefined;

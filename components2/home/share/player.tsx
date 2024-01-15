@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { motion } from "framer-motion";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { AspectRatio } from "@/components2/ui/aspect-ratio";
 import { cn } from "@/lib/tailwind";
 
 const players = {

@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { CrossIcon, PlayIcon } from "@storybook/icons";
-import { Button } from "@/components/ui/button";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Button } from "@/components2/ui/button";
+import { AspectRatio } from "@/components2/ui/aspect-ratio";
 
 export const Video: FC = () => {
   const [openVideo, setOpenVideo] = useState(false);

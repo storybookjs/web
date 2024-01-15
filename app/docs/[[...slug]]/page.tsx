@@ -1,12 +1,12 @@
 import { getVersion } from "@/lib/get-version";
-import * as MDX from "@/components/docs/mdx";
+import * as MDX from "@/components2/docs/mdx";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/tailwind";
 import { renderers } from "@/docs-renderers";
 import { getPageData } from "@/lib/get-page";
 import { docsVersions } from "@/docs-versions";
-import { Renderers } from "@/components/docs/renderers";
+import { Renderers } from "@/components2/docs/renderers";
 import { generateDocsTree } from "@/lib/get-tree";
 
 interface Props {

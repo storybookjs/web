@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Header } from "@/components/header/header";
-import { Footer } from "@/components/footer/footer";
+import { Header } from "@/components2/header/header";
+import { Footer } from "@/components2/footer/footer";
 import Image from "next/image";
-import { Sidebar } from "@/components/docs/sidebar/sidebar";
-import { TableOfContent } from "@/components/docs/table-of-content";
+import { Sidebar } from "@/components2/docs/sidebar/sidebar";
+import { TableOfContent } from "@/components2/docs/table-of-content";
 import { cn, container } from "@/lib/tailwind";
-import { NavDocs } from "@/components/docs/sidebar/nav-docs";
+import { NavDocs } from "@/components2/docs/sidebar/nav-docs";
 import { generateDocsTree } from "@/lib/get-tree";
 import { DocsProvider } from "../provider";
 import { getVersion } from "@/lib/get-version";

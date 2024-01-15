@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components2/ui/button";
 import { cn } from "@/lib/tailwind";
 import React, { useState, ComponentProps, ReactNode, useRef, FC } from "react";
 
