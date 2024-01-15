@@ -4,12 +4,11 @@ import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
 import { Sidebar } from "@/components/docs/sidebar/sidebar";
 import { TableOfContent } from "@/components/docs/table-of-content";
-import { cn, container } from "@/lib/utils";
+import { cn, container } from "@/lib/tailwind";
 import { NavDocs } from "@/components/docs/sidebar/nav-docs";
-import { getVersion } from "@/lib/get-version";
 import { generateDocsTree } from "@/lib/get-tree";
 import { DocsProvider } from "../provider";
-import { DocsVersion, docsVersions } from "@/docs-versions";
+import { getVersion } from "@/lib/get-version";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -24,11 +23,7 @@ export default async function Layout({
   children: React.ReactNode;
   params: { slug: string[] };
 }) {
-  let activeVersion = docsVersions[0];
-  const versionFromUrl =
-    slug?.length >= 1 && docsVersions.find((version) => slug[0] === version.id);
-  if (versionFromUrl) activeVersion = versionFromUrl;
-
+  const activeVersion = getVersion(slug);
   const path = `content/docs/${activeVersion.id}`;
   const tree = generateDocsTree(path);
 

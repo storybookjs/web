@@ -10,27 +10,32 @@ const rehypePrettyCodeOptions = {
   theme: firefoxThemeLight,
 };
 
-export const getPageData = async (path: string[], activeVersion: string) => {
-  const segment = path ? path.join("/").replace(`${activeVersion}/`, "") : "/";
-  const superRootPath = `content/docs/${activeVersion}`;
-
-  const indexPath = `${superRootPath}/${segment}/index.mdx`;
+export const getPageData = async (path: string[]) => {
+  const rootPath = "content/docs";
+  const pathString = path.join("/");
+  const indexPathMDX = `content/docs/${pathString}/index.mdx`;
+  const indexPathMD = `content/docs/${pathString}/index.md`;
   const linkPath =
-    `${superRootPath}/${segment}.mdx` || `${superRootPath}/${segment}.md`;
+    `${rootPath}/${pathString}.mdx` || `${rootPath}/${pathString}.md`;
 
-  const isIndex = fs.existsSync(indexPath);
+  const isIndexMDX = fs.existsSync(indexPathMDX);
+  const isIndexMD = fs.existsSync(indexPathMD);
   const isLink = fs.existsSync(linkPath);
 
   let newPath = null;
-  if (isIndex) newPath = indexPath;
+  if (isIndexMDX) newPath = indexPathMDX;
+  if (isIndexMD) newPath = indexPathMD;
   if (isLink) newPath = linkPath;
 
   if (!newPath) return undefined;
 
-  const fileContents = fs.readFileSync(newPath, "utf8");
+  const file = await fs.promises.readFile(
+    process.cwd() + `/${newPath}`,
+    "utf8"
+  );
 
   const { content, frontmatter } = await compileMDX<{ title: string }>({
-    source: fileContents,
+    source: file,
     options: {
       parseFrontmatter: true,
       mdxOptions: {
@@ -66,8 +71,8 @@ export const getPageData = async (path: string[], activeVersion: string) => {
 
   // Get Tabs
   let pathToFiles = isLink
-    ? `${superRootPath}/${segment}`.split("/").slice(0, -1).join("/")
-    : `${superRootPath}/${segment}`;
+    ? `${rootPath}/${pathString}`.split("/").slice(0, -1).join("/")
+    : `${rootPath}/${pathString}`;
 
   const parent = generateDocsTree(pathToFiles);
 

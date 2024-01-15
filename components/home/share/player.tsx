@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { motion } from "framer-motion";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/tailwind";
 
 const players = {
   blue: "/home/share/avatar-1.png",

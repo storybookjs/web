@@ -8,7 +8,7 @@ import { LogoCloudbees } from "./Logo-cloudbees";
 import { PublishIntegrations } from "./publish-integrations";
 import { EmbedIntegrations } from "./embed-integrations";
 import { TestIntegrations } from "./test-integrations";
-import { cn, container } from "@/lib/utils";
+import { cn, container } from "@/lib/tailwind";
 
 export function Share() {
   const publishRef = useRef<HTMLImageElement | null>(null);

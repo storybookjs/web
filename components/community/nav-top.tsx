@@ -1,4 +1,4 @@
-import { cn, container } from "@/lib/utils";
+import { cn, container } from "@/lib/tailwind";
 import {
   DiscordIcon,
   GithubIcon,

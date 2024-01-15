@@ -1,7 +1,7 @@
 "use client";
 
 import { useCommunity } from "@/app/community/provider";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/tailwind";
 import Image from "next/image";
 import { FC } from "react";
 

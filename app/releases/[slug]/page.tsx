@@ -4,7 +4,7 @@ import { ReleaseNewsletter } from "@/components/release-newsletter";
 import { Sidebar } from "@/components/docs/sidebar/sidebar";
 import { getRelease } from "@/lib/get-release";
 import { getReleases } from "@/lib/get-releases";
-import { cn, container } from "@/lib/utils";
+import { cn, container } from "@/lib/tailwind";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";

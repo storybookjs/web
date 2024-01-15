@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Button } from "../ui/button";
 import { MenuIcon } from "@storybook/icons";
-import { cn } from "../../lib/utils";
+import { cn } from "../../lib/tailwind";
 
 export const Submenu: FC<HeaderProps> = ({ variant }) => {
   return (

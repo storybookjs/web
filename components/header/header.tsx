@@ -10,7 +10,7 @@ import {
   RSSIcon,
   StarHollowIcon,
 } from "@storybook/icons";
-import { cn } from "../../lib/utils";
+import { cn } from "../../lib/tailwind";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Search } from "./search";

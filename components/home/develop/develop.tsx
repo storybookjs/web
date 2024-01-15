@@ -9,7 +9,7 @@ import { ChevronSmallRightIcon } from "@storybook/icons";
 import { Integrations } from "../integrations/integrations";
 import { Testimonial } from "../testimonial";
 import { LogoAtomicDesign } from "./logo-atomic-design";
-import { cn, container } from "@/lib/utils";
+import { cn, container } from "@/lib/tailwind";
 
 export function Develop() {
   // Step 1

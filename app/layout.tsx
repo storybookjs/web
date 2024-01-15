@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito_Sans as FontSans } from "next/font/google";
-import { cn } from "../lib/utils";
+import { cn } from "../lib/tailwind";
 import { Providers } from "./providers";
 import "./globals.css";
 

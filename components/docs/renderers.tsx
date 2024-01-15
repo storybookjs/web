@@ -1,7 +1,7 @@
 "use client";
 
 import { renderers } from "@/docs-renderers";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/tailwind";
 import { FC } from "react";
 import { useDocs } from "@/app/docs/provider";
 

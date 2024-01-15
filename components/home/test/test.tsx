@@ -4,7 +4,7 @@ import { Accessibility, Code, Eye, Interact, Pixel, Projects } from "./icons";
 import { Testimonial } from "../testimonial";
 import { IllustratedFeatureList } from "../illustrated-feature-list";
 import { LogoAirbnb } from "./logo-airbnb";
-import { cn, container } from "@/lib/utils";
+import { cn, container } from "@/lib/tailwind";
 
 const features = [
   {

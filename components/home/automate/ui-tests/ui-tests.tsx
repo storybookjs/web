@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, FC } from "react";
 import { useReducedMotion, useInView } from "framer-motion";
-import { cn, container } from "@/lib/utils";
+import { cn, container } from "@/lib/tailwind";
 import Boolean from "./images/Boolean.svg";
 import Cascade from "./images/Cascade.svg";
 import DatePicker from "./images/DatePicker.svg";

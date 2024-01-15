@@ -1,4 +1,4 @@
-import { cn, container } from "../../lib/utils";
+import { cn, container } from "../../lib/tailwind";
 import { FC } from "react";
 import { Form } from "./form";
 import Link from "next/link";
