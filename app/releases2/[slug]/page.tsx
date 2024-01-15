@@ -10,7 +10,7 @@ import { ReleaseNewsletter } from "@/components/release-newsletter";
 import { notFound } from "next/navigation";
 import { A, H1, H2, H3, Hr, P, UnorderedList, List } from "@/components/mdx";
 
-export default async function Home({
+export default async function Page({
   params: { slug },
 }: {
   params: { slug: string };

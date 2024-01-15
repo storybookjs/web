@@ -1,4 +1,4 @@
-import { promises as fs } from "fs";
+import fs from "fs";
 
 interface Props {
   params: {
@@ -7,11 +7,22 @@ interface Props {
 }
 
 export const generateStaticParams = async () => {
-  return [{ slug: ["test-1"] }, { slug: ["test-2"] }];
+  const releases: string[] = [];
+
+  fs.readdirSync("content/releases").forEach((f) => {
+    releases.push(f.replace(".md", ""));
+  });
+
+  return releases.map((release) => ({
+    slug: release,
+  }));
 };
 
 export default async function Page({ params: { slug } }: Props) {
-  const file = await fs.readFile(process.cwd() + "/content/data.json", "utf8");
+  const file = await fs.promises.readFile(
+    process.cwd() + "/content/data.json",
+    "utf8"
+  );
   const data = JSON.parse(file);
 
   return (
