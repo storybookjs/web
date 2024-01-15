@@ -3,7 +3,7 @@
 import { renderers } from "@/docs-renderers";
 import { cn } from "@/lib/tailwind";
 import { FC } from "react";
-import { useDocs } from "@/app/docs/provider";
+import { useDocs } from "@/app/docs2/provider";
 
 interface RenderersProps {
   activeRenderer: string;
