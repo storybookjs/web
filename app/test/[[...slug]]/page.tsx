@@ -55,6 +55,7 @@ export default async function Page({ params: { slug } }: Props) {
   if (!hasVersion) newSlug.unshift(activeVersion.id);
   // const cookieStore = cookies();
   // const rendererCookie = cookieStore.get("sb-docs-renderer");
+
   // const activeRenderer = rendererCookie
   //   ? rendererCookie.value
   //   : renderers[0].id;
