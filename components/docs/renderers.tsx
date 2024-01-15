@@ -11,18 +11,15 @@ interface RenderersProps {
 
 export const Renderers: FC<RenderersProps> = ({ activeRenderer }) => {
   const [state, setState] = useState<null | string>(null);
+  const cookies = document.cookie.split("; ");
+  const cookie = cookies.find((item) => item.startsWith("sb-docs-renderer="));
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   setState(renderers[1].id);
-    // }, 1000);
-    const cookies = document.cookie.split("; ");
-    const cookie = cookies.find((item) => item.startsWith("sb-docs-renderer="));
     if (cookie) {
       const [, value] = cookie.split("=");
       setState(value);
     }
-  }, []);
+  }, [cookie]);
 
   return (
     <div className="flex gap-2 mb-8">

@@ -53,12 +53,6 @@ export default async function Page({ params: { slug } }: Props) {
   const hasVersion = docsVersions.some((version) => slug[0] === version.id);
   const newSlug = [...slug];
   if (!hasVersion) newSlug.unshift(activeVersion.id);
-  // const cookieStore = cookies();
-  // const rendererCookie = cookieStore.get("sb-docs-renderer");
-
-  // const activeRenderer = rendererCookie
-  //   ? rendererCookie.value
-  //   : renderers[0].id;
 
   const page = await getPageData(newSlug);
 
