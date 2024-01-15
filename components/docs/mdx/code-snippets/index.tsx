@@ -1,29 +1,18 @@
-import { cookies } from "next/headers";
-import { docsVersions } from "@/docs-versions";
-import { packageManagers } from "@/docs-package-managers";
-import { languages } from "@/docs-languages";
-import { renderers } from "@/docs-renderers";
+"use client";
+
 import { Dropdown } from "./dropdown";
-import { setLanguageCookie, setPackageManagerCookie } from "@/app/actions";
 import { getFilters } from "./utils/get-filters";
 import { getMetadata } from "./utils/get-metadata";
 import { getActiveContent } from "./utils/get-active-content";
 import { CodeWrapper } from "./wrapper";
+import { useDocs } from "@/app/docs/provider";
 
 type Props = {
   paths: string[];
 };
 
 export const CodeSnippets = async ({ paths }: Props) => {
-  const cookieStore = cookies();
-  const cookieVersion = cookieStore.get("sb-docs-version");
-  const cookieRenderer = cookieStore.get("sb-docs-renderer");
-  const cookieLanguage = cookieStore.get("sb-docs-language");
-  const language = cookieLanguage?.value ?? languages[0].id;
-  const cookiePackageManager = cookieStore.get("sb-docs-package-manager");
-  const packageManager = cookiePackageManager?.value ?? packageManagers[0].id;
-  const version = cookieVersion?.value ?? docsVersions[0].id;
-  const renderer = cookieRenderer?.value ?? renderers[0].id;
+  const { activeLanguage, activeRenderer } = useDocs();
 
   // This is how files are structured.
   // [renderer]/[filename].[option].[language].mdx
@@ -86,7 +75,7 @@ export const CodeSnippets = async ({ paths }: Props) => {
       title="Code Snippets"
       options={
         <>
-          {filters && filters.languages.length > 1 && (
+          {/* {filters && filters.languages.length > 1 && (
             <Dropdown
               list={filters.languages}
               activeId={language}
@@ -101,7 +90,7 @@ export const CodeSnippets = async ({ paths }: Props) => {
               type="packageManager"
               action={setPackageManagerCookie}
             />
-          )}
+          )} */}
         </>
       }
     >
