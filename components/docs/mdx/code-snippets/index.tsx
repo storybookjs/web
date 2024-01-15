@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const CodeSnippets = async ({ paths }: Props) => {
-  const { activeLanguage, activeRenderer, activePackageManager } = useDocs();
+  const { activeLanguage, activePackageManager } = useDocs();
 
   // This is how files are structured.
   // [renderer]/[filename].[option].[language].mdx
