@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { renderers } from "@/docs-renderers";
 import { getPageData } from "@/lib/get-page2";
 import { docsVersions } from "@/docs-versions";
-import { cookies } from "next/headers";
 import { Renderers } from "@/components/docs/renderers";
 import { generateDocsTree } from "@/lib/get-tree";
 

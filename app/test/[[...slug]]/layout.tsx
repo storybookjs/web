@@ -7,8 +7,8 @@ import { TableOfContent } from "@/components/table-of-content";
 import { cn, container } from "@/lib/utils";
 import { NavDocs } from "@/components/sidebar/nav-docs";
 import { getVersion } from "@/lib/get-version";
-import { Fragment } from "react";
 import { generateDocsTree } from "@/lib/get-tree";
+import { DocsProvider } from "../provider";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -28,7 +28,7 @@ export default async function Layout({
   const tree = generateDocsTree(path);
 
   return (
-    <Fragment>
+    <DocsProvider>
       <Header variant="system" />
       <Image
         src="/bubbles.png"
@@ -45,6 +45,6 @@ export default async function Layout({
         <TableOfContent />
       </main>
       <Footer />
-    </Fragment>
+    </DocsProvider>
   );
 }
