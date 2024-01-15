@@ -1,5 +1,5 @@
 import { getVersion } from "@/lib/get-version";
-import * as MDX from "@/components/mdx";
+import * as MDX from "@/components/docs/mdx";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";

@@ -1,7 +1,7 @@
 import { Footer } from "@/components/footer/footer";
 import { Header } from "@/components/header/header";
 import { ReleaseNewsletter } from "@/components/release-newsletter";
-import { Sidebar } from "@/components/sidebar/sidebar";
+import { Sidebar } from "@/components/docs/sidebar/sidebar";
 import { getRelease } from "@/lib/get-release";
 import { getReleases } from "@/lib/get-releases";
 import { cn, container } from "@/lib/utils";

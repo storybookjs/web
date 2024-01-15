@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { Header } from "@/components/header/header";
 import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
-import { Sidebar } from "@/components/sidebar/sidebar";
-import { TableOfContent } from "@/components/table-of-content";
+import { Sidebar } from "@/components/docs/sidebar/sidebar";
+import { TableOfContent } from "@/components/docs/table-of-content";
 import { cn, container } from "@/lib/utils";
-import { NavDocs } from "@/components/sidebar/nav-docs";
+import { NavDocs } from "@/components/docs/sidebar/nav-docs";
 import { getVersion } from "@/lib/get-version";
 import { generateDocsTree } from "@/lib/get-tree";
-import { DocsProvider } from "@/app/test/provider";
+import { DocsProvider } from "@/app/docs/provider";
 
 export const metadata: Metadata = {
   title: "Storybook",
