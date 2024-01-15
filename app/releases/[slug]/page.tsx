@@ -5,6 +5,7 @@ import { Sidebar } from "@/components/sidebar/sidebar";
 import { getRelease } from "@/lib/get-release";
 import { cn, container } from "@/lib/utils";
 import fs from "fs";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
 
@@ -14,20 +15,25 @@ interface Props {
   };
 }
 
-export const generateStaticParams = async () => {
+const getReleases = () => {
   const releases: string[] = [];
 
   fs.readdirSync("content/releases").forEach((f) => {
     releases.push(f.replace(".md", ""));
   });
 
-  return releases.map((release) => ({
+  return releases;
+};
+
+export const generateStaticParams = async () => {
+  return getReleases().map((release) => ({
     slug: release,
   }));
 };
 
 export default async function Page({ params: { slug } }: Props) {
   const page = await getRelease(slug);
+  const releases = getReleases();
 
   if (!page) return notFound();
 
@@ -37,7 +43,7 @@ export default async function Page({ params: { slug } }: Props) {
       <main className={cn(container, "lg:pl-5 lg:pr-8 flex gap-4")}>
         <Sidebar>
           <div className="flex flex-col border-t border-zinc-200 mt-4 pt-4">
-            {/* {releases
+            {releases
               .sort((a, b) => b.localeCompare(a))
               .map((release) => (
                 <Link
@@ -50,7 +56,7 @@ export default async function Page({ params: { slug } }: Props) {
                 >
                   Version {release}
                 </Link>
-              ))} */}
+              ))}
           </div>
         </Sidebar>
         <article className="w-full flex-1 py-12 max-w-3xl">
@@ -64,13 +70,4 @@ export default async function Page({ params: { slug } }: Props) {
       <Footer />
     </Fragment>
   );
-
-  // return (
-  //   <main className="flex flex-col min-h-screen items-center justify-center">
-  //     <div>Slug: {slug}</div>
-  //     <div>{page?.frontmatter?.title}</div>
-  //     <h1>{data.title}</h1>
-  //     <p>{data.content}</p>
-  //   </main>
-  // );
 }
