@@ -41,6 +41,8 @@ export const generateStaticParams = async () => {
     { slug: ["8.0-test-1", "get-started"] },
     { slug: ["stories"] },
     { slug: ["8.0-test-1", "stories"] },
+    { slug: ["docs"] },
+    { slug: ["8.0-test-1", "docs"] },
   ];
 
   // return result;
