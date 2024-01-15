@@ -17,7 +17,7 @@ export default async function Page({ params: { slug } }: Props) {
   const ids = (data: TreeProps[], removeVersion: boolean) => {
     data.forEach((item) => {
       if ("slug" in item) {
-        const newSlug = item.slug.replace("docs/", "").split("/");
+        const newSlug = item.slug.replace("/docs/", "").split("/");
         if (removeVersion) newSlug.shift();
         result.push({
           slug: newSlug,

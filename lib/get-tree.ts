@@ -22,7 +22,7 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
 
   files.forEach((file) => {
     const filePath = path.join(newPath, file);
-    const slug = filePath.replace("content/", "").replace(/\.mdx?$|\.md$/, "");
+    const slug = filePath.replace("content/", "/").replace(/\.mdx?$|\.md$/, "");
     const isDirectory = fs.lstatSync(filePath).isDirectory();
 
     if (isDirectory) {
