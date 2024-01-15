@@ -10,12 +10,18 @@ interface RenderersProps {
 }
 
 export const Renderers: FC<RenderersProps> = ({ activeRenderer }) => {
-  const [state, setState] = useState(activeRenderer);
+  const [state, setState] = useState<null | string>(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      setState(renderers[1].id);
-    }, 1000);
+    // setTimeout(() => {
+    //   setState(renderers[1].id);
+    // }, 1000);
+    const cookies = document.cookie.split("; ");
+    const cookie = cookies.find((item) => item.startsWith("sb-docs-renderer="));
+    if (cookie) {
+      const [, value] = cookie.split("=");
+      setState(value);
+    }
   }, []);
 
   return (
