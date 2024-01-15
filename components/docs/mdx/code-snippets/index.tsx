@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const CodeSnippets = async ({ paths }: Props) => {
-  const { activeLanguage, activeRenderer } = useDocs();
+  const { activeLanguage, activeRenderer, activePackageManager } = useDocs();
 
   // This is how files are structured.
   // [renderer]/[filename].[option].[language].mdx
@@ -60,7 +60,12 @@ export const CodeSnippets = async ({ paths }: Props) => {
   const filters = getFilters({ codeSnippetsContent });
 
   // Get active content for the Code Snippets component
-  const activeContent = getActiveContent({ codeSnippetsContent, filters });
+  const activeContent = getActiveContent({
+    codeSnippetsContent,
+    filters,
+    activeLanguage,
+    activePackageManager,
+  });
 
   // Helper
   const contentWithoutCode = codeSnippetsContent?.map((obj) =>
