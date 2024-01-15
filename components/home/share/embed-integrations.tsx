@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AspectRatio } from "@/components2/ui/aspect-ratio";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { IntegrationsCarousel } from "./integrations-carousel";
 import Image from "next/image";
 

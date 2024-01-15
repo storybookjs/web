@@ -1,17 +1,17 @@
 "use client";
 
-import { Hero } from "@/components2/home/hero/hero";
-import { Footer } from "@/components2/footer/footer";
-import { Header } from "@/components2/header/header";
-import { Develop } from "@/components2/home/develop/develop";
-import { StickyNav } from "@/components2/home/sticky-nav/sticky-nav";
+import { Hero } from "@/components/home/hero/hero";
+import { Footer } from "@/components/footer/footer";
+import { Header } from "@/components/header/header";
+import { Develop } from "@/components/home/develop/develop";
+import { StickyNav } from "@/components/home/sticky-nav/sticky-nav";
 import { useMemo, useRef } from "react";
 import { useInView } from "framer-motion";
-import { Test } from "@/components2/home/test/test";
-import { Document } from "@/components2/home/document/document";
-import { Share } from "@/components2/home/share/share";
-import { Automate } from "@/components2/home/automate/automate";
-import { SocialValidation } from "@/components2/home/social-validation/social-validation";
+import { Test } from "@/components/home/test/test";
+import { Document } from "@/components/home/document/document";
+import { Share } from "@/components/home/share/share";
+import { Automate } from "@/components/home/automate/automate";
+import { SocialValidation } from "@/components/home/social-validation/social-validation";
 
 export default function Home() {
   const developRef = useRef(null);

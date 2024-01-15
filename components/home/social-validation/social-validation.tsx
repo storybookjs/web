@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { cn, container } from "@/lib/tailwind";
-import { Button } from "@/components2/ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { AspectRatio } from "@/components2/ui/aspect-ratio";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Community } from "../../community";
 import {
   DiscordIcon,

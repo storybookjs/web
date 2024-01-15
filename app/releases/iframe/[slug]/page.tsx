@@ -1,4 +1,4 @@
-import { ReleaseNewsletter } from "@/components2/release-newsletter";
+import { ReleaseNewsletter } from "@/components/release-newsletter";
 import { getRelease } from "@/lib/get-release";
 import { getReleases } from "@/lib/get-releases";
 import { notFound } from "next/navigation";

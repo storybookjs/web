@@ -1,18 +1,18 @@
-import { NavTop } from "@/components2/community/nav-top";
-import { Footer } from "@/components2/footer/footer";
-import { Header } from "@/components2/header/header";
-import { Community } from "@/components2/community";
-import { NewsletterForm } from "@/components2/newsletter-form/form";
+import { NavTop } from "@/components/community/nav-top";
+import { Footer } from "@/components/footer/footer";
+import { Header } from "@/components/header/header";
+import { Community } from "@/components/community";
+import { NewsletterForm } from "@/components/newsletter-form/form";
 import { cn, smallContainer } from "@/lib/tailwind";
-import { Numbers } from "@/components2/community/numbers";
-import { NavSide } from "@/components2/community/nav-side";
-import { Support } from "@/components2/community/support";
-import { Events } from "@/components2/community/events";
-import { BrandAndResources } from "@/components2/community/brand";
-import { Team } from "@/components2/community/team";
-import { Contribute } from "@/components2/community/contribute";
-import { Sponsor } from "@/components2/community/sponsor";
-import { Testimonials } from "@/components2/community/testimonials";
+import { Numbers } from "@/components/community/numbers";
+import { NavSide } from "@/components/community/nav-side";
+import { Support } from "@/components/community/support";
+import { Events } from "@/components/community/events";
+import { BrandAndResources } from "@/components/community/brand";
+import { Team } from "@/components/community/team";
+import { Contribute } from "@/components/community/contribute";
+import { Sponsor } from "@/components/community/sponsor";
+import { Testimonials } from "@/components/community/testimonials";
 import { CommunityProvider } from "./provider";
 
 export default function Page() {
