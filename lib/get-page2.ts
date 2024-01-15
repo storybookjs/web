@@ -20,9 +20,6 @@ export const getPageData = async (path: string[]) => {
   const isIndex = fs.existsSync(indexPath);
   const isLink = fs.existsSync(linkPath);
 
-  console.log("indexPath", indexPath, isIndex);
-  console.log("linkPath", linkPath, isLink);
-
   let newPath = null;
   if (isIndex) newPath = indexPath;
   if (isLink) newPath = linkPath;
@@ -68,8 +65,6 @@ export const getPageData = async (path: string[]) => {
       FeatureSnippets: MDX.FeatureSnippets,
     },
   });
-
-  console.log(frontmatter);
 
   // Get Tabs
   let pathToFiles = isLink

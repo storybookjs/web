@@ -42,7 +42,6 @@ export const generateStaticParams = async () => {
 };
 
 export default async function Page({ params: { slug } }: Props) {
-  const tree = generateDocsTree();
   const activeVersion = getVersion(slug);
   const hasVersion = docsVersions.some((version) => slug[0] === version.id);
   const newSlug = [...slug];
