@@ -45,8 +45,9 @@ export const generateStaticParams = async () => {
 
 export default async function Page({ params: { slug } }: Props) {
   const activeVersion = getVersion(slug);
-  const hasVersion = docsVersions.some((version) => slug[0] === version.id);
-  const newSlug = [...slug];
+  const hasVersion =
+    slug?.length >= 1 && docsVersions.some((version) => slug[0] === version.id);
+  const newSlug = slug ? [...slug] : [];
   if (!hasVersion) newSlug.unshift(activeVersion.id);
 
   const page = await getPageData(newSlug);
