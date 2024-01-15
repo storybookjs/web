@@ -32,10 +32,11 @@ export const generateStaticParams = async () => {
 };
 
 export default async function Page({ params: { slug } }: Props) {
-  const page = await getRelease(slug);
   const releases = getReleases();
 
-  if (!page) return notFound();
+  if (releases.includes(slug) === false) return notFound();
+
+  const page = await getRelease(slug);
 
   return (
     <Fragment>
