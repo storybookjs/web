@@ -66,7 +66,7 @@ export default async function Page({ params: { slug } }: Props) {
   return (
     <div>
       <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
-      {/* <Renderers activeRenderer={activeRenderer} /> */}
+      <Renderers activeRenderer={renderers[0].id} />
       {page.tabs && page.tabs.length > 0 && (
         <div className="flex items-center gap-8 border-b border-zinc-200">
           {page.tabs.map((tab) => {
