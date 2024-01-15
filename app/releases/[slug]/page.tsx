@@ -3,8 +3,8 @@ import { Header } from "@/components/header/header";
 import { ReleaseNewsletter } from "@/components/release-newsletter";
 import { Sidebar } from "@/components/sidebar/sidebar";
 import { getRelease } from "@/lib/get-release";
+import { getReleases } from "@/lib/get-releases";
 import { cn, container } from "@/lib/utils";
-import fs from "fs";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
@@ -14,16 +14,6 @@ interface Props {
     slug: string;
   };
 }
-
-const getReleases = () => {
-  const releases: string[] = [];
-
-  fs.readdirSync("content/releases").forEach((f) => {
-    releases.push(f.replace(".md", ""));
-  });
-
-  return releases;
-};
 
 export const generateStaticParams = async () => {
   return getReleases().map((release) => ({
