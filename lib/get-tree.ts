@@ -38,7 +38,8 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
               ? a.sidebar.order - b.sidebar.order
               : 0
           )
-          .filter((item) => item.name !== "index.mdx");
+          .filter((item) => item.name !== "index.mdx")
+          .filter((item) => item.name !== "index.md");
         const isTab = indexFile?.isTab || false;
 
         if (indexFile) {
@@ -82,5 +83,10 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
         ? a.sidebar.order - b.sidebar.order
         : 0
     )
-    .filter((item) => item.slug !== "/docs/index");
+    .filter((item) => {
+      // Here we are removing the index page from the tree
+      const slug = item.slug.split("/");
+      if (slug.length !== 3) return true;
+      return slug[2] !== "index";
+    });
 };

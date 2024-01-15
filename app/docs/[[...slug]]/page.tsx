@@ -16,35 +16,31 @@ interface Props {
 }
 
 export const generateStaticParams = async () => {
-  const tree = generateDocsTree();
-
   const result: { slug: string[] }[] = [];
+  const tree = generateDocsTree();
+  const treeFirstVersion = generateDocsTree(
+    `content/docs/${docsVersions[0].id}`
+  );
 
-  const ids = (data: TreeProps[]) => {
+  const ids = (data: TreeProps[], removeVersion: boolean) => {
     data.forEach((item) => {
       if ("slug" in item) {
+        const newSlug = item.slug.replace("docs/", "").split("/");
+        if (removeVersion) newSlug.shift();
         result.push({
-          slug: item.slug.replace("docs/", "").split("/"),
+          slug: newSlug,
         });
       }
       if (item.children) {
-        ids(item.children);
+        ids(item.children, removeVersion);
       }
     });
   };
 
-  ids(tree);
+  ids(treeFirstVersion, true);
+  ids(tree, false);
 
-  return [
-    { slug: ["get-started"] },
-    { slug: ["8.0-test-1", "get-started"] },
-    { slug: ["stories"] },
-    { slug: ["8.0-test-1", "stories"] },
-    { slug: ["docs"] },
-    { slug: ["8.0-test-1", "docs"] },
-  ];
-
-  // return result;
+  return result;
 };
 
 export default async function Page({ params: { slug } }: Props) {
