@@ -34,7 +34,7 @@ export default async function Page({ params: { slug } }: Props) {
 
   return (
     <div className="p-8">
-      <div className="mb-4">{result.length} pages</div>
+      <div className="mb-4">{result.length} pages 👻</div>
       {result.map((item, index) => (
         <div key={index}>{item.slug.join("/")}</div>
       ))}
