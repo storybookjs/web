@@ -50,7 +50,7 @@ export default async function Page({ params: { slug } }: Props) {
   const newSlug = slug ? [...slug] : [];
   if (!hasVersion) newSlug.unshift(activeVersion.id);
 
-  const page = await getPageData(newSlug);
+  const page = await getPageData(newSlug, activeVersion);
 
   if (!page) notFound();
 

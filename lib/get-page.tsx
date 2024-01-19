@@ -5,12 +5,16 @@ import rehypePrettyCode from "rehype-pretty-code";
 import { compileMDX } from "next-mdx-remote/rsc";
 import * as MDX from "@/components/docs/mdx";
 import rehypeSlug from "rehype-slug";
+import { DocsVersion } from "@/docs-versions";
 
 const rehypePrettyCodeOptions = {
   theme: firefoxThemeLight,
 };
 
-export const getPageData = async (path: string[]) => {
+export const getPageData = async (
+  path: string[],
+  activeVersion: DocsVersion
+) => {
   const rootPath = "content/docs";
   const pathString = path.join("/");
   const indexPathMDX = `content/docs/${pathString}/index.mdx`;
@@ -58,9 +62,9 @@ export const getPageData = async (path: string[]) => {
       ul: MDX.UnorderedList,
       li: MDX.List,
       pre: MDX.Pre,
-      // img: (props: any) => (
-      //   <MDX.ImgDocs activeVersion={activeVersion} {...props} />
-      // ),
+      img: (props) => (
+        <MDX.ImgDocs activeVersion={activeVersion.id} {...props} />
+      ),
       CodeSnippets: MDX.CodeSnippets,
       Callout: MDX.Callout,
       IfRenderer: MDX.IfRenderer,
