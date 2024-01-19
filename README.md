@@ -28,15 +28,13 @@ The Storybook for Storybook contains every UI component. The UI is built followi
 2. yarn build
 3. yarn run storybook
 
-### Gatsby instructions
+### Nextjs instructions
 
-Gatsby is used for basic routing and static site generation.
+Nextjs is used for basic routing and static site generation.
 
-1. `yarn start` to run the entire site
+1. `pnpm fetch-docs` to fetch the docs
 
-2. `yarn start:skip-addons` to skip building the addon catalog
-
-3. `yarn start:docs-only` to mock the home page and build the docs pages
+2. `pnpm dev` to launch the site locally
 
 #### Docs content
 
