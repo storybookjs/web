@@ -1,16 +1,21 @@
 import Image from "next/image";
-import { FC } from "react";
+import { DetailedHTMLProps, HTMLAttributes } from "react";
 import sizeOf from "image-size";
 import fs from "fs";
 
-interface Props {
-  src: string;
-  alt: string;
+type ImageProps = DetailedHTMLProps<
+  HTMLAttributes<HTMLImageElement>,
+  HTMLImageElement
+>;
+
+interface Props extends ImageProps {
   activeVersion: string;
+  src?: string;
+  alt?: string;
 }
 
-export const ImgDocs: FC<Props> = ({ src, alt, activeVersion }) => {
-  const pathWithoutDotSlash = src.replace(/^\.\//, "");
+export const ImgDocs = ({ src, alt, activeVersion }: Props) => {
+  const pathWithoutDotSlash = src?.replace(/^\.\//, "");
   const path = `/docs/${activeVersion}/${pathWithoutDotSlash}`;
   const localPath = `public${path}`;
 
@@ -29,7 +34,7 @@ export const ImgDocs: FC<Props> = ({ src, alt, activeVersion }) => {
       height={dimensions.height}
       className="text-blue-700"
       src={path}
-      alt={alt}
+      alt={alt || ""}
     />
   );
 };

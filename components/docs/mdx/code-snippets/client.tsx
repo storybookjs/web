@@ -4,7 +4,7 @@ import { FC } from "react";
 import { CodeWrapper } from "./wrapper";
 import { getFilters } from "./utils/get-filters";
 import { getActiveContent } from "./utils/get-active-content";
-import { useDocs } from "@/app/docs2/provider";
+import { useDocs } from "@/app/docs/provider";
 import { Dropdown } from "./dropdown";
 
 interface CodeSnippetsClientProps {
