@@ -18,33 +18,6 @@ export const CodeSnippets = async ({ paths }: Props) => {
   // option in Vue: 2 | 3
   // option in common: could be anything
 
-  const test = [
-    {
-      path: "common/init-command.npx.js.mdx",
-      fileName: "init-command",
-      option: null,
-      renderer: "common",
-      packageManager: "npx",
-      language: "js",
-    },
-    {
-      path: "common/init-command.yarn.js.mdx",
-      fileName: "init-command",
-      option: null,
-      renderer: "common",
-      packageManager: "yarn",
-      language: "ts",
-    },
-    {
-      path: "common/init-command.pnpm.js.mdx",
-      fileName: "init-command",
-      option: null,
-      renderer: "common",
-      packageManager: "pnpm",
-      language: "ts-4-9",
-    },
-  ];
-
   // Get metadata for all files from the Code Snippets component
   // This happen on the server since we need to call the file system (fs)
   const codeSnippetsContent: CodeSnippetsProps[] = await getMetadata({ paths });
