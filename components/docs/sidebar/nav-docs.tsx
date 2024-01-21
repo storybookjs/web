@@ -24,7 +24,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
   return (
     <Fragment>
       <VersionSelector activeVersion={activeVersion} />
-      <ul className="mt-9">
+      <ul className="mt-7 md:mt-9">
         {tree
           ? tree.map((lvl1) => (
               <li key={lvl1.pathSegment}>

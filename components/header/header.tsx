@@ -18,7 +18,11 @@ import { MobileMenu } from "./mobile-menu";
 import { Submenu } from "./submenu";
 import { Button } from "../ui/button";
 
-export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
+export const Header: FC<HeaderProps> = ({
+  variant = "home",
+  tree,
+  activeVersion,
+}) => {
   const pathname = usePathname();
 
   return (
@@ -33,7 +37,7 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
       <div className="max-w-8xl mx-auto">
         <div
           className={cn(
-            "h-18 py-4 lg:px-8 lg:border-0 mx-4 lg:mx-0 flex items-center justify-between",
+            "h-18 py-4 px-4 sm:px-8 md:px-8 lg:border-0 flex items-center justify-between",
             variant === "home" && "border-b border-zinc-700",
             variant === "system" &&
               "border-b border-zinc-200 dark:border-zinc-700"
@@ -43,7 +47,7 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
             <Link href="/">
               <StorybookLogo color={variant === "home" ? "white" : "system"} />
             </Link>
-            <NavigationMenu.Root className="max-[864px]:hidden">
+            <NavigationMenu.Root className="max-[920px]:hidden">
               <NavigationMenu.List className="flex gap-2">
                 <NavigationMenu.Item>
                   <NavigationMenu.Link asChild>
@@ -154,7 +158,13 @@ export const Header: FC<HeaderProps> = ({ variant = "home" }) => {
           <Search variant={variant} />
           <MobileMenu variant={variant} />
         </div>
-        {pathname === "/docs" && <Submenu variant={variant} />}
+        {pathname.startsWith("/docs") && (
+          <Submenu
+            variant={variant}
+            tree={tree}
+            activeVersion={activeVersion}
+          />
+        )}
       </div>
     </header>
   );
