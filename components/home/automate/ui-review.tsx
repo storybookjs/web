@@ -1,4 +1,4 @@
-import { cn, container } from "@/lib/utils";
+import { cn, container } from "@/lib/tailwind";
 
 const reviewComments = [
   { id: 0, image: "/home/automate/comment-1.svg" },

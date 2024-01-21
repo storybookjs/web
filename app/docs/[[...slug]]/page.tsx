@@ -2,23 +2,12 @@ import { getVersion } from "@/lib/get-version";
 import * as MDX from "@/components/docs/mdx";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/tailwind";
 import { renderers } from "@/docs-renderers";
 import { getPageData } from "@/lib/get-page";
 import { docsVersions } from "@/docs-versions";
-import { cookies } from "next/headers";
 import { Renderers } from "@/components/docs/renderers";
-
-const isHomepage = (slug: string[]) => {
-  return (
-    slug === undefined ||
-    (slug &&
-      slug.length === 1 &&
-      docsVersions.some((version) => {
-        return slug[0] === version.id;
-      }))
-  );
-};
+import { generateDocsTree } from "@/lib/get-tree";
 
 interface Props {
   params: {
@@ -26,46 +15,49 @@ interface Props {
   };
 }
 
-export async function generateMetadata({ params: { slug } }: Props) {
-  const activeVersion = getVersion(slug);
-
-  const page = await getPageData(
-    isHomepage(slug) ? ["/"] : slug,
-    activeVersion.id
+export const generateStaticParams = async () => {
+  const result: { slug: string[] }[] = [];
+  const tree = generateDocsTree();
+  const treeFirstVersion = generateDocsTree(
+    `content/docs/${docsVersions[0].id}`
   );
 
-  if (!page) {
-    return {
-      title: "Page Not Found",
-    };
-  }
-
-  return {
-    title: `${page.title} • Storybook docs` || "Storybook • Storybook docs",
+  const ids = (data: TreeProps[], removeVersion: boolean) => {
+    data.forEach((item) => {
+      if ("slug" in item) {
+        const newSlug = item.slug.replace("/docs/", "").split("/");
+        if (removeVersion) newSlug.shift();
+        result.push({
+          slug: newSlug,
+        });
+      }
+      if (item.children) {
+        ids(item.children, removeVersion);
+      }
+    });
   };
-}
+
+  ids(treeFirstVersion, true);
+  ids(tree, false);
+
+  return result;
+};
 
 export default async function Page({ params: { slug } }: Props) {
-  const cookieStore = cookies();
-  const rendererCookie = cookieStore.get("sb-docs-renderer");
-  const activeRenderer = rendererCookie
-    ? rendererCookie.value
-    : renderers[0].id;
-
-  // Get the latest version
   const activeVersion = getVersion(slug);
+  const hasVersion =
+    slug?.length >= 1 && docsVersions.some((version) => slug[0] === version.id);
+  const newSlug = slug ? [...slug] : [];
+  if (!hasVersion) newSlug.unshift(activeVersion.id);
 
-  const page = await getPageData(
-    isHomepage(slug) ? ["/"] : slug,
-    activeVersion.id
-  );
+  const page = await getPageData(newSlug, activeVersion);
 
   if (!page) notFound();
 
   return (
     <div>
       <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
-      <Renderers activeRenderer={activeRenderer} />
+      <Renderers activeRenderer={renderers[0].id} />
       {page.tabs && page.tabs.length > 0 && (
         <div className="flex items-center gap-8 border-b border-zinc-200">
           {page.tabs.map((tab) => {

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import SocialProof from "../social-proof";
 import Link from "next/link";
 import { Video } from "./video";
-import { cn, container } from "@/lib/utils";
+import { cn, container } from "@/lib/tailwind";
 
 export const Hero: FC = () => {
   return (

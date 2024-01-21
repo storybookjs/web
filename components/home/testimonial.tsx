@@ -1,4 +1,4 @@
-import { cn, container } from "@/lib/utils";
+import { cn, container } from "@/lib/tailwind";
 import Image from "next/image";
 import { FC, ReactNode } from "react";
 

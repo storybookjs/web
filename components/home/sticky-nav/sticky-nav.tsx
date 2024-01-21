@@ -4,7 +4,7 @@ import { ArrowUpIcon } from "@storybook/icons";
 import { Button } from "../../ui/button";
 import Link from "next/link";
 import { MobileMenu } from "./mobile-menu";
-import { cn, container } from "@/lib/utils";
+import { cn, container } from "@/lib/tailwind";
 
 interface StickyNavProps {
   isVisible?: boolean;

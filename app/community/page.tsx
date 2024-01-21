@@ -3,7 +3,7 @@ import { Footer } from "@/components/footer/footer";
 import { Header } from "@/components/header/header";
 import { Community } from "@/components/community";
 import { NewsletterForm } from "@/components/newsletter-form/form";
-import { cn, smallContainer } from "@/lib/utils";
+import { cn, smallContainer } from "@/lib/tailwind";
 import { Numbers } from "@/components/community/numbers";
 import { NavSide } from "@/components/community/nav-side";
 import { Support } from "@/components/community/support";

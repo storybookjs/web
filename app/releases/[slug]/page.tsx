@@ -1,37 +1,33 @@
 import { Footer } from "@/components/footer/footer";
 import { Header } from "@/components/header/header";
-import { cn, container } from "@/lib/utils";
-import { Fragment } from "react";
-import { Sidebar } from "@/components/docs/sidebar/sidebar";
-import Link from "next/link";
-import { getRelease } from "@/lib/get-release";
-import fs from "fs";
 import { ReleaseNewsletter } from "@/components/release-newsletter";
+import { Sidebar } from "@/components/docs/sidebar/sidebar";
+import { getRelease } from "@/lib/get-release";
+import { getReleases } from "@/lib/get-releases";
+import { cn, container } from "@/lib/tailwind";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  A,
-  H1,
-  H2,
-  H3,
-  Hr,
-  P,
-  UnorderedList,
-  List,
-} from "@/components/docs/mdx";
+import { Fragment } from "react";
 
-export default async function Home({
-  params: { slug },
-}: {
-  params: { slug: string };
-}) {
-  const page = await getRelease(slug || "");
-  const releases: string[] = [];
+interface Props {
+  params: {
+    slug: string;
+  };
+}
 
-  fs.readdirSync("content/releases").forEach((f) => {
-    releases.push(f.replace(".md", ""));
-  });
+export const generateStaticParams = async () => {
+  return getReleases().map((release) => ({
+    slug: release,
+  }));
+};
 
-  if (!page) return notFound();
+export default async function Page({ params: { slug } }: Props) {
+  const releases = getReleases();
+
+  // TODO: This is not really working on prod
+  if (releases.includes(slug) === false) return notFound();
+
+  const page = await getRelease(slug);
 
   return (
     <Fragment>
@@ -59,21 +55,7 @@ export default async function Home({
           <h1 className="text-4xl mt-0 mb-6 font-bold">
             {page?.frontmatter.title || "Page Not Found"}
           </h1>
-          {page.content}
-          {/* <Content
-            components={{
-              h1: H1,
-              h2: H2,
-              h3: H3,
-              h4: H1,
-              a: A,
-              p: P,
-              hr: Hr,
-              ul: UnorderedList,
-              li: List,
-              // img: Img,
-            }}
-          /> */}
+          {page && page.content}
           <ReleaseNewsletter />
         </article>
       </main>

@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn, container } from "@/lib/utils";
+import { cn, container } from "@/lib/tailwind";
 import { ArrowRightIcon, ChevronSmallRightIcon } from "@storybook/icons";
 import { Button } from "../ui/button";
 import Link from "next/link";

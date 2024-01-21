@@ -1,7 +1,6 @@
 import { packageManagers } from "@/docs-package-managers";
 import { docsVersions } from "@/docs-versions";
 import { compileMDX } from "next-mdx-remote/rsc";
-import { cookies } from "next/headers";
 import { firefoxThemeLight } from "../themes/firefox-theme-vscode";
 import fs from "fs";
 import rehypePrettyCode from "rehype-pretty-code";
@@ -12,9 +11,8 @@ interface Props {
 }
 
 export const getMetadata = async ({ paths }: Props) => {
-  const cookieStore = cookies();
-  const cookieVersion = cookieStore.get("sb-docs-version");
-  const version = cookieVersion?.value ?? docsVersions[0].id;
+  const activeVersion = "8.0-test-1";
+  const version = activeVersion ?? docsVersions[0].id;
 
   const rehypePrettyCodeOptions = {
     theme: firefoxThemeLight,
@@ -22,9 +20,11 @@ export const getMetadata = async ({ paths }: Props) => {
 
   const content: CodeSnippetsProps[] = await Promise.all(
     paths.map(async (path) => {
-      // Parse data
-      const sourcePath = `content/docs/${version}/snippets/${path}`;
-      const source = fs.readFileSync(sourcePath, "utf8");
+      const source = await fs.promises.readFile(
+        process.cwd() + `/content/snippets/${version}/${path}`,
+        "utf8"
+      );
+
       const renderer = path.split("/")[0];
       const segments = path
         .split("/")[1]

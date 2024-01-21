@@ -1,31 +1,26 @@
-import { languages } from "@/docs-languages";
-import { packageManagers } from "@/docs-package-managers";
-import { cookies } from "next/headers";
-
 interface Props {
   codeSnippetsContent: CodeSnippetsProps[];
   filters: CodeSnippetsFiltersProps;
+  activePackageManager: string | null;
+  activeLanguage: string | null;
 }
 
 export const getActiveContent = ({
   codeSnippetsContent,
   filters,
+  activePackageManager,
+  activeLanguage,
 }: Props): CodeSnippetsProps | null => {
-  const cookieStore = cookies();
-  const cookiePackageManager = cookieStore.get("sb-docs-package-manager");
-  const packageManager = cookiePackageManager?.value ?? packageManagers[0].id;
-  const cookieLanguage = cookieStore.get("sb-docs-language");
-  const language = cookieLanguage?.value ?? languages[0].id;
-
   const filterByPackageManager = codeSnippetsContent.filter((item) => {
     // If there is only one package manager, we don't need to filter
     if (filters.packageManagers.length <= 1) return true;
 
     // Edge case to show npx snippets when npm is selected
-    if (item.packageManager === "npx" && packageManager === "npm") return true;
+    if (item.packageManager === "npx" && activePackageManager === "npm")
+      return true;
 
     // If there's a match, we return true
-    if (item.packageManager === packageManager) return true;
+    if (item.packageManager === activePackageManager) return true;
 
     return false;
   });
@@ -35,12 +30,12 @@ export const getActiveContent = ({
     if (filters.languages.length <= 1) return true;
 
     // If there's a match, we return true
-    if (item.language === language) return true;
+    if (item.language === activeLanguage) return true;
 
     return false;
   });
 
-  if (language === "ts" && filterByLanguage.length === 0) {
+  if (activeLanguage === "ts" && filterByLanguage.length === 0) {
     const getTsVersion = filterByPackageManager.find(
       (v) => v.language === "ts-4-9"
     );
@@ -52,7 +47,7 @@ export const getActiveContent = ({
     }
   }
 
-  if (language === "ts-4-9" && filterByLanguage.length === 0) {
+  if (activeLanguage === "ts-4-9" && filterByLanguage.length === 0) {
     const getTsVersion = filterByPackageManager.find(
       (v) => v.language === "ts"
     );

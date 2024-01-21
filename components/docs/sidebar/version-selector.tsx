@@ -37,39 +37,39 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
   };
 
   return (
-    <div className="w-full px-2 md:px-0">
-      <DropdownMenu.Root>
-        <DropdownMenu.Trigger asChild>
-          <DropdownMenu.Trigger
-            type="button"
-            className="w-full h-10 mt-4 md:mt-6 px-3 md:px-2 flex items-center justify-between text-sm border md:border-0 md:border-b border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 transition-all select-none rounded md:rounded-none"
-            aria-label="Customise options"
-          >
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger asChild>
+        <DropdownMenu.Trigger
+          type="button"
+          className="w-full h-10 mt-6 px-2"
+          aria-label="Customise options"
+        >
+          <div className="flex items-center justify-between text-sm w-full h-full border-b border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 transition-all select-none">
             {activeVersion.label}
             <ChevronSmallDownIcon />
-          </DropdownMenu.Trigger>
+          </div>
         </DropdownMenu.Trigger>
-        <DropdownMenu.Portal>
-          <DropdownMenu.Content
-            align="start"
-            className="min-w-[200px] ml-1 bg-white rounded p-1 shadow-xl will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
-            sideOffset={4}
-          >
-            <DropdownMenu.Group>
-              {docsVersions.map((version) => (
-                <DropdownMenu.Item key={version.id} asChild>
-                  <Link
-                    href={getLink(version.id)}
-                    className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
-                  >
-                    {version.label}
-                  </Link>
-                </DropdownMenu.Item>
-              ))}
-            </DropdownMenu.Group>
-          </DropdownMenu.Content>
-        </DropdownMenu.Portal>
-      </DropdownMenu.Root>
-    </div>
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Portal>
+        <DropdownMenu.Content
+          align="start"
+          className="min-w-[200px] ml-1 bg-white rounded p-1 shadow-xl will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
+          sideOffset={4}
+        >
+          <DropdownMenu.Group>
+            {docsVersions.map((version) => (
+              <DropdownMenu.Item key={version.id} asChild>
+                <Link
+                  href={getLink(version.id)}
+                  className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
+                >
+                  {version.label}
+                </Link>
+              </DropdownMenu.Item>
+            ))}
+          </DropdownMenu.Group>
+        </DropdownMenu.Content>
+      </DropdownMenu.Portal>
+    </DropdownMenu.Root>
   );
 };

@@ -6,7 +6,7 @@ import { RangeSlider } from "./range-slider";
 import { VSCode } from "./vscode";
 import { App } from "./app";
 import { Connector } from "../connector";
-import { useMediaQuery } from "@/lib/useMediaQuery";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 interface ScrollDemoProps {
   appearProgress: MotionValue;

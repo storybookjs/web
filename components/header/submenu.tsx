@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { MenuIcon } from "@storybook/icons";
-import { cn } from "../../lib/utils";
 import { usePathname } from "next/navigation";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { NavDocs } from "../docs/sidebar/nav-docs";
+import { cn } from "@/lib/tailwind";
 
 export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
   const pathname = usePathname();

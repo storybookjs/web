@@ -1,18 +1,27 @@
 import { ReleaseNewsletter } from "@/components/release-newsletter";
 import { getRelease } from "@/lib/get-release";
-import fs from "fs";
+import { getReleases } from "@/lib/get-releases";
+import { notFound } from "next/navigation";
 
-export default async function Home({
-  params: { slug },
-}: {
-  params: { slug: string };
-}) {
-  const page = await getRelease(slug || "");
-  const releases: string[] = [];
+interface Props {
+  params: {
+    slug: string;
+  };
+}
 
-  fs.readdirSync("content/releases").forEach((f) => {
-    releases.push(f.replace(".md", ""));
-  });
+export const generateStaticParams = async () => {
+  return getReleases().map((release) => ({
+    slug: release,
+  }));
+};
+
+export default async function Home({ params: { slug } }: Props) {
+  const releases = getReleases();
+
+  // TODO: This is not really working on prod
+  if (releases.includes(slug) === false) return notFound();
+
+  const page = await getRelease(slug);
 
   return (
     <article className="w-full max-w-4xl mx-auto px-4 lg:px-8 my-10">

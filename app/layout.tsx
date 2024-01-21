@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Nunito_Sans as FontSans } from "next/font/google";
-import { cn } from "../lib/utils";
+import { cn } from "../lib/tailwind";
 import { Providers } from "./providers";
 import "./globals.css";
-import { CookieClient } from "@/components/cookieClient";
 
-export const fontSans = FontSans({
+const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -29,10 +28,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers>
-          <CookieClient />
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

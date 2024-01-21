@@ -1,37 +1,45 @@
 import fs from "fs";
 import { generateDocsTree } from "./get-tree";
-import { getNullableVersion } from "./get-version";
 import { firefoxThemeLight } from "@/components/docs/mdx/code-snippets/themes/firefox-theme-vscode";
 import rehypePrettyCode from "rehype-pretty-code";
 import { compileMDX } from "next-mdx-remote/rsc";
 import * as MDX from "@/components/docs/mdx";
 import rehypeSlug from "rehype-slug";
+import { DocsVersion } from "@/docs-versions";
 
 const rehypePrettyCodeOptions = {
   theme: firefoxThemeLight,
 };
 
-export const getPageData = async (path: string[], activeVersion: string) => {
-  const segment = path ? path.join("/").replace(`${activeVersion}/`, "") : "/";
-  const superRootPath = `content/docs/${activeVersion}/docs`;
-
-  const indexPath = `${superRootPath}/${segment}/index.mdx`;
+export const getPageData = async (
+  path: string[],
+  activeVersion: DocsVersion
+) => {
+  const rootPath = "content/docs";
+  const pathString = path.join("/");
+  const indexPathMDX = `content/docs/${pathString}/index.mdx`;
+  const indexPathMD = `content/docs/${pathString}/index.md`;
   const linkPath =
-    `${superRootPath}/${segment}.mdx` || `${superRootPath}/${segment}.md`;
+    `${rootPath}/${pathString}.mdx` || `${rootPath}/${pathString}.md`;
 
-  const isIndex = fs.existsSync(indexPath);
+  const isIndexMDX = fs.existsSync(indexPathMDX);
+  const isIndexMD = fs.existsSync(indexPathMD);
   const isLink = fs.existsSync(linkPath);
 
   let newPath = null;
-  if (isIndex) newPath = indexPath;
+  if (isIndexMDX) newPath = indexPathMDX;
+  if (isIndexMD) newPath = indexPathMD;
   if (isLink) newPath = linkPath;
 
   if (!newPath) return undefined;
 
-  const fileContents = fs.readFileSync(newPath, "utf8");
+  const file = await fs.promises.readFile(
+    process.cwd() + `/${newPath}`,
+    "utf8"
+  );
 
   const { content, frontmatter } = await compileMDX<{ title: string }>({
-    source: fileContents,
+    source: file,
     options: {
       parseFrontmatter: true,
       mdxOptions: {
@@ -54,9 +62,9 @@ export const getPageData = async (path: string[], activeVersion: string) => {
       ul: MDX.UnorderedList,
       li: MDX.List,
       pre: MDX.Pre,
-      // img: (props: any) => (
-      //   <MDX.ImgDocs activeVersion={activeVersion} {...props} />
-      // ),
+      img: (props) => (
+        <MDX.ImgDocs activeVersion={activeVersion.id} {...props} />
+      ),
       CodeSnippets: MDX.CodeSnippets,
       Callout: MDX.Callout,
       IfRenderer: MDX.IfRenderer,
@@ -67,17 +75,16 @@ export const getPageData = async (path: string[], activeVersion: string) => {
 
   // Get Tabs
   let pathToFiles = isLink
-    ? `${superRootPath}/${segment}`.split("/").slice(0, -1).join("/")
-    : `${superRootPath}/${segment}`;
+    ? `${rootPath}/${pathString}`.split("/").slice(0, -1).join("/")
+    : `${rootPath}/${pathString}`;
 
-  const parent = generateDocsTree({
-    pathToFiles,
-    activeVersion: getNullableVersion(path),
-  }).sort((a, b) =>
+  const parent = generateDocsTree(pathToFiles);
+
+  const sorted = parent?.sort((a, b) =>
     a?.tab?.order && b?.tab?.order ? a.tab.order - b.tab.order : 0
   );
 
-  const index = parent.find((item) => item.name === "index.mdx");
+  const index = sorted?.find((item) => item.name === "index.mdx");
 
   return {
     ...frontmatter,

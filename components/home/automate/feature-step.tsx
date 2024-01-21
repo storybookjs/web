@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/tailwind";
 import { CheckIcon, ChevronSmallRightIcon } from "@storybook/icons";
 import Link from "next/link";
 import React, { FC, ReactNode } from "react";

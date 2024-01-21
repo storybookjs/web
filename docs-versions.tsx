@@ -34,19 +34,19 @@ export const docsVersions: DocsVersion[] = [
     id: "8.0-test-3",
     branch: "charles-docs-new-structure",
   },
-  {
-    label: "Verion 8.0 - Alpha 7",
-    id: "8.0.0-alpha.7",
-    tag: "v8.0.0-alpha.7",
-  },
-  {
-    label: "Version 7.6.7",
-    id: "7.6.7",
-    tag: "v7.6.7",
-  },
-  {
-    label: "Version 6.5.16",
-    id: "6.5.16",
-    tag: "v6.5.16",
-  },
+  // {
+  //   label: "Verion 8.0 - Alpha 7",
+  //   id: "8.0.0-alpha.7",
+  //   tag: "v8.0.0-alpha.7",
+  // },
+  // {
+  //   label: "Version 7.6.7",
+  //   id: "7.6.7",
+  //   tag: "v7.6.7",
+  // },
+  // {
+  //   label: "Version 6.5.16",
+  //   id: "6.5.16",
+  //   tag: "v6.5.16",
+  // },
 ];

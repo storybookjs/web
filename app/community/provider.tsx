@@ -1,6 +1,6 @@
 "use client";
 
-import type { Dispatch, FC, PropsWithChildren, SetStateAction } from "react";
+import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
 import React, { createContext, useContext, useState } from "react";
 
 type CommunityContextType = {
@@ -13,7 +13,7 @@ const CommunityContext = createContext<CommunityContextType>({
   setActiveSegment: () => {},
 });
 
-export const CommunityProvider: FC<PropsWithChildren> = ({ children }) => {
+export const CommunityProvider = ({ children }: PropsWithChildren<{}>) => {
   const [activeSegment, setActiveSegment] = useState<string | null>(null);
 
   return (

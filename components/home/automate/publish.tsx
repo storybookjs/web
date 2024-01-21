@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { motion } from "framer-motion";
-import { cn, container } from "@/lib/utils";
+import { cn, container } from "@/lib/tailwind";
 
 const calendarVariants = {
   initial: { opacity: 0.5, filter: "grayscale(100%)" },

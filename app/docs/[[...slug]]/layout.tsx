@@ -3,12 +3,12 @@ import { Header } from "@/components/header/header";
 import { Footer } from "@/components/footer/footer";
 import Image from "next/image";
 import { Sidebar } from "@/components/docs/sidebar/sidebar";
-import { TableOfContent } from "@/components/table-of-content";
-import { cn, container } from "@/lib/utils";
+import { TableOfContent } from "@/components/docs/table-of-content";
+import { cn, container } from "@/lib/tailwind";
 import { NavDocs } from "@/components/docs/sidebar/nav-docs";
-import { getNullableVersion, getVersion } from "@/lib/get-version";
-import { Fragment } from "react";
 import { generateDocsTree } from "@/lib/get-tree";
+import { DocsProvider } from "../provider";
+import { getVersion } from "@/lib/get-version";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -18,28 +18,18 @@ export const metadata: Metadata = {
 
 export default async function Layout({
   children,
-  params,
+  params: { slug },
 }: {
   children: React.ReactNode;
   params: { slug: string[] };
 }) {
-  // Get the latest version
-  const activeVersionForPath = getVersion(params.slug);
-  const activeVersionForSlug = getNullableVersion(params.slug);
-
-  // Get the tree for the version
-  const tree = generateDocsTree({
-    pathToFiles: `content/docs/${activeVersionForPath?.id}/docs`,
-    activeVersion: activeVersionForSlug,
-  });
+  const activeVersion = getVersion(slug);
+  const path = `content/docs/${activeVersion.id}`;
+  const tree = generateDocsTree(path);
 
   return (
-    <Fragment>
-      <Header
-        variant="system"
-        tree={tree}
-        activeVersion={activeVersionForPath}
-      />
+    <DocsProvider>
+      <Header variant="system" />
       <Image
         src="/bubbles.png"
         alt="Storybook Docs"
@@ -49,12 +39,12 @@ export default async function Layout({
       />
       <main className={cn(container, "md:pl-5 lg:pr-8 flex gap-4")}>
         <Sidebar>
-          <NavDocs tree={tree} activeVersion={activeVersionForPath} />
+          <NavDocs tree={tree} activeVersion={activeVersion} />
         </Sidebar>
         <div className="w-full flex-1 min-h-[1400px] py-12">{children}</div>
         <TableOfContent />
       </main>
       <Footer />
-    </Fragment>
+    </DocsProvider>
   );
 }

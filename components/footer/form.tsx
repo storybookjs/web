@@ -6,7 +6,7 @@ import {
   YoutubeIcon,
 } from "@storybook/icons";
 import { FooterProps } from "./footer";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/tailwind";
 import { NewsletterForm } from "../newsletter-form/form";
 
 interface FormProps {

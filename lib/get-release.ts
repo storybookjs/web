@@ -5,10 +5,13 @@ import * as MDX from "@/components/docs/mdx";
 export async function getRelease(version: string) {
   if (!version) return undefined;
 
-  const fileContent = fs.readFileSync(`content/releases/${version}.md`, "utf8");
+  const file = await fs.promises.readFile(
+    process.cwd() + `/content/releases/${version}.md`,
+    "utf8"
+  );
 
   return await compileMDX<{ title: string }>({
-    source: fileContent,
+    source: file,
     options: {
       parseFrontmatter: true,
     },

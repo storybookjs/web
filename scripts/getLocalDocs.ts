@@ -13,20 +13,20 @@ const raindow = chalkAnimation.rainbow(
 
 async function clean() {
   await fs.emptyDir(path.join(__dirname, "../content/docs"));
+  await fs.emptyDir(path.join(__dirname, "../content/snippets"));
   await fs.emptyDir(path.join(__dirname, "../public/docs"));
-  // Create directories for each version
 
+  // Create directories for each version
   for (const version of docsVersions) {
-    await fs.mkdirp(path.join(__dirname, `../content/docs/${version.id}/docs`));
-    await fs.mkdirp(
-      path.join(__dirname, `../content/docs/${version.id}/snippets`)
-    );
+    await fs.mkdirp(path.join(__dirname, `../content/docs/${version.id}`));
+    await fs.mkdirp(path.join(__dirname, `../content/snippets/${version.id}`));
     await fs.mkdirp(path.join(__dirname, `../public/docs/${version.id}`));
   }
 }
 
 async function fetchAndExtract(version: DocsVersion) {
-  raindow.start();
+  // raindow.start();
+  console.log(`Fetching docs for ${version.id}...`);
 
   let url: string | null = null;
   if (version.branch)
@@ -57,7 +57,7 @@ async function fetchAndExtract(version: DocsVersion) {
             tar.x(
               {
                 strip: 2,
-                C: path.join(__dirname, `../content/docs/${version.id}/docs`),
+                C: path.join(__dirname, `../content/docs/${version.id}`),
                 filter: (path) =>
                   !path.includes("_assets") &&
                   !path.includes("_versions") &&
@@ -80,10 +80,7 @@ async function fetchAndExtract(version: DocsVersion) {
             tar.x(
               {
                 strip: 3,
-                C: path.join(
-                  __dirname,
-                  `../content/docs/${version.id}/snippets`
-                ),
+                C: path.join(__dirname, `../content/snippets/${version.id}`),
                 filter: (path) => path.includes("_snippets"),
               },
               [folder]
@@ -123,5 +120,7 @@ clean();
 const arrayOfFetches = docsVersions.map((version) => fetchAndExtract(version));
 
 Promise.all(arrayOfFetches).then(() => {
-  raindow.stop();
+  // raindow.stop();
+  console.log("Done!");
+  console.log("");
 });

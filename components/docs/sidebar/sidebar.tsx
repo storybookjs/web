@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ScrollBar } from "@/components/ui/scroll-area";
 import { FC, ReactNode } from "react";
 import { ChangelogIcon, DocsIcon, TutorialsIcon } from "./icons";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/tailwind";
 import { usePathname } from "next/navigation";
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 
