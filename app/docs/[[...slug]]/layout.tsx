@@ -11,6 +11,7 @@ import { DocsProvider } from "../provider";
 import { getVersion } from "@/lib/get-version";
 import { slugHasVersion } from "@/lib/slug-has-version";
 import { getPageData } from "@/lib/get-page";
+import { inView } from "framer-motion";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -44,11 +45,11 @@ export default async function Layout({
         height={339}
         className="w-full absolute top-0 left-0 -z-10"
       />
-      <main className={cn(container, "lg:pl-5 lg:pr-8 flex gap-4")}>
+      <main className={cn(container, "lg:pl-5 lg:pr-8 flex gap-12")}>
         <Sidebar>
           <NavDocs tree={tree} activeVersion={activeVersion} />
         </Sidebar>
-        <div className="w-full flex-1 min-h-[1400px] py-12">{children}</div>
+        {children}
         <TableOfContent headings={page?.headings} />
       </main>
       <Footer />

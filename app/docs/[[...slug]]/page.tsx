@@ -55,7 +55,7 @@ export default async function Page({ params: { slug } }: Props) {
   if (!page) notFound();
 
   return (
-    <div>
+    <div className="w-full flex-1 min-h-[1400px] py-12">
       <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
       <Renderers activeRenderer={renderers[0].id} />
       {page.tabs && page.tabs.length > 0 && (
