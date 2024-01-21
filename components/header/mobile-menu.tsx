@@ -2,8 +2,8 @@ import { FC, ReactNode } from "react";
 import { MenuIcon } from "@storybook/icons";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { cn } from "@/lib/tailwind";
 
 export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
   return (

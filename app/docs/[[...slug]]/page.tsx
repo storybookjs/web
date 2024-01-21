@@ -8,6 +8,7 @@ import { getPageData } from "@/lib/get-page";
 import { docsVersions } from "@/docs-versions";
 import { Renderers } from "@/components/docs/renderers";
 import { generateDocsTree } from "@/lib/get-tree";
+import { slugHasVersion } from "@/lib/slug-has-version";
 
 interface Props {
   params: {
@@ -45,8 +46,7 @@ export const generateStaticParams = async () => {
 
 export default async function Page({ params: { slug } }: Props) {
   const activeVersion = getVersion(slug);
-  const hasVersion =
-    slug?.length >= 1 && docsVersions.some((version) => slug[0] === version.id);
+  const hasVersion = slugHasVersion(slug);
   const newSlug = slug ? [...slug] : [];
   if (!hasVersion) newSlug.unshift(activeVersion.id);
 
@@ -55,30 +55,32 @@ export default async function Page({ params: { slug } }: Props) {
   if (!page) notFound();
 
   return (
-    <div>
-      <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
-      <Renderers activeRenderer={renderers[0].id} />
-      {page.tabs && page.tabs.length > 0 && (
-        <div className="flex items-center gap-8 border-b border-zinc-200">
-          {page.tabs.map((tab) => {
-            const isActive = tab.slug === `/docs/${slug.join("/")}`;
+    <div className="w-full flex-1 py-12">
+      <div className="max-w-[720px] mx-auto">
+        <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
+        <Renderers activeRenderer={renderers[0].id} />
+        {page.tabs && page.tabs.length > 0 && (
+          <div className="flex items-center gap-8 border-b border-zinc-200">
+            {page.tabs.map((tab) => {
+              const isActive = tab.slug === `/docs/${slug.join("/")}`;
 
-            return (
-              <Link
-                key={tab.name}
-                href={tab.slug}
-                className={cn(
-                  "border-b -mb-px pb-2 hover:text-blue-500 transition-colors px-2 text-sm capitalize",
-                  isActive && "border-b border-blue-500 text-blue-500"
-                )}
-              >
-                {tab?.tab?.title || tab.title}
-              </Link>
-            );
-          })}
-        </div>
-      )}
-      <article>{page.content}</article>
+              return (
+                <Link
+                  key={tab.name}
+                  href={tab.slug}
+                  className={cn(
+                    "border-b -mb-px pb-2 hover:text-blue-500 transition-colors px-2 text-sm capitalize",
+                    isActive && "border-b border-blue-500 text-blue-500"
+                  )}
+                >
+                  {tab?.tab?.title || tab.title}
+                </Link>
+              );
+            })}
+          </div>
+        )}
+        <article>{page.content}</article>
+      </div>
     </div>
   );
 }
