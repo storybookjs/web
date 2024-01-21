@@ -6,6 +6,7 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import * as MDX from "@/components/docs/mdx";
 import rehypeSlug from "rehype-slug";
 import { DocsVersion } from "@/docs-versions";
+import { extractHeadings } from "extract-md-headings";
 
 const rehypePrettyCodeOptions = {
   theme: firefoxThemeLight,
@@ -73,6 +74,8 @@ export const getPageData = async (
     },
   });
 
+  const headings = extractHeadings(process.cwd() + `/${newPath}`);
+
   // Get Tabs
   let pathToFiles = isLink
     ? `${rootPath}/${pathString}`.split("/").slice(0, -1).join("/")
@@ -90,5 +93,6 @@ export const getPageData = async (
     ...frontmatter,
     tabs: index?.isTab ? parent : [],
     content,
+    headings,
   };
 };

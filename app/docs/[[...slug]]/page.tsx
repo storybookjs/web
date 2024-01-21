@@ -8,6 +8,7 @@ import { getPageData } from "@/lib/get-page";
 import { docsVersions } from "@/docs-versions";
 import { Renderers } from "@/components/docs/renderers";
 import { generateDocsTree } from "@/lib/get-tree";
+import { slugHasVersion } from "@/lib/slug-has-version";
 
 interface Props {
   params: {
@@ -45,8 +46,7 @@ export const generateStaticParams = async () => {
 
 export default async function Page({ params: { slug } }: Props) {
   const activeVersion = getVersion(slug);
-  const hasVersion =
-    slug?.length >= 1 && docsVersions.some((version) => slug[0] === version.id);
+  const hasVersion = slugHasVersion(slug);
   const newSlug = slug ? [...slug] : [];
   if (!hasVersion) newSlug.unshift(activeVersion.id);
 

@@ -27,6 +27,7 @@
     "date-fns": "2",
     "date-fns-tz": "^2.0.0",
     "directory-tree": "^3.5.1",
+    "extract-md-headings": "^0.2.5",
     "framer-motion": "^10.16.14",
     "fs-extra": "^11.2.0",
     "fs-find-root": "^2.0.0",

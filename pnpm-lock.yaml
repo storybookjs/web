@@ -56,6 +56,9 @@ dependencies:
   directory-tree:
     specifier: ^3.5.1
     version: 3.5.1
+  extract-md-headings:
+    specifier: ^0.2.5
+    version: 0.2.5
   framer-motion:
     specifier: ^10.16.14
     version: 10.18.0(react-dom@18.2.0)(react@18.2.0)
@@ -5756,6 +5759,12 @@ packages:
 
   /extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
+    dev: false
+
+  /extract-md-headings@0.2.5:
+    resolution: {integrity: sha512-1x49be07xQxXDDI/n0SCGLRbMbHShOE4fblGgzF+uCE+bCWIH0j2UphXvGL8LjGr8a+U1aPzPqyiNoNLrAdY/Q==}
+    dependencies:
+      tslib: 2.6.2
     dev: false
 
   /fast-deep-equal@3.1.3:

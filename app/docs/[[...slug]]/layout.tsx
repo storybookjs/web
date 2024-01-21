@@ -9,6 +9,8 @@ import { NavDocs } from "@/components/docs/sidebar/nav-docs";
 import { generateDocsTree } from "@/lib/get-tree";
 import { DocsProvider } from "../provider";
 import { getVersion } from "@/lib/get-version";
+import { slugHasVersion } from "@/lib/slug-has-version";
+import { getPageData } from "@/lib/get-page";
 
 export const metadata: Metadata = {
   title: "Storybook",
@@ -26,6 +28,13 @@ export default async function Layout({
   const activeVersion = getVersion(slug);
   const path = `content/docs/${activeVersion.id}`;
   const tree = generateDocsTree(path);
+  const hasVersion = slugHasVersion(slug);
+  const newSlug = slug ? [...slug] : [];
+  if (!hasVersion) newSlug.unshift(activeVersion.id);
+
+  const page = await getPageData(newSlug, activeVersion);
+
+  console.log(page?.headings);
 
   return (
     <DocsProvider>
@@ -42,7 +51,7 @@ export default async function Layout({
           <NavDocs tree={tree} activeVersion={activeVersion} />
         </Sidebar>
         <div className="w-full flex-1 min-h-[1400px] py-12">{children}</div>
-        <TableOfContent />
+        <TableOfContent headings={page?.headings} />
       </main>
       <Footer />
     </DocsProvider>
