@@ -44,7 +44,7 @@ export const Header: FC<HeaderProps> = ({
           )}
         >
           <div className="flex gap-6 items-center">
-            <Link href="/">
+            <Link href="/" className="pl-2 md:pl-0">
               <StorybookLogo color={variant === "home" ? "white" : "system"} />
             </Link>
             <NavigationMenu.Root className="max-[920px]:hidden">

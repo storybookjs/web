@@ -20,7 +20,7 @@ export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
   return (
     <div
       className={cn(
-        "flex items-center p-4 md:hidden gap-2 text-sm",
+        "flex items-center p-4 sm:px-8 md:hidden gap-2 text-sm",
         variant === "home" && "border-b border-zinc-700 text-white",
         variant === "system" && "border-b border-zinc-200 dark:border-zinc-700"
       )}

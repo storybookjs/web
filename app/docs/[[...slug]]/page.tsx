@@ -55,30 +55,32 @@ export default async function Page({ params: { slug } }: Props) {
   if (!page) notFound();
 
   return (
-    <div className="w-full flex-1 min-h-[1400px] py-12">
-      <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
-      <Renderers activeRenderer={renderers[0].id} />
-      {page.tabs && page.tabs.length > 0 && (
-        <div className="flex items-center gap-8 border-b border-zinc-200">
-          {page.tabs.map((tab) => {
-            const isActive = tab.slug === `/docs/${slug.join("/")}`;
+    <div className="w-full flex-1 py-12">
+      <div className="max-w-[720px] mx-auto">
+        <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
+        <Renderers activeRenderer={renderers[0].id} />
+        {page.tabs && page.tabs.length > 0 && (
+          <div className="flex items-center gap-8 border-b border-zinc-200">
+            {page.tabs.map((tab) => {
+              const isActive = tab.slug === `/docs/${slug.join("/")}`;
 
-            return (
-              <Link
-                key={tab.name}
-                href={tab.slug}
-                className={cn(
-                  "border-b -mb-px pb-2 hover:text-blue-500 transition-colors px-2 text-sm capitalize",
-                  isActive && "border-b border-blue-500 text-blue-500"
-                )}
-              >
-                {tab?.tab?.title || tab.title}
-              </Link>
-            );
-          })}
-        </div>
-      )}
-      <article>{page.content}</article>
+              return (
+                <Link
+                  key={tab.name}
+                  href={tab.slug}
+                  className={cn(
+                    "border-b -mb-px pb-2 hover:text-blue-500 transition-colors px-2 text-sm capitalize",
+                    isActive && "border-b border-blue-500 text-blue-500"
+                  )}
+                >
+                  {tab?.tab?.title || tab.title}
+                </Link>
+              );
+            })}
+          </div>
+        )}
+        <article>{page.content}</article>
+      </div>
     </div>
   );
 }
