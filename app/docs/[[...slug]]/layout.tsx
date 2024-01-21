@@ -11,7 +11,6 @@ import { DocsProvider } from "../provider";
 import { getVersion } from "@/lib/get-version";
 import { slugHasVersion } from "@/lib/slug-has-version";
 import { getPageData } from "@/lib/get-page";
-import { inView } from "framer-motion";
 
 export const metadata: Metadata = {
   title: "Storybook",
