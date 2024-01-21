@@ -56,7 +56,7 @@ export const getPageData = async (
       h1: MDX.H1,
       h2: MDX.H2,
       h3: MDX.H3,
-      h4: MDX.H1,
+      h4: MDX.H4,
       a: MDX.A,
       p: MDX.P,
       hr: MDX.Hr,

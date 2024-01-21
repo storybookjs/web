@@ -34,8 +34,6 @@ export default async function Layout({
 
   const page = await getPageData(newSlug, activeVersion);
 
-  console.log(page?.headings);
-
   return (
     <DocsProvider>
       <Header variant="system" />

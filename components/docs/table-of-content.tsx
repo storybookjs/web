@@ -5,7 +5,7 @@ import { cn } from "@/lib/tailwind";
 import { FC } from "react";
 
 interface TableOfContentProps {
-  headings: {
+  headings?: {
     id: string;
     slug: string;
     title: string;

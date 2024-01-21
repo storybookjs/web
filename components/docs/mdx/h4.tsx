@@ -1,17 +1,14 @@
 import { LinkIcon } from "@storybook/icons";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
-type H2Props = DetailedHTMLProps<
+type H3Props = DetailedHTMLProps<
   HTMLAttributes<HTMLHeadingElement>,
   HTMLHeadingElement
 >;
 
-export const H2 = ({ children, id }: H2Props) => {
+export const H4 = ({ children, id }: H3Props) => {
   return (
-    <h2
-      className="relative text-2xl mt-0 mb-6 font-bold group"
-      data-docs-heading
-    >
+    <h4 className="relative text-xl mb-4 font-bold" data-docs-heading>
       <div id={id} className="absolute -translate-y-24" />
       <a
         href={`#${id}`}
@@ -22,6 +19,6 @@ export const H2 = ({ children, id }: H2Props) => {
           <LinkIcon />
         </span>
       </a>
-    </h2>
+    </h4>
   );
 };

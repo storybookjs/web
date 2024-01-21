@@ -7,7 +7,8 @@ type H1Props = DetailedHTMLProps<
 >;
 export const H1 = ({ children, id }: H1Props) => {
   return (
-    <h1 className="text-4xl mt-0 mb-6 font-bold" id={id} data-docs-heading>
+    <h1 className="relative text-4xl mt-0 mb-6 font-bold" data-docs-heading>
+      <div id={id} className="absolute -translate-y-24" />
       <a
         href={`#${id}`}
         className="text-black group-hover:text-blue-500 transition-colors duration-200"

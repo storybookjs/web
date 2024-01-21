@@ -8,7 +8,8 @@ type H3Props = DetailedHTMLProps<
 
 export const H3 = ({ children, id }: H3Props) => {
   return (
-    <h3 className="text-xl mt-10 mb-4 font-bold" id={id} data-docs-heading>
+    <h3 className="relative text-xl mt-10 mb-4 font-bold" data-docs-heading>
+      <div id={id} className="absolute -translate-y-24" />
       <a
         href={`#${id}`}
         className="text-black group-hover:text-blue-500 transition-colors duration-200"
