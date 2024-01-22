@@ -15,8 +15,8 @@ interface Props extends ImageProps {
 }
 
 export const ImgDocs = ({ src, alt, activeVersion }: Props) => {
-  const pathWithoutDotSlash = src?.replace(/^\.\//, "");
-  const path = `/docs/${activeVersion}/${pathWithoutDotSlash}`;
+  const pathWithoutRoot = src?.replace("../_assets/", "");
+  const path = `/docs/${activeVersion}/${pathWithoutRoot}`;
   const localPath = `public${path}`;
 
   console.log("src", src);
@@ -36,7 +36,7 @@ export const ImgDocs = ({ src, alt, activeVersion }: Props) => {
     <Image
       width={dimensions.width}
       height={dimensions.height}
-      className="text-blue-700"
+      className="my-6"
       src={path}
       alt={alt || ""}
     />

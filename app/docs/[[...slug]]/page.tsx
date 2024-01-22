@@ -1,5 +1,4 @@
 import { getVersion } from "@/lib/get-version";
-import * as MDX from "@/components/docs/mdx";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/tailwind";
@@ -57,7 +56,12 @@ export default async function Page({ params: { slug } }: Props) {
   return (
     <div className="w-full flex-1 py-12">
       <div className="max-w-[720px] mx-auto">
-        <MDX.H1>{page.title || "Title is missing"}</MDX.H1>
+        <h1
+          className="relative text-4xl mt-0 mb-6 font-bold text-black group-hover:text-blue-500 transition-colors duration-200"
+          data-docs-heading
+        >
+          {page.title || "Title is missing"}
+        </h1>
         <Renderers activeRenderer={renderers[0].id} />
         {page.tabs && page.tabs.length > 0 && (
           <div className="flex items-center gap-8 border-b border-zinc-200">
