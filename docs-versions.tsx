@@ -21,17 +21,12 @@ export interface DocsVersion {
 export const docsVersions: DocsVersion[] = [
   {
     label: "Version Test 1",
-    id: "8.0-test-1",
-    branch: "charles-docs-new-structure",
+    id: "8.0",
+    branch: "charles-docs-new-structure-2",
   },
   {
     label: "Version Test 2",
     id: "8.0-test-2",
-    branch: "charles-docs-new-structure",
-  },
-  {
-    label: "Version Test 3",
-    id: "8.0-test-3",
     branch: "charles-docs-new-structure",
   },
   // {

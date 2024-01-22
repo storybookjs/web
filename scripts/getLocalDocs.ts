@@ -2,14 +2,7 @@ import path from "path";
 import fs from "fs-extra";
 import fetch from "node-fetch";
 import tar from "tar";
-import chalkAnimation from "chalk-animation";
 import { DocsVersion, docsVersions } from "@/docs-versions";
-
-const branchName = process.argv[2] || "main";
-
-const raindow = chalkAnimation.rainbow(
-  `Extracting docs & assets from the ${branchName} branch...`
-);
 
 async function clean() {
   await fs.emptyDir(path.join(__dirname, "../content/docs"));
@@ -25,7 +18,6 @@ async function clean() {
 }
 
 async function fetchAndExtract(version: DocsVersion) {
-  // raindow.start();
   console.log(`Fetching docs for ${version.id}...`);
 
   let url: string | null = null;
@@ -120,7 +112,6 @@ clean();
 const arrayOfFetches = docsVersions.map((version) => fetchAndExtract(version));
 
 Promise.all(arrayOfFetches).then(() => {
-  // raindow.stop();
   console.log("Done!");
   console.log("");
 });

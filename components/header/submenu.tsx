@@ -10,8 +10,6 @@ export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
   const pathname = usePathname();
   const activeSection = tree?.find((node) => node.slug.startsWith(pathname));
 
-  console.log(tree);
-
   let title = "";
   if (activeSection?.sidebar?.title) {
     title = activeSection.sidebar.title;
