@@ -36,7 +36,7 @@ export default async function Layout({
 
   return (
     <DocsProvider>
-      <Header variant="system" />
+      <Header variant="system" tree={tree} activeVersion={activeVersion} />
       <Image
         src="/bubbles.png"
         alt="Storybook Docs"
