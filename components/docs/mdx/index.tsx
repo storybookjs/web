@@ -5,7 +5,6 @@ export { H2 } from "./h2";
 export { H3 } from "./h3";
 export { H4 } from "./h4";
 export { Hr } from "./hr";
-export { ImgDocs } from "./img-docs";
 export { Img } from "./img";
 export { Callout } from "./callout";
 export { Pre } from "./pre";

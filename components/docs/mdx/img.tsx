@@ -1,16 +1,22 @@
 import Image from "next/image";
-import { FC } from "react";
+import { DetailedHTMLProps, HTMLAttributes } from "react";
 import sizeOf from "image-size";
 import fs from "fs";
 
-interface Props {
-  src: string;
-  alt: string;
+type ImageProps = DetailedHTMLProps<
+  HTMLAttributes<HTMLImageElement>,
+  HTMLImageElement
+>;
+
+interface Props extends ImageProps {
+  activeVersion: string;
+  src?: string;
+  alt?: string;
 }
 
-export const Img: FC<Props> = ({ src, alt }) => {
-  const pathWithoutDotSlash = src.replace(/^\.\//, "");
-  const path = `/docs/${pathWithoutDotSlash}`;
+export const Img = ({ src, alt, activeVersion }: Props) => {
+  const pathWithoutRoot = src?.replace("../_assets/", "");
+  const path = `/docs/${activeVersion}/${pathWithoutRoot}`;
   const localPath = `public${path}`;
 
   // Check if the file exists
@@ -26,9 +32,9 @@ export const Img: FC<Props> = ({ src, alt }) => {
     <Image
       width={dimensions.width}
       height={dimensions.height}
-      className="text-blue-700"
+      className="my-6"
       src={path}
-      alt={alt}
+      alt={alt || ""}
     />
   );
 };
