@@ -79,7 +79,28 @@ export default async function Page({ params: { slug } }: Props) {
             })}
           </div>
         )}
-        <article>{page.content}</article>
+        <article
+          className={cn(
+            "[&>details]:my-6",
+            "[&>details]:relative",
+            "[&>details[open]>summary]:mb-4",
+            "[&>details[open]]:before:content-['']",
+            "[&>details[open]]:before:absolute",
+            "[&>details[open]]:before:border-l",
+            "[&>details[open]]:before:border-l-zinc-200",
+            "[&>details[open]]:before:left-1",
+            "[&>details[open]]:before:top-[calc(28px+1em)]",
+            "[&>details[open]]:before:h-[calc(100%-2.4rem)]",
+            "[&>details[open]>*]:ml-7",
+            "[&>details[open]>summary]:ml-0",
+            "[&>details>summary]:text-blue-600",
+            "[&>details>summary]:cursor-pointer",
+            "[&>details>summary>h3]:inline",
+            "[&>details>summary>h3]:text-xl"
+          )}
+        >
+          {page.content}
+        </article>
       </div>
     </div>
   );

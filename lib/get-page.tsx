@@ -63,10 +63,13 @@ export const getPageData = async (
       ul: MDX.UnorderedList,
       li: MDX.List,
       pre: MDX.Pre,
+      details: () => <details>Hello world</details>,
       img: (props) => (
         <MDX.ImgDocs activeVersion={activeVersion.id} {...props} />
       ),
-      CodeSnippets: MDX.CodeSnippets,
+      CodeSnippets: (props) => (
+        <MDX.CodeSnippets activeVersion={activeVersion.id} {...props} />
+      ),
       Callout: MDX.Callout,
       IfRenderer: MDX.IfRenderer,
       YouTubeCallout: MDX.YouTubeCallout,

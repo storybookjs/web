@@ -9,6 +9,7 @@ export { ImgDocs } from "./img-docs";
 export { Img } from "./img";
 export { Callout } from "./callout";
 export { Pre } from "./pre";
+export { Details } from "./details";
 export { CodeSnippets } from "./code-snippets";
 export { CustomImage } from "./custom-image";
 export { FeatureSnippets } from "./feature-snippets";
