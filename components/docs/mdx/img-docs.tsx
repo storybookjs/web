@@ -19,6 +19,10 @@ export const ImgDocs = ({ src, alt, activeVersion }: Props) => {
   const path = `/docs/${activeVersion}/${pathWithoutDotSlash}`;
   const localPath = `public${path}`;
 
+  console.log("src", src);
+  console.log("path", path);
+  console.log("localPath", localPath);
+
   // Check if the file exists
   const fileExists = fs.existsSync(localPath);
   if (!fileExists) return null;
