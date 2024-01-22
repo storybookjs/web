@@ -1,17 +1,28 @@
-import { FC } from "react";
+import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
+import fs from "fs";
 
-type Props = {
-  id: string;
-};
+type ImageProps = DetailedHTMLProps<
+  HTMLAttributes<HTMLVideoElement>,
+  HTMLVideoElement
+>;
 
-export const Video: FC<Props> = ({ id }) => {
+interface Props extends ImageProps {
+  activeVersion: string;
+  src?: string;
+}
+
+export const Video: FC<Props> = ({ src, activeVersion }) => {
+  const pathWithoutRoot = src?.replace("../_assets/", "");
+  const path = `/docs/${activeVersion}/${pathWithoutRoot}`;
+  const localPath = `public${path}`;
+
+  // Check if the file exists
+  const fileExists = fs.existsSync(localPath);
+  if (!fileExists) return null;
+
   return (
-    <div className="aspect-w-16 aspect-h-9">
-      <iframe
-        src={`https://www.youtube.com/embed/${id}`}
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      />
-    </div>
+    <video autoPlay muted playsInline loop>
+      <source src={path} type="video/mp4" />
+    </video>
   );
 };

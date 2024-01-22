@@ -65,6 +65,9 @@ export const getPageData = async (
       pre: MDX.Pre,
       details: () => <details>Hello world</details>,
       img: (props) => <MDX.Img activeVersion={activeVersion.id} {...props} />,
+      Video: (props) => (
+        <MDX.Video activeVersion={activeVersion.id} {...props} />
+      ),
       CodeSnippets: (props) => (
         <MDX.CodeSnippets activeVersion={activeVersion.id} {...props} />
       ),
