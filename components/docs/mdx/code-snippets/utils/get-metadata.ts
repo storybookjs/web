@@ -8,10 +8,10 @@ import { languages } from "@/docs-languages";
 
 interface Props {
   paths: string[];
+  activeVersion: string;
 }
 
-export const getMetadata = async ({ paths }: Props) => {
-  const activeVersion = "8.0-test-1";
+export const getMetadata = async ({ paths, activeVersion }: Props) => {
   const version = activeVersion ?? docsVersions[0].id;
 
   const rehypePrettyCodeOptions = {

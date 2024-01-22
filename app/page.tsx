@@ -13,7 +13,7 @@ import { Share } from "@/components/home/share/share";
 import { Automate } from "@/components/home/automate/automate";
 import { SocialValidation } from "@/components/home/social-validation/social-validation";
 
-export default function Home() {
+export default function Page() {
   const developRef = useRef(null);
   const developInView = useInView(developRef, { margin: "0px 0px -100% 0px" });
 
