@@ -47,6 +47,7 @@
     "rehype-pretty-code": "^0.12.3",
     "rehype-slug": "^6.0.0",
     "shikiji": "^0.9.18",
+    "snarkdown": "^2.0.0",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
     "tar": "^6.2.0",
