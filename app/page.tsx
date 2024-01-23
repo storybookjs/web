@@ -50,7 +50,7 @@ export default function Page() {
   ]);
 
   return (
-    <div className="bg-[#181C22]" id="page-top">
+    <div className="bg-[#130D3D]" id="page-top">
       <Header variant="home" />
       <Hero />
       <StickyNav isVisible={!!activeSection} activeSection={activeSection} />

@@ -90,7 +90,7 @@ export const ScrollDemo = ({
       {...props}
     >
       <motion.div
-        className="absolute h-[75vh] top-[-35vh] left-0 right-0 pointer-events-none user-select-none bg-gradient-to-b from-[#181C22] from-90% to-[#181C22]/10"
+        className="absolute h-[75vh] top-[-35vh] left-0 right-0 pointer-events-none user-select-none bg-gradient-to-b from-[#130D3D] from-90% to-[#130D3D]/10"
         style={{
           y: scrimY,
           opacity: scrimOpacity,

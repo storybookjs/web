@@ -29,7 +29,7 @@ export const Header: FC<HeaderProps> = ({
     <header
       className={cn(
         "w-full",
-        variant === "home" && "bg-[#181C22] lg:border-b lg:border-zinc-700",
+        variant === "home" && "bg-[#130D3D] lg:border-b lg:border-zinc-700",
         variant === "system" &&
           "sticky top-0 z-40 backdrop-blur bg-white/80 dark:bg-zinc-900/80 lg:border-b lg:border-zinc-200 dark:border-zinc-700"
       )}
