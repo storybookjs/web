@@ -1,12 +1,13 @@
-import { getMetadata } from "./utils/get-metadata";
+import { getMetadata } from "./utils/get-metadata2";
 import { CodeSnippetsClient } from "./client";
 
 interface Props {
-  paths: string[];
+  paths?: string[];
+  path?: string;
   activeVersion: string;
 }
 
-export const CodeSnippets = async ({ paths, activeVersion }: Props) => {
+export const CodeSnippets = async ({ paths, path, activeVersion }: Props) => {
   // This is how files are structured.
   // [renderer]/[filename].[option].[language].mdx
   // [renderer]/[filename].[language].mdx
@@ -21,8 +22,9 @@ export const CodeSnippets = async ({ paths, activeVersion }: Props) => {
 
   // Get metadata for all files from the Code Snippets component
   // This happen on the server since we need to call the file system (fs)
+
   const codeSnippetsContent: CodeSnippetsProps[] = await getMetadata({
-    paths,
+    path: path || paths?.[0],
     activeVersion,
   });
 
