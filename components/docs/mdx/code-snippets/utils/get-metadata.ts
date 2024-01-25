@@ -1,71 +1,74 @@
-import { packageManagers } from "@/docs-package-managers";
 import { docsVersions } from "@/docs-versions";
-import { compileMDX } from "next-mdx-remote/rsc";
 import { firefoxThemeLight } from "../themes/firefox-theme-vscode";
 import fs from "fs";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
 import rehypePrettyCode from "rehype-pretty-code";
-import { languages } from "@/docs-languages";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
 
 interface Props {
-  paths: string[];
+  path: string | undefined;
   activeVersion: string;
 }
 
-export const getMetadata = async ({ paths, activeVersion }: Props) => {
+export const getMetadata = async ({ path, activeVersion }: Props) => {
   const version = activeVersion ?? docsVersions[0].id;
 
-  const rehypePrettyCodeOptions = {
-    theme: firefoxThemeLight,
-  };
+  // Read the content of the MD file
+  const source = await fs.promises.readFile(
+    process.cwd() + `/content/snippets/${version}/${path}`,
+    "utf8"
+  );
 
+  // Parse the content into a syntax tree
+  const tree = unified().use(remarkParse).parse(source);
+
+  // Traverse the syntax tree and find the code blocks
+  const codeBlocks = [];
+  for (const node of tree.children) {
+    if (node.type === "code") {
+      // For each code block, create an object with a `code` property
+      codeBlocks.push(node);
+    }
+  }
+
+  // Transform the code blocks using remarkRehype
   const content: CodeSnippetsProps[] = await Promise.all(
-    paths.map(async (path) => {
-      const source = await fs.promises.readFile(
-        process.cwd() + `/content/snippets/${version}/${path}`,
-        "utf8"
-      );
+    codeBlocks.map(async (block) => {
+      // We are bringing back the necessary values to render the code block
+      const valueWithBackticks = `\`\`\`${block.lang}\n${block.value}\n\`\`\``;
+      const result = await unified()
+        .use(remarkParse)
+        .use(remarkRehype)
+        .use(rehypePrettyCode, {
+          theme: firefoxThemeLight,
+        } as any)
+        .use(rehypeStringify)
+        .process(valueWithBackticks);
 
-      const renderer = path.split("/")[0];
-      const segments = path
-        .split("/")[1]
-        .replace(/\.mdx$|\.md$/, "")
-        .split(".");
+      const matches = block.meta?.match(/(\w+)="([^"]*)"/g);
 
-      // Find the right data
-      const fileName = segments[0];
-      const rawOptions = segments.length === 3 ? segments[1] : null;
-      const packageManager =
-        packageManagers.find((p) => p.id === rawOptions)?.id ?? null;
-      const option = packageManager ? null : rawOptions;
-      const language =
-        segments.find((s) => languages.map((p) => p.id).includes(s)) ?? null;
+      const metadata: { [key: string]: string } = {};
 
-      const { content, frontmatter } = await compileMDX<{ title: string }>({
-        source,
-        options: {
-          parseFrontmatter: true,
-          mdxOptions: {
-            remarkPlugins: [],
-            rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions] as any],
-            format: "mdx",
-          },
-        },
-      });
-
-      // TODO - Trim matter.content to get the snippet to copy + filename
+      if (matches) {
+        matches.forEach((match) => {
+          const [key, value] = match
+            .split("=")
+            .map((part) => part.replace(/"/g, ""));
+          metadata[key] = value;
+        });
+      }
 
       return {
-        path,
-        fileName,
-        option,
-        content,
-        renderer,
-        packageManager,
-        language,
-        ...frontmatter,
+        language: block.lang || undefined,
+        ...metadata,
+        content: result.value,
       };
     })
   );
+
+  console.log(content);
 
   return content;
 };

@@ -1,4 +1,4 @@
-import { getMetadata } from "./utils/get-metadata2";
+import { getMetadata } from "./utils/get-metadata";
 import { CodeSnippetsClient } from "./client";
 
 interface Props {
