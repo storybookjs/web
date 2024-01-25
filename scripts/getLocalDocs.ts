@@ -18,7 +18,7 @@ async function clean() {
 }
 
 async function fetchAndExtract(version: DocsVersion) {
-  console.log(`Fetching docs for ${version.id}...`);
+  console.log(`♠︎ Fetching docs for ${version.id}...`);
 
   let url: string | null = null;
   if (version.branch)
