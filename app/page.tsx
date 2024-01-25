@@ -1,6 +1,6 @@
 "use client";
 
-import { Hero } from "@/components/home/hero/hero";
+import { Hero } from "@/components/home/hero2";
 import { Footer } from "@/components/footer/footer";
 import { Header } from "@/components/header/header";
 import { Develop } from "@/components/home/develop/develop";
@@ -50,7 +50,7 @@ export default function Page() {
   ]);
 
   return (
-    <div className="bg-[#130D3D]" id="page-top">
+    <div className="bg-[#0C062E]" id="page-top">
       <Header variant="home" />
       <Hero />
       <StickyNav isVisible={!!activeSection} activeSection={activeSection} />

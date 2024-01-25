@@ -1,10 +1,10 @@
 "use client";
 
 import { FC } from "react";
-import { GradientBackdrop } from "../gradient-backdrop";
+import { GradientBackdrop } from "./gradient-backdrop";
 import { HeroDemo } from "./demo/hero-demo";
 import { Button } from "@/components/ui/button";
-import SocialProof from "../social-proof";
+import SocialProof from "./social-proof";
 import Link from "next/link";
 import { Video } from "./video";
 import { cn, container } from "@/lib/tailwind";

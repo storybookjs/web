@@ -6,7 +6,7 @@ import {
   LogoMonday,
   LogoMozilla,
   LogoVscode,
-} from "./hero/demo/logos";
+} from "./logos";
 
 export default function SocialProof() {
   return (
