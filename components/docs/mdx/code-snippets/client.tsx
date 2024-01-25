@@ -61,13 +61,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
         </>
       }
     >
-      {activeContent?.content ? (
-        <section
-          dangerouslySetInnerHTML={{
-            __html: activeContent?.content,
-          }}
-        />
-      ) : (
+      {activeContent?.content ?? (
         <div>
           <div>Oh no! We could not find the code you are looking for.</div>
           <div>
