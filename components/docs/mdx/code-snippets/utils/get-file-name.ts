@@ -59,8 +59,6 @@ export const parseSnippetContent = (
 ): ParsedSnippet => {
   const lines = content.split("\n");
 
-  // console.log(lines);
-
   if (isTerminalSnippet) {
     const command = trimSnippet(lines);
 
@@ -68,8 +66,6 @@ export const parseSnippetContent = (
   }
 
   const [firstLine, ...rest] = lines;
-
-  // console.log(firstLine);
 
   // All snippets have an empty last line, so a one-line snippet will have a length of 2
   const yoinkFileNameComment = stringIsComment(firstLine) && lines.length > 2;

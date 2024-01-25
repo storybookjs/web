@@ -68,7 +68,5 @@ export const getMetadata = async ({ path, activeVersion }: Props) => {
     })
   );
 
-  console.log(content);
-
   return content;
 };

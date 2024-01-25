@@ -62,10 +62,7 @@ export const getPageData = async (
       hr: MDX.Hr,
       ul: MDX.UnorderedList,
       li: MDX.List,
-      pre: (props) => {
-        console.log(props);
-        return <MDX.Pre {...props} />;
-      },
+      pre: MDX.Pre,
       details: () => <details>Hello world</details>,
       img: (props) => <MDX.Img activeVersion={activeVersion.id} {...props} />,
       Video: (props) => (

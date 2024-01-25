@@ -6,9 +6,6 @@ interface PreProps {
 }
 
 export const Pre: FC<PreProps> = ({ children, ...props }) => {
-  // console.log(props);
-  // console.log(children);
-
   return (
     <CodeWrapper>
       <pre>{children}</pre>
