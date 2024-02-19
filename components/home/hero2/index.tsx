@@ -77,15 +77,15 @@ export const Hero = () => {
                 href="https://github.com/storybookjs/storybook/releases"
                 className="md:hidden"
               >
-                <div className="text-lg text-white">v8</div>
+                <div className="text-md text-white">v8</div>
                 <div className="text-sm text-white/60">Latest version</div>
               </a>
               <div>
-                <div className="text-lg text-white">16.29m</div>
+                <div className="text-md text-white">16.29m</div>
                 <div className="text-sm text-white/60">Installs per month</div>
               </div>
               <div>
-                <div className="text-lg text-white">2,142+</div>
+                <div className="text-md text-white">2,142+</div>
                 <div className="text-sm text-white/60">Contributors</div>
               </div>
             </div>

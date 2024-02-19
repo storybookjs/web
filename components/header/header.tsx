@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Search } from "./search";
 import { MobileMenu } from "./mobile-menu";
 import { Submenu } from "./submenu";
+import { GithubIcon } from "@storybook/icons";
 
 export const Header: FC<HeaderProps> = ({
   variant = "home",
@@ -71,7 +72,18 @@ export const Header: FC<HeaderProps> = ({
               </NavigationMenu.List>
             </NavigationMenu.Root>
           </div>
-          <Search variant={variant} />
+          <div className="flex gap-4">
+            <a
+              href="https://github.com/storybookjs/storybook"
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label="Star Storybook on GitHub"
+              className="h-8 w-8 flex items-center justify-center text-white border border-white/30 rounded-full hover:border-white transition-colors"
+            >
+              <GithubIcon />
+            </a>
+            <Search variant={variant} />
+          </div>
           <MobileMenu variant={variant} />
         </div>
         {pathname.startsWith("/docs") && (
