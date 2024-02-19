@@ -50,7 +50,7 @@ export default function Page() {
   ]);
 
   return (
-    <div className="bg-[#0C062E]" id="page-top">
+    <div className="bg-[#0E0C2C] relative" id="page-top">
       <Header variant="home" />
       <Hero />
       <StickyNav isVisible={!!activeSection} activeSection={activeSection} />
@@ -73,6 +73,13 @@ export default function Page() {
         <SocialValidation />
       </div>
       <Footer variant="home" />
+
+      {/* Background circles and texture */}
+      <div className="absolute rounded-full bg-[radial-gradient(closest-side_at_50%_50%,_rgba(255,71,133,1),_rgba(255,71,133,0)),url('/home/texture.svg')] w-[500px] h-[500px] top-[-300px] left-[-160px] z-[2] min-[600px]:w-[700px] min-[600px]:h-[700px] min-[960px]:w-[928px] min-[960px]:h-[928px] min-[960px]:top-[-500px] min-[960px]:left-[-100px] min-[1440px]:w-[1100px] min-[1440px]:h-[1100px] min-[1440px]:top-[-720px] min-[1440px]:left-[4%] min-[2200px]:left-[14%]" />
+
+      <div className="absolute rounded-full bg-[radial-gradient(closest-side_at_50%_50%,_rgba(252,81,31,1),_rgba(252,81,31,0)),url('/home/texture.svg')] opacity-80 w-[400px] h-[400px] top-[-220px] left-[200px] z-[1] min-[600px]:w-[600px] min-[600px]:h-[600px] min-[600px]:top-[-260px] min-[600px]:left-[360px] min-[960px]:w-[740px] min-[960px]:h-[740px] min-[960px]:top-[-420px] min-[960px]:left-[480px] min-[1440px]:left-[40%] min-[2200px]:left-[44%]" />
+
+      <div className="absolute rounded-full bg-[radial-gradient(closest-side_at_50%_50%,_rgba(71,145,255,1),_rgba(252,81,31,0)),url('/home/texture.svg')] opacity-70 w-[600px] h-[600px] top-[160px] left-[200px] z-[1] min-[600px]:top-[220px] min-[600px]:left-[400px] min-[960px]:w-[1192px] min-[960px]:h-[1192px] min-[960px]:top-[210px] min-[960px]:left-[560px] min-[1440px]:left-[40%]" />
     </div>
   );
 }
