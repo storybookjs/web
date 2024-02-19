@@ -78,7 +78,13 @@ export const Header: FC<HeaderProps> = ({
               target="_blank"
               rel="noreferrer noopener"
               aria-label="Star Storybook on GitHub"
-              className="h-8 w-8 flex items-center justify-center text-white border border-white/30 rounded-full hover:border-white transition-colors"
+              className={cn(
+                "h-8 w-8 flex items-center justify-center border rounded-full transition-colors",
+                variant === "home" &&
+                  "border-white/30 hover:border-white text-white",
+                variant === "system" &&
+                  "border-zinc-300 hover:border-zinc-400 text-black"
+              )}
             >
               <GithubIcon />
             </a>
