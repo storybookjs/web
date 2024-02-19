@@ -42,13 +42,12 @@ interface TreeProps extends TreeMetaProps {
 }
 
 interface CodeSnippetsProps {
-  path: string;
+  filename?: string;
+  option?: string;
+  renderer?;
+  packageManager?: string | null;
+  language?: string;
   content: ReactNode;
-  fileName: string;
-  option: string | null;
-  renderer: string | null;
-  packageManager: string | null;
-  language: string | null;
 }
 
 type CodeSnippetsFilter = { id: string; title: string } | undefined;

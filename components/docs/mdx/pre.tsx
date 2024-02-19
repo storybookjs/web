@@ -5,7 +5,7 @@ interface PreProps {
   children?: ReactNode;
 }
 
-export const Pre: FC<PreProps> = ({ children }) => {
+export const Pre: FC<PreProps> = ({ children, ...props }) => {
   return (
     <CodeWrapper>
       <pre>{children}</pre>

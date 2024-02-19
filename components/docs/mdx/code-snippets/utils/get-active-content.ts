@@ -61,8 +61,5 @@ export const getActiveContent = ({
 
   if (filterByLanguage.length === 0) return null;
 
-  // console.log("filterByPackageManager", filterByPackageManager);
-  // console.log("filterByLanguage", filterByLanguage);
-
   return filterByLanguage[0];
 };
