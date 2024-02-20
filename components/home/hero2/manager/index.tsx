@@ -10,7 +10,10 @@ import { PanelVisualTesting } from "./panel-visual-testing";
 
 export const Manager: FC<{ slide: number }> = ({ slide }) => {
   return (
-    <div className="flex h-[820px] rounded-b-md overflow-hidden">
+    <div
+      className="flex h-[600px] sm:h-[820px] rounded-b-md overflow-hidden"
+      role="presentation"
+    >
       <Sidebar slide={slide} />
       <div className="w-full flex-1 h-full bg-white relative">
         <AnimatePresence>

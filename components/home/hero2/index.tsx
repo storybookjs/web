@@ -9,6 +9,14 @@ import { motion } from "framer-motion";
 import { InitCommand } from "./init-command";
 import { useState } from "react";
 import { Manager } from "./manager";
+import { ChevronLeftIcon, ChevronRightIcon } from "@storybook/icons";
+
+const features = [
+  "Development",
+  "Documentation",
+  "Interaction Testing",
+  "Visual Testing",
+];
 
 const Star = ({ x = 0, y = 0, w = 14, delay = 0 }) => {
   return (
@@ -55,18 +63,18 @@ export const Hero = () => {
         "lg:px-8 pt-12 md:pt-24 pb-12 sm:pb-72 text-white justify-between gap-20 relative z-20"
       )}
     >
-      <h1 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
+      <h1 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold max-sm:max-w-80">
         Build UIs without the grunt work
       </h1>
-      <div className="flex-1 pt-4 mb-10">
-        <p className="mb-12 leading-7 max-w-[500px]">
+      <div className="flex-1 pt-4 mb-8 md:mb-20">
+        <p className="mb-8 sm:mb-12 leading-7 max-w-[500px]">
           Storybook is a frontend workshop for building UI components and pages
           in isolation. Thousands of teams use it for UI development, testing,
           and documentation. It&apos;s open source and free.
         </p>
         <div className="flex justify-between items-center">
-          <div className="flex gap-8">
-            <div className="flex gap-4 mb-6">
+          <div className="flex gap-8 flex-col sm:flex-row">
+            <div className="flex gap-4">
               <Link
                 href="/docs"
                 className="flex items-center justify-center bg-white px-6 h-12 rounded-full text-black text-md font-bold"
@@ -75,7 +83,7 @@ export const Hero = () => {
               </Link>
               <InitCommand />
             </div>
-            <div className="flex gap-10">
+            <div className="flex gap-6 sm:gap-10 md:hidden lg:flex">
               <a
                 href="https://github.com/storybookjs/storybook/releases"
                 className="md:hidden"
@@ -115,8 +123,25 @@ export const Hero = () => {
           </a>
         </div>
       </div>
-      <div className="border-t border-t-white/20 flex justify-center">
-        <div className="flex h-20 gap-12 relative">
+      <div className="border-t border-t-white/20 flex justify-between md:justify-center select-none">
+        <div className="flex justify-between w-full items-center md:hidden">
+          {features[slide - 1]}
+          <div className="flex gap-4 py-4">
+            <div
+              className="w-10 h-10 text-white bg-white/20 rounded-full flex items-center justify-center"
+              onClick={() => setSlide(slide === 1 ? 4 : slide - 1)}
+            >
+              <ChevronLeftIcon />
+            </div>
+            <div
+              className="w-10 h-10 text-white bg-white/20 rounded-full flex items-center justify-center"
+              onClick={() => setSlide(slide === 4 ? 1 : slide + 1)}
+            >
+              <ChevronRightIcon />
+            </div>
+          </div>
+        </div>
+        <div className="h-20 gap-12 relative hidden md:flex">
           <div
             className={cn(
               "bg-white h-0.5 absolute top-0 transition-all",
@@ -126,12 +151,7 @@ export const Hero = () => {
               slide === 4 && "left-[482px] w-[101px]"
             )}
           />
-          {[
-            "Development",
-            "Documentation",
-            "Interaction Testing",
-            "Visual Testing",
-          ].map((label, i) => (
+          {features.map((label, i) => (
             <button
               key={label}
               className={cn(

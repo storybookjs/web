@@ -63,7 +63,7 @@ export const Doc: FC = () => {
             <ShareAltIcon />
           </ToolbarButton>
         </div>
-        <div className="flex w-full justify-center py-8">
+        <div className="flex w-full justify-center py-4 sm:py-8 px-4">
           <Image priority src={timeframe1} alt="TimeFrame" />
         </div>
       </div>
