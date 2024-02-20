@@ -12,7 +12,7 @@ export const Canvas: FC<{ slide: number }> = ({ slide }) => {
       exit={{ opacity: 0 }}
       className={cn(
         "absolute w-full top-10 h-[calc(60%-40px)] flex items-center justify-center text-black bg-white transition-all px-4",
-        slide === 4 && "w-[calc(100%-230px)]"
+        slide === 4 && "lg:w-[calc(100%-320px)]"
       )}
     >
       <Image priority src={timeframe1} alt="TimeFrame" />

@@ -16,15 +16,15 @@ import { cn } from "@/lib/tailwind";
 export const Toolbar: FC<{ slide: number }> = ({ slide }) => {
   return (
     <motion.div
-      // variants={variants}
-      initial={{ y: -40, right: 0 }}
-      animate={{ y: 0, right: slide === 4 ? 230 : 0 }}
+      initial={{ y: -40 }}
+      animate={{ y: 0 }}
       exit={{ y: -40 }}
       className={cn(
-        "absolute top-0 left-0 h-10 border-b border-b-[#D9E0E6] flex items-center px-2 justify-between"
+        "absolute top-0 left-0 h-10 border-b border-b-[#D9E0E6] flex items-center px-2 justify-between right-0 overflow-hidden",
+        slide === 4 && "lg:right-[320px]"
       )}
     >
-      <div className="flex">
+      <div className="flex mr-2">
         <ToolbarButton>
           <SyncIcon />
         </ToolbarButton>

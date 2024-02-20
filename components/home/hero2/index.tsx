@@ -124,21 +124,19 @@ export const Hero = () => {
         </div>
       </div>
       <div className="border-t border-t-white/20 flex justify-between md:justify-center select-none">
-        <div className="flex justify-between w-full items-center md:hidden">
-          {features[slide - 1]}
-          <div className="flex gap-4 py-4">
-            <div
-              className="w-10 h-10 text-white bg-white/20 rounded-full flex items-center justify-center"
-              onClick={() => setSlide(slide === 1 ? 4 : slide - 1)}
-            >
-              <ChevronLeftIcon />
-            </div>
-            <div
-              className="w-10 h-10 text-white bg-white/20 rounded-full flex items-center justify-center"
-              onClick={() => setSlide(slide === 4 ? 1 : slide + 1)}
-            >
-              <ChevronRightIcon />
-            </div>
+        <div className="flex h-20 w-full items-center justify-between md:hidden">
+          <div
+            className="w-10 h-10 text-white rounded-full flex items-center justify-center"
+            onClick={() => setSlide(slide === 1 ? 4 : slide - 1)}
+          >
+            <ChevronLeftIcon />
+          </div>
+          <div className="text-md">{features[slide - 1]}</div>
+          <div
+            className="w-10 h-10 text-white rounded-full flex items-center justify-center"
+            onClick={() => setSlide(slide === 4 ? 1 : slide + 1)}
+          >
+            <ChevronRightIcon />
           </div>
         </div>
         <div className="h-20 gap-12 relative hidden md:flex">

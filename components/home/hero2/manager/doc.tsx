@@ -21,10 +21,14 @@ export const Doc: FC = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="absolute top-0 left-1/2 w-full text-black max-w-[840px] -translate-x-1/2 pt-16 px-6"
+      className="absolute top-10 left-1/2 w-full text-black max-w-[840px] -translate-x-1/2 pt-8 md:pt-12 px-6"
     >
-      <div className="text-3xl font-bold mb-6">TimeFrame</div>
-      <div className="mb-8">
+      <div className="text-3xl font-bold mb-4 md:mb-6">TimeFrame</div>
+      <div className="mb-8 sm:hidden">
+        TimeFrame is a component that allows you to select a range of data
+        points from a time period.
+      </div>
+      <div className="mb-8 hidden sm:block">
         TimeFrame is a component that allows you to select a range of data
         points from a time period. It combines a time chart visualization and
         slider. TimeFrames are often used in tandem with a form or as a facet in
