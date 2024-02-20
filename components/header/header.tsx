@@ -22,7 +22,7 @@ export const Header: FC<HeaderProps> = ({
     <header
       className={cn(
         "w-full relative z-50",
-        variant === "home" && "lg:border-b lg:border-white/10",
+        variant === "home" && "border-b border-white/20",
         variant === "system" &&
           "sticky top-0 z-40 backdrop-blur bg-white/80 dark:bg-zinc-900/80 lg:border-b lg:border-zinc-200 dark:border-zinc-700"
       )}
@@ -31,7 +31,6 @@ export const Header: FC<HeaderProps> = ({
         <div
           className={cn(
             "h-18 py-4 px-4 sm:px-8 md:px-8 lg:border-0 flex items-center justify-between",
-            variant === "home" && "border-b border-zinc-700",
             variant === "system" &&
               "border-b border-zinc-200 dark:border-zinc-700"
           )}
@@ -79,7 +78,7 @@ export const Header: FC<HeaderProps> = ({
               rel="noreferrer noopener"
               aria-label="Star Storybook on GitHub"
               className={cn(
-                "h-8 w-8 flex items-center justify-center border rounded-full transition-colors",
+                "h-8 w-8 flex items-center justify-center border rounded-full transition-colors max-[440px]:hidden",
                 variant === "home" &&
                   "border-white/30 hover:border-white text-white",
                 variant === "system" &&
