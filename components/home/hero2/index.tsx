@@ -7,7 +7,7 @@ import { Chrome } from "./chrome";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { InitCommand } from "./init-command";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Manager } from "./manager";
 import { ChevronLeftIcon, ChevronRightIcon } from "@storybook/icons";
 
@@ -55,6 +55,14 @@ const Star = ({ x = 0, y = 0, w = 14, delay = 0 }) => {
 
 export const Hero = () => {
   const [slide, setSlide] = useState(1);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSlide((slide) => (slide === 4 ? 1 : slide + 1));
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div
