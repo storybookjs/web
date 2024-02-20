@@ -1,6 +1,6 @@
 "use client";
 
-import SocialProof from "../hero/social-proof";
+import SocialProof from "./social-proof";
 import Link from "next/link";
 import { cn, container } from "@/lib/tailwind";
 import { Chrome } from "./chrome";
@@ -68,7 +68,7 @@ export const Hero = () => {
     <div
       className={cn(
         container,
-        "lg:px-8 pt-12 md:pt-24 pb-12 sm:pb-72 text-white justify-between gap-20 relative z-20"
+        "lg:px-8 pt-12 md:pt-24 text-white justify-between gap-20 relative z-20"
       )}
     >
       <h1 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold max-sm:max-w-80">
@@ -171,11 +171,9 @@ export const Hero = () => {
           ))}
         </div>
       </div>
-      <div className="w-full relative">
-        <Chrome />
-        <Manager slide={slide} />
-        <SocialProof />
-      </div>
+      <Chrome />
+      <Manager slide={slide} />
+      <SocialProof />
     </div>
   );
 };

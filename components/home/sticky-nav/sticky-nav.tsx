@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpIcon } from "@storybook/icons";
 import { Button } from "../../ui/button";
 import Link from "next/link";
@@ -37,40 +37,52 @@ export const StickyNav = ({
   const activeItem = items.find((item) => item.id === activeSection);
 
   return (
-    <motion.div
-      className="bg-black sticky h-10 md:h-18 top-0 z-50"
-      animate={{ opacity: isVisible ? 1 : 0 }}
-      {...props}
-    >
-      <section
-        className={cn(container, "h-full flex items-center justify-between")}
-      >
-        <MobileMenu items={items} label={activeItem?.label || items[0].label} />
-        <div className="hidden md:flex items-center gap-2">
-          {items.map((item) => (
-            <Button
-              key={item.id}
-              asChild
-              variant="ghostHome"
-              size="md"
-              active={activeSection === item.id ? "home" : undefined}
-            >
-              <a href={item.href}>{item.label}</a>
-            </Button>
-          ))}
-        </div>
-        <div className="flex items-center gap-5">
-          <Button asChild variant="ghostHome" size="md">
-            <a href="#page-top" className="hidden md:flex items-center">
-              <ArrowUpIcon />
-              Jump to top
-            </a>
-          </Button>
-          <Button size="sm" variant="solid" rounded="full" asChild>
-            <Link href="/docs">Get started</Link>
-          </Button>
-        </div>
-      </section>
-    </motion.div>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          className="bg-black fixed h-10 md:h-18 top-0 z-50 w-full"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          {...props}
+        >
+          <section
+            className={cn(
+              container,
+              "h-full flex items-center justify-between"
+            )}
+          >
+            <MobileMenu
+              items={items}
+              label={activeItem?.label || items[0].label}
+            />
+            <div className="hidden md:flex items-center gap-2">
+              {items.map((item) => (
+                <Button
+                  key={item.id}
+                  asChild
+                  variant="ghostHome"
+                  size="md"
+                  active={activeSection === item.id ? "home" : undefined}
+                >
+                  <a href={item.href}>{item.label}</a>
+                </Button>
+              ))}
+            </div>
+            <div className="flex items-center gap-5">
+              <Button asChild variant="ghostHome" size="md">
+                <a href="#page-top" className="hidden md:flex items-center">
+                  <ArrowUpIcon />
+                  Jump to top
+                </a>
+              </Button>
+              <Button size="sm" variant="solid" rounded="full" asChild>
+                <Link href="/docs">Get started</Link>
+              </Button>
+            </div>
+          </section>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
