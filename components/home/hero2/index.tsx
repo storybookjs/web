@@ -115,31 +115,34 @@ export const Hero = () => {
           </a>
         </div>
       </div>
-      <div className="border-t border-t-white/30 flex justify-center">
+      <div className="border-t border-t-white/20 flex justify-center">
         <div className="flex h-20 gap-12 relative">
           <div
             className={cn(
               "bg-white h-0.5 absolute top-0 transition-all",
-              slide === 1 && "left-0 w-[60px]",
-              slide === 2 && "left-[108px] w-[74px]",
-              slide === 3 && "left-[230px] w-[108px]",
-              slide === 4 && "left-[385px] w-[76px]"
+              slide === 1 && "left-0 w-[96px]",
+              slide === 2 && "left-[144px] w-[110px]",
+              slide === 3 && "left-[302px] w-[132px]",
+              slide === 4 && "left-[482px] w-[101px]"
             )}
           />
-          {["Develop", "Document", "Interaction test", "Visual test"].map(
-            (label, i) => (
-              <button
-                key={label}
-                className={cn(
-                  "text-white/60 transition-colors hover:text-white",
-                  i === slide - 1 && "text-white"
-                )}
-                onClick={() => setSlide(i + 1)}
-              >
-                {label}
-              </button>
-            )
-          )}
+          {[
+            "Development",
+            "Documentation",
+            "Interaction Testing",
+            "Visual Testing",
+          ].map((label, i) => (
+            <button
+              key={label}
+              className={cn(
+                "text-white/60 transition-colors hover:text-white",
+                i === slide - 1 && "text-white"
+              )}
+              onClick={() => setSlide(i + 1)}
+            >
+              {label}
+            </button>
+          ))}
         </div>
       </div>
       <div className="w-full relative">

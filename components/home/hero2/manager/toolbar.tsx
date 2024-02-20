@@ -11,14 +11,18 @@ import {
 } from "@storybook/icons";
 import { FC, ReactNode } from "react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/tailwind";
 
-export const Toolbar: FC = () => {
+export const Toolbar: FC<{ slide: number }> = ({ slide }) => {
   return (
     <motion.div
-      initial={{ y: -40 }}
-      animate={{ y: 0 }}
+      // variants={variants}
+      initial={{ y: -40, right: 0 }}
+      animate={{ y: 0, right: slide === 4 ? 230 : 0 }}
       exit={{ y: -40 }}
-      className="h-10 border-b border-b-[#D9E0E6] w-full flex items-center px-2 justify-between"
+      className={cn(
+        "absolute top-0 left-0 h-10 border-b border-b-[#D9E0E6] flex items-center px-2 justify-between"
+      )}
     >
       <div className="flex">
         <ToolbarButton>

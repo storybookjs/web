@@ -13,7 +13,7 @@ import {
 } from "@storybook/icons";
 import { FC } from "react";
 
-export const Sidebar: FC = () => {
+export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
   return (
     <div className="w-[230px] h-full bg-[#F7F9FC] border-r border-r-[#D9E0E6] px-3">
       <div className="flex justify-between items-center pt-5 pb-4 pl-2">
@@ -44,8 +44,13 @@ export const Sidebar: FC = () => {
       <SidebarLine ic="component" ar="right" lvl={2} label="RangeSlider" />
       <SidebarLine ic="component" ar="right" lvl={2} label="SparkLine" />
       <SidebarLine ic="component" ar="right" lvl={2} label="TimeFrame" />
-      <SidebarLine ic="docs" lvl={3} label="Overview" />
-      <SidebarLine ic="story" lvl={3} label="No selection" />
+      <SidebarLine ic="docs" lvl={3} label="Overview" active={slide === 2} />
+      <SidebarLine
+        ic="story"
+        lvl={3}
+        label="No selection"
+        active={slide === 1 || slide === 3 || slide === 4}
+      />
       <SidebarLine ic="story" lvl={3} label="Afternoon" />
       <SidebarLine ic="story" lvl={3} label="All day" />
       <SidebarLine ic="group" ar="down" label="Image" />
@@ -59,35 +64,49 @@ const SidebarLine: FC<{
   label: string;
   ar?: "down" | "right";
   lvl?: 1 | 2 | 3;
-}> = ({ ic, label, ar, lvl = 1 }) => {
+  active?: boolean;
+}> = ({ ic, label, ar, lvl = 1, active }) => {
   return (
     <div
       className={cn(
-        "group flex items-center gap-1.5 hover:bg-blue-500 rounded h-7 cursor-default select-none",
+        "group flex items-center gap-1.5 rounded h-7 cursor-default select-none",
         lvl === 1 && "pl-2 pr-2",
         lvl === 2 && "pl-6 pr-2",
-        lvl === 3 && "pl-16 pr-2"
+        lvl === 3 && "pl-16 pr-2",
+        active && "bg-blue-500"
       )}
     >
       {ar === "down" && (
-        <ChevronSmallDownIcon className="text-[#73828C] group-hover:text-white" />
+        <ChevronSmallDownIcon
+          className={cn("text-[#73828C]", active && "text-white")}
+        />
       )}
       {ar === "right" && (
-        <ChevronSmallRightIcon className="text-[#73828C] group-hover:text-white" />
+        <ChevronSmallRightIcon
+          className={cn("text-[#73828C]", active && "text-white")}
+        />
       )}
       {ic === "docs" && (
-        <DocumentIcon className="text-[#FFAE00] group-hover:text-white" />
+        <DocumentIcon
+          className={cn("text-[#FFAE00]", active && "text-white")}
+        />
       )}
       {ic === "component" && (
-        <ComponentIcon className="text-[#029CFD] group-hover:text-white" />
+        <ComponentIcon
+          className={cn("text-[#029CFD]", active && "text-white")}
+        />
       )}
       {ic === "group" && (
-        <FolderIcon className="text-[#6F2CAC] group-hover:text-white" />
+        <FolderIcon className={cn("text-[#6F2CAC]", active && "text-white")} />
       )}
       {ic === "story" && (
-        <BookmarkHollowIcon className="text-[#37D5D3] group-hover:text-white" />
+        <BookmarkHollowIcon
+          className={cn("text-[#37D5D3]", active && "text-white")}
+        />
       )}
-      <div className="text-black group-hover:text-white text-sm">{label}</div>
+      <div className={cn("text-black text-sm", active && "text-white")}>
+        {label}
+      </div>
     </div>
   );
 };
