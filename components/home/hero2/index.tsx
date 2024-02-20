@@ -1,13 +1,14 @@
 "use client";
 
-import { HeroDemo } from "./demo/hero-demo";
 import SocialProof from "../hero/social-proof";
 import Link from "next/link";
-import { Video } from "./video";
 import { cn, container } from "@/lib/tailwind";
 import { Chrome } from "./chrome";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { InitCommand } from "./init-command";
+import { useState } from "react";
+import { Manager } from "./manager";
 
 const Star = ({ x = 0, y = 0, w = 14, delay = 0 }) => {
   return (
@@ -45,6 +46,8 @@ const Star = ({ x = 0, y = 0, w = 14, delay = 0 }) => {
 };
 
 export const Hero = () => {
+  const [slide, setSlide] = useState(1);
+
   return (
     <div
       className={cn(
@@ -55,7 +58,7 @@ export const Hero = () => {
       <h1 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
         Build UIs without the grunt work
       </h1>
-      <div className="flex-1 pt-4 mb-20">
+      <div className="flex-1 pt-4 mb-10">
         <p className="mb-12 leading-7 max-w-[500px]">
           Storybook is a frontend workshop for building UI components and pages
           in isolation. Thousands of teams use it for UI development, testing,
@@ -70,7 +73,7 @@ export const Hero = () => {
               >
                 Get Started
               </Link>
-              <Video />
+              <InitCommand />
             </div>
             <div className="flex gap-10">
               <a
@@ -112,11 +115,36 @@ export const Hero = () => {
           </a>
         </div>
       </div>
+      <div className="border-t border-t-white/30 flex justify-center">
+        <div className="flex h-20 gap-12 relative">
+          <div
+            className={cn(
+              "bg-white h-0.5 absolute top-0 transition-all",
+              slide === 1 && "left-0 w-[60px]",
+              slide === 2 && "left-[108px] w-[74px]",
+              slide === 3 && "left-[230px] w-[108px]",
+              slide === 4 && "left-[385px] w-[76px]"
+            )}
+          />
+          {["Develop", "Document", "Interaction test", "Visual test"].map(
+            (label, i) => (
+              <button
+                key={label}
+                className={cn(
+                  "text-white/60 transition-colors hover:text-white",
+                  i === slide - 1 && "text-white"
+                )}
+                onClick={() => setSlide(i + 1)}
+              >
+                {label}
+              </button>
+            )
+          )}
+        </div>
+      </div>
       <div className="w-full relative">
         <Chrome />
-        {/* <figure className="pt-8 sm:pt-3 px-6 sm:max-w-8xl sm:mx-auto relative z-10">
-          <HeroDemo />
-        </figure> */}
+        <Manager slide={slide} />
         <SocialProof />
       </div>
     </div>

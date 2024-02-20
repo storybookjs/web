@@ -15,7 +15,7 @@ export const Chrome = () => {
           <RefreshIcon />
         </div>
       </div>
-      <div className="w-52 h-5 bg-[rgba(255,255,255,0.20)] rounded flex items-center justify-center text-sm font-medium">
+      <div className="w-52 h-5 bg-[rgba(255,255,255,0.20)] rounded flex items-center justify-center text-xs font-medium">
         localhost:6006
       </div>
       <div className="flex-1" />
