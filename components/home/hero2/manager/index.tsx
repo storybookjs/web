@@ -11,7 +11,7 @@ import { PanelVisualTesting } from "./panel-visual-testing";
 export const Manager: FC<{ slide: number }> = ({ slide }) => {
   return (
     <div
-      className="flex h-[600px] sm:h-[820px] rounded-b-md overflow-hidden"
+      className="flex h-[580px] sm:h-[820px] rounded-b-md overflow-hidden"
       role="presentation"
     >
       <Sidebar slide={slide} />
