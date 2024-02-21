@@ -57,8 +57,7 @@ const Circle: FC<CircleProps> = ({ children, href, variant }) => {
       target="_blank"
       className={cn(
         "flex items-center justify-center border border-zinc-200 rounded-full h-12 w-12 hover:-translate-y-1 transition-all",
-        variant === "home" &&
-          "bg-zinc-800 border border-zinc-700 hover:border-zinc-400",
+        variant === "home" && "border border-zinc-700 hover:border-zinc-400",
         variant !== "home" &&
           "bg-white hover:border-zinc-400 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:border-zinc-500"
       )}

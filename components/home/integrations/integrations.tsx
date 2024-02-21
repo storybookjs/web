@@ -251,7 +251,7 @@ export function Integrations() {
           );
         })}
       </div>
-      <div className="hidden md:block absolute h-1/2 bottom-[-2.5rem] left-0 right-0 pointer-events-none bg-gradient-to-t from-[#181C22] to-[#181C22]/0" />
+      <div className="hidden md:block absolute h-1/2 bottom-[-2.5rem] left-0 right-0 pointer-events-none bg-gradient-to-t from-homeBackground to-homeBackground/0" />
     </div>
   );
 }

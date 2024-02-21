@@ -8,7 +8,7 @@ export const Search: FC<HeaderProps> = ({ variant }) => {
       type="button"
       className={cn(
         "w-44 h-8 rounded-full text-sm flex items-center justify-between px-3 max-[440px]:hidden",
-        variant === "home" && "border border-zinc-700 text-white",
+        variant === "home" && "border border-white/30 text-white",
         variant === "system" &&
           "border border-zinc-200 dark:border-zinc-700 text-zinc-500 dark:text-white"
       )}
@@ -20,7 +20,7 @@ export const Search: FC<HeaderProps> = ({ variant }) => {
       <div
         className={cn(
           "text-[11px] bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-500 px-1.5 rounded",
-          variant === "home" && "bg-zinc-800 text-zinc-500"
+          variant === "home" && "bg-white/10 text-white"
         )}
       >
         ⌘K

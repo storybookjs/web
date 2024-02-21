@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import { useScroll, useTransform, useSpring, motion } from "framer-motion";
 import Link from "next/link";
 import { Angular, Vue, WebComponents, HTML5, ReactLogo } from "./logos";
-import { ScrollDemo } from "../hero/demo/scroll-demo";
+import { ScrollDemo } from "./demo/scroll-demo";
 import { ChevronSmallRightIcon } from "@storybook/icons";
 import { Integrations } from "../integrations/integrations";
 import { Testimonial } from "../testimonial";
@@ -101,7 +101,7 @@ export function Develop() {
                   <Link
                     key={i}
                     href={`/docs/get-started/install/?renderer=${i}`}
-                    className="flex items-center justify-center rounded h-10 w-10 hover:-translate-y-1 transition-all bg-zinc-800 border border-zinc-700 hover:border-zinc-400"
+                    className="flex items-center justify-center rounded h-10 w-10 hover:-translate-y-1 transition-all border border-zinc-700 hover:border-zinc-400"
                   >
                     {i === "react" && <ReactLogo />}
                     {i === "vue" && <Vue />}

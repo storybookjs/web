@@ -27,6 +27,7 @@ const config: Config = {
           800: "#1E4FAF",
           900: "#1E3A8A",
         },
+        homeBackground: "#0d1026",
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
