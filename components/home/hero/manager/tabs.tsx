@@ -6,10 +6,7 @@ import {
 } from "@storybook/icons";
 import { cn } from "@/lib/tailwind";
 
-export const Tabs: FC<{ active?: number; slide: number }> = ({
-  active = 0,
-  slide,
-}) => {
+export const Tabs: FC<{ active?: number }> = ({ active = 0 }) => {
   let tabs = [
     "Controls",
     "Interactions",
@@ -17,15 +14,6 @@ export const Tabs: FC<{ active?: number; slide: number }> = ({
     "Accessibility",
     "Design",
   ];
-
-  if (slide === 4)
-    tabs = [
-      "Controls",
-      "Visual tests",
-      "Interactions",
-      "Accessibility",
-      "Design",
-    ];
 
   return (
     <div className="w-full h-10 flex border-b border-b-[#D9E0E6] justify-between items-center">

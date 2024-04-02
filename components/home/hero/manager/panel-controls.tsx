@@ -1,12 +1,7 @@
 import { FC } from "react";
 import { motion } from "framer-motion";
 import { Controls } from "./controls";
-import {
-  ChevronSmallDownIcon,
-  CloseIcon,
-  SidebarAltIcon,
-  UndoIcon,
-} from "@storybook/icons";
+import { UndoIcon } from "@storybook/icons";
 import { cn } from "@/lib/tailwind";
 import { Tabs } from "./tabs";
 
