@@ -6,22 +6,19 @@ import { ElementOrSelector, inView } from "framer-motion";
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { useScrollDirection } from "react-use-scroll-direction";
 
+interface Heading {
+  id: number;
+  slug: string;
+  title: string;
+  level: number;
+}
+
 interface TableOfContentProps {
-  headings?: {
-    id: string;
-    slug: string;
-    title: string;
-    level: number;
-  }[];
+  headings?: Heading[];
 }
 
 interface ElementProps {
-  heading: {
-    id: string;
-    slug: string;
-    title: string;
-    level: number;
-  };
+  heading: Heading;
   isInView: string[];
   setIsInView: Dispatch<SetStateAction<string[]>>;
 }

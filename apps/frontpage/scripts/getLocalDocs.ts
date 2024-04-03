@@ -2,7 +2,9 @@ import path from "path";
 import fs from "fs-extra";
 import fetch from "node-fetch";
 import tar from "tar";
-import { DocsVersion, docsVersions } from "@/docs-versions";
+// TODO: Figure out why we can't use an absolute import here
+// import { DocsVersion, docsVersions } from "@/docs-versions";
+import { DocsVersion, docsVersions } from "../docs-versions";
 
 async function clean() {
   await fs.emptyDir(path.join(__dirname, "../content/docs"));
