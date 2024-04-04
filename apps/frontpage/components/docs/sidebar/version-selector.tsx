@@ -4,7 +4,7 @@ import { FC } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import Link from 'next/link';
-import { DocsVersion, docsVersions } from '../../../docs-versions';
+import { DocsVersion, docsVersions } from '@utils';
 import { usePathname } from 'next/navigation';
 
 interface VersionSelectorProps {
@@ -41,10 +41,10 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
       <DropdownMenu.Trigger asChild>
         <DropdownMenu.Trigger
           type="button"
-          className="w-full h-10 mt-6 px-2"
+          className="w-full h-10 px-2 mt-6"
           aria-label="Customise options"
         >
-          <div className="flex items-center justify-between text-sm w-full h-full border-b border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 transition-all select-none">
+          <div className="flex items-center justify-between w-full h-full text-sm transition-all border-b select-none border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300">
             {activeVersion.label}
             <ChevronSmallDownIcon />
           </div>

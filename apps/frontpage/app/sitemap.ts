@@ -1,4 +1,4 @@
-import { docsVersions } from '../docs-versions';
+import { TreeProps, docsVersions } from '@utils';
 import { getReleases } from '../lib/get-releases';
 import { generateDocsTree } from '../lib/get-tree';
 import { MetadataRoute } from 'next';

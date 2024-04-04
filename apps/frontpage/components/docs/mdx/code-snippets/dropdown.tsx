@@ -1,14 +1,15 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { ChevronSmallDownIcon } from "@storybook/icons";
+import { FC } from 'react';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { ChevronSmallDownIcon } from '@storybook/icons';
+import { CodeSnippetsFilter } from '@utils';
 
 type Props = {
   list: CodeSnippetsFilter[];
   activeId: string | null;
   action: (id: string) => void;
-  type: "language" | "packageManager";
+  type: 'language' | 'packageManager';
 };
 
 export const Dropdown: FC<Props> = ({ list, activeId, action, type }) => {
@@ -19,7 +20,7 @@ export const Dropdown: FC<Props> = ({ list, activeId, action, type }) => {
       <DropdownMenu.Trigger asChild>
         <DropdownMenu.Trigger
           type="button"
-          className="group h-8 gap-1 px-2 flex items-center justify-between text-sm text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 transition-all select-none hover:bg-slate-200 rounded"
+          className="flex items-center justify-between h-8 gap-1 px-2 text-sm transition-all rounded select-none group text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 hover:bg-slate-200"
           aria-label="Customise options"
         >
           {activeItem?.title}

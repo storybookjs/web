@@ -1,3 +1,5 @@
+import { CodeSnippetsFiltersProps, CodeSnippetsProps } from '@utils';
+
 interface Props {
   codeSnippetsContent: CodeSnippetsProps[];
   filters: CodeSnippetsFiltersProps;
@@ -16,7 +18,7 @@ export const getActiveContent = ({
     if (filters.packageManagers.length <= 1) return true;
 
     // Edge case to show npx snippets when npm is selected
-    if (item.packageManager === "npx" && activePackageManager === "npm")
+    if (item.packageManager === 'npx' && activePackageManager === 'npm')
       return true;
 
     // If there's a match, we return true
@@ -35,9 +37,9 @@ export const getActiveContent = ({
     return false;
   });
 
-  if (activeLanguage === "ts" && filterByLanguage.length === 0) {
+  if (activeLanguage === 'ts' && filterByLanguage.length === 0) {
     const getTsVersion = filterByPackageManager.find(
-      (v) => v.language === "ts-4-9"
+      (v) => v.language === 'ts-4-9'
     );
     if (getTsVersion) {
       filterByLanguage.push(getTsVersion);
@@ -47,9 +49,9 @@ export const getActiveContent = ({
     }
   }
 
-  if (activeLanguage === "ts-4-9" && filterByLanguage.length === 0) {
+  if (activeLanguage === 'ts-4-9' && filterByLanguage.length === 0) {
     const getTsVersion = filterByPackageManager.find(
-      (v) => v.language === "ts"
+      (v) => v.language === 'ts'
     );
     if (getTsVersion) {
       filterByLanguage.push(getTsVersion);

@@ -1,4 +1,4 @@
-import { docsVersions } from '../../../../../docs-versions';
+import { CodeSnippetsProps, docsVersions } from '@utils';
 import { firefoxThemeLight } from '../themes/firefox-theme-vscode';
 import fs from 'fs';
 import { unified } from 'unified';

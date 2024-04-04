@@ -1,6 +1,6 @@
 'use client';
 
-import { renderers } from '../../docs-renderers';
+import { renderers } from '@utils';
 import { cn } from '../../lib/tailwind';
 import { FC } from 'react';
 import { useDocs } from '../../app/docs/provider';

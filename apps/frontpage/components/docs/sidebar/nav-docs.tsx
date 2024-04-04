@@ -5,7 +5,7 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { FC, Fragment } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import { VersionSelector } from './version-selector';
-import { DocsVersion, docsVersions } from '../../../docs-versions';
+import { DocsVersion, docsVersions, TreeProps } from '@utils';
 
 interface NavDocsProps {
   tree: TreeProps[] | null | undefined;
@@ -30,7 +30,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
               <li key={lvl1.pathSegment}>
                 <Link
                   href={getUrl(lvl1.slug)}
-                  className="flex items-center text-sm font-bold mt-6 h-8 hover:text-blue-500 transition-colors px-2"
+                  className="flex items-center h-8 px-2 mt-6 text-sm font-bold transition-colors hover:text-blue-500"
                 >
                   {lvl1?.sidebar?.title || lvl1.title}
                 </Link>
@@ -48,7 +48,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                             {(!lvl2.children || lvl2.children.length === 0) && (
                               <Link
                                 href={getUrl(lvl2.slug)}
-                                className="flex items-center text-sm h-8 text-zinc-600 hover:text-blue-500 transition-colors px-2"
+                                className="flex items-center h-8 px-2 text-sm transition-colors text-zinc-600 hover:text-blue-500"
                               >
                                 {lvl2?.sidebar?.title || lvl2.title}
                               </Link>
@@ -56,7 +56,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                             {lvl2.children && lvl2.children.length > 0 && (
                               <Accordion.Item value="item-1">
                                 <Accordion.Trigger asChild>
-                                  <button className="group flex justify-between items-center text-sm w-full h-8 px-2">
+                                  <button className="flex items-center justify-between w-full h-8 px-2 text-sm group">
                                     {lvl2?.sidebar?.title || lvl2.title}
                                     <ChevronSmallRightIcon
                                       className="ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-90"
@@ -74,7 +74,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                                         >
                                           <Link
                                             href={getUrl(lvl3.slug)}
-                                            className="flex items-center text-sm h-8 border-l border-zinc-200 p-4"
+                                            className="flex items-center h-8 p-4 text-sm border-l border-zinc-200"
                                           >
                                             {lvl3?.sidebar?.title || lvl3.title}
                                           </Link>

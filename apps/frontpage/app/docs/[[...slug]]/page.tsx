@@ -2,9 +2,8 @@ import { getVersion } from '../../../lib/get-version';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { cn } from '../../../lib/tailwind';
-import { renderers } from '../../../docs-renderers';
+import { renderers, docsVersions, TreeProps } from '@utils';
 import { getPageData } from '../../../lib/get-page';
-import { docsVersions } from '../../../docs-versions';
 import { Renderers } from '../../../components/docs/renderers';
 import { generateDocsTree } from '../../../lib/get-tree';
 import { slugHasVersion } from '../../../lib/slug-has-version';
@@ -54,10 +53,10 @@ export default async function Page({ params: { slug } }: Props) {
   if (!page) notFound();
 
   return (
-    <div className="w-full flex-1 py-12">
+    <div className="flex-1 w-full py-12">
       <div className="max-w-[720px] mx-auto">
         <h1
-          className="relative text-4xl mt-0 mb-6 font-bold text-black group-hover:text-blue-500 transition-colors duration-200"
+          className="relative mt-0 mb-6 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500"
           data-docs-heading
         >
           {page.title || 'Title is missing'}

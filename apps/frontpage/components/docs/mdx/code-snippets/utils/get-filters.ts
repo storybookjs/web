@@ -1,5 +1,9 @@
-import { languages } from '../../../../../docs-languages';
-import { packageManagers } from '../../../../../docs-package-managers';
+import {
+  CodeSnippetsFiltersProps,
+  CodeSnippetsProps,
+  languages,
+  packageManagers,
+} from '@utils';
 
 interface Props {
   codeSnippetsContent: CodeSnippetsProps[];

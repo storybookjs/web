@@ -5,7 +5,7 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import * as MDX from '../components/docs/mdx';
 import rehypeSlug from 'rehype-slug';
-import { DocsVersion } from '../docs-versions';
+import { DocsVersion } from '@utils';
 import { extractHeadings } from 'extract-md-headings';
 
 const rehypePrettyCodeOptions = {

@@ -1,8 +1,6 @@
 'use client';
 
-import { languages } from '../../docs-languages';
-import { packageManagers } from '../../docs-package-managers';
-import { renderers } from '../../docs-renderers';
+import { languages, packageManagers, renderers } from '@utils';
 import { getCookie, setCookie } from 'cookies-next';
 import {
   createContext,
