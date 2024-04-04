@@ -1,6 +1,6 @@
-import { cn, container } from "@/lib/tailwind";
-import Image from "next/image";
-import { FC, ReactNode } from "react";
+import { cn, container } from '../../lib/tailwind';
+import Image from 'next/image';
+import { FC, ReactNode } from 'react';
 
 interface TestimonialProps {
   text: React.ReactNode;

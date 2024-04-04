@@ -1,9 +1,8 @@
-import { FC } from "react";
-import { motion } from "framer-motion";
-import { Controls } from "./controls";
-import { UndoIcon } from "@storybook/icons";
-import { cn } from "@/lib/tailwind";
-import { Tabs } from "./tabs";
+import { FC } from 'react';
+import { motion } from 'framer-motion';
+import { Controls } from './controls';
+import { UndoIcon } from '@storybook/icons';
+import { Tabs } from './tabs';
 
 export const PanelControls: FC = () => {
   return (

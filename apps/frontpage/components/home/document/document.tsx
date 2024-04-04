@@ -1,56 +1,56 @@
-import { FC } from "react";
-import Link from "next/link";
-import { Branch, Document as Doc, Overlap, Search } from "./icons";
-import { Testimonial } from "../testimonial";
-import { IllustratedFeatureList } from "../illustrated-feature-list";
-import { LogoGitlab } from "./logo-gitlab";
-import { cn, container } from "@/lib/tailwind";
+import { FC } from 'react';
+import Link from 'next/link';
+import { Branch, Document as Doc, Overlap, Search } from './icons';
+import { Testimonial } from '../testimonial';
+import { IllustratedFeatureList } from '../illustrated-feature-list';
+import { LogoGitlab } from './logo-gitlab';
+import { cn, container } from '../../../lib/tailwind';
 
 const features = [
   {
     icon: <Search />,
-    title: "Find any component or page in your app",
-    description: "Storybook is a single source of truth for UI.",
+    title: 'Find any component or page in your app',
+    description: 'Storybook is a single source of truth for UI.',
     link: {
-      label: "Learn about search",
-      href: "/docs/get-started/browse-stories#sidebar-and-canvas",
+      label: 'Learn about search',
+      href: '/docs/get-started/browse-stories#sidebar-and-canvas',
     },
-    media: "/home/document/homepage-search-stories-lg.mp4",
-    poster: "/home/document/homepage-search-stories-poster-lg.jpg",
+    media: '/home/document/homepage-search-stories-lg.mp4',
+    poster: '/home/document/homepage-search-stories-poster-lg.jpg',
   },
   {
     icon: <Doc />,
-    title: "Generate UI docs automatically",
-    description: "Write Markdown and build custom docs.",
+    title: 'Generate UI docs automatically',
+    description: 'Write Markdown and build custom docs.',
     link: {
-      label: "Learn about docs addon",
-      href: "/docs/writing-docs/introduction",
+      label: 'Learn about docs addon',
+      href: '/docs/writing-docs/introduction',
     },
-    media: "/home/document/homepage-component-document-lg.mp4",
-    poster: "/home/document/homepage-component-document-poster-lg.jpg",
+    media: '/home/document/homepage-component-document-lg.mp4',
+    poster: '/home/document/homepage-component-document-poster-lg.jpg',
   },
   {
     icon: <Overlap />,
-    title: "Reuse components across pages and apps",
-    description: "Every story is a use case that you can reuse.",
+    title: 'Reuse components across pages and apps',
+    description: 'Every story is a use case that you can reuse.',
     link: {
-      label: "Learn about reuse",
-      href: "/docs/get-started/browse-stories#use-stories-to-build-uis",
+      label: 'Learn about reuse',
+      href: '/docs/get-started/browse-stories#use-stories-to-build-uis',
     },
-    media: "/home/document/homepage-reuse-components-across-apps-lg.mp4",
+    media: '/home/document/homepage-reuse-components-across-apps-lg.mp4',
     poster:
-      "/home/document/homepage-reuse-components-across-apps-poster-lg.jpg",
+      '/home/document/homepage-reuse-components-across-apps-poster-lg.jpg',
   },
   {
     icon: <Branch />,
-    title: "Track component history and versions",
-    description: "QA unexpected bugs by going back in time.",
+    title: 'Track component history and versions',
+    description: 'QA unexpected bugs by going back in time.',
     link: {
-      label: "Learn about versioning",
-      href: "/docs/react/sharing/publish-storybook#versioning-and-history",
+      label: 'Learn about versioning',
+      href: '/docs/react/sharing/publish-storybook#versioning-and-history',
     },
-    media: "/home/document/homepage-component-history-lg.mp4",
-    poster: "/home/document/homepage-component-history-poster-lg.jpg",
+    media: '/home/document/homepage-component-history-lg.mp4',
+    poster: '/home/document/homepage-component-history-poster-lg.jpg',
   },
 ];
 
@@ -68,7 +68,7 @@ export const Document: FC = () => {
       <div
         className={cn(
           container,
-          "lg:px-8 text-white md:flex justify-between gap-20"
+          'lg:px-8 text-white md:flex justify-between gap-20'
         )}
       >
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">

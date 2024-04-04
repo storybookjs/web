@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { languages } from "@/docs-languages";
-import { packageManagers } from "@/docs-package-managers";
-import { renderers } from "@/docs-renderers";
-import { getCookie, setCookie } from "cookies-next";
+import { languages } from '../../docs-languages';
+import { packageManagers } from '../../docs-package-managers';
+import { renderers } from '../../docs-renderers';
+import { getCookie, setCookie } from 'cookies-next';
 import {
   createContext,
   ReactNode,
   useContext,
   useEffect,
   useState,
-} from "react";
+} from 'react';
 
 interface Props {
   activeRenderer: null | string;
@@ -28,9 +28,9 @@ export function DocsProvider({ children }: { children: ReactNode }) {
   const [activeLanguage, setActiveLanguage] = useState<null | string>(null);
   const [activePackageManager, setActivePM] = useState<null | string>(null);
 
-  const cookieRendererId = "sb-docs-renderer";
-  const cookieLanguageId = "sb-docs-language";
-  const cookiePackageManagerId = "sb-docs-package-manager";
+  const cookieRendererId = 'sb-docs-renderer';
+  const cookieLanguageId = 'sb-docs-language';
+  const cookiePackageManagerId = 'sb-docs-package-manager';
 
   useEffect(() => {
     const cookieRenderer = getCookie(cookieRendererId);
@@ -90,7 +90,7 @@ export function DocsProvider({ children }: { children: ReactNode }) {
 export function useDocs() {
   const context = useContext(DocsContext);
   if (context === undefined) {
-    throw new Error("useDocs must be used within a DocsProvider");
+    throw new Error('useDocs must be used within a DocsProvider');
   }
   return context;
 }

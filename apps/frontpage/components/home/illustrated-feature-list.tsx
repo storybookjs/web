@@ -1,11 +1,11 @@
-import { FC, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { cn, container } from "@/lib/tailwind";
-import { ArrowRightIcon, ChevronSmallRightIcon } from "@storybook/icons";
-import { Button } from "../ui/button";
-import Link from "next/link";
+import { FC, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { cn, container } from '../../lib/tailwind';
+import { ArrowRightIcon, ChevronSmallRightIcon } from '@storybook/icons';
+import { Button } from '../ui/button';
+import Link from 'next/link';
 
-type Alignment = "left" | "right";
+type Alignment = 'left' | 'right';
 
 interface FeatureItem {
   media: string;
@@ -26,20 +26,20 @@ interface IllustratedFeatureListProps {
 const duration = 0.3;
 
 const variants = {
-  enter: (direction: "up" | "down") => ({
-    y: direction === "up" ? "-5%" : "5%",
+  enter: (direction: 'up' | 'down') => ({
+    y: direction === 'up' ? '-5%' : '5%',
     opacity: 0,
     transition: { duration },
   }),
   center: {
-    y: "0%",
+    y: '0%',
     opacity: 1,
     zIndex: 1,
     transition: { duration, delay: 0.2 },
   },
-  exit: (direction: "up" | "down") => ({
+  exit: (direction: 'up' | 'down') => ({
     zIndex: 0,
-    y: direction === "up" ? "5%" : "-5%",
+    y: direction === 'up' ? '5%' : '-5%',
     opacity: 0,
     transition: { duration },
   }),
@@ -47,30 +47,30 @@ const variants = {
 
 export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
   features,
-  alignment = "left",
+  alignment = 'left',
   lockUpHeight,
   bgColor,
   ...props
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeFeature = features[activeIndex];
-  const [direction, setDirection] = useState("down");
+  const [direction, setDirection] = useState('down');
 
   return (
     <div
       className={cn(
         container,
-        "flex items-center flex-col pb-0 pt-12 sm:pt-20 md:grid md:justify-center md:items-start md:grid-cols-[repeat(2,_minmax(auto,_1fr))] md:grid-rows-[minmax(50vh,_max-content)] md:gap-20 md:pt-28 lg:grid-cols-[repeat(2,_minmax(auto,_1fr))] min-[1416px]:grid-cols-[repeat(2,_1fr)]"
+        'flex items-center flex-col pb-0 pt-12 sm:pt-20 md:grid md:justify-center md:items-start md:grid-cols-[repeat(2,_minmax(auto,_1fr))] md:grid-rows-[minmax(50vh,_max-content)] md:gap-20 md:pt-28 lg:grid-cols-[repeat(2,_minmax(auto,_1fr))] min-[1416px]:grid-cols-[repeat(2,_1fr)]'
       )}
       {...props}
     >
       {/* Desktop video */}
       <div
         className={cn(
-          "rounded-lg relative overflow-hidden hidden h-full min-h-[640px] md:block lg:max-h-[640px] min-[1416px]:ml-0 min-[1416px]:mr-0 min-[1416px]:rounded-lg",
-          alignment === "left"
-            ? "order-1 md:-ml-12 md:rounded-tl-none md:-border-bl-none"
-            : "order-2 md:-mr-12 md:rounded-tr-none md:-border-br-none"
+          'rounded-lg relative overflow-hidden hidden h-full min-h-[640px] md:block lg:max-h-[640px] min-[1416px]:ml-0 min-[1416px]:mr-0 min-[1416px]:rounded-lg',
+          alignment === 'left'
+            ? 'order-1 md:-ml-12 md:rounded-tl-none md:-border-bl-none'
+            : 'order-2 md:-mr-12 md:rounded-tr-none md:-border-br-none'
         )}
         style={{ backgroundColor: bgColor }}
       >
@@ -103,8 +103,8 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
         <Link
           href={activeFeature.link.href}
           className={cn(
-            "absolute top-5 z-10 flex gap-2 items-center bg-black/50 text-white pl-4 pr-3 rounded-full text-xs font-bold h-7 hover:bg-black/60 transition-all hover:-translate-y-0.5",
-            alignment === "left" ? "right-5" : "left-5"
+            'absolute top-5 z-10 flex gap-2 items-center bg-black/50 text-white pl-4 pr-3 rounded-full text-xs font-bold h-7 hover:bg-black/60 transition-all hover:-translate-y-0.5',
+            alignment === 'left' ? 'right-5' : 'left-5'
           )}
         >
           {activeFeature.link.label} <ChevronSmallRightIcon />
@@ -112,20 +112,20 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
       </div>
       <ul
         className={cn(
-          "flex flex-col gap-5 p-0 m-0 w-full min-w-0",
-          alignment === "left" ? "order-2" : "order-1"
+          'flex flex-col gap-5 p-0 m-0 w-full min-w-0',
+          alignment === 'left' ? 'order-2' : 'order-1'
         )}
       >
         {features.map((feature, index) => (
           <li key={feature.title} className="list-none m-0">
             <button
               className={cn(
-                "border border-zinc-600 rounded text-left flex w-full p-5 items-center cursor-pointer transition-all duration-200 ease-in-out outline-0 gap-5 hover:border-blue-500 hover:-translate-y-1",
-                activeIndex === index && "border-blue-500"
+                'border border-zinc-600 rounded text-left flex w-full p-5 items-center cursor-pointer transition-all duration-200 ease-in-out outline-0 gap-5 hover:border-blue-500 hover:-translate-y-1',
+                activeIndex === index && 'border-blue-500'
               )}
-              aria-pressed={index === activeIndex ? "true" : "false"}
+              aria-pressed={index === activeIndex ? 'true' : 'false'}
               onClick={() => {
-                setDirection(index > activeIndex ? "down" : "up");
+                setDirection(index > activeIndex ? 'down' : 'up');
                 setActiveIndex(index);
               }}
             >
@@ -149,7 +149,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
                     animate="open"
                     exit="collapsed"
                     variants={{
-                      open: { opacity: 1, height: "auto", marginTop: 20 },
+                      open: { opacity: 1, height: 'auto', marginTop: 20 },
                       collapsed: { opacity: 0, height: 0, marginTop: 0 },
                     }}
                     transition={{

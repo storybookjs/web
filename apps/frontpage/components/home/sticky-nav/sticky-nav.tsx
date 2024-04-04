@@ -1,31 +1,31 @@
-import React from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpIcon } from "@storybook/icons";
-import { Button } from "../../ui/button";
-import Link from "next/link";
-import { MobileMenu } from "./mobile-menu";
-import { cn, container } from "@/lib/tailwind";
+import React from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowUpIcon } from '@storybook/icons';
+import { Button } from '../../ui/button';
+import Link from 'next/link';
+import { MobileMenu } from './mobile-menu';
+import { cn, container } from '../../../lib/tailwind';
 
 interface StickyNavProps {
   isVisible?: boolean;
   animationDisabled?: boolean;
   activeSection:
-    | "who"
-    | "automate"
-    | "share"
-    | "document"
-    | "test"
-    | "develop"
+    | 'who'
+    | 'automate'
+    | 'share'
+    | 'document'
+    | 'test'
+    | 'develop'
     | null;
 }
 
 const items = [
-  { id: "develop", label: "Develop", href: "#develop" },
-  { id: "test", label: "Test", href: "#test" },
-  { id: "document", label: "Document", href: "#document" },
-  { id: "share", label: "Share", href: "#share" },
-  { id: "automate", label: "Automate", href: "#automate" },
-  { id: "who", label: "Who's it for", href: "#who" },
+  { id: 'develop', label: 'Develop', href: '#develop' },
+  { id: 'test', label: 'Test', href: '#test' },
+  { id: 'document', label: 'Document', href: '#document' },
+  { id: 'share', label: 'Share', href: '#share' },
+  { id: 'automate', label: 'Automate', href: '#automate' },
+  { id: 'who', label: "Who's it for", href: '#who' },
 ];
 
 export const StickyNav = ({
@@ -49,7 +49,7 @@ export const StickyNav = ({
           <section
             className={cn(
               container,
-              "h-full flex items-center justify-between"
+              'h-full flex items-center justify-between'
             )}
           >
             <MobileMenu
@@ -63,7 +63,7 @@ export const StickyNav = ({
                   asChild
                   variant="ghostHome"
                   size="md"
-                  active={activeSection === item.id ? "home" : undefined}
+                  active={activeSection === item.id ? 'home' : undefined}
                 >
                   <a href={item.href}>{item.label}</a>
                 </Button>

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { ChevronSmallDownIcon } from "@storybook/icons";
-import Link from "next/link";
-import { DocsVersion, docsVersions } from "@/docs-versions";
-import { usePathname } from "next/navigation";
+import { FC } from 'react';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { ChevronSmallDownIcon } from '@storybook/icons';
+import Link from 'next/link';
+import { DocsVersion, docsVersions } from '../../../docs-versions';
+import { usePathname } from 'next/navigation';
 
 interface VersionSelectorProps {
   activeVersion: DocsVersion;
@@ -15,7 +15,7 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
   activeVersion,
 }) => {
   const pathname = usePathname();
-  const segments = pathname.slice(1).split("/");
+  const segments = pathname.slice(1).split('/');
 
   const getLink = (version: string) => {
     const isFirstVersion = version === docsVersions[0].id;
@@ -25,13 +25,13 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
     const isVersionInUrl = activeVersionIndex !== -1;
 
     const newSegments = [...segments];
-    let newHref = "/" + newSegments.join("/");
+    let newHref = '/' + newSegments.join('/');
 
     if (!isVersionInUrl && !isFirstVersion)
-      newHref = newHref.replace("/docs", `/docs/${version}`);
+      newHref = newHref.replace('/docs', `/docs/${version}`);
     if (isVersionInUrl) newHref = newHref.replace(activeVersion.id, version);
     if (isVersionInUrl && isFirstVersion)
-      newHref = newHref.replace(`/${version}`, "");
+      newHref = newHref.replace(`/${version}`, '');
 
     return newHref;
   };

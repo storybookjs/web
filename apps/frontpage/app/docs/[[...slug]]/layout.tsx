@@ -1,19 +1,19 @@
-import type { Metadata } from "next";
-import { Header } from "@/components/header/header";
-import { Footer } from "@/components/footer/footer";
-import Image from "next/image";
-import { Sidebar } from "@/components/docs/sidebar/sidebar";
-import { TableOfContent } from "@/components/docs/table-of-content";
-import { cn, container } from "@/lib/tailwind";
-import { NavDocs } from "@/components/docs/sidebar/nav-docs";
-import { generateDocsTree } from "@/lib/get-tree";
-import { DocsProvider } from "../provider";
-import { getVersion } from "@/lib/get-version";
-import { slugHasVersion } from "@/lib/slug-has-version";
-import { getPageData } from "@/lib/get-page";
+import type { Metadata } from 'next';
+import { Header } from '../../../components/header/header';
+import { Footer } from '../../../components/footer/footer';
+import Image from 'next/image';
+import { Sidebar } from '../../../components/docs/sidebar/sidebar';
+import { TableOfContent } from '../../../components/docs/table-of-content';
+import { cn, container } from '../../../lib/tailwind';
+import { NavDocs } from '../../../components/docs/sidebar/nav-docs';
+import { generateDocsTree } from '../../../lib/get-tree';
+import { DocsProvider } from '../provider';
+import { getVersion } from '../../../lib/get-version';
+import { slugHasVersion } from '../../../lib/slug-has-version';
+import { getPageData } from '../../../lib/get-page';
 
 export const metadata: Metadata = {
-  title: "Storybook",
+  title: 'Storybook',
   description:
     "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
 };
@@ -44,7 +44,7 @@ export default async function Layout({
         height={339}
         className="w-full absolute top-0 left-0 -z-10"
       />
-      <main className={cn(container, "md:pl-5 lg:pr-8 flex gap-4 lg:gap-12")}>
+      <main className={cn(container, 'md:pl-5 lg:pr-8 flex gap-4 lg:gap-12')}>
         <Sidebar>
           <NavDocs tree={tree} activeVersion={activeVersion} />
         </Sidebar>

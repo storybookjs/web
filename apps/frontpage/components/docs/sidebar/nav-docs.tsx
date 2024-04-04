@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import * as Accordion from "@radix-ui/react-accordion";
-import { FC, Fragment } from "react";
-import { ChevronSmallRightIcon } from "@storybook/icons";
-import { VersionSelector } from "./version-selector";
-import { DocsVersion, docsVersions } from "@/docs-versions";
+import Link from 'next/link';
+import * as Accordion from '@radix-ui/react-accordion';
+import { FC, Fragment } from 'react';
+import { ChevronSmallRightIcon } from '@storybook/icons';
+import { VersionSelector } from './version-selector';
+import { DocsVersion, docsVersions } from '../../../docs-versions';
 
 interface NavDocsProps {
   tree: TreeProps[] | null | undefined;
@@ -13,11 +13,11 @@ interface NavDocsProps {
 }
 
 const getUrl = (slug: string) => {
-  const newSlug = slug.replace("/docs/", "").split("/");
+  const newSlug = slug.replace('/docs/', '').split('/');
   const hasFirstVersion = docsVersions[0].id === newSlug[0];
   if (hasFirstVersion) newSlug.shift();
 
-  return `/docs/${newSlug.join("/")}`;
+  return `/docs/${newSlug.join('/')}`;
 };
 
 export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
