@@ -1,6 +1,5 @@
 import { NavTop } from '../../components/community/nav-top';
-import { Footer } from '../../components/footer/footer';
-import { Header } from '@ui';
+import { Header, Footer } from '@ui';
 import { Community } from '../../components/community';
 import { NewsletterForm } from '../../components/newsletter-form/form';
 import { cn, smallContainer } from '../../lib/tailwind';

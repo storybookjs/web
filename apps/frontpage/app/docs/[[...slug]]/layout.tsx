@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import { Header } from '@ui';
-import { Footer } from '../../../components/footer/footer';
+import { Header, Footer } from '@ui';
 import Image from 'next/image';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { TableOfContent } from '../../../components/docs/table-of-content';

@@ -1,8 +1,7 @@
 'use client';
 
 import { Hero } from '../components/home/hero';
-import { Footer } from '../components/footer/footer';
-import { Header } from '@ui';
+import { Header, Footer } from '@ui';
 import { Develop } from '../components/home/develop/develop';
 import { StickyNav } from '../components/home/sticky-nav/sticky-nav';
 import { useMemo, useRef } from 'react';

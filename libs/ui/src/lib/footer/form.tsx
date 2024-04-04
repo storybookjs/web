@@ -6,7 +6,7 @@ import {
   YoutubeIcon,
 } from '@storybook/icons';
 import { FooterProps } from './footer';
-import { cn } from '../../lib/tailwind';
+import { cn } from '@utils';
 import { NewsletterForm } from '../newsletter-form/form';
 
 interface FormProps {
@@ -16,9 +16,9 @@ interface FormProps {
 export const Form: FC<FormProps> = ({ variant }) => {
   return (
     <div className="mb-14">
-      <div className="text-md font-bold mb-4">Join the community</div>
-      <div className="flex flex-col lg:flex-row gap-8 items-start lg:justify-between lg:items-center">
-        <div className="flex-1 w-full flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+      <div className="mb-4 font-bold text-md">Join the community</div>
+      <div className="flex flex-col items-start gap-8 lg:flex-row lg:justify-between lg:items-center">
+        <div className="flex flex-col flex-1 w-full gap-4 sm:flex-row sm:items-center sm:gap-6">
           <NewsletterForm variant={variant === 'home' ? 'dark' : 'system'} />
           <div className="text-zinc-400">6,378 developers and counting</div>
         </div>

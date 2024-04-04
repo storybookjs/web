@@ -1,5 +1,4 @@
-import { Footer } from '../../../components/footer/footer';
-import { Header } from '@ui';
+import { Header, Footer } from '@ui';
 import { ReleaseNewsletter } from '../../../components/release-newsletter';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { getRelease } from '../../../lib/get-release';
