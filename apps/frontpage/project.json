@@ -24,7 +24,7 @@
       }
     },
     "fetch-docs": {
-      "command": "tsx apps/frontpage/scripts/getLocalDocs.ts"
+      "command": "tsx --tsconfig apps/frontpage/tsconfig.json apps/frontpage/scripts/getLocalDocs.ts"
     },
     "typecheck": {
       "command": "tsc --noEmit -p apps/frontpage/tsconfig.json"

@@ -10,6 +10,7 @@ import { Search } from './search';
 import { MobileMenu } from './mobile-menu';
 import { Submenu } from './submenu';
 import { GithubIcon } from '@storybook/icons';
+import type { DocsVersion } from "@utils";
 
 interface TreeMetaProps {
   title: string;
@@ -34,13 +35,7 @@ interface TreeProps extends TreeMetaProps {
 export interface HeaderProps {
   variant?: 'home' | 'system';
   tree?: TreeProps[];
-  activeVersion?: {
-    label: string;
-    id: string;
-    branch?: string;
-    tag?: string;
-    commit?: string;
-  };
+  activeVersion?: DocsVersion;
 }
 
 export const Header: FC<HeaderProps> = ({
