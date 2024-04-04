@@ -1,26 +1,26 @@
-import { NavTop } from "@/components/community/nav-top";
-import { Footer } from "@/components/footer/footer";
-import { Header } from "@/components/header/header";
-import { Community } from "@/components/community";
-import { NewsletterForm } from "@/components/newsletter-form/form";
-import { cn, smallContainer } from "@/lib/tailwind";
-import { Numbers } from "@/components/community/numbers";
-import { NavSide } from "@/components/community/nav-side";
-import { Support } from "@/components/community/support";
-import { Events } from "@/components/community/events";
-import { BrandAndResources } from "@/components/community/brand";
-import { Team } from "@/components/community/team";
-import { Contribute } from "@/components/community/contribute";
-import { Sponsor } from "@/components/community/sponsor";
-import { Testimonials } from "@/components/community/testimonials";
-import { CommunityProvider } from "./provider";
+import { NavTop } from '../../components/community/nav-top';
+import { Footer } from '../../components/footer/footer';
+import { Header } from '../../components/header/header';
+import { Community } from '../../components/community';
+import { NewsletterForm } from '../../components/newsletter-form/form';
+import { cn, smallContainer } from '../../lib/tailwind';
+import { Numbers } from '../../components/community/numbers';
+import { NavSide } from '../../components/community/nav-side';
+import { Support } from '../../components/community/support';
+import { Events } from '../../components/community/events';
+import { BrandAndResources } from '../../components/community/brand';
+import { Team } from '../../components/community/team';
+import { Contribute } from '../../components/community/contribute';
+import { Sponsor } from '../../components/community/sponsor';
+import { Testimonials } from '../../components/community/testimonials';
+import { CommunityProvider } from './provider';
 
 export default function Page() {
   return (
     <CommunityProvider>
       <Header variant="system" />
       <NavTop />
-      <main className={cn(smallContainer, " mt-10 md:mt-20")}>
+      <main className={cn(smallContainer, ' mt-10 md:mt-20')}>
         <div className="lg:px-8 md:flex justify-between gap-20 mb-10 md:mb-16">
           <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
             Meet world-class frontend devs

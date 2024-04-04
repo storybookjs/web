@@ -1,25 +1,25 @@
-import { docsVersions } from "@/docs-versions";
-import { getReleases } from "@/lib/get-releases";
-import { generateDocsTree } from "@/lib/get-tree";
-import { MetadataRoute } from "next";
+import { docsVersions } from '../docs-versions';
+import { getReleases } from '../lib/get-releases';
+import { generateDocsTree } from '../lib/get-tree';
+import { MetadataRoute } from 'next';
 
 interface Sitemap {
   url: string;
   lastModified: Date;
   changeFrequency:
-    | "weekly"
-    | "monthly"
-    | "always"
-    | "hourly"
-    | "daily"
-    | "yearly"
-    | "never"
+    | 'weekly'
+    | 'monthly'
+    | 'always'
+    | 'hourly'
+    | 'daily'
+    | 'yearly'
+    | 'never'
     | undefined;
   priority: number;
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const mainUrl = "https://storybook.js.org";
+  const mainUrl = 'https://storybook.js.org';
   const docs: Sitemap[] = [];
   const tree = generateDocsTree();
   const treeFirstVersion = generateDocsTree(
@@ -28,13 +28,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const ids = (data: TreeProps[], removeVersion: boolean) => {
     data.forEach((item) => {
-      if ("slug" in item) {
-        const newSlug = item.slug.replace("/docs/", "").split("/");
+      if ('slug' in item) {
+        const newSlug = item.slug.replace('/docs/', '').split('/');
         if (removeVersion) newSlug.shift();
         docs.push({
-          url: `${mainUrl}/docs/${newSlug.join("/")}`,
+          url: `${mainUrl}/docs/${newSlug.join('/')}`,
           lastModified: new Date(),
-          changeFrequency: "weekly",
+          changeFrequency: 'weekly',
           priority: 0.8,
         });
       }
@@ -50,7 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const releases: Sitemap[] = getReleases().map((release) => ({
     url: `${mainUrl}/releases/${release}`,
     lastModified: new Date(),
-    changeFrequency: "weekly",
+    changeFrequency: 'weekly',
     priority: 0.8,
   }));
 
@@ -58,13 +58,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: mainUrl,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: 'monthly',
       priority: 1,
     },
     {
       url: `${mainUrl}/community`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: 'monthly',
       priority: 0.9,
     },
     ...docs,

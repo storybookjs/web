@@ -1,11 +1,11 @@
-import { cn } from "@/lib/tailwind";
-import snarkdown from "snarkdown";
+import { cn } from '../../../lib/tailwind';
+import snarkdown from 'snarkdown';
 
-type Variant = "neutral" | "positive" | "info" | "warning";
+type Variant = 'neutral' | 'positive' | 'info' | 'warning';
 
 const VARIANT_DEFAULT_ICON: Partial<Record<Variant, string>> = {
-  info: "ℹ️",
-  warning: "⚠️",
+  info: 'ℹ️',
+  warning: '⚠️',
 };
 
 interface CalloutContainerProps {
@@ -30,11 +30,11 @@ export const Callout = ({
   return (
     <div
       className={cn(
-        "p-6 rounded flex gap-4",
-        variant === "neutral" && "bg-slate-200",
-        variant === "positive" && "bg-slate-200",
-        variant === "info" && "bg-blue-100 border border-blue-200",
-        variant === "warning" && "bg-slate-200"
+        'p-6 rounded flex gap-4',
+        variant === 'neutral' && 'bg-slate-200',
+        variant === 'positive' && 'bg-slate-200',
+        variant === 'info' && 'bg-blue-100 border border-blue-200',
+        variant === 'warning' && 'bg-slate-200'
       )}
       {...props}
     >

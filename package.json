@@ -2,7 +2,9 @@
   "name": "storybook-web",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "frontpage": "npx nx run frontpage:dev"
+  },
   "private": true,
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useCommunity } from "@/app/community/provider";
-import { useInView } from "framer-motion";
-import { FC, ReactNode, useEffect, useRef } from "react";
+import { useCommunity } from '../../app/community/provider';
+import { useInView } from 'framer-motion';
+import { FC, ReactNode, useEffect, useRef } from 'react';
 
 interface AnchorProps {
   id: string;

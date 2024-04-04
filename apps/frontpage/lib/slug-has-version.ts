@@ -1,4 +1,4 @@
-import { docsVersions } from "@/docs-versions";
+import { docsVersions } from '../docs-versions';
 
 export const slugHasVersion = (slug: string[]): boolean => {
   return (

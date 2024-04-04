@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/tailwind";
-import { ElementOrSelector, inView } from "framer-motion";
-import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import { useScrollDirection } from "react-use-scroll-direction";
+import { ScrollArea } from '../../components/ui/scroll-area';
+import { cn } from '../../lib/tailwind';
+import { ElementOrSelector, inView } from 'framer-motion';
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { useScrollDirection } from 'react-use-scroll-direction';
 
 interface Heading {
   id: number;
@@ -78,9 +78,9 @@ const Element: FC<ElementProps> = ({ heading, isInView, setIsInView }) => {
       <a
         href={`#${heading.slug}`}
         className={cn(
-          "flex items-center text-sm text-zinc-700 hover:text-blue-500 transition-colors w-full mb-3",
-          heading.level > 2 && "ml-5",
-          active && "text-blue-500"
+          'flex items-center text-sm text-zinc-700 hover:text-blue-500 transition-colors w-full mb-3',
+          heading.level > 2 && 'ml-5',
+          active && 'text-blue-500'
         )}
       >
         {heading.title}

@@ -1,11 +1,11 @@
-import { docsVersions } from "@/docs-versions";
-import { firefoxThemeLight } from "../themes/firefox-theme-vscode";
-import fs from "fs";
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import rehypePrettyCode from "rehype-pretty-code";
-import remarkRehype from "remark-rehype";
-import rehypeStringify from "rehype-stringify";
+import { docsVersions } from '../../../../../docs-versions';
+import { firefoxThemeLight } from '../themes/firefox-theme-vscode';
+import fs from 'fs';
+import { unified } from 'unified';
+import remarkParse from 'remark-parse';
+import rehypePrettyCode from 'rehype-pretty-code';
+import remarkRehype from 'remark-rehype';
+import rehypeStringify from 'rehype-stringify';
 
 interface Props {
   path: string | undefined;
@@ -18,7 +18,7 @@ export const getMetadata = async ({ path, activeVersion }: Props) => {
   // Read the content of the MD file
   const source = await fs.promises.readFile(
     process.cwd() + `/content/snippets/${version}/${path}`,
-    "utf8"
+    'utf8'
   );
 
   // Parse the content into a syntax tree
@@ -27,7 +27,7 @@ export const getMetadata = async ({ path, activeVersion }: Props) => {
   // Traverse the syntax tree and find the code blocks
   const codeBlocks = [];
   for (const node of tree.children) {
-    if (node.type === "code") {
+    if (node.type === 'code') {
       // For each code block, create an object with a `code` property
       codeBlocks.push(node);
     }
@@ -54,8 +54,8 @@ export const getMetadata = async ({ path, activeVersion }: Props) => {
       if (matches) {
         matches.forEach((match) => {
           const [key, value] = match
-            .split("=")
-            .map((part) => part.replace(/"/g, ""));
+            .split('=')
+            .map((part) => part.replace(/"/g, ''));
           metadata[key] = value;
         });
       }

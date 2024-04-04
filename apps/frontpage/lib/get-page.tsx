@@ -1,12 +1,12 @@
-import fs from "fs";
-import { generateDocsTree } from "./get-tree";
-import { firefoxThemeLight } from "@/components/docs/mdx/code-snippets/themes/firefox-theme-vscode";
-import rehypePrettyCode from "rehype-pretty-code";
-import { compileMDX } from "next-mdx-remote/rsc";
-import * as MDX from "@/components/docs/mdx";
-import rehypeSlug from "rehype-slug";
-import { DocsVersion } from "@/docs-versions";
-import { extractHeadings } from "extract-md-headings";
+import fs from 'fs';
+import { generateDocsTree } from './get-tree';
+import { firefoxThemeLight } from '../components/docs/mdx/code-snippets/themes/firefox-theme-vscode';
+import rehypePrettyCode from 'rehype-pretty-code';
+import { compileMDX } from 'next-mdx-remote/rsc';
+import * as MDX from '../components/docs/mdx';
+import rehypeSlug from 'rehype-slug';
+import { DocsVersion } from '../docs-versions';
+import { extractHeadings } from 'extract-md-headings';
 
 const rehypePrettyCodeOptions = {
   theme: firefoxThemeLight,
@@ -16,8 +16,8 @@ export const getPageData = async (
   path: string[],
   activeVersion: DocsVersion
 ) => {
-  const rootPath = "content/docs";
-  const pathString = path.join("/");
+  const rootPath = 'content/docs';
+  const pathString = path.join('/');
   const indexPathMDX = `content/docs/${pathString}/index.mdx`;
   const indexPathMD = `content/docs/${pathString}/index.md`;
   const linkPath =
@@ -36,7 +36,7 @@ export const getPageData = async (
 
   const file = await fs.promises.readFile(
     process.cwd() + `/${newPath}`,
-    "utf8"
+    'utf8'
   );
 
   const { content, frontmatter } = await compileMDX<{ title: string }>({
@@ -49,7 +49,7 @@ export const getPageData = async (
           rehypeSlug,
           [rehypePrettyCode, rehypePrettyCodeOptions] as any,
         ],
-        format: "mdx",
+        format: 'mdx',
       },
     },
     components: {
@@ -82,7 +82,7 @@ export const getPageData = async (
 
   // Get Tabs
   let pathToFiles = isLink
-    ? `${rootPath}/${pathString}`.split("/").slice(0, -1).join("/")
+    ? `${rootPath}/${pathString}`.split('/').slice(0, -1).join('/')
     : `${rootPath}/${pathString}`;
 
   const parent = generateDocsTree(pathToFiles);
@@ -91,7 +91,7 @@ export const getPageData = async (
     a?.tab?.order && b?.tab?.order ? a.tab.order - b.tab.order : 0
   );
 
-  const index = sorted?.find((item) => item.name === "index.mdx");
+  const index = sorted?.find((item) => item.name === 'index.mdx');
 
   return {
     ...frontmatter,

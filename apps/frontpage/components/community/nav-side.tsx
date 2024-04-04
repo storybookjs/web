@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useCommunity } from "@/app/community/provider";
-import { cn } from "@/lib/tailwind";
-import Image from "next/image";
-import { FC } from "react";
+import { useCommunity } from '../../app/community/provider';
+import { cn } from '../../lib/tailwind';
+import Image from 'next/image';
+import { FC } from 'react';
 
 export const NavSide: FC = () => {
   const { activeSegment, setActiveSegment } = useCommunity();
@@ -12,12 +12,12 @@ export const NavSide: FC = () => {
     <div className="w-[200px] hidden lg:block sticky self-start top-28">
       <div className="border-b border-b-zinc-300 w-40 pb-6 mb-6">
         {[
-          { label: "⭐  Support", href: "#support" },
-          { label: "🎪  Events & streams", href: "#events-streams" },
-          { label: "⚡️  Brand & resources", href: "#brand-resources" },
-          { label: "🌎  Maintainer team", href: "#maintainer-team" },
-          { label: "🛠  Contribute", href: "#contribute" },
-          { label: "💅  Sponsor", href: "#sponsor" },
+          { label: '⭐  Support', href: '#support' },
+          { label: '🎪  Events & streams', href: '#events-streams' },
+          { label: '⚡️  Brand & resources', href: '#brand-resources' },
+          { label: '🌎  Maintainer team', href: '#maintainer-team' },
+          { label: '🛠  Contribute', href: '#contribute' },
+          { label: '💅  Sponsor', href: '#sponsor' },
         ].map(({ label, href }) => {
           // Remove # from href
           const hrefWithoutHash = href.slice(1);
@@ -28,8 +28,8 @@ export const NavSide: FC = () => {
               key={href}
               href={href}
               className={cn(
-                "h-10 flex items-center",
-                isActive && "text-blue-500"
+                'h-10 flex items-center',
+                isActive && 'text-blue-500'
               )}
               onClick={() =>
                 setTimeout(() => setActiveSegment(hrefWithoutHash), 10)
