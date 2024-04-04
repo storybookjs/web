@@ -13,6 +13,7 @@ import { Share } from '../components/home/share/share';
 import { Automate } from '../components/home/automate/automate';
 import { SocialValidation } from '../components/home/social-validation/social-validation';
 import { cn, container } from '../lib/tailwind';
+import { Header as Hello } from '@ui';
 
 export default function Page() {
   const developRef = useRef(null);
@@ -53,6 +54,7 @@ export default function Page() {
   return (
     <div className="bg-homeBackground relative" id="page-top">
       <div className="relative z-10">
+        <Hello />
         <Header variant="home" />
         <Hero />
         <StickyNav isVisible={!!activeSection} activeSection={activeSection} />
