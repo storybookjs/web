@@ -6,25 +6,30 @@
   "tags": [],
   "// targets": "to see all targets run: nx show project frontpage --web",
   "targets": {
-    "build": {
-      "command": "next build",
-      "dependsOn": ["fetch-docs"]
-    },
-    "build-only": {
-      "command": "next build"
-    },
     "checks": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "nx typecheck frontpage",
-          "nx lint frontpage"
-        ],
+        "commands": ["nx typecheck frontpage", "nx lint frontpage"],
         "parallel": true
       }
     },
     "fetch-docs": {
       "command": "tsx --tsconfig apps/frontpage/tsconfig.json apps/frontpage/scripts/getLocalDocs.ts"
+    },
+    "prepare": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["nx fetch-docs frontpage"],
+        "parallel": true
+      }
+    },
+    "prepare-and-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["nx build frontpage"],
+        "parallel": false
+      },
+      "dependsOn": ["prepare"]
     },
     "typecheck": {
       "command": "tsc --noEmit -p apps/frontpage/tsconfig.json"
