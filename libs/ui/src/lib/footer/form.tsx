@@ -5,7 +5,7 @@ import {
   TwitterIcon,
   YoutubeIcon,
 } from '@storybook/icons';
-import { FooterProps } from './footer';
+import { FooterProps } from '.';
 import { cn } from '@utils';
 import { NewsletterForm } from '../newsletter-form/form';
 
