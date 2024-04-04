@@ -1,5 +1,5 @@
 import { Footer } from '../../../components/footer/footer';
-import { Header } from '../../../components/header/header';
+import { Header } from '@ui';
 import { ReleaseNewsletter } from '../../../components/release-newsletter';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { getRelease } from '../../../lib/get-release';
@@ -34,7 +34,7 @@ export default async function Page({ params: { slug } }: Props) {
       <Header variant="system" />
       <main className={cn(container, 'lg:pl-5 lg:pr-8 flex gap-4')}>
         <Sidebar>
-          <div className="flex flex-col border-t border-zinc-200 mt-4 pt-4">
+          <div className="flex flex-col pt-4 mt-4 border-t border-zinc-200">
             {releases
               .sort((a, b) => b.localeCompare(a))
               .map((release) => (
@@ -51,8 +51,8 @@ export default async function Page({ params: { slug } }: Props) {
               ))}
           </div>
         </Sidebar>
-        <article className="w-full flex-1 py-12 max-w-3xl">
-          <h1 className="text-4xl mt-0 mb-6 font-bold">
+        <article className="flex-1 w-full max-w-3xl py-12">
+          <h1 className="mt-0 mb-6 text-4xl font-bold">
             {page?.frontmatter.title || 'Page Not Found'}
           </h1>
           {page && page.content}

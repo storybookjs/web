@@ -3,7 +3,8 @@ import { MenuIcon } from '@storybook/icons';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import Link from 'next/link';
-import { cn } from '../../lib/tailwind';
+import { cn } from '@utils';
+import { HeaderProps } from '.';
 
 export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
   return (
@@ -93,7 +94,7 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
                 className="flex select-none touch-none p-1 w-4 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
                 orientation="vertical"
               >
-                <ScrollArea.Thumb className="flex-1 bg-zinc-200 rounded-full" />
+                <ScrollArea.Thumb className="flex-1 rounded-full bg-zinc-200" />
               </ScrollArea.Scrollbar>
             </ScrollArea.Viewport>
           </ScrollArea.Root>
@@ -115,7 +116,7 @@ interface DropdownItemProps {
 }
 
 export const DropdownLabel: FC<DropdownLabelProps> = ({ children }) => (
-  <DropdownMenu.Label className="text-md md:text-sm h-10 flex items-center mt-4 first:mt-0">
+  <DropdownMenu.Label className="flex items-center h-10 mt-4 text-md md:text-sm first:mt-0">
     {children}
   </DropdownMenu.Label>
 );
@@ -127,7 +128,7 @@ export const DropdownItem: FC<DropdownItemProps> = ({
   target = '_self',
 }) => (
   <DropdownMenu.Item
-    className="text-md md:text-sm h-10 md:h-8 flex items-center border-l border-l-zinc-200 ml-1 pl-3 text-zinc-500"
+    className="flex items-center h-10 pl-3 ml-1 border-l text-md md:text-sm md:h-8 border-l-zinc-200 text-zinc-500"
     asChild
   >
     {isExternal ? (

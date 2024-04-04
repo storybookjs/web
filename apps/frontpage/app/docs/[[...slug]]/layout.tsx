@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Header } from '../../../components/header/header';
+import { Header } from '@ui';
 import { Footer } from '../../../components/footer/footer';
 import Image from 'next/image';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
@@ -42,7 +42,7 @@ export default async function Layout({
         alt="Storybook Docs"
         width={1800}
         height={339}
-        className="w-full absolute top-0 left-0 -z-10"
+        className="absolute top-0 left-0 w-full -z-10"
       />
       <main className={cn(container, 'md:pl-5 lg:pr-8 flex gap-4 lg:gap-12')}>
         <Sidebar>

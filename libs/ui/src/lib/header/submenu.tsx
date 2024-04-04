@@ -3,8 +3,9 @@ import { MenuIcon } from '@storybook/icons';
 import { usePathname } from 'next/navigation';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
-import { NavDocs } from '../docs/sidebar/nav-docs';
-import { cn } from '../../lib/tailwind';
+// import { NavDocs } from '../docs/sidebar/nav-docs';
+import { cn } from '@utils';
+import { HeaderProps } from '.';
 
 export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
   const pathname = usePathname();
@@ -43,14 +44,14 @@ export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
           >
             <ScrollArea.Root className="w-full h-full">
               <ScrollArea.Viewport className="w-full h-full p-4 md:p-6 md:pt-5">
-                {activeVersion && (
+                {/* {activeVersion && (
                   <NavDocs tree={tree} activeVersion={activeVersion} />
-                )}
+                )} */}
                 <ScrollArea.Scrollbar
                   className="flex select-none touch-none p-1 w-4 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
                   orientation="vertical"
                 >
-                  <ScrollArea.Thumb className="flex-1 bg-zinc-200 rounded-full" />
+                  <ScrollArea.Thumb className="flex-1 rounded-full bg-zinc-200" />
                 </ScrollArea.Scrollbar>
               </ScrollArea.Viewport>
             </ScrollArea.Root>
