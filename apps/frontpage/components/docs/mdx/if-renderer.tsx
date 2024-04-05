@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useDocs } from "@/app/docs/provider";
-import { ReactNode } from "react";
+import { useDocs } from '../../../app/docs/provider';
+import { ReactNode } from 'react';
 
 type IfRendererProps = {
   renderer: string | string[];

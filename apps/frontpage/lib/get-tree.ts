@@ -1,9 +1,10 @@
-import fs from "fs";
-import matter from "gray-matter";
-import path from "path";
+import { TreeProps } from '@utils';
+import fs from 'fs';
+import matter from 'gray-matter';
+import path from 'path';
 
 function getMetadata(filePath: string): any {
-  const fileContents = fs.readFileSync(filePath, "utf8");
+  const fileContents = fs.readFileSync(filePath, 'utf8');
   const {
     data: { navTitle, title, ...data },
   } = matter(fileContents);
@@ -14,7 +15,7 @@ function getMetadata(filePath: string): any {
 }
 
 export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
-  const newPath = pathToFiles || "content/docs";
+  const newPath = pathToFiles || 'content/docs';
   const newDocsRoot = docsRoot || newPath;
 
   const files = fs.readdirSync(newPath);
@@ -22,7 +23,7 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
 
   files.forEach((file) => {
     const filePath = path.join(newPath, file);
-    const slug = filePath.replace("content/", "/").replace(/\.mdx?$|\.md$/, "");
+    const slug = filePath.replace('content/', '/').replace(/\.mdx?$|\.md$/, '');
     const isDirectory = fs.lstatSync(filePath).isDirectory();
 
     if (isDirectory) {
@@ -30,7 +31,7 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
 
       if (childItems) {
         const indexFile = childItems.find(
-          (item) => item.name === "index.mdx" || item.name === "index.md"
+          (item) => item.name === 'index.mdx' || item.name === 'index.md'
         );
         const children = childItems
           .sort((a, b) =>
@@ -38,8 +39,8 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
               ? a.sidebar.order - b.sidebar.order
               : 0
           )
-          .filter((item) => item.name !== "index.mdx")
-          .filter((item) => item.name !== "index.md");
+          .filter((item) => item.name !== 'index.mdx')
+          .filter((item) => item.name !== 'index.md');
         const isTab = indexFile?.isTab || false;
 
         if (indexFile) {
@@ -48,30 +49,30 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
             name: file,
             slug,
             pathSegment: filePath,
-            type: "directory",
+            type: 'directory',
             children: isTab ? [] : children,
           });
         } else {
           tree.push({
-            title: "No title",
+            title: 'No title',
             name: file,
             slug,
             pathSegment: filePath,
-            type: "directory",
+            type: 'directory',
             children,
           });
         }
       }
-    } else if (file.endsWith(".mdx") || file.endsWith(".md")) {
+    } else if (file.endsWith('.mdx') || file.endsWith('.md')) {
       const metaData = getMetadata(filePath);
 
       const isTab = metaData.isTab || false;
 
       tree.push({
         name: file,
-        slug: isTab ? slug.replace(/\/index$/, "") : slug,
+        slug: isTab ? slug.replace(/\/index$/, '') : slug,
         pathSegment: filePath,
-        type: "link",
+        type: 'link',
         ...metaData,
       });
     }
@@ -85,8 +86,8 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
     )
     .filter((item) => {
       // Here we are removing the index page from the tree
-      const slug = item.slug.split("/");
+      const slug = item.slug.split('/');
       if (slug.length !== 3) return true;
-      return slug[2] !== "index";
+      return slug[2] !== 'index';
     });
 };

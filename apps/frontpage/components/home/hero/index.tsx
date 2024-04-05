@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import SocialProof from "./social-proof";
-import Link from "next/link";
-import { cn, container } from "@/lib/tailwind";
-import { Chrome } from "./chrome";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { InitCommand } from "./init-command";
-import { useEffect, useState } from "react";
-import { Manager } from "./manager";
-import { ChevronLeftIcon, ChevronRightIcon } from "@storybook/icons";
+import SocialProof from './social-proof';
+import Link from 'next/link';
+import { cn, container } from '../../../lib/tailwind';
+import { Chrome } from './chrome';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { InitCommand } from './init-command';
+import { useEffect, useState } from 'react';
+import { Manager } from './manager';
+import { ChevronLeftIcon, ChevronRightIcon } from '@storybook/icons';
 
 const features = [
-  "Development",
-  "Documentation",
-  "Interaction Testing",
-  "Visual Testing",
+  'Development',
+  'Documentation',
+  'Interaction Testing',
+  'Visual Testing',
 ];
 
 const Star = ({ x = 0, y = 0, w = 14, delay = 0 }) => {
@@ -68,7 +68,7 @@ export const Hero = () => {
     <div
       className={cn(
         container,
-        "lg:px-8 pt-12 md:pt-24 text-white justify-between gap-20 relative z-20"
+        'lg:px-8 pt-12 md:pt-24 text-white justify-between gap-20 relative z-20'
       )}
     >
       <h1 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold max-sm:max-w-80">
@@ -150,19 +150,19 @@ export const Hero = () => {
         <div className="h-20 gap-12 relative hidden md:flex">
           <div
             className={cn(
-              "bg-white h-0.5 absolute top-0 transition-all",
-              slide === 1 && "left-0 w-[96px]",
-              slide === 2 && "left-[144px] w-[110px]",
-              slide === 3 && "left-[302px] w-[132px]",
-              slide === 4 && "left-[482px] w-[101px]"
+              'bg-white h-0.5 absolute top-0 transition-all',
+              slide === 1 && 'left-0 w-[96px]',
+              slide === 2 && 'left-[144px] w-[110px]',
+              slide === 3 && 'left-[302px] w-[132px]',
+              slide === 4 && 'left-[482px] w-[101px]'
             )}
           />
           {features.map((label, i) => (
             <button
               key={label}
               className={cn(
-                "text-white/60 transition-colors hover:text-white",
-                i === slide - 1 && "text-white"
+                'text-white/60 transition-colors hover:text-white',
+                i === slide - 1 && 'text-white'
               )}
               onClick={() => setSlide(i + 1)}
             >

@@ -1,8 +1,8 @@
-import React, { FC } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { IntegrationsCarousel } from "./integrations-carousel";
-import Image from "next/image";
+import React, { FC } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { AspectRatio } from '../../../components/ui/aspect-ratio';
+import { IntegrationsCarousel } from './integrations-carousel';
+import Image from 'next/image';
 
 const Connector: FC<{ name: string; style: any }> = ({ name, ...props }) => {
   return (
@@ -22,9 +22,9 @@ const Connector: FC<{ name: string; style: any }> = ({ name, ...props }) => {
           animate: { opacity: 1 },
         }}
         viewport={{
-          margin: "-25% 0px -25% 0px",
+          margin: '-25% 0px -25% 0px',
         }}
-        transition={{ duration: 0.4, when: "beforeChildren" }}
+        transition={{ duration: 0.4, when: 'beforeChildren' }}
         {...props}
       >
         <motion.circle
@@ -68,12 +68,12 @@ const Connector: FC<{ name: string; style: any }> = ({ name, ...props }) => {
 const embedIntegrations = [
   {
     index: 1,
-    name: "NextJS",
-    image: "/home/share/next-js.svg",
-    color: "#000",
+    name: 'NextJS',
+    image: '/home/share/next-js.svg',
+    color: '#000',
     media: (
       // transform is to prevent the slight jump before the animation starts
-      <AspectRatio ratio={1202 / 910} style={{ transform: "translate(0, 0)" }}>
+      <AspectRatio ratio={1202 / 910} style={{ transform: 'translate(0, 0)' }}>
         <img
           className="block w-full h-auto"
           src="/home/share/next.png"
@@ -82,18 +82,18 @@ const embedIntegrations = [
         <Connector
           key="nextjs"
           name="NextJS"
-          style={{ top: "51%", left: "37%" }}
+          style={{ top: '51%', left: '37%' }}
         />
       </AspectRatio>
     ),
   },
   {
     index: 2,
-    name: "Figma",
-    image: "/home/share/figma.svg",
-    color: "#000",
+    name: 'Figma',
+    image: '/home/share/figma.svg',
+    color: '#000',
     media: (
-      <AspectRatio ratio={1202 / 910} style={{ transform: "translate(0, 0)" }}>
+      <AspectRatio ratio={1202 / 910} style={{ transform: 'translate(0, 0)' }}>
         <img
           className="block w-full h-auto"
           src="/home/share/figma.png"
@@ -102,18 +102,18 @@ const embedIntegrations = [
         <Connector
           key="figma"
           name="Figma"
-          style={{ top: "52%", left: "1%" }}
+          style={{ top: '52%', left: '1%' }}
         />
       </AspectRatio>
     ),
   },
   {
     index: 3,
-    name: "Notion",
-    image: "/home/share/notion.svg",
-    color: "#fff",
+    name: 'Notion',
+    image: '/home/share/notion.svg',
+    color: '#fff',
     media: (
-      <AspectRatio ratio={1202 / 910} style={{ transform: "translate(0, 0)" }}>
+      <AspectRatio ratio={1202 / 910} style={{ transform: 'translate(0, 0)' }}>
         <img
           className="block w-full h-auto"
           src="/home/share/notion.png"
@@ -122,24 +122,24 @@ const embedIntegrations = [
         <Connector
           key="notion"
           name="Notion"
-          style={{ top: "55%", left: "7%" }}
+          style={{ top: '55%', left: '7%' }}
         />
       </AspectRatio>
     ),
   },
   {
     index: 4,
-    name: "Medium",
-    image: "/home/share/medium.svg",
-    color: "#F5C347",
+    name: 'Medium',
+    image: '/home/share/medium.svg',
+    color: '#F5C347',
     media: (
-      <AspectRatio ratio={1202 / 910} style={{ transform: "translate(0, 0)" }}>
+      <AspectRatio ratio={1202 / 910} style={{ transform: 'translate(0, 0)' }}>
         <img
           className="block w-full h-auto"
           src="/home/share/medium.png"
           alt="Embed stories in Medium articles using the oEmbed support"
         />
-        <Connector name="Medium" style={{ top: "53%", left: "28%" }} />
+        <Connector name="Medium" style={{ top: '53%', left: '28%' }} />
       </AspectRatio>
     ),
   },
@@ -164,4 +164,4 @@ export const EmbedIntegrations = React.forwardRef<HTMLImageElement>(
   }
 );
 
-EmbedIntegrations.displayName = "EmbedIntegrations";
+EmbedIntegrations.displayName = 'EmbedIntegrations';

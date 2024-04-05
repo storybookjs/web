@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import React, { useRef } from "react";
-import { useScroll, useTransform, useSpring, motion } from "framer-motion";
-import Link from "next/link";
-import { Angular, Vue, WebComponents, HTML5, ReactLogo } from "./logos";
-import { ScrollDemo } from "./demo/scroll-demo";
-import { ChevronSmallRightIcon } from "@storybook/icons";
-import { Integrations } from "../integrations/integrations";
-import { Testimonial } from "../testimonial";
-import { LogoAtomicDesign } from "./logo-atomic-design";
-import { cn, container } from "@/lib/tailwind";
+import React, { useRef } from 'react';
+import { useScroll, useTransform, useSpring, motion } from 'framer-motion';
+import Link from 'next/link';
+import { Angular, Vue, WebComponents, HTML5, ReactLogo } from './logos';
+import { ScrollDemo } from './demo/scroll-demo';
+import { ChevronSmallRightIcon } from '@storybook/icons';
+import { Integrations } from '../integrations/integrations';
+import { Testimonial } from '../testimonial';
+import { LogoAtomicDesign } from './logo-atomic-design';
+import { cn, container } from '../../../lib/tailwind';
 
 export function Develop() {
   // Step 1
   const isolationRef = useRef(null);
   const { scrollYProgress: appearProgress } = useScroll({
     target: isolationRef,
-    offset: ["0 1", "0 0.75"],
+    offset: ['0 1', '0 0.75'],
   });
   const smoothAppearProgress = useSpring(appearProgress, {
     stiffness: 1000,
@@ -26,7 +26,7 @@ export function Develop() {
   // Step 1
   const { scrollYProgress: isolationProgress } = useScroll({
     target: isolationRef,
-    offset: ["0 0.5", "1 0.5"],
+    offset: ['0 0.5', '1 0.5'],
   });
   const smoothIsolationProgress = useSpring(isolationProgress, {
     stiffness: 1000,
@@ -37,7 +37,7 @@ export function Develop() {
   const storiesRef = useRef(null);
   const { scrollYProgress: storiesProgress } = useScroll({
     target: storiesRef,
-    offset: ["0 0.5", ".75 1"],
+    offset: ['0 0.5', '.75 1'],
   });
   const activeStory = useTransform(storiesProgress, (value) =>
     Math.floor(value * 3)
@@ -47,7 +47,7 @@ export function Develop() {
   const addonsRef = useRef(null);
   const { scrollYProgress: addonsProgress } = useScroll({
     target: addonsRef,
-    offset: ["0 0.4", ".75 1"],
+    offset: ['0 0.4', '.75 1'],
   });
   const activePanel = useTransform(addonsProgress, (value) =>
     Math.floor(value * 4)
@@ -61,7 +61,7 @@ export function Develop() {
   const dropInRef = useRef(null);
   const { scrollYProgress: dropInProgress } = useScroll({
     target: dropInRef,
-    offset: ["0 0.5", "0 0.25"],
+    offset: ['0 0.5', '0 0.25'],
   });
   const smoothDropInProgress = useSpring(dropInProgress, {
     stiffness: 1000,
@@ -71,7 +71,7 @@ export function Develop() {
   const y = useTransform(
     smoothAppearProgress,
     [0, 1],
-    ["calc(0% + 36px)", "calc(-50% + 36px)"]
+    ['calc(0% + 36px)', 'calc(-50% + 36px)']
   );
 
   return (
@@ -79,7 +79,7 @@ export function Develop() {
       <div
         className={cn(
           container,
-          "lg:px-8 text-white md:flex justify-between gap-20"
+          'lg:px-8 text-white md:flex justify-between gap-20'
         )}
       >
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
@@ -96,18 +96,18 @@ export function Develop() {
               Made for
             </div>
             <div className="flex gap-4 items-center">
-              {["react", "vue", "angular", "web-components", "html"].map(
+              {['react', 'vue', 'angular', 'web-components', 'html'].map(
                 (i) => (
                   <Link
                     key={i}
                     href={`/docs/get-started/install/?renderer=${i}`}
                     className="flex items-center justify-center rounded h-10 w-10 hover:-translate-y-1 transition-all border border-zinc-700 hover:border-zinc-400"
                   >
-                    {i === "react" && <ReactLogo />}
-                    {i === "vue" && <Vue />}
-                    {i === "angular" && <Angular />}
-                    {i === "web-components" && <WebComponents />}
-                    {i === "html" && <HTML5 />}
+                    {i === 'react' && <ReactLogo />}
+                    {i === 'vue' && <Vue />}
+                    {i === 'angular' && <Angular />}
+                    {i === 'web-components' && <WebComponents />}
+                    {i === 'html' && <HTML5 />}
                   </Link>
                 )
               )}
@@ -119,14 +119,14 @@ export function Develop() {
       <div
         className={cn(
           container,
-          "pt-28 grid justify-items-center gap-24 grid-flow-dense md:pt-[27rem] md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr]"
+          'pt-28 grid justify-items-center gap-24 grid-flow-dense md:pt-[27rem] md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr]'
         )}
       >
         <motion.figure
           className="sticky w-full -order-1 z-[999] m-0 self-start top-[34%] translate-y-[var(--mobile-y)] md:w-[150%] md:max-w-[800px] md:col-[2/3] md:top-[50vh] md:translate-y-[calc(-50%+36px)]"
           // TODO: Fix that - Probably by passing the value directly to the style prop
           // @ts-ignore
-          style={{ "--mobile-y": y }}
+          style={{ '--mobile-y': y }}
         >
           <ScrollDemo
             storyIndex={activeStory}
@@ -228,7 +228,7 @@ export function Develop() {
       <div
         className={cn(
           container,
-          "pt-28 grid grid-cols-1 justify-items-center items-center gap-12 grid-flow-dense md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-24"
+          'pt-28 grid grid-cols-1 justify-items-center items-center gap-12 grid-flow-dense md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-24'
         )}
       >
         <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white">

@@ -1,6 +1,6 @@
-import React from "react";
-import { motion, MotionValue, useTransform } from "framer-motion";
-import { cn } from "@/lib/tailwind";
+import React from 'react';
+import { motion, MotionValue, useTransform } from 'framer-motion';
+import { cn } from '../../lib/tailwind';
 
 interface ConnectorProps {
   name: string;
@@ -19,7 +19,7 @@ export const Connector = ({
 
   return (
     <motion.svg
-      className={cn("block", className)}
+      className={cn('block', className)}
       width="263"
       height="145"
       viewBox="0 0 263 145"

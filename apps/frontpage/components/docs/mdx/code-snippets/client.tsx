@@ -1,11 +1,12 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import { CodeWrapper } from "./wrapper";
-import { getFilters } from "./utils/get-filters";
-import { getActiveContent } from "./utils/get-active-content";
-import { useDocs } from "@/app/docs/provider";
-import { Dropdown } from "./dropdown";
+import { FC } from 'react';
+import { CodeWrapper } from './wrapper';
+import { getFilters } from './utils/get-filters';
+import { getActiveContent } from './utils/get-active-content';
+import { useDocs } from '../../../../app/docs/provider';
+import { Dropdown } from './dropdown';
+import { CodeSnippetsProps } from '@utils';
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[];

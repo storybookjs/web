@@ -1,4 +1,4 @@
-import { docsVersions } from "@/docs-versions";
+import { docsVersions } from '@utils';
 
 export const getVersion = (slug: string[]) => {
   let activeVersion = docsVersions[0];

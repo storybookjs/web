@@ -1,14 +1,14 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
-import { useScroll, useSpring, useTransform } from "framer-motion";
-import Link from "next/link";
-import { ChevronSmallRightIcon } from "@storybook/icons";
-import { Testimonial } from "../testimonial";
-import { useEventListener } from "@/hooks/use-event-listener";
-import { LogoCloudbees } from "./Logo-cloudbees";
-import { PublishIntegrations } from "./publish-integrations";
-import { EmbedIntegrations } from "./embed-integrations";
-import { TestIntegrations } from "./test-integrations";
-import { cn, container } from "@/lib/tailwind";
+import React, { useLayoutEffect, useRef, useState } from 'react';
+import { useScroll, useSpring, useTransform } from 'framer-motion';
+import Link from 'next/link';
+import { ChevronSmallRightIcon } from '@storybook/icons';
+import { Testimonial } from '../testimonial';
+import { useEventListener } from '../../../hooks/use-event-listener';
+import { LogoCloudbees } from './Logo-cloudbees';
+import { PublishIntegrations } from './publish-integrations';
+import { EmbedIntegrations } from './embed-integrations';
+import { TestIntegrations } from './test-integrations';
+import { cn, container } from '../../../lib/tailwind';
 
 export function Share() {
   const publishRef = useRef<HTMLImageElement | null>(null);
@@ -17,7 +17,7 @@ export function Share() {
 
   const { scrollYProgress: publishYProgress } = useScroll({
     target: embedRef,
-    offset: ["0.25 1", "0 0.5"],
+    offset: ['0.25 1', '0 0.5'],
   });
   const smoothPublishProgress = useSpring(publishYProgress, {
     stiffness: 1000,
@@ -26,7 +26,7 @@ export function Share() {
 
   const { scrollYProgress: testYProgress } = useScroll({
     target: testRef,
-    offset: ["1 1", "0 0.5"],
+    offset: ['1 1', '0 0.5'],
   });
   const smoothTestProgress = useSpring(testYProgress, {
     stiffness: 1000,
@@ -64,7 +64,7 @@ export function Share() {
     handleResize();
   }, []);
 
-  useEventListener("resize", handleResize);
+  useEventListener('resize', handleResize);
 
   const scrollProgress = useTransform(
     [smoothPublishProgress, smoothTestProgress],
@@ -75,12 +75,12 @@ export function Share() {
   const x = useTransform(
     scrollProgress,
     [0, 1, 2],
-    ["0%", `${delta.x[0]}px`, `${delta.x[1]}px`]
+    ['0%', `${delta.x[0]}px`, `${delta.x[1]}px`]
   );
   const y = useTransform(
     scrollProgress,
     [0, 1, 2],
-    ["0%", `${delta.y[0]}px`, `${delta.y[1]}px`]
+    ['0%', `${delta.y[0]}px`, `${delta.y[1]}px`]
   );
   const scale = useTransform(
     scrollProgress,
@@ -94,7 +94,7 @@ export function Share() {
       <div
         className={cn(
           container,
-          "lg:px-8 text-white md:flex justify-between gap-20"
+          'lg:px-8 text-white md:flex justify-between gap-20'
         )}
       >
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
@@ -111,7 +111,7 @@ export function Share() {
       <div
         className={cn(
           container,
-          "pt-12 pb-4 grid grid-cols-1 grid-flow-dense justify-items-center items-center gap-12 md:pt-28 md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-x-24 md:gap-y-48"
+          'pt-12 pb-4 grid grid-cols-1 grid-flow-dense justify-items-center items-center gap-12 md:pt-28 md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-x-24 md:gap-y-48'
         )}
       >
         <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white col-[1/-1] first-of-type:pt-0 sm:max-w-full sm:pt-16 md:col-[1/2]">
@@ -137,7 +137,7 @@ export function Share() {
             y,
             scale,
             opacity,
-            transformOrigin: "top left",
+            transformOrigin: 'top left',
           }}
         />
         <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white col-[1/-1] first-of-type:pt-0 sm:max-w-full sm:pt-16 md:col-[1/2]">
@@ -161,7 +161,7 @@ export function Share() {
           <h3 className="text-2xl font-bold">
             <span className="inline-block border border-zinc-600 bg-zinc-800 rounded px-2 font-mono text-[19px]">
               import
-            </span>{" "}
+            </span>{' '}
             stories into other JavaScript tooling
           </h3>
           <p className="text-md leading-7">

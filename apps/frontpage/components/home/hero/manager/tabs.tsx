@@ -1,18 +1,18 @@
-import { FC } from "react";
+import { FC } from 'react';
 import {
   ChevronSmallDownIcon,
   CloseIcon,
   SidebarAltIcon,
-} from "@storybook/icons";
-import { cn } from "@/lib/tailwind";
+} from '@storybook/icons';
+import { cn } from '../../../../lib/tailwind';
 
 export const Tabs: FC<{ active?: number }> = ({ active = 0 }) => {
   let tabs = [
-    "Controls",
-    "Interactions",
-    "Visual tests",
-    "Accessibility",
-    "Design",
+    'Controls',
+    'Interactions',
+    'Visual tests',
+    'Accessibility',
+    'Design',
   ];
 
   return (
@@ -22,11 +22,11 @@ export const Tabs: FC<{ active?: number }> = ({ active = 0 }) => {
           <div
             key={label}
             className={cn(
-              "h-full flex items-center text-sm px-4 font-bold text-[#76828B] flex-shrink-0",
-              i === 2 && "hidden md:flex",
-              i === 3 && "hidden md:flex",
-              i === 4 && "hidden lg:flex",
-              i === active && "border-b-2 border-b-blue-500 text-blue-500"
+              'h-full flex items-center text-sm px-4 font-bold text-[#76828B] flex-shrink-0',
+              i === 2 && 'hidden md:flex',
+              i === 3 && 'hidden md:flex',
+              i === 4 && 'hidden lg:flex',
+              i === active && 'border-b-2 border-b-blue-500 text-blue-500'
             )}
           >
             {label}

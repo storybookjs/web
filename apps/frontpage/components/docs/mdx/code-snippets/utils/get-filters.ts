@@ -1,5 +1,9 @@
-import { languages } from "@/docs-languages";
-import { packageManagers } from "@/docs-package-managers";
+import {
+  CodeSnippetsFiltersProps,
+  CodeSnippetsProps,
+  languages,
+  packageManagers,
+} from '@utils';
 
 interface Props {
   codeSnippetsContent: CodeSnippetsProps[];
@@ -16,7 +20,7 @@ export const getFilters = ({ codeSnippetsContent }: Props) => {
 
   // Package managers
   const transformPackageManager = codeSnippetsContent.map((pm) => {
-    if (pm.packageManager === "npx") return "npm";
+    if (pm.packageManager === 'npx') return 'npm';
     return pm.packageManager;
   });
 

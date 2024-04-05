@@ -1,7 +1,7 @@
-import { ReleaseNewsletter } from "@/components/release-newsletter";
-import { getRelease } from "@/lib/get-release";
-import { getReleases } from "@/lib/get-releases";
-import { notFound } from "next/navigation";
+import { ReleaseNewsletter } from '../../../../components/release-newsletter';
+import { getRelease } from '../../../../lib/get-release';
+import { getReleases } from '../../../../lib/get-releases';
+import { notFound } from 'next/navigation';
 
 interface Props {
   params: {
@@ -26,7 +26,7 @@ export default async function Home({ params: { slug } }: Props) {
   return (
     <article className="w-full max-w-4xl mx-auto px-4 lg:px-8 my-10">
       <h1 className="text-4xl mt-0 mb-6 font-bold">
-        {page?.frontmatter.title || "Page Not Found"}
+        {page?.frontmatter.title || 'Page Not Found'}
       </h1>
       {page?.content}
       <ReleaseNewsletter />

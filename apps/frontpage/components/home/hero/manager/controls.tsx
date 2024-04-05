@@ -1,25 +1,25 @@
-import { cn } from "@/lib/tailwind";
-import { FC } from "react";
+import { cn } from '../../../../lib/tailwind';
+import { FC } from 'react';
 
 const content = [
   {
-    label: "label",
-    description: "Label of component",
-    default: "Choose time frame",
-    control: "Usage frequency",
+    label: 'label',
+    description: 'Label of component',
+    default: 'Choose time frame',
+    control: 'Usage frequency',
   },
   {
-    label: "startTime",
-    description: "Start time in 24h notation",
-    default: "undefined",
-    control: "Edit string",
+    label: 'startTime',
+    description: 'Start time in 24h notation',
+    default: 'undefined',
+    control: 'Edit string',
     muted: true,
   },
   {
-    label: "endTime",
-    description: "End time in 24h notation",
-    default: "undefined",
-    control: "Edit string",
+    label: 'endTime',
+    description: 'End time in 24h notation',
+    default: 'undefined',
+    control: 'Edit string',
     muted: true,
   },
 ];
@@ -29,8 +29,8 @@ export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
     <div>
       <div
         className={cn(
-          "bg-[#F7F9FC] h-10 flex items-center px-4 text-[11px] tracking-widest uppercase font-bold text-[#2E3438] border-b border-b-[#D9E0E6]",
-          isPanel && "hidden sm:flex"
+          'bg-[#F7F9FC] h-10 flex items-center px-4 text-[11px] tracking-widest uppercase font-bold text-[#2E3438] border-b border-b-[#D9E0E6]',
+          isPanel && 'hidden sm:flex'
         )}
       >
         Props
@@ -51,8 +51,8 @@ export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
           <div className="text-[13px] w-1/2 md:w-1/3 lg:w-[25%] flex py-2 pr-4">
             <div
               className={cn(
-                "border border-[#D9E0E6] rounded w-full h-7 flex items-center px-2",
-                item.muted && "text-[#73828C]"
+                'border border-[#D9E0E6] rounded w-full h-7 flex items-center px-2',
+                item.muted && 'text-[#73828C]'
               )}
             >
               {item.control}

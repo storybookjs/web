@@ -1,22 +1,21 @@
-"use client";
+'use client';
 
-import { Hero } from "@/components/home/hero";
-import { Footer } from "@/components/footer/footer";
-import { Header } from "@/components/header/header";
-import { Develop } from "@/components/home/develop/develop";
-import { StickyNav } from "@/components/home/sticky-nav/sticky-nav";
-import { useMemo, useRef } from "react";
-import { useInView } from "framer-motion";
-import { Test } from "@/components/home/test/test";
-import { Document } from "@/components/home/document/document";
-import { Share } from "@/components/home/share/share";
-import { Automate } from "@/components/home/automate/automate";
-import { SocialValidation } from "@/components/home/social-validation/social-validation";
-import { cn, container } from "@/lib/tailwind";
+import { Hero } from '../components/home/hero';
+import { Header, Footer } from '@ui';
+import { Develop } from '../components/home/develop/develop';
+import { StickyNav } from '../components/home/sticky-nav/sticky-nav';
+import { useMemo, useRef } from 'react';
+import { useInView } from 'framer-motion';
+import { Test } from '../components/home/test/test';
+import { Document } from '../components/home/document/document';
+import { Share } from '../components/home/share/share';
+import { Automate } from '../components/home/automate/automate';
+import { SocialValidation } from '../components/home/social-validation/social-validation';
+import { cn, container } from '../lib/tailwind';
 
 export default function Page() {
   const developRef = useRef(null);
-  const developInView = useInView(developRef, { margin: "0px 0px -100% 0px" });
+  const developInView = useInView(developRef, { margin: '0px 0px -100% 0px' });
 
   const testRef = useRef(null);
   const testInView = useInView(testRef);
@@ -34,12 +33,12 @@ export default function Page() {
   const whoInView = useInView(whoRef);
 
   const activeSection = useMemo(() => {
-    if (whoInView) return "who";
-    if (automateInView) return "automate";
-    if (shareInView) return "share";
-    if (documentInView) return "document";
-    if (testInView) return "test";
-    if (developInView) return "develop";
+    if (whoInView) return 'who';
+    if (automateInView) return 'automate';
+    if (shareInView) return 'share';
+    if (documentInView) return 'document';
+    if (testInView) return 'test';
+    if (developInView) return 'develop';
     return null;
   }, [
     developInView,
@@ -51,12 +50,12 @@ export default function Page() {
   ]);
 
   return (
-    <div className="bg-homeBackground relative" id="page-top">
+    <div className="relative bg-homeBackground" id="page-top">
       <div className="relative z-10">
         <Header variant="home" />
         <Hero />
         <StickyNav isVisible={!!activeSection} activeSection={activeSection} />
-        <div style={{ contain: "paint" }} ref={developRef} id="develop">
+        <div style={{ contain: 'paint' }} ref={developRef} id="develop">
           <Develop />
         </div>
         <div ref={testRef} id="test">
@@ -68,7 +67,7 @@ export default function Page() {
         <div ref={shareRef} id="share">
           <Share />
         </div>
-        <div style={{ contain: "paint" }} ref={automateRef} id="automate">
+        <div style={{ contain: 'paint' }} ref={automateRef} id="automate">
           <Automate />
         </div>
         <div ref={whoRef} id="who">
@@ -78,8 +77,8 @@ export default function Page() {
       </div>
 
       {/* Background circles and texture */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div className={cn(container, "h-full relative")}>
+      <div className="absolute top-0 left-0 z-0 w-full h-full overflow-hidden">
+        <div className={cn(container, 'h-full relative')}>
           <div className="absolute rounded-full bg-[radial-gradient(closest-side_at_50%_50%,_rgba(255,71,133,1),_rgba(255,71,133,0)),url('/home/texture.svg')] w-[500px] h-[500px] top-[-300px] left-[-160px] z-[2] min-[600px]:w-[700px] min-[600px]:h-[700px] min-[960px]:w-[928px] min-[960px]:h-[928px] min-[960px]:top-[-500px] min-[960px]:left-[-100px] min-[1440px]:w-[1400px] min-[1440px]:h-[1400px] min-[1440px]:top-[-720px] min-[1440px]:left-[-20%]" />
 
           <div className="absolute rounded-full bg-[radial-gradient(closest-side_at_50%_50%,_rgba(252,81,31,1),_rgba(252,81,31,0)),url('/home/texture.svg')] opacity-80 w-[400px] h-[400px] top-[-220px] left-[200px] z-[1] min-[600px]:w-[600px] min-[600px]:h-[600px] min-[600px]:top-[-260px] min-[600px]:left-[360px] min-[960px]:w-[900px] min-[960px]:h-[900px] min-[960px]:top-[-420px] min-[960px]:left-[480px] min-[1440px]:left-[34%]" />

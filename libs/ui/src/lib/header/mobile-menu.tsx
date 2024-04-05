@@ -1,9 +1,10 @@
-import { FC, ReactNode } from "react";
-import { MenuIcon } from "@storybook/icons";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import * as ScrollArea from "@radix-ui/react-scroll-area";
-import Link from "next/link";
-import { cn } from "@/lib/tailwind";
+import { FC, ReactNode } from 'react';
+import { MenuIcon } from '@storybook/icons';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import * as ScrollArea from '@radix-ui/react-scroll-area';
+import Link from 'next/link';
+import { cn } from '@utils';
+import { HeaderProps } from '.';
 
 export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
   return (
@@ -11,8 +12,8 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
       <DropdownMenu.Trigger asChild>
         <button
           className={cn(
-            "group flex items-center justify-center gap-2 text-sm text-zinc-500 font-bold hover:bg-blue-100 hover:text-blue-500  dark:text-white dark:hover:bg-blue-500/10 h-9 w-9 rounded min-[920px]:hidden",
-            variant === "home" && "text-white"
+            'group flex items-center justify-center gap-2 text-sm text-zinc-500 font-bold hover:bg-blue-100 hover:text-blue-500  dark:text-white dark:hover:bg-blue-500/10 h-9 w-9 rounded min-[920px]:hidden',
+            variant === 'home' && 'text-white'
           )}
         >
           <MenuIcon size={18} />
@@ -93,7 +94,7 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
                 className="flex select-none touch-none p-1 w-4 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
                 orientation="vertical"
               >
-                <ScrollArea.Thumb className="flex-1 bg-zinc-200 rounded-full" />
+                <ScrollArea.Thumb className="flex-1 rounded-full bg-zinc-200" />
               </ScrollArea.Scrollbar>
             </ScrollArea.Viewport>
           </ScrollArea.Root>
@@ -111,11 +112,11 @@ interface DropdownItemProps {
   children: ReactNode;
   isExternal?: boolean;
   href: string;
-  target?: "_blank" | "_self";
+  target?: '_blank' | '_self';
 }
 
 export const DropdownLabel: FC<DropdownLabelProps> = ({ children }) => (
-  <DropdownMenu.Label className="text-md md:text-sm h-10 flex items-center mt-4 first:mt-0">
+  <DropdownMenu.Label className="flex items-center h-10 mt-4 text-md md:text-sm first:mt-0">
     {children}
   </DropdownMenu.Label>
 );
@@ -124,10 +125,10 @@ export const DropdownItem: FC<DropdownItemProps> = ({
   children,
   isExternal,
   href,
-  target = "_self",
+  target = '_self',
 }) => (
   <DropdownMenu.Item
-    className="text-md md:text-sm h-10 md:h-8 flex items-center border-l border-l-zinc-200 ml-1 pl-3 text-zinc-500"
+    className="flex items-center h-10 pl-3 ml-1 border-l text-md md:text-sm md:h-8 border-l-zinc-200 text-zinc-500"
     asChild
   >
     {isExternal ? (

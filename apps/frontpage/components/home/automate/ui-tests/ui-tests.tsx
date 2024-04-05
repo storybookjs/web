@@ -1,23 +1,23 @@
-import React, { useEffect, useState, useRef, FC } from "react";
-import { useReducedMotion, useInView } from "framer-motion";
-import { cn, container } from "@/lib/tailwind";
-import Boolean from "./images/Boolean.svg";
-import Cascade from "./images/Cascade.svg";
-import DatePicker from "./images/DatePicker.svg";
-import Headings from "./images/Headings.svg";
-import Histogram from "./images/Histogram.svg";
-import Icons from "./images/Icons.svg";
-import LineGraphCoral from "./images/LineGraph-coral.svg";
-import LineGraphTeal from "./images/LineGraph-teal.svg";
-import MarketingButtons from "./images/MarketingButtons.svg";
-import PieChart from "./images/PieChart.svg";
-import Slider from "./images/Slider.svg";
-import Image from "next/image";
+import React, { useEffect, useState, useRef, FC } from 'react';
+import { useReducedMotion, useInView } from 'framer-motion';
+import { cn, container } from '../../../../lib/tailwind';
+import Boolean from './images/Boolean.svg';
+import Cascade from './images/Cascade.svg';
+import DatePicker from './images/DatePicker.svg';
+import Headings from './images/Headings.svg';
+import Histogram from './images/Histogram.svg';
+import Icons from './images/Icons.svg';
+import LineGraphCoral from './images/LineGraph-coral.svg';
+import LineGraphTeal from './images/LineGraph-teal.svg';
+import MarketingButtons from './images/MarketingButtons.svg';
+import PieChart from './images/PieChart.svg';
+import Slider from './images/Slider.svg';
+import Image from 'next/image';
 
 const workflowWidth = 210;
 const initialAnimationLength = 0;
 const eachWorkflowAnimationLength = 4000;
-const easing = "ease-in-out";
+const easing = 'ease-in-out';
 
 /**
  * Note: the z-index and relative positioning on the Wrapper should not be
@@ -115,9 +115,9 @@ const PureUITests: FC<PureUITestsProps> = ({
                 <div className="absolute overflow-hidden left-[-15px] w-[240px] h-[240px] top-[-15px]">
                   <div
                     className={cn(
-                      "rounded-[1rem] absolute bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform",
-                      "top-3 left-0",
-                      isActive ? "visible" : "hidden"
+                      'rounded-[1rem] absolute bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform',
+                      'top-3 left-0',
+                      isActive ? 'visible' : 'hidden'
                     )}
                     style={{
                       width: workflowWidth + 30,
@@ -130,9 +130,9 @@ const PureUITests: FC<PureUITestsProps> = ({
                   />
                   <div
                     className={cn(
-                      "rounded-[1rem] absolute bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform",
-                      "top-0 left-3",
-                      isActive ? "visible" : "hidden"
+                      'rounded-[1rem] absolute bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform',
+                      'top-0 left-3',
+                      isActive ? 'visible' : 'hidden'
                     )}
                     style={{
                       width: lineSize,
@@ -170,7 +170,7 @@ export const baseWorkflows = [
 export function UITests() {
   const ref = useRef(null);
   // Pause animation if not in viewport
-  const isInView = useInView(ref, { once: true, amount: "all" });
+  const isInView = useInView(ref, { once: true, amount: 'all' });
   const shouldReduceMotion = useReducedMotion();
 
   const isPaused = shouldReduceMotion;

@@ -1,5 +1,5 @@
-import { StorybookLogo } from "@/components/logos/storybook";
-import { cn } from "@/lib/tailwind";
+import { StorybookLogo } from '../../../../components/logos/storybook';
+import { cn } from '../../../../lib/tailwind';
 import {
   BookmarkHollowIcon,
   ChevronSmallDownIcon,
@@ -10,8 +10,8 @@ import {
   ExpandAltIcon,
   FolderIcon,
   SearchIcon,
-} from "@storybook/icons";
-import { FC } from "react";
+} from '@storybook/icons';
+import { FC } from 'react';
 
 export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
   return (
@@ -60,51 +60,51 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
 };
 
 const SidebarLine: FC<{
-  ic: "docs" | "story" | "group" | "component";
+  ic: 'docs' | 'story' | 'group' | 'component';
   label: string;
-  ar?: "down" | "right";
+  ar?: 'down' | 'right';
   lvl?: 1 | 2 | 3;
   active?: boolean;
 }> = ({ ic, label, ar, lvl = 1, active }) => {
   return (
     <div
       className={cn(
-        "group flex items-center gap-1.5 rounded h-7 cursor-default select-none",
-        lvl === 1 && "pl-2 pr-2",
-        lvl === 2 && "pl-6 pr-2",
-        lvl === 3 && "pl-16 pr-2",
-        active && "bg-blue-500"
+        'group flex items-center gap-1.5 rounded h-7 cursor-default select-none',
+        lvl === 1 && 'pl-2 pr-2',
+        lvl === 2 && 'pl-6 pr-2',
+        lvl === 3 && 'pl-16 pr-2',
+        active && 'bg-blue-500'
       )}
     >
-      {ar === "down" && (
+      {ar === 'down' && (
         <ChevronSmallDownIcon
-          className={cn("text-[#73828C]", active && "text-white")}
+          className={cn('text-[#73828C]', active && 'text-white')}
         />
       )}
-      {ar === "right" && (
+      {ar === 'right' && (
         <ChevronSmallRightIcon
-          className={cn("text-[#73828C]", active && "text-white")}
+          className={cn('text-[#73828C]', active && 'text-white')}
         />
       )}
-      {ic === "docs" && (
+      {ic === 'docs' && (
         <DocumentIcon
-          className={cn("text-[#FFAE00]", active && "text-white")}
+          className={cn('text-[#FFAE00]', active && 'text-white')}
         />
       )}
-      {ic === "component" && (
+      {ic === 'component' && (
         <ComponentIcon
-          className={cn("text-[#029CFD]", active && "text-white")}
+          className={cn('text-[#029CFD]', active && 'text-white')}
         />
       )}
-      {ic === "group" && (
-        <FolderIcon className={cn("text-[#6F2CAC]", active && "text-white")} />
+      {ic === 'group' && (
+        <FolderIcon className={cn('text-[#6F2CAC]', active && 'text-white')} />
       )}
-      {ic === "story" && (
+      {ic === 'story' && (
         <BookmarkHollowIcon
-          className={cn("text-[#37D5D3]", active && "text-white")}
+          className={cn('text-[#37D5D3]', active && 'text-white')}
         />
       )}
-      <div className={cn("text-black text-sm", active && "text-white")}>
+      <div className={cn('text-black text-sm', active && 'text-white')}>
         {label}
       </div>
     </div>

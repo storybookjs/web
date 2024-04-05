@@ -1,25 +1,25 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode } from 'react';
 import {
   DiscordIcon,
   GithubIcon,
   TwitterIcon,
   YoutubeIcon,
-} from "@storybook/icons";
-import { FooterProps } from "./footer";
-import { cn } from "@/lib/tailwind";
-import { NewsletterForm } from "../newsletter-form/form";
+} from '@storybook/icons';
+import { FooterProps } from '.';
+import { cn } from '@utils';
+import { NewsletterForm } from '../newsletter-form/form';
 
 interface FormProps {
-  variant?: FooterProps["variant"];
+  variant?: FooterProps['variant'];
 }
 
 export const Form: FC<FormProps> = ({ variant }) => {
   return (
     <div className="mb-14">
-      <div className="text-md font-bold mb-4">Join the community</div>
-      <div className="flex flex-col lg:flex-row gap-8 items-start lg:justify-between lg:items-center">
-        <div className="flex-1 w-full flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-          <NewsletterForm variant={variant === "home" ? "dark" : "system"} />
+      <div className="mb-4 font-bold text-md">Join the community</div>
+      <div className="flex flex-col items-start gap-8 lg:flex-row lg:justify-between lg:items-center">
+        <div className="flex flex-col flex-1 w-full gap-4 sm:flex-row sm:items-center sm:gap-6">
+          <NewsletterForm variant={variant === 'home' ? 'dark' : 'system'} />
           <div className="text-zinc-400">6,378 developers and counting</div>
         </div>
         <div className="flex items-center gap-4">
@@ -47,7 +47,7 @@ export const Form: FC<FormProps> = ({ variant }) => {
 interface CircleProps {
   children: ReactNode;
   href: string;
-  variant?: FooterProps["variant"];
+  variant?: FooterProps['variant'];
 }
 
 const Circle: FC<CircleProps> = ({ children, href, variant }) => {
@@ -56,10 +56,10 @@ const Circle: FC<CircleProps> = ({ children, href, variant }) => {
       href={href}
       target="_blank"
       className={cn(
-        "flex items-center justify-center border border-zinc-200 rounded-full h-12 w-12 hover:-translate-y-1 transition-all",
-        variant === "home" && "border border-zinc-700 hover:border-zinc-400",
-        variant !== "home" &&
-          "bg-white hover:border-zinc-400 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:border-zinc-500"
+        'flex items-center justify-center border border-zinc-200 rounded-full h-12 w-12 hover:-translate-y-1 transition-all',
+        variant === 'home' && 'border border-zinc-700 hover:border-zinc-400',
+        variant !== 'home' &&
+          'bg-white hover:border-zinc-400 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:border-zinc-500'
       )}
     >
       {children}

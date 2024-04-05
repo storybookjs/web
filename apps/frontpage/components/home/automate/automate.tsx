@@ -1,11 +1,11 @@
-import React, { FC } from "react";
-import { cn, container } from "@/lib/tailwind";
-import { FeatureStep } from "./feature-step";
-import { MergeIcon } from "@storybook/icons";
-import { Publish } from "./publish";
-import { UITests } from "./ui-tests/ui-tests";
-import { UIReview } from "./ui-review";
-import { MergeAndShip } from "./merge-and-ship";
+import React, { FC } from 'react';
+import { cn, container } from '../../../lib/tailwind';
+import { FeatureStep } from './feature-step';
+import { MergeIcon } from '@storybook/icons';
+import { Publish } from './publish';
+import { UITests } from './ui-tests/ui-tests';
+import { UIReview } from './ui-review';
+import { MergeAndShip } from './merge-and-ship';
 
 export const Automate: FC = () => {
   return (

@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { renderers } from "@/docs-renderers";
-import { cn } from "@/lib/tailwind";
-import { FC } from "react";
-import { useDocs } from "@/app/docs/provider";
+import { renderers } from '@utils';
+import { cn } from '../../lib/tailwind';
+import { FC } from 'react';
+import { useDocs } from '../../app/docs/provider';
 
 interface RenderersProps {
   activeRenderer: string;
@@ -18,8 +18,8 @@ export const Renderers: FC<RenderersProps> = () => {
         <button
           key={renderer.id}
           className={cn(
-            "inline-flex items-center justify-center h-7 rounded border border-zinc-300 text-sm px-2 hover:border-blue-500 transition-colors text-zinc-800 hover:text-blue-500",
-            renderer.id === activeRenderer && "border-blue-500 text-blue-500"
+            'inline-flex items-center justify-center h-7 rounded border border-zinc-300 text-sm px-2 hover:border-blue-500 transition-colors text-zinc-800 hover:text-blue-500',
+            renderer.id === activeRenderer && 'border-blue-500 text-blue-500'
           )}
           onClick={() => setRenderer(renderer.id)}
         >

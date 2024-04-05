@@ -1,17 +1,17 @@
-import { cn, container } from "@/lib/tailwind";
+import { cn, container } from '../../lib/tailwind';
 import {
   DiscordIcon,
   GithubIcon,
   TwitterIcon,
   YoutubeIcon,
-} from "@storybook/icons";
-import { FC } from "react";
+} from '@storybook/icons';
+import { FC } from 'react';
 
 export const NavTop: FC = () => {
   return (
     <div className="w-full h-10 border-b border-zinc-200">
       <div
-        className={cn(container, "h-full flex justify-between items-center")}
+        className={cn(container, 'h-full flex justify-between items-center')}
       >
         <div className="flex h-full">
           <a className="flex items-center px-[15px] h-full shadow-[0_-3px_0_0_inset] font-bold text-sm text-blue-500 shadow-blue-500">

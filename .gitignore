@@ -47,6 +47,7 @@ testem.log
 /typings
 
 # NX
+.nx
 .nx/cache
 
 # vercel

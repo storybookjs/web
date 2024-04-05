@@ -1,16 +1,4 @@
-interface HeaderProps {
-  variant?: "home" | "system";
-  tree?: TreeProps[];
-  activeVersion?: {
-    label: string;
-    id: string;
-    branch?: string;
-    tag?: string;
-    commit?: string;
-  };
-}
-
-type Meta = {
+export type Meta = {
   path: string;
   title: string;
   shortTitle: string;
@@ -20,7 +8,7 @@ type Meta = {
   tab: string | null;
 };
 
-interface TreeMetaProps {
+export interface TreeMetaProps {
   title: string;
   sidebar?: {
     title?: string;
@@ -33,26 +21,26 @@ interface TreeMetaProps {
   isTab?: boolean;
 }
 
-interface TreeProps extends TreeMetaProps {
+export interface TreeProps extends TreeMetaProps {
   name: string;
   slug: string;
   pathSegment: string;
-  type: "directory" | "link" | "tab";
+  type: 'directory' | 'link' | 'tab';
   children?: TreeProps[];
 }
 
-interface CodeSnippetsProps {
+export interface CodeSnippetsProps {
   filename?: string;
   option?: string;
-  renderer?;
+  renderer?: string;
   packageManager?: string | null;
   language?: string;
-  content: ReactNode;
+  content: React.ReactNode;
 }
 
-type CodeSnippetsFilter = { id: string; title: string } | undefined;
+export type CodeSnippetsFilter = { id: string; title: string } | undefined;
 
-interface CodeSnippetsFiltersProps {
+export interface CodeSnippetsFiltersProps {
   languages: CodeSnippetsFilter[];
   packageManagers: CodeSnippetsFilter[];
 }

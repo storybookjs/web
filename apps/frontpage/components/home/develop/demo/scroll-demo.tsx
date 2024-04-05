@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { motion, MotionValue, useTransform } from "framer-motion";
-import { Sidebar } from "./sidebar";
-import { AddonsPanel } from "./addons-panel";
-import { RangeSlider } from "./range-slider";
-import { VSCode } from "./vscode";
-import { App } from "./app";
-import { Connector } from "../../connector";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import React, { useEffect, useState } from 'react';
+import { motion, MotionValue, useTransform } from 'framer-motion';
+import { Sidebar } from './sidebar';
+import { AddonsPanel } from './addons-panel';
+import { RangeSlider } from './range-slider';
+import { VSCode } from './vscode';
+import { App } from './app';
+import { Connector } from '../../connector';
+import { useMediaQuery } from '../../../../hooks/use-media-query';
 
 interface ScrollDemoProps {
   appearProgress: MotionValue;
@@ -18,8 +18,8 @@ interface ScrollDemoProps {
 }
 
 const rangeSlider = {
-  stories: ["default", "no-selection", "input-range", "default"],
-  addons: ["controls", "interactions", "design", "a11y", "controls"],
+  stories: ['default', 'no-selection', 'input-range', 'default'],
+  addons: ['controls', 'interactions', 'design', 'a11y', 'controls'],
 };
 
 export const ScrollDemo = ({
@@ -31,19 +31,19 @@ export const ScrollDemo = ({
   panelIndex,
   ...props
 }: ScrollDemoProps) => {
-  const [activeStory, setActiveStory] = useState("default");
-  const [activePanel, setActivePanel] = useState("controls");
+  const [activeStory, setActiveStory] = useState('default');
+  const [activePanel, setActivePanel] = useState('controls');
 
   useEffect(() => {
     function updateId() {
       setActiveStory(rangeSlider.stories[storyIndex.get()]);
     }
-    const unsubscribeStoryIndex = storyIndex.on("change", updateId);
+    const unsubscribeStoryIndex = storyIndex.on('change', updateId);
 
     function updatePanel() {
       setActivePanel(rangeSlider.addons[panelIndex.get()]);
     }
-    const unsubscribePanel = panelIndex.on("change", updatePanel);
+    const unsubscribePanel = panelIndex.on('change', updatePanel);
 
     return () => {
       unsubscribeStoryIndex();
@@ -63,10 +63,10 @@ export const ScrollDemo = ({
   const scale = useTransform(zoom, [0, 1], [1, stacked ? 1.25 : 1], {
     clamp: true,
   });
-  const x = useTransform(zoom, [0, 1], ["0%", stacked ? "12.5%" : "0%"], {
+  const x = useTransform(zoom, [0, 1], ['0%', stacked ? '12.5%' : '0%'], {
     clamp: true,
   });
-  const scrimY = useTransform(zoom, [0, 1], ["0%", "-5%"], { clamp: true });
+  const scrimY = useTransform(zoom, [0, 1], ['0%', '-5%'], { clamp: true });
   const scrimOpacity = useTransform(isolationProgress, [0, 0.25], [0, 1], {
     clamp: true,
   });

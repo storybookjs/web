@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
+    // "baseUrl": ".",
     "jsx": "preserve",
     "allowJs": true,
     "esModuleInterop": true,
@@ -17,18 +17,15 @@
         "name": "next"
       }
     ],
-    "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "contentlayer/generated": [
-        "./.contentlayer/generated"
-      ]
-    },
-    "types": [
-      "jest",
-      "node"
-    ]
+    // "paths": {
+    //   "@/*": [
+    //     "./*"
+    //   ],
+    //   "contentlayer/generated": [
+    //     "./.contentlayer/generated"
+    //   ]
+    // },
+    "types": ["jest", "node"]
   },
   "include": [
     "**/*.ts",
@@ -40,10 +37,5 @@
     "next-env.d.ts",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "jest.config.ts",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ]
+  "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }

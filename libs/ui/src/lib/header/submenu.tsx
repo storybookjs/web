@@ -1,16 +1,17 @@
-import { FC } from "react";
-import { MenuIcon } from "@storybook/icons";
-import { usePathname } from "next/navigation";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import * as ScrollArea from "@radix-ui/react-scroll-area";
-import { NavDocs } from "../docs/sidebar/nav-docs";
-import { cn } from "@/lib/tailwind";
+import { FC } from 'react';
+import { MenuIcon } from '@storybook/icons';
+import { usePathname } from 'next/navigation';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import * as ScrollArea from '@radix-ui/react-scroll-area';
+import { NavDocs } from '../nav-docs/nav-docs';
+import { cn } from '@utils';
+import { HeaderProps } from '.';
 
 export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
   const pathname = usePathname();
   const activeSection = tree?.find((node) => node.slug.startsWith(pathname));
 
-  let title = "";
+  let title = '';
   if (activeSection?.sidebar?.title) {
     title = activeSection.sidebar.title;
   } else if (activeSection?.title) {
@@ -20,17 +21,17 @@ export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
   return (
     <div
       className={cn(
-        "flex items-center p-4 sm:px-8 md:hidden gap-2 text-sm",
-        variant === "home" && "border-b border-zinc-700 text-white",
-        variant === "system" && "border-b border-zinc-200 dark:border-zinc-700"
+        'flex items-center p-4 sm:px-8 md:hidden gap-2 text-sm',
+        variant === 'home' && 'border-b border-zinc-700 text-white',
+        variant === 'system' && 'border-b border-zinc-200 dark:border-zinc-700'
       )}
     >
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
           <button
             className={cn(
-              "group flex items-center justify-center gap-2 text-sm text-zinc-500 font-bold hover:bg-blue-100 hover:text-blue-500  dark:text-white dark:hover:bg-blue-500/10 h-9 w-9 rounded min-[920px]:hidden",
-              variant === "home" && "text-white"
+              'group flex items-center justify-center gap-2 text-sm text-zinc-500 font-bold hover:bg-blue-100 hover:text-blue-500  dark:text-white dark:hover:bg-blue-500/10 h-9 w-9 rounded min-[920px]:hidden',
+              variant === 'home' && 'text-white'
             )}
           >
             <MenuIcon size={18} />
@@ -50,7 +51,7 @@ export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
                   className="flex select-none touch-none p-1 w-4 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
                   orientation="vertical"
                 >
-                  <ScrollArea.Thumb className="flex-1 bg-zinc-200 rounded-full" />
+                  <ScrollArea.Thumb className="flex-1 rounded-full bg-zinc-200" />
                 </ScrollArea.Scrollbar>
               </ScrollArea.Viewport>
             </ScrollArea.Root>
