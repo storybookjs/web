@@ -13,20 +13,29 @@
         "parallel": true
       }
     },
+    "compose-other-sitemaps": {
+      "command": "tsx --tsconfig apps/frontpage/tsconfig.json apps/frontpage/scripts/composeOtherSitemaps.ts"
+    },
     "fetch-docs": {
       "command": "tsx --tsconfig apps/frontpage/tsconfig.json apps/frontpage/scripts/getLocalDocs.ts"
     },
     "prepare": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["nx fetch-docs frontpage"],
+        "commands": [
+          "nx fetch-docs frontpage",
+          "nx compose-other-sitemaps frontpage"
+        ],
         "parallel": true
       }
     },
     "prepare-and-build": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["nx build frontpage"],
+        "commands": [
+          "nx build frontpage",
+          "next-sitemap --config apps/frontpage/next-sitemap.config.js"
+        ],
         "parallel": false
       },
       "dependsOn": ["prepare"]
