@@ -13,18 +13,28 @@
         "parallel": true
       }
     },
-    "compose-other-sitemaps": {
-      "command": "tsx --tsconfig apps/frontpage/tsconfig.json apps/frontpage/scripts/composeOtherSitemaps.ts"
+    "copy-other-sitemaps": {
+      "command": "tsx --tsconfig apps/frontpage/tsconfig.json apps/frontpage/scripts/copyOtherSitemaps.ts"
     },
     "fetch-docs": {
       "command": "tsx --tsconfig apps/frontpage/tsconfig.json apps/frontpage/scripts/getLocalDocs.ts"
+    },
+    "post-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "next-sitemap --config apps/frontpage/next-sitemap.config.js",
+          "next-sitemap --config apps/frontpage/next-sitemap-all.config.js"
+        ],
+        "parallel": true
+      }
     },
     "prepare": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
           "nx fetch-docs frontpage",
-          "nx compose-other-sitemaps frontpage"
+          "nx copy-other-sitemaps frontpage"
         ],
         "parallel": true
       }
@@ -34,7 +44,7 @@
       "options": {
         "commands": [
           "nx build frontpage",
-          "next-sitemap --config apps/frontpage/next-sitemap.config.js"
+          "nx post-build frontpage"
         ],
         "parallel": false
       },

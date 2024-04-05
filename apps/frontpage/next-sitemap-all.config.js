@@ -1,11 +1,9 @@
-const { docsVersions } = require('../../docs-versions')
-
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: 'https://storybook.js.org',
   sourceDir: 'apps/frontpage/.next',
   outDir: 'apps/frontpage/public',
-  sitemapBaseFileName: 'sitemap/sitemap',
+  sitemapBaseFileName: 'sitemap/sitemap-all',
   exclude: [
     '/docs-urls',
     '/releases', // TODO: Why is this a page instead of a redirect?
@@ -15,8 +13,6 @@ module.exports = {
     '/opengraph-image.jpg',
   ],
   transform: async (config, path) => {
-    if (docsVersions.some(({ id }) => path.includes(id))) return null
-
     return {
       loc: path, // => this will be exported as http(s)://<config.siteUrl>/<path>
       // changefreq: config.changefreq,
@@ -28,9 +24,6 @@ module.exports = {
   robotsTxtOptions: {
     additionalSitemaps: [
       'https://storybook.js.org/sitemap/addons/sitemap.xml',
-      'https://storybook.js.org/sitemap/blog/sitemap.xml',
-      'https://storybook.js.org/sitemap/showcase/sitemap.xml',
-      'https://storybook.js.org/sitemap/tutorials/sitemap.xml',
     ]
   },
 };

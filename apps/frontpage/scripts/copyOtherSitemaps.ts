@@ -33,8 +33,6 @@ const OTHER_SITEMAPS = {
 
 const DESTINATION = path.join(__dirname, '../public/sitemap');
 const SITEMAP_FILENAME = 'sitemap.xml';
-const SITEMAP_INDEX = `${DESTINATION}/sitemap-index.xml`;
-const SITEMAP_INDEX_ALL = `${DESTINATION}/sitemap-index-all.xml`;
 
 function stripDirname(file: string) {
   return file.replace(/.*(\/public\/.*)/, '$1');
@@ -61,34 +59,6 @@ async function copySitemaps() {
   }
 }
 
-async function updateSitemapIndex(
-  sitemapIndex: string,
-  includedSitemaps = Object.keys(OTHER_SITEMAPS)
-) {
-  const data = await fs.promises.readFile(sitemapIndex);
-  const originalContents = data.toString();
-
-  const newLocations = Object.keys(OTHER_SITEMAPS)
-    .filter((sitemapId) => includedSitemaps.includes(sitemapId))
-    .map(
-      (sitemapId) =>
-        // prettier-ignore
-        `<sitemap><loc>https://storybook.js.org/sitemap/${sitemapId}/${SITEMAP_FILENAME}</loc></sitemap>`
-    )
-    .join('\n');
-
-  const newContent = originalContents.replace(
-    '<!-- INSERT -->',
-    newLocations
-  );
-
-  fs.writeFileSync(sitemapIndex, newContent);
-  console.log(`Updated ${stripDirname(sitemapIndex)}:`);
-  console.log(newContent);
-}
-
 (async () => {
   await copySitemaps();
-  await updateSitemapIndex(SITEMAP_INDEX);
-  await updateSitemapIndex(SITEMAP_INDEX_ALL, ['addons']);
 })();
