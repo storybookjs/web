@@ -28,10 +28,12 @@ export const Renderers: FC<RenderersProps> = () => {
   const activeRendererObj = renderers.find(
     (renderer) => renderer.id === activeRenderer
   );
-  const wc = renderers.find((renderer) => renderer.id === 'web-components');
+  const fourthRenderer = renderers[3];
   const restRenderers =
-    !isInFirstFour && wc
-      ? [wc, ...renderers.slice(4)].filter((r) => r.id !== activeRenderer)
+    !isInFirstFour && fourthRenderer
+      ? [fourthRenderer, ...renderers.slice(4)].filter(
+          (r) => r.id !== activeRenderer
+        )
       : renderers.slice(4);
 
   return (
@@ -54,10 +56,10 @@ export const Renderers: FC<RenderersProps> = () => {
         </Button>
       ) : (
         <Button
-          active={renderers[3].id === activeRenderer}
-          onClick={() => setRenderer(renderers[3].id)}
+          active={fourthRenderer.id === activeRenderer}
+          onClick={() => setRenderer(fourthRenderer.id)}
         >
-          {renderers[3].title}
+          {fourthRenderer.title}
         </Button>
       )}
       <DropdownMenu>
