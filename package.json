@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "frontpage": "npx nx run frontpage:dev"
+    "dev": "npx nx run frontpage:dev"
   },
   "private": true,
   "dependencies": {
