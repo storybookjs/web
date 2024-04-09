@@ -4,7 +4,7 @@ import { ArrowUpIcon } from '@storybook/icons';
 import { Button } from '../../ui/button';
 import Link from 'next/link';
 import { MobileMenu } from './mobile-menu';
-import { cn, container } from '../../../lib/tailwind';
+import { cn, container } from '@utils';
 
 interface StickyNavProps {
   isVisible?: boolean;
@@ -40,7 +40,7 @@ export const StickyNav = ({
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="bg-black fixed h-10 md:h-18 top-0 z-50 w-full"
+          className="fixed top-0 z-50 w-full h-10 bg-black md:h-18"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -56,7 +56,7 @@ export const StickyNav = ({
               items={items}
               label={activeItem?.label || items[0].label}
             />
-            <div className="hidden md:flex items-center gap-2">
+            <div className="items-center hidden gap-2 md:flex">
               {items.map((item) => (
                 <Button
                   key={item.id}
@@ -71,7 +71,7 @@ export const StickyNav = ({
             </div>
             <div className="flex items-center gap-5">
               <Button asChild variant="ghostHome" size="md">
-                <a href="#page-top" className="hidden md:flex items-center">
+                <a href="#page-top" className="items-center hidden md:flex">
                   <ArrowUpIcon />
                   Jump to top
                 </a>

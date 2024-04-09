@@ -1,4 +1,4 @@
-import { cn } from '../../../lib/tailwind';
+import { cn } from '@utils';
 import { CheckIcon, ChevronSmallRightIcon } from '@storybook/icons';
 import Link from 'next/link';
 import React, { FC, ReactNode } from 'react';
@@ -30,13 +30,13 @@ export const FeatureStep: FC<FeatureStepProps> = ({
     >
       {icon}
     </div>
-    <div className="text-white text-center mb-3 text-2xl font-bold">
+    <div className="mb-3 text-2xl font-bold text-center text-white">
       {title}
     </div>
-    <div className="text-white text-center mb-5">{description}</div>
+    <div className="mb-5 text-center text-white">{description}</div>
     <Link
       href={href}
-      className="flex gap-2 items-center text-blue-500 font-bold"
+      className="flex items-center gap-2 font-bold text-blue-500"
     >
       {linkLabel}
       <ChevronSmallRightIcon />

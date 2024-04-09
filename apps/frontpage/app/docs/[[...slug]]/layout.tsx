@@ -3,7 +3,7 @@ import { Header, Footer } from '@ui';
 import Image from 'next/image';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { TableOfContent } from '../../../components/docs/table-of-content';
-import { cn, container } from '../../../lib/tailwind';
+import { cn, container } from '@utils';
 import { NavDocs } from '../../../components/docs/sidebar/nav-docs';
 import { generateDocsTree } from '../../../lib/get-tree';
 import { DocsProvider } from '../provider';

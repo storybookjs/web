@@ -1,7 +1,7 @@
 'use client';
 
 import { useCommunity } from '../../app/community/provider';
-import { cn } from '../../lib/tailwind';
+import { cn } from '@utils';
 import Image from 'next/image';
 import { FC } from 'react';
 
@@ -10,7 +10,7 @@ export const NavSide: FC = () => {
 
   return (
     <div className="w-[200px] hidden lg:block sticky self-start top-28">
-      <div className="border-b border-b-zinc-300 w-40 pb-6 mb-6">
+      <div className="w-40 pb-6 mb-6 border-b border-b-zinc-300">
         {[
           { label: '⭐  Support', href: '#support' },
           { label: '🎪  Events & streams', href: '#events-streams' },
@@ -40,7 +40,7 @@ export const NavSide: FC = () => {
           );
         })}
       </div>
-      <div className="text-zinc-500 text-sm mb-4">Get a README badge</div>
+      <div className="mb-4 text-sm text-zinc-500">Get a README badge</div>
       <a
         href="https://github.com/storybookjs/brand/tree/master/badge"
         target="_blank"

@@ -1,4 +1,4 @@
-import { cn, container } from '../../lib/tailwind';
+import { cn, container } from '@utils';
 import {
   DiscordIcon,
   GithubIcon,
@@ -24,13 +24,13 @@ export const NavTop: FC = () => {
             Blog
           </a>
         </div>
-        <div className="items-center gap-3 hidden md:flex">
+        <div className="items-center hidden gap-3 md:flex">
           <div>Join the community:</div>
           <a
             href="https://github.com/storybookjs"
             target="_blank"
             aria-label="Github"
-            className="text-zinc-500 hover:text-zinc-800 transition-colors"
+            className="transition-colors text-zinc-500 hover:text-zinc-800"
           >
             <GithubIcon />
           </a>
@@ -38,7 +38,7 @@ export const NavTop: FC = () => {
             href="https://discord.gg/storybook"
             target="_blank"
             aria-label="Discord"
-            className="text-zinc-500 hover:text-zinc-800 transition-colors"
+            className="transition-colors text-zinc-500 hover:text-zinc-800"
           >
             <DiscordIcon />
           </a>
@@ -46,7 +46,7 @@ export const NavTop: FC = () => {
             href="https://twitter.com/storybookjs"
             target="_blank"
             aria-label="Twitter"
-            className="text-zinc-500 hover:text-zinc-800 transition-colors"
+            className="transition-colors text-zinc-500 hover:text-zinc-800"
           >
             <TwitterIcon />
           </a>
@@ -54,7 +54,7 @@ export const NavTop: FC = () => {
             href="https://www.youtube.com/channel/UCr7Quur3eIyA_oe8FNYexfg"
             target="_blank"
             aria-label="Youtube"
-            className="text-zinc-500 hover:text-zinc-800 transition-colors"
+            className="transition-colors text-zinc-500 hover:text-zinc-800"
           >
             <YoutubeIcon />
           </a>

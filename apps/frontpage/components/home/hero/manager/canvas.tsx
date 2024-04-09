@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { motion } from 'framer-motion';
 import timeframe1 from './timeframe-1.svg';
 import Image from 'next/image';
-import { cn } from '../../../../lib/tailwind';
+import { cn } from '@utils';
 
 export const Canvas: FC<{ slide: number }> = ({ slide }) => {
   return (

@@ -9,7 +9,7 @@ import { ChevronSmallRightIcon } from '@storybook/icons';
 import { Integrations } from '../integrations/integrations';
 import { Testimonial } from '../testimonial';
 import { LogoAtomicDesign } from './logo-atomic-design';
-import { cn, container } from '../../../lib/tailwind';
+import { cn, container } from '@utils';
 
 export function Develop() {
   // Step 1
@@ -92,16 +92,16 @@ export function Develop() {
             run the whole app.
           </p>
           <div className="flex flex-col gap-4">
-            <div className="text-xs font-bold uppercase tracking-widest text-zinc-300">
+            <div className="text-xs font-bold tracking-widest uppercase text-zinc-300">
               Made for
             </div>
-            <div className="flex gap-4 items-center">
+            <div className="flex items-center gap-4">
               {['react', 'vue', 'angular', 'web-components', 'html'].map(
                 (i) => (
                   <Link
                     key={i}
                     href={`/docs/get-started/install/?renderer=${i}`}
-                    className="flex items-center justify-center rounded h-10 w-10 hover:-translate-y-1 transition-all border border-zinc-700 hover:border-zinc-400"
+                    className="flex items-center justify-center w-10 h-10 transition-all border rounded hover:-translate-y-1 border-zinc-700 hover:border-zinc-400"
                   >
                     {i === 'react' && <ReactLogo />}
                     {i === 'vue' && <Vue />}
@@ -125,6 +125,7 @@ export function Develop() {
         <motion.figure
           className="sticky w-full -order-1 z-[999] m-0 self-start top-[34%] translate-y-[var(--mobile-y)] md:w-[150%] md:max-w-[800px] md:col-[2/3] md:top-[50vh] md:translate-y-[calc(-50%+36px)]"
           // TODO: Fix that - Probably by passing the value directly to the style prop
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           style={{ '--mobile-y': y }}
         >
@@ -143,13 +144,13 @@ export function Develop() {
             <h3 className="text-2xl font-bold">
               Build UI components and pages in isolation
             </h3>
-            <p className="text-md leading-7">
+            <p className="leading-7 text-md">
               Implement components and pages without needing to fuss with data,
               APIs, or business logic.
             </p>
             <Link
               href="/docs/get-started/why-storybook"
-              className="flex gap-2 items-center text-blue-500 font-bold"
+              className="flex items-center gap-2 font-bold text-blue-500"
             >
               Why build UIs in isolation?
               <ChevronSmallRightIcon />
@@ -163,14 +164,14 @@ export function Develop() {
             <h3 className="text-2xl font-bold">
               Mock hard-to-reach edge cases as stories
             </h3>
-            <p className="text-md leading-7">
+            <p className="leading-7 text-md">
               Render components in key states that are tricky to reproduce in an
               app. Then save those states as stories to revisit during
               development, testing, and QA.
             </p>
             <Link
               href="/docs/get-started/whats-a-story"
-              className="flex gap-2 items-center text-blue-500 font-bold"
+              className="flex items-center gap-2 font-bold text-blue-500"
             >
               How to write a story
               <ChevronSmallRightIcon />
@@ -184,7 +185,7 @@ export function Develop() {
             <h3 className="text-2xl font-bold">
               Supercharge your workflow with addons
             </h3>
-            <p className="text-md leading-7">
+            <p className="leading-7 text-md">
               Addons extend and customize your UI development workflow. There
               are hundreds of addons that help you build UI faster, document
               component libraries, and integrate with other tools.
@@ -192,7 +193,7 @@ export function Develop() {
             <div>
               <Link
                 href="/docs/addons/introduction"
-                className="flex gap-2 items-center text-blue-500 font-bold"
+                className="flex items-center gap-2 font-bold text-blue-500"
               >
                 Learn about addons
                 <ChevronSmallRightIcon />
@@ -207,7 +208,7 @@ export function Develop() {
             <h3 className="text-2xl font-bold">
               Drop the finished UI components into your app
             </h3>
-            <p className="text-md leading-7">
+            <p className="leading-7 text-md">
               Once you finish developing UI components in isolation, drop them
               into your app. You&apos;ll have confidence that the components are
               hardened to support every possible edge case.
@@ -215,7 +216,7 @@ export function Develop() {
             <div>
               <Link
                 href="/docs/get-started/why-storybook"
-                className="flex gap-2 items-center text-blue-500 font-bold"
+                className="flex items-center gap-2 font-bold text-blue-500"
               >
                 Why build UIs in isolation?
                 <ChevronSmallRightIcon />
@@ -235,14 +236,14 @@ export function Develop() {
           <h3 className="text-2xl font-bold">
             Integrate with the tools you already use
           </h3>
-          <p className="text-md leading-7">
+          <p className="leading-7 text-md">
             Storybook is incrementally adoptable and integrates with
             industry-standard tools. That means your team doesn&apos;t have to
             change their workflow.
           </p>
           <Link
             href="/addons"
-            className="flex gap-2 items-center text-blue-500 font-bold"
+            className="flex items-center gap-2 font-bold text-blue-500"
           >
             Browse integrations
             <ChevronSmallRightIcon />
