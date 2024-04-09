@@ -6,14 +6,14 @@ import { ChevronSmallDownIcon } from '@storybook/icons';
 
 interface ButtonProps {
   onClick?: () => void;
-  title: string;
+  children: string;
   active?: boolean;
   arrow?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { onClick, title = '', active = false, arrow = false, ...props },
+    { onClick, children = '', active = false, arrow = false, ...props },
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
     return (
@@ -26,7 +26,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={onClick}
         {...props}
       >
-        {title}
+        {children}
         {arrow && <ChevronSmallDownIcon />}
       </button>
     );

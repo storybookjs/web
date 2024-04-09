@@ -41,25 +41,28 @@ export const Renderers: FC<RenderersProps> = () => {
           key={renderer.id}
           active={renderer.id === activeRenderer}
           onClick={() => setRenderer(renderer.id)}
-          title={renderer.title}
-        />
+        >
+          {renderer.title}
+        </Button>
       ))}
       {!isInFirstThree && activeRendererObj ? (
         <Button
           active={activeRendererObj.id === activeRenderer}
           onClick={() => setRenderer(activeRendererObj.id)}
-          title={activeRendererObj.title}
-        />
+        >
+          {activeRendererObj.title}
+        </Button>
       ) : (
         <Button
           active={renderers[3].id === activeRenderer}
           onClick={() => setRenderer(renderers[3].id)}
-          title={renderers[3].title}
-        />
+        >
+          {renderers[3].title}
+        </Button>
       )}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button title="More" arrow />
+          <Button arrow>More</Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
           {restRenderers.map((renderer) => (
