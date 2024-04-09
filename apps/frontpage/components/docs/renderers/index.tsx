@@ -19,13 +19,20 @@ export const Renderers: FC<RenderersProps> = () => {
   const { activeRenderer, setRenderer } = useDocs();
 
   const firstThreeRenderers = renderers.slice(0, 3);
-  const restRenderers = renderers.slice(4);
   const isInFirstThree = firstThreeRenderers.some(
     (renderer) => renderer.id === activeRenderer
   );
+  const isInFirstFour = renderers
+    .slice(0, 4)
+    .some((renderer) => renderer.id === activeRenderer);
   const activeRendererObj = renderers.find(
     (renderer) => renderer.id === activeRenderer
   );
+  const wc = renderers.find((renderer) => renderer.id === 'web-components');
+  const restRenderers =
+    !isInFirstFour && wc
+      ? [wc, ...renderers.slice(4)].filter((r) => r.id !== activeRenderer)
+      : renderers.slice(4);
 
   return (
     <div className="flex gap-2 mb-8">
