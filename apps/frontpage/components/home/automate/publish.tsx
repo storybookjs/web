@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { motion } from 'framer-motion';
-import { cn, container } from '../../../lib/tailwind';
+import { cn, container } from '@utils';
 
 const calendarVariants = {
   initial: { opacity: 0.5, filter: 'grayscale(100%)' },
@@ -70,7 +70,7 @@ export const Publish: FC = () => {
             alt=""
           />
           <img
-            className="rotate-180 w-full absolute top-0 left-0 right-0 bottom-0"
+            className="absolute top-0 bottom-0 left-0 right-0 w-full rotate-180"
             src="/home/automate/status-published.svg"
             alt=""
           />

@@ -11,7 +11,7 @@ import { Document } from '../components/home/document/document';
 import { Share } from '../components/home/share/share';
 import { Automate } from '../components/home/automate/automate';
 import { SocialValidation } from '../components/home/social-validation/social-validation';
-import { cn, container } from '../lib/tailwind';
+import { cn, container } from '@utils';
 
 export default function Page() {
   const developRef = useRef(null);

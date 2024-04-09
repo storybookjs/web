@@ -2,7 +2,7 @@
 
 import SocialProof from './social-proof';
 import Link from 'next/link';
-import { cn, container } from '../../../lib/tailwind';
+import { cn, container } from '@utils';
 import { Chrome } from './chrome';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -21,7 +21,7 @@ const features = [
 const Star = ({ x = 0, y = 0, w = 14, delay = 0 }) => {
   return (
     <motion.svg
-      className="absolute left-0 top-0"
+      className="absolute top-0 left-0"
       initial={{ x, y, opacity: 0, scale: 0.5 }}
       animate={{ rotate: 360, opacity: 1, scale: 1 }}
       transition={{ duration: 2, repeat: Infinity, delay }}
@@ -80,12 +80,12 @@ export const Hero = () => {
           in isolation. Thousands of teams use it for UI development, testing,
           and documentation. It&apos;s open source and free.
         </p>
-        <div className="flex justify-between items-center">
-          <div className="flex gap-8 flex-col sm:flex-row">
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-8 sm:flex-row">
             <div className="flex gap-4">
               <Link
                 href="/docs"
-                className="flex items-center justify-center bg-white px-6 h-12 rounded-full text-black text-md font-bold"
+                className="flex items-center justify-center h-12 px-6 font-bold text-black bg-white rounded-full text-md"
               >
                 Get Started
               </Link>
@@ -96,15 +96,15 @@ export const Hero = () => {
                 href="https://github.com/storybookjs/storybook/releases"
                 className="md:hidden"
               >
-                <div className="text-md text-white">v8</div>
+                <div className="text-white text-md">v8</div>
                 <div className="text-sm text-white/60">Latest version</div>
               </a>
               <div>
-                <div className="text-md text-white">16.29m</div>
+                <div className="text-white text-md">16.29m</div>
                 <div className="text-sm text-white/60">Installs per month</div>
               </div>
               <div>
-                <div className="text-md text-white">2,142+</div>
+                <div className="text-white text-md">2,142+</div>
                 <div className="text-sm text-white/60">Contributors</div>
               </div>
             </div>
@@ -113,7 +113,7 @@ export const Hero = () => {
             href="https://github.com/storybookjs/storybook/releases"
             target="_blank"
             rel="noreferrer"
-            className="hidden md:flex md:items-end text-white/60 text-sm hover:text-white transition-colors"
+            className="hidden text-sm transition-colors md:flex md:items-end text-white/60 hover:text-white"
           >
             Version
             <div className="relative mx-3">
@@ -131,23 +131,23 @@ export const Hero = () => {
           </a>
         </div>
       </div>
-      <div className="border-t border-t-white/20 flex justify-between md:justify-center select-none">
-        <div className="flex h-20 w-full items-center justify-between md:hidden">
+      <div className="flex justify-between border-t select-none border-t-white/20 md:justify-center">
+        <div className="flex items-center justify-between w-full h-20 md:hidden">
           <div
-            className="w-10 h-10 text-white rounded-full flex items-center justify-center"
+            className="flex items-center justify-center w-10 h-10 text-white rounded-full"
             onClick={() => setSlide(slide === 1 ? 4 : slide - 1)}
           >
             <ChevronLeftIcon />
           </div>
           <div className="text-md">{features[slide - 1]}</div>
           <div
-            className="w-10 h-10 text-white rounded-full flex items-center justify-center"
+            className="flex items-center justify-center w-10 h-10 text-white rounded-full"
             onClick={() => setSlide(slide === 4 ? 1 : slide + 1)}
           >
             <ChevronRightIcon />
           </div>
         </div>
-        <div className="h-20 gap-12 relative hidden md:flex">
+        <div className="relative hidden h-20 gap-12 md:flex">
           <div
             className={cn(
               'bg-white h-0.5 absolute top-0 transition-all',

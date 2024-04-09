@@ -8,7 +8,7 @@ import { LogoCloudbees } from './Logo-cloudbees';
 import { PublishIntegrations } from './publish-integrations';
 import { EmbedIntegrations } from './embed-integrations';
 import { TestIntegrations } from './test-integrations';
-import { cn, container } from '../../../lib/tailwind';
+import { cn, container } from '@utils';
 
 export function Share() {
   const publishRef = useRef<HTMLImageElement | null>(null);
@@ -90,7 +90,7 @@ export function Share() {
   const opacity = useTransform(scrollProgress, [0, 1, 2], [1, 1, 0]);
 
   return (
-    <div className="pt-12 border-b border-zinc-600 sm:pt-20 md:pt-28 overflow-hidden">
+    <div className="pt-12 overflow-hidden border-b border-zinc-600 sm:pt-20 md:pt-28">
       <div
         className={cn(
           container,
@@ -118,13 +118,13 @@ export function Share() {
           <h3 className="text-2xl font-bold">
             Publish Storybook to get sign off from teammates
           </h3>
-          <p className="text-md leading-7">
+          <p className="leading-7 text-md">
             Publish Storybook as a website for stakeholders to reference. Your
             team can check that the UI looks right without touching code.
           </p>
           <Link
             href="/docs/react/sharing/publish-storybook"
-            className="flex gap-2 items-center text-blue-500 font-bold"
+            className="flex items-center gap-2 font-bold text-blue-500"
           >
             Publish Storybook
             <ChevronSmallRightIcon />
@@ -144,13 +144,13 @@ export function Share() {
           <h3 className="text-2xl font-bold">
             Embed stories in wikis, Markdown, and Figma
           </h3>
-          <p className="text-md leading-7">
+          <p className="leading-7 text-md">
             Embed stories to showcase your work to teammates and the developer
             community. Works with the oEmbed standard.
           </p>
           <Link
             href="/docs/react/sharing/embed"
-            className="flex gap-2 items-center text-blue-500 font-bold"
+            className="flex items-center gap-2 font-bold text-blue-500"
           >
             Embed stories
             <ChevronSmallRightIcon />
@@ -164,13 +164,13 @@ export function Share() {
             </span>{' '}
             stories into other JavaScript tooling
           </h3>
-          <p className="text-md leading-7">
+          <p className="leading-7 text-md">
             Stories are a portable standard based on ES6 modules. Write stories
             once and import them into any JavaScript library.
           </p>
           <Link
             href="/docs/react/writing-tests/stories-in-unit-tests"
-            className="flex gap-2 items-center text-blue-500 font-bold"
+            className="flex items-center gap-2 font-bold text-blue-500"
           >
             Reuse stories in tests and libraries
             <ChevronSmallRightIcon />

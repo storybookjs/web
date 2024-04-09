@@ -1,4 +1,4 @@
-import { cn, container } from '../../lib/tailwind';
+import { cn, container } from '@utils';
 import Image from 'next/image';
 import { FC, ReactNode } from 'react';
 
@@ -21,11 +21,11 @@ export const Testimonial: FC<TestimonialProps> = ({
   ...props
 }) => (
   <div className={cn(container)} {...props}>
-    <div className="flex items-center justify-center flex-col py-12 sm:py-28">
+    <div className="flex flex-col items-center justify-center py-12 sm:py-28">
       <blockquote className="text-white max-w-[590px] text-xl leading-8 text-center mb-8">
         {text}
       </blockquote>
-      <cite className="flex items-stretch text not-italic">
+      <cite className="flex items-stretch not-italic text">
         <div className="flex items-center">
           <Image
             className="inline-block rounded-full"
@@ -35,11 +35,11 @@ export const Testimonial: FC<TestimonialProps> = ({
             alt={name}
           />
           <div className="ml-3">
-            <div className="text-white font-bold text-sm">{name}</div>
-            <div className="text-zinc-400 text-sm">{jobTitle}</div>
+            <div className="text-sm font-bold text-white">{name}</div>
+            <div className="text-sm text-zinc-400">{jobTitle}</div>
           </div>
         </div>
-        <div className="border-l border-zinc-600 ml-5 pl-5 flex items-center sm:ml-12 sm:pl-10">
+        <div className="flex items-center pl-5 ml-5 border-l border-zinc-600 sm:ml-12 sm:pl-10">
           {logo}
         </div>
       </cite>

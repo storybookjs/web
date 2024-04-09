@@ -1,7 +1,7 @@
 'use client';
 
 import { ScrollArea } from '../../components/ui/scroll-area';
-import { cn } from '../../lib/tailwind';
+import { cn } from '@utils';
 import { ElementOrSelector, inView } from 'framer-motion';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { useScrollDirection } from 'react-use-scroll-direction';
@@ -30,7 +30,7 @@ export const TableOfContent: FC<TableOfContentProps> = ({ headings }) => {
     <nav className="w-[228px] hidden lg:block sticky self-start top-[72px]">
       <ScrollArea className="h-[calc(100vh-72px)] w-full">
         <div className="py-12 ">
-          <div className="block text-sm font-bold h-8">On this page</div>
+          <div className="block h-8 text-sm font-bold">On this page</div>
           <ul className="mt-4">
             {headings?.map((heading) => {
               return (

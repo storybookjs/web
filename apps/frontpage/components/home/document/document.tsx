@@ -4,7 +4,7 @@ import { Branch, Document as Doc, Overlap, Search } from './icons';
 import { Testimonial } from '../testimonial';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
 import { LogoGitlab } from './logo-gitlab';
-import { cn, container } from '../../../lib/tailwind';
+import { cn, container } from '@utils';
 
 const features = [
   {

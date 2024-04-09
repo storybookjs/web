@@ -1,5 +1,5 @@
 import { Button } from '../../../components/ui/button';
-import { cn } from '../../../lib/tailwind';
+import { cn } from '@utils';
 import React, { useState, ComponentProps, ReactNode, useRef, FC } from 'react';
 
 interface IntegrationProps extends ComponentProps<typeof Button> {

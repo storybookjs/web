@@ -11,7 +11,7 @@ import {
 } from '@storybook/icons';
 import { FC, ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import { cn } from '../../../../lib/tailwind';
+import { cn } from '@utils';
 
 export const Toolbar: FC<{ slide: number }> = ({ slide }) => {
   return (
