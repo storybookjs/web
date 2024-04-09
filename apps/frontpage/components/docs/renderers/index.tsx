@@ -54,7 +54,7 @@ export const Renderers: FC<RenderersProps> = () => {
         <DropdownMenuTrigger asChild>
           <Button title="More" arrow />
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent align="start">
           {restRenderers.map((renderer) => (
             <DropdownMenuItem
               key={renderer.id}
