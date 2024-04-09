@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { cn, container } from '../../../lib/tailwind';
+import { cn, container } from '@utils';
 import { FeatureStep } from './feature-step';
 import { MergeIcon } from '@storybook/icons';
 import { Publish } from './publish';

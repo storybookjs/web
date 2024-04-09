@@ -1,4 +1,4 @@
-import { cn } from '../../../../lib/tailwind';
+import { cn } from '@utils';
 import { FC } from 'react';
 
 const content = [

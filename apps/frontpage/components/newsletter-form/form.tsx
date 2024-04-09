@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '../../lib/tailwind';
+import { cn } from '@utils';
 import { FC, useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import { saveNewsletter } from './actions';
@@ -23,7 +23,7 @@ function SubmitButton() {
       variant="solid"
       type="submit"
       size="md"
-      className="absolute right-2 top-1/2 -translate-y-1/2"
+      className="absolute -translate-y-1/2 right-2 top-1/2"
       aria-disabled={pending}
     >
       Subscribe

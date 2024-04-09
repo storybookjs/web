@@ -1,4 +1,4 @@
-import { cn } from '../../../lib/tailwind';
+import { cn } from '@utils';
 import snarkdown from 'snarkdown';
 
 type Variant = 'neutral' | 'positive' | 'info' | 'warning';
@@ -39,7 +39,7 @@ export const Callout = ({
       {...props}
     >
       {appliedIcon && (
-        <span className="hidden md:flex text-2xl" aria-hidden>
+        <span className="hidden text-2xl md:flex" aria-hidden>
           {appliedIcon}
         </span>
       )}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, FC } from 'react';
 import { useReducedMotion, useInView } from 'framer-motion';
-import { cn, container } from '../../../../lib/tailwind';
+import { cn, container } from '@utils';
 import Boolean from './images/Boolean.svg';
 import Cascade from './images/Cascade.svg';
 import DatePicker from './images/DatePicker.svg';
@@ -57,7 +57,7 @@ const PureUITests: FC<PureUITestsProps> = ({
       {/* TODO: Find a way to bring back the isPaused */}
       <div className="realtive z-[1] mt-12 sm:mt-16">
         <div
-          className="relative flex flex-nowrap text-white"
+          className="relative flex text-white flex-nowrap"
           style={{ height: workflowWidth }}
         >
           {workflows.map((workflow, index) => {
@@ -67,7 +67,7 @@ const PureUITests: FC<PureUITestsProps> = ({
             return (
               <div
                 key={index}
-                className="absolute left-1/2 flex justify-center transition-transform duration-350 ease-in-out will-change-transform"
+                className="absolute flex justify-center transition-transform ease-in-out left-1/2 duration-350 will-change-transform"
                 style={{
                   transform: `translateX(${getWorkflowTranslateValue(
                     index - activeIndex
@@ -78,7 +78,7 @@ const PureUITests: FC<PureUITestsProps> = ({
                 }}
               >
                 <div
-                  className="w-full h-full rounded transition bg-white"
+                  className="w-full h-full transition bg-white rounded"
                   style={{
                     transform: `scale(${isActive ? 1 : 0.76}) translateY(${
                       isActive ? 0 : 33

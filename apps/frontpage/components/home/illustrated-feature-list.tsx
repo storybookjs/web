@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn, container } from '../../lib/tailwind';
+import { cn, container } from '@utils';
 import { ArrowRightIcon, ChevronSmallRightIcon } from '@storybook/icons';
 import { Button } from '../ui/button';
 import Link from 'next/link';
@@ -76,7 +76,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
       >
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
-            className="absolute top-0 left-0 right-0 bottom-0"
+            className="absolute top-0 bottom-0 left-0 right-0"
             key={activeFeature.title}
             custom={direction}
             variants={variants}
@@ -85,7 +85,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
             exit="exit"
           >
             <video
-              className="absolute top-0 w-full scale-125 blur select-none pointer-events-none"
+              className="absolute top-0 w-full scale-125 pointer-events-none select-none blur"
               src={activeFeature.media}
               playsInline
             />
@@ -117,7 +117,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
         )}
       >
         {features.map((feature, index) => (
-          <li key={feature.title} className="list-none m-0">
+          <li key={feature.title} className="m-0 list-none">
             <button
               className={cn(
                 'border border-zinc-600 rounded text-left flex w-full p-5 items-center cursor-pointer transition-all duration-200 ease-in-out outline-0 gap-5 hover:border-blue-500 hover:-translate-y-1',
@@ -131,7 +131,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
             >
               <div className="w-10 h-10">{feature.icon}</div>
               <div>
-                <div className="font-bold text-md text-white">
+                <div className="font-bold text-white text-md">
                   {feature.title}
                 </div>
                 <div className="text-sm text-white">{feature.description}</div>
@@ -158,7 +158,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
                     }}
                   >
                     <div
-                      className="rounded relative overflow-hidden block aspect-square md:hidden"
+                      className="relative block overflow-hidden rounded aspect-square md:hidden"
                       style={{ backgroundColor: bgColor }}
                     >
                       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}

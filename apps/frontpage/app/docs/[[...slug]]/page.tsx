@@ -1,8 +1,7 @@
 import { getVersion } from '../../../lib/get-version';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { cn } from '../../../lib/tailwind';
-import { renderers, docsVersions, TreeProps } from '@utils';
+import { renderers, docsVersions, TreeProps, cn } from '@utils';
 import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
 import { generateDocsTree } from '../../../lib/get-tree';

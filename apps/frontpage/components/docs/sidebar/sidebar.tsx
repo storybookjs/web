@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ScrollBar } from '../../../components/ui/scroll-area';
 import { FC, ReactNode } from 'react';
 import { ChangelogIcon, DocsIcon, TutorialsIcon } from './icons';
-import { cn } from '../../../lib/tailwind';
+import { cn } from '@utils';
 import { usePathname } from 'next/navigation';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 
@@ -19,7 +19,7 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
     <nav className="w-[228px] hidden md:block sticky self-start top-[72px]">
       <ScrollAreaPrimitive.Root className="relative overflow-hidden h-[calc(100vh-72px)] w-full">
         <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
-          <div className="py-12 pr-4 pl-1">
+          <div className="py-12 pl-1 pr-4">
             <nav className="flex flex-col gap-1.5 text-sm font-medium">
               <Link
                 href="/docs"

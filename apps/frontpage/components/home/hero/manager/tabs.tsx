@@ -4,7 +4,7 @@ import {
   CloseIcon,
   SidebarAltIcon,
 } from '@storybook/icons';
-import { cn } from '../../../../lib/tailwind';
+import { cn } from '@utils';
 
 export const Tabs: FC<{ active?: number }> = ({ active = 0 }) => {
   let tabs = [
@@ -38,10 +38,10 @@ export const Tabs: FC<{ active?: number }> = ({ active = 0 }) => {
         </div>
       </div>
       <div className="flex text-[#76828B] pr-2">
-        <div className="w-7 h-7 items-center justify-center hidden sm:flex">
+        <div className="items-center justify-center hidden w-7 h-7 sm:flex">
           <SidebarAltIcon />
         </div>
-        <div className="w-7 h-7 flex items-center justify-center">
+        <div className="flex items-center justify-center w-7 h-7">
           <CloseIcon />
         </div>
       </div>

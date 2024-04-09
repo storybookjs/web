@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { cn, container } from '../../../lib/tailwind';
+import { cn, container } from '@utils';
 import { Button } from '../../../components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -201,14 +201,14 @@ export const SocialValidation: FC = () => {
             world-changing products. Join our open source community to learn new
             techniques and get support.
           </p>
-          <div className="flex gap-8 items-center">
+          <div className="flex items-center gap-8">
             <Button variant="outlineHome" rounded="full" jumpOnHover asChild>
               <Link href="/community/">Get involved</Link>
             </Button>
-            <div className="min-w-0 flex items-center flex-row-reverse">
+            <div className="flex flex-row-reverse items-center min-w-0">
               {contributors.map((image) => (
                 <Image
-                  className="block w-10 h-10 rounded-full -ml-1 last:ml-0 odd:none sm:odd:block"
+                  className="block w-10 h-10 -ml-1 rounded-full last:ml-0 odd:none sm:odd:block"
                   loading="lazy"
                   width={40}
                   height={40}
@@ -230,8 +230,8 @@ export const SocialValidation: FC = () => {
             target="_blank"
             rel="noopener nofollow noreferrer"
           >
-            <div className="rounded-md overflow-hidden">
-              <div className="h-4 bg-zinc-200 border-y border-t-transparent border-b-zinc-300 w-full flex items-center pl-2 gap-1">
+            <div className="overflow-hidden rounded-md">
+              <div className="flex items-center w-full h-4 gap-1 pl-2 bg-zinc-200 border-y border-t-transparent border-b-zinc-300">
                 <div className="bg-red-500 w-[5px] h-[5px] rounded-full" />
                 <div className="bg-yellow-500 w-[5px] h-[5px] rounded-full" />
                 <div className="bg-green-500 w-[5px] h-[5px] rounded-full" />
@@ -267,7 +267,7 @@ export const SocialValidation: FC = () => {
           >
             <AspectRatio
               ratio={4 / 3}
-              className="flex flex-col gap-2 items-center justify-center font-bold text-white"
+              className="flex flex-col items-center justify-center gap-2 font-bold text-white"
             >
               <Image
                 src={project.logoUrl}
