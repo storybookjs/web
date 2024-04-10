@@ -7,6 +7,7 @@ import { cn, container } from '@utils';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
+import { getGithubCount } from '../../../lib/get-github-count';
 
 interface Props {
   params: {
@@ -22,6 +23,7 @@ export const generateStaticParams = async () => {
 
 export default async function Page({ params: { slug } }: Props) {
   const releases = getReleases();
+  const githubCount = await getGithubCount();
 
   // TODO: This is not really working on prod
   if (releases.includes(slug) === false) return notFound();
@@ -30,7 +32,7 @@ export default async function Page({ params: { slug } }: Props) {
 
   return (
     <Fragment>
-      <Header variant="system" />
+      <Header variant="system" githubCount={githubCount} />
       <main className={cn(container, 'lg:pl-5 lg:pr-8 flex gap-4')}>
         <Sidebar>
           <div className="flex flex-col pt-4 mt-4 border-t border-zinc-200">

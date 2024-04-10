@@ -1,4 +1,4 @@
-export const githubCount = async () => {
+export const getGithubCount = async () => {
   const response = await fetch(
     'https://api.github.com/repos/storybookjs/storybook'
   );

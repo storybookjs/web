@@ -10,6 +10,7 @@ import { DocsProvider } from '../provider';
 import { getVersion } from '../../../lib/get-version';
 import { slugHasVersion } from '../../../lib/slug-has-version';
 import { getPageData } from '../../../lib/get-page';
+import { getGithubCount } from '../../../lib/get-github-count';
 
 export const metadata: Metadata = {
   title: 'Storybook',
@@ -24,6 +25,7 @@ export default async function Layout({
   children: React.ReactNode;
   params: { slug: string[] };
 }) {
+  const githubCount = await getGithubCount();
   const activeVersion = getVersion(slug);
   const path = `content/docs/${activeVersion.id}`;
   const tree = generateDocsTree(path);
@@ -35,7 +37,12 @@ export default async function Layout({
 
   return (
     <DocsProvider>
-      <Header variant="system" tree={tree} activeVersion={activeVersion} />
+      <Header
+        variant="system"
+        tree={tree}
+        activeVersion={activeVersion}
+        githubCount={githubCount}
+      />
       <Image
         src="/bubbles.png"
         alt="Storybook Docs"

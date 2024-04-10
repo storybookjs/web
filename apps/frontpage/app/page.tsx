@@ -1,8 +1,8 @@
 import { Home } from '../components/home/home';
-import { githubCount } from '../lib/get-github-count';
+import { getGithubCount } from '../lib/get-github-count';
 
 export default async function Page() {
-  const count = await githubCount();
+  const githubCount = await getGithubCount();
 
-  return <Home githubCount={count} />;
+  return <Home githubCount={githubCount} />;
 }

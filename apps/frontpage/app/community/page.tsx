@@ -13,11 +13,14 @@ import { Contribute } from '../../components/community/contribute';
 import { Sponsor } from '../../components/community/sponsor';
 import { Testimonials } from '../../components/community/testimonials';
 import { CommunityProvider } from './provider';
+import { getGithubCount } from '../../lib/get-github-count';
 
-export default function Page() {
+export default async function Page() {
+  const githubCount = await getGithubCount();
+
   return (
     <CommunityProvider>
-      <Header variant="system" />
+      <Header variant="system" githubCount={githubCount} />
       <NavTop />
       <main className={cn(smallContainer, ' mt-10 md:mt-20')}>
         <div className="justify-between gap-20 mb-10 lg:px-8 md:flex md:mb-16">
