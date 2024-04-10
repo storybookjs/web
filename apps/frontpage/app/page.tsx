@@ -1,5 +1,5 @@
 import { Home } from '../components/home/home';
-import { getGithubCount } from '../lib/get-github-count';
+import { getGithubCount } from '@utils';
 
 export default async function Page() {
   const githubCount = await getGithubCount();

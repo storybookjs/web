@@ -2,7 +2,7 @@ import { NavTop } from '../../components/community/nav-top';
 import { Header, Footer } from '@ui';
 import { Community } from '../../components/community';
 import { NewsletterForm } from '../../components/newsletter-form/form';
-import { cn, smallContainer } from '@utils';
+import { cn, smallContainer, getGithubCount } from '@utils';
 import { Numbers } from '../../components/community/numbers';
 import { NavSide } from '../../components/community/nav-side';
 import { Support } from '../../components/community/support';
@@ -13,7 +13,6 @@ import { Contribute } from '../../components/community/contribute';
 import { Sponsor } from '../../components/community/sponsor';
 import { Testimonials } from '../../components/community/testimonials';
 import { CommunityProvider } from './provider';
-import { getGithubCount } from '../../lib/get-github-count';
 
 export default async function Page() {
   const githubCount = await getGithubCount();

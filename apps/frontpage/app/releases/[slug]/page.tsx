@@ -3,11 +3,10 @@ import { ReleaseNewsletter } from '../../../components/release-newsletter';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { getRelease } from '../../../lib/get-release';
 import { getReleases } from '../../../lib/get-releases';
-import { cn, container } from '@utils';
+import { cn, container, getGithubCount } from '@utils';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
-import { getGithubCount } from '../../../lib/get-github-count';
 
 interface Props {
   params: {
