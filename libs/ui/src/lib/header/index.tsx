@@ -117,7 +117,12 @@ export const Header: FC<HeaderProps> = ({
             >
               <GithubIcon />
               {githubCount > 0 && (
-                <span className="text-xs font-bold text-slate-600">
+                <span
+                  className={cn(
+                    'text-xs font-bold text-slate-600',
+                    variant === 'home' && 'text-white'
+                  )}
+                >
                   {githubCount.toLocaleString('en-US')}
                 </span>
               )}
