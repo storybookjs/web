@@ -10,7 +10,7 @@ import { Search } from './search';
 import { MobileMenu } from './mobile-menu';
 import { Submenu } from './submenu';
 import { GithubIcon } from '@storybook/icons';
-import type { DocsVersion } from "@utils";
+import type { DocsVersion } from '@utils';
 
 interface TreeMetaProps {
   title: string;
@@ -36,12 +36,14 @@ export interface HeaderProps {
   variant?: 'home' | 'system';
   tree?: TreeProps[];
   activeVersion?: DocsVersion;
+  githubCount?: number;
 }
 
 export const Header: FC<HeaderProps> = ({
   variant = 'home',
   tree,
   activeVersion,
+  githubCount = 0,
 }) => {
   const pathname = usePathname();
 
@@ -105,7 +107,8 @@ export const Header: FC<HeaderProps> = ({
               rel="noreferrer noopener"
               aria-label="Star Storybook on GitHub"
               className={cn(
-                'h-8 w-8 flex items-center justify-center border rounded-full transition-colors max-[440px]:hidden',
+                'h-8 flex items-center justify-center border rounded-full transition-colors max-[440px]:hidden px-3 gap-2',
+                githubCount === 0 && 'w-8 px-0',
                 variant === 'home' &&
                   'border-white/30 hover:border-white text-white',
                 variant === 'system' &&
@@ -113,6 +116,11 @@ export const Header: FC<HeaderProps> = ({
               )}
             >
               <GithubIcon />
+              {githubCount > 0 && (
+                <span className="text-sm">
+                  {githubCount.toLocaleString('en-US')}
+                </span>
+              )}
             </a>
             <Search variant={variant} />
           </div>
