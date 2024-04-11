@@ -2,7 +2,7 @@ import { NavTop } from '../../components/community/nav-top';
 import { Header, Footer } from '@ui';
 import { Community } from '../../components/community';
 import { NewsletterForm } from '../../components/newsletter-form/form';
-import { cn, smallContainer } from '@utils';
+import { cn, smallContainer, getGithubCount } from '@utils';
 import { Numbers } from '../../components/community/numbers';
 import { NavSide } from '../../components/community/nav-side';
 import { Support } from '../../components/community/support';
@@ -14,10 +14,12 @@ import { Sponsor } from '../../components/community/sponsor';
 import { Testimonials } from '../../components/community/testimonials';
 import { CommunityProvider } from './provider';
 
-export default function Page() {
+export default async function Page() {
+  const githubCount = await getGithubCount();
+
   return (
     <CommunityProvider>
-      <Header variant="system" />
+      <Header variant="system" githubCount={githubCount} />
       <NavTop />
       <main className={cn(smallContainer, ' mt-10 md:mt-20')}>
         <div className="justify-between gap-20 mb-10 lg:px-8 md:flex md:mb-16">
