@@ -53,7 +53,7 @@ const Star = ({ x = 0, y = 0, w = 14, delay = 0 }) => {
   );
 };
 
-export const Hero = ({ npmDownloads }: { npmDownloads: number }) => {
+export const Hero = ({ npmDownloads }: { npmDownloads: string }) => {
   const [slide, setSlide] = useState(1);
 
   useEffect(() => {

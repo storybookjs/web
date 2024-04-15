@@ -26,10 +26,21 @@ export const getNpmDownloads = async () => {
     });
 
     const results = await Promise.all(promises);
+    const result = results.reduce((a, b) => a + b, 0);
 
-    return results.reduce((a, b) => a + b, 0);
+    let npmDownloadsFixed = parseInt((result / 1000).toFixed(0), 10);
+    let npmDownloadsDisplay = `${npmDownloadsFixed}k`;
+    if (npmDownloadsFixed >= 1000) {
+      npmDownloadsFixed = parseFloat((npmDownloadsFixed / 1000).toFixed(2));
+      npmDownloadsDisplay = `${npmDownloadsFixed}m`;
+    }
+
+    return {
+      number: results.reduce((a, b) => a + b, 0),
+      formattedResult: npmDownloadsDisplay,
+    };
   } catch (error) {
     console.log(error);
-    return 15578172;
+    return { number: 0, formattedResult: '0' };
   }
 };

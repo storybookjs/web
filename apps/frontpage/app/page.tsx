@@ -3,9 +3,7 @@ import { getGithubCount, getNpmDownloads } from '@utils';
 
 export default async function Page() {
   const githubCount = await getGithubCount();
-  const npmDownloads = await getNpmDownloads();
+  const { formattedResult } = await getNpmDownloads();
 
-  console.log(npmDownloads);
-
-  return <Home githubCount={githubCount} npmDownloads={npmDownloads} />;
+  return <Home githubCount={githubCount} npmDownloads={formattedResult} />;
 }

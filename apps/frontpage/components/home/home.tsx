@@ -15,7 +15,7 @@ import { cn, container } from '@utils';
 
 interface HomeProps {
   githubCount: number;
-  npmDownloads: number;
+  npmDownloads: string;
 }
 
 export const Home = ({ githubCount, npmDownloads }: HomeProps) => {
