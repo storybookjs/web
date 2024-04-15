@@ -7,7 +7,7 @@ import {
 } from '@utils';
 
 export default async function Page() {
-  const githubCount = await fetchGithubCount();
+  const { number: githubCount } = await fetchGithubCount();
   const { formattedResult: npmDownloads } = await fetchNpmDownloads();
   const { formattedResult: contributorCount } =
     await fetchGithubContributorCount();

@@ -4,7 +4,10 @@ export const fetchGithubCount = async () => {
   );
   const data = await response.json();
 
-  if (!response.ok) return 0;
+  if (!response.ok) return { number: 0, formattedResult: '0' };
 
-  return data.stargazers_count;
+  return {
+    number: data.stargazers_count,
+    formattedResult: `${data.stargazers_count.toLocaleString()}+`,
+  };
 };

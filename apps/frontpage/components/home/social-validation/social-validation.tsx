@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { cn, container } from '@utils';
 import { Button } from '../../../components/ui/button';
 import Link from 'next/link';
