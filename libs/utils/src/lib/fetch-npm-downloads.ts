@@ -16,7 +16,7 @@ const npmApi = [
   `${npmApiBase}/@storybook/preact`,
 ];
 
-export const getNpmDownloads = async () => {
+export const fetchNpmDownloads = async () => {
   try {
     const promises = npmApi.map(async (uri) => {
       const response = await fetch(uri);

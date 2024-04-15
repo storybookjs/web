@@ -16,9 +16,14 @@ import { cn, container } from '@utils';
 interface HomeProps {
   githubCount: number;
   npmDownloads: string;
+  contributorCount: string;
 }
 
-export const Home = ({ githubCount, npmDownloads }: HomeProps) => {
+export const Home = ({
+  githubCount,
+  npmDownloads,
+  contributorCount,
+}: HomeProps) => {
   const developRef = useRef(null);
   const developInView = useInView(developRef, { margin: '0px 0px -100% 0px' });
 
@@ -58,7 +63,7 @@ export const Home = ({ githubCount, npmDownloads }: HomeProps) => {
     <div className="relative bg-homeBackground" id="page-top">
       <div className="relative z-10">
         <Header variant="home" githubCount={githubCount} />
-        <Hero npmDownloads={npmDownloads} />
+        <Hero npmDownloads={npmDownloads} contributorCount={contributorCount} />
         <StickyNav isVisible={!!activeSection} activeSection={activeSection} />
         <div style={{ contain: 'paint' }} ref={developRef} id="develop">
           <Develop />

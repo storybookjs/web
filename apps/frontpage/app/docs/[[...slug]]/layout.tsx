@@ -3,7 +3,7 @@ import { Header, Footer } from '@ui';
 import Image from 'next/image';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { TableOfContent } from '../../../components/docs/table-of-content';
-import { cn, container, getGithubCount } from '@utils';
+import { cn, container, fetchGithubCount } from '@utils';
 import { NavDocs } from '../../../components/docs/sidebar/nav-docs';
 import { generateDocsTree } from '../../../lib/get-tree';
 import { DocsProvider } from '../provider';
@@ -24,7 +24,7 @@ export default async function Layout({
   children: React.ReactNode;
   params: { slug: string[] };
 }) {
-  const githubCount = await getGithubCount();
+  const githubCount = await fetchGithubCount();
   const activeVersion = getVersion(slug);
   const path = `content/docs/${activeVersion.id}`;
   const tree = generateDocsTree(path);

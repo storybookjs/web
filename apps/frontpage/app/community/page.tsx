@@ -2,7 +2,7 @@ import { NavTop } from '../../components/community/nav-top';
 import { Header, Footer } from '@ui';
 import { Community } from '../../components/community';
 import { NewsletterForm } from '../../components/newsletter-form/form';
-import { cn, smallContainer, getGithubCount } from '@utils';
+import { cn, smallContainer, fetchGithubCount } from '@utils';
 import { Numbers } from '../../components/community/numbers';
 import { NavSide } from '../../components/community/nav-side';
 import { Support } from '../../components/community/support';
@@ -15,7 +15,7 @@ import { Testimonials } from '../../components/community/testimonials';
 import { CommunityProvider } from './provider';
 
 export default async function Page() {
-  const githubCount = await getGithubCount();
+  const githubCount = await fetchGithubCount();
 
   return (
     <CommunityProvider>

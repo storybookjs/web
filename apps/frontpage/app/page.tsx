@@ -1,9 +1,21 @@
 import { Home } from '../components/home/home';
-import { getGithubCount, getNpmDownloads } from '@utils';
+import {
+  fetchGithubContributorCount,
+  fetchGithubCount,
+  fetchNpmDownloads,
+} from '@utils';
 
 export default async function Page() {
-  const githubCount = await getGithubCount();
-  const { formattedResult } = await getNpmDownloads();
+  const githubCount = await fetchGithubCount();
+  const { formattedResult: npmDownloads } = await fetchNpmDownloads();
+  const { formattedResult: contributorCount } =
+    await fetchGithubContributorCount();
 
-  return <Home githubCount={githubCount} npmDownloads={formattedResult} />;
+  return (
+    <Home
+      githubCount={githubCount}
+      npmDownloads={npmDownloads}
+      contributorCount={contributorCount}
+    />
+  );
 }
