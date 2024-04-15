@@ -18,8 +18,6 @@ export default async function Page() {
   const { formattedResult: youtubeSubscribers } =
     await fetchYouTubeSubscribers();
 
-  console.log(twitterFollowers);
-
   return (
     <Home
       githubCount={githubCount}
