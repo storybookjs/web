@@ -1,8 +1,11 @@
 import { Home } from '../components/home/home';
-import { getGithubCount } from '@utils';
+import { getGithubCount, getNpmDownloads } from '@utils';
 
 export default async function Page() {
   const githubCount = await getGithubCount();
+  const npmDownloads = await getNpmDownloads();
 
-  return <Home githubCount={githubCount} />;
+  console.log(npmDownloads);
+
+  return <Home githubCount={githubCount} npmDownloads={npmDownloads} />;
 }

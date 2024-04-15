@@ -13,7 +13,12 @@ import { Automate } from './automate/automate';
 import { SocialValidation } from './social-validation/social-validation';
 import { cn, container } from '@utils';
 
-export const Home = ({ githubCount }: { githubCount: number }) => {
+interface HomeProps {
+  githubCount: number;
+  npmDownloads: number;
+}
+
+export const Home = ({ githubCount, npmDownloads }: HomeProps) => {
   const developRef = useRef(null);
   const developInView = useInView(developRef, { margin: '0px 0px -100% 0px' });
 
@@ -53,7 +58,7 @@ export const Home = ({ githubCount }: { githubCount: number }) => {
     <div className="relative bg-homeBackground" id="page-top">
       <div className="relative z-10">
         <Header variant="home" githubCount={githubCount} />
-        <Hero />
+        <Hero npmDownloads={npmDownloads} />
         <StickyNav isVisible={!!activeSection} activeSection={activeSection} />
         <div style={{ contain: 'paint' }} ref={developRef} id="develop">
           <Develop />
