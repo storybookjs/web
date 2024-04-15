@@ -172,7 +172,6 @@ const contributors = [
 ];
 
 // TODO: Bring back live data
-const githubContributorCount = 2129;
 const discordMemberCount = 20218;
 const twitterFollowerCount = 18350;
 const youTubeSubscriberCount = 6340;
@@ -180,7 +179,15 @@ const youTubeSubscriberCount = 6340;
 const socialCard =
   'flex flex-col justify-start items-start gap-6 border border-zinc-600 rounded-md p-6 sm:border-transparent';
 
-export const SocialValidation: FC = () => {
+interface SocialValidationProps {
+  contributorCount: string;
+  discordMembers: string;
+}
+
+export const SocialValidation = ({
+  contributorCount,
+  discordMembers,
+}: SocialValidationProps) => {
   return (
     <section
       className="pt-12 sm:pt-20 md:pt-28"
@@ -292,7 +299,7 @@ export const SocialValidation: FC = () => {
         <div className={cn(socialCard)}>
           <GithubIcon aria-label="Discord" className="text-white" size={48} />
           <div className="text-white text-md">
-            {`Join ${githubContributorCount.toLocaleString()}+ contributors building the future of UI development.`}
+            {`Join ${contributorCount} contributors building the future of UI development.`}
           </div>
           <Button variant="outlineHome" rounded="full" jumpOnHover asChild>
             <a href="https://github.com/storybookjs/storybook">
@@ -300,7 +307,7 @@ export const SocialValidation: FC = () => {
             </a>
           </Button>
           <div>
-            <div className="text-sm text-white">{`${githubContributorCount.toLocaleString()}+`}</div>
+            <div className="text-sm text-white">{contributorCount}</div>
             <div className="text-sm text-zinc-500">Contributors</div>
           </div>
         </div>
@@ -311,13 +318,13 @@ export const SocialValidation: FC = () => {
             size={48}
           />
           <div className="text-white text-md">
-            {`Chat with ${discordMemberCount.toLocaleString()}+ frontend developers.`}
+            {`Chat with ${discordMembers} frontend developers.`}
           </div>
           <Button variant="outlineHome" rounded="full" jumpOnHover asChild>
             <a href="https://discord.gg/storybook">Join Discord server</a>
           </Button>
           <div>
-            <div className="text-sm text-white">{`${discordMemberCount.toLocaleString()}+`}</div>
+            <div className="text-sm text-white">{discordMembers}</div>
             <div className="text-sm text-zinc-500">Server members</div>
           </div>
         </div>

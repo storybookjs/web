@@ -17,12 +17,14 @@ interface HomeProps {
   githubCount: number;
   npmDownloads: string;
   contributorCount: string;
+  discordMembers: string;
 }
 
 export const Home = ({
   githubCount,
   npmDownloads,
   contributorCount,
+  discordMembers,
 }: HomeProps) => {
   const developRef = useRef(null);
   const developInView = useInView(developRef, { margin: '0px 0px -100% 0px' });
@@ -81,7 +83,10 @@ export const Home = ({
           <Automate />
         </div>
         <div ref={whoRef} id="who">
-          <SocialValidation />
+          <SocialValidation
+            contributorCount={contributorCount}
+            discordMembers={discordMembers}
+          />
         </div>
         <Footer variant="home" />
       </div>

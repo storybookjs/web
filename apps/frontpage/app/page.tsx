@@ -1,5 +1,6 @@
 import { Home } from '../components/home/home';
 import {
+  fetchDiscordMembers,
   fetchGithubContributorCount,
   fetchGithubCount,
   fetchNpmDownloads,
@@ -10,12 +11,16 @@ export default async function Page() {
   const { formattedResult: npmDownloads } = await fetchNpmDownloads();
   const { formattedResult: contributorCount } =
     await fetchGithubContributorCount();
+  const { formattedResult: discordMembers } = await fetchDiscordMembers();
+
+  console.log(discordMembers);
 
   return (
     <Home
       githubCount={githubCount}
       npmDownloads={npmDownloads}
       contributorCount={contributorCount}
+      discordMembers={discordMembers}
     />
   );
 }

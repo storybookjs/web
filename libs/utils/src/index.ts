@@ -7,3 +7,4 @@ export * from './lib/types';
 export { fetchGithubCount } from './lib/fetch-github-count';
 export { fetchNpmDownloads } from './lib/fetch-npm-downloads';
 export { fetchGithubContributorCount } from './lib/fetch-github-contributors-count';
+export { fetchDiscordMembers } from './lib/fetch-discord-members';
