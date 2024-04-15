@@ -18,8 +18,6 @@ interface HomeProps {
   npmDownloads: string;
   contributorCount: string;
   discordMembers: string;
-  twitterFollowers: string;
-  youtubeSubscribers: string;
 }
 
 export const Home = ({
@@ -27,8 +25,6 @@ export const Home = ({
   npmDownloads,
   contributorCount,
   discordMembers,
-  twitterFollowers,
-  youtubeSubscribers,
 }: HomeProps) => {
   const developRef = useRef(null);
   const developInView = useInView(developRef, { margin: '0px 0px -100% 0px' });
@@ -90,8 +86,6 @@ export const Home = ({
           <SocialValidation
             contributorCount={contributorCount}
             discordMembers={discordMembers}
-            twitterFollowers={twitterFollowers}
-            youtubeSubscribers={youtubeSubscribers}
           />
         </div>
         <Footer variant="home" />

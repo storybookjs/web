@@ -171,25 +171,17 @@ const contributors = [
   '/home/community/contributor1.jpg',
 ];
 
-// TODO: Bring back live data
-const twitterFollowerCount = 18350;
-const youTubeSubscriberCount = 6340;
-
 const socialCard =
   'flex flex-col justify-start items-start gap-6 border border-zinc-600 rounded-md p-6 sm:border-transparent';
 
 interface SocialValidationProps {
   contributorCount: string;
   discordMembers: string;
-  twitterFollowers: string;
-  youtubeSubscribers: string;
 }
 
 export const SocialValidation = ({
   contributorCount,
   discordMembers,
-  twitterFollowers,
-  youtubeSubscribers,
 }: SocialValidationProps) => {
   return (
     <section
@@ -344,7 +336,7 @@ export const SocialValidation = ({
             <a href="https://twitter.com/storybookjs">Follow on Twitter</a>
           </Button>
           <div>
-            <div className="text-sm text-white">{twitterFollowers}</div>
+            <div className="text-sm text-white">24,200+</div>
             <div className="text-sm text-zinc-500">Followers</div>
           </div>
         </div>
@@ -363,7 +355,7 @@ export const SocialValidation = ({
             </a>
           </Button>
           <div>
-            <div className="text-sm text-white">{youtubeSubscribers}</div>
+            <div className="text-sm text-white">7,020+</div>
             <div className="text-sm text-zinc-500">Subscribers</div>
           </div>
         </div>
