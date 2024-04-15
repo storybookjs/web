@@ -15,7 +15,7 @@ import { Testimonials } from '../../components/community/testimonials';
 import { CommunityProvider } from './provider';
 
 export default async function Page() {
-  const githubCount = await fetchGithubCount();
+  const { number: githubCount } = await fetchGithubCount();
 
   return (
     <CommunityProvider>

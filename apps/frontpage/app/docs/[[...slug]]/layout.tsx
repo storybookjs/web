@@ -24,7 +24,7 @@ export default async function Layout({
   children: React.ReactNode;
   params: { slug: string[] };
 }) {
-  const githubCount = await fetchGithubCount();
+  const { number: githubCount } = await fetchGithubCount();
   const activeVersion = getVersion(slug);
   const path = `content/docs/${activeVersion.id}`;
   const tree = generateDocsTree(path);
