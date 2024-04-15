@@ -7,7 +7,7 @@ import { Chrome } from './chrome';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { InitCommand } from './init-command';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Manager } from './manager';
 import { ChevronLeftIcon, ChevronRightIcon } from '@storybook/icons';
 
@@ -55,14 +55,31 @@ const Star = ({ x = 0, y = 0, w = 14, delay = 0 }) => {
 
 export const Hero = () => {
   const [slide, setSlide] = useState(1);
+  const intervalId = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
+  const setSlideInterval = () => {
+    if (intervalId.current) {
+      clearInterval(intervalId.current);
+    }
+
+    intervalId.current = setInterval(() => {
       setSlide((slide) => (slide === 4 ? 1 : slide + 1));
     }, 3000);
+  };
 
-    return () => clearInterval(interval);
+  useEffect(() => {
+    setSlideInterval();
+    return () => {
+      if (intervalId.current) {
+        clearInterval(intervalId.current);
+      }
+    };
   }, []);
+
+  const handleSlideChange = (newSlide: number) => {
+    setSlide(newSlide);
+    setSlideInterval();
+  };
 
   return (
     <div
@@ -135,14 +152,14 @@ export const Hero = () => {
         <div className="flex items-center justify-between w-full h-20 md:hidden">
           <div
             className="flex items-center justify-center w-10 h-10 text-white rounded-full"
-            onClick={() => setSlide(slide === 1 ? 4 : slide - 1)}
+            onClick={() => handleSlideChange(slide === 1 ? 4 : slide - 1)}
           >
             <ChevronLeftIcon />
           </div>
           <div className="text-md">{features[slide - 1]}</div>
           <div
             className="flex items-center justify-center w-10 h-10 text-white rounded-full"
-            onClick={() => setSlide(slide === 4 ? 1 : slide + 1)}
+            onClick={() => handleSlideChange(slide === 4 ? 1 : slide + 1)}
           >
             <ChevronRightIcon />
           </div>
@@ -164,7 +181,7 @@ export const Hero = () => {
                 'text-white/60 transition-colors hover:text-white',
                 i === slide - 1 && 'text-white'
               )}
-              onClick={() => setSlide(i + 1)}
+              onClick={() => handleSlideChange(i + 1)}
             >
               {label}
             </button>
