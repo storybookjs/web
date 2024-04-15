@@ -4,6 +4,8 @@ import {
   fetchGithubContributorCount,
   fetchGithubCount,
   fetchNpmDownloads,
+  fetchTwitterFollowers,
+  fetchYouTubeSubscribers,
 } from '@utils';
 
 export default async function Page() {
@@ -12,8 +14,11 @@ export default async function Page() {
   const { formattedResult: contributorCount } =
     await fetchGithubContributorCount();
   const { formattedResult: discordMembers } = await fetchDiscordMembers();
+  const { formattedResult: twitterFollowers } = await fetchTwitterFollowers();
+  const { formattedResult: youtubeSubscribers } =
+    await fetchYouTubeSubscribers();
 
-  console.log(discordMembers);
+  console.log(twitterFollowers);
 
   return (
     <Home
@@ -21,6 +26,8 @@ export default async function Page() {
       npmDownloads={npmDownloads}
       contributorCount={contributorCount}
       discordMembers={discordMembers}
+      twitterFollowers={twitterFollowers}
+      youtubeSubscribers={youtubeSubscribers}
     />
   );
 }

@@ -172,7 +172,6 @@ const contributors = [
 ];
 
 // TODO: Bring back live data
-const discordMemberCount = 20218;
 const twitterFollowerCount = 18350;
 const youTubeSubscriberCount = 6340;
 
@@ -182,11 +181,15 @@ const socialCard =
 interface SocialValidationProps {
   contributorCount: string;
   discordMembers: string;
+  twitterFollowers: string;
+  youtubeSubscribers: string;
 }
 
 export const SocialValidation = ({
   contributorCount,
   discordMembers,
+  twitterFollowers,
+  youtubeSubscribers,
 }: SocialValidationProps) => {
   return (
     <section
@@ -341,7 +344,7 @@ export const SocialValidation = ({
             <a href="https://twitter.com/storybookjs">Follow on Twitter</a>
           </Button>
           <div>
-            <div className="text-sm text-white">{`${twitterFollowerCount.toLocaleString()}+`}</div>
+            <div className="text-sm text-white">{twitterFollowers}</div>
             <div className="text-sm text-zinc-500">Followers</div>
           </div>
         </div>
@@ -360,7 +363,7 @@ export const SocialValidation = ({
             </a>
           </Button>
           <div>
-            <div className="text-sm text-white">{`${youTubeSubscriberCount.toLocaleString()}+`}</div>
+            <div className="text-sm text-white">{youtubeSubscribers}</div>
             <div className="text-sm text-zinc-500">Subscribers</div>
           </div>
         </div>
