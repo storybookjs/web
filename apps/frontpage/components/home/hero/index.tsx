@@ -53,7 +53,13 @@ const Star = ({ x = 0, y = 0, w = 14, delay = 0 }) => {
   );
 };
 
-export const Hero = () => {
+export const Hero = ({
+  npmDownloads,
+  contributorCount,
+}: {
+  npmDownloads: string;
+  contributorCount: string;
+}) => {
   const [slide, setSlide] = useState(1);
 
   useEffect(() => {
@@ -100,11 +106,11 @@ export const Hero = () => {
                 <div className="text-sm text-white/60">Latest version</div>
               </a>
               <div>
-                <div className="text-white text-md">16.29m</div>
+                <div className="text-white text-md">{npmDownloads}</div>
                 <div className="text-sm text-white/60">Installs per month</div>
               </div>
               <div>
-                <div className="text-white text-md">2,142+</div>
+                <div className="text-white text-md">{contributorCount}</div>
                 <div className="text-sm text-white/60">Contributors</div>
               </div>
             </div>

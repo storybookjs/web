@@ -3,7 +3,7 @@ import { ReleaseNewsletter } from '../../../components/release-newsletter';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { getRelease } from '../../../lib/get-release';
 import { getReleases } from '../../../lib/get-releases';
-import { cn, container, getGithubCount } from '@utils';
+import { cn, container, fetchGithubCount } from '@utils';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
@@ -22,7 +22,7 @@ export const generateStaticParams = async () => {
 
 export default async function Page({ params: { slug } }: Props) {
   const releases = getReleases();
-  const githubCount = await getGithubCount();
+  const { number: githubCount } = await fetchGithubCount();
 
   // TODO: This is not really working on prod
   if (releases.includes(slug) === false) return notFound();
