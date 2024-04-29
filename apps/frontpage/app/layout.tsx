@@ -3,6 +3,7 @@ import { Nunito_Sans as FontSans } from 'next/font/google';
 import { cn } from '@utils';
 import { Providers } from './providers';
 import './styles.css';
+import PlausibleProvider from 'next-plausible';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -23,6 +24,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <PlausibleProvider domain="storybook.js.org" />
+      </head>
       <body
         className={cn(
           'min-h-screen bg-white dark:bg-zinc-900 font-sans antialiased',
