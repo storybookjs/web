@@ -1,5 +1,5 @@
 import { Footer, Header } from '@ui';
-import { getGithubCount } from '@utils';
+import { fetchGithubCount } from '@utils';
 import { PuzzlePieces } from '../components/puzzle-pieces';
 import {
   ChevronSmallRightIcon,
@@ -10,7 +10,7 @@ import {
 import { SearchIcon as SearchIllustration } from '../components/icons/search';
 
 export default async function NotFound() {
-  const githubCount = await getGithubCount();
+  const { number: githubCount } = await fetchGithubCount();
 
   return (
     <div>
