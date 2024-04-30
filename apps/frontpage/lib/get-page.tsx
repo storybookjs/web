@@ -77,6 +77,7 @@ export const getPageData = async (
       FeatureSnippets: MDX.FeatureSnippets,
       HomeRenderers: MDX.HomeRenderers,
       HomeConcepts: MDX.HomeConcepts,
+      HomeResources: MDX.HomeResources,
     },
   });
 
