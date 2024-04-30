@@ -1,4 +1,5 @@
-![Storybook Web](https://github.com/storybookjs/web/assets/1540635/8aeb5b04-47b3-419b-84d6-71c0bafdd177#gh-light-mode-only)![Storybook Web](https://github.com/storybookjs/web/assets/1540635/5e4b0364-6e54-4dfa-90ad-ab49a6796842#gh-dark-mode-only)
+![Storybook Web](https://github.com/storybookjs/web/assets/1540635/8aeb5b04-47b3-419b-84d6-71c0bafdd177)
+![Storybook Web](https://github.com/storybookjs/web/assets/1540635/5e4b0364-6e54-4dfa-90ad-ab49a6796842)
 
 # Storybook Web
 
