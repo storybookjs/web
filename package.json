@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "npx nx run frontpage:dev",
-    "build": "npx nx run frontpage:build"
+    "build": "npx nx run frontpage:build",
+    "fetch-docs": "npx nx run frontpage:fetch-docs"
   },
   "private": true,
   "dependencies": {

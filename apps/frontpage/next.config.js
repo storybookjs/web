@@ -10,30 +10,39 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "avatars3.githubusercontent.com",
+        protocol: 'https',
+        hostname: 'avatars3.githubusercontent.com',
       },
       {
-        protocol: "https",
-        hostname: "avatars2.githubusercontent.com",
+        protocol: 'https',
+        hostname: 'avatars2.githubusercontent.com',
       },
       {
-        protocol: "https",
-        hostname: "avatars0.githubusercontent.com",
+        protocol: 'https',
+        hostname: 'avatars0.githubusercontent.com',
       },
       {
-        protocol: "https",
-        hostname: "avatars1.githubusercontent.com",
+        protocol: 'https',
+        hostname: 'avatars1.githubusercontent.com',
       },
       {
-        protocol: "https",
-        hostname: "avatars.githubusercontent.com",
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
       },
       {
-        protocol: "https",
-        hostname: "images.opencollective.com",
+        protocol: 'https',
+        hostname: 'images.opencollective.com',
       },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/docs/get-started',
+        destination: '/docs',
+        permanent: true,
+      },
+    ];
   },
   nx: {
     // Set this to true if you would like to use SVGR
@@ -46,7 +55,7 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.mjs$/,
       include: /node_modules/,
-      type: "javascript/auto",
+      type: 'javascript/auto',
     });
     return config;
   },

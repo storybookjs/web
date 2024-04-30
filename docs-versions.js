@@ -8,8 +8,8 @@
 const docsVersions = [
   {
     label: 'Version Test 1',
-    id: '8.0',
-    branch: 'charles-docs-new-structure-2',
+    id: '8.0-test-1',
+    branch: 'charles-docs-new-structure',
   },
   {
     label: 'Version Test 2',
