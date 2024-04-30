@@ -76,6 +76,7 @@ export const getPageData = async (
       YouTubeCallout: MDX.YouTubeCallout,
       FeatureSnippets: MDX.FeatureSnippets,
       HomeRenderers: MDX.HomeRenderers,
+      HomeConcepts: MDX.HomeConcepts,
     },
   });
 

@@ -15,3 +15,4 @@ export { Video } from './video';
 export { YouTubeCallout } from './youtube-callout';
 export { UnorderedList, List } from './unordered-list';
 export { HomeRenderers } from './home-renderers';
+export { HomeConcepts } from './home-concepts';
