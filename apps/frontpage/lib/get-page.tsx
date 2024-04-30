@@ -72,6 +72,7 @@ export const getPageData = async (
         <MDX.CodeSnippets activeVersion={activeVersion.id} {...props} />
       ),
       Callout: MDX.Callout,
+      If: MDX.If,
       IfRenderer: MDX.IfRenderer,
       YouTubeCallout: MDX.YouTubeCallout,
       FeatureSnippets: MDX.FeatureSnippets,

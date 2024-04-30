@@ -11,6 +11,7 @@ export { Pre } from './pre';
 export { CodeSnippets } from './code-snippets';
 export { FeatureSnippets } from './feature-snippets';
 export { IfRenderer } from './if-renderer';
+export { If } from './if';
 export { Video } from './video';
 export { YouTubeCallout } from './youtube-callout';
 export { UnorderedList, List } from './unordered-list';
