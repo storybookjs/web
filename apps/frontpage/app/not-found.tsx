@@ -14,7 +14,6 @@ export default async function NotFound() {
 
   return (
     <div>
-      bonjour
       <Header variant="system" githubCount={githubCount} />
       <div className="m-auto max-w-[960px] flex flex-col items-center pt-24 px-8 mb-24">
         <div className="w-full sm:w-[460px] sm:h-[460px] relative flex items-center justify-center flex-col gap-4 mb-24 aspect-square">
