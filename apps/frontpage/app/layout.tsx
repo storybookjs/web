@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
-import { Nunito_Sans } from 'next/font/google';
+// import { Nunito_Sans } from 'next/font/google';
 import { cn } from '@utils';
 import { Providers } from './providers';
 import './styles.css';
 
-const fontSans = Nunito_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-sans',
-});
+// const fontSans = Nunito_Sans({
+//   subsets: ['latin'],
+//   display: 'swap',
+//   variable: '--font-sans',
+// });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://storybook.js.org'),
@@ -27,7 +27,7 @@ export default function RootLayout({
       <body
         className={cn(
           'min-h-screen bg-white dark:bg-zinc-900 font-sans antialiased',
-          fontSans.variable
+          // fontSans.variable
         )}
       >
         <Providers>{children}</Providers>
