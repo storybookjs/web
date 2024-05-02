@@ -26,11 +26,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          'min-h-screen bg-white dark:bg-zinc-900 font-sans antialiased',
+          'min-h-screen bg-white dark:bg-zinc-900 font-sans antialiased'
           // fontSans.variable
         )}
       >
-        <Providers>{children}</Providers>
+        <Providers>{children}</Providers>Hello
       </body>
     </html>
   );
