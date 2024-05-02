@@ -1,24 +1,27 @@
 'use client';
 
-// import { useDocs } from '../../../app/docs/provider';
-import { ReactNode } from 'react';
+import { useDocs } from '../../../app/docs/provider';
+import { renderers } from '@utils';
 
 type IfProps = {
-  // renderer: string | string[];
-  children: ReactNode;
+  children: React.ReactNode;
+  renderer?: string | string[];
+  notRenderer?: string | string[];
 };
 
-export const If = ({ children }: IfProps) => {
-  // const { activeRenderer } = useDocs();
-  // const rendererArray = Array.isArray(renderer) ? renderer : [renderer];
+const normalizeValue = (value: string | string[]) =>
+  Array.isArray(value) ? value : [value];
 
-  // If there is no active renderer, don't render anything
-  // if (activeRenderer === null) return null;
+export const If = ({ notRenderer, renderer, children }: IfProps) => {
+  const { activeRenderer } = useDocs();
+  const renderersList = renderers.map((r) => r.id);
+  const notRendererArray = notRenderer && normalizeValue(notRenderer);
 
-  // If the active renderer is in the array of allowed renderers, render the children
-  // if (rendererArray.includes(activeRenderer)) return <>{children}</>;
+  const toRender = renderer
+    ? normalizeValue(renderer)
+    : renderersList.filter((r) => !notRendererArray?.includes(r));
 
-  return <>{children}</>;
+  if (activeRenderer && toRender?.includes(activeRenderer)) return children;
 
-  // return null;
+  return null;
 };
