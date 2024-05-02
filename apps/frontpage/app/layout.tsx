@@ -30,7 +30,6 @@ export default function RootLayout({
         )}
       >
         <Providers>{children}</Providers>
-        hello
       </body>
     </html>
   );
