@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./button": "./src/button.tsx",
-    "./tailwind": "./src/tailwind.ts"
+    ".": "./src/main.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",

@@ -1,7 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import './globals.css';
-import { cn } from '@repo/utils/tailwind';
+import { cn } from '@repo/utils';
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default function RootLayout({
           // fontSans.variable
         )}
       >
-        <Providers>{children}</Providers>Hello
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

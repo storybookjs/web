@@ -1,0 +1,36 @@
+import { CheckIcon, CopyIcon } from "@storybook/icons";
+import { FC, useState } from "react";
+import copy from "copy-to-clipboard";
+import { AnimatePresence, motion } from "framer-motion";
+
+export const InitCommand: FC = ({}) => {
+  const [state, setState] = useState(false);
+
+  const onClick = () => {
+    copy("npx storybook@latest init");
+    setState(true);
+    setTimeout(() => setState(false), 2000);
+  };
+
+  return (
+    <button
+      className="relative overflow-hidden hidden md:flex items-center justify-center border border-white px-6 h-12 rounded-full text-white text-md font-bold gap-3"
+      onClick={onClick}
+    >
+      <span>~</span>npx storybook@latest init
+      <CopyIcon />
+      <AnimatePresence>
+        {state && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute bg-white top-0 left-0 w-full h-full text-black flex items-center justify-center gap-2"
+          >
+            <CheckIcon /> Copied!
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </button>
+  );
+};

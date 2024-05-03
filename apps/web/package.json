@@ -11,6 +11,8 @@
   "dependencies": {
     "@repo/ui": "*",
     "@repo/utils": "*",
+    "@storybook/icons": "^1.2.9",
+    "framer-motion": "^10.16.14",
     "next": "14.2.3",
     "next-themes": "^0.3.0",
     "react": "^18",
