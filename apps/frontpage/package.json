@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "npm run fetch-docs && next dev",
     "build": "npm run fetch-docs && next build",
-    "postbuild": "next-sitemap --config next-sitemap.config.js && next-sitemap --config next-sitemap-all.config.js && npm run copy-other-sitemaps",
     "start": "next start",
     "lint": "eslint . --max-warnings 0",
     "fetch-docs": "tsx --tsconfig tsconfig.json scripts/getLocalDocs.ts",
