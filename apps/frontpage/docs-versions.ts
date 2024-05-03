@@ -15,7 +15,7 @@ export type DocsVersion = {
  **/
 
 /** Latest version must ALWAYS be first */
-export const docsVersions: DocsVersion[] = [
+export const docsVersions = [
   {
     label: 'Version Test 1',
     id: '8.0-test-1',
@@ -27,5 +27,3 @@ export const docsVersions: DocsVersion[] = [
     branch: 'charles-docs-new-structure',
   },
 ];
-
-export const latestVersion = docsVersions[0];

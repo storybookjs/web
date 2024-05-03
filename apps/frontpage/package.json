@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run fetch-docs && next dev",
     "build": "npm run fetch-docs && next build",
     "start": "next start",
     "lint": "eslint . --max-warnings 0",

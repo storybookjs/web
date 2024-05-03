@@ -12,7 +12,9 @@
     "next.config.js",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "next-sitemap-all.config.js",
+    "next-sitemap.config.js"
   ],
   "exclude": ["node_modules"]
 }
