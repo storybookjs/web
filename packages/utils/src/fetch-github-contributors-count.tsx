@@ -11,7 +11,7 @@ export const fetchGithubContributorCount = async () => {
           Authorization: `token ${process.env.GITHUB_STORYBOOK_BOT_PAT}`,
           'User-Agent': 'storybook-bot',
         },
-      }
+      },
     );
 
     const headers = response.headers;
@@ -20,6 +20,7 @@ export const fetchGithubContributorCount = async () => {
 
     // Parse contributor count
     const match = link && /&page=(\d+)/.exec(link);
+    // @ts-ignore
     const contributorCount = match && +match[1];
 
     return {

@@ -20,6 +20,7 @@ const colors = [
 ];
 
 function pickRandom<T>(array: T[]): T {
+  // @ts-ignore
   return array[Math.floor(Math.random() * array.length)];
 }
 
