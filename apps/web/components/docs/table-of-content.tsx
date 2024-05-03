@@ -71,6 +71,7 @@ const Element: FC<ElementProps> = ({ heading, isInView, setIsInView }) => {
   }, [isScrollingUp]);
 
   const active =
+    // @ts-ignore
     isInView.length > 0 ? isInView[0].includes(heading.slug) : false;
 
   return (

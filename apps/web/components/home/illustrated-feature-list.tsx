@@ -77,7 +77,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             className="absolute top-0 bottom-0 left-0 right-0"
-            key={activeFeature.title}
+            key={activeFeature?.title}
             custom={direction}
             variants={variants}
             initial="enter"
@@ -86,28 +86,28 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
           >
             <video
               className="absolute top-0 w-full scale-125 pointer-events-none select-none blur"
-              src={activeFeature.media}
+              src={activeFeature?.media}
               playsInline
             />
             <video
               className="relative"
-              src={activeFeature.media}
+              src={activeFeature?.media}
               autoPlay
               loop
               playsInline
               muted
-              poster={activeFeature.poster}
+              poster={activeFeature?.poster}
             />
           </motion.div>
         </AnimatePresence>
         <Link
-          href={activeFeature.link.href}
+          href={activeFeature?.link.href || ''}
           className={cn(
             'absolute top-5 z-10 flex gap-2 items-center bg-black/50 text-white pl-4 pr-3 rounded-full text-xs font-bold h-7 hover:bg-black/60 transition-all hover:-translate-y-0.5',
             alignment === 'left' ? 'right-5' : 'left-5',
           )}
         >
-          {activeFeature.link.label} <ChevronSmallRightIcon />
+          {activeFeature?.link.label} <ChevronSmallRightIcon />
         </Link>
       </div>
       <ul

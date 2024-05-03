@@ -18,7 +18,7 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
   const segments = pathname.slice(1).split('/');
 
   const getLink = (version: string) => {
-    const isFirstVersion = version === docsVersions[0].id;
+    const isFirstVersion = version === docsVersions[0]?.id;
     const activeVersionIndex = segments.findIndex(
       (segment) => segment === activeVersion.id,
     );

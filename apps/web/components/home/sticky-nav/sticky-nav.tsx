@@ -54,7 +54,7 @@ export const StickyNav = ({
           >
             <MobileMenu
               items={items}
-              label={activeItem?.label || items[0].label}
+              label={activeItem?.label || items[0]?.label || ''}
             />
             <div className="items-center hidden gap-2 md:flex">
               {items.map((item) => (

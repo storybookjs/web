@@ -36,11 +36,13 @@ export const ScrollDemo = ({
 
   useEffect(() => {
     function updateId() {
+      // @ts-ignore
       setActiveStory(rangeSlider.stories[storyIndex.get()]);
     }
     const unsubscribeStoryIndex = storyIndex.on('change', updateId);
 
     function updatePanel() {
+      // @ts-ignore
       setActivePanel(rangeSlider.addons[panelIndex.get()]);
     }
     const unsubscribePanel = panelIndex.on('change', updatePanel);
@@ -55,7 +57,8 @@ export const ScrollDemo = ({
   const zoom = useTransform(
     [isolationProgress, dropInProgress],
     ([latestIsolationProgress, latestDropInProgress]: number[]) =>
-      latestIsolationProgress - latestDropInProgress
+      // @ts-ignore
+      latestIsolationProgress - latestDropInProgress,
   );
 
   const [stacked] = useMediaQuery(`(min-width: 648px)`);
@@ -97,7 +100,7 @@ export const ScrollDemo = ({
         }}
       />
       <motion.img
-        className="block h-auto absolute top-0 left-0 w-full"
+        className="absolute top-0 left-0 block w-full h-auto"
         src="/home/develop/storybook-frame.svg"
         alt=""
         style={{

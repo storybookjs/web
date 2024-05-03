@@ -69,6 +69,7 @@ export function Share() {
   const scrollProgress = useTransform(
     [smoothPublishProgress, smoothTestProgress],
     ([latestPublishProgress, latestTestProgress]: number[]) =>
+      //@ts-ignore
       latestPublishProgress + latestTestProgress,
   );
 

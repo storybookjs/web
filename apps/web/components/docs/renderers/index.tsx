@@ -8,7 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@ui';
+} from '@repo/ui';
 import { Button } from './button';
 
 interface RenderersProps {
@@ -56,10 +56,10 @@ export const Renderers: FC<RenderersProps> = () => {
         </Button>
       ) : (
         <Button
-          active={fourthRenderer.id === activeRenderer}
-          onClick={() => setRenderer(fourthRenderer.id)}
+          active={fourthRenderer?.id === activeRenderer}
+          onClick={() => setRenderer(fourthRenderer?.id || '')}
         >
-          {fourthRenderer.title}
+          {fourthRenderer?.title || ''}
         </Button>
       )}
       <DropdownMenu>

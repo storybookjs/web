@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const getMetadata = async ({ path, activeVersion }: Props) => {
-  const version = activeVersion ?? docsVersions[0].id;
+  const version = activeVersion ?? docsVersions[0]?.id;
 
   // Read the content of the MD file
   const source = await fs.promises.readFile(
@@ -56,6 +56,7 @@ export const getMetadata = async ({ path, activeVersion }: Props) => {
           const [key, value] = match
             .split('=')
             .map((part) => part.replace(/"/g, ''));
+          // @ts-ignore
           metadata[key] = value;
         });
       }

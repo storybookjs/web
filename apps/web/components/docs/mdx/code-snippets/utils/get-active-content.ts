@@ -63,5 +63,5 @@ export const getActiveContent = ({
 
   if (filterByLanguage.length === 0) return null;
 
-  return filterByLanguage[0];
+  return filterByLanguage[0] || null;
 };

@@ -1,7 +1,7 @@
 'use client';
 
 import { Hero } from './hero';
-import { Header, Footer } from '@ui';
+import { Header, Footer } from '@repo/ui';
 import { Develop } from './develop/develop';
 import { StickyNav } from './sticky-nav/sticky-nav';
 import { useMemo, useRef } from 'react';

@@ -14,7 +14,7 @@ interface NavDocsProps {
 
 const getUrl = (slug: string) => {
   const newSlug = slug.replace('/docs/', '').split('/');
-  const hasFirstVersion = docsVersions[0].id === newSlug[0];
+  const hasFirstVersion = docsVersions[0]?.id === newSlug[0];
   if (hasFirstVersion) newSlug.shift();
 
   return `/docs/${newSlug.join('/')}`;
