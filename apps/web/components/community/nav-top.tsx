@@ -1,4 +1,4 @@
-import { cn, container } from '@utils';
+import { cn, container } from '@repo/utils';
 import {
   DiscordIcon,
   GithubIcon,
