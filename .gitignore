@@ -41,3 +41,6 @@ yarn-error.log*
 apps/frontpage/content/docs
 apps/frontpage/content/snippets
 apps/frontpage/public/docs
+
+# NX
+.nx
