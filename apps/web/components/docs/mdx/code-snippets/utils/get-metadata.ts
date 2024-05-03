@@ -1,4 +1,4 @@
-import { CodeSnippetsProps, docsVersions } from '@utils';
+import { CodeSnippetsProps, docsVersions } from '@repo/utils';
 import { firefoxThemeLight } from '../themes/firefox-theme-vscode';
 import fs from 'fs';
 import { unified } from 'unified';
@@ -18,7 +18,7 @@ export const getMetadata = async ({ path, activeVersion }: Props) => {
   // Read the content of the MD file
   const source = await fs.promises.readFile(
     process.cwd() + `/content/snippets/${version}/${path}`,
-    'utf8'
+    'utf8',
   );
 
   // Parse the content into a syntax tree
@@ -65,7 +65,7 @@ export const getMetadata = async ({ path, activeVersion }: Props) => {
         ...metadata,
         content: result.value,
       };
-    })
+    }),
   );
 
   return content;

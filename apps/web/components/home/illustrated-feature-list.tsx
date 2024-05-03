@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn, container } from '@utils';
+import { cn, container } from '@repo/utils';
 import { ArrowRightIcon, ChevronSmallRightIcon } from '@storybook/icons';
 import { Button } from '../ui/button';
 import Link from 'next/link';
@@ -60,7 +60,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
     <div
       className={cn(
         container,
-        'flex items-center flex-col pb-0 pt-12 sm:pt-20 md:grid md:justify-center md:items-start md:grid-cols-[repeat(2,_minmax(auto,_1fr))] md:grid-rows-[minmax(50vh,_max-content)] md:gap-20 md:pt-28 lg:grid-cols-[repeat(2,_minmax(auto,_1fr))] min-[1416px]:grid-cols-[repeat(2,_1fr)]'
+        'flex items-center flex-col pb-0 pt-12 sm:pt-20 md:grid md:justify-center md:items-start md:grid-cols-[repeat(2,_minmax(auto,_1fr))] md:grid-rows-[minmax(50vh,_max-content)] md:gap-20 md:pt-28 lg:grid-cols-[repeat(2,_minmax(auto,_1fr))] min-[1416px]:grid-cols-[repeat(2,_1fr)]',
       )}
       {...props}
     >
@@ -70,7 +70,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
           'rounded-lg relative overflow-hidden hidden h-full min-h-[640px] md:block lg:max-h-[640px] min-[1416px]:ml-0 min-[1416px]:mr-0 min-[1416px]:rounded-lg',
           alignment === 'left'
             ? 'order-1 md:-ml-12 md:rounded-tl-none md:-border-bl-none'
-            : 'order-2 md:-mr-12 md:rounded-tr-none md:-border-br-none'
+            : 'order-2 md:-mr-12 md:rounded-tr-none md:-border-br-none',
         )}
         style={{ backgroundColor: bgColor }}
       >
@@ -104,7 +104,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
           href={activeFeature.link.href}
           className={cn(
             'absolute top-5 z-10 flex gap-2 items-center bg-black/50 text-white pl-4 pr-3 rounded-full text-xs font-bold h-7 hover:bg-black/60 transition-all hover:-translate-y-0.5',
-            alignment === 'left' ? 'right-5' : 'left-5'
+            alignment === 'left' ? 'right-5' : 'left-5',
           )}
         >
           {activeFeature.link.label} <ChevronSmallRightIcon />
@@ -113,7 +113,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
       <ul
         className={cn(
           'flex flex-col gap-5 p-0 m-0 w-full min-w-0',
-          alignment === 'left' ? 'order-2' : 'order-1'
+          alignment === 'left' ? 'order-2' : 'order-1',
         )}
       >
         {features.map((feature, index) => (
@@ -121,7 +121,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
             <button
               className={cn(
                 'border border-zinc-600 rounded text-left flex w-full p-5 items-center cursor-pointer transition-all duration-200 ease-in-out outline-0 gap-5 hover:border-blue-500 hover:-translate-y-1',
-                activeIndex === index && 'border-blue-500'
+                activeIndex === index && 'border-blue-500',
               )}
               aria-pressed={index === activeIndex ? 'true' : 'false'}
               onClick={() => {

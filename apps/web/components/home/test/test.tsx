@@ -4,7 +4,7 @@ import { Accessibility, Code, Eye, Interact, Pixel, Projects } from './icons';
 import { Testimonial } from '../testimonial';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
 import { LogoAirbnb } from './logo-airbnb';
-import { cn, container } from '@utils';
+import { cn, container } from '@repo/utils';
 
 const features = [
   {
@@ -89,7 +89,7 @@ export const Test: FC = () => {
       <div
         className={cn(
           container,
-          'lg:px-8 text-white md:flex justify-between gap-20'
+          'lg:px-8 text-white md:flex justify-between gap-20',
         )}
       >
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">

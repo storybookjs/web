@@ -4,7 +4,7 @@ import { FC } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import Link from 'next/link';
-import { DocsVersion, docsVersions } from '@utils';
+import { DocsVersion, docsVersions } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 
 interface VersionSelectorProps {
@@ -20,7 +20,7 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
   const getLink = (version: string) => {
     const isFirstVersion = version === docsVersions[0].id;
     const activeVersionIndex = segments.findIndex(
-      (segment) => segment === activeVersion.id
+      (segment) => segment === activeVersion.id,
     );
     const isVersionInUrl = activeVersionIndex !== -1;
 

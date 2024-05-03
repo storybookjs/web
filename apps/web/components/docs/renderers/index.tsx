@@ -1,6 +1,6 @@
 'use client';
 
-import { renderers } from '@utils';
+import { renderers } from '@repo/utils';
 import { FC } from 'react';
 import { useDocs } from '../../../app/docs/provider';
 import {
@@ -20,19 +20,19 @@ export const Renderers: FC<RenderersProps> = () => {
 
   const firstThreeRenderers = renderers.slice(0, 3);
   const isInFirstThree = firstThreeRenderers.some(
-    (renderer) => renderer.id === activeRenderer
+    (renderer) => renderer.id === activeRenderer,
   );
   const isInFirstFour = renderers
     .slice(0, 4)
     .some((renderer) => renderer.id === activeRenderer);
   const activeRendererObj = renderers.find(
-    (renderer) => renderer.id === activeRenderer
+    (renderer) => renderer.id === activeRenderer,
   );
   const fourthRenderer = renderers[3];
   const restRenderers =
     !isInFirstFour && fourthRenderer
       ? [fourthRenderer, ...renderers.slice(4)].filter(
-          (r) => r.id !== activeRenderer
+          (r) => r.id !== activeRenderer,
         )
       : renderers.slice(4);
 

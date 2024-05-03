@@ -5,7 +5,7 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { FC, Fragment } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import { VersionSelector } from './version-selector';
-import { DocsVersion, docsVersions, TreeProps } from '@utils';
+import { DocsVersion, docsVersions, TreeProps } from '@repo/utils';
 
 interface NavDocsProps {
   tree: TreeProps[] | null | undefined;

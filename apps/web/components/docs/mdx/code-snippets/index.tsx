@@ -1,6 +1,6 @@
 import { getMetadata } from './utils/get-metadata';
 import { CodeSnippetsClient } from './client';
-import { CodeSnippetsProps } from '@utils';
+import { CodeSnippetsProps } from '@repo/utils';
 
 interface Props {
   paths?: string[];

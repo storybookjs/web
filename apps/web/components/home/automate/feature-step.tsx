@@ -1,4 +1,4 @@
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 import { CheckIcon, ChevronSmallRightIcon } from '@storybook/icons';
 import Link from 'next/link';
 import React, { FC, ReactNode } from 'react';
@@ -25,7 +25,7 @@ export const FeatureStep: FC<FeatureStepProps> = ({
     <div
       className={cn(
         'flex items-center justify-center w-10 h-10 rounded-full p-[10px] mb-5 bg-green-500 text-white',
-        logoBgColor
+        logoBgColor,
       )}
     >
       {icon}

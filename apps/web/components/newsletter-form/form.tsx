@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 import { FC, useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import { saveNewsletter } from './actions';
@@ -48,7 +48,7 @@ export const NewsletterForm: FC<Props> = ({ variant }) => {
           className={cn(
             'absolute top-0 left-0 w-full h-full z-10 rounded-md flex items-center justify-between px-4',
             status === 'done' && 'bg-green-300',
-            status === 'error' && 'bg-red-300'
+            status === 'error' && 'bg-red-300',
           )}
         >
           {status === 'done' && <div>Thanks, you are all signed up!</div>}
@@ -74,7 +74,7 @@ export const NewsletterForm: FC<Props> = ({ variant }) => {
         onChange={(e) => setEmail(e.target.value)}
         className={cn(
           'rounded-md pl-4 pr-[100px] w-full h-full transition-color bg-white text-zinc-800',
-          variant === 'system' && 'border border-zinc-200'
+          variant === 'system' && 'border border-zinc-200',
         )}
       />
       <SubmitButton />

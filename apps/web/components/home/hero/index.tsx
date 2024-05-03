@@ -2,7 +2,7 @@
 
 import SocialProof from './social-proof';
 import Link from 'next/link';
-import { cn, container } from '@utils';
+import { cn, container } from '@repo/utils';
 import { Chrome } from './chrome';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -74,7 +74,7 @@ export const Hero = ({
     <div
       className={cn(
         container,
-        'lg:px-8 pt-12 md:pt-24 text-white justify-between gap-20 relative z-20'
+        'lg:px-8 pt-12 md:pt-24 text-white justify-between gap-20 relative z-20',
       )}
     >
       <h1 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold max-sm:max-w-80">
@@ -160,7 +160,7 @@ export const Hero = ({
               slide === 1 && 'left-0 w-[96px]',
               slide === 2 && 'left-[144px] w-[110px]',
               slide === 3 && 'left-[302px] w-[132px]',
-              slide === 4 && 'left-[482px] w-[101px]'
+              slide === 4 && 'left-[482px] w-[101px]',
             )}
           />
           {features.map((label, i) => (
@@ -168,7 +168,7 @@ export const Hero = ({
               key={label}
               className={cn(
                 'text-white/60 transition-colors hover:text-white',
-                i === slide - 1 && 'text-white'
+                i === slide - 1 && 'text-white',
               )}
               onClick={() => setSlide(i + 1)}
             >

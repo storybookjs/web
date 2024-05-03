@@ -9,7 +9,7 @@ import { ChevronSmallRightIcon } from '@storybook/icons';
 import { Integrations } from '../integrations/integrations';
 import { Testimonial } from '../testimonial';
 import { LogoAtomicDesign } from './logo-atomic-design';
-import { cn, container } from '@utils';
+import { cn, container } from '@repo/utils';
 
 export function Develop() {
   // Step 1
@@ -40,7 +40,7 @@ export function Develop() {
     offset: ['0 0.5', '.75 1'],
   });
   const activeStory = useTransform(storiesProgress, (value) =>
-    Math.floor(value * 3)
+    Math.floor(value * 3),
   );
 
   // Step 3
@@ -50,7 +50,7 @@ export function Develop() {
     offset: ['0 0.4', '.75 1'],
   });
   const activePanel = useTransform(addonsProgress, (value) =>
-    Math.floor(value * 4)
+    Math.floor(value * 4),
   );
   const smoothAddonsProgress = useSpring(addonsProgress, {
     stiffness: 1000,
@@ -71,7 +71,7 @@ export function Develop() {
   const y = useTransform(
     smoothAppearProgress,
     [0, 1],
-    ['calc(0% + 36px)', 'calc(-50% + 36px)']
+    ['calc(0% + 36px)', 'calc(-50% + 36px)'],
   );
 
   return (
@@ -79,7 +79,7 @@ export function Develop() {
       <div
         className={cn(
           container,
-          'lg:px-8 text-white md:flex justify-between gap-20'
+          'lg:px-8 text-white md:flex justify-between gap-20',
         )}
       >
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
@@ -109,7 +109,7 @@ export function Develop() {
                     {i === 'web-components' && <WebComponents />}
                     {i === 'html' && <HTML5 />}
                   </Link>
-                )
+                ),
               )}
               <div className="text-zinc-400">+ 7</div>
             </div>
@@ -119,7 +119,7 @@ export function Develop() {
       <div
         className={cn(
           container,
-          'pt-28 grid justify-items-center gap-24 grid-flow-dense md:pt-[27rem] md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr]'
+          'pt-28 grid justify-items-center gap-24 grid-flow-dense md:pt-[27rem] md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr]',
         )}
       >
         <motion.figure
@@ -229,7 +229,7 @@ export function Develop() {
       <div
         className={cn(
           container,
-          'pt-28 grid grid-cols-1 justify-items-center items-center gap-12 grid-flow-dense md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-24'
+          'pt-28 grid grid-cols-1 justify-items-center items-center gap-12 grid-flow-dense md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-24',
         )}
       >
         <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white">

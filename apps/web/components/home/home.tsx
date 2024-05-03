@@ -11,7 +11,7 @@ import { Document } from './document/document';
 import { Share } from './share/share';
 import { Automate } from './automate/automate';
 import { SocialValidation } from './social-validation/social-validation';
-import { cn, container } from '@utils';
+import { cn, container } from '@repo/utils';
 
 interface HomeProps {
   githubCount: number;

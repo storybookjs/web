@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, FC } from 'react';
 import { useReducedMotion, useInView } from 'framer-motion';
-import { cn, container } from '@utils';
+import { cn, container } from '@repo/utils';
 import Boolean from './images/Boolean.svg';
 import Cascade from './images/Cascade.svg';
 import DatePicker from './images/DatePicker.svg';
@@ -70,7 +70,7 @@ const PureUITests: FC<PureUITestsProps> = ({
                 className="absolute flex justify-center transition-transform ease-in-out left-1/2 duration-350 will-change-transform"
                 style={{
                   transform: `translateX(${getWorkflowTranslateValue(
-                    index - activeIndex
+                    index - activeIndex,
                   )}px)`,
                   marginLeft: -workflowWidth / 2,
                   width: workflowWidth,
@@ -117,7 +117,7 @@ const PureUITests: FC<PureUITestsProps> = ({
                     className={cn(
                       'rounded-[1rem] absolute bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform',
                       'top-3 left-0',
-                      isActive ? 'visible' : 'hidden'
+                      isActive ? 'visible' : 'hidden',
                     )}
                     style={{
                       width: workflowWidth + 30,
@@ -132,7 +132,7 @@ const PureUITests: FC<PureUITestsProps> = ({
                     className={cn(
                       'rounded-[1rem] absolute bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform',
                       'top-0 left-3',
-                      isActive ? 'visible' : 'hidden'
+                      isActive ? 'visible' : 'hidden',
                     )}
                     style={{
                       width: lineSize,
@@ -208,7 +208,7 @@ export function UITests() {
           workflows: [...workflows.slice(1), ...workflows.slice(0, 1)],
         });
       },
-      isAnimatingLoop ? eachWorkflowAnimationLength : initialAnimationLength
+      isAnimatingLoop ? eachWorkflowAnimationLength : initialAnimationLength,
     );
 
     return () => clearTimeout(timer);

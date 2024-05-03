@@ -1,4 +1,4 @@
-import { cn, container } from '@utils';
+import { cn, container } from '@repo/utils';
 import Image from 'next/image';
 import { FC, ReactNode } from 'react';
 

@@ -20,7 +20,13 @@
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
-    "tailwindcss-animate": "^1.0.7"
+    "react-use-scroll-direction": "^0.1.0",
+    "rehype-pretty-code": "^0.13.1",
+    "rehype-stringify": "^10.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.0",
+    "tailwindcss-animate": "^1.0.7",
+    "unified": "^11.0.4"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.1.1",

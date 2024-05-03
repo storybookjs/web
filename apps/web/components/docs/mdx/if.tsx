@@ -1,7 +1,7 @@
 'use client';
 
 import { useDocs } from '../../../app/docs/provider';
-import { renderers } from '@utils';
+import { renderers } from '@repo/utils';
 
 type IfProps = {
   children: React.ReactNode;

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { motion } from 'framer-motion';
 import { AspectRatio } from '../../../components/ui/aspect-ratio';
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 
 const players = {
   blue: '/home/share/avatar-1.png',
@@ -50,7 +50,7 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
           type === 'purple' && purple,
           type === 'yellow' && yellow,
           type === 'red' && red,
-          type === 'blue' && blue
+          type === 'blue' && blue,
         )}
         data-chromatic="ignore"
         color={type}
@@ -74,7 +74,7 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
           type === 'purple' && purple,
           type === 'yellow' && yellow,
           type === 'red' && red,
-          type === 'blue' && blue
+          type === 'blue' && blue,
         )}
         data-chromatic="ignore"
         color={type}
@@ -98,7 +98,7 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
           type === 'purple' && purple,
           type === 'yellow' && yellow,
           type === 'red' && red,
-          type === 'blue' && blue
+          type === 'blue' && blue,
         )}
         data-chromatic="ignore"
         color={type}

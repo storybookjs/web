@@ -8,7 +8,7 @@ import { LogoCloudbees } from './Logo-cloudbees';
 import { PublishIntegrations } from './publish-integrations';
 import { EmbedIntegrations } from './embed-integrations';
 import { TestIntegrations } from './test-integrations';
-import { cn, container } from '@utils';
+import { cn, container } from '@repo/utils';
 
 export function Share() {
   const publishRef = useRef<HTMLImageElement | null>(null);
@@ -69,23 +69,23 @@ export function Share() {
   const scrollProgress = useTransform(
     [smoothPublishProgress, smoothTestProgress],
     ([latestPublishProgress, latestTestProgress]: number[]) =>
-      latestPublishProgress + latestTestProgress
+      latestPublishProgress + latestTestProgress,
   );
 
   const x = useTransform(
     scrollProgress,
     [0, 1, 2],
-    ['0%', `${delta.x[0]}px`, `${delta.x[1]}px`]
+    ['0%', `${delta.x[0]}px`, `${delta.x[1]}px`],
   );
   const y = useTransform(
     scrollProgress,
     [0, 1, 2],
-    ['0%', `${delta.y[0]}px`, `${delta.y[1]}px`]
+    ['0%', `${delta.y[0]}px`, `${delta.y[1]}px`],
   );
   const scale = useTransform(
     scrollProgress,
     [0, 1, 2],
-    [1, delta.scale[0], delta.scale[1]]
+    [1, delta.scale[0], delta.scale[1]],
   );
   const opacity = useTransform(scrollProgress, [0, 1, 2], [1, 1, 0]);
 
@@ -94,7 +94,7 @@ export function Share() {
       <div
         className={cn(
           container,
-          'lg:px-8 text-white md:flex justify-between gap-20'
+          'lg:px-8 text-white md:flex justify-between gap-20',
         )}
       >
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
@@ -111,7 +111,7 @@ export function Share() {
       <div
         className={cn(
           container,
-          'pt-12 pb-4 grid grid-cols-1 grid-flow-dense justify-items-center items-center gap-12 md:pt-28 md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-x-24 md:gap-y-48'
+          'pt-12 pb-4 grid grid-cols-1 grid-flow-dense justify-items-center items-center gap-12 md:pt-28 md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-x-24 md:gap-y-48',
         )}
       >
         <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white col-[1/-1] first-of-type:pt-0 sm:max-w-full sm:pt-16 md:col-[1/2]">

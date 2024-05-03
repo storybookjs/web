@@ -6,7 +6,7 @@ import { getFilters } from './utils/get-filters';
 import { getActiveContent } from './utils/get-active-content';
 import { useDocs } from '../../../../app/docs/provider';
 import { Dropdown } from './dropdown';
-import { CodeSnippetsProps } from '@utils';
+import { CodeSnippetsProps } from '@repo/utils';
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[];

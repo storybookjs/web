@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, MotionValue, useTransform } from 'framer-motion';
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 
 interface ConnectorProps {
   name: string;

@@ -1,4 +1,4 @@
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 import snarkdown from 'snarkdown';
 
 type Variant = 'neutral' | 'positive' | 'info' | 'warning';
@@ -34,7 +34,7 @@ export const Callout = ({
         variant === 'neutral' && 'bg-slate-200',
         variant === 'positive' && 'bg-slate-200',
         variant === 'info' && 'bg-blue-100 border border-blue-200',
-        variant === 'warning' && 'bg-slate-200'
+        variant === 'warning' && 'bg-slate-200',
       )}
       {...props}
     >
