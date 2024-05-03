@@ -1,8 +1,0 @@
-```html renderer="common" language="html"
-{/* .storybook/preview-head.html */}
-
-<script>
-  window.global = window;
-</script>
-```
-
