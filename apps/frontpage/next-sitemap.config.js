@@ -1,4 +1,16 @@
-const { docsVersions } = require('../../packages/utils/src/docs-versions');
+// TODO: Find a better way to import this data
+const docsVersions = [
+  {
+    label: 'Version Test 1',
+    id: '8.0-test-1',
+    branch: 'charles-docs-new-structure',
+  },
+  {
+    label: 'Version Test 2',
+    id: '8.0-test-2',
+    branch: 'charles-docs-new-structure',
+  },
+];
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
