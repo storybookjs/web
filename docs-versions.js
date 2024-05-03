@@ -11,11 +11,6 @@ const docsVersions = [
     id: '8.0-test-1',
     branch: 'charles-docs-new-structure',
   },
-  {
-    label: 'Version Test 2',
-    id: '8.0-test-2',
-    branch: 'charles-docs-new-structure',
-  },
 ];
 
 module.exports = { docsVersions };
