@@ -4,7 +4,7 @@ import {
   fetchGithubContributorCount,
   fetchGithubCount,
   fetchNpmDownloads,
-} from '@utils';
+} from '@repo/utils';
 
 export default async function Page() {
   const { number: githubCount } = await fetchGithubCount();

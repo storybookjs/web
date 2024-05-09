@@ -1,4 +1,4 @@
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 import { FC } from 'react';
 
 const content = [
@@ -30,7 +30,7 @@ export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
       <div
         className={cn(
           'bg-[#F7F9FC] h-10 flex items-center px-4 text-[11px] tracking-widest uppercase font-bold text-[#2E3438] border-b border-b-[#D9E0E6]',
-          isPanel && 'hidden sm:flex'
+          isPanel && 'hidden sm:flex',
         )}
       >
         Props
@@ -52,7 +52,7 @@ export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
             <div
               className={cn(
                 'border border-[#D9E0E6] rounded w-full h-7 flex items-center px-2',
-                item.muted && 'text-[#73828C]'
+                item.muted && 'text-[#73828C]',
               )}
             >
               {item.control}

@@ -1,9 +1,9 @@
-import { Header, Footer } from '@ui';
+import { Header, Footer } from '@repo/ui';
 import { ReleaseNewsletter } from '../../../components/release-newsletter';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { getRelease } from '../../../lib/get-release';
 import { getReleases } from '../../../lib/get-releases';
-import { cn, container, fetchGithubCount } from '@utils';
+import { cn, container, fetchGithubCount } from '@repo/utils';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
@@ -43,7 +43,7 @@ export default async function Page({ params: { slug } }: Props) {
                   href={`/releases/${release}`}
                   className={cn(
                     'flex items-center text-sm h-8 text-zinc-600 hover:text-blue-500 transition-colors px-2',
-                    release === slug && 'text-blue-500'
+                    release === slug && 'text-blue-500',
                   )}
                 >
                   Version {release}

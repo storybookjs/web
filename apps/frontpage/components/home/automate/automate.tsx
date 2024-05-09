@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { cn, container } from '@utils';
+import { cn, container } from '@repo/utils';
 import { FeatureStep } from './feature-step';
 import { MergeIcon } from '@storybook/icons';
 import { Publish } from './publish';

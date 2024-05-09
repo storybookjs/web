@@ -1,7 +1,7 @@
 'use client';
 
 import { ScrollArea } from '../../components/ui/scroll-area';
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 import { ElementOrSelector, inView } from 'framer-motion';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { useScrollDirection } from 'react-use-scroll-direction';
@@ -71,6 +71,7 @@ const Element: FC<ElementProps> = ({ heading, isInView, setIsInView }) => {
   }, [isScrollingUp]);
 
   const active =
+    // @ts-expect-error - TS doesn't follow that isInView has at least 1 entry
     isInView.length > 0 ? isInView[0].includes(heading.slug) : false;
 
   return (
@@ -80,7 +81,7 @@ const Element: FC<ElementProps> = ({ heading, isInView, setIsInView }) => {
         className={cn(
           'flex items-center text-sm text-zinc-700 hover:text-blue-500 transition-colors w-full mb-3',
           heading.level > 2 && 'ml-5',
-          active && 'text-blue-500'
+          active && 'text-blue-500',
         )}
       >
         {heading.title}

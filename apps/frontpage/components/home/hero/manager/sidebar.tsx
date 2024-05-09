@@ -1,5 +1,5 @@
 import { StorybookLogo } from '../../../../components/logos/storybook';
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 import {
   BookmarkHollowIcon,
   ChevronSmallDownIcon,
@@ -73,7 +73,7 @@ const SidebarLine: FC<{
         lvl === 1 && 'pl-2 pr-2',
         lvl === 2 && 'pl-6 pr-2',
         lvl === 3 && 'pl-16 pr-2',
-        active && 'bg-blue-500'
+        active && 'bg-blue-500',
       )}
     >
       {ar === 'down' && (

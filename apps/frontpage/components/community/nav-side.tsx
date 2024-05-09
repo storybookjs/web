@@ -1,7 +1,7 @@
 'use client';
 
 import { useCommunity } from '../../app/community/provider';
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 import Image from 'next/image';
 import { FC } from 'react';
 
@@ -29,7 +29,7 @@ export const NavSide: FC = () => {
               href={href}
               className={cn(
                 'h-10 flex items-center',
-                isActive && 'text-blue-500'
+                isActive && 'text-blue-500',
               )}
               onClick={() =>
                 setTimeout(() => setActiveSegment(hrefWithoutHash), 10)

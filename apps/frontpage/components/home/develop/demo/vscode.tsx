@@ -1,12 +1,12 @@
 import React from "react";
-import { motion, useTransform } from "framer-motion";
+import { motion, MotionValue, useTransform } from "framer-motion";
 
 export const VSCode = ({
   scrollProgress,
   appearProgress,
 }: {
-  scrollProgress: any;
-  appearProgress: any;
+  scrollProgress: MotionValue;
+  appearProgress: MotionValue;
 }) => {
   const x = useTransform(scrollProgress, [0, 1], ["0%", "40%"]);
   const opacity = useTransform(scrollProgress, [0, 0.5, 1], [1, 1, 0]);

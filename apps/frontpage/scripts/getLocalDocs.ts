@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import fetch from 'node-fetch';
 import tar from 'tar';
-import { DocsVersion, docsVersions } from '@utils';
+import { DocsVersion, docsVersions } from '@repo/utils';
 
 async function clean() {
   await fs.emptyDir(path.join(__dirname, '../content/docs'));
@@ -50,15 +50,15 @@ async function fetchAndExtract(version: DocsVersion) {
               {
                 strip: 2,
                 C: path.join(__dirname, `../content/docs/${version.id}`),
-                filter: (path) =>
+                filter: (path: string) =>
                   !path.includes('_assets') &&
                   !path.includes('_versions') &&
                   !path.includes('_snippets') &&
                   !path.includes('.prettierignore') &&
                   !path.includes('.prettierrc'),
               },
-              [folder]
-            )
+              [folder],
+            ),
           )
           .on('error', reject)
           .on('end', resolve);
@@ -73,10 +73,10 @@ async function fetchAndExtract(version: DocsVersion) {
               {
                 strip: 3,
                 C: path.join(__dirname, `../content/snippets/${version.id}`),
-                filter: (path) => path.includes('_snippets'),
+                filter: (path: string) => path.includes('_snippets'),
               },
-              [folder]
-            )
+              [folder],
+            ),
           )
           .on('error', reject)
           .on('end', resolve);
@@ -91,10 +91,10 @@ async function fetchAndExtract(version: DocsVersion) {
               {
                 strip: 3,
                 C: path.join(__dirname, `../public/docs/${version.id}`),
-                filter: (path) => path.includes('_assets'),
+                filter: (path: string) => path.includes('_assets'),
               },
-              [folder]
-            )
+              [folder],
+            ),
           )
           .on('error', reject)
           .on('end', resolve);

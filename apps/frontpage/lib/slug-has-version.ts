@@ -1,4 +1,4 @@
-import { docsVersions } from '@utils';
+import { docsVersions } from '@repo/utils';
 
 export const slugHasVersion = (slug: string[]): boolean => {
   return (

@@ -4,12 +4,18 @@
 Welcome to the new home for Storybook's main website and documentation. This project is still in progress but will soon replace the existing platform. It is mainly buuilt around Next.js, Tailwind, Nx and obviously Storybook ✌️
 
 ## Monorepo
-This project is structured around [Nx](https://nx.dev). This doesn't include all projects just yet but we are importing all the pieces together slowly. Here are the main components of it:
+
+This project is structured around [Turborepo](https://turbo.build/repo). This doesn't include all projects just yet but we are importing all the pieces together slowly. Here are the main components of it:
+
 - `apps/frontpage` - Main website + Docs
-- `libs/utils` - Any functions useful across apps
-- `libs/ui` - Component library across apps
+- `packages/utils` - Any functions useful across apps
+- `packages/ui` - Component library across apps
 
 ## Main commands
+
+#### `turbo dev`
+
+> Run all apps locally
 
 #### `pnpm fetch-docs`
 

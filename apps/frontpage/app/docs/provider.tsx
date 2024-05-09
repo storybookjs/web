@@ -1,6 +1,6 @@
 'use client';
 
-import { languages, packageManagers, renderers } from '@utils';
+import { languages, packageManagers, renderers } from '@repo/utils';
 import { getCookie, setCookie } from 'cookies-next';
 import {
   createContext,
@@ -38,19 +38,19 @@ export function DocsProvider({ children }: { children: ReactNode }) {
     if (cookieRenderer) {
       setActiveRenderer(cookieRenderer);
     } else {
-      setActiveRenderer(renderers[0].id);
+      setActiveRenderer(renderers[0]?.id || '');
     }
 
     if (cookieLanguage) {
       setActiveLanguage(cookieLanguage);
     } else {
-      setActiveLanguage(languages[0].id);
+      setActiveLanguage(languages[0]?.id || '');
     }
 
     if (cookiePackageManager) {
       setActivePM(cookiePackageManager);
     } else {
-      setActivePM(packageManagers[0].id);
+      setActivePM(packageManagers[0]?.id || '');
     }
   }, []);
 

@@ -3,7 +3,7 @@
 import { FC } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronSmallDownIcon } from '@storybook/icons';
-import { CodeSnippetsFilter } from '@utils';
+import { CodeSnippetsFilter } from '@repo/utils';
 
 type Props = {
   list: CodeSnippetsFilter[];

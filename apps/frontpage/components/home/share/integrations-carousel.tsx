@@ -1,5 +1,5 @@
 import { Button } from '../../../components/ui/button';
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 import React, { useState, ComponentProps, ReactNode, useRef, FC } from 'react';
 
 interface IntegrationProps extends ComponentProps<typeof Button> {
@@ -8,8 +8,10 @@ interface IntegrationProps extends ComponentProps<typeof Button> {
   color: string;
 }
 
+type Integration = IntegrationProps & { media: ReactNode };
+
 interface IntegrationsCarouselProps {
-  integrations: (IntegrationProps & { media: ReactNode })[];
+  integrations: Integration[];
   animationDisabled?: boolean;
   className?: string;
 }
@@ -19,7 +21,7 @@ export const IntegrationsCarousel: FC<IntegrationsCarouselProps> = ({
   className,
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeIntegration = integrations[activeIndex];
+  const activeIntegration = integrations[activeIndex] as Integration;
   const ref = useRef(null);
 
   return (
@@ -31,7 +33,7 @@ export const IntegrationsCarousel: FC<IntegrationsCarouselProps> = ({
             className={cn(
               'rounded w-10 h-10 flex items-center justify-center p-2 opacity-50 hover:opacity-100 transition-all duration-200 border border-transparent hover:border-blue-500',
               name === activeIntegration.name &&
-                'opacity-100 border border-blue-500'
+                'opacity-100 border border-blue-500',
             )}
             key={name}
             style={{ backgroundColor: integration.color }}

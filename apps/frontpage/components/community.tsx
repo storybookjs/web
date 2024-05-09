@@ -1,40 +1,40 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 
 const images = [
-  "/home/community/community-michele.webp",
-  "/home/community/community-gert.webp",
-  "/home/community/community-yann.webp",
+  '/home/community/community-michele.webp',
+  '/home/community/community-gert.webp',
+  '/home/community/community-yann.webp',
 ];
 
 const videosA = [
   {
-    src: "/home/community/brad.mp4",
-    link: "https://www.youtube.com/watch?v=jR0Gefa4lpg",
+    src: '/home/community/brad.mp4',
+    link: 'https://www.youtube.com/watch?v=jR0Gefa4lpg',
   },
   {
-    src: "/home/community/esther.mp4",
-    link: "https://www.youtube.com/watch?v=U7lW6qAsvrg",
+    src: '/home/community/esther.mp4',
+    link: 'https://www.youtube.com/watch?v=U7lW6qAsvrg',
   },
   {
-    src: "/home/community/jackherrington.mp4",
-    link: "https://www.youtube.com/watch?v=NgkYH97Z3nk",
+    src: '/home/community/jackherrington.mp4',
+    link: 'https://www.youtube.com/watch?v=NgkYH97Z3nk',
   },
 ];
 const videosB = [
   {
-    src: "/home/community/jackpritchard.mp4",
-    link: "https://www.youtube.com/watch?v=8GxTENqNjYI",
+    src: '/home/community/jackpritchard.mp4',
+    link: 'https://www.youtube.com/watch?v=8GxTENqNjYI',
   },
   {
-    src: "/home/community/katerina.mp4",
-    link: "https://www.youtube.com/watch?v=VgxrR2Ypbuc",
+    src: '/home/community/katerina.mp4',
+    link: 'https://www.youtube.com/watch?v=VgxrR2Ypbuc',
   },
   {
-    src: "/home/community/jarrod.mp4",
-    link: "https://www.youtube.com/watch?v=L4F5dSu0FcQ",
+    src: '/home/community/jarrod.mp4',
+    link: 'https://www.youtube.com/watch?v=L4F5dSu0FcQ',
   },
 ];
 
@@ -53,7 +53,7 @@ const variants = {
 };
 
 let count = 0;
-const options = ["img", "videoA", "videoB"];
+const options = ['img', 'videoA', 'videoB'];
 
 function nextOption() {
   const index = count % options.length;
@@ -67,7 +67,7 @@ function useAnimationState(totalCount: number, animate: boolean) {
     videoA: 0,
     videoB: 0,
   });
-  const [animateNext, setAnimateNext] = useState<"videoA" | "videoB">("videoB");
+  const [animateNext, setAnimateNext] = useState<'videoA' | 'videoB'>('videoB');
 
   useEffect(() => {
     if (!animate) return () => {};
@@ -78,7 +78,7 @@ function useAnimationState(totalCount: number, animate: boolean) {
           ? 0
           : activeIndex[animateNext] + 1;
       setActiveIndex({ ...activeIndex, [animateNext]: nextIndex });
-      setAnimateNext(nextOption() as "videoA" | "videoB");
+      setAnimateNext(nextOption() as 'videoA' | 'videoB');
     }, 6000);
 
     return () => {
@@ -120,7 +120,7 @@ export function Community() {
       <div className="relative col-[1_/_-1] rounded-lg bg-zinc-600 sm:col-[1_/_3]">
         <AnimatePresence initial={false}>
           <motion.div
-            className="rounded-lg bg-cover bg-center bg-no-repeat absolute top-0 left-0 right-0 bottom-0"
+            className="absolute top-0 bottom-0 left-0 right-0 bg-center bg-no-repeat bg-cover rounded-lg"
             key={activeIndex.img}
             style={{ backgroundImage: `url('${images[activeIndex.img]}')` }}
             variants={variants}
@@ -135,13 +135,13 @@ export function Community() {
       </div>
       <a
         className="relative col-[1_/3] rounded-lg bg-zinc-600 sm:col-[3_/4]"
-        href={videosA[activeIndex.videoA].link}
+        href={videosA[activeIndex.videoA]?.link}
         target="_blank"
         rel="noopener nofollow noreferrer"
       >
         <AnimatePresence initial={false}>
           <motion.video
-            className="rounded-lg overflow-hidden w-full h-full object-cover absolute top-0 left-0 right-0 bottom-0"
+            className="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full overflow-hidden rounded-lg"
             key={activeIndex.videoA}
             variants={variants}
             initial="enter"
@@ -150,7 +150,7 @@ export function Community() {
             transition={{
               opacity: { duration: 0.8 },
             }}
-            src={videosA[activeIndex.videoA].src}
+            src={videosA[activeIndex.videoA]?.src}
             autoPlay
             playsInline
             muted
@@ -159,13 +159,13 @@ export function Community() {
       </a>
       <a
         className="relative col-[3_/5] rounded-lg bg-zinc-600 sm:col-[4_/5]"
-        href={videosB[activeIndex.videoB].link}
+        href={videosB[activeIndex.videoB]?.link}
         target="_blank"
         rel="noopener nofollow noreferrer"
       >
         <AnimatePresence initial={false}>
           <motion.video
-            className="rounded-lg overflow-hidden w-full h-full object-cover absolute top-0 left-0 right-0 bottom-0"
+            className="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full overflow-hidden rounded-lg"
             ref={videoBRef}
             key={activeIndex.videoB}
             variants={variants}
@@ -175,7 +175,7 @@ export function Community() {
             transition={{
               opacity: { duration: 0.8 },
             }}
-            src={videosB[activeIndex.videoB].src}
+            src={videosB[activeIndex.videoB]?.src}
             autoPlay
             playsInline
             muted

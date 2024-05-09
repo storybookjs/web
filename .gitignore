@@ -1,64 +1,46 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# compiled output
-dist
-tmp
-/out-tsc
-tsconfig.tsbuildinfo
-
-# dependencies
+# Dependencies
 node_modules
+.pnp
+.pnp.js
 
-# IDEs and editors
-/.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# Testing
+coverage
 
-# system files
-.DS_Store
-Thumbs.db
+# Turbo
+.turbo
 
-# testing
-/coverage
+# Vercel
+.vercel
 
-# debug
+# Build Outputs
+.next/
+out/
+build
+dist
+
+
+# Debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/libpeerconnection.log
-testem.log
 
-# local env files
-.env*.local
-
-# misc
-/.sass-cache
-/connect.lock
-/typings
-
-# NX
-.nx
-.nx/cache
-
-# vercel
-.vercel
-
-# Next.js
-.next
-out
+# Misc
+.DS_Store
+*.pem
 
 # Generated docs content
 apps/frontpage/content/docs
 apps/frontpage/content/snippets
 apps/frontpage/public/docs
+
+# NX
+.nx

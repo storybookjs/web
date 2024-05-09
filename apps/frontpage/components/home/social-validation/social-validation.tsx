@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn, container } from '@utils';
+import { cn, container } from '@repo/utils';
 import { Button } from '../../../components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -191,7 +191,7 @@ export const SocialValidation = ({
       <div
         className={cn(
           container,
-          'lg:px-8 text-white md:flex justify-between gap-20'
+          'lg:px-8 text-white md:flex justify-between gap-20',
         )}
       >
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
@@ -288,7 +288,7 @@ export const SocialValidation = ({
       <div
         className={cn(
           container,
-          'pb-12 grid grid-cols-[1fr] md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(4,_1fr)] gap-8'
+          'pb-12 grid grid-cols-[1fr] md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(4,_1fr)] gap-8',
         )}
       >
         <div className={cn(socialCard)}>

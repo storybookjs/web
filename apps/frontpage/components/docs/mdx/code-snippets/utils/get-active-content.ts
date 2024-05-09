@@ -1,4 +1,4 @@
-import { CodeSnippetsFiltersProps, CodeSnippetsProps } from '@utils';
+import { CodeSnippetsFiltersProps, CodeSnippetsProps } from '@repo/utils';
 
 interface Props {
   codeSnippetsContent: CodeSnippetsProps[];
@@ -39,7 +39,7 @@ export const getActiveContent = ({
 
   if (activeLanguage === 'ts' && filterByLanguage.length === 0) {
     const getTsVersion = filterByPackageManager.find(
-      (v) => v.language === 'ts-4-9'
+      (v) => v.language === 'ts-4-9',
     );
     if (getTsVersion) {
       filterByLanguage.push(getTsVersion);
@@ -51,7 +51,7 @@ export const getActiveContent = ({
 
   if (activeLanguage === 'ts-4-9' && filterByLanguage.length === 0) {
     const getTsVersion = filterByPackageManager.find(
-      (v) => v.language === 'ts'
+      (v) => v.language === 'ts',
     );
     if (getTsVersion) {
       filterByLanguage.push(getTsVersion);
@@ -63,5 +63,5 @@ export const getActiveContent = ({
 
   if (filterByLanguage.length === 0) return null;
 
-  return filterByLanguage[0];
+  return filterByLanguage[0] || null;
 };

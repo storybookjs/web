@@ -1,9 +1,9 @@
-import { TreeProps } from '@utils';
+import { TreeProps } from '@repo/utils';
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
 
-function getMetadata(filePath: string): any {
+function getMetadata(filePath: string): { title: string; [key: string]: unknown } {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const {
     data: { navTitle, title, ...data },
@@ -31,13 +31,13 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
 
       if (childItems) {
         const indexFile = childItems.find(
-          (item) => item.name === 'index.mdx' || item.name === 'index.md'
+          (item) => item.name === 'index.mdx' || item.name === 'index.md',
         );
         const children = childItems
           .sort((a, b) =>
             a?.sidebar?.order && b?.sidebar?.order
               ? a.sidebar.order - b.sidebar.order
-              : 0
+              : 0,
           )
           .filter((item) => item.name !== 'index.mdx')
           .filter((item) => item.name !== 'index.md');
@@ -82,7 +82,7 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
     .sort((a, b) =>
       a?.sidebar?.order && b?.sidebar?.order
         ? a.sidebar.order - b.sidebar.order
-        : 0
+        : 0,
     )
     .filter((item) => {
       // Here we are removing the index page from the tree

@@ -5,7 +5,7 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import * as MDX from '../components/docs/mdx';
 import rehypeSlug from 'rehype-slug';
-import { DocsVersion } from '@utils';
+import { DocsVersion } from '@repo/utils';
 import { extractHeadings } from 'extract-md-headings';
 
 const rehypePrettyCodeOptions = {
@@ -14,7 +14,7 @@ const rehypePrettyCodeOptions = {
 
 export const getPageData = async (
   path: string[],
-  activeVersion: DocsVersion
+  activeVersion: DocsVersion,
 ) => {
   const rootPath = 'content/docs';
   const pathString = path.join('/');
@@ -36,7 +36,7 @@ export const getPageData = async (
 
   const file = await fs.promises.readFile(
     process.cwd() + `/${newPath}`,
-    'utf8'
+    'utf8',
   );
 
   const { content, frontmatter } = await compileMDX<{ title: string }>({
@@ -72,9 +72,14 @@ export const getPageData = async (
         <MDX.CodeSnippets activeVersion={activeVersion.id} {...props} />
       ),
       Callout: MDX.Callout,
-      IfRenderer: MDX.IfRenderer,
+      If: MDX.If,
+      IfRenderer: MDX.If,
       YouTubeCallout: MDX.YouTubeCallout,
       FeatureSnippets: MDX.FeatureSnippets,
+      // TODO: These three should be imported in the necessary MDX file(s)
+      HomeRenderers: MDX.HomeRenderers,
+      HomeConcepts: MDX.HomeConcepts,
+      HomeResources: MDX.HomeResources,
     },
   });
 
@@ -88,7 +93,7 @@ export const getPageData = async (
   const parent = generateDocsTree(pathToFiles);
 
   const sorted = parent?.sort((a, b) =>
-    a?.tab?.order && b?.tab?.order ? a.tab.order - b.tab.order : 0
+    a?.tab?.order && b?.tab?.order ? a.tab.order - b.tab.order : 0,
   );
 
   const index = sorted?.find((item) => item.name === 'index.mdx');

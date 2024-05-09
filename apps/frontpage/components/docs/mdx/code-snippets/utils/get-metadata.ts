@@ -1,4 +1,4 @@
-import { CodeSnippetsProps, docsVersions } from '@utils';
+import { CodeSnippetsProps, docsVersions } from '@repo/utils';
 import { firefoxThemeLight } from '../themes/firefox-theme-vscode';
 import fs from 'fs';
 import { unified } from 'unified';
@@ -13,12 +13,12 @@ interface Props {
 }
 
 export const getMetadata = async ({ path, activeVersion }: Props) => {
-  const version = activeVersion ?? docsVersions[0].id;
+  const version = activeVersion ?? docsVersions[0]?.id;
 
   // Read the content of the MD file
   const source = await fs.promises.readFile(
     process.cwd() + `/content/snippets/${version}/${path}`,
-    'utf8'
+    'utf8',
   );
 
   // Parse the content into a syntax tree
@@ -49,13 +49,18 @@ export const getMetadata = async ({ path, activeVersion }: Props) => {
 
       const matches = block.meta?.match(/(\w+)="([^"]*)"/g);
 
+      // console.log(path, 'matches', matches);
+      // -> init-command.md matches [ 'renderer="common"', 'language="js"', 'packageManager="npx"' ]
+
       const metadata: { [key: string]: string } = {};
 
       if (matches) {
         matches.forEach((match) => {
+          // TODO: Based on the console.log above, the match is a string, not an array
           const [key, value] = match
             .split('=')
             .map((part) => part.replace(/"/g, ''));
+          // @ts-expect-error - See TODO above
           metadata[key] = value;
         });
       }
@@ -65,7 +70,7 @@ export const getMetadata = async ({ path, activeVersion }: Props) => {
         ...metadata,
         content: result.value,
       };
-    })
+    }),
   );
 
   return content;

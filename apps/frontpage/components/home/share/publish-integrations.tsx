@@ -9,7 +9,7 @@ const symbolVariants = {
 
 export const PublishIntegrations = React.forwardRef<
   HTMLImageElement | null,
-  { timeFrameStyles: any }
+  { timeFrameStyles: React.CSSProperties }
 >(({ timeFrameStyles }, ref) => {
   return (
     <motion.div

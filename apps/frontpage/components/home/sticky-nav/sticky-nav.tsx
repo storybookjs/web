@@ -4,7 +4,7 @@ import { ArrowUpIcon } from '@storybook/icons';
 import { Button } from '../../ui/button';
 import Link from 'next/link';
 import { MobileMenu } from './mobile-menu';
-import { cn, container } from '@utils';
+import { cn, container } from '@repo/utils';
 
 interface StickyNavProps {
   isVisible?: boolean;
@@ -49,12 +49,12 @@ export const StickyNav = ({
           <section
             className={cn(
               container,
-              'h-full flex items-center justify-between'
+              'h-full flex items-center justify-between',
             )}
           >
             <MobileMenu
               items={items}
-              label={activeItem?.label || items[0].label}
+              label={activeItem?.label || items[0]?.label || ''}
             />
             <div className="items-center hidden gap-2 md:flex">
               {items.map((item) => (

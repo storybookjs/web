@@ -1,8 +1,8 @@
 import { NavTop } from '../../components/community/nav-top';
-import { Header, Footer } from '@ui';
+import { Header, Footer } from '@repo/ui';
 import { Community } from '../../components/community';
 import { NewsletterForm } from '../../components/newsletter-form/form';
-import { cn, smallContainer, fetchGithubCount } from '@utils';
+import { cn, smallContainer, fetchGithubCount } from '@repo/utils';
 import { Numbers } from '../../components/community/numbers';
 import { NavSide } from '../../components/community/nav-side';
 import { Support } from '../../components/community/support';

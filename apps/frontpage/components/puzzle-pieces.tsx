@@ -1,6 +1,6 @@
 'use client';
 
-/* eslint-disable @typescript-eslint/no-loss-of-precision */
+/* eslint-disable no-loss-of-precision */
 import React, { useRef, useEffect } from 'react';
 import {
   motion,
@@ -20,6 +20,7 @@ const colors = [
 ];
 
 function pickRandom<T>(array: T[]): T {
+  // @ts-expect-error - TS doesn't know that the resulting index is safe
   return array[Math.floor(Math.random() * array.length)];
 }
 

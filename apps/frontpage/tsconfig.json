@@ -1,41 +1,20 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
-    // "baseUrl": ".",
-    "jsx": "preserve",
-    "allowJs": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "incremental": true,
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    // "paths": {
-    //   "@/*": [
-    //     "./*"
-    //   ],
-    //   "contentlayer/generated": [
-    //     "./.contentlayer/generated"
-    //   ]
-    // },
-    "types": ["jest", "node"]
+    ]
   },
   "include": [
+    "next-env.d.ts",
+    "next.config.js",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx",
-    "../../apps/frontpage/.next/types/**/*.ts",
-    "../../dist/apps/frontpage/.next/types/**/*.ts",
-    "next-env.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "next-sitemap-all.config.js",
+    "next-sitemap.config.js"
   ],
-  "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
+  "exclude": ["node_modules"]
 }

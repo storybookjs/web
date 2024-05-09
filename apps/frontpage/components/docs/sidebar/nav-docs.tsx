@@ -5,7 +5,7 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { FC, Fragment } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import { VersionSelector } from './version-selector';
-import { DocsVersion, docsVersions, TreeProps } from '@utils';
+import { DocsVersion, docsVersions, TreeProps } from '@repo/utils';
 
 interface NavDocsProps {
   tree: TreeProps[] | null | undefined;
@@ -14,7 +14,7 @@ interface NavDocsProps {
 
 const getUrl = (slug: string) => {
   const newSlug = slug.replace('/docs/', '').split('/');
-  const hasFirstVersion = docsVersions[0].id === newSlug[0];
+  const hasFirstVersion = docsVersions[0]?.id === newSlug[0];
   if (hasFirstVersion) newSlug.shift();
 
   return `/docs/${newSlug.join('/')}`;

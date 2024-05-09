@@ -4,7 +4,7 @@ import {
   CloseIcon,
   SidebarAltIcon,
 } from '@storybook/icons';
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 
 export const Tabs: FC<{ active?: number }> = ({ active = 0 }) => {
   let tabs = [
@@ -26,7 +26,7 @@ export const Tabs: FC<{ active?: number }> = ({ active = 0 }) => {
               i === 2 && 'hidden md:flex',
               i === 3 && 'hidden md:flex',
               i === 4 && 'hidden lg:flex',
-              i === active && 'border-b-2 border-b-blue-500 text-blue-500'
+              i === active && 'border-b-2 border-b-blue-500 text-blue-500',
             )}
           >
             {label}

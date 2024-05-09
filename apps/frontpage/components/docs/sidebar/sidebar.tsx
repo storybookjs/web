@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ScrollBar } from '../../../components/ui/scroll-area';
 import { FC, ReactNode } from 'react';
 import { ChangelogIcon, DocsIcon, TutorialsIcon } from './icons';
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 
@@ -25,7 +25,7 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
                 href="/docs"
                 className={cn(
                   'flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8',
-                  pathname === '/docs' && 'text-blue-500'
+                  pathname === '/docs' && 'text-blue-500',
                 )}
               >
                 <DocsIcon />
@@ -35,7 +35,7 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
                 href="#"
                 className={cn(
                   'flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8',
-                  pathname === '/tutorials' && 'text-blue-500'
+                  pathname === '/tutorials' && 'text-blue-500',
                 )}
               >
                 <TutorialsIcon />
@@ -45,7 +45,7 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
                 href="/releases"
                 className={cn(
                   'flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8',
-                  pathname.startsWith('/releases') && 'text-blue-500'
+                  pathname.startsWith('/releases') && 'text-blue-500',
                 )}
               >
                 <ChangelogIcon />

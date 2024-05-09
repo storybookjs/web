@@ -1,7 +1,7 @@
 'use client';
 
 import { Hero } from './hero';
-import { Header, Footer } from '@ui';
+import { Header, Footer } from '@repo/ui';
 import { Develop } from './develop/develop';
 import { StickyNav } from './sticky-nav/sticky-nav';
 import { useMemo, useRef } from 'react';
@@ -11,7 +11,7 @@ import { Document } from './document/document';
 import { Share } from './share/share';
 import { Automate } from './automate/automate';
 import { SocialValidation } from './social-validation/social-validation';
-import { cn, container } from '@utils';
+import { cn, container } from '@repo/utils';
 
 interface HomeProps {
   githubCount: number;

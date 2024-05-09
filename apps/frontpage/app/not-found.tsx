@@ -1,5 +1,5 @@
-import { Footer, Header } from '@ui';
-import { fetchGithubCount } from '@utils';
+import { Footer, Header } from '@repo/ui';
+import { fetchGithubCount } from '@repo/utils';
 import { PuzzlePieces } from '../components/puzzle-pieces';
 import {
   ChevronSmallRightIcon,
