@@ -1,24 +1,23 @@
-import fs from 'node:fs';
-import type { CodeSnippetsProps } from '@repo/utils';
-import { docsVersions } from '@repo/utils';
+import { CodeSnippetsProps, docsVersions } from '@repo/utils';
+import { firefoxThemeLight } from '../themes/firefox-theme-vscode';
+import fs from 'fs';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
-import { firefoxThemeLight } from '../themes/firefox-theme-vscode';
 
-interface MetadataProps {
+interface Props {
   path: string | undefined;
-  activeVersion: string | undefined;
+  activeVersion: string;
 }
 
-export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
+export const getMetadata = async ({ path, activeVersion }: Props) => {
   const version = activeVersion ?? docsVersions[0]?.id;
 
   // Read the content of the MD file
   const source = await fs.promises.readFile(
-    `${process.cwd()}/content/snippets/${version}/${path}`,
+    process.cwd() + `/content/snippets/${version}/${path}`,
     'utf8',
   );
 
