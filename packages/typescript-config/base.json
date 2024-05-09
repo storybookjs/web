@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Default",
   "compilerOptions": {
-    "composite": false,
     "declaration": true,
+    "incremental": false,
     "declarationMap": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -13,12 +13,16 @@
     "isolatedModules": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "moduleDetection": "force",
+    "noUncheckedIndexedAccess": true,
+    "resolveJsonModule": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "lib": ["es2022", "DOM", "DOM.Iterable"]
   },
   "exclude": ["node_modules"]
 }

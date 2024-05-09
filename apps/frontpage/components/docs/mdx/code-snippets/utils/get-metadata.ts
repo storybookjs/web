@@ -10,7 +10,7 @@ import { firefoxThemeLight } from '../themes/firefox-theme-vscode';
 
 interface MetadataProps {
   path: string | undefined;
-  activeVersion: string;
+  activeVersion: string | undefined;
 }
 
 export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
@@ -18,7 +18,7 @@ export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
 
   // Read the content of the MD file
   const source = await fs.promises.readFile(
-    process.cwd() + `/content/snippets/${version}/${path}`,
+    `${process.cwd()}/content/snippets/${version}/${path}`,
     'utf8',
   );
 

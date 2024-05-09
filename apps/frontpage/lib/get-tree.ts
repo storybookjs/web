@@ -1,9 +1,12 @@
-import { TreeProps } from '@repo/utils';
-import fs from 'fs';
+import path from 'node:path';
+import fs from 'node:fs';
+import type { TreeProps } from '@repo/utils';
 import matter from 'gray-matter';
-import path from 'path';
 
-function getMetadata(filePath: string): { title: string; [key: string]: unknown } {
+function getMetadata(filePath: string): {
+  title: string;
+  [key: string]: unknown;
+} {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const {
     data: { navTitle, title, ...data },
