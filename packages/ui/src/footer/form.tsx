@@ -55,6 +55,7 @@ const Circle: FC<CircleProps> = ({ children, href, variant }) => {
     <a
       href={href}
       target="_blank"
+      rel="noreferrer"
       className={cn(
         'flex items-center justify-center border border-zinc-200 rounded-full h-12 w-12 hover:-translate-y-1 transition-all',
         variant === 'home' && 'border border-zinc-700 hover:border-zinc-400',

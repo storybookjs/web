@@ -36,6 +36,7 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
                       key={link.title}
                       href={link.href}
                       target="_blank"
+                      rel="noreferrer"
                       className={cn(
                         'text-zinc-600 hover:text-blue-500 transition-colors text-md',
                         variant === 'home' && 'text-zinc-400',
