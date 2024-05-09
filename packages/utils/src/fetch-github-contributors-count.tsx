@@ -20,8 +20,7 @@ export const fetchGithubContributorCount = async () => {
 
     // Parse contributor count
     const match = link && /&page=(\d+)/.exec(link);
-    // @ts-ignore
-    const contributorCount = match && +match[1];
+    const contributorCount = match ? match[1] : 0;
 
     return {
       number: contributorCount,

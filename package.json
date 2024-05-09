@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "storybook-web",
   "private": true,
   "scripts": {
     "build": "turbo build",

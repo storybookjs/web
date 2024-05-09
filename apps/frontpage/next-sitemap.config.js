@@ -1,4 +1,4 @@
-// TODO: Find a better way to import this data
+// TODO: Generate this in a script from /packages/utils/src/docs-versions.ts
 const docsVersions = [
   {
     label: 'Version Test 1',

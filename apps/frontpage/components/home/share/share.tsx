@@ -66,11 +66,10 @@ export function Share() {
 
   useEventListener('resize', handleResize);
 
-  const scrollProgress = useTransform(
+  const scrollProgress = useTransform<number, number>(
     [smoothPublishProgress, smoothTestProgress],
-    ([latestPublishProgress, latestTestProgress]: number[]) =>
-      //@ts-ignore
-      latestPublishProgress + latestTestProgress,
+    ([latestPublishProgress, latestTestProgress]) =>
+      (latestPublishProgress || 0) + (latestTestProgress || 0),
   );
 
   const x = useTransform(

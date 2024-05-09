@@ -50,7 +50,7 @@ async function fetchAndExtract(version: DocsVersion) {
               {
                 strip: 2,
                 C: path.join(__dirname, `../content/docs/${version.id}`),
-                filter: (path: any) =>
+                filter: (path: string) =>
                   !path.includes('_assets') &&
                   !path.includes('_versions') &&
                   !path.includes('_snippets') &&
@@ -73,7 +73,7 @@ async function fetchAndExtract(version: DocsVersion) {
               {
                 strip: 3,
                 C: path.join(__dirname, `../content/snippets/${version.id}`),
-                filter: (path: any) => path.includes('_snippets'),
+                filter: (path: string) => path.includes('_snippets'),
               },
               [folder],
             ),
@@ -91,7 +91,7 @@ async function fetchAndExtract(version: DocsVersion) {
               {
                 strip: 3,
                 C: path.join(__dirname, `../public/docs/${version.id}`),
-                filter: (path: any) => path.includes('_assets'),
+                filter: (path: string) => path.includes('_assets'),
               },
               [folder],
             ),

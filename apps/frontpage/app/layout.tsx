@@ -1,9 +1,9 @@
-import './globals.css';
 import type { Metadata } from 'next';
-import './globals.css';
+import { Nunito_Sans } from 'next/font/google';
 import { cn } from '@repo/utils';
 import { Providers } from './providers';
-import { Nunito_Sans } from 'next/font/google';
+
+import './globals.css';
 
 const fontSans = Nunito_Sans({
   subsets: ['latin'],

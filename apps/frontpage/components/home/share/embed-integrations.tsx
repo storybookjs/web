@@ -4,7 +4,7 @@ import { AspectRatio } from '../../../components/ui/aspect-ratio';
 import { IntegrationsCarousel } from './integrations-carousel';
 import Image from 'next/image';
 
-const Connector: FC<{ name: string; style: any }> = ({ name, ...props }) => {
+const Connector: FC<{ name: string; style: React.CSSProperties }> = ({ name, ...props }) => {
   return (
     <AnimatePresence>
       <motion.svg

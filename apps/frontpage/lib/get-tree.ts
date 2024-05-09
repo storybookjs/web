@@ -3,7 +3,7 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
 
-function getMetadata(filePath: string): any {
+function getMetadata(filePath: string): { title: string; [key: string]: unknown } {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const {
     data: { navTitle, title, ...data },

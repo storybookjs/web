@@ -36,13 +36,13 @@ export const ScrollDemo = ({
 
   useEffect(() => {
     function updateId() {
-      // @ts-ignore
+      // @ts-expect-error - TS doesn't know index is safe
       setActiveStory(rangeSlider.stories[storyIndex.get()]);
     }
     const unsubscribeStoryIndex = storyIndex.on('change', updateId);
 
     function updatePanel() {
-      // @ts-ignore
+      // @ts-expect-error - TS doesn't know index is safe
       setActivePanel(rangeSlider.addons[panelIndex.get()]);
     }
     const unsubscribePanel = panelIndex.on('change', updatePanel);
@@ -54,11 +54,10 @@ export const ScrollDemo = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const zoom = useTransform(
+  const zoom = useTransform<number, number>(
     [isolationProgress, dropInProgress],
-    ([latestIsolationProgress, latestDropInProgress]: number[]) =>
-      // @ts-ignore
-      latestIsolationProgress - latestDropInProgress,
+    ([latestIsolationProgress, latestDropInProgress]) =>
+      (latestIsolationProgress || 0) - (latestDropInProgress || 0),
   );
 
   const [stacked] = useMediaQuery(`(min-width: 648px)`);

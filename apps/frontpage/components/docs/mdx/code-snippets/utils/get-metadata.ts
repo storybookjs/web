@@ -49,14 +49,18 @@ export const getMetadata = async ({ path, activeVersion }: Props) => {
 
       const matches = block.meta?.match(/(\w+)="([^"]*)"/g);
 
+      // console.log(path, 'matches', matches);
+      // -> init-command.md matches [ 'renderer="common"', 'language="js"', 'packageManager="npx"' ]
+
       const metadata: { [key: string]: string } = {};
 
       if (matches) {
         matches.forEach((match) => {
+          // TODO: Based on the console.log above, the match is a string, not an array
           const [key, value] = match
             .split('=')
             .map((part) => part.replace(/"/g, ''));
-          // @ts-ignore
+          // @ts-expect-error - See TODO above
           metadata[key] = value;
         });
       }

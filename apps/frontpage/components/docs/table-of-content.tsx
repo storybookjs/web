@@ -71,7 +71,7 @@ const Element: FC<ElementProps> = ({ heading, isInView, setIsInView }) => {
   }, [isScrollingUp]);
 
   const active =
-    // @ts-ignore
+    // @ts-expect-error - TS doesn't follow that isInView has at least 1 entry
     isInView.length > 0 ? isInView[0].includes(heading.slug) : false;
 
   return (

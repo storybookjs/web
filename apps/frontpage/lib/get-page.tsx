@@ -73,9 +73,10 @@ export const getPageData = async (
       ),
       Callout: MDX.Callout,
       If: MDX.If,
-      IfRenderer: MDX.IfRenderer,
+      IfRenderer: MDX.If,
       YouTubeCallout: MDX.YouTubeCallout,
       FeatureSnippets: MDX.FeatureSnippets,
+      // TODO: These three should be imported in the necessary MDX file(s)
       HomeRenderers: MDX.HomeRenderers,
       HomeConcepts: MDX.HomeConcepts,
       HomeResources: MDX.HomeResources,
