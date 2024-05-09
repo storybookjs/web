@@ -18,7 +18,7 @@ async function clean() {
 }
 
 async function fetchAndExtract(version: DocsVersion) {
-  console.log(`♠︎ Fetching docs for ${version.id}...`);
+  console.log(` ♠︎ Fetching docs for ${version.id}...`);
 
   let url: string | null = null;
   if (version.branch)
@@ -112,6 +112,6 @@ clean();
 const arrayOfFetches = docsVersions.map((version) => fetchAndExtract(version));
 
 Promise.all(arrayOfFetches).then(() => {
-  console.log('Done!');
+  console.log(' Done!');
   console.log('');
 });
