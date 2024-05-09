@@ -4,6 +4,7 @@ import { cn } from '@repo/utils';
 import { Providers } from './providers';
 
 import './globals.css';
+import '@repo/ui/styles.css';
 
 const fontSans = Nunito_Sans({
   subsets: ['latin'],
