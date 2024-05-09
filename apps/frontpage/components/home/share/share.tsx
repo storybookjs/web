@@ -133,10 +133,12 @@ export function Share() {
         <PublishIntegrations
           ref={publishRef}
           timeFrameStyles={{
-            x,
-            y,
-            scale,
-            opacity,
+            // TODO: These are ultimately passed to a motion.img component's style attribute,
+            //       but they're not valid CSS properties. Should they be translateX & translateY?
+            // x,
+            // y,
+            scale: scale.get(),
+            opacity: opacity.get(),
             transformOrigin: 'top left',
           }}
         />
