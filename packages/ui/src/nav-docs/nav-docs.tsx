@@ -60,7 +60,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                                   <button className="flex items-center justify-between w-full h-8 px-2 text-sm group">
                                     {lvl2?.sidebar?.title || lvl2.title}
                                     <ChevronSmallRightIcon
-                                      className="ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-90"
+                                      className="ease-in-out transition-transform duration-300 group-data-[state=open]:rotate-90"
                                       aria-hidden
                                     />
                                   </button>
