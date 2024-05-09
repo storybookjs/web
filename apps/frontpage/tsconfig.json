@@ -5,7 +5,8 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "noEmit": true
   },
   "include": [
     "next-env.d.ts",
@@ -16,5 +17,7 @@
     "next-sitemap-all.config.js",
     "next-sitemap.config.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

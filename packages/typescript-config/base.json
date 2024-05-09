@@ -3,26 +3,19 @@
   "display": "Default",
   "compilerOptions": {
     "declaration": true,
-    "incremental": false,
     "declarationMap": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
-    "inlineSources": false,
+    "incremental": false,
     "isolatedModules": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "lib": ["es2022", "DOM", "DOM.Iterable"],
+    "module": "NodeNext",
     "moduleDetection": "force",
+    "moduleResolution": "NodeNext",
     "noUncheckedIndexedAccess": true,
     "resolveJsonModule": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "preserveWatchOutput": true,
     "skipLibCheck": true,
     "strict": true,
-    "strictNullChecks": true,
-    "lib": ["es2022", "DOM", "DOM.Iterable"]
+    "target": "ES2022"
   },
   "exclude": ["node_modules"]
 }
