@@ -1,7 +1,7 @@
 ![Storybook Web Light](github-light.png#gh-light-mode-only)
 ![Storybook Web Dark](github-dark.png#gh-dark-mode-only)
 
-Welcome to the new home for Storybook's main website and documentation. This project is still in progress but will soon replace the existing platform. It is mainly buuilt around Next.js, Tailwind, Nx and obviously Storybook ✌️
+Welcome to the new home for Storybook's main website and documentation. This project is still in progress but will soon replace the existing platform. It is mainly built around Next.js, Tailwind, Turborepo and obviously Storybook ✌️
 
 ## Monorepo
 
