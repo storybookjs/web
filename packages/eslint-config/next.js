@@ -7,9 +7,20 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "prettier",
-    require.resolve("@vercel/style-guide/eslint/next"),
+    "next/core-web-vitals",
     "eslint-config-turbo",
   ],
+  plugins: ["only-warn"],
+  parserOptions: {
+    project,
+  },
+  settings: {
+    "import/resolver": {
+      typescript: {
+        project,
+      },
+    },
+  },
   globals: {
     React: true,
     JSX: true,
@@ -17,14 +28,6 @@ module.exports = {
   env: {
     node: true,
     browser: true,
-  },
-  plugins: ["only-warn"],
-  settings: {
-    "import/resolver": {
-      typescript: {
-        project,
-      },
-    },
   },
   ignorePatterns: [
     // Ignore dotfiles

@@ -1,6 +1,6 @@
 'use client';
 
-/* eslint-disable @typescript-eslint/no-loss-of-precision */
+/* eslint-disable no-loss-of-precision */
 import React, { useRef, useEffect } from 'react';
 import {
   motion,
