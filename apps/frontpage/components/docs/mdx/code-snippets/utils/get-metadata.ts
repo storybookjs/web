@@ -60,7 +60,7 @@ export const getMetadata = async ({ path, activeVersion }: Props) => {
           const [key, value] = match
             .split('=')
             .map((part) => part.replace(/"/g, ''));
-          // @ts-expect-error - See TODO above
+
           metadata[key] = value;
         });
       }
