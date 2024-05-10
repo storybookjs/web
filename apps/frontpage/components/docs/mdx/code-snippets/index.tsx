@@ -2,13 +2,13 @@ import type { CodeSnippetsProps } from '@repo/utils';
 import { getMetadata } from './utils/get-metadata';
 import { CodeSnippetsClient } from './client';
 
-interface Props {
+interface LocalProps {
   paths?: string[];
   path?: string;
   activeVersion: string;
 }
 
-export function CodeSnippets({ paths, path, activeVersion }: Props) {
+export async function CodeSnippets({ paths, path, activeVersion }: LocalProps) {
   // This is how files are structured.
   // [renderer]/[filename].[option].[language].mdx
   // [renderer]/[filename].[language].mdx
