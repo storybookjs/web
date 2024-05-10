@@ -7,21 +7,22 @@ export const Search: FC<HeaderProps> = ({ variant }) => {
   return (
     <button
       className={cn(
-        'w-44 h-8 rounded-full text-sm flex items-center justify-between px-3 max-[440px]:hidden',
-        variant === 'home' && 'border border-white/30 text-white',
+        'ui-w-44 ui-h-8 ui-rounded-full ui-text-sm ui-flex ui-items-center ui-justify-between ui-px-3 max-[440px]:ui-hidden',
+        variant === 'home' && 'ui-border ui-border-white/30 ui-text-white',
         variant === 'system' &&
-          'border border-zinc-200 dark:border-zinc-700 text-zinc-500 dark:text-white',
+          'ui-border ui-border-zinc-200 dark:ui-border-zinc-700 ui-text-zinc-500 dark:ui-text-white',
       )}
       type="button"
     >
-      <div className="flex items-center gap-1.5">
-        <SearchIcon className="w-3 h-3" />
+      <div className="ui-flex ui-items-center ui-gap-1.5">
+        <SearchIcon className="ui-w-3 ui-h-3" />
         Search docs
       </div>
       <div
         className={cn(
-          'text-[11px] bg-zinc-100 dark:bg-zinc-800 dark:text-zinc-500 px-1.5 rounded',
-          variant === 'home' && 'bg-white/10 text-white',
+          'ui-text-[11px] dark:ui-text-zinc-500 ui-px-1.5 ui-rounded',
+          variant === 'home' && 'ui-bg-white/10 ui-text-white',
+          variant !== 'home' && 'ui-bg-zinc-100 dark:ui-bg-zinc-800',
         )}
       >
         ⌘K
