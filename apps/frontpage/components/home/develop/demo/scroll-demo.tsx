@@ -37,13 +37,11 @@ export function ScrollDemo({
 
   useEffect(() => {
     function updateId() {
-      // @ts-expect-error - TS doesn't know index is safe
       setActiveStory(rangeSlider.stories[storyIndex.get()]);
     }
     const unsubscribeStoryIndex = storyIndex.on('change', updateId);
 
     function updatePanel() {
-      // @ts-expect-error - TS doesn't know index is safe
       setActivePanel(rangeSlider.addons[panelIndex.get()]);
     }
     const unsubscribePanel = panelIndex.on('change', updatePanel);
