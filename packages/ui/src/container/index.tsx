@@ -26,9 +26,9 @@ export const Container: ForwardRefExoticComponent<
     return (
       <Comp
         className={cn(
-          'mx-auto px-4 sm:px-8',
-          variant === 'default' && 'max-w-8xl md:px-8',
-          variant === 'small' && 'max-w-7xl md:px-12',
+          'ui-mx-auto ui-px-4 sm:ui-px-8',
+          variant === 'default' && 'ui-max-w-8xl md:ui-px-8',
+          variant === 'small' && 'ui-max-w-7xl md:ui-px-12',
           className,
         )}
         ref={ref}

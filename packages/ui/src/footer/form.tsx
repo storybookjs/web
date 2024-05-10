@@ -15,14 +15,14 @@ interface FormProps {
 
 export function Form({ variant }: FormProps): JSX.Element {
   return (
-    <div className="mb-14">
-      <div className="mb-4 font-bold text-md">Join the community</div>
-      <div className="flex flex-col items-start gap-8 lg:flex-row lg:justify-between lg:items-center">
-        <div className="flex flex-col flex-1 w-full gap-4 sm:flex-row sm:items-center sm:gap-6">
+    <div className="ui-mb-14">
+      <div className="ui-mb-4 ui-font-bold ui-text-md">Join the community</div>
+      <div className="ui-flex ui-flex-col ui-items-start ui-gap-8 lg:ui-flex-row lg:ui-justify-between lg:ui-items-center">
+        <div className="ui-flex ui-flex-col ui-flex-1 ui-w-full ui-gap-4 sm:ui-flex-row sm:ui-items-center sm:ui-gap-6">
           <NewsletterForm variant={variant === 'home' ? 'dark' : 'system'} />
-          <div className="text-zinc-400">6,378 developers and counting</div>
+          <div className="ui-text-zinc-400">6,378 developers and counting</div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="ui-flex ui-items-center ui-gap-4">
           <Circle href="http://github.com/storybookjs" variant={variant}>
             <GithubIcon size={18} />
           </Circle>
@@ -54,10 +54,11 @@ const Circle: FC<CircleProps> = ({ children, href, variant }) => {
   return (
     <a
       className={cn(
-        'flex items-center justify-center border border-zinc-200 rounded-full h-12 w-12 hover:-translate-y-1 transition-all',
-        variant === 'home' && 'border border-zinc-700 hover:border-zinc-400',
+        'ui-flex ui-items-center ui-justify-center ui-border ui-border-zinc-200 ui-rounded-full ui-h-12 ui-w-12 hover:-ui-translate-y-1 ui-transition-all',
+        variant === 'home' &&
+          'ui-border ui-border-zinc-700 hover:ui-border-zinc-400',
         variant !== 'home' &&
-          'bg-white hover:border-zinc-400 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:border-zinc-500',
+          'ui-bg-white hover:ui-border-zinc-400 dark:ui-bg-zinc-800 dark:ui-border-zinc-700 dark:hover:ui-border-zinc-500',
       )}
       href={href}
       rel="noreferrer"

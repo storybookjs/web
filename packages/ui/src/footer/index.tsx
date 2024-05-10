@@ -16,29 +16,29 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
     <div
       className={cn(
         variant !== 'home' &&
-          'bg-slate-50 text-slate-800 border-t border-zinc-200 dark:bg-zinc-900 dark:text-white dark:border-zinc-700',
+          'ui-bg-slate-50 ui-text-slate-800 ui-border-t ui-border-zinc-200 dark:ui-bg-zinc-900 dark:ui-text-white dark:ui-border-zinc-700',
         variant === 'home' &&
-          'bg-homeBackground text-white border-t border-zinc-700',
+          'ui-bg-homeBackground ui-text-white ui-border-t border-zinc-700',
       )}
     >
-      <Container className="lg:px-8 py-12">
+      <Container className="lg:ui-px-8 ui-py-12">
         <Form variant={variant} />
-        <div className="flex flex-wrap mb-6 sm:mb-20">
+        <div className="ui-flex ui-flex-wrap ui-mb-6 sm:ui-mb-20">
           {footerNav.map((nav) => (
             <div
-              className="flex flex-col w-full gap-3 mb-12 sm:w-1/2 md:flex-1 md:mb-0"
+              className="ui-flex ui-flex-col ui-w-full ui-gap-3 ui-mb-12 sm:ui-w-1/2 md:ui-flex-1 md:ui-mb-0"
               key={nav.title}
             >
-              <div className="font-bold text-md">{nav.title}</div>
+              <div className="ui-font-bold ui-text-md">{nav.title}</div>
               {nav.links.map((link) => {
                 if (link.isExternal)
                   return (
                     <a
                       className={cn(
-                        'text-zinc-600 hover:text-blue-500 transition-colors text-md',
-                        variant === 'home' && 'text-zinc-400',
+                        'ui-text-zinc-600 hover:ui-text-blue-500 ui-transition-colors ui-text-md',
+                        variant === 'home' && 'ui-text-zinc-400',
                         variant !== 'home' &&
-                          'text-zinc-600 dark:text-zinc-400',
+                          'ui-text-zinc-600 dark:ui-text-zinc-400',
                       )}
                       href={link.href}
                       key={link.title}
@@ -51,9 +51,10 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
                 return (
                   <Link
                     className={cn(
-                      'text-zinc-600 hover:text-blue-500 transition-colors text-md',
-                      variant === 'home' && 'text-zinc-400',
-                      variant !== 'home' && 'text-zinc-600 dark:text-zinc-400',
+                      'ui-text-zinc-600 hover:ui-text-blue-500 ui-transition-colors ui-text-md',
+                      variant === 'home' && 'ui-text-zinc-400',
+                      variant !== 'home' &&
+                        'ui-text-zinc-600 dark:ui-text-zinc-400',
                     )}
                     href={link.href}
                     key={link.title}
@@ -65,19 +66,20 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
             </div>
           ))}
         </div>
-        <div className="flex flex-col justify-between gap-12 sm:flex-row sm:gap-0">
-          <div className="flex gap-4 sm:gap-8">
+        <div className="ui-flex ui-flex-col ui-justify-between ui-gap-12 sm:ui-flex-row sm:ui-gap-0">
+          <div className="ui-flex ui-gap-4 sm:ui-gap-8">
             <div
               className={cn(
-                'border-r border-zinc-200 pr-4 sm:pr-8 dark:border-zinc-600',
-                variant === 'home' && 'border-zinc-600',
+                'ui-border-r ui-border-zinc-200 ui-pr-4 sm:ui-pr-8 dark:ui-border-zinc-600',
+                variant === 'home' && 'ui-border-zinc-600',
               )}
             >
               <div
                 className={cn(
                   'text-sm mb-2',
-                  variant === 'home' && 'text-zinc-400',
-                  variant !== 'home' && 'text-zinc-600 dark:text-zinc-400',
+                  variant === 'home' && 'ui-text-zinc-400',
+                  variant !== 'home' &&
+                    'ui-text-zinc-600 dark:ui-text-zinc-400',
                 )}
               >
                 Open source software
@@ -88,8 +90,9 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
               <div
                 className={cn(
                   'text-sm mb-2',
-                  variant === 'home' && 'text-zinc-400',
-                  variant !== 'home' && 'text-zinc-600 dark:text-zinc-400',
+                  variant === 'home' && 'ui-text-zinc-400',
+                  variant !== 'home' &&
+                    'ui-text-zinc-600 dark:ui-text-zinc-400',
                 )}
               >
                 Maintained by
@@ -100,16 +103,16 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
           <div
             className={cn(
               'text-sm',
-              variant === 'home' && 'text-zinc-400',
-              variant !== 'home' && 'text-zinc-600 dark:text-zinc-400',
+              variant === 'home' && 'ui-text-zinc-400',
+              variant !== 'home' && 'ui-text-zinc-600 dark:ui-text-zinc-400',
             )}
           >
             Special thanks to{' '}
             <a
               className={cn(
-                'text-zinc-600 hover:text-blue-500 transition-colors text-md',
-                variant === 'home' && 'text-white',
-                variant !== 'home' && 'text-zinc-600 dark:text-white',
+                'ui-text-zinc-600 hover:ui-text-blue-500 ui-transition-colors ui-text-md',
+                variant === 'home' && 'ui-text-white',
+                variant !== 'home' && 'ui-text-zinc-600 dark:ui-text-white',
               )}
               href="https://netlify.com"
             >
@@ -118,9 +121,9 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
             and{' '}
             <a
               className={cn(
-                'text-zinc-600 hover:text-blue-500 transition-colors text-md',
-                variant === 'home' && 'text-white',
-                variant !== 'home' && 'text-zinc-600 dark:text-white',
+                'ui-text-zinc-600 hover:ui-text-blue-500 ui-transition-colors ui-text-md',
+                variant === 'home' && 'ui-text-white',
+                variant !== 'home' && 'ui-text-zinc-600 dark:ui-text-white',
               )}
               href="https://circleci.com"
             >
