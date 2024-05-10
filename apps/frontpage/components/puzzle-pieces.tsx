@@ -17,7 +17,6 @@ const colors = [
 ];
 
 function pickRandom<T>(array: T[]): T {
-  // @ts-expect-error - TS doesn't know that the resulting index is safe
   return array[Math.floor(Math.random() * array.length)];
 }
 
