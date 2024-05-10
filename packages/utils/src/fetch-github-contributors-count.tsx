@@ -27,7 +27,7 @@ export const fetchGithubContributorCount = async (): Promise<{
 
     return {
       number: contributorCount,
-      formattedResult: `${contributorCount?.toLocaleString()}+`,
+      formattedResult: `${contributorCount.toLocaleString()}+`,
     };
   } catch (error) {
     return { number: 0, formattedResult: '0' };
