@@ -44,11 +44,11 @@ export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
         .use(remarkRehype)
         .use(rehypePrettyCode, {
           theme: firefoxThemeLight,
-        } as any)
+        } as never)
         .use(rehypeStringify)
         .process(valueWithBackticks);
 
-      const matches = block.meta?.match(/(\w+)="([^"]*)"/g);
+      const matches = block.meta?.match(/(?<temp2>\w+)="(?<temp1>[^"]*)"/g);
 
       // console.log(path, 'matches', matches);
       // -> init-command.md matches [ 'renderer="common"', 'language="js"', 'packageManager="npx"' ]

@@ -8,7 +8,6 @@ import { MobileMenu } from './mobile-menu';
 
 interface StickyNavProps {
   isVisible?: boolean;
-  animationDisabled?: boolean;
   activeSection:
     | 'who'
     | 'automate'
@@ -30,7 +29,6 @@ const items = [
 
 export function StickyNav({
   isVisible,
-  animationDisabled = false,
   activeSection,
   ...props
 }: StickyNavProps) {
@@ -38,7 +36,8 @@ export function StickyNav({
 
   return (
     <AnimatePresence>
-      {isVisible ? <motion.div
+      {isVisible ? (
+        <motion.div
           animate={{ opacity: 1 }}
           className="fixed top-0 z-50 w-full h-10 bg-black md:h-18"
           exit={{ opacity: 0 }}
@@ -80,7 +79,8 @@ export function StickyNav({
               </Button>
             </div>
           </section>
-        </motion.div> : null}
+        </motion.div>
+      ) : null}
     </AnimatePresence>
   );
 }

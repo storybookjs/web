@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export function LogoCloudbees(props: Props) {
+export function LogoCloudbees() {
   return (
     <svg
       height="32"

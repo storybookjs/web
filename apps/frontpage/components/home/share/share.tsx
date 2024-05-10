@@ -5,7 +5,7 @@ import { ChevronSmallRightIcon } from '@storybook/icons';
 import { cn, container } from '@repo/utils';
 import { Testimonial } from '../testimonial';
 import { useEventListener } from '../../../hooks/use-event-listener';
-import { LogoCloudbees } from './Logo-cloudbees';
+import { LogoCloudbees } from './logo-cloudbees';
 import { PublishIntegrations } from './publish-integrations';
 import { EmbedIntegrations } from './embed-integrations';
 import { TestIntegrations } from './test-integrations';
@@ -72,16 +72,16 @@ export function Share() {
       (latestPublishProgress || 0) + (latestTestProgress || 0),
   );
 
-  const x = useTransform(
-    scrollProgress,
-    [0, 1, 2],
-    ['0%', `${delta.x[0]}px`, `${delta.x[1]}px`],
-  );
-  const y = useTransform(
-    scrollProgress,
-    [0, 1, 2],
-    ['0%', `${delta.y[0]}px`, `${delta.y[1]}px`],
-  );
+  // const x = useTransform(
+  //   scrollProgress,
+  //   [0, 1, 2],
+  //   ['0%', `${delta.x[0]}px`, `${delta.x[1]}px`],
+  // );
+  // const y = useTransform(
+  //   scrollProgress,
+  //   [0, 1, 2],
+  //   ['0%', `${delta.y[0]}px`, `${delta.y[1]}px`],
+  // );
   const scale = useTransform(
     scrollProgress,
     [0, 1, 2],

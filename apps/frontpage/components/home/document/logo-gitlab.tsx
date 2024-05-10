@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export function LogoGitlab(props: Props) {
+export function LogoGitlab() {
   return (
     <svg
       fill="none"

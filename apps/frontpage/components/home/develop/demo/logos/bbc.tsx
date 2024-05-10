@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export function LogoBbc(props: Props) {
+export function LogoBbc() {
   return (
     <svg
       className="w-full h-full"

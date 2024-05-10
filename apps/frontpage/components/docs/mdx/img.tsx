@@ -1,21 +1,21 @@
-import fs from "node:fs";
-import Image from "next/image";
-import type { DetailedHTMLProps, HTMLAttributes } from "react";
-import sizeOf from "image-size";
+import fs from 'node:fs';
+import Image from 'next/image';
+import type { DetailedHTMLProps, HTMLAttributes } from 'react';
+import sizeOf from 'image-size';
 
 type ImageProps = DetailedHTMLProps<
   HTMLAttributes<HTMLImageElement>,
   HTMLImageElement
 >;
 
-interface Props extends ImageProps {
+interface ImgProps extends ImageProps {
   activeVersion: string;
   src?: string;
   alt?: string;
 }
 
-export function Img({ src, alt, activeVersion }: Props) {
-  const pathWithoutRoot = src?.replace("../_assets/", "");
+export function Img({ src, alt, activeVersion }: ImgProps) {
+  const pathWithoutRoot = src?.replace('../_assets/', '');
   const path = `/docs/${activeVersion}/${pathWithoutRoot}`;
   const localPath = `public${path}`;
 
@@ -30,7 +30,7 @@ export function Img({ src, alt, activeVersion }: Props) {
 
   return (
     <Image
-      alt={alt || ""}
+      alt={alt || ''}
       className="my-6"
       height={dimensions.height}
       src={path}

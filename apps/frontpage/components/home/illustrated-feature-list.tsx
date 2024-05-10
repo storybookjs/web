@@ -1,4 +1,4 @@
-import type { FC} from 'react';
+import type { FC } from 'react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn, container } from '@repo/utils';
@@ -14,7 +14,7 @@ interface FeatureItem {
   icon: React.ReactNode;
   title: string;
   description: string;
-  link: { label: string; href: string; LinkWrapper?: React.ComponentType<any> };
+  link: { label: string; href: string; LinkWrapper?: React.ComponentType };
 }
 
 interface IllustratedFeatureListProps {
@@ -49,7 +49,6 @@ const variants = {
 export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
   features,
   alignment = 'left',
-  lockUpHeight,
   bgColor,
   ...props
 }) => {
@@ -89,7 +88,9 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
               className="absolute top-0 w-full scale-125 pointer-events-none select-none blur"
               playsInline
               src={activeFeature.media}
-            />
+            >
+              <track kind="captions" />
+            </video>
             <video
               autoPlay
               className="relative"
@@ -162,7 +163,6 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
                       className="relative block overflow-hidden rounded aspect-square md:hidden"
                       style={{ backgroundColor: bgColor }}
                     >
-                      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
                       <video
                         autoPlay
                         loop
@@ -170,7 +170,9 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
                         poster={feature.poster}
                         preload="auto"
                         src={feature.media}
-                      />
+                      >
+                        <track kind="captions" />
+                      </video>
                       <Button size="sm">
                         <Link href={feature.link.href}>
                           {feature.link.label} <ArrowRightIcon />

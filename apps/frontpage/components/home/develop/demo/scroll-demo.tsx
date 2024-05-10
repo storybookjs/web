@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import type { MotionValue} from 'framer-motion';
+import type { MotionValue } from 'framer-motion';
 import { motion, useTransform } from 'framer-motion';
 import { Connector } from '../../connector';
 import { useMediaQuery } from '../../../../hooks/use-media-query';
@@ -10,12 +10,12 @@ import { VSCode } from './vscode';
 import { App } from './app';
 
 interface ScrollDemoProps {
-  appearProgress: MotionValue;
-  isolationProgress: MotionValue;
-  addonsProgress: MotionValue;
-  dropInProgress: MotionValue;
-  storyIndex: MotionValue;
-  panelIndex: MotionValue;
+  appearProgress: MotionValue<number>;
+  isolationProgress: MotionValue<number>;
+  addonsProgress: MotionValue<number>;
+  dropInProgress: MotionValue<number>;
+  storyIndex: MotionValue<number>;
+  panelIndex: MotionValue<number>;
 }
 
 const rangeSlider = {
@@ -52,7 +52,7 @@ export function ScrollDemo({
       unsubscribeStoryIndex();
       unsubscribePanel();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- We don't need to update the effect when the props change
   }, []);
 
   const zoom = useTransform<number, number>(

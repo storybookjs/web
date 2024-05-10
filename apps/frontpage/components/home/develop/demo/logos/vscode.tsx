@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export function LogoVscode(props: Props) {
+export function LogoVscode() {
   return (
     <svg
       className="w-full h-full"
@@ -17,7 +13,7 @@ export function LogoVscode(props: Props) {
           height="33"
           id="mask0_1377_42556"
           maskUnits="userSpaceOnUse"
-          style={{ maskType: "alpha" }}
+          style={{ maskType: 'alpha' }}
           width="33"
           x="0"
           y="0"

@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export function LogoEu(props: Props) {
+export function LogoEu() {
   return (
     <svg
       className="w-full h-full"

@@ -1,16 +1,18 @@
-import { CheckIcon, CopyIcon } from "@storybook/icons";
-import type { FC} from "react";
-import { useState } from "react";
-import copy from "copy-to-clipboard";
-import { AnimatePresence, motion } from "framer-motion";
+import { CheckIcon, CopyIcon } from '@storybook/icons';
+import type { FC } from 'react';
+import { useState } from 'react';
+import copy from 'copy-to-clipboard';
+import { AnimatePresence, motion } from 'framer-motion';
 
-export const InitCommand: FC = ({}) => {
+export const InitCommand: FC = () => {
   const [state, setState] = useState(false);
 
   const onClick = () => {
-    copy("npx storybook@latest init");
+    copy('npx storybook@latest init');
     setState(true);
-    setTimeout(() => { setState(false); }, 2000);
+    setTimeout(() => {
+      setState(false);
+    }, 2000);
   };
 
   return (
@@ -21,14 +23,16 @@ export const InitCommand: FC = ({}) => {
       <span>~</span>npx storybook@latest init
       <CopyIcon />
       <AnimatePresence>
-        {state ? <motion.div
+        {state ? (
+          <motion.div
             animate={{ opacity: 1 }}
             className="absolute bg-white top-0 left-0 w-full h-full text-black flex items-center justify-center gap-2"
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
           >
             <CheckIcon /> Copied!
-          </motion.div> : null}
+          </motion.div>
+        ) : null}
       </AnimatePresence>
     </button>
   );

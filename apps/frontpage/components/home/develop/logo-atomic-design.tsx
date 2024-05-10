@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export function LogoAtomicDesign(props: Props) {
+export function LogoAtomicDesign() {
   return (
     <svg
       height="36"

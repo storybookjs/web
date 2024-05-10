@@ -1,18 +1,18 @@
-import fs from "node:fs";
-import type { DetailedHTMLProps, FC, HTMLAttributes } from "react";
+import fs from 'node:fs';
+import type { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 
 type ImageProps = DetailedHTMLProps<
   HTMLAttributes<HTMLVideoElement>,
   HTMLVideoElement
 >;
 
-interface Props extends ImageProps {
+interface VideoProps extends ImageProps {
   activeVersion: string;
   src?: string;
 }
 
-export const Video: FC<Props> = ({ src, activeVersion }) => {
-  const pathWithoutRoot = src?.replace("../_assets/", "");
+export const Video: FC<VideoProps> = ({ src, activeVersion }) => {
+  const pathWithoutRoot = src?.replace('../_assets/', '');
   const path = `/docs/${activeVersion}/${pathWithoutRoot}`;
   const localPath = `public${path}`;
 

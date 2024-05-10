@@ -1,16 +1,11 @@
-import type {
-  CodeSnippetsFiltersProps,
-  CodeSnippetsProps} from '@repo/utils';
-import {
-  languages,
-  packageManagers,
-} from '@repo/utils';
+import type { CodeSnippetsFiltersProps, CodeSnippetsProps } from '@repo/utils';
+import { languages, packageManagers } from '@repo/utils';
 
-interface Props {
+interface GetFiltersProps {
   codeSnippetsContent: CodeSnippetsProps[];
 }
 
-export const getFilters = ({ codeSnippetsContent }: Props) => {
+export const getFilters = ({ codeSnippetsContent }: GetFiltersProps) => {
   const listOfLanguages = [
     ...new Set(codeSnippetsContent.map((obj) => obj.language)),
   ].filter((r) => r !== null) as string[];

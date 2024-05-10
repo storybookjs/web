@@ -1,12 +1,12 @@
 'use client';
 
 import { cn } from '@repo/utils';
-import type { ElementOrSelector} from 'framer-motion';
+import type { ElementOrSelector } from 'framer-motion';
 import { inView } from 'framer-motion';
-import type { Dispatch, FC, SetStateAction} from 'react';
+import type { Dispatch, FC, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { useScrollDirection } from 'react-use-scroll-direction';
-import { ScrollArea } from "../ui/scroll-area";
+import { ScrollArea } from '../ui/scroll-area';
 
 interface Heading {
   id: number;
@@ -65,11 +65,12 @@ const Element: FC<ElementProps> = ({ heading, isInView, setIsInView }) => {
         ? setIsInView((value) => [...new Set([heading.slug, ...value])])
         : setIsInView((value) => [...new Set([...value, heading.slug])]);
 
-      return () =>
-        { setIsInView((value) => value.filter((slug) => slug !== heading.slug)); };
+      return () => {
+        setIsInView((value) => value.filter((slug) => slug !== heading.slug));
+      };
     });
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- This is intentional
   }, [isScrollingUp]);
 
   const active =

@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@repo/utils';
-import { AspectRatio } from "../../ui/aspect-ratio";
+import { AspectRatio } from '../../ui/aspect-ratio';
 
 const players = {
   blue: '/home/share/avatar-1.png',
@@ -120,6 +120,7 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
       <img
         className="border-2 border-white rounded-[50%] shadow-sm block w-[28%] h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         src={players[type]}
+        alt="Player"
       />
     </AspectRatio>
   </MotionComponent>

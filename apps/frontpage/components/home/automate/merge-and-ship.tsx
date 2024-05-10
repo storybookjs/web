@@ -1,27 +1,27 @@
-import React, { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 const checksVariants = {
   initial: {
-    borderColor: "transparent",
+    borderColor: 'transparent',
     boxShadow:
-      "0px 8.808px 50px 0px rgba(0, 0, 0, 0.3), 0px 6.406px 18.417px 0px rgba(0, 0, 0, 0.1)",
+      '0px 8.808px 50px 0px rgba(0, 0, 0, 0.3), 0px 6.406px 18.417px 0px rgba(0, 0, 0, 0.1)',
   },
   checking: {
-    borderColor: "rgba(254, 187, 48, 1)",
+    borderColor: 'rgba(254, 187, 48, 1)',
     boxShadow:
-      "0px 8.808px 50px 0px rgba(254, 187, 48, 0.3), 0px 6.406px 18.417px 0px rgba(254, 210, 48, 0.1)",
+      '0px 8.808px 50px 0px rgba(254, 187, 48, 0.3), 0px 6.406px 18.417px 0px rgba(254, 210, 48, 0.1)',
     transition: {
       duration: 0.4,
     },
   },
   checked: {
-    borderColor: "green",
+    borderColor: 'green',
     boxShadow:
-      "0px 8.808px 50px 0px rgba(133, 191, 60, 0.3), 0px 6.406px 18.417px 0px rgba(102, 191, 60, 0.1)",
+      '0px 8.808px 50px 0px rgba(133, 191, 60, 0.3), 0px 6.406px 18.417px 0px rgba(102, 191, 60, 0.1)',
     transition: {
       duration: 0.4,
-      when: "afterChildren",
+      when: 'afterChildren',
       staggerChildren: 0.1,
     },
   },
@@ -42,41 +42,42 @@ const textVariantsChecked = {
 const checks = [
   {
     id: 1,
-    label: "Storybook Publish",
-    checking: "Publishing UI…",
-    done: "Ready to share!",
+    label: 'Storybook Publish',
+    checking: 'Publishing UI…',
+    done: 'Ready to share!',
   },
   {
     id: 2,
-    label: "UI Tests",
-    checking: "Running tests…",
-    done: "2 changes accepted as baselines",
+    label: 'UI Tests',
+    checking: 'Running tests…',
+    done: '2 changes accepted as baselines',
   },
   {
     id: 3,
-    label: "UI Review",
-    checking: "Awaiting reviewers…",
-    done: "3 discussions resolved",
+    label: 'UI Review',
+    checking: 'Awaiting reviewers…',
+    done: '3 discussions resolved',
   },
 ];
 
 export function MergeAndShip() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: "all" });
-  const [state, setState] = useState("initial");
+  const isInView = useInView(ref, { once: true, amount: 'all' });
+  const [state, setState] = useState('initial');
 
   useEffect(() => {
-    let id: NodeJS.Timeout;
     if (isInView) {
-      setState("checking");
-      id = setTimeout(() => {
-        setState("checked");
+      setState('checking');
+      const id = setTimeout(() => {
+        setState('checked');
       }, 1000);
+
+      return () => {
+        clearTimeout(id);
+      };
     }
 
-    return () => {
-      clearTimeout(id);
-    };
+    return undefined;
   }, [isInView]);
 
   return (
@@ -93,7 +94,7 @@ export function MergeAndShip() {
           <div className="py-4 px-[18px] flex items-center gap-2 border-b border-zinc-300">
             <motion.div
               className="w-7 h-7"
-              style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
+              style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
               transition={{ duration: 0.4, delay: 1.4 }}
               variants={statusVariants}
             >
@@ -101,15 +102,15 @@ export function MergeAndShip() {
                 alt=""
                 className="w-full absolute top-0 left-0 right-0 bottom-0 z-[2]"
                 src="/home/automate/ci-check-yellow.svg"
-                style={{ backfaceVisibility: "hidden", transform: "rotate(0)" }}
+                style={{ backfaceVisibility: 'hidden', transform: 'rotate(0)' }}
               />
               <img
                 alt=""
                 className="w-full absolute top-0 left-0 right-0 bottom-0"
                 src="/home/automate/ci-check-green.svg"
                 style={{
-                  backfaceVisibility: "hidden",
-                  transform: "rotateY(180deg)",
+                  backfaceVisibility: 'hidden',
+                  transform: 'rotateY(180deg)',
                 }}
               />
             </motion.div>
@@ -137,7 +138,7 @@ export function MergeAndShip() {
             >
               <motion.div
                 className="w-6 h-6"
-                style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
+                style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
                 transition={{ duration: 0.4 }}
                 variants={statusVariants}
               >
@@ -146,8 +147,8 @@ export function MergeAndShip() {
                   className="w-full absolute top-0 left-0 right-0 bottom-0 z-[2]"
                   src="/home/automate/progress.svg"
                   style={{
-                    backfaceVisibility: "hidden",
-                    transform: "rotateY(0deg)",
+                    backfaceVisibility: 'hidden',
+                    transform: 'rotateY(0deg)',
                   }}
                 />
                 <img
@@ -155,8 +156,8 @@ export function MergeAndShip() {
                   className="w-full absolute top-0 left-0 right-0 bottom-0"
                   src="/home/automate/passed.svg"
                   style={{
-                    backfaceVisibility: "hidden",
-                    transform: "rotateY(180deg)",
+                    backfaceVisibility: 'hidden',
+                    transform: 'rotateY(180deg)',
                   }}
                 />
               </motion.div>

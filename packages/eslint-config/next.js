@@ -53,5 +53,9 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     // TODO: Remove this override once the issues are resolved
     '@typescript-eslint/no-empty-function': 'off',
+    // TODO: Remove this override once the issues are resolved
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    // TODO: Remove this override once the issues are resolved
+    'react/function-component-definition': 'off',
   },
 };

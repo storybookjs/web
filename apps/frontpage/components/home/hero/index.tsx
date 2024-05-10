@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions -- TODO: Add missing onKeyDown */
+/* eslint-disable jsx-a11y/click-events-have-key-events -- TODO: Add missing onKeyDown */
 'use client';
 
 import Link from 'next/link';
@@ -64,10 +66,12 @@ export function Hero({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSlide((slide) => (slide === 4 ? 1 : slide + 1));
+      setSlide((s) => (s === 4 ? 1 : s + 1));
     }, 3000);
 
-    return () => { clearInterval(interval); };
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -141,14 +145,18 @@ export function Hero({
         <div className="flex items-center justify-between w-full h-20 md:hidden">
           <div
             className="flex items-center justify-center w-10 h-10 text-white rounded-full"
-            onClick={() => { setSlide(slide === 1 ? 4 : slide - 1); }}
+            onClick={() => {
+              setSlide(slide === 1 ? 4 : slide - 1);
+            }}
           >
             <ChevronLeftIcon />
           </div>
           <div className="text-md">{features[slide - 1]}</div>
           <div
             className="flex items-center justify-center w-10 h-10 text-white rounded-full"
-            onClick={() => { setSlide(slide === 4 ? 1 : slide + 1); }}
+            onClick={() => {
+              setSlide(slide === 4 ? 1 : slide + 1);
+            }}
           >
             <ChevronRightIcon />
           </div>
@@ -170,7 +178,10 @@ export function Hero({
                 i === slide - 1 && 'text-white',
               )}
               key={label}
-              onClick={() => { setSlide(i + 1); }}
+              onClick={() => {
+                setSlide(i + 1);
+              }}
+              type="button"
             >
               {label}
             </button>

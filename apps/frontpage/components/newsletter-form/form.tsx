@@ -1,14 +1,15 @@
+/* eslint-disable import/named -- TODO: Fix this when React 19 is out */
 'use client';
 
 import { cn } from '@repo/utils';
-import type { FC} from 'react';
+import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { CloseIcon } from '@storybook/icons';
 import { Button } from '../ui/button';
 import { saveNewsletter } from './actions';
 
-interface Props {
+interface NewsletterFormProps {
   variant?: 'system' | 'dark';
 }
 
@@ -32,7 +33,7 @@ function SubmitButton() {
   );
 }
 
-export const NewsletterForm: FC<Props> = ({ variant }) => {
+export const NewsletterForm: FC<NewsletterFormProps> = ({ variant }) => {
   const [state, formAction] = useFormState(saveNewsletter, initialState);
   const [status, setStatus] = useState<'idle' | 'done' | 'error'>('idle');
   const [email, setEmail] = useState('');
@@ -73,7 +74,9 @@ export const NewsletterForm: FC<Props> = ({ variant }) => {
         )}
         id="email"
         name="email"
-        onChange={(e) => { setEmail(e.target.value); }}
+        onChange={(e) => {
+          setEmail(e.target.value);
+        }}
         placeholder="you@domain.com"
         type="text"
         value={email}

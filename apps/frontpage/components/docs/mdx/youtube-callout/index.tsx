@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { ChevronSmallDownIcon, YoutubeIcon } from "@storybook/icons";
-import LiteYouTubeEmbed from "react-lite-youtube-embed";
-import styles from "./styles.module.css";
+import { ChevronSmallDownIcon, YoutubeIcon } from '@storybook/icons';
+import LiteYouTubeEmbed from 'react-lite-youtube-embed';
+import styles from './styles.module.css';
 
 interface YouTubeCalloutProps {
   id: string;
@@ -17,8 +17,7 @@ interface YouTubeCalloutProps {
 
 export function YouTubeCallout({
   id,
-  open,
-  summary = "Watch a video tutorial on the Storybook channel",
+  summary = 'Watch a video tutorial on the Storybook channel',
   title,
   params,
 }: YouTubeCalloutProps) {

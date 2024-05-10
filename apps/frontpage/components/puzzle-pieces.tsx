@@ -1,14 +1,10 @@
+/* eslint-disable no-loss-of-precision -- TODO */
+/* eslint-disable @typescript-eslint/no-loss-of-precision -- TODO */
 'use client';
 
-/* eslint-disable no-loss-of-precision */
 import React, { useRef, useEffect } from 'react';
-import type {
-  MotionProps} from 'framer-motion';
-import {
-  motion,
-  transform,
-  useAnimationControls,
-} from 'framer-motion';
+import type { MotionProps } from 'framer-motion';
+import { motion, transform, useAnimationControls } from 'framer-motion';
 
 const colors = [
   '#FC521F',
@@ -726,7 +722,7 @@ export function PuzzlePieces() {
       return transform(d, [0, MAX_DISTANCE], [0, 1]);
     });
 
-    rippleControls.start('visible');
+    void rippleControls.start('visible');
   }
 
   useEffect(() => {

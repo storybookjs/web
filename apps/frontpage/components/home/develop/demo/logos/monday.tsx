@@ -1,11 +1,7 @@
-import type { FC } from "react";
-import React from "react";
+import type { FC } from 'react';
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export const LogoMonday: FC = (props: Props) => {
+export const LogoMonday: FC = () => {
   return (
     <svg
       className="w-full h-full"

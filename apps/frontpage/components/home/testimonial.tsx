@@ -17,7 +17,6 @@ export const Testimonial: FC<TestimonialProps> = ({
   name,
   jobTitle,
   logo,
-  companyName,
   ...props
 }) => (
   <div className={cn(container)} {...props}>

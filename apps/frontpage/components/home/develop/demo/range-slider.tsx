@@ -1,14 +1,14 @@
-import React from "react";
-import type { MotionValue } from "framer-motion";
-import { motion, useTransform } from "framer-motion";
+import React from 'react';
+import type { MotionValue } from 'framer-motion';
+import { motion, useTransform } from 'framer-motion';
 
 interface RangeSliderProps {
   activeStory: string;
-  scrollProgress: MotionValue;
-  appearProgress: MotionValue;
+  scrollProgress: MotionValue<number>;
+  appearProgress: MotionValue<number>;
 }
 
-const stories = ["default", "input-range", "no-selection"];
+const stories = ['default', 'input-range', 'no-selection'];
 
 export function RangeSlider({
   appearProgress,
@@ -16,10 +16,10 @@ export function RangeSlider({
   activeStory,
   ...props
 }: RangeSliderProps) {
-  const x = useTransform(scrollProgress, [0, 1], ["0%", "-91%"], {
+  const x = useTransform(scrollProgress, [0, 1], ['0%', '-91%'], {
     clamp: true,
   });
-  const y = useTransform(scrollProgress, [0, 1], ["0%", "31%"], {
+  const y = useTransform(scrollProgress, [0, 1], ['0%', '31%'], {
     clamp: true,
   });
 
@@ -30,8 +30,8 @@ export function RangeSlider({
   const filter = useTransform(
     appearProgress,
     [0, 0.5, 1],
-    ["grayscale(100%)", "grayscale(100%)", "grayscale(0%)"],
-    { clamp: true }
+    ['grayscale(100%)', 'grayscale(100%)', 'grayscale(0%)'],
+    { clamp: true },
   );
   return (
     <motion.div

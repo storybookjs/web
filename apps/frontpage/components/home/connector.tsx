@@ -1,11 +1,11 @@
 import React from 'react';
-import type { MotionValue} from 'framer-motion';
+import type { MotionValue } from 'framer-motion';
 import { motion, useTransform } from 'framer-motion';
 import { cn } from '@repo/utils';
 
 interface ConnectorProps {
   name: string;
-  progress: MotionValue;
+  progress: MotionValue<number>;
   className?: string;
 }
 

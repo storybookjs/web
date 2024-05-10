@@ -1,13 +1,13 @@
-import React from "react";
-import type { MotionValue } from "framer-motion";
-import { motion, useTransform } from "framer-motion";
+import React from 'react';
+import type { MotionValue } from 'framer-motion';
+import { motion, useTransform } from 'framer-motion';
 
 interface AppProps {
-  scrollProgress: MotionValue;
+  scrollProgress: MotionValue<number>;
 }
 
 export function App({ scrollProgress }: AppProps) {
-  const x = useTransform(scrollProgress, [0, 1], ["0%", "-109%"]);
+  const x = useTransform(scrollProgress, [0, 1], ['0%', '-109%']);
   const opacity = useTransform(scrollProgress, [0, 0.5, 1], [0, 1, 1]);
 
   return (

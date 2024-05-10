@@ -1,6 +1,5 @@
-import { LinkIcon } from "@storybook/icons";
-import type { DetailedHTMLProps, HTMLAttributes} from "react";
-import { FC, ReactNode } from "react";
+import { LinkIcon } from '@storybook/icons';
+import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 type H1Props = DetailedHTMLProps<
   HTMLAttributes<HTMLHeadingElement>,

@@ -24,6 +24,7 @@ export function UIReview() {
               className="block h-[32%] w-auto shadow-lg"
               key={id}
               src={image}
+              alt="Comment from a user"
             />
           ))}
         </div>

@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export function LogoMozilla(props: Props) {
+export function LogoMozilla() {
   return (
     <svg
       className="w-full h-full"
