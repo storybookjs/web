@@ -21,7 +21,7 @@ async function clean(): Promise<void> {
 
 async function fetchAndExtract(version: DocsVersion): Promise<void> {
   // eslint-disable-next-line no-console -- Showing off console.log
-  console.log(`♠︎ Fetching docs for ${version.id}...`);
+  console.log(` ♠︎ Fetching docs for ${version.id}...`);
 
   let url: string | null = null;
   if (version.branch)
@@ -116,7 +116,7 @@ const arrayOfFetches = docsVersions.map((version) => fetchAndExtract(version));
 
 void Promise.all(arrayOfFetches).then(() => {
   // eslint-disable-next-line no-console -- Showing off console.log
-  console.log('Done!');
+  console.log(' Done!');
   // eslint-disable-next-line no-console -- Showing off console.log
   console.log('');
 });
