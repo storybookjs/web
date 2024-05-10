@@ -16,11 +16,15 @@ const npmApi = [
   `${npmApiBase}/@storybook/preact`,
 ];
 
+interface JsonResponse {
+  downloads: number;
+}
+
 export const fetchNpmDownloads = async () => {
   try {
     const promises = npmApi.map(async (uri) => {
       const response = await fetch(uri);
-      const json = await response.json();
+      const json = await (response.json() as Promise<JsonResponse>);
 
       return json.downloads;
     });
@@ -40,7 +44,6 @@ export const fetchNpmDownloads = async () => {
       formattedResult: npmDownloadsDisplay,
     };
   } catch (error) {
-    console.log(error);
     return { number: 0, formattedResult: '0' };
   }
 };

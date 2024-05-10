@@ -1,4 +1,4 @@
-export type Meta = {
+export interface Meta {
   path: string;
   title: string;
   shortTitle: string;
@@ -6,7 +6,7 @@ export type Meta = {
   isRoot: boolean;
   group: string | null;
   tab: string | null;
-};
+}
 
 export interface TreeMetaProps {
   title: string;

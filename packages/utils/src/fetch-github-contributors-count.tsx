@@ -1,4 +1,7 @@
-export const fetchGithubContributorCount = async () => {
+export const fetchGithubContributorCount = async (): Promise<{
+  number: string | number | undefined;
+  formattedResult: string;
+}> => {
   try {
     // The trick here is to enable pagination to 1 and
     // then read the Link header to get the last page number
@@ -19,7 +22,7 @@ export const fetchGithubContributorCount = async () => {
     const link = linkHeader ? linkHeader.split(';')[1] : null;
 
     // Parse contributor count
-    const match = link && /&page=(\d+)/.exec(link);
+    const match = link && /&page=(?<temp1>\d+)/.exec(link);
     const contributorCount = match ? match[1] : 0;
 
     return {
@@ -27,7 +30,6 @@ export const fetchGithubContributorCount = async () => {
       formattedResult: `${contributorCount?.toLocaleString()}+`,
     };
   } catch (error) {
-    console.log(error);
     return { number: 0, formattedResult: '0' };
   }
 };

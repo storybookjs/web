@@ -1,4 +1,4 @@
-export type DocsVersion = {
+export interface DocsVersion {
   /** Used for visual display, e.g. the docs sidebar */
   label: string;
   /** Used for routes */
@@ -6,7 +6,7 @@ export type DocsVersion = {
   branch?: string;
   commit?: string;
   tag?: string;
-};
+}
 
 /**
  * ********************************************
