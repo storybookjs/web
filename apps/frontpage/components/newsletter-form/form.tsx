@@ -1,11 +1,12 @@
 'use client';
 
 import { cn } from '@repo/utils';
-import { FC, useEffect, useState } from 'react';
-import { Button } from '../ui/button';
-import { saveNewsletter } from './actions';
+import type { FC} from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { CloseIcon } from '@storybook/icons';
+import { Button } from '../ui/button';
+import { saveNewsletter } from './actions';
 
 interface Props {
   variant?: 'system' | 'dark';
@@ -20,11 +21,11 @@ function SubmitButton() {
 
   return (
     <Button
-      variant="solid"
-      type="submit"
-      size="md"
-      className="absolute -translate-y-1/2 right-2 top-1/2"
       aria-disabled={pending}
+      className="absolute -translate-y-1/2 right-2 top-1/2"
+      size="md"
+      type="submit"
+      variant="solid"
     >
       Subscribe
     </Button>
@@ -42,7 +43,7 @@ export const NewsletterForm: FC<Props> = ({ variant }) => {
   }, [state.message]);
 
   return (
-    <form className="relative w-full max-w-[360px] h-12" action={formAction}>
+    <form action={formAction} className="relative w-full max-w-[360px] h-12">
       {(status === 'done' || status === 'error') && (
         <div
           className={cn(
@@ -66,20 +67,20 @@ export const NewsletterForm: FC<Props> = ({ variant }) => {
       )}
 
       <input
-        type="text"
-        id="email"
-        name="email"
-        placeholder="you@domain.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
         className={cn(
           'rounded-md pl-4 pr-[100px] w-full h-full transition-color bg-white text-zinc-800',
           variant === 'system' && 'border border-zinc-200',
         )}
+        id="email"
+        name="email"
+        onChange={(e) => { setEmail(e.target.value); }}
+        placeholder="you@domain.com"
+        type="text"
+        value={email}
       />
       <SubmitButton />
       <p aria-live="polite" className="sr-only" role="status">
-        {state?.message}
+        {state.message}
       </p>
     </form>
   );

@@ -3,13 +3,13 @@ import {
   GithubIcon,
   SearchIcon,
 } from '@storybook/icons';
-import { FC } from 'react';
+import type { FC } from 'react';
+import { SearchIcon as SearchIllustration } from "../icons/search";
 import { Section } from './section';
-import { SearchIcon as SearchIllustration } from '../../components/icons/search';
 
 export const Support: FC = () => {
   return (
-    <Section id="support" className="relative mb-8 md:mb-16">
+    <Section className="relative mb-8 md:mb-16" id="support">
       <h2 className="mb-2 text-2xl font-bold">Get Support</h2>
       <p className="mb-8">
         Storybook&apos;s thriving community can help answer your questions.
@@ -44,8 +44,8 @@ export const Support: FC = () => {
               Share your issues with our community and get help from other devs.
             </p>
             <a
-              href="https://github.com/storybookjs/storybook/discussions"
               className="flex items-center gap-2 text-blue-500"
+              href="https://github.com/storybookjs/storybook/discussions"
             >
               View GitHub Discussions
               <ChevronSmallRightIcon />
@@ -60,8 +60,8 @@ export const Support: FC = () => {
               Please report issues, someone else may have the same issue.
             </p>
             <a
-              href="https://github.com/storybookjs/storybook"
               className="flex items-center gap-2 text-blue-500"
+              href="https://github.com/storybookjs/storybook"
             >
               View GitHub Issues
               <ChevronSmallRightIcon />

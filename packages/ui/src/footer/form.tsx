@@ -1,13 +1,13 @@
-import { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 import {
   DiscordIcon,
   GithubIcon,
   TwitterIcon,
   YoutubeIcon,
 } from '@storybook/icons';
-import { FooterProps } from '.';
 import { cn } from '@repo/utils';
 import { NewsletterForm } from '../newsletter-form/form';
+import type { FooterProps } from '.';
 
 interface FormProps {
   variant?: FooterProps['variant'];
@@ -53,15 +53,15 @@ interface CircleProps {
 const Circle: FC<CircleProps> = ({ children, href, variant }) => {
   return (
     <a
-      href={href}
-      target="_blank"
-      rel="noreferrer"
       className={cn(
         'flex items-center justify-center border border-zinc-200 rounded-full h-12 w-12 hover:-translate-y-1 transition-all',
         variant === 'home' && 'border border-zinc-700 hover:border-zinc-400',
         variant !== 'home' &&
           'bg-white hover:border-zinc-400 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:border-zinc-500',
       )}
+      href={href}
+      rel="noreferrer"
+      target="_blank"
     >
       {children}
     </a>

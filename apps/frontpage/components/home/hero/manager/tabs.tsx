@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import {
   ChevronSmallDownIcon,
   CloseIcon,
@@ -7,7 +7,7 @@ import {
 import { cn } from '@repo/utils';
 
 export const Tabs: FC<{ active?: number }> = ({ active = 0 }) => {
-  let tabs = [
+  const tabs = [
     'Controls',
     'Interactions',
     'Visual tests',
@@ -20,7 +20,6 @@ export const Tabs: FC<{ active?: number }> = ({ active = 0 }) => {
       <div className="flex h-full">
         {tabs.map((label, i) => (
           <div
-            key={label}
             className={cn(
               'h-full flex items-center text-sm px-4 font-bold text-[#76828B] flex-shrink-0',
               i === 2 && 'hidden md:flex',
@@ -28,6 +27,7 @@ export const Tabs: FC<{ active?: number }> = ({ active = 0 }) => {
               i === 4 && 'hidden lg:flex',
               i === active && 'border-b-2 border-b-blue-500 text-blue-500',
             )}
+            key={label}
           >
             {label}
           </div>

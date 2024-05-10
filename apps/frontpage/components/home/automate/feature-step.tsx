@@ -1,7 +1,8 @@
 import { cn } from '@repo/utils';
 import { CheckIcon, ChevronSmallRightIcon } from '@storybook/icons';
 import Link from 'next/link';
-import React, { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
+import React from 'react';
 
 interface FeatureStepProps {
   icon?: ReactNode;
@@ -35,8 +36,8 @@ export const FeatureStep: FC<FeatureStepProps> = ({
     </div>
     <div className="mb-5 text-center text-white">{description}</div>
     <Link
-      href={href}
       className="flex items-center gap-2 font-bold text-blue-500"
+      href={href}
     >
       {linkLabel}
       <ChevronSmallRightIcon />

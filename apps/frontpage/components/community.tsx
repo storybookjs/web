@@ -98,8 +98,8 @@ export function Community() {
 
   useEffect(() => {
     const pauseVideo = () => {
-      videoBRef?.current && videoBRef.current.pause();
-      videoBRef?.current &&
+      videoBRef.current && videoBRef.current.pause();
+      videoBRef.current &&
         videoBRef.current.removeEventListener('loadeddata', pauseVideo);
     };
 
@@ -111,71 +111,71 @@ export function Community() {
 
   return (
     <div
-      ref={sectionRef}
       className="grid grid-cols-[repeat(4,_1fr)] auto-rows-[280px] gap-8"
+      ref={sectionRef}
     >
       <div className="relative col-[1_/_-1] rounded-lg bg-zinc-600 sm:col-[1_/_3]">
         <AnimatePresence initial={false}>
           <motion.div
+            animate="center"
             className="absolute top-0 bottom-0 left-0 right-0 bg-center bg-no-repeat bg-cover rounded-lg"
+            exit="exit"
+            initial="enter"
             key={activeIndex.img}
             style={{ backgroundImage: `url('${images[activeIndex.img]}')` }}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
             transition={{
               opacity: { duration: 0.4 },
             }}
+            variants={variants}
           />
         </AnimatePresence>
       </div>
       <a
         className="relative col-[1_/3] rounded-lg bg-zinc-600 sm:col-[3_/4]"
         href={videosA[activeIndex.videoA]?.link}
-        target="_blank"
         rel="noopener nofollow noreferrer"
+        target="_blank"
       >
         <AnimatePresence initial={false}>
           <motion.video
-            className="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full overflow-hidden rounded-lg"
-            key={activeIndex.videoA}
-            variants={variants}
-            initial="enter"
             animate="center"
+            autoPlay
+            className="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full overflow-hidden rounded-lg"
             exit="exit"
+            initial="enter"
+            key={activeIndex.videoA}
+            muted
+            playsInline
+            src={videosA[activeIndex.videoA]?.src}
             transition={{
               opacity: { duration: 0.8 },
             }}
-            src={videosA[activeIndex.videoA]?.src}
-            autoPlay
-            playsInline
-            muted
+            variants={variants}
           />
         </AnimatePresence>
       </a>
       <a
         className="relative col-[3_/5] rounded-lg bg-zinc-600 sm:col-[4_/5]"
         href={videosB[activeIndex.videoB]?.link}
-        target="_blank"
         rel="noopener nofollow noreferrer"
+        target="_blank"
       >
         <AnimatePresence initial={false}>
           <motion.video
-            className="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full overflow-hidden rounded-lg"
-            ref={videoBRef}
-            key={activeIndex.videoB}
-            variants={variants}
-            initial="enter"
             animate="center"
+            autoPlay
+            className="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full overflow-hidden rounded-lg"
             exit="exit"
+            initial="enter"
+            key={activeIndex.videoB}
+            muted
+            playsInline
+            ref={videoBRef}
+            src={videosB[activeIndex.videoB]?.src}
             transition={{
               opacity: { duration: 0.8 },
             }}
-            src={videosB[activeIndex.videoB]?.src}
-            autoPlay
-            playsInline
-            muted
+            variants={variants}
           />
         </AnimatePresence>
       </a>

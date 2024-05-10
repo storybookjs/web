@@ -1,12 +1,12 @@
 import { Footer, Header } from '@repo/ui';
 import { fetchGithubCount } from '@repo/utils';
-import { PuzzlePieces } from '../components/puzzle-pieces';
 import {
   ChevronSmallRightIcon,
   DiscordIcon,
   GithubIcon,
   SearchIcon,
 } from '@storybook/icons';
+import { PuzzlePieces } from '../components/puzzle-pieces';
 import { SearchIcon as SearchIllustration } from '../components/icons/search';
 
 export default async function NotFound() {
@@ -14,7 +14,7 @@ export default async function NotFound() {
 
   return (
     <div>
-      <Header variant="system" githubCount={githubCount} />
+      <Header githubCount={githubCount} variant="system" />
       <div className="m-auto max-w-[960px] flex flex-col items-center pt-24 px-8 mb-24">
         <div className="w-full sm:w-[460px] sm:h-[460px] relative flex items-center justify-center flex-col gap-4 mb-24 aspect-square">
           <h2 className="relative z-10 text-5xl font-bold">404</h2>
@@ -54,8 +54,8 @@ export default async function NotFound() {
                 online.
               </p>
               <a
-                href="https://discord.gg/storybook"
                 className="flex items-center gap-2 text-blue-500"
+                href="https://discord.gg/storybook"
               >
                 Chat now
                 <ChevronSmallRightIcon />
@@ -70,8 +70,8 @@ export default async function NotFound() {
                 Please report issues, someone else may have the same issue.
               </p>
               <a
-                href="https://github.com/storybookjs/storybook"
                 className="flex items-center gap-2 text-blue-500"
+                href="https://github.com/storybookjs/storybook"
               >
                 View GitHub Issues
                 <ChevronSmallRightIcon />

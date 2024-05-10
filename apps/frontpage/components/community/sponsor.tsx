@@ -1,11 +1,11 @@
-import { FC } from 'react';
-import { Button } from '../ui/button';
+import type { FC } from 'react';
 import Image from 'next/image';
+import { Button } from '../ui/button';
 import { Section } from './section';
 
 export const Sponsor: FC = () => {
   return (
-    <Section id="sponsor" className="relative">
+    <Section className="relative" id="sponsor">
       <h2 className="font-bold text-2xl mb-2">Sponsor the community</h2>
       <p className="mb-8">
         Donations help the community keep going. They are used for web hosting,
@@ -13,11 +13,11 @@ export const Sponsor: FC = () => {
         production.
       </p>
       <div className="flex mb-12">
-        <Button asChild variant="solid" rounded="full">
+        <Button asChild rounded="full" variant="solid">
           <a
             href="https://opencollective.com/storybook"
-            target="_blank"
             rel="noreferrer"
+            target="_blank"
           >
             Donate on Open Collective
           </a>
@@ -25,19 +25,19 @@ export const Sponsor: FC = () => {
       </div>
       <ul className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-8 gap-4">
         {sponsors.map((sponsor) => (
-          <li key={sponsor.name} className="w-12 h-12 flex-shrink-0">
+          <li className="w-12 h-12 flex-shrink-0" key={sponsor.name}>
             <a
-              href={sponsor.url}
-              target="_blank"
-              rel="noreferrer"
               className="w-12 h-12 block relative"
+              href={sponsor.url}
+              rel="noreferrer"
+              target="_blank"
             >
               <Image
-                src={sponsor.image}
                 alt={sponsor.name}
-                fill
                 className="object-contain"
+                fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                src={sponsor.image}
               />
             </a>
           </li>

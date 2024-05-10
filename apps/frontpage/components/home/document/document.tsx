@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import Link from 'next/link';
-import { Branch, Document as Doc, Overlap, Search } from './icons';
+import { cn, container } from '@repo/utils';
 import { Testimonial } from '../testimonial';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
+import { Branch, Document as Doc, Overlap, Search } from './icons';
 import { LogoGitlab } from './logo-gitlab';
-import { cn, container } from '@repo/utils';
 
 const features = [
   {
@@ -59,10 +59,10 @@ export const Document: FC = () => {
     <div className="pt-12 border-b border-zinc-600 sm:pt-20 md:pt-28">
       {features.map((feature) => (
         <Link
-          key={feature.title}
-          rel="preload"
           as="video"
           href={feature.media}
+          key={feature.title}
+          rel="preload"
         />
       ))}
       <div
@@ -82,16 +82,16 @@ export const Document: FC = () => {
         </div>
       </div>
       <IllustratedFeatureList
-        features={features}
         alignment="right"
         bgColor="#c3eeaf"
+        features={features}
       />
       <Testimonial
-        text="“Storybook has made developing components more streamlined by allowing us to easily include technical documentation within our design system!”"
         avatarUrl="https://avatars0.githubusercontent.com/u/3028593?s=460&v=4"
-        name="Taurie Davis"
         jobTitle="Author of Building Design Systems"
         logo={<LogoGitlab />}
+        name="Taurie Davis"
+        text="“Storybook has made developing components more streamlined by allowing us to easily include technical documentation within our design system!”"
       />
     </div>
   );

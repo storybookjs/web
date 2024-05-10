@@ -1,8 +1,9 @@
-import path from 'path';
+import path from 'node:path';
 import fs from 'fs-extra';
 import fetch from 'node-fetch';
 import tar from 'tar';
-import { DocsVersion, docsVersions } from '@repo/utils';
+import type { DocsVersion} from '@repo/utils';
+import { docsVersions } from '@repo/utils';
 
 async function clean() {
   await fs.emptyDir(path.join(__dirname, '../content/docs'));

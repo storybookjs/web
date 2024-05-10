@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import type { FC} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   motion,
   useAnimate,
@@ -183,24 +184,24 @@ export const HeroDemo: FC = () => {
       ref={ref}
     >
       <motion.img
+        alt=""
         className="block h-auto absolute top-0 left-0 w-full"
+        height="830"
         src="/home/develop/storybook-frame.svg"
         width="1201"
-        height="830"
-        alt=""
       />
-      <Sidebar type="timeFrame" activeStory={activeStory} />
+      <Sidebar activeStory={activeStory} type="timeFrame" />
       <Controls
-        startTimeControls={startTimeControls}
         endTimeControls={endTimeControls}
+        startTimeControls={startTimeControls}
       />
       <TimeFrame activeStory={activeStory} />
       <img
+        alt=""
         className="block absolute w-[5.66%] h-auto top-[100%] left-[50%]"
         data-chromatic="ignore"
         ref={scopePointerControls}
         src="/home/develop/pointer.svg"
-        alt=""
       />
     </motion.div>
   );

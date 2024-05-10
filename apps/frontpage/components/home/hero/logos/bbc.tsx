@@ -4,7 +4,7 @@ interface Props {
   className?: string;
 }
 
-export const LogoBbc = (props: Props) => {
+export function LogoBbc(props: Props) {
   return (
     <svg
       className="w-full h-full"
@@ -18,4 +18,4 @@ export const LogoBbc = (props: Props) => {
       />
     </svg>
   );
-};
+}

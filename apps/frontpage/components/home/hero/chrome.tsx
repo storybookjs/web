@@ -1,6 +1,6 @@
 import { ArrowLeftIcon, ArrowRightIcon, RefreshIcon } from "@storybook/icons";
 
-export const Chrome = () => {
+export function Chrome() {
   return (
     <div className="w-full h-7 bg-[rgba(255,255,255,0.20)] rounded-t-md border-t border-l border-r border-[rgba(255,255,255,0.30)] flex items-center">
       <div className="flex-1 flex pl-3 items-center gap-5">
@@ -21,4 +21,4 @@ export const Chrome = () => {
       <div className="flex-1" />
     </div>
   );
-};
+}

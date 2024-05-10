@@ -4,13 +4,13 @@ interface Props {
   className?: string;
 }
 
-export const LogoAirbnb = (props: Props) => {
+export function LogoAirbnb(props: Props) {
   return (
     <svg
-      width="96"
+      fill="none"
       height="32"
       viewBox="0 0 120 40"
-      fill="none"
+      width="96"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g clipPath="url(#a)">
@@ -26,4 +26,4 @@ export const LogoAirbnb = (props: Props) => {
       </defs>
     </svg>
   );
-};
+}

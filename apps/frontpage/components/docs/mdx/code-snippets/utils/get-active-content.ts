@@ -1,4 +1,4 @@
-import { CodeSnippetsFiltersProps, CodeSnippetsProps } from '@repo/utils';
+import type { CodeSnippetsFiltersProps, CodeSnippetsProps } from '@repo/utils';
 
 interface Props {
   codeSnippetsContent: CodeSnippetsProps[];
@@ -27,7 +27,7 @@ export const getActiveContent = ({
     return false;
   });
 
-  let filterByLanguage = filterByPackageManager.filter((item) => {
+  const filterByLanguage = filterByPackageManager.filter((item) => {
     // If there is only one language, we don't need to filter
     if (filters.languages.length <= 1) return true;
 

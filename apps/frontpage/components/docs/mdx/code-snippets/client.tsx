@@ -1,12 +1,12 @@
 'use client';
 
-import { FC } from 'react';
+import type { FC } from 'react';
+import type { CodeSnippetsProps } from '@repo/utils';
+import { useDocs } from '../../../../app/docs/provider';
 import { CodeWrapper } from './wrapper';
 import { getFilters } from './utils/get-filters';
 import { getActiveContent } from './utils/get-active-content';
-import { useDocs } from '../../../../app/docs/provider';
 import { Dropdown } from './dropdown';
-import { CodeSnippetsProps } from '@repo/utils';
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[];
@@ -40,32 +40,28 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
 
   return (
     <CodeWrapper
-      title="Code Snippets"
       options={
         <>
-          {filters && filters.languages.length > 1 && (
-            <Dropdown
-              list={filters.languages}
-              activeId={activeLanguage}
-              type="language"
+          {filters && filters.languages.length > 1 ? <Dropdown
               action={setLanguage}
-            />
-          )}
-          {filters && filters.packageManagers.length > 1 && (
-            <Dropdown
-              list={filters.packageManagers}
-              activeId={activePackageManager}
-              type="packageManager"
+              activeId={activeLanguage}
+              list={filters.languages}
+              type="language"
+            /> : null}
+          {filters && filters.packageManagers.length > 1 ? <Dropdown
               action={setPackageManager}
-            />
-          )}
+              activeId={activePackageManager}
+              list={filters.packageManagers}
+              type="packageManager"
+            /> : null}
         </>
       }
+      title="Code Snippets"
     >
       {activeContent?.content ? (
         <section
           dangerouslySetInnerHTML={{
-            __html: activeContent?.content,
+            __html: activeContent.content,
           }}
         />
       ) : (

@@ -11,9 +11,9 @@ export function UIReview() {
     <figure className={cn(container)}>
       <div className="relative mt-12 mx-auto mb-[22%] md:mb-[160px] max-w-[715px] sm:mt-16">
         <img
+          alt=""
           className="block w-[55%]"
           src="/home/automate/datepicker-compact-week.svg"
-          alt=""
         />
         <div
           className="flex-none w-[52%] h-[132%] absolute right-0 top-0 flex flex-col justify-end gap-[2.5%]"

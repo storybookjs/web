@@ -1,7 +1,8 @@
-import { getVersion } from '../../../lib/get-version';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { renderers, docsVersions, TreeProps, cn } from '@repo/utils';
+import type { TreeProps} from '@repo/utils';
+import { renderers, docsVersions, cn } from '@repo/utils';
+import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
 import { generateDocsTree } from '../../../lib/get-tree';
@@ -61,26 +62,24 @@ export default async function Page({ params: { slug } }: Props) {
           {page.title || 'Title is missing'}
         </h1>
         <Renderers activeRenderer={renderers[0]?.id || ''} />
-        {page.tabs && page.tabs.length > 0 && (
-          <div className="flex items-center gap-8 border-b border-zinc-200">
+        {page.tabs && page.tabs.length > 0 ? <div className="flex items-center gap-8 border-b border-zinc-200">
             {page.tabs.map((tab) => {
               const isActive = tab.slug === `/docs/${slug.join('/')}`;
 
               return (
                 <Link
-                  key={tab.name}
-                  href={tab.slug}
                   className={cn(
                     'border-b -mb-px pb-2 hover:text-blue-500 transition-colors px-2 text-sm capitalize',
                     isActive && 'border-b border-blue-500 text-blue-500',
                   )}
+                  href={tab.slug}
+                  key={tab.name}
                 >
-                  {tab?.tab?.title || tab.title}
+                  {tab.tab?.title || tab.title}
                 </Link>
               );
             })}
-          </div>
-        )}
+          </div> : null}
         <article
           className={cn(
             '[&>details]:my-6',

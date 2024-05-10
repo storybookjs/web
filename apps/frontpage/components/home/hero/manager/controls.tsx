@@ -1,5 +1,5 @@
 import { cn } from '@repo/utils';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 const content = [
   {
@@ -36,7 +36,7 @@ export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
         Props
       </div>
       {content.map((item) => (
-        <div key={item.label} className="flex border-b border-b-[#D9E0E6]">
+        <div className="flex border-b border-b-[#D9E0E6]" key={item.label}>
           <div className="text-[13px] w-1/2 md:w-[28%] lg:w-[22%] pl-4 py-2">
             {item.label}
           </div>

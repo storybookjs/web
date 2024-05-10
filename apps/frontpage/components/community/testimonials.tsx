@@ -1,19 +1,19 @@
 import Image from "next/image";
-import { FC } from "react";
+import type { FC } from "react";
 
 export const Testimonials: FC = () => {
   return (
     <div className="flex flex-col md:flex-row gap-10 md:gap-12 lg:gap-20 mb-20">
       {testimonials.map((testimonial) => (
-        <div key={testimonial.name} className="flex-1">
+        <div className="flex-1" key={testimonial.name}>
           <div className="mb-4">“{testimonial.quote}”</div>
           <div className="flex gap-3">
             <Image
-              src={testimonial.avatarUrl}
-              width={40}
-              height={40}
               alt={testimonial.name}
               className="w-10 h-10 flex-shrink-0 rounded-full"
+              height={40}
+              src={testimonial.avatarUrl}
+              width={40}
             />
             <div>
               <div className="font-bold">{testimonial.name}</div>

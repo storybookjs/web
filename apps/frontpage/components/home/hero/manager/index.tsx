@@ -1,8 +1,8 @@
-import { FC } from "react";
+import type { FC } from "react";
+import { AnimatePresence } from "framer-motion";
 import { Sidebar } from "./sidebar";
 import { Toolbar } from "./toolbar";
 import { PanelControls } from "./panel-controls";
-import { AnimatePresence } from "framer-motion";
 import { Doc } from "./doc";
 import { PanelInteractions } from "./panel-interactions";
 import { Canvas } from "./canvas";

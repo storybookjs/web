@@ -1,5 +1,5 @@
-import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
-import fs from "fs";
+import fs from "node:fs";
+import type { DetailedHTMLProps, FC, HTMLAttributes } from "react";
 
 type ImageProps = DetailedHTMLProps<
   HTMLAttributes<HTMLVideoElement>,
@@ -21,7 +21,7 @@ export const Video: FC<Props> = ({ src, activeVersion }) => {
   if (!fileExists) return null;
 
   return (
-    <video autoPlay muted playsInline loop>
+    <video autoPlay loop muted playsInline>
       <source src={path} type="video/mp4" />
     </video>
   );

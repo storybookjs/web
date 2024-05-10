@@ -1,12 +1,12 @@
-import fs from 'fs';
-import { generateDocsTree } from './get-tree';
-import { firefoxThemeLight } from '../components/docs/mdx/code-snippets/themes/firefox-theme-vscode';
+import fs from 'node:fs';
 import rehypePrettyCode from 'rehype-pretty-code';
 import { compileMDX } from 'next-mdx-remote/rsc';
-import * as MDX from '../components/docs/mdx';
 import rehypeSlug from 'rehype-slug';
-import { DocsVersion } from '@repo/utils';
+import type { DocsVersion } from '@repo/utils';
 import { extractHeadings } from 'extract-md-headings';
+import * as MDX from '../components/docs/mdx';
+import { firefoxThemeLight } from '../components/docs/mdx/code-snippets/themes/firefox-theme-vscode';
+import { generateDocsTree } from './get-tree';
 
 const rehypePrettyCodeOptions = {
   theme: firefoxThemeLight,
@@ -35,7 +35,7 @@ export const getPageData = async (
   if (!newPath) return undefined;
 
   const file = await fs.promises.readFile(
-    process.cwd() + `/${newPath}`,
+    `${process.cwd()  }/${newPath}`,
     'utf8',
   );
 
@@ -83,20 +83,20 @@ export const getPageData = async (
     },
   });
 
-  const headings = extractHeadings(process.cwd() + `/${newPath}`);
+  const headings = extractHeadings(`${process.cwd()  }/${newPath}`);
 
   // Get Tabs
-  let pathToFiles = isLink
+  const pathToFiles = isLink
     ? `${rootPath}/${pathString}`.split('/').slice(0, -1).join('/')
     : `${rootPath}/${pathString}`;
 
   const parent = generateDocsTree(pathToFiles);
 
-  const sorted = parent?.sort((a, b) =>
-    a?.tab?.order && b?.tab?.order ? a.tab.order - b.tab.order : 0,
+  const sorted = parent.sort((a, b) =>
+    a.tab?.order && b.tab?.order ? a.tab.order - b.tab.order : 0,
   );
 
-  const index = sorted?.find((item) => item.name === 'index.mdx');
+  const index = sorted.find((item) => item.name === 'index.mdx');
 
   return {
     ...frontmatter,

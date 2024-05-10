@@ -1,16 +1,16 @@
 'use client';
 
-import { FC } from 'react';
+import type { FC } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronSmallDownIcon } from '@storybook/icons';
-import { CodeSnippetsFilter } from '@repo/utils';
+import type { CodeSnippetsFilter } from '@repo/utils';
 
-type Props = {
+interface Props {
   list: CodeSnippetsFilter[];
   activeId: string | null;
   action: (id: string) => void;
   type: 'language' | 'packageManager';
-};
+}
 
 export const Dropdown: FC<Props> = ({ list, activeId, action, type }) => {
   const activeItem = list.find((item) => item?.id === activeId);
@@ -19,9 +19,9 @@ export const Dropdown: FC<Props> = ({ list, activeId, action, type }) => {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <DropdownMenu.Trigger
-          type="button"
-          className="flex items-center justify-between h-8 gap-1 px-2 text-sm transition-all rounded select-none group text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 hover:bg-slate-200"
           aria-label="Customise options"
+          className="flex items-center justify-between h-8 gap-1 px-2 text-sm transition-all rounded select-none group text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 hover:bg-slate-200"
+          type="button"
         >
           {activeItem?.title}
           <ChevronSmallDownIcon className="group-data-[state=open]:rotate-180 transition-transform" />
@@ -37,8 +37,8 @@ export const Dropdown: FC<Props> = ({ list, activeId, action, type }) => {
             {list.map((item) => {
               return (
                 <DropdownMenu.Item
-                  key={item?.id}
                   className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
+                  key={item?.id}
                   onClick={() => item?.id && action(item.id)}
                 >
                   {item?.title}

@@ -1,6 +1,8 @@
-import React, { useEffect, useState, useRef, FC } from 'react';
+import type { FC } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useReducedMotion, useInView } from 'framer-motion';
 import { cn, container } from '@repo/utils';
+import Image from 'next/image';
 import Boolean from './images/Boolean.svg';
 import Cascade from './images/Cascade.svg';
 import DatePicker from './images/DatePicker.svg';
@@ -12,7 +14,6 @@ import LineGraphTeal from './images/LineGraph-teal.svg';
 import MarketingButtons from './images/MarketingButtons.svg';
 import PieChart from './images/PieChart.svg';
 import Slider from './images/Slider.svg';
-import Image from 'next/image';
 
 const workflowWidth = 210;
 const initialAnimationLength = 0;
@@ -66,8 +67,8 @@ const PureUITests: FC<PureUITestsProps> = ({
 
             return (
               <div
-                key={index}
                 className="absolute flex justify-center transition-transform ease-in-out left-1/2 duration-350 will-change-transform"
+                key={index}
                 style={{
                   transform: `translateX(${getWorkflowTranslateValue(
                     index - activeIndex,
@@ -104,12 +105,12 @@ const PureUITests: FC<PureUITestsProps> = ({
                   }}
                 >
                   <Image
+                    alt=""
                     className="w-full h-full"
+                    height={180}
                     loading="lazy"
                     src={workflow.src}
                     width={180}
-                    height={180}
-                    alt=""
                   />
                 </div>
                 <div className="absolute overflow-hidden left-[-15px] w-[240px] h-[240px] top-[-15px]">
@@ -211,13 +212,13 @@ export function UITests() {
       isAnimatingLoop ? eachWorkflowAnimationLength : initialAnimationLength,
     );
 
-    return () => clearTimeout(timer);
+    return () => { clearTimeout(timer); };
   }, [isAnimatingLoop, workflows, isPaused, isInView]);
 
   return (
     <PureUITests
-      forwardRef={ref}
       activeIndex={activeIndex}
+      forwardRef={ref}
       isAnimatingLoop={animationState.isAnimatingLoop}
       isPaused={isPaused}
       workflows={animationState.workflows}

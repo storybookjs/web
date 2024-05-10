@@ -1,5 +1,6 @@
 import React from 'react';
-import { motion, MotionValue, useTransform } from 'framer-motion';
+import type { MotionValue} from 'framer-motion';
+import { motion, useTransform } from 'framer-motion';
 import { cn } from '@repo/utils';
 
 interface ConnectorProps {
@@ -8,44 +9,44 @@ interface ConnectorProps {
   className?: string;
 }
 
-export const Connector = ({
+export function Connector({
   name,
   progress,
   className,
   ...props
-}: ConnectorProps) => {
+}: ConnectorProps) {
   const pathLength = useTransform(progress, [0, 0.75], [0, 1], { clamp: true });
   const scale = useTransform(progress, [0.75, 1], [0, 1], { clamp: true });
 
   return (
     <motion.svg
       className={cn('block', className)}
-      width="263"
+      fill="none"
       height="145"
       viewBox="0 0 263 145"
-      fill="none"
+      width="263"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <motion.circle cx="256" cy="140" r="5" fill="#1EA7FD" style={{ scale }} />
+      <motion.circle cx="256" cy="140" fill="#1EA7FD" r="5" style={{ scale }} />
       <path
-        mask={`url(#${name}-connector-mask)`}
         d="M252.5 134.5C195.5 53.001 98.4998 0.999337 10.0003 0.999647"
+        mask={`url(#${name}-connector-mask)`}
         stroke="#1EA7FD"
-        strokeWidth="2"
         strokeDasharray="6 4"
+        strokeWidth="2"
       />
       <defs>
         <mask id={`${name}-connector-mask`} maskUnits="userSpaceOnUse">
           <motion.path
             d="M10.0003,0.999647C98.4998,0.999337 195.5,53.001 252.5,134.5"
             stroke="#fff"
-            strokeWidth="4"
             strokeDasharray="0 1"
+            strokeWidth="4"
             style={{ pathLength }}
           />
         </mask>
       </defs>
     </motion.svg>
   );
-};
+}

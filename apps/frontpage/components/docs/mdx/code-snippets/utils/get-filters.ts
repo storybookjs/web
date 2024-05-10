@@ -1,6 +1,7 @@
-import {
+import type {
   CodeSnippetsFiltersProps,
-  CodeSnippetsProps,
+  CodeSnippetsProps} from '@repo/utils';
+import {
   languages,
   packageManagers,
 } from '@repo/utils';

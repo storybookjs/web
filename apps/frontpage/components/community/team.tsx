@@ -1,12 +1,12 @@
 import { GithubIcon, TwitterIcon } from '@storybook/icons';
 import Image from 'next/image';
-import { FC } from 'react';
+import type { FC } from 'react';
 import { Button } from '../ui/button';
 import { Section } from './section';
 
 export const Team: FC = () => {
   return (
-    <Section id="maintainer-team" className="relative mb-8 md:mb-16">
+    <Section className="relative mb-8 md:mb-16" id="maintainer-team">
       <h2 className="font-bold text-2xl mb-2">Maintainer team</h2>
       <p className="mb-8">
         Storybook is maintained by thousands of contributors worldwide and
@@ -15,13 +15,13 @@ export const Team: FC = () => {
       <h3 className="font-bold text-lg mb-6 mt-6">Steering committee</h3>
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {steeringCommittee.map((member) => (
-          <li key={member.name} className="flex gap-3">
+          <li className="flex gap-3" key={member.name}>
             <Image
-              src={member.avatarUrl}
-              width={48}
-              height={48}
               alt={member.name}
               className="rounded-full flex-shrink-0 w-12 h-12"
+              height={48}
+              src={member.avatarUrl}
+              width={48}
             />
             <div>
               <div className="font-bold">{member.name}</div>
@@ -31,18 +31,18 @@ export const Team: FC = () => {
               </div>
               <div className="flex items-center gap-3">
                 <a
-                  href={member.gitHubUrl}
-                  target="_blank"
-                  rel="noreferrer"
                   className="text-zinc-500 hover:text-blue-500 transition"
+                  href={member.gitHubUrl}
+                  rel="noreferrer"
+                  target="_blank"
                 >
                   <GithubIcon />
                 </a>
                 <a
-                  href={member.twitterUrl}
-                  target="_blank"
-                  rel="noreferrer"
                   className="text-zinc-500 hover:text-blue-500 transition"
+                  href={member.twitterUrl}
+                  rel="noreferrer"
+                  target="_blank"
                 >
                   <TwitterIcon />
                 </a>
@@ -54,25 +54,25 @@ export const Team: FC = () => {
       <h3 className="font-bold text-lg mb-6 mt-6">Contributors</h3>
       <ul className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-12 gap-4 mb-8">
         {contributors.map((contributor) => (
-          <li key={contributor.name} className="w-10 h-10 flex-shrink-0">
-            <a href={contributor.url} target="_blank" rel="noreferrer">
+          <li className="w-10 h-10 flex-shrink-0" key={contributor.name}>
+            <a href={contributor.url} rel="noreferrer" target="_blank">
               <Image
-                src={contributor.avatar}
                 alt={contributor.name}
-                width={40}
-                height={40}
                 className="rounded-full w-10 h-10"
+                height={40}
+                src={contributor.avatar}
+                width={40}
               />
             </a>
           </li>
         ))}
       </ul>
       <div className="flex">
-        <Button rounded="full" variant="solid" asChild>
+        <Button asChild rounded="full" variant="solid">
           <a
             href="https://github.com/storybookjs/storybook/graphs/contributors"
-            target="_blank"
             rel="noreferrer"
+            target="_blank"
           >
             View all contributors on Github
           </a>

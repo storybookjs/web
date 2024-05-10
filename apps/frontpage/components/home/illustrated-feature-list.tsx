@@ -1,9 +1,10 @@
-import { FC, useState } from 'react';
+import type { FC} from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn, container } from '@repo/utils';
 import { ArrowRightIcon, ChevronSmallRightIcon } from '@storybook/icons';
-import { Button } from '../ui/button';
 import Link from 'next/link';
+import { Button } from '../ui/button';
 
 type Alignment = 'left' | 'right';
 
@@ -53,7 +54,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
   ...props
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeFeature = features[activeIndex] as FeatureItem;
+  const activeFeature = features[activeIndex]!;
   const [direction, setDirection] = useState('down');
 
   return (
@@ -74,38 +75,38 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
         )}
         style={{ backgroundColor: bgColor }}
       >
-        <AnimatePresence initial={false} custom={direction}>
+        <AnimatePresence custom={direction} initial={false}>
           <motion.div
-            className="absolute top-0 bottom-0 left-0 right-0"
-            key={activeFeature.title}
-            custom={direction}
-            variants={variants}
-            initial="enter"
             animate="center"
+            className="absolute top-0 bottom-0 left-0 right-0"
+            custom={direction}
             exit="exit"
+            initial="enter"
+            key={activeFeature.title}
+            variants={variants}
           >
             <video
               className="absolute top-0 w-full scale-125 pointer-events-none select-none blur"
-              src={activeFeature.media}
               playsInline
+              src={activeFeature.media}
             />
             <video
-              className="relative"
-              src={activeFeature.media}
               autoPlay
+              className="relative"
               loop
-              playsInline
               muted
+              playsInline
               poster={activeFeature.poster}
+              src={activeFeature.media}
             />
           </motion.div>
         </AnimatePresence>
         <Link
-          href={activeFeature.link.href || ''}
           className={cn(
             'absolute top-5 z-10 flex gap-2 items-center bg-black/50 text-white pl-4 pr-3 rounded-full text-xs font-bold h-7 hover:bg-black/60 transition-all hover:-translate-y-0.5',
             alignment === 'left' ? 'right-5' : 'left-5',
           )}
+          href={activeFeature.link.href || ''}
         >
           {activeFeature.link.label} <ChevronSmallRightIcon />
         </Link>
@@ -117,13 +118,13 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
         )}
       >
         {features.map((feature, index) => (
-          <li key={feature.title} className="m-0 list-none">
+          <li className="m-0 list-none" key={feature.title}>
             <button
+              aria-pressed={index === activeIndex ? 'true' : 'false'}
               className={cn(
                 'border border-zinc-600 rounded text-left flex w-full p-5 items-center cursor-pointer transition-all duration-200 ease-in-out outline-0 gap-5 hover:border-blue-500 hover:-translate-y-1',
                 activeIndex === index && 'border-blue-500',
               )}
-              aria-pressed={index === activeIndex ? 'true' : 'false'}
               onClick={() => {
                 setDirection(index > activeIndex ? 'down' : 'up');
                 setActiveIndex(index);
@@ -142,19 +143,19 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
               <AnimatePresence initial={false}>
                 {index === activeIndex && (
                   <motion.div
-                    className="overflow-hidden"
-                    layout
-                    key={feature.title}
-                    initial="collapsed"
                     animate="open"
+                    className="overflow-hidden"
                     exit="collapsed"
-                    variants={{
-                      open: { opacity: 1, height: 'auto', marginTop: 20 },
-                      collapsed: { opacity: 0, height: 0, marginTop: 0 },
-                    }}
+                    initial="collapsed"
+                    key={feature.title}
+                    layout
                     transition={{
                       duration: 0.4,
                       ease: [0.04, 0.62, 0.23, 0.98],
+                    }}
+                    variants={{
+                      open: { opacity: 1, height: 'auto', marginTop: 20 },
+                      collapsed: { opacity: 0, height: 0, marginTop: 0 },
                     }}
                   >
                     <div
@@ -163,12 +164,12 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
                     >
                       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
                       <video
-                        src={feature.media}
                         autoPlay
                         loop
                         playsInline
-                        preload="auto"
                         poster={feature.poster}
+                        preload="auto"
+                        src={feature.media}
                       />
                       <Button size="sm">
                         <Link href={feature.link.href}>

@@ -1,5 +1,6 @@
 import React from "react";
-import { motion, useTransform, MotionValue } from "framer-motion";
+import type { MotionValue } from "framer-motion";
+import { motion, useTransform } from "framer-motion";
 
 interface RangeSliderProps {
   activeStory: string;
@@ -9,12 +10,12 @@ interface RangeSliderProps {
 
 const stories = ["default", "input-range", "no-selection"];
 
-export const RangeSlider = ({
+export function RangeSlider({
   appearProgress,
   scrollProgress,
   activeStory,
   ...props
-}: RangeSliderProps) => {
+}: RangeSliderProps) {
   const x = useTransform(scrollProgress, [0, 1], ["0%", "-91%"], {
     clamp: true,
   });
@@ -40,22 +41,22 @@ export const RangeSlider = ({
     >
       {stories.map((id) => (
         <motion.img
+          alt=""
+          animate={{ opacity: activeStory === id ? 1 : 0 }}
           className="block w-full h-auto absolute top-0 left-0"
+          height="303"
           key={id}
           src={`/home/develop/range-slider-${id}.svg`}
-          alt=""
-          width="370"
-          height="303"
-          animate={{ opacity: activeStory === id ? 1 : 0 }}
           transition={{ duration: 0.1 }}
+          width="370"
         />
       ))}
       <motion.img
+        alt=""
         className="w-[10%] h-auto block absolute top-[-3%] right-[-1%]"
         src="/home/demo/ci-check-green.svg"
-        alt=""
         style={{ scale: check, opacity: check }}
       />
     </motion.div>
   );
-};
+}

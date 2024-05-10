@@ -4,7 +4,7 @@ interface Props {
   className?: string;
 }
 
-export const LogoMozilla = (props: Props) => {
+export function LogoMozilla(props: Props) {
   return (
     <svg
       className="w-full h-full"
@@ -29,9 +29,9 @@ export const LogoMozilla = (props: Props) => {
       </g>
       <defs>
         <clipPath id="clip0_5354_72151">
-          <rect height="102.8" width="360" fill="currentColor" />
+          <rect fill="currentColor" height="102.8" width="360" />
         </clipPath>
       </defs>
     </svg>
   );
-};
+}

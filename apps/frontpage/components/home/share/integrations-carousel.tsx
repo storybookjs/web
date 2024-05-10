@@ -1,6 +1,7 @@
-import { Button } from '../../../components/ui/button';
 import { cn } from '@repo/utils';
-import React, { useState, ComponentProps, ReactNode, useRef, FC } from 'react';
+import type { ComponentProps, ReactNode, FC } from 'react';
+import React, { useState, useRef } from 'react';
+import type { Button } from "../../ui/button";
 
 interface IntegrationProps extends ComponentProps<typeof Button> {
   image: string;
@@ -21,11 +22,11 @@ export const IntegrationsCarousel: FC<IntegrationsCarouselProps> = ({
   className,
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeIntegration = integrations[activeIndex] as Integration;
+  const activeIntegration = integrations[activeIndex]!;
   const ref = useRef(null);
 
   return (
-    <div ref={ref} className={className}>
+    <div className={className} ref={ref}>
       <figure className="m-0">{activeIntegration.media}</figure>
       <div className="flex items-center gap-[10px] mt-5">
         {integrations.map(({ media, name, image, ...integration }, index) => (
@@ -36,13 +37,13 @@ export const IntegrationsCarousel: FC<IntegrationsCarouselProps> = ({
                 'opacity-100 border border-blue-500',
             )}
             key={name}
-            style={{ backgroundColor: integration.color }}
             onClick={() => {
               setActiveIndex(index);
             }}
+            style={{ backgroundColor: integration.color }}
             {...integration}
           >
-            <img src={image} alt={name} />
+            <img alt={name} src={image} />
           </button>
         ))}
         <div className="text-zinc-600">+ and more</div>

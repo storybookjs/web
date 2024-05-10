@@ -1,7 +1,7 @@
+import { notFound } from 'next/navigation';
 import { ReleaseNewsletter } from '../../../../components/release-newsletter';
 import { getRelease } from '../../../../lib/get-release';
 import { getReleases } from '../../../../lib/get-releases';
-import { notFound } from 'next/navigation';
 
 interface Props {
   params: {
@@ -19,7 +19,7 @@ export default async function Home({ params: { slug } }: Props) {
   const releases = getReleases();
 
   // TODO: This is not really working on prod
-  if (releases.includes(slug) === false) return notFound();
+  if (!releases.includes(slug)) return notFound();
 
   const page = await getRelease(slug);
 

@@ -1,6 +1,6 @@
+import path from 'node:path';
 import fs from 'fs-extra';
 import fetch from 'node-fetch';
-import path from 'path';
 
 async function getRemoteSitemapContent(path: string) {
   const response = await fetch(`https://storybook.js.org${path}`);

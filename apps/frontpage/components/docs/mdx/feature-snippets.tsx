@@ -1,8 +1,8 @@
-import { FC } from "react";
+import type { FC } from "react";
 
-type Props = {
+interface Props {
   id: string;
-};
+}
 
 export const FeatureSnippets: FC<Props> = ({ id }) => {
   return <div className="">Feature Snippets</div>;

@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import * as MDX from '../components/docs/mdx';
 
@@ -6,7 +6,7 @@ export async function getRelease(version: string) {
   if (!version) return undefined;
 
   const file = await fs.promises.readFile(
-    process.cwd() + `/content/releases/${version}.md`,
+    `${process.cwd()  }/content/releases/${version}.md`,
     'utf8'
   );
 

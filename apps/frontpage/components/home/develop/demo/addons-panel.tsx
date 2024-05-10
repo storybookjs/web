@@ -1,5 +1,6 @@
 import React from "react";
-import { motion, MotionProps, MotionValue, useTransform } from "framer-motion";
+import type { MotionProps, MotionValue} from "framer-motion";
+import { motion, useTransform } from "framer-motion";
 
 interface AddonsProps extends MotionProps {
   activePanel: string;
@@ -8,11 +9,11 @@ interface AddonsProps extends MotionProps {
 
 const panels = ["a11y", "controls", "design", "interactions"];
 
-export const AddonsPanel = ({
+export function AddonsPanel({
   scrollProgress,
   activePanel,
   ...props
-}: AddonsProps) => {
+}: AddonsProps) {
   const y = useTransform(scrollProgress, [0, 0.15], ["100%", "0%"], {
     clamp: true,
   });
@@ -25,15 +26,15 @@ export const AddonsPanel = ({
     >
       {panels.map((id) => (
         <motion.img
+          alt=""
+          animate={{ opacity: id === activePanel ? 1 : 0 }}
           className="absolute top-0 left-0 h-full"
           key={id}
           src={`/home/develop/addons-${id}.svg`}
-          alt=""
-          animate={{ opacity: id === activePanel ? 1 : 0 }}
           style={{ y }}
           transition={{ duration: 0.1 }}
         />
       ))}
     </motion.div>
   );
-};
+}

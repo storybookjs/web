@@ -5,7 +5,7 @@ import {
   TwitterIcon,
   YoutubeIcon,
 } from '@storybook/icons';
-import { FC } from 'react';
+import type { FC } from 'react';
 
 export const NavTop: FC = () => {
   return (
@@ -18,8 +18,8 @@ export const NavTop: FC = () => {
             Get involved
           </a>
           <a
-            href="/blog"
             className="flex items-center px-[15px] h-full font-bold text-sm text-zinc-400 transition-all hover:-translate-y-px hover:text-blue-500"
+            href="/blog"
           >
             Blog
           </a>
@@ -27,38 +27,38 @@ export const NavTop: FC = () => {
         <div className="items-center hidden gap-3 md:flex">
           <div>Join the community:</div>
           <a
-            href="https://github.com/storybookjs"
-            target="_blank"
-            rel="noreferrer"
             aria-label="Github"
             className="transition-colors text-zinc-500 hover:text-zinc-800"
+            href="https://github.com/storybookjs"
+            rel="noreferrer"
+            target="_blank"
           >
             <GithubIcon />
           </a>
           <a
-            href="https://discord.gg/storybook"
-            target="_blank"
-            rel="noreferrer"
             aria-label="Discord"
             className="transition-colors text-zinc-500 hover:text-zinc-800"
+            href="https://discord.gg/storybook"
+            rel="noreferrer"
+            target="_blank"
           >
             <DiscordIcon />
           </a>
           <a
-            href="https://twitter.com/storybookjs"
-            target="_blank"
-            rel="noreferrer"
             aria-label="Twitter"
             className="transition-colors text-zinc-500 hover:text-zinc-800"
+            href="https://twitter.com/storybookjs"
+            rel="noreferrer"
+            target="_blank"
           >
             <TwitterIcon />
           </a>
           <a
-            href="https://www.youtube.com/channel/UCr7Quur3eIyA_oe8FNYexfg"
-            target="_blank"
-            rel="noreferrer"
             aria-label="Youtube"
             className="transition-colors text-zinc-500 hover:text-zinc-800"
+            href="https://www.youtube.com/channel/UCr7Quur3eIyA_oe8FNYexfg"
+            rel="noreferrer"
+            target="_blank"
           >
             <YoutubeIcon />
           </a>

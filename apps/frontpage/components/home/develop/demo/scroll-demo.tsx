@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { motion, MotionValue, useTransform } from 'framer-motion';
+import type { MotionValue} from 'framer-motion';
+import { motion, useTransform } from 'framer-motion';
+import { Connector } from '../../connector';
+import { useMediaQuery } from '../../../../hooks/use-media-query';
 import { Sidebar } from './sidebar';
 import { AddonsPanel } from './addons-panel';
 import { RangeSlider } from './range-slider';
 import { VSCode } from './vscode';
 import { App } from './app';
-import { Connector } from '../../connector';
-import { useMediaQuery } from '../../../../hooks/use-media-query';
 
 interface ScrollDemoProps {
   appearProgress: MotionValue;
@@ -22,7 +23,7 @@ const rangeSlider = {
   addons: ['controls', 'interactions', 'design', 'a11y', 'controls'],
 };
 
-export const ScrollDemo = ({
+export function ScrollDemo({
   appearProgress,
   isolationProgress,
   addonsProgress,
@@ -30,7 +31,7 @@ export const ScrollDemo = ({
   storyIndex,
   panelIndex,
   ...props
-}: ScrollDemoProps) => {
+}: ScrollDemoProps) {
   const [activeStory, setActiveStory] = useState('default');
   const [activePanel, setActivePanel] = useState('controls');
 
@@ -99,25 +100,25 @@ export const ScrollDemo = ({
         }}
       />
       <motion.img
+        alt=""
         className="absolute top-0 left-0 block w-full h-auto"
         src="/home/develop/storybook-frame.svg"
-        alt=""
         style={{
           scale: frameScale,
           opacity: frameOpacity,
         }}
       />
       <Sidebar
-        type="rangeSlider"
         activeStory={activeStory}
         style={{
           scale: frameScale,
           opacity: frameOpacity,
         }}
+        type="rangeSlider"
       />
       <AddonsPanel
-        scrollProgress={addonsProgress}
         activePanel={activePanel}
+        scrollProgress={addonsProgress}
         style={{
           scale: frameScale,
           opacity: frameOpacity,
@@ -125,14 +126,14 @@ export const ScrollDemo = ({
       />
       <App scrollProgress={dropInProgress} />
       <Connector
+        className="w-[24%] h-auto absolute top-[20%] left[17.8%] rotate[-56deg] z-[2]"
         name="rs-to-app"
         progress={connectorProgress}
-        className="w-[24%] h-auto absolute top-[20%] left[17.8%] rotate[-56deg] z-[2]"
       />
       <RangeSlider
         activeStory={activeStory}
-        scrollProgress={dropInProgress}
         appearProgress={appearProgress}
+        scrollProgress={dropInProgress}
       />
       <VSCode
         appearProgress={appearProgress}
@@ -140,4 +141,4 @@ export const ScrollDemo = ({
       />
     </motion.div>
   );
-};
+}

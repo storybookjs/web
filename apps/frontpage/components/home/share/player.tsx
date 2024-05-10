@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { AspectRatio } from '../../../components/ui/aspect-ratio';
 import { cn } from '@repo/utils';
+import { AspectRatio } from "../../ui/aspect-ratio";
 
 const players = {
   blue: '/home/share/avatar-1.png',
@@ -33,15 +34,15 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
   <MotionComponent
     className="w-[28%] absolute z-[1] sm:w-[20%] md:w-[14%]"
     data-chromatic="ignore"
+    initial="initial"
     style={{ left: x, top: y }}
+    transition={{ type: 'pop', delay, duration: 0.4 }}
     variants={{
       initial: { scale: 0, opacity: 0 },
       animate: { scale: 1, opacity: 1 },
     }}
-    initial="initial"
-    whileInView="animate"
     viewport={{ once: true }}
-    transition={{ type: 'pop', delay, duration: 0.4 }}
+    whileInView="animate"
   >
     <AspectRatio ratio={1 / 1}>
       <motion.div
@@ -52,13 +53,9 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
           type === 'red' && red,
           type === 'blue' && blue,
         )}
-        data-chromatic="ignore"
         color={type}
+        data-chromatic="ignore"
         style={{ x: '-50%', y: '-50%' }}
-        variants={{
-          initial: { opacity: 0.1 },
-          animate: { opacity: 0 },
-        }}
         transition={{
           ease: 'linear',
           repeat: count,
@@ -66,6 +63,10 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
           duration: 0.3,
           delay: delay + 0.4,
           repeatDelay: 0,
+        }}
+        variants={{
+          initial: { opacity: 0.1 },
+          animate: { opacity: 0 },
         }}
       />
       <motion.div
@@ -76,13 +77,9 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
           type === 'red' && red,
           type === 'blue' && blue,
         )}
-        data-chromatic="ignore"
         color={type}
+        data-chromatic="ignore"
         style={{ x: '-50%', y: '-50%' }}
-        variants={{
-          initial: { scale: 1, opacity: 0.3 },
-          animate: { scale: 1.66666667, opacity: 0.1 },
-        }}
         transition={{
           ease: 'linear',
           repeat: count,
@@ -90,6 +87,10 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
           duration: 0.3,
           delay: delay + 0.4,
           repeatDelay: 0,
+        }}
+        variants={{
+          initial: { scale: 1, opacity: 0.3 },
+          animate: { scale: 1.66666667, opacity: 0.1 },
         }}
       />
       <motion.div
@@ -100,13 +101,9 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
           type === 'red' && red,
           type === 'blue' && blue,
         )}
-        data-chromatic="ignore"
         color={type}
+        data-chromatic="ignore"
         style={{ x: '-50%', y: '-50%' }}
-        variants={{
-          initial: { scale: 1, opacity: 0 },
-          animate: { scale: 2.14285714, opacity: 0.3 },
-        }}
         transition={{
           ease: 'linear',
           repeat: count,
@@ -114,6 +111,10 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
           duration: 0.3,
           delay: delay + 0.4,
           repeatDelay: 0,
+        }}
+        variants={{
+          initial: { scale: 1, opacity: 0 },
+          animate: { scale: 2.14285714, opacity: 0.3 },
         }}
       />
       <img
