@@ -53,7 +53,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
   ...props
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeFeature = features[activeIndex]!;
+  const activeFeature = features[activeIndex];
   const [direction, setDirection] = useState('down');
 
   return (
