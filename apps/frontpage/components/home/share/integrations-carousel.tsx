@@ -22,7 +22,7 @@ export const IntegrationsCarousel: FC<IntegrationsCarouselProps> = ({
   className,
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeIntegration = integrations[activeIndex]!;
+  const activeIntegration = integrations[activeIndex];
   const ref = useRef(null);
 
   return (

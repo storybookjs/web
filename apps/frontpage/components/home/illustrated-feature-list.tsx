@@ -54,8 +54,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
   ...props
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- TODO: Check if this is true or not.
-  const activeFeature = features[activeIndex]!;
+  const activeFeature = features[activeIndex];
   const [direction, setDirection] = useState('down');
 
   return (
