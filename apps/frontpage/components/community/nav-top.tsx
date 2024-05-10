@@ -29,6 +29,7 @@ export const NavTop: FC = () => {
           <a
             href="https://github.com/storybookjs"
             target="_blank"
+            rel="noreferrer"
             aria-label="Github"
             className="transition-colors text-zinc-500 hover:text-zinc-800"
           >
@@ -37,6 +38,7 @@ export const NavTop: FC = () => {
           <a
             href="https://discord.gg/storybook"
             target="_blank"
+            rel="noreferrer"
             aria-label="Discord"
             className="transition-colors text-zinc-500 hover:text-zinc-800"
           >
@@ -45,6 +47,7 @@ export const NavTop: FC = () => {
           <a
             href="https://twitter.com/storybookjs"
             target="_blank"
+            rel="noreferrer"
             aria-label="Twitter"
             className="transition-colors text-zinc-500 hover:text-zinc-800"
           >
@@ -53,6 +56,7 @@ export const NavTop: FC = () => {
           <a
             href="https://www.youtube.com/channel/UCr7Quur3eIyA_oe8FNYexfg"
             target="_blank"
+            rel="noreferrer"
             aria-label="Youtube"
             className="transition-colors text-zinc-500 hover:text-zinc-800"
           >

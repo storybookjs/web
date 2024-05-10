@@ -44,6 +44,7 @@ export const NavSide: FC = () => {
       <a
         href="https://github.com/storybookjs/brand/tree/master/badge"
         target="_blank"
+        rel="noreferrer"
         className="border border-dashed border-purple-400 w-28 rounded flex items-center justify-center bg-purple-100 h-[50px]"
       >
         <Image

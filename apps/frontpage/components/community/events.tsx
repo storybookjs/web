@@ -4,19 +4,19 @@ import {
   DiscordIcon,
   TwitterIcon,
   YoutubeIcon,
-} from "@storybook/icons";
-import { FC, useMemo } from "react";
-import { zonedTimeToUtc, format } from "date-fns-tz";
-import { isPast } from "date-fns";
-import { Section } from "./section";
+} from '@storybook/icons';
+import { FC, useMemo } from 'react';
+import { zonedTimeToUtc, format } from 'date-fns-tz';
+import { isPast } from 'date-fns';
+import { Section } from './section';
 
-const rezoneDate = (date: Date) => zonedTimeToUtc(date, "America/Los_Angeles");
+const rezoneDate = (date: Date) => zonedTimeToUtc(date, 'America/Los_Angeles');
 
 const formatDate = (date: Date) => {
   // https://github.com/date-fns/date-fns/issues/946
   return {
-    date: format(date, "d LLLL, y, h:mmaaa (zzzz)"),
-    dateShort: format(date, "d LLL, y, haaa (zzz)"),
+    date: format(date, 'd LLLL, y, h:mmaaa (zzzz)'),
+    dateShort: format(date, 'd LLL, y, haaa (zzz)'),
   };
 };
 
@@ -31,31 +31,31 @@ interface Session {
 const sessionsData: Session[] = [
   {
     id: 0,
-    title: "Storybook for Developers",
-    date: "July 20, 2023 8:30 AM",
+    title: 'Storybook for Developers',
+    date: 'July 20, 2023 8:30 AM',
     registrationLink:
-      "https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=July+20,+2023",
+      'https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=July+20,+2023',
   },
   {
     id: 1,
-    title: "Storybook for Developers",
-    date: "Aug 29, 2023 7:00 AM",
+    title: 'Storybook for Developers',
+    date: 'Aug 29, 2023 7:00 AM',
     registrationLink:
-      "https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Aug+29,+2023",
+      'https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Aug+29,+2023',
   },
   {
     id: 2,
-    title: "Chromatic & Storybook for Designers",
-    date: "Oct 12, 2023 8:30 AM",
+    title: 'Chromatic & Storybook for Designers',
+    date: 'Oct 12, 2023 8:30 AM',
     registrationLink:
-      "https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Oct+12,+2023",
+      'https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Oct+12,+2023',
   },
   {
     id: 3,
-    title: "Storybook Workflows for Frontend Teams",
-    date: "Nov 7, 2023 9:00 AM",
+    title: 'Storybook Workflows for Frontend Teams',
+    date: 'Nov 7, 2023 9:00 AM',
     registrationLink:
-      "https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Nov+7,+2023",
+      'https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Nov+7,+2023',
   },
 ];
 
@@ -74,7 +74,7 @@ export const Events: FC = () => {
         };
       })
       .sort(
-        (a, b) => new Date(a.rawDate).valueOf() - new Date(b.rawDate).valueOf()
+        (a, b) => new Date(a.rawDate).valueOf() - new Date(b.rawDate).valueOf(),
       )
       .reduce<{ upcoming: Session[]; past: Session[] }>(
         (acc, session) => {
@@ -85,7 +85,7 @@ export const Events: FC = () => {
           }
           return acc;
         },
-        { upcoming: [], past: [] }
+        { upcoming: [], past: [] },
       );
   }, []);
 
@@ -153,10 +153,10 @@ export const Events: FC = () => {
         <h3 className="font-bold text-lg mb-3">Storybook Sessions</h3>
         <div>
           <p>
-            Join us for these 1-hour sessions, hosted by the{" "}
+            Join us for these 1-hour sessions, hosted by the{' '}
             <a href="https://www.chromatic.com/">
               <span>Chromatic</span>
-            </a>{" "}
+            </a>{' '}
             team. We&apos;ll explore the component-driven approach to building,
             testing, and documenting UIs using Storybook. You&apos;ll learn how
             to:
@@ -199,6 +199,7 @@ export const Events: FC = () => {
               <a
                 href={session.registrationLink}
                 target="_blank"
+                rel="noreferrer"
                 className="flex gap-2 items-center text-blue-500"
               >
                 Register <ChevronSmallRightIcon />
