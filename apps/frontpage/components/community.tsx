@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, VideoHTMLAttributes } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 
 const images = [
@@ -93,21 +93,18 @@ export function Community() {
   const sectionRef = useRef(null);
   const animate = useInView(sectionRef);
   const activeIndex = useAnimationState(3, animate);
-  const videoBRef = useRef(null);
+  const videoBRef = useRef<HTMLVideoElement>(null);
   const [pauseVideoB, setPauseVideoB] = useState(false);
 
-  // TODO: Fix this
-  // Pause Video B (on first load)
-  // so that only one video is playing at a time
   useEffect(() => {
     const pauseVideo = () => {
-      // videoBRef?.current && videoBRef.current.pause();
-      // videoBRef?.current &&
-      //   videoBRef.current.removeEventListener("loadeddata", pauseVideo);
+      videoBRef?.current && videoBRef.current.pause();
+      videoBRef?.current &&
+        videoBRef.current.removeEventListener('loadeddata', pauseVideo);
     };
 
     if (videoBRef.current && !pauseVideoB) {
-      // videoBRef.current.addEventListener("loadeddata", pauseVideo);
+      videoBRef.current.addEventListener('loadeddata', pauseVideo);
       setPauseVideoB(true);
     }
   }, [videoBRef, pauseVideoB]);
