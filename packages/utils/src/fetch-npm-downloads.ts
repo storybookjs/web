@@ -20,7 +20,10 @@ interface JsonResponse {
   downloads: number;
 }
 
-export const fetchNpmDownloads = async () => {
+export const fetchNpmDownloads = async (): Promise<{
+  number: number;
+  formattedResult: string;
+}> => {
   try {
     const promises = npmApi.map(async (uri) => {
       const response = await fetch(uri);

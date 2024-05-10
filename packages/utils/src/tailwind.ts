@@ -1,9 +1,9 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
-export function cn(...inputs: ClassValue[]) {
+export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
 
-export const container = "max-w-8xl mx-auto px-4 sm:px-8 md:px-8";
-export const smallContainer = "max-w-7xl mx-auto px-4 sm:px-8 md:px-12";
+export const container = 'max-w-8xl mx-auto px-4 sm:px-8 md:px-8';
+export const smallContainer = 'max-w-7xl mx-auto px-4 sm:px-8 md:px-12';
