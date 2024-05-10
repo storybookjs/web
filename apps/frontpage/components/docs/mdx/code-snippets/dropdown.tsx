@@ -5,14 +5,14 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import type { CodeSnippetsFilter } from '@repo/utils';
 
-interface Props {
+interface DropdownProps {
   list: CodeSnippetsFilter[];
   activeId: string | null;
   action: (id: string) => void;
   type: 'language' | 'packageManager';
 }
 
-export const Dropdown: FC<Props> = ({ list, activeId, action, type }) => {
+export const Dropdown: FC<DropdownProps> = ({ list, activeId, action }) => {
   const activeItem = list.find((item) => item?.id === activeId);
 
   return (
@@ -39,7 +39,9 @@ export const Dropdown: FC<Props> = ({ list, activeId, action, type }) => {
                 <DropdownMenu.Item
                   className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
                   key={item?.id}
-                  onClick={() => item?.id && action(item.id)}
+                  onClick={() => {
+                    item?.id && action(item.id);
+                  }}
                 >
                   {item?.title}
                 </DropdownMenu.Item>

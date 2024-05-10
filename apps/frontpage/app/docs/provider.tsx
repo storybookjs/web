@@ -2,16 +2,10 @@
 
 import { languages, packageManagers, renderers } from '@repo/utils';
 import { getCookie, setCookie } from 'cookies-next';
-import type {
-  ReactNode} from 'react';
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import type { ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
-interface Props {
+interface DocsContextProps {
   activeRenderer: null | string;
   setRenderer: (id: string) => void;
   activeLanguage: null | string;
@@ -20,7 +14,7 @@ interface Props {
   setPackageManager: (id: string) => void;
 }
 
-const DocsContext = createContext<Props | undefined>(undefined);
+const DocsContext = createContext<DocsContextProps | undefined>(undefined);
 
 export function DocsProvider({ children }: { children: ReactNode }) {
   const [activeRenderer, setActiveRenderer] = useState<null | string>(null);

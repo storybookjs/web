@@ -2,25 +2,24 @@ import { Header, Footer } from '@repo/ui';
 import { cn, container, fetchGithubCount } from '@repo/utils';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Fragment } from 'react';
 import { ReleaseNewsletter } from '../../../components/release-newsletter';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { getRelease } from '../../../lib/get-release';
 import { getReleases } from '../../../lib/get-releases';
 
-interface Props {
+interface PageProps {
   params: {
     slug: string;
   };
 }
 
-export const generateStaticParams = async () => {
+export const generateStaticParams = () => {
   return getReleases().map((release) => ({
     slug: release,
   }));
 };
 
-export default async function Page({ params: { slug } }: Props) {
+export default async function Page({ params: { slug } }: PageProps) {
   const releases = getReleases();
   const { number: githubCount } = await fetchGithubCount();
 

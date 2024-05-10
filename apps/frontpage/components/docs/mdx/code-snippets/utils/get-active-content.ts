@@ -1,6 +1,6 @@
 import type { CodeSnippetsFiltersProps, CodeSnippetsProps } from '@repo/utils';
 
-interface Props {
+interface GetActiveContentProps {
   codeSnippetsContent: CodeSnippetsProps[];
   filters: CodeSnippetsFiltersProps;
   activePackageManager: string | null;
@@ -12,7 +12,7 @@ export const getActiveContent = ({
   filters,
   activePackageManager,
   activeLanguage,
-}: Props): CodeSnippetsProps | null => {
+}: GetActiveContentProps): CodeSnippetsProps | null => {
   const filterByPackageManager = codeSnippetsContent.filter((item) => {
     // If there is only one package manager, we don't need to filter
     if (filters.packageManagers.length <= 1) return true;

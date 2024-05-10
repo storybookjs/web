@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import type { TreeProps} from '@repo/utils';
+import type { TreeProps } from '@repo/utils';
 import { renderers, docsVersions, cn } from '@repo/utils';
 import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
@@ -8,13 +8,13 @@ import { Renderers } from '../../../components/docs/renderers';
 import { generateDocsTree } from '../../../lib/get-tree';
 import { slugHasVersion } from '../../../lib/slug-has-version';
 
-interface Props {
+interface PageProps {
   params: {
     slug: string[];
   };
 }
 
-export const generateStaticParams = async () => {
+export const generateStaticParams = () => {
   const result: { slug: string[] }[] = [];
   const tree = generateDocsTree();
   const treeFirstVersion = generateDocsTree(
@@ -42,7 +42,7 @@ export const generateStaticParams = async () => {
   return result;
 };
 
-export default async function Page({ params: { slug } }: Props) {
+export default async function Page({ params: { slug } }: PageProps) {
   const activeVersion = getVersion(slug) || { id: 'next', label: 'Next' };
   const hasVersion = slugHasVersion(slug);
   const newSlug = slug ? [...slug] : [];
@@ -62,7 +62,8 @@ export default async function Page({ params: { slug } }: Props) {
           {page.title || 'Title is missing'}
         </h1>
         <Renderers activeRenderer={renderers[0]?.id || ''} />
-        {page.tabs && page.tabs.length > 0 ? <div className="flex items-center gap-8 border-b border-zinc-200">
+        {page.tabs && page.tabs.length > 0 ? (
+          <div className="flex items-center gap-8 border-b border-zinc-200">
             {page.tabs.map((tab) => {
               const isActive = tab.slug === `/docs/${slug.join('/')}`;
 
@@ -79,7 +80,8 @@ export default async function Page({ params: { slug } }: Props) {
                 </Link>
               );
             })}
-          </div> : null}
+          </div>
+        ) : null}
         <article
           className={cn(
             '[&>details]:my-6',

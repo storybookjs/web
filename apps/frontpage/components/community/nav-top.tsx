@@ -14,7 +14,10 @@ export const NavTop: FC = () => {
         className={cn(container, 'h-full flex justify-between items-center')}
       >
         <div className="flex h-full">
-          <a className="flex items-center px-[15px] h-full shadow-[0_-3px_0_0_inset] font-bold text-sm text-blue-500 shadow-blue-500">
+          <a
+            className="flex items-center px-[15px] h-full shadow-[0_-3px_0_0_inset] font-bold text-sm text-blue-500 shadow-blue-500"
+            href="/community"
+          >
             Get involved
           </a>
           <a

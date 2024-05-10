@@ -13,7 +13,7 @@ const CommunityContext = createContext<CommunityContextType>({
   setActiveSegment: () => {},
 });
 
-export function CommunityProvider({ children }: PropsWithChildren<{}>) {
+export function CommunityProvider({ children }: PropsWithChildren) {
   const [activeSegment, setActiveSegment] = useState<string | null>(null);
 
   return (

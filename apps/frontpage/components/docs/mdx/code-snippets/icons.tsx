@@ -1,11 +1,11 @@
-import type { FC } from "react";
-import React from "react";
+import type { FC } from 'react';
+import React from 'react';
 
-interface Props {
+interface IconProps {
   className?: string;
 }
 
-export const TSIcon: FC<Props> = ({ className }) => (
+export const TSIcon: FC<IconProps> = ({ className }) => (
   <svg
     className={className}
     fill="none"
@@ -30,7 +30,7 @@ export const TSIcon: FC<Props> = ({ className }) => (
   </svg>
 );
 
-export const ShellIcon: FC<Props> = ({ className }) => (
+export const ShellIcon: FC<IconProps> = ({ className }) => (
   <svg
     className={className}
     fill="none"
@@ -57,7 +57,7 @@ export const ShellIcon: FC<Props> = ({ className }) => (
   </svg>
 );
 
-export const JSIcon: FC<Props> = ({ className }) => (
+export const JSIcon: FC<IconProps> = ({ className }) => (
   <svg
     className={className}
     fill="none"
