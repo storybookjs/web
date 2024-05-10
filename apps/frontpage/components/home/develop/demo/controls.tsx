@@ -1,6 +1,6 @@
-import React from "react";
-import type { AnimationControls, MotionProps } from "framer-motion";
-import { motion } from "framer-motion";
+import React from 'react';
+import type { AnimationControls, MotionProps } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface ControlsProps extends MotionProps {
   startTimeControls: AnimationControls;
@@ -52,13 +52,12 @@ export function Controls({
           y="2"
         />
         <text x="8" y="16">
-          {"07:30".split("").map((v, index) => (
+          {'07:30'.split('').map((v, index) => (
             <motion.tspan
-               
               animate={startTimeControls}
               custom={index}
               initial="initial"
-              key={`${v}-${index}`}
+              key={v}
               variants={charVariants}
             >
               {v}
@@ -77,13 +76,12 @@ export function Controls({
       >
         <rect fill="#fff" height="20" width="120" x="2" y="2" />
         <text x="8" y="16">
-          {"16:30".split("").map((v, index) => (
+          {'16:30'.split('').map((v, index) => (
             <motion.tspan
-               
               animate={endTimeControls}
               custom={index}
               initial="initial"
-              key={`${v}-${index}`}
+              key={v}
               variants={charVariants}
             >
               {v}

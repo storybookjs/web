@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import * as Accordion from '@radix-ui/react-accordion';
-import type { FC} from 'react';
+import type { FC } from 'react';
 import { Fragment } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import type { DocsVersion, TreeProps } from '@repo/utils';
@@ -36,7 +36,8 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                 >
                   {lvl1.sidebar?.title || lvl1.title}
                 </Link>
-                {lvl1.children && lvl1.children.length > 0 ? <ul>
+                {lvl1.children && lvl1.children.length > 0 ? (
+                  <ul>
                     {lvl1.children.map((lvl2) => {
                       return (
                         <Accordion.Root
@@ -54,9 +55,13 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                                 {lvl2.sidebar?.title || lvl2.title}
                               </Link>
                             )}
-                            {lvl2.children && lvl2.children.length > 0 ? <Accordion.Item value="item-1">
+                            {lvl2.children && lvl2.children.length > 0 ? (
+                              <Accordion.Item value="item-1">
                                 <Accordion.Trigger asChild>
-                                  <button className="flex items-center justify-between w-full h-8 px-2 text-sm group">
+                                  <button
+                                    className="flex items-center justify-between w-full h-8 px-2 text-sm group"
+                                    type="button"
+                                  >
                                     {lvl2.sidebar?.title || lvl2.title}
                                     <ChevronSmallRightIcon
                                       aria-hidden
@@ -83,12 +88,14 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                                     })}
                                   </ul>
                                 </Accordion.Content>
-                              </Accordion.Item> : null}
+                              </Accordion.Item>
+                            ) : null}
                           </li>
                         </Accordion.Root>
                       );
                     })}
-                  </ul> : null}
+                  </ul>
+                ) : null}
               </li>
             ))
           : []}

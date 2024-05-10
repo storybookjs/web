@@ -41,6 +41,7 @@ export const IntegrationsCarousel: FC<IntegrationsCarouselProps> = ({
               setActiveIndex(index);
             }}
             style={{ backgroundColor: integration.color }}
+            type="button"
             {...integration}
           >
             <img alt={name} src={image} />

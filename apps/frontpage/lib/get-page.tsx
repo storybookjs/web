@@ -72,11 +72,14 @@ export const getPageData = async (
       li: MDX.List,
       pre: MDX.Pre,
       details: () => <details>Hello world</details>,
+      // eslint-disable-next-line react/jsx-pascal-case -- TODO: Not sure why this through an error.
       img: (props) => <MDX.Img activeVersion={activeVersion.id} {...props} />,
       Video: (props) => (
+        // eslint-disable-next-line react/jsx-pascal-case -- TODO: Not sure why this through an error.
         <MDX.Video activeVersion={activeVersion.id} {...props} />
       ),
       CodeSnippets: (props) => (
+        // eslint-disable-next-line react/jsx-pascal-case -- TODO: Not sure why this through an error.
         <MDX.CodeSnippets activeVersion={activeVersion.id} {...props} />
       ),
       Callout: MDX.Callout,

@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@repo/utils';
-import type { ForwardedRef} from 'react';
+import type { ForwardedRef } from 'react';
 import { forwardRef } from 'react';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 
@@ -25,6 +25,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         onClick={onClick}
         ref={ref}
+        type="button"
         {...props}
       >
         {children}

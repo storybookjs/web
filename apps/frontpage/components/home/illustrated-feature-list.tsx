@@ -130,6 +130,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
                 setDirection(index > activeIndex ? 'down' : 'up');
                 setActiveIndex(index);
               }}
+              type="button"
             >
               <div className="w-10 h-10">{feature.icon}</div>
               <div>

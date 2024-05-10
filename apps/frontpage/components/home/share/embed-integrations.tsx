@@ -1,11 +1,14 @@
 import type { FC } from 'react';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { AspectRatio } from "../../ui/aspect-ratio";
+import { AspectRatio } from '../../ui/aspect-ratio';
 import { IntegrationsCarousel } from './integrations-carousel';
 
-const Connector: FC<{ name: string; style: React.CSSProperties }> = ({ name, ...props }) => {
+const Connector: FC<{ name: string; style: React.CSSProperties }> = ({
+  name,
+  ...props
+}) => {
   return (
     <AnimatePresence>
       <motion.svg
@@ -146,23 +149,21 @@ const embedIntegrations = [
   },
 ];
 
-export const EmbedIntegrations = React.forwardRef<HTMLImageElement>(
-  (_, ref) => {
-    return (
-      <div className="w-full relative max-w-[800px] ml-[30px] sm:ml-[30px] md:w-[150%] md:col-[2/3] lg:ml-[120px]">
-        <IntegrationsCarousel integrations={embedIntegrations} />
-        <Image
-          alt=""
-          className="block w-[56%] max-w-[440px] h-auto absolute top-[22%] left-[-30%] opacity-100 user-select-none pointer-events-none sm:left-[-60px] lg:[-120px]"
-          height="244"
-          ref={ref}
-          src="/home/share/time-frame-picker.svg"
-          style={{ opacity: 0 }}
-          width="458"
-        />
-      </div>
-    );
-  }
-);
+export const EmbedIntegrations = forwardRef<HTMLImageElement>((_, ref) => {
+  return (
+    <div className="w-full relative max-w-[800px] ml-[30px] sm:ml-[30px] md:w-[150%] md:col-[2/3] lg:ml-[120px]">
+      <IntegrationsCarousel integrations={embedIntegrations} />
+      <Image
+        alt=""
+        className="block w-[56%] max-w-[440px] h-auto absolute top-[22%] left-[-30%] opacity-100 user-select-none pointer-events-none sm:left-[-60px] lg:[-120px]"
+        height="244"
+        ref={ref}
+        src="/home/share/time-frame-picker.svg"
+        style={{ opacity: 0 }}
+        width="458"
+      />
+    </div>
+  );
+});
 
 EmbedIntegrations.displayName = 'EmbedIntegrations';

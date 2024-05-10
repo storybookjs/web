@@ -19,6 +19,7 @@ export const InitCommand: FC = () => {
     <button
       className="relative overflow-hidden hidden md:flex items-center justify-center border border-white px-6 h-12 rounded-full text-white text-md font-bold gap-3"
       onClick={onClick}
+      type="button"
     >
       <span>~</span>npx storybook@latest init
       <CopyIcon />

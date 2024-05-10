@@ -1,21 +1,21 @@
 /* eslint-disable no-await-in-loop -- TODO: Fix this */
 import path from 'node:path';
-import fs from 'fs-extra';
+import { emptyDir, mkdirp } from 'fs-extra';
 import fetch from 'node-fetch';
-import tar from 'tar';
+import { x } from 'tar';
 import type { DocsVersion } from '@repo/utils';
 import { docsVersions } from '@repo/utils';
 
 async function clean(): Promise<void> {
-  await fs.emptyDir(path.join(__dirname, '../content/docs'));
-  await fs.emptyDir(path.join(__dirname, '../content/snippets'));
-  await fs.emptyDir(path.join(__dirname, '../public/docs'));
+  await emptyDir(path.join(__dirname, '../content/docs'));
+  await emptyDir(path.join(__dirname, '../content/snippets'));
+  await emptyDir(path.join(__dirname, '../public/docs'));
 
   // Create directories for each version
   for (const version of docsVersions) {
-    await fs.mkdirp(path.join(__dirname, `../content/docs/${version.id}`));
-    await fs.mkdirp(path.join(__dirname, `../content/snippets/${version.id}`));
-    await fs.mkdirp(path.join(__dirname, `../public/docs/${version.id}`));
+    await mkdirp(path.join(__dirname, `../content/docs/${version.id}`));
+    await mkdirp(path.join(__dirname, `../content/snippets/${version.id}`));
+    await mkdirp(path.join(__dirname, `../public/docs/${version.id}`));
   }
 }
 
@@ -49,7 +49,7 @@ async function fetchAndExtract(version: DocsVersion): Promise<void> {
       if (response.body) {
         response.body
           .pipe(
-            tar.x(
+            x(
               {
                 strip: 2,
                 C: path.join(__dirname, `../content/docs/${version.id}`),
@@ -72,7 +72,7 @@ async function fetchAndExtract(version: DocsVersion): Promise<void> {
       if (response.body) {
         response.body
           .pipe(
-            tar.x(
+            x(
               {
                 strip: 3,
                 C: path.join(__dirname, `../content/snippets/${version.id}`),
@@ -90,7 +90,7 @@ async function fetchAndExtract(version: DocsVersion): Promise<void> {
       if (response.body) {
         response.body
           .pipe(
-            tar.x(
+            x(
               {
                 strip: 3,
                 C: path.join(__dirname, `../public/docs/${version.id}`),

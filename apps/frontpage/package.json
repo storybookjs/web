@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "npm run fetch-docs && next build",
     "start": "next start",
-    "lint": "eslint --ext .ts,.tsx .",
+    "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "fetch-docs": "tsx --tsconfig tsconfig.json scripts/get-local-docs.ts",
     "copy-other-sitemaps": "tsx --tsconfig apps/frontpage/tsconfig.json apps/frontpage/scripts/copy-other-sitemaps.ts"

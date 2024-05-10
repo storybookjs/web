@@ -1,13 +1,13 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Player } from "./player";
+import React, { forwardRef } from 'react';
+import { motion } from 'framer-motion';
+import { Player } from './player';
 
 const symbolVariants = {
   initial: { y: 20, opacity: 0 },
   animate: { y: 0, opacity: 1 },
 };
 
-export const PublishIntegrations = React.forwardRef<
+export const PublishIntegrations = forwardRef<
   HTMLImageElement | null,
   { timeFrameStyles: React.CSSProperties }
 >(({ timeFrameStyles }, ref) => {
@@ -21,12 +21,12 @@ export const PublishIntegrations = React.forwardRef<
       <div
         data-chromatic="ignore"
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: -64,
           left: -64,
           right: 0,
           bottom: 0,
-          zIndex: "-1",
+          zIndex: '-1',
         }}
       />
       <img
@@ -76,4 +76,4 @@ export const PublishIntegrations = React.forwardRef<
   );
 });
 
-PublishIntegrations.displayName = "PublishIntegrations";
+PublishIntegrations.displayName = 'PublishIntegrations';

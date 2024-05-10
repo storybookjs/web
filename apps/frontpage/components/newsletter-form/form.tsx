@@ -61,6 +61,7 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({ variant }) => {
               setEmail('');
               state.message = '';
             }}
+            type="button"
           >
             <CloseIcon />
           </button>

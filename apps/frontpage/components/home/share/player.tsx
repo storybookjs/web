@@ -118,9 +118,9 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
         }}
       />
       <img
+        alt="Player"
         className="border-2 border-white rounded-[50%] shadow-sm block w-[28%] h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         src={players[type]}
-        alt="Player"
       />
     </AspectRatio>
   </MotionComponent>

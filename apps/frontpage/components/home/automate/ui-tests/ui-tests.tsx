@@ -68,7 +68,7 @@ const PureUITests: FC<PureUITestsProps> = ({
             return (
               <div
                 className="absolute flex justify-center transition-transform ease-in-out left-1/2 duration-350 will-change-transform"
-                key={index}
+                key={workflow.src}
                 style={{
                   transform: `translateX(${getWorkflowTranslateValue(
                     index - activeIndex,
@@ -212,7 +212,9 @@ export function UITests() {
       isAnimatingLoop ? eachWorkflowAnimationLength : initialAnimationLength,
     );
 
-    return () => { clearTimeout(timer); };
+    return () => {
+      clearTimeout(timer);
+    };
   }, [isAnimatingLoop, workflows, isPaused, isInView]);
 
   return (

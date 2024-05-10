@@ -4,7 +4,7 @@ import {
   SearchIcon,
 } from '@storybook/icons';
 import type { FC } from 'react';
-import { SearchIcon as SearchIllustration } from "../icons/search";
+import { SearchIcon as SearchIllustration } from '../icons/search';
 import { Section } from './section';
 
 export const Support: FC = () => {
@@ -24,7 +24,10 @@ export const Support: FC = () => {
               There&apos;s probably an article for your issue already.
             </p>
           </div>
-          <button className="flex items-center justify-between h-10 px-3 transition-colors border rounded border-zinc-300 lg:w-60 xl:w-72 hover:border-blue-500 group">
+          <button
+            className="flex items-center justify-between h-10 px-3 transition-colors border rounded border-zinc-300 lg:w-60 xl:w-72 hover:border-blue-500 group"
+            type="button"
+          >
             <div className="flex items-center gap-2 text-sm text-zinc-500">
               <SearchIcon className="transition-colors group-hover:text-blue-500" />
               Search docs
