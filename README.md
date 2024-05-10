@@ -13,17 +13,17 @@ This project is structured around [Turborepo](https://turbo.build/repo). This do
 
 ## Main commands
 
+#### `turbo fetch-docs`
+
+> Fetch docs from the monorepo
+
 #### `turbo dev`
 
 > Run all apps locally
 
-#### `pnpm fetch-docs`
+#### `turbo build`
 
-> Import docs from the monorepo
-
-#### `pnpm dev`
-
-> Run frontpage locally
+> Build all apps locally
 
 ## Connect with us!
 
