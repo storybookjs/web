@@ -3,8 +3,8 @@ import { Nunito_Sans as nunitoSans } from 'next/font/google';
 import { cn } from '@repo/utils';
 import { Providers } from './providers';
 
-import './globals.css';
 import '@repo/ui/styles.css';
+import './globals.css';
 
 const fontSans = nunitoSans({
   subsets: ['latin'],

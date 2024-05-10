@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React from 'react';
-import { cn, container } from '@repo/utils';
 import { MergeIcon } from '@storybook/icons';
+import { Container } from '@repo/ui';
 import { FeatureStep } from './feature-step';
 import { Publish } from './publish';
 import { UITests } from './ui-tests/ui-tests';
@@ -11,7 +11,7 @@ import { MergeAndShip } from './merge-and-ship';
 export const Automate: FC = () => {
   return (
     <div className="py-12 border-b border-zinc-600 sm:py-20 md:pt-28">
-      <div className={cn(container)}>
+      <Container>
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] text-center font-bold text-white">
           Automate UI workflows
         </h2>
@@ -19,8 +19,8 @@ export const Automate: FC = () => {
           Add Storybook as a CI step to automate the UI development workflow.
           That helps you and your team ship faster with less manual work.
         </p>
-      </div>
-      <div className={cn(container)}>
+      </Container>
+      <Container>
         <FeatureStep
           description="Publish Storybook online to collaborate on UI implementation with developers, designers, and PMs. Your teammates can see work without needing to spin up a dev environment."
           href="/docs/react/sharing/publish-storybook/"
@@ -51,7 +51,7 @@ export const Automate: FC = () => {
           title="Merge and ship"
         />
         <MergeAndShip />
-      </div>
+      </Container>
     </div>
   );
 };

@@ -1,9 +1,10 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn, container } from '@repo/utils';
+import { cn } from '@repo/utils';
 import { ArrowRightIcon, ChevronSmallRightIcon } from '@storybook/icons';
 import Link from 'next/link';
+import { Container } from '@repo/ui';
 import { Button } from '../ui/button';
 
 type Alignment = 'left' | 'right';
@@ -53,15 +54,13 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
   ...props
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- TODO: Check if this is true or not.
   const activeFeature = features[activeIndex]!;
   const [direction, setDirection] = useState('down');
 
   return (
-    <div
-      className={cn(
-        container,
-        'flex items-center flex-col pb-0 pt-12 sm:pt-20 md:grid md:justify-center md:items-start md:grid-cols-[repeat(2,_minmax(auto,_1fr))] md:grid-rows-[minmax(50vh,_max-content)] md:gap-20 md:pt-28 lg:grid-cols-[repeat(2,_minmax(auto,_1fr))] min-[1416px]:grid-cols-[repeat(2,_1fr)]',
-      )}
+    <Container
+      className="flex items-center flex-col pb-0 pt-12 sm:pt-20 md:grid md:justify-center md:items-start md:grid-cols-[repeat(2,_minmax(auto,_1fr))] md:grid-rows-[minmax(50vh,_max-content)] md:gap-20 md:pt-28 lg:grid-cols-[repeat(2,_minmax(auto,_1fr))] min-[1416px]:grid-cols-[repeat(2,_1fr)]"
       {...props}
     >
       {/* Desktop video */}
@@ -187,6 +186,6 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
           </li>
         ))}
       </ul>
-    </div>
+    </Container>
   );
 };

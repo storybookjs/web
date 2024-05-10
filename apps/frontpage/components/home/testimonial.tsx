@@ -1,4 +1,4 @@
-import { cn, container } from '@repo/utils';
+import { Container } from '@repo/ui';
 import Image from 'next/image';
 import type { FC, ReactNode } from 'react';
 
@@ -19,7 +19,7 @@ export const Testimonial: FC<TestimonialProps> = ({
   logo,
   ...props
 }) => (
-  <div className={cn(container)} {...props}>
+  <Container {...props}>
     <div className="flex flex-col items-center justify-center py-12 sm:py-28">
       <blockquote className="text-white max-w-[590px] text-xl leading-8 text-center mb-8">
         {text}
@@ -43,5 +43,5 @@ export const Testimonial: FC<TestimonialProps> = ({
         </div>
       </cite>
     </div>
-  </div>
+  </Container>
 );

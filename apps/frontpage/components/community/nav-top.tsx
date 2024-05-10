@@ -1,4 +1,4 @@
-import { cn, container } from '@repo/utils';
+import { Container } from '@repo/ui';
 import {
   DiscordIcon,
   GithubIcon,
@@ -10,9 +10,7 @@ import type { FC } from 'react';
 export const NavTop: FC = () => {
   return (
     <div className="w-full h-10 border-b border-zinc-200">
-      <div
-        className={cn(container, 'h-full flex justify-between items-center')}
-      >
+      <Container className="h-full flex justify-between items-center">
         <div className="flex h-full">
           <a
             className="flex items-center px-[15px] h-full shadow-[0_-3px_0_0_inset] font-bold text-sm text-blue-500 shadow-blue-500"
@@ -66,7 +64,7 @@ export const NavTop: FC = () => {
             <YoutubeIcon />
           </a>
         </div>
-      </div>
+      </Container>
     </div>
   );
 };
