@@ -1,11 +1,11 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import { MenuIcon } from '@storybook/icons';
 import { usePathname } from 'next/navigation';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
-import { NavDocs } from '../nav-docs/nav-docs';
 import { cn } from '@repo/utils';
-import { HeaderProps } from '.';
+import { NavDocs } from '../nav-docs/nav-docs';
+import type { HeaderProps } from '.';
 
 export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
   const pathname = usePathname();
@@ -33,20 +33,21 @@ export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
               'group flex items-center justify-center gap-2 text-sm text-zinc-500 font-bold hover:bg-blue-100 hover:text-blue-500  dark:text-white dark:hover:bg-blue-500/10 h-9 w-9 rounded min-[920px]:hidden',
               variant === 'home' && 'text-white',
             )}
+            type="button"
           >
             <MenuIcon size={18} />
           </button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
           <DropdownMenu.Content
-            className="bg-white w-screen md:w-64 h-[74vh] md:h-[50vh] rounded-b-lg md:rounded-lg shadow-xl data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade md:border md:border-zinc-200 mt-[17px] md:mt-2"
             align="end"
+            className="bg-white w-screen md:w-64 h-[74vh] md:h-[50vh] rounded-b-lg md:rounded-lg shadow-xl data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade md:border md:border-zinc-200 mt-[17px] md:mt-2"
           >
             <ScrollArea.Root className="w-full h-full">
               <ScrollArea.Viewport className="w-full h-full p-4 md:p-6 md:pt-5">
-                {activeVersion && (
-                  <NavDocs tree={tree} activeVersion={activeVersion} />
-                )}
+                {activeVersion ? (
+                  <NavDocs activeVersion={activeVersion} tree={tree} />
+                ) : null}
                 <ScrollArea.Scrollbar
                   className="flex select-none touch-none p-1 w-4 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
                   orientation="vertical"

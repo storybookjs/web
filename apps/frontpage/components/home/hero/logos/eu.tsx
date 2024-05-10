@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export const LogoEu = (props: Props) => {
+export function LogoEu() {
   return (
     <svg
       className="w-full h-full"
@@ -19,4 +15,4 @@ export const LogoEu = (props: Props) => {
       />
     </svg>
   );
-};
+}

@@ -1,9 +1,14 @@
-import { TreeProps } from '@repo/utils';
-import fs from 'fs';
+import path from 'node:path';
+import fs from 'node:fs';
+import type { TreeProps } from '@repo/utils';
 import matter from 'gray-matter';
-import path from 'path';
 
-function getMetadata(filePath: string): { title: string; [key: string]: unknown } {
+interface Metadata {
+  title: string;
+  [key: string]: unknown;
+}
+
+function getMetadata(filePath: string): Metadata {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const {
     data: { navTitle, title, ...data },
@@ -35,7 +40,7 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
         );
         const children = childItems
           .sort((a, b) =>
-            a?.sidebar?.order && b?.sidebar?.order
+            a.sidebar?.order && b.sidebar?.order
               ? a.sidebar.order - b.sidebar.order
               : 0,
           )
@@ -80,7 +85,7 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
 
   return tree
     .sort((a, b) =>
-      a?.sidebar?.order && b?.sidebar?.order
+      a.sidebar?.order && b.sidebar?.order
         ? a.sidebar.order - b.sidebar.order
         : 0,
     )

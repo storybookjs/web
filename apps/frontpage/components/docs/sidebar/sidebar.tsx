@@ -1,12 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { ScrollBar } from '../../../components/ui/scroll-area';
-import { FC, ReactNode } from 'react';
-import { ChangelogIcon, DocsIcon, TutorialsIcon } from './icons';
+import type { FC, ReactNode } from 'react';
 import { cn } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
+import { ScrollBar } from "../../ui/scroll-area";
+import { ChangelogIcon, DocsIcon, TutorialsIcon } from './icons';
 
 interface SidebarProps {
   children: ReactNode;
@@ -22,31 +22,31 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
           <div className="py-12 pl-1 pr-4">
             <nav className="flex flex-col gap-1.5 text-sm font-medium">
               <Link
-                href="/docs"
                 className={cn(
                   'flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8',
                   pathname === '/docs' && 'text-blue-500',
                 )}
+                href="/docs"
               >
                 <DocsIcon />
                 Documentation
               </Link>
               <Link
-                href="#"
                 className={cn(
                   'flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8',
                   pathname === '/tutorials' && 'text-blue-500',
                 )}
+                href="#"
               >
                 <TutorialsIcon />
                 Tutorials
               </Link>
               <Link
-                href="/releases"
                 className={cn(
                   'flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8',
                   pathname.startsWith('/releases') && 'text-blue-500',
                 )}
+                href="/releases"
               >
                 <ChangelogIcon />
                 Changelog

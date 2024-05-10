@@ -1,14 +1,14 @@
 'use client';
 
 import { renderers } from '@repo/utils';
-import { FC } from 'react';
-import { useDocs } from '../../../app/docs/provider';
+import type { FC } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@repo/ui';
+import { useDocs } from '../../../app/docs/provider';
 import { Button } from './button';
 
 interface RenderersProps {
@@ -40,9 +40,9 @@ export const Renderers: FC<RenderersProps> = () => {
     <div className="flex gap-2 mb-8">
       {firstThreeRenderers.map((renderer) => (
         <Button
-          key={renderer.id}
           active={renderer.id === activeRenderer}
-          onClick={() => setRenderer(renderer.id)}
+          key={renderer.id}
+          onClick={() => { setRenderer(renderer.id); }}
         >
           {renderer.title}
         </Button>
@@ -50,14 +50,14 @@ export const Renderers: FC<RenderersProps> = () => {
       {!isInFirstThree && activeRendererObj ? (
         <Button
           active={activeRendererObj.id === activeRenderer}
-          onClick={() => setRenderer(activeRendererObj.id)}
+          onClick={() => { setRenderer(activeRendererObj.id); }}
         >
           {activeRendererObj.title}
         </Button>
       ) : (
         <Button
           active={fourthRenderer?.id === activeRenderer}
-          onClick={() => setRenderer(fourthRenderer?.id || '')}
+          onClick={() => { setRenderer(fourthRenderer?.id || ''); }}
         >
           {fourthRenderer?.title || ''}
         </Button>
@@ -70,7 +70,7 @@ export const Renderers: FC<RenderersProps> = () => {
           {restRenderers.map((renderer) => (
             <DropdownMenuItem
               key={renderer.id}
-              onClick={() => setRenderer(renderer.id)}
+              onClick={() => { setRenderer(renderer.id); }}
             >
               {renderer.title}
             </DropdownMenuItem>

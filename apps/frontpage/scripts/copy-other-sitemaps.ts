@@ -1,9 +1,9 @@
+import path from 'node:path';
 import fs from 'fs-extra';
 import fetch from 'node-fetch';
-import path from 'path';
 
-async function getRemoteSitemapContent(path: string) {
-  const response = await fetch(`https://storybook.js.org${path}`);
+async function getRemoteSitemapContent(p: string): Promise<string> {
+  const response = await fetch(`https://storybook.js.org${p}`);
   const content = await response.text();
   return content;
 }
@@ -34,11 +34,11 @@ const OTHER_SITEMAPS = {
 const DESTINATION = path.join(__dirname, '../public/sitemap');
 const SITEMAP_FILENAME = 'sitemap.xml';
 
-function stripDirname(file: string) {
-  return file.replace(/.*(\/public\/.*)/, '$1');
+function stripDirname(file: string): string {
+  return file.replace(/.*(?<temp1>\/public\/.*)/, '$1');
 }
 
-async function copySitemaps() {
+async function copySitemaps(): Promise<void> {
   for (const sitemapId of Object.keys(OTHER_SITEMAPS)) {
     const directory = `${DESTINATION}/${sitemapId}`;
     if (!fs.existsSync(directory)) {
@@ -47,18 +47,21 @@ async function copySitemaps() {
 
     try {
       const file = `${DESTINATION}/${sitemapId}/${SITEMAP_FILENAME}`;
-      const content = await OTHER_SITEMAPS[
-        sitemapId as keyof typeof OTHER_SITEMAPS
-      ].getContent();
+      const content =
+        // eslint-disable-next-line no-await-in-loop -- TODO: Fix it
+        await OTHER_SITEMAPS[
+          sitemapId as keyof typeof OTHER_SITEMAPS
+        ].getContent();
       fs.writeFileSync(file, content);
+      // eslint-disable-next-line no-console -- Showing off console.log
       console.log('Wrote file:', stripDirname(file));
     } catch (error) {
-      // eslint-disable-next-line no-console
+      // eslint-disable-next-line no-console -- Showing off error handling
       console.error(error);
     }
   }
 }
 
-(async () => {
+void (async () => {
   await copySitemaps();
 })();

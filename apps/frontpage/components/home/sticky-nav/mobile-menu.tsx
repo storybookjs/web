@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import Link from 'next/link';
-import { Button } from '../../../components/ui/button';
+import { Button } from "../../ui/button";
 
 interface MenuItemProps {
   id: string;
@@ -20,7 +20,7 @@ export const MobileMenu: FC<MenuProps> = ({ items, label }) => {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <DropdownMenu.Trigger asChild>
-          <Button variant="ghostHome" size="sm" className="md:hidden">
+          <Button className="md:hidden" size="sm" variant="ghostHome">
             {label} <ChevronSmallDownIcon />
           </Button>
         </DropdownMenu.Trigger>
@@ -33,10 +33,10 @@ export const MobileMenu: FC<MenuProps> = ({ items, label }) => {
         >
           <DropdownMenu.Group>
             {items.map((item) => (
-              <DropdownMenu.Item key={item.id} asChild>
+              <DropdownMenu.Item asChild key={item.id}>
                 <Link
-                  href={item.href}
                   className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
+                  href={item.href}
                 >
                   {item.label}
                 </Link>

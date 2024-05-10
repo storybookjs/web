@@ -4,19 +4,20 @@ import {
   DiscordIcon,
   TwitterIcon,
   YoutubeIcon,
-} from "@storybook/icons";
-import { FC, useMemo } from "react";
-import { zonedTimeToUtc, format } from "date-fns-tz";
-import { isPast } from "date-fns";
-import { Section } from "./section";
+} from '@storybook/icons';
+import type { FC} from 'react';
+import { useMemo } from 'react';
+import { zonedTimeToUtc, format } from 'date-fns-tz';
+import { isPast } from 'date-fns';
+import { Section } from './section';
 
-const rezoneDate = (date: Date) => zonedTimeToUtc(date, "America/Los_Angeles");
+const rezoneDate = (date: Date) => zonedTimeToUtc(date, 'America/Los_Angeles');
 
 const formatDate = (date: Date) => {
   // https://github.com/date-fns/date-fns/issues/946
   return {
-    date: format(date, "d LLLL, y, h:mmaaa (zzzz)"),
-    dateShort: format(date, "d LLL, y, haaa (zzz)"),
+    date: format(date, 'd LLLL, y, h:mmaaa (zzzz)'),
+    dateShort: format(date, 'd LLL, y, haaa (zzz)'),
   };
 };
 
@@ -31,31 +32,31 @@ interface Session {
 const sessionsData: Session[] = [
   {
     id: 0,
-    title: "Storybook for Developers",
-    date: "July 20, 2023 8:30 AM",
+    title: 'Storybook for Developers',
+    date: 'July 20, 2023 8:30 AM',
     registrationLink:
-      "https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=July+20,+2023",
+      'https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=July+20,+2023',
   },
   {
     id: 1,
-    title: "Storybook for Developers",
-    date: "Aug 29, 2023 7:00 AM",
+    title: 'Storybook for Developers',
+    date: 'Aug 29, 2023 7:00 AM',
     registrationLink:
-      "https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Aug+29,+2023",
+      'https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Aug+29,+2023',
   },
   {
     id: 2,
-    title: "Chromatic & Storybook for Designers",
-    date: "Oct 12, 2023 8:30 AM",
+    title: 'Chromatic & Storybook for Designers',
+    date: 'Oct 12, 2023 8:30 AM',
     registrationLink:
-      "https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Oct+12,+2023",
+      'https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Oct+12,+2023',
   },
   {
     id: 3,
-    title: "Storybook Workflows for Frontend Teams",
-    date: "Nov 7, 2023 9:00 AM",
+    title: 'Storybook Workflows for Frontend Teams',
+    date: 'Nov 7, 2023 9:00 AM',
     registrationLink:
-      "https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Nov+7,+2023",
+      'https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Nov+7,+2023',
   },
 ];
 
@@ -74,7 +75,7 @@ export const Events: FC = () => {
         };
       })
       .sort(
-        (a, b) => new Date(a.rawDate).valueOf() - new Date(b.rawDate).valueOf()
+        (a, b) => new Date(a.rawDate).valueOf() - new Date(b.rawDate).valueOf(),
       )
       .reduce<{ upcoming: Session[]; past: Session[] }>(
         (acc, session) => {
@@ -85,12 +86,12 @@ export const Events: FC = () => {
           }
           return acc;
         },
-        { upcoming: [], past: [] }
+        { upcoming: [], past: [] },
       );
   }, []);
 
   return (
-    <Section id="events-streams" className="relative mb-8 md:mb-16">
+    <Section className="relative mb-8 md:mb-16" id="events-streams">
       <h2 className="font-bold text-2xl mb-2">Join live events & streams</h2>
       <p className="mb-8">
         Storybook&apos;s thriving community can help answer your questions.
@@ -105,8 +106,8 @@ export const Events: FC = () => {
               Watch insider previews, feature demos, and interviews.
             </p>
             <a
-              href="https://www.youtube.com/channel/UCr7Quur3eIyA_oe8FNYexfg"
               className="flex gap-2 items-center text-blue-500"
+              href="https://www.youtube.com/channel/UCr7Quur3eIyA_oe8FNYexfg"
             >
               Watch now
               <ChevronSmallRightIcon />
@@ -121,8 +122,8 @@ export const Events: FC = () => {
               Get the latest event updates from Storybook maintainers.
             </p>
             <a
-              href="https://twitter.com/storybookjs"
               className="flex gap-2 items-center text-blue-500"
+              href="https://twitter.com/storybookjs"
             >
               Follow now
               <ChevronSmallRightIcon />
@@ -139,8 +140,8 @@ export const Events: FC = () => {
               Join our community chat to learn about live events and streams.
             </p>
             <a
-              href="https://discord.gg/storybook"
               className="flex gap-2 items-center text-blue-500"
+              href="https://discord.gg/storybook"
             >
               Chat now
               <ChevronSmallRightIcon />
@@ -153,10 +154,10 @@ export const Events: FC = () => {
         <h3 className="font-bold text-lg mb-3">Storybook Sessions</h3>
         <div>
           <p>
-            Join us for these 1-hour sessions, hosted by the{" "}
+            Join us for these 1-hour sessions, hosted by the{' '}
             <a href="https://www.chromatic.com/">
               <span>Chromatic</span>
-            </a>{" "}
+            </a>{' '}
             team. We&apos;ll explore the component-driven approach to building,
             testing, and documenting UIs using Storybook. You&apos;ll learn how
             to:
@@ -187,8 +188,8 @@ export const Events: FC = () => {
         <ul>
           {localizedSessions.upcoming.map((session) => (
             <li
-              key={session.id}
               className="flex items-center h-11 border-b border-b-zinc-300 justify-between"
+              key={session.id}
             >
               <div className="flex items-center gap-4">
                 <CalendarIcon className="w-4 h-4 text-zinc-500" />
@@ -197,9 +198,10 @@ export const Events: FC = () => {
                 <div className="text-md text-zinc-500">{session.dateShort}</div>
               </div>
               <a
-                href={session.registrationLink}
-                target="_blank"
                 className="flex gap-2 items-center text-blue-500"
+                href={session.registrationLink}
+                rel="noreferrer"
+                target="_blank"
               >
                 Register <ChevronSmallRightIcon />
               </a>
@@ -216,8 +218,8 @@ export const Events: FC = () => {
         <ul>
           {localizedSessions.past.map((session) => (
             <li
-              key={session.id}
               className="flex items-center h-11 border-b border-b-zinc-300"
+              key={session.id}
             >
               <div className="flex items-center gap-4">
                 <CalendarIcon className="w-4 h-4 text-zinc-500" />

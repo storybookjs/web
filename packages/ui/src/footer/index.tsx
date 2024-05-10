@@ -1,9 +1,9 @@
 import { cn, container } from '@repo/utils';
-import { FC } from 'react';
-import { Form } from './form';
+import type { FC } from 'react';
 import Link from 'next/link';
 import { StorybookLogo } from '../logos/storybook';
 import { ChromaticLogo } from '../logos/chromatic';
+import { Form } from './form';
 import { footerNav } from './nav';
 
 export interface FooterProps {
@@ -25,37 +25,37 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
         <div className="flex flex-wrap mb-6 sm:mb-20">
           {footerNav.map((nav) => (
             <div
-              key={nav.title}
               className="flex flex-col w-full gap-3 mb-12 sm:w-1/2 md:flex-1 md:mb-0"
+              key={nav.title}
             >
               <div className="font-bold text-md">{nav.title}</div>
               {nav.links.map((link) => {
                 if (link.isExternal)
                   return (
                     <a
-                      key={link.title}
-                      href={link.href}
-                      target="_blank"
-                      rel="noreferrer"
                       className={cn(
                         'text-zinc-600 hover:text-blue-500 transition-colors text-md',
                         variant === 'home' && 'text-zinc-400',
                         variant !== 'home' &&
                           'text-zinc-600 dark:text-zinc-400',
                       )}
+                      href={link.href}
+                      key={link.title}
+                      rel="noreferrer"
+                      target="_blank"
                     >
                       {link.title}
                     </a>
                   );
                 return (
                   <Link
-                    key={link.title}
-                    href={link.href}
                     className={cn(
                       'text-zinc-600 hover:text-blue-500 transition-colors text-md',
                       variant === 'home' && 'text-zinc-400',
                       variant !== 'home' && 'text-zinc-600 dark:text-zinc-400',
                     )}
+                    href={link.href}
+                    key={link.title}
                   >
                     {link.title}
                   </Link>

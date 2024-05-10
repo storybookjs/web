@@ -1,17 +1,17 @@
 'use client';
 
-import { Hero } from './hero';
 import { Header, Footer } from '@repo/ui';
-import { Develop } from './develop/develop';
-import { StickyNav } from './sticky-nav/sticky-nav';
 import { useMemo, useRef } from 'react';
 import { useInView } from 'framer-motion';
+import { cn, container } from '@repo/utils';
+import { Hero } from './hero';
+import { Develop } from './develop/develop';
+import { StickyNav } from './sticky-nav/sticky-nav';
 import { Test } from './test/test';
 import { Document } from './document/document';
 import { Share } from './share/share';
 import { Automate } from './automate/automate';
 import { SocialValidation } from './social-validation/social-validation';
-import { cn, container } from '@repo/utils';
 
 interface HomeProps {
   githubCount: number;
@@ -20,12 +20,12 @@ interface HomeProps {
   discordMembers: string;
 }
 
-export const Home = ({
+export function Home({
   githubCount,
   npmDownloads,
   contributorCount,
   discordMembers,
-}: HomeProps) => {
+}: HomeProps) {
   const developRef = useRef(null);
   const developInView = useInView(developRef, { margin: '0px 0px -100% 0px' });
 
@@ -64,25 +64,25 @@ export const Home = ({
   return (
     <div className="relative bg-homeBackground" id="page-top">
       <div className="relative z-10">
-        <Header variant="home" githubCount={githubCount} />
-        <Hero npmDownloads={npmDownloads} contributorCount={contributorCount} />
-        <StickyNav isVisible={!!activeSection} activeSection={activeSection} />
-        <div style={{ contain: 'paint' }} ref={developRef} id="develop">
+        <Header githubCount={githubCount} variant="home" />
+        <Hero contributorCount={contributorCount} npmDownloads={npmDownloads} />
+        <StickyNav activeSection={activeSection} isVisible={Boolean(activeSection)} />
+        <div id="develop" ref={developRef} style={{ contain: 'paint' }}>
           <Develop />
         </div>
-        <div ref={testRef} id="test">
+        <div id="test" ref={testRef}>
           <Test />
         </div>
-        <div ref={documentRef} id="document">
+        <div id="document" ref={documentRef}>
           <Document />
         </div>
-        <div ref={shareRef} id="share">
+        <div id="share" ref={shareRef}>
           <Share />
         </div>
-        <div style={{ contain: 'paint' }} ref={automateRef} id="automate">
+        <div id="automate" ref={automateRef} style={{ contain: 'paint' }}>
           <Automate />
         </div>
-        <div ref={whoRef} id="who">
+        <div id="who" ref={whoRef}>
           <SocialValidation
             contributorCount={contributorCount}
             discordMembers={discordMembers}
@@ -103,4 +103,4 @@ export const Home = ({
       </div>
     </div>
   );
-};
+}

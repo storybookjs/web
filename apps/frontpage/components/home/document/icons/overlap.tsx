@@ -1,44 +1,44 @@
 import * as React from "react";
-import { SVGProps } from "react";
+import type { SVGProps } from "react";
 
 interface SVGRProps {
   title?: string;
   titleId?: string;
 }
 
-export const Overlap = ({
+export function Overlap({
   title,
   titleId,
   ...props
-}: SVGProps<SVGSVGElement> & SVGRProps) => (
-  <svg
+}: SVGProps<SVGSVGElement> & SVGRProps) {
+  return <svg
+    aria-labelledby={titleId}
+    role="img"
     viewBox="0 0 48 48"
     xmlns="http://www.w3.org/2000/svg"
-    role="img"
-    aria-labelledby={titleId}
     {...props}
   >
     {title ? <title id={titleId}>{title}</title> : null}
     <g fill="none" fillRule="evenodd">
-      <rect fill="#FC521F" y={6} width={24} height={24} rx={4} opacity={0.7} />
+      <rect fill="#FC521F" height={24} opacity={0.7} rx={4} width={24} y={6} />
       <rect
         fill="#FFC445"
+        height={24}
+        opacity={0.7}
+        rx={4}
+        width={24}
         x={12}
         y={12}
-        width={24}
-        height={24}
-        rx={4}
-        opacity={0.7}
       />
       <rect
         fill="#1EA7FD"
+        height={24}
+        opacity={0.7}
+        rx={4}
+        width={24}
         x={24}
         y={18}
-        width={24}
-        height={24}
-        rx={4}
-        opacity={0.7}
       />
     </g>
   </svg>
-);
+}

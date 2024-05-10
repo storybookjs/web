@@ -13,44 +13,44 @@ export default function SocialProof() {
       <div className="flex w-full justify-evenly items-center gap-8 sm:gap-8 md:gap-12 lg:gap-16 text-zinc-600">
         <div className="flex-initial flex-shrink-0 hidden sm:flex items-center justify-center h-10">
           <Image
-            src={logoVSCode}
             alt="VSCode"
             className="w-full h-full opacity-50"
+            src={logoVSCode}
           />
         </div>
         <div className="flex-initial flex-shrink-0 hidden sm:flex items-center justify-center h-8">
-          <Image src={logoEu} alt="EU" className="w-full h-full opacity-50" />
+          <Image alt="EU" className="w-full h-full opacity-50" src={logoEu} />
         </div>
         <div className="flex-grow-1 flex-shrink-0 flex items-center justify-center h-5 sm:h-6">
           <Image
-            src={logoGithub}
             alt="Github"
             className="w-full h-full opacity-50"
+            src={logoGithub}
           />
         </div>
         <div className="flex-grow-1 flex-shrink-0 flex items-center justify-center h-6 sm:h-8">
           <Image
-            src={logoAirbnb}
             alt="Airbnb"
             className="w-full h-full opacity-50"
+            src={logoAirbnb}
           />
         </div>
         <div className="flex-grow-1 flex-shrink-0 flex items-center justify-center h-6 sm:h-7">
           <Image
-            src={logoMozilla}
             alt="Mozilla"
             className="w-full h-full opacity-50"
+            src={logoMozilla}
           />
         </div>
         <div className="flex-grow-1 flex-shrink-0 hidden lg:flex items-center justify-center h-7">
           <Image
-            src={logoMonday}
             alt="Monday.com"
             className="w-full h-full opacity-50"
+            src={logoMonday}
           />
         </div>
         <div className="flex-grow-1 flex-shrink-0 hidden items-center justify-center h-6 xl:flex">
-          <Image src={logoBBC} alt="BBC" className="w-full h-full opacity-50" />
+          <Image alt="BBC" className="w-full h-full opacity-50" src={logoBBC} />
         </div>
       </div>
     </div>

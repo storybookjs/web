@@ -1,10 +1,12 @@
 'use client';
 
-import { ScrollArea } from '../../components/ui/scroll-area';
 import { cn } from '@repo/utils';
-import { ElementOrSelector, inView } from 'framer-motion';
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import type { ElementOrSelector } from 'framer-motion';
+import { inView } from 'framer-motion';
+import type { Dispatch, FC, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 import { useScrollDirection } from 'react-use-scroll-direction';
+import { ScrollArea } from '../ui/scroll-area';
 
 interface Heading {
   id: number;
@@ -35,9 +37,9 @@ export const TableOfContent: FC<TableOfContentProps> = ({ headings }) => {
             {headings?.map((heading) => {
               return (
                 <Element
-                  key={heading.id}
                   heading={heading}
                   isInView={isInView}
+                  key={heading.id}
                   setIsInView={setIsInView}
                 />
               );
@@ -63,26 +65,26 @@ const Element: FC<ElementProps> = ({ heading, isInView, setIsInView }) => {
         ? setIsInView((value) => [...new Set([heading.slug, ...value])])
         : setIsInView((value) => [...new Set([...value, heading.slug])]);
 
-      return () =>
+      return () => {
         setIsInView((value) => value.filter((slug) => slug !== heading.slug));
+      };
     });
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- This is intentional
   }, [isScrollingUp]);
 
   const active =
-    // @ts-expect-error - TS doesn't follow that isInView has at least 1 entry
     isInView.length > 0 ? isInView[0].includes(heading.slug) : false;
 
   return (
     <li key={heading.id}>
       <a
-        href={`#${heading.slug}`}
         className={cn(
           'flex items-center text-sm text-zinc-700 hover:text-blue-500 transition-colors w-full mb-3',
           heading.level > 2 && 'ml-5',
           active && 'text-blue-500',
         )}
+        href={`#${heading.slug}`}
       >
         {heading.title}
       </a>

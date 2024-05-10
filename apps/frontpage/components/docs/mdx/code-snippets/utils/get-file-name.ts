@@ -50,7 +50,7 @@ const parseNameFromComment = (comment: string) => {
 type ParsedSnippet = [string, string];
 /**
  *
- * @param content The string content of a code snippet
+ * @param content - The string content of a code snippet
  * @returns A tuple containing the file name and the code
  */
 export const parseSnippetContent = (

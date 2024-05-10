@@ -1,15 +1,17 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions -- TODO: Add missing onKeyDown */
+/* eslint-disable jsx-a11y/click-events-have-key-events -- TODO: Add missing onKeyDown */
 'use client';
 
-import SocialProof from './social-proof';
 import Link from 'next/link';
 import { cn, container } from '@repo/utils';
-import { Chrome } from './chrome';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { InitCommand } from './init-command';
 import { useEffect, useState } from 'react';
-import { Manager } from './manager';
 import { ChevronLeftIcon, ChevronRightIcon } from '@storybook/icons';
+import { InitCommand } from './init-command';
+import { Manager } from './manager';
+import { Chrome } from './chrome';
+import SocialProof from './social-proof';
 
 const features = [
   'Development',
@@ -18,18 +20,18 @@ const features = [
   'Visual Testing',
 ];
 
-const Star = ({ x = 0, y = 0, w = 14, delay = 0 }) => {
+function Star({ x = 0, y = 0, w = 14, delay = 0 }) {
   return (
     <motion.svg
-      className="absolute top-0 left-0"
-      initial={{ x, y, opacity: 0, scale: 0.5 }}
       animate={{ rotate: 360, opacity: 1, scale: 1 }}
-      transition={{ duration: 2, repeat: Infinity, delay }}
-      style={{ originX: `${w / 2}px`, originY: `${w / 2}px` }}
-      width={w}
-      height={w}
-      viewBox="0 0 14 14"
+      className="absolute top-0 left-0"
       fill="none"
+      height={w}
+      initial={{ x, y, opacity: 0, scale: 0.5 }}
+      style={{ originX: `${w / 2}px`, originY: `${w / 2}px` }}
+      transition={{ duration: 2, repeat: Infinity, delay }}
+      viewBox="0 0 14 14"
+      width={w}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -38,12 +40,12 @@ const Star = ({ x = 0, y = 0, w = 14, delay = 0 }) => {
       />
       <defs>
         <linearGradient
+          gradientUnits="userSpaceOnUse"
           id="paint0_linear_195_11225"
           x1="7"
-          y1="0"
           x2="7"
+          y1="0"
           y2="14"
-          gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="white" />
           <stop offset="1" stopColor="white" stopOpacity="0" />
@@ -51,23 +53,25 @@ const Star = ({ x = 0, y = 0, w = 14, delay = 0 }) => {
       </defs>
     </motion.svg>
   );
-};
+}
 
-export const Hero = ({
+export function Hero({
   npmDownloads,
   contributorCount,
 }: {
   npmDownloads: string;
   contributorCount: string;
-}) => {
+}) {
   const [slide, setSlide] = useState(1);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSlide((slide) => (slide === 4 ? 1 : slide + 1));
+      setSlide((s) => (s === 4 ? 1 : s + 1));
     }, 3000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -90,8 +94,8 @@ export const Hero = ({
           <div className="flex flex-col gap-8 sm:flex-row">
             <div className="flex gap-4">
               <Link
-                href="/docs"
                 className="flex items-center justify-center h-12 px-6 font-bold text-black bg-white rounded-full text-md"
+                href="/docs"
               >
                 Get Started
               </Link>
@@ -99,8 +103,8 @@ export const Hero = ({
             </div>
             <div className="flex gap-6 sm:gap-10 md:hidden lg:flex">
               <a
-                href="https://github.com/storybookjs/storybook/releases"
                 className="md:hidden"
+                href="https://github.com/storybookjs/storybook/releases"
               >
                 <div className="text-white text-md">v8</div>
                 <div className="text-sm text-white/60">Latest version</div>
@@ -116,23 +120,23 @@ export const Hero = ({
             </div>
           </div>
           <a
-            href="https://github.com/storybookjs/storybook/releases"
-            target="_blank"
-            rel="noreferrer"
             className="hidden text-sm transition-colors md:flex md:items-end text-white/60 hover:text-white"
+            href="https://github.com/storybookjs/storybook/releases"
+            rel="noreferrer"
+            target="_blank"
           >
             Version
             <div className="relative mx-3">
               <Image
-                src="/home/eight.svg"
                 alt="Storybook 8"
-                width={26}
                 height={39}
+                src="/home/eight.svg"
+                width={26}
               />
-              <Star x={-36} y={-10} delay={1} />
-              <Star x={-16} y={-20} w={7} delay={0.2} />
-              <Star x={24} y={-34} delay={2} />
-              <Star x={52} y={28} w={7} delay={0.4} />
+              <Star delay={1} x={-36} y={-10} />
+              <Star delay={0.2} w={7} x={-16} y={-20} />
+              <Star delay={2} x={24} y={-34} />
+              <Star delay={0.4} w={7} x={52} y={28} />
             </div>
           </a>
         </div>
@@ -141,14 +145,18 @@ export const Hero = ({
         <div className="flex items-center justify-between w-full h-20 md:hidden">
           <div
             className="flex items-center justify-center w-10 h-10 text-white rounded-full"
-            onClick={() => setSlide(slide === 1 ? 4 : slide - 1)}
+            onClick={() => {
+              setSlide(slide === 1 ? 4 : slide - 1);
+            }}
           >
             <ChevronLeftIcon />
           </div>
           <div className="text-md">{features[slide - 1]}</div>
           <div
             className="flex items-center justify-center w-10 h-10 text-white rounded-full"
-            onClick={() => setSlide(slide === 4 ? 1 : slide + 1)}
+            onClick={() => {
+              setSlide(slide === 4 ? 1 : slide + 1);
+            }}
           >
             <ChevronRightIcon />
           </div>
@@ -165,12 +173,15 @@ export const Hero = ({
           />
           {features.map((label, i) => (
             <button
-              key={label}
               className={cn(
                 'text-white/60 transition-colors hover:text-white',
                 i === slide - 1 && 'text-white',
               )}
-              onClick={() => setSlide(i + 1)}
+              key={label}
+              onClick={() => {
+                setSlide(i + 1);
+              }}
+              type="button"
             >
               {label}
             </button>
@@ -182,4 +193,4 @@ export const Hero = ({
       <SocialProof />
     </div>
   );
-};
+}

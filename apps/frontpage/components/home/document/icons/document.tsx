@@ -1,23 +1,23 @@
 import * as React from "react";
-import { SVGProps } from "react";
+import type { SVGProps } from "react";
 
 interface SVGRProps {
   title?: string;
   titleId?: string;
 }
 
-export const Document = ({
+export function Document({
   title,
   titleId,
   ...props
-}: SVGProps<SVGSVGElement> & SVGRProps) => (
-  <svg
-    width="48"
+}: SVGProps<SVGSVGElement> & SVGRProps) {
+  return <svg
+    aria-labelledby={titleId}
+    fill="none"
     height="48"
     viewBox="0 0 48 48"
-    fill="none"
+    width="48"
     xmlns="http://www.w3.org/2000/svg"
-    aria-labelledby={titleId}
     {...props}
   >
     {title ? <title id={titleId}>{title}</title> : null}
@@ -26,58 +26,58 @@ export const Document = ({
       fill="#D7F7F6"
     />
     <rect
+      fill="#37D5D3"
+      fillOpacity="0.85"
+      height="5"
+      rx="2"
+      width="9"
       x="9"
       y="17"
-      width="9"
-      height="5"
-      rx="2"
-      fill="#37D5D3"
-      fillOpacity="0.85"
     />
     <rect
+      fill="#37D5D3"
+      fillOpacity="0.85"
+      height="5"
+      rx="2"
+      width="19"
       x="20"
       y="17"
-      width="19"
-      height="5"
-      rx="2"
-      fill="#37D5D3"
-      fillOpacity="0.85"
     />
     <rect
+      fill="#37D5D3"
+      fillOpacity="0.85"
+      height="5"
+      rx="2"
+      width="9"
       x="9"
       y="26"
-      width="9"
-      height="5"
-      rx="2"
-      fill="#37D5D3"
-      fillOpacity="0.85"
     />
     <rect
+      fill="#37D5D3"
+      fillOpacity="0.85"
+      height="5"
+      rx="2"
+      width="19"
       x="20"
       y="26"
-      width="19"
-      height="5"
-      rx="2"
-      fill="#37D5D3"
-      fillOpacity="0.85"
     />
     <rect
+      fill="#37D5D3"
+      fillOpacity="0.85"
+      height="5"
+      rx="2"
+      width="9"
       x="9"
       y="35"
-      width="9"
-      height="5"
-      rx="2"
-      fill="#37D5D3"
-      fillOpacity="0.85"
     />
     <rect
-      x="20"
-      y="35"
-      width="19"
-      height="5"
-      rx="2"
       fill="#37D5D3"
       fillOpacity="0.85"
+      height="5"
+      rx="2"
+      width="19"
+      x="20"
+      y="35"
     />
     <path
       d="M36 0V5C36 7.20914 37.7909 9 40 9H45L36 0Z"
@@ -85,4 +85,4 @@ export const Document = ({
       fillOpacity="0.85"
     />
   </svg>
-);
+}

@@ -1,9 +1,3 @@
-import { FC } from "react";
-
-type Props = {
-  id: string;
-};
-
-export const FeatureSnippets: FC<Props> = ({ id }) => {
+export const FeatureSnippets = () => {
   return <div className="">Feature Snippets</div>;
 };

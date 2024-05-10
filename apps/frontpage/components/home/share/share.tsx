@@ -2,13 +2,13 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useScroll, useSpring, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { ChevronSmallRightIcon } from '@storybook/icons';
+import { cn, container } from '@repo/utils';
 import { Testimonial } from '../testimonial';
 import { useEventListener } from '../../../hooks/use-event-listener';
-import { LogoCloudbees } from './Logo-cloudbees';
+import { LogoCloudbees } from './logo-cloudbee';
 import { PublishIntegrations } from './publish-integrations';
 import { EmbedIntegrations } from './embed-integrations';
 import { TestIntegrations } from './test-integrations';
-import { cn, container } from '@repo/utils';
 
 export function Share() {
   const publishRef = useRef<HTMLImageElement | null>(null);
@@ -40,9 +40,9 @@ export function Share() {
   });
 
   const handleResize = () => {
-    const embed = embedRef && embedRef.current?.getBoundingClientRect();
-    const publish = publishRef && publishRef.current?.getBoundingClientRect();
-    const test = testRef && testRef.current?.getBoundingClientRect();
+    const embed = embedRef.current?.getBoundingClientRect();
+    const publish = publishRef.current?.getBoundingClientRect();
+    const test = testRef.current?.getBoundingClientRect();
 
     if (embed && publish && test) {
       const deltaX1 = embed.left - publish.left;
@@ -72,16 +72,16 @@ export function Share() {
       (latestPublishProgress || 0) + (latestTestProgress || 0),
   );
 
-  const x = useTransform(
-    scrollProgress,
-    [0, 1, 2],
-    ['0%', `${delta.x[0]}px`, `${delta.x[1]}px`],
-  );
-  const y = useTransform(
-    scrollProgress,
-    [0, 1, 2],
-    ['0%', `${delta.y[0]}px`, `${delta.y[1]}px`],
-  );
+  // const x = useTransform(
+  //   scrollProgress,
+  //   [0, 1, 2],
+  //   ['0%', `${delta.x[0]}px`, `${delta.x[1]}px`],
+  // );
+  // const y = useTransform(
+  //   scrollProgress,
+  //   [0, 1, 2],
+  //   ['0%', `${delta.y[0]}px`, `${delta.y[1]}px`],
+  // );
   const scale = useTransform(
     scrollProgress,
     [0, 1, 2],
@@ -123,8 +123,8 @@ export function Share() {
             team can check that the UI looks right without touching code.
           </p>
           <Link
-            href="/docs/react/sharing/publish-storybook"
             className="flex items-center gap-2 font-bold text-blue-500"
+            href="/docs/react/sharing/publish-storybook"
           >
             Publish Storybook
             <ChevronSmallRightIcon />
@@ -151,8 +151,8 @@ export function Share() {
             community. Works with the oEmbed standard.
           </p>
           <Link
-            href="/docs/react/sharing/embed"
             className="flex items-center gap-2 font-bold text-blue-500"
+            href="/docs/react/sharing/embed"
           >
             Embed stories
             <ChevronSmallRightIcon />
@@ -171,8 +171,8 @@ export function Share() {
             once and import them into any JavaScript library.
           </p>
           <Link
-            href="/docs/react/writing-tests/stories-in-unit-tests"
             className="flex items-center gap-2 font-bold text-blue-500"
+            href="/docs/react/writing-tests/stories-in-unit-tests"
           >
             Reuse stories in tests and libraries
             <ChevronSmallRightIcon />
@@ -181,13 +181,13 @@ export function Share() {
         <TestIntegrations ref={testRef} />
       </div>
       <Testimonial
+        avatarUrl="https://avatars2.githubusercontent.com/u/8724083?s=460&v=4"
+        jobTitle="Author of Building Design Systems"
+        logo={<LogoCloudbees />}
+        name="Sarrah Vesselov"
         text="“Storybook is my go-to when starting a new design system. It makes
             getting something in place quick and easy for both design and
             engineering.”"
-        avatarUrl="https://avatars2.githubusercontent.com/u/8724083?s=460&v=4"
-        name="Sarrah Vesselov"
-        jobTitle="Author of Building Design Systems"
-        logo={<LogoCloudbees />}
       />
     </div>
   );

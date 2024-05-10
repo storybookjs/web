@@ -1,6 +1,6 @@
 import { cn, container } from '@repo/utils';
 import Image from 'next/image';
-import { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 
 interface TestimonialProps {
   text: React.ReactNode;
@@ -17,7 +17,6 @@ export const Testimonial: FC<TestimonialProps> = ({
   name,
   jobTitle,
   logo,
-  companyName,
   ...props
 }) => (
   <div className={cn(container)} {...props}>
@@ -28,11 +27,11 @@ export const Testimonial: FC<TestimonialProps> = ({
       <cite className="flex items-stretch not-italic text">
         <div className="flex items-center">
           <Image
+            alt={name}
             className="inline-block rounded-full"
-            width={40}
             height={40}
             src={avatarUrl}
-            alt={name}
+            width={40}
           />
           <div className="ml-3">
             <div className="text-sm font-bold text-white">{name}</div>

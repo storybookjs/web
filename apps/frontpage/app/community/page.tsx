@@ -1,8 +1,8 @@
-import { NavTop } from '../../components/community/nav-top';
 import { Header, Footer } from '@repo/ui';
+import { cn, smallContainer, fetchGithubCount } from '@repo/utils';
+import { NavTop } from '../../components/community/nav-top';
 import { Community } from '../../components/community';
 import { NewsletterForm } from '../../components/newsletter-form/form';
-import { cn, smallContainer, fetchGithubCount } from '@repo/utils';
 import { Numbers } from '../../components/community/numbers';
 import { NavSide } from '../../components/community/nav-side';
 import { Support } from '../../components/community/support';
@@ -19,7 +19,7 @@ export default async function Page() {
 
   return (
     <CommunityProvider>
-      <Header variant="system" githubCount={githubCount} />
+      <Header githubCount={githubCount} variant="system" />
       <NavTop />
       <main className={cn(smallContainer, ' mt-10 md:mt-20')}>
         <div className="justify-between gap-20 mb-10 lg:px-8 md:flex md:mb-16">

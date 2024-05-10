@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export const LogoVscode = (props: Props) => {
+export function LogoVscode() {
   return (
     <svg
       className="w-full h-full"
@@ -16,11 +12,11 @@ export const LogoVscode = (props: Props) => {
         <mask
           height="33"
           id="mask0_1377_42556"
-          style={{ maskType: "alpha" }}
+          maskUnits="userSpaceOnUse"
+          style={{ maskType: 'alpha' }}
           width="33"
           x="0"
           y="0"
-          maskUnits="userSpaceOnUse"
         >
           <path
             d="M23.2773 32.8029C23.7943 33.0043 24.3838 32.9914 24.9056 32.7403L31.6638 29.4884C32.374 29.1467 32.8256 28.428 32.8256 27.6395V5.58925C32.8256 4.80078 32.374 4.08206 31.6639 3.74035L24.9056 0.4883C24.2208 0.158768 23.4193 0.239483 22.8182 0.676454C22.7324 0.738875 22.6506 0.808571 22.5738 0.885376L9.63599 12.6888L4.00052 8.41104C3.4759 8.01283 2.74213 8.04546 2.2549 8.48867L0.447423 10.1328C-0.148553 10.675 -0.149236 11.6126 0.445946 12.1556L5.33321 16.6143L0.445946 21.0731C-0.149236 21.6161 -0.148553 22.5537 0.447423 23.0958L2.2549 24.74C2.74213 25.1832 3.4759 25.2158 4.00052 24.8176L9.63599 20.5398L22.5738 32.3432C22.7785 32.548 23.0188 32.7023 23.2773 32.8029ZM24.6242 9.16251L14.8073 16.6143L24.6242 24.0661V9.16251Z"
@@ -50,13 +46,13 @@ export const LogoVscode = (props: Props) => {
       <defs>
         <clipPath id="clip0_1377_42556">
           <rect
-            height="32.826"
-            width="32.826"
             fill="#fff"
+            height="32.826"
             transform="translate(0 0.20166)"
+            width="32.826"
           />
         </clipPath>
       </defs>
     </svg>
   );
-};
+}

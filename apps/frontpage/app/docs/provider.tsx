@@ -2,15 +2,10 @@
 
 import { languages, packageManagers, renderers } from '@repo/utils';
 import { getCookie, setCookie } from 'cookies-next';
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import type { ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
-interface Props {
+interface DocsContextProps {
   activeRenderer: null | string;
   setRenderer: (id: string) => void;
   activeLanguage: null | string;
@@ -19,12 +14,14 @@ interface Props {
   setPackageManager: (id: string) => void;
 }
 
-const DocsContext = createContext<Props | undefined>(undefined);
+const DocsContext = createContext<DocsContextProps | undefined>(undefined);
 
 export function DocsProvider({ children }: { children: ReactNode }) {
   const [activeRenderer, setActiveRenderer] = useState<null | string>(null);
   const [activeLanguage, setActiveLanguage] = useState<null | string>(null);
-  const [activePackageManager, setActivePM] = useState<null | string>(null);
+  const [activePackageManager, setActivePackageManager] = useState<
+    null | string
+  >(null);
 
   const cookieRendererId = 'sb-docs-renderer';
   const cookieLanguageId = 'sb-docs-language';
@@ -48,9 +45,9 @@ export function DocsProvider({ children }: { children: ReactNode }) {
     }
 
     if (cookiePackageManager) {
-      setActivePM(cookiePackageManager);
+      setActivePackageManager(cookiePackageManager);
     } else {
-      setActivePM(packageManagers[0]?.id || '');
+      setActivePackageManager(packageManagers[0]?.id || '');
     }
   }, []);
 
@@ -65,7 +62,7 @@ export function DocsProvider({ children }: { children: ReactNode }) {
   };
 
   const setPackageManager = (id: string) => {
-    setActivePM(id);
+    setActivePackageManager(id);
     setCookie(cookiePackageManagerId, id);
   };
 

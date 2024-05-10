@@ -1,10 +1,10 @@
-import { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 import { MenuIcon } from '@storybook/icons';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import Link from 'next/link';
 import { cn } from '@repo/utils';
-import { HeaderProps } from '.';
+import type { HeaderProps } from '.';
 
 export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
   return (
@@ -15,14 +15,15 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
             'group flex items-center justify-center gap-2 text-sm text-zinc-500 font-bold hover:bg-blue-100 hover:text-blue-500  dark:text-white dark:hover:bg-blue-500/10 h-9 w-9 rounded min-[920px]:hidden',
             variant === 'home' && 'text-white',
           )}
+          type="button"
         >
           <MenuIcon size={18} />
         </button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          className="bg-white w-screen md:w-64 h-[80vh] md:h-[50vh] rounded-b-lg md:rounded-lg shadow-xl data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade z-50 md:border md:border-zinc-200 mt-6 md:mt-2"
           align="end"
+          className="bg-white w-screen md:w-64 h-[80vh] md:h-[50vh] rounded-b-lg md:rounded-lg shadow-xl data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade z-50 md:border md:border-zinc-200 mt-6 md:mt-2"
         >
           <ScrollArea.Root className="w-full h-full" type="always">
             <ScrollArea.Viewport className="w-full h-full p-4 md:p-6 md:pt-5">
@@ -128,8 +129,8 @@ export const DropdownItem: FC<DropdownItemProps> = ({
   target = '_self',
 }) => (
   <DropdownMenu.Item
-    className="flex items-center h-10 pl-3 ml-1 border-l text-md md:text-sm md:h-8 border-l-zinc-200 text-zinc-500"
     asChild
+    className="flex items-center h-10 pl-3 ml-1 border-l text-md md:text-sm md:h-8 border-l-zinc-200 text-zinc-500"
   >
     {isExternal ? (
       <a href={href} target={target}>

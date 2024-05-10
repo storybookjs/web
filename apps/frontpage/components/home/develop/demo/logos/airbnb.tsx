@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export const LogoAirbnb = (props: Props) => {
+export function LogoAirbnb() {
   return (
     <svg
       className="w-full h-full"
@@ -17,4 +13,4 @@ export const LogoAirbnb = (props: Props) => {
       />
     </svg>
   );
-};
+}

@@ -6,9 +6,8 @@
     ".": "./src/main.ts"
   },
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
-    "typecheck": "tsc --noEmit",
-    "generate:component": "turbo gen react-component"
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",

@@ -1,16 +1,16 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import { motion } from 'framer-motion';
-import { Controls } from './controls';
 import { UndoIcon } from '@storybook/icons';
+import { Controls } from './controls';
 import { Tabs } from './tabs';
 
 export const PanelControls: FC = () => {
   return (
     <motion.div
-      initial={{ y: 40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      exit={{ y: 40, opacity: 0 }}
       className="absolute bottom-0 left-0 w-full h-[215px] sm:h-[40%] border-t border-t-[#D9E0E6] text-black"
+      exit={{ y: 40, opacity: 0 }}
+      initial={{ y: 40, opacity: 0 }}
     >
       <Tabs active={0} />
       <div className="flex h-10 items-center border-b border-b-[#D9E0E6]">

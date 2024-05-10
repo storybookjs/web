@@ -1,15 +1,16 @@
 'use client';
 
 import React, { useRef } from 'react';
+import type { MotionValue } from 'framer-motion';
 import { useScroll, useTransform, useSpring, motion } from 'framer-motion';
 import Link from 'next/link';
-import { Angular, Vue, WebComponents, HTML5, ReactLogo } from './logos';
-import { ScrollDemo } from './demo/scroll-demo';
 import { ChevronSmallRightIcon } from '@storybook/icons';
+import { cn, container } from '@repo/utils';
 import { Integrations } from '../integrations/integrations';
 import { Testimonial } from '../testimonial';
+import { Angular, Vue, WebComponents, HTML5, ReactLogo } from './logos';
+import { ScrollDemo } from './demo/scroll-demo';
 import { LogoAtomicDesign } from './logo-atomic-design';
-import { cn, container } from '@repo/utils';
 
 export function Develop() {
   // Step 1
@@ -21,7 +22,7 @@ export function Develop() {
   const smoothAppearProgress = useSpring(appearProgress, {
     stiffness: 1000,
     damping: 100,
-  });
+  }) as MotionValue<number>;
 
   // Step 1
   const { scrollYProgress: isolationProgress } = useScroll({
@@ -99,9 +100,9 @@ export function Develop() {
               {['react', 'vue', 'angular', 'web-components', 'html'].map(
                 (i) => (
                   <Link
-                    key={i}
-                    href={`/docs/get-started/install/?renderer=${i}`}
                     className="flex items-center justify-center w-10 h-10 transition-all border rounded hover:-translate-y-1 border-zinc-700 hover:border-zinc-400"
+                    href={`/docs/get-started/install/?renderer=${i}`}
+                    key={i}
                   >
                     {i === 'react' && <ReactLogo />}
                     {i === 'vue' && <Vue />}
@@ -128,12 +129,12 @@ export function Develop() {
           style={{ '--mobile-y': y } as React.CSSProperties}
         >
           <ScrollDemo
-            storyIndex={activeStory}
-            panelIndex={activePanel}
-            appearProgress={smoothAppearProgress}
-            isolationProgress={smoothIsolationProgress}
             addonsProgress={smoothAddonsProgress}
+            appearProgress={smoothAppearProgress}
             dropInProgress={smoothDropInProgress}
+            isolationProgress={smoothIsolationProgress}
+            panelIndex={activePanel}
+            storyIndex={activeStory}
           />
         </motion.figure>
         <div className="col-[1/2] w-full" ref={isolationRef}>
@@ -147,8 +148,8 @@ export function Develop() {
               APIs, or business logic.
             </p>
             <Link
-              href="/docs/get-started/why-storybook"
               className="flex items-center gap-2 font-bold text-blue-500"
+              href="/docs/get-started/why-storybook"
             >
               Why build UIs in isolation?
               <ChevronSmallRightIcon />
@@ -168,8 +169,8 @@ export function Develop() {
               development, testing, and QA.
             </p>
             <Link
-              href="/docs/get-started/whats-a-story"
               className="flex items-center gap-2 font-bold text-blue-500"
+              href="/docs/get-started/whats-a-story"
             >
               How to write a story
               <ChevronSmallRightIcon />
@@ -190,8 +191,8 @@ export function Develop() {
             </p>
             <div>
               <Link
-                href="/docs/addons/introduction"
                 className="flex items-center gap-2 font-bold text-blue-500"
+                href="/docs/addons/introduction"
               >
                 Learn about addons
                 <ChevronSmallRightIcon />
@@ -213,8 +214,8 @@ export function Develop() {
             </p>
             <div>
               <Link
-                href="/docs/get-started/why-storybook"
                 className="flex items-center gap-2 font-bold text-blue-500"
+                href="/docs/get-started/why-storybook"
               >
                 Why build UIs in isolation?
                 <ChevronSmallRightIcon />
@@ -240,8 +241,8 @@ export function Develop() {
             change their workflow.
           </p>
           <Link
-            href="/addons"
             className="flex items-center gap-2 font-bold text-blue-500"
+            href="/addons"
           >
             Browse integrations
             <ChevronSmallRightIcon />
@@ -266,14 +267,14 @@ export function Develop() {
         <Integrations />
       </div>
       <Testimonial
+        avatarUrl="https://avatars3.githubusercontent.com/u/383701?s=460&v=4"
+        jobTitle="Author of Atomic Design"
+        logo={<LogoAtomicDesign />}
+        name="Brad Frost"
         text="“Storybook is a powerful frontend workshop environment tool that
             allows teams to design, build, and organize UI components (and even
             full screens!) without getting tripped up over business logic and
             plumbing.”"
-        avatarUrl="https://avatars3.githubusercontent.com/u/383701?s=460&v=4"
-        name="Brad Frost"
-        jobTitle="Author of Atomic Design"
-        logo={<LogoAtomicDesign />}
       />
     </section>
   );

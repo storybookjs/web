@@ -1,16 +1,16 @@
 'use client';
 
-import { FC } from 'react';
-import { StorybookLogo } from '../logos/storybook';
+import type { FC } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { cn } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { GithubIcon } from '@storybook/icons';
+import type { DocsVersion } from '@repo/utils';
+import { StorybookLogo } from '../logos/storybook';
 import { Search } from './search';
 import { MobileMenu } from './mobile-menu';
 import { Submenu } from './submenu';
-import { GithubIcon } from '@storybook/icons';
-import type { DocsVersion } from '@repo/utils';
 
 interface TreeMetaProps {
   title: string;
@@ -65,35 +65,35 @@ export const Header: FC<HeaderProps> = ({
           )}
         >
           <div className="flex items-center gap-6">
-            <Link href="/" className="pl-2 md:pl-0">
+            <Link className="pl-2 md:pl-0" href="/">
               <StorybookLogo color={variant === 'home' ? 'white' : 'system'} />
             </Link>
             <NavigationMenu.Root className="max-[920px]:hidden">
               <NavigationMenu.List className="flex gap-2">
                 <Button
                   active={pathname === '/docs'}
-                  variant={variant}
                   href="/docs"
+                  variant={variant}
                 >
                   Docs
                 </Button>
-                <Button variant={variant} href="#">
+                <Button href="#" variant={variant}>
                   Showcase
                 </Button>
-                <Button variant={variant} href="#">
+                <Button href="#" variant={variant}>
                   Blog
                 </Button>
                 <Button
-                  variant={variant}
-                  href="https://www.chromatic.com/?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
                   external
+                  href="https://www.chromatic.com/?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
+                  variant={variant}
                 >
                   Visual Test
                 </Button>
                 <Button
-                  variant={variant}
-                  href="https://www.chromatic.com/sales?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
                   external
+                  href="https://www.chromatic.com/sales?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
+                  variant={variant}
                 >
                   Enterprise
                 </Button>
@@ -102,9 +102,6 @@ export const Header: FC<HeaderProps> = ({
           </div>
           <div className="flex gap-4">
             <a
-              href="https://github.com/storybookjs/storybook"
-              target="_blank"
-              rel="noreferrer noopener"
               aria-label="Star Storybook on GitHub"
               className={cn(
                 'h-8 flex items-center justify-center border rounded-full transition-colors max-[440px]:hidden px-3 gap-2',
@@ -114,6 +111,9 @@ export const Header: FC<HeaderProps> = ({
                 variant === 'system' &&
                   'border-zinc-300 hover:border-zinc-400 text-black',
               )}
+              href="https://github.com/storybookjs/storybook"
+              rel="noreferrer noopener"
+              target="_blank"
             >
               <GithubIcon />
               {githubCount > 0 && (
@@ -133,9 +133,9 @@ export const Header: FC<HeaderProps> = ({
         </div>
         {pathname.startsWith('/docs') && (
           <Submenu
-            variant={variant}
-            tree={tree}
             activeVersion={activeVersion}
+            tree={tree}
+            variant={variant}
           />
         )}
       </div>
@@ -177,13 +177,12 @@ const Button: FC<ButtonProps> = ({
           target={external ? '_blank' : undefined}
         >
           {children}
-          {external && (
-            <div className="h-full flex items-start py-1.5">
+          {external ? <div className="h-full flex items-start py-1.5">
               <svg
-                width="8"
+                fill="none"
                 height="8"
                 viewBox="0 0 8 8"
-                fill="none"
+                width="8"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
@@ -191,8 +190,7 @@ const Button: FC<ButtonProps> = ({
                   fill="currentColor"
                 />
               </svg>
-            </div>
-          )}
+            </div> : null}
         </Comp>
       </NavigationMenu.Link>
     </NavigationMenu.Item>

@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
-import { Nunito_Sans } from 'next/font/google';
+import { Nunito_Sans as nunitoSans } from 'next/font/google';
 import { cn } from '@repo/utils';
 import { Providers } from './providers';
 
 import './globals.css';
 import '@repo/ui/styles.css';
 
-const fontSans = Nunito_Sans({
+const fontSans = nunitoSans({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',

@@ -2,18 +2,19 @@
 
 import Link from 'next/link';
 import * as Accordion from '@radix-ui/react-accordion';
-import { FC, Fragment } from 'react';
+import type { FC } from 'react';
+import { Fragment } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
+import { docsVersions } from '@repo/utils';
+import type { TreeProps, DocsVersion } from '@repo/utils';
 import { VersionSelector } from './version-selector';
-import { DocsVersion, docsVersions } from '@repo/utils';
-import type { TreeProps } from '@repo/utils';
 
 interface NavDocsProps {
   tree: TreeProps[] | null | undefined;
   activeVersion: DocsVersion;
 }
 
-const getUrl = (slug: string) => {
+const getUrl = (slug: string): string => {
   const newSlug = slug.replace('/docs/', '').split('/');
   const hasFirstVersion = docsVersions[0]?.id === newSlug[0];
   if (hasFirstVersion) newSlug.shift();
@@ -23,45 +24,48 @@ const getUrl = (slug: string) => {
 
 export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
   return (
-    <Fragment>
+    <>
       <VersionSelector activeVersion={activeVersion} />
       <ul className="mt-7 md:mt-9">
         {tree
           ? tree.map((lvl1) => (
               <li key={lvl1.pathSegment}>
                 <Link
-                  href={getUrl(lvl1.slug)}
                   className="flex items-center h-8 px-2 mt-6 text-sm font-bold transition-colors hover:text-blue-500"
+                  href={getUrl(lvl1.slug)}
                 >
-                  {lvl1?.sidebar?.title || lvl1.title}
+                  {lvl1.sidebar?.title || lvl1.title}
                 </Link>
-                {lvl1.children && lvl1.children.length > 0 && (
+                {lvl1.children && lvl1.children.length > 0 ? (
                   <ul>
                     {lvl1.children.map((lvl2) => {
                       return (
                         <Accordion.Root
-                          type="single"
-                          collapsible
                           asChild
+                          collapsible
                           key={lvl2.pathSegment}
+                          type="single"
                         >
                           <li>
                             {(!lvl2.children || lvl2.children.length === 0) && (
                               <Link
-                                href={getUrl(lvl2.slug)}
                                 className="flex items-center h-8 px-2 text-sm transition-colors text-zinc-600 hover:text-blue-500"
+                                href={getUrl(lvl2.slug)}
                               >
-                                {lvl2?.sidebar?.title || lvl2.title}
+                                {lvl2.sidebar?.title || lvl2.title}
                               </Link>
                             )}
-                            {lvl2.children && lvl2.children.length > 0 && (
+                            {lvl2.children && lvl2.children.length > 0 ? (
                               <Accordion.Item value="item-1">
                                 <Accordion.Trigger asChild>
-                                  <button className="flex items-center justify-between w-full h-8 px-2 text-sm group">
-                                    {lvl2?.sidebar?.title || lvl2.title}
+                                  <button
+                                    className="flex items-center justify-between w-full h-8 px-2 text-sm group"
+                                    type="button"
+                                  >
+                                    {lvl2.sidebar?.title || lvl2.title}
                                     <ChevronSmallRightIcon
-                                      className="ease-[cubic-bezier(0.87,_0,_0.13,_1)] transition-transform duration-300 group-data-[state=open]:rotate-90"
                                       aria-hidden
+                                      className="ease-in-out transition-transform duration-300 group-data-[state=open]:rotate-90"
                                     />
                                   </button>
                                 </Accordion.Trigger>
@@ -70,14 +74,14 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                                     {lvl2.children.map((lvl3) => {
                                       return (
                                         <li
-                                          key={lvl3.pathSegment}
                                           className="ml-4"
+                                          key={lvl3.pathSegment}
                                         >
                                           <Link
-                                            href={getUrl(lvl3.slug)}
                                             className="flex items-center h-8 p-4 text-sm border-l border-zinc-200"
+                                            href={getUrl(lvl3.slug)}
                                           >
-                                            {lvl3?.sidebar?.title || lvl3.title}
+                                            {lvl3.sidebar?.title || lvl3.title}
                                           </Link>
                                         </li>
                                       );
@@ -85,17 +89,17 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                                   </ul>
                                 </Accordion.Content>
                               </Accordion.Item>
-                            )}
+                            ) : null}
                           </li>
                         </Accordion.Root>
                       );
                     })}
                   </ul>
-                )}
+                ) : null}
               </li>
             ))
           : []}
       </ul>
-    </Fragment>
+    </>
   );
 };
