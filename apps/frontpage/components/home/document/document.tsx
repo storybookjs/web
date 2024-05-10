@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import Link from 'next/link';
-import { cn, container } from '@repo/utils';
+import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
 import { Branch, Document as Doc, Overlap, Search } from './icons';
@@ -65,12 +65,7 @@ export const Document: FC = () => {
           rel="preload"
         />
       ))}
-      <div
-        className={cn(
-          container,
-          'lg:px-8 text-white md:flex justify-between gap-20',
-        )}
-      >
+      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Document UI for your team to reuse
         </h2>
@@ -80,7 +75,7 @@ export const Document: FC = () => {
             place. That helps your team adopt existing UI patterns.
           </p>
         </div>
-      </div>
+      </Container>
       <IllustratedFeatureList
         alignment="right"
         bgColor="#c3eeaf"

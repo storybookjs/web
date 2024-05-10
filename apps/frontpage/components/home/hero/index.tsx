@@ -3,11 +3,12 @@
 'use client';
 
 import Link from 'next/link';
-import { cn, container } from '@repo/utils';
+import { cn } from '@repo/utils';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@storybook/icons';
+import { Container } from '@repo/ui';
 import { InitCommand } from './init-command';
 import { Manager } from './manager';
 import { Chrome } from './chrome';
@@ -75,12 +76,7 @@ export function Hero({
   }, []);
 
   return (
-    <div
-      className={cn(
-        container,
-        'lg:px-8 pt-12 md:pt-24 text-white justify-between gap-20 relative z-20',
-      )}
-    >
+    <Container className="lg:px-8 pt-12 md:pt-24 text-white justify-between gap-20 relative z-20">
       <h1 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold max-sm:max-w-80">
         Build UIs without the grunt work
       </h1>
@@ -191,6 +187,6 @@ export function Hero({
       <Chrome />
       <Manager slide={slide} />
       <SocialProof />
-    </div>
+    </Container>
   );
 }

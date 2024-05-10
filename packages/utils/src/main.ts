@@ -1,4 +1,4 @@
-export * from './tailwind';
+export { cn } from './cn';
 export * from './docs-versions';
 export { renderers } from './docs-renderers';
 export { packageManagers } from './docs-package-managers';

@@ -1,8 +1,9 @@
-import { cn, container } from '@repo/utils';
+import { cn } from '@repo/utils';
 import type { FC } from 'react';
 import Link from 'next/link';
 import { StorybookLogo } from '../logos/storybook';
 import { ChromaticLogo } from '../logos/chromatic';
+import { Container } from '../container';
 import { Form } from './form';
 import { footerNav } from './nav';
 
@@ -20,7 +21,7 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
           'bg-homeBackground text-white border-t border-zinc-700',
       )}
     >
-      <div className={cn(container, 'lg:px-8 py-12')}>
+      <Container className="lg:px-8 py-12">
         <Form variant={variant} />
         <div className="flex flex-wrap mb-6 sm:mb-20">
           {footerNav.map((nav) => (
@@ -127,7 +128,7 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
             </a>
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 };

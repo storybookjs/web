@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import Link from 'next/link';
-import { cn, container } from '@repo/utils';
+import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
 import { Accessibility, Code, Eye, Interact, Pixel, Projects } from './icons';
@@ -86,12 +86,7 @@ export const Test: FC = () => {
           rel="preload"
         />
       ))}
-      <div
-        className={cn(
-          container,
-          'lg:px-8 text-white md:flex justify-between gap-20',
-        )}
-      >
+      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Test UIs with less effort and no flake
         </h2>
@@ -102,7 +97,7 @@ export const Test: FC = () => {
             cases. Reuse stories to power automated tests
           </p>
         </div>
-      </div>
+      </Container>
       <IllustratedFeatureList bgColor="#FDDD9C" features={features} />
       <Testimonial
         avatarUrl="https://avatars2.githubusercontent.com/u/1247751?s=100&v=4"

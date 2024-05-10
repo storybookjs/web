@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn, container } from '@repo/utils';
+import { cn } from '@repo/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -8,8 +8,9 @@ import {
   TwitterIcon,
   YoutubeIcon,
 } from '@storybook/icons';
-import { Button } from "../../ui/button";
-import { AspectRatio } from "../../ui/aspect-ratio";
+import { Container } from '@repo/ui';
+import { Button } from '../../ui/button';
+import { AspectRatio } from '../../ui/aspect-ratio';
 import { Community } from '../../community';
 
 const projects = [
@@ -188,12 +189,7 @@ export function SocialValidation({
       className="pt-12 sm:pt-20 md:pt-28"
       style={{ scrollbarWidth: 'none' }}
     >
-      <div
-        className={cn(
-          container,
-          'lg:px-8 text-white md:flex justify-between gap-20',
-        )}
-      >
+      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Made for frontend developers
         </h2>
@@ -222,7 +218,7 @@ export function SocialValidation({
             </div>
           </div>
         </div>
-      </div>
+      </Container>
       <div className="px-8 py-0 pb-4 mt-12 text-white flex gap-8 scroll-p-8 sm:mt-20 mb-[calc(5rem-1rem)] md:mt-28 overflow-scroll snap-x">
         {storybooks.map((storybookProject) => (
           <a
@@ -265,7 +261,8 @@ export function SocialValidation({
             href={project.projectUrl}
             key={project.logoAlt}
             rel="noopener"
-            style={{ backgroundColor: project.bgColor }} target="_blank"
+            style={{ backgroundColor: project.bgColor }}
+            target="_blank"
           >
             <AspectRatio
               className="flex flex-col items-center justify-center gap-2 font-bold text-white"
@@ -282,15 +279,10 @@ export function SocialValidation({
           </a>
         ))}
       </div>
-      <div className={cn(container, 'pt-0 pb-12 sm:pb-20 md:pb-28')}>
+      <Container className="pt-0 pb-12 sm:pb-20 md:pb-28">
         <Community />
-      </div>
-      <div
-        className={cn(
-          container,
-          'pb-12 grid grid-cols-[1fr] md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(4,_1fr)] gap-8',
-        )}
-      >
+      </Container>
+      <Container className="pb-12 grid grid-cols-[1fr] md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(4,_1fr)] gap-8">
         <div className={cn(socialCard)}>
           <GithubIcon aria-label="Discord" className="text-white" size={48} />
           <div className="text-white text-md">
@@ -359,7 +351,7 @@ export function SocialValidation({
             <div className="text-sm text-zinc-500">Subscribers</div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

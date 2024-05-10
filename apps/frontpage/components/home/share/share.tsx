@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useScroll, useSpring, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { ChevronSmallRightIcon } from '@storybook/icons';
-import { cn, container } from '@repo/utils';
+import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
 import { useEventListener } from '../../../hooks/use-event-listener';
 import { LogoCloudbees } from './logo-cloudbee';
@@ -91,12 +91,7 @@ export function Share() {
 
   return (
     <div className="pt-12 overflow-hidden border-b border-zinc-600 sm:pt-20 md:pt-28">
-      <div
-        className={cn(
-          container,
-          'lg:px-8 text-white md:flex justify-between gap-20',
-        )}
-      >
+      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Share how the UI actually works
         </h2>
@@ -107,13 +102,8 @@ export function Share() {
             what&apos;s currently in production.
           </p>
         </div>
-      </div>
-      <div
-        className={cn(
-          container,
-          'pt-12 pb-4 grid grid-cols-1 grid-flow-dense justify-items-center items-center gap-12 md:pt-28 md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-x-24 md:gap-y-48',
-        )}
-      >
+      </Container>
+      <Container className="pt-12 pb-4 grid grid-cols-1 grid-flow-dense justify-items-center items-center gap-12 md:pt-28 md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-x-24 md:gap-y-48">
         <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white col-[1/-1] first-of-type:pt-0 sm:max-w-full sm:pt-16 md:col-[1/2]">
           <h3 className="text-2xl font-bold">
             Publish Storybook to get sign off from teammates
@@ -179,7 +169,7 @@ export function Share() {
           </Link>
         </div>
         <TestIntegrations ref={testRef} />
-      </div>
+      </Container>
       <Testimonial
         avatarUrl="https://avatars2.githubusercontent.com/u/8724083?s=460&v=4"
         jobTitle="Author of Building Design Systems"

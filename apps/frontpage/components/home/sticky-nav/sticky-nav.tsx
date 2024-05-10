@@ -2,7 +2,7 @@ import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpIcon } from '@storybook/icons';
 import Link from 'next/link';
-import { cn, container } from '@repo/utils';
+import { Container } from '@repo/ui';
 import { Button } from '../../ui/button';
 import { MobileMenu } from './mobile-menu';
 
@@ -44,41 +44,38 @@ export function StickyNav({
           initial={{ opacity: 0 }}
           {...props}
         >
-          <section
-            className={cn(
-              container,
-              'h-full flex items-center justify-between',
-            )}
-          >
-            <MobileMenu
-              items={items}
-              label={activeItem?.label || items[0]?.label || ''}
-            />
-            <div className="items-center hidden gap-2 md:flex">
-              {items.map((item) => (
-                <Button
-                  active={activeSection === item.id ? 'home' : undefined}
-                  asChild
-                  key={item.id}
-                  size="md"
-                  variant="ghostHome"
-                >
-                  <a href={item.href}>{item.label}</a>
+          <Container className="h-full flex items-center justify-between">
+            <section>
+              <MobileMenu
+                items={items}
+                label={activeItem?.label || items[0]?.label || ''}
+              />
+              <div className="items-center hidden gap-2 md:flex">
+                {items.map((item) => (
+                  <Button
+                    active={activeSection === item.id ? 'home' : undefined}
+                    asChild
+                    key={item.id}
+                    size="md"
+                    variant="ghostHome"
+                  >
+                    <a href={item.href}>{item.label}</a>
+                  </Button>
+                ))}
+              </div>
+              <div className="flex items-center gap-5">
+                <Button asChild size="md" variant="ghostHome">
+                  <a className="items-center hidden md:flex" href="#page-top">
+                    <ArrowUpIcon />
+                    Jump to top
+                  </a>
                 </Button>
-              ))}
-            </div>
-            <div className="flex items-center gap-5">
-              <Button asChild size="md" variant="ghostHome">
-                <a className="items-center hidden md:flex" href="#page-top">
-                  <ArrowUpIcon />
-                  Jump to top
-                </a>
-              </Button>
-              <Button asChild rounded="full" size="sm" variant="solid">
-                <Link href="/docs">Get started</Link>
-              </Button>
-            </div>
-          </section>
+                <Button asChild rounded="full" size="sm" variant="solid">
+                  <Link href="/docs">Get started</Link>
+                </Button>
+              </div>
+            </section>
+          </Container>
         </motion.div>
       ) : null}
     </AnimatePresence>
