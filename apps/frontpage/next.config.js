@@ -47,5 +47,6 @@ module.exports = {
     });
     return config;
   },
+  reactStrictMode: true,
   transpilePackages: ['@repo/ui', '@repo/utils'],
 };
