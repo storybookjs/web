@@ -15,7 +15,7 @@ const initialState = {
   message: '',
 };
 
-function SubmitButton() {
+function SubmitButton(): JSX.Element {
   const { pending } = useFormStatus();
 
   return (
@@ -57,6 +57,7 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({ variant }) => {
               setEmail('');
               state.message = '';
             }}
+            type="button"
           >
             <CloseIcon />
           </button>

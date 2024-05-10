@@ -15,6 +15,7 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
             'group flex items-center justify-center gap-2 text-sm text-zinc-500 font-bold hover:bg-blue-100 hover:text-blue-500  dark:text-white dark:hover:bg-blue-500/10 h-9 w-9 rounded min-[920px]:hidden',
             variant === 'home' && 'text-white',
           )}
+          type="button"
         >
           <MenuIcon size={18} />
         </button>

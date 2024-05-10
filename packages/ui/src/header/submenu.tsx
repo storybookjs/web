@@ -33,6 +33,7 @@ export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
               'group flex items-center justify-center gap-2 text-sm text-zinc-500 font-bold hover:bg-blue-100 hover:text-blue-500  dark:text-white dark:hover:bg-blue-500/10 h-9 w-9 rounded min-[920px]:hidden',
               variant === 'home' && 'text-white',
             )}
+            type="button"
           >
             <MenuIcon size={18} />
           </button>
@@ -44,7 +45,9 @@ export const Submenu: FC<HeaderProps> = ({ variant, tree, activeVersion }) => {
           >
             <ScrollArea.Root className="w-full h-full">
               <ScrollArea.Viewport className="w-full h-full p-4 md:p-6 md:pt-5">
-                {activeVersion ? <NavDocs activeVersion={activeVersion} tree={tree} /> : null}
+                {activeVersion ? (
+                  <NavDocs activeVersion={activeVersion} tree={tree} />
+                ) : null}
                 <ScrollArea.Scrollbar
                   className="flex select-none touch-none p-1 w-4 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
                   orientation="vertical"

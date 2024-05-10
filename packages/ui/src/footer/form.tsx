@@ -13,7 +13,7 @@ interface FormProps {
   variant?: FooterProps['variant'];
 }
 
-export const Form: FC<FormProps> = ({ variant }) => {
+export function Form({ variant }: FormProps): JSX.Element {
   return (
     <div className="mb-14">
       <div className="mb-4 font-bold text-md">Join the community</div>
@@ -42,7 +42,7 @@ export const Form: FC<FormProps> = ({ variant }) => {
       </div>
     </div>
   );
-};
+}
 
 interface CircleProps {
   children: ReactNode;

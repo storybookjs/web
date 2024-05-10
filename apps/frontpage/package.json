@@ -9,7 +9,7 @@
     "lint": "eslint --ext .ts,.tsx .",
     "typecheck": "tsc --noEmit",
     "fetch-docs": "tsx --tsconfig tsconfig.json scripts/getLocalDocs.ts",
-    "copy-other-sitemaps": "tsx --tsconfig apps/frontpage/tsconfig.json apps/frontpage/scripts/copyOtherSitemaps.ts"
+    "copy-other-sitemaps": "tsx --tsconfig apps/frontpage/tsconfig.json apps/frontpage/scripts/copy-other-sitemaps.ts"
   },
   "dependencies": {
     "@radix-ui/react-aspect-ratio": "^1.0.3",

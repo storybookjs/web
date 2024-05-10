@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import Link from 'next/link';
-import type { DocsVersion} from '@repo/utils';
+import type { DocsVersion } from '@repo/utils';
 import { docsVersions } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 
@@ -18,7 +18,7 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
   const pathname = usePathname();
   const segments = pathname.slice(1).split('/');
 
-  const getLink = (version: string) => {
+  const getLink = (version: string): string => {
     const isFirstVersion = version === docsVersions[0]?.id;
     const activeVersionIndex = segments.findIndex(
       (segment) => segment === activeVersion.id,
@@ -26,7 +26,7 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
     const isVersionInUrl = activeVersionIndex !== -1;
 
     const newSegments = [...segments];
-    let newHref = `/${  newSegments.join('/')}`;
+    let newHref = `/${newSegments.join('/')}`;
 
     if (!isVersionInUrl && !isFirstVersion)
       newHref = newHref.replace('/docs', `/docs/${version}`);
