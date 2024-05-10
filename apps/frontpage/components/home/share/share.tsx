@@ -5,7 +5,7 @@ import { ChevronSmallRightIcon } from '@storybook/icons';
 import { cn, container } from '@repo/utils';
 import { Testimonial } from '../testimonial';
 import { useEventListener } from '../../../hooks/use-event-listener';
-import { LogoCloudbees } from './logo-cloudbees';
+import { LogoCloudbees } from './logo-cloudbee';
 import { PublishIntegrations } from './publish-integrations';
 import { EmbedIntegrations } from './embed-integrations';
 import { TestIntegrations } from './test-integrations';
