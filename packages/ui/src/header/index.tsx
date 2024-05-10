@@ -50,26 +50,26 @@ export const Header: FC<HeaderProps> = ({
   return (
     <header
       className={cn(
-        'w-full relative z-50',
-        variant === 'home' && 'border-b border-white/20',
+        'ui-w-full ui-relative ui-z-50',
+        variant === 'home' && 'ui-border-b ui-border-white/20',
         variant === 'system' &&
-          'sticky top-0 z-40 backdrop-blur bg-white/80 dark:bg-zinc-900/80 lg:border-b lg:border-zinc-200 dark:border-zinc-700',
+          'ui-sticky ui-top-0 ui-z-40 ui-backdrop-blur ui-bg-white/80 dark:ui-bg-zinc-900/80 lg:ui-border-b lg:ui-border-zinc-200 dark:ui-border-zinc-700',
       )}
     >
-      <div className="mx-auto max-w-8xl">
+      <div className="ui-mx-auto ui-max-w-8xl">
         <div
           className={cn(
-            'h-18 py-4 px-4 sm:px-8 md:px-8 lg:border-0 flex items-center justify-between',
+            'ui-h-18 ui-py-4 ui-px-4 sm:ui-px-8 md:ui-px-8 lg:ui-border-0 ui-flex ui-items-center ui-justify-between',
             variant === 'system' &&
-              'border-b border-zinc-200 dark:border-zinc-700',
+              'ui-border-b ui-border-zinc-200 dark:ui-border-zinc-700',
           )}
         >
-          <div className="flex items-center gap-6">
-            <Link className="pl-2 md:pl-0" href="/">
+          <div className="ui-flex ui-items-center ui-gap-6">
+            <Link className="ui-pl-2 md:ui-pl-0" href="/">
               <StorybookLogo color={variant === 'home' ? 'white' : 'system'} />
             </Link>
-            <NavigationMenu.Root className="max-[920px]:hidden">
-              <NavigationMenu.List className="flex gap-2">
+            <NavigationMenu.Root className="max-[920px]:ui-hidden">
+              <NavigationMenu.List className="ui-flex ui-gap-2">
                 <Button
                   active={pathname === '/docs'}
                   href="/docs"
@@ -100,16 +100,16 @@ export const Header: FC<HeaderProps> = ({
               </NavigationMenu.List>
             </NavigationMenu.Root>
           </div>
-          <div className="flex gap-4">
+          <div className="ui-flex ui-gap-4">
             <a
               aria-label="Star Storybook on GitHub"
               className={cn(
-                'h-8 flex items-center justify-center border rounded-full transition-colors max-[440px]:hidden px-3 gap-2',
+                'ui-h-8 ui-flex ui-items-center ui-justify-center ui-border ui-rounded-full ui-transition-colors max-[440px]:ui-hidden ui-px-3 ui-gap-2',
                 githubCount === 0 && 'w-8 px-0',
                 variant === 'home' &&
-                  'border-white/30 hover:border-white text-white',
+                  'ui-border-white/30 hover:ui-border-white ui-text-white',
                 variant === 'system' &&
-                  'border-zinc-300 hover:border-zinc-400 text-black',
+                  'ui-border-zinc-300 hover:ui-border-zinc-400 ui-text-black',
               )}
               href="https://github.com/storybookjs/storybook"
               rel="noreferrer noopener"
@@ -119,8 +119,9 @@ export const Header: FC<HeaderProps> = ({
               {githubCount > 0 && (
                 <span
                   className={cn(
-                    'text-xs font-bold text-slate-600',
-                    variant === 'home' && 'text-white',
+                    'ui-text-xs ui-font-bold',
+                    variant === 'home' && 'ui-text-white',
+                    variant !== 'home' && 'ui-text-slate-600',
                   )}
                 >
                   {githubCount.toLocaleString('en-US')}
@@ -165,19 +166,20 @@ const Button: FC<ButtonProps> = ({
       <NavigationMenu.Link asChild>
         <Comp
           className={cn(
-            'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300 duration-300 h-8 px-2',
+            'ui-inline-flex ui-items-center ui-justify-center ui-whitespace-nowrap ui-rounded-md ui-text-sm ui-font-medium ui-ring-offset-white ui-transition-all focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 focus-visible:ui-ring-offset-2 disabled:ui-pointer-events-none disabled:ui-opacity-50 dark:ui-ring-offset-slate-950 dark:ui-focus-visible:ring-slate-300 ui-duration-300 ui-h-8 ui-px-2',
             variant === 'home' &&
-              'group flex items-center justify-center gap-2 text-sm text-white font-bold hover:bg-white/10 hover:text-white',
+              'ui-group ui-flex ui-items-center ui-justify-center ui-gap-2 ui-text-sm ui-text-white ui-font-bold hover:ui-bg-white/10 hover:ui-text-white',
             variant === 'system' &&
-              'group flex items-center justify-center gap-2 text-sm text-zinc-500 font-bold hover:bg-blue-100 hover:text-blue-500  dark:text-white dark:hover:bg-blue-500/10',
+              'ui-group ui-flex ui-items-center ui-justify-center ui-gap-2 ui-text-sm ui-text-zinc-500 ui-font-bold hover:ui-bg-blue-100 hover:ui-text-blue-500  dark:ui-text-white dark:hover:ui-bg-blue-500/10',
             active &&
-              'bg-blue-100 text-blue-500 dark:bg-blue-500/10 dark:text-blue-500',
+              'ui-bg-blue-100 ui-text-blue-500 dark:ui-bg-blue-500/10 dark:ui-text-blue-500',
           )}
           href={href}
           target={external ? '_blank' : undefined}
         >
           {children}
-          {external ? <div className="h-full flex items-start py-1.5">
+          {external ? (
+            <div className="ui-h-full ui-flex ui-items-start ui-py-1.5">
               <svg
                 fill="none"
                 height="8"
@@ -190,7 +192,8 @@ const Button: FC<ButtonProps> = ({
                   fill="currentColor"
                 />
               </svg>
-            </div> : null}
+            </div>
+          ) : null}
         </Comp>
       </NavigationMenu.Link>
     </NavigationMenu.Item>

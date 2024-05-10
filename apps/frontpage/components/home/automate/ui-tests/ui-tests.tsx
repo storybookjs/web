@@ -1,8 +1,9 @@
 import type { FC } from 'react';
 import React, { useEffect, useState, useRef } from 'react';
 import { useReducedMotion, useInView } from 'framer-motion';
-import { cn, container } from '@repo/utils';
+import { cn } from '@repo/utils';
 import Image from 'next/image';
+import { Container } from '@repo/ui';
 import Boolean from './images/Boolean.svg';
 import Cascade from './images/Cascade.svg';
 import DatePicker from './images/DatePicker.svg';
@@ -54,39 +55,40 @@ const PureUITests: FC<PureUITestsProps> = ({
   workflows,
 }) => {
   return (
-    <figure className={cn(container)} ref={forwardRef}>
-      {/* TODO: Find a way to bring back the isPaused */}
-      <div className="realtive z-[1] mt-12 sm:mt-16">
-        <div
-          className="relative flex text-white flex-nowrap"
-          style={{ height: workflowWidth }}
-        >
-          {workflows.map((workflow, index) => {
-            const isActive = index - activeIndex === 0;
-            const done = index <= activeIndex;
+    <Container ref={forwardRef}>
+      <figure>
+        {/* TODO: Find a way to bring back the isPaused */}
+        <div className="realtive z-[1] mt-12 sm:mt-16">
+          <div
+            className="relative flex text-white flex-nowrap"
+            style={{ height: workflowWidth }}
+          >
+            {workflows.map((workflow, index) => {
+              const isActive = index - activeIndex === 0;
+              const done = index <= activeIndex;
 
-            return (
-              <div
-                className="absolute flex justify-center transition-transform ease-in-out left-1/2 duration-350 will-change-transform"
-                key={workflow.src}
-                style={{
-                  transform: `translateX(${getWorkflowTranslateValue(
-                    index - activeIndex,
-                  )}px)`,
-                  marginLeft: -workflowWidth / 2,
-                  width: workflowWidth,
-                  height: workflowWidth,
-                }}
-              >
+              return (
                 <div
-                  className="w-full h-full transition bg-white rounded"
+                  className="absolute flex justify-center transition-transform ease-in-out left-1/2 duration-350 will-change-transform"
+                  key={workflow.src}
                   style={{
-                    transform: `scale(${isActive ? 1 : 0.76}) translateY(${
-                      isActive ? 0 : 33
-                    }px)`,
-                    opacity: done ? 1 : 0.5,
-                    boxShadow: isActive
-                      ? `
+                    transform: `translateX(${getWorkflowTranslateValue(
+                      index - activeIndex,
+                    )}px)`,
+                    marginLeft: -workflowWidth / 2,
+                    width: workflowWidth,
+                    height: workflowWidth,
+                  }}
+                >
+                  <div
+                    className="w-full h-full transition bg-white rounded"
+                    style={{
+                      transform: `scale(${isActive ? 1 : 0.76}) translateY(${
+                        isActive ? 0 : 33
+                      }px)`,
+                      opacity: done ? 1 : 0.5,
+                      boxShadow: isActive
+                        ? `
                     0 1.7px 2.2px rgba(0, 0, 0, 0.028),
                     0 4px 5.3px rgba(0, 0, 0, 0.04),
                     0 7.5px 10px rgba(0, 0, 0, 0.05),
@@ -94,7 +96,7 @@ const PureUITests: FC<PureUITestsProps> = ({
                     0 25.1px 33.4px rgba(0, 0, 0, 0.072),
                     0 60px 80px rgba(0, 0, 0, 0.1)
                   `
-                      : `
+                        : `
                     0 0.6px 2.2px rgba(0, 0, 0, 0.02),
                     0 1.3px 5.3px rgba(0, 0, 0, 0.028),
                     0 2.5px 10px rgba(0, 0, 0, 0.035),
@@ -102,55 +104,56 @@ const PureUITests: FC<PureUITestsProps> = ({
                     0 8.4px 33.4px rgba(0, 0, 0, 0.05),
                     0 20px 80px rgba(0, 0, 0, 0.07)
                 `,
-                  }}
-                >
-                  <Image
-                    alt=""
-                    className="w-full h-full"
-                    height={180}
-                    loading="lazy"
-                    src={workflow.src}
-                    width={180}
-                  />
-                </div>
-                <div className="absolute overflow-hidden left-[-15px] w-[240px] h-[240px] top-[-15px]">
-                  <div
-                    className={cn(
-                      'rounded-[1rem] absolute bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform',
-                      'top-3 left-0',
-                      isActive ? 'visible' : 'hidden',
-                    )}
-                    style={{
-                      width: workflowWidth + 30,
-                      height: lineSize,
-                      animation:
-                        isActive && isAnimatingLoop
-                          ? `homeAutomateHorizontal ${lineAnimationLength}ms ${easing} ${lineAnimationDelay}ms`
-                          : undefined,
                     }}
-                  />
-                  <div
-                    className={cn(
-                      'rounded-[1rem] absolute bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform',
-                      'top-0 left-3',
-                      isActive ? 'visible' : 'hidden',
-                    )}
-                    style={{
-                      width: lineSize,
-                      height: 240,
-                      animation:
-                        isActive && isAnimatingLoop
-                          ? `homeAutomateVertical ${lineAnimationLength}ms ${easing} ${lineAnimationDelay}ms`
-                          : undefined,
-                    }}
-                  />
+                  >
+                    <Image
+                      alt=""
+                      className="w-full h-full"
+                      height={180}
+                      loading="lazy"
+                      src={workflow.src}
+                      width={180}
+                    />
+                  </div>
+                  <div className="absolute overflow-hidden left-[-15px] w-[240px] h-[240px] top-[-15px]">
+                    <div
+                      className={cn(
+                        'rounded-[1rem] absolute bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform',
+                        'top-3 left-0',
+                        isActive ? 'visible' : 'hidden',
+                      )}
+                      style={{
+                        width: workflowWidth + 30,
+                        height: lineSize,
+                        animation:
+                          isActive && isAnimatingLoop
+                            ? `homeAutomateHorizontal ${lineAnimationLength}ms ${easing} ${lineAnimationDelay}ms`
+                            : undefined,
+                      }}
+                    />
+                    <div
+                      className={cn(
+                        'rounded-[1rem] absolute bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform',
+                        'top-0 left-3',
+                        isActive ? 'visible' : 'hidden',
+                      )}
+                      style={{
+                        width: lineSize,
+                        height: 240,
+                        animation:
+                          isActive && isAnimatingLoop
+                            ? `homeAutomateVertical ${lineAnimationLength}ms ${easing} ${lineAnimationDelay}ms`
+                            : undefined,
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </figure>
+      </figure>
+    </Container>
   );
 };
 

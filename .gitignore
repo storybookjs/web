@@ -21,11 +21,11 @@ coverage
 # Vercel
 .vercel
 
-# Build Outputs
+# next.js
 .next/
 out/
 build
-dist
+.swc/
 
 
 # Debug
@@ -42,5 +42,5 @@ apps/frontpage/content/docs
 apps/frontpage/content/snippets
 apps/frontpage/public/docs
 
-# NX
-.nx
+# ui
+dist/

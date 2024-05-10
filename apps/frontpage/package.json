@@ -18,7 +18,6 @@
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@radix-ui/react-slot": "^1.0.2",
-    "@repo/tailwind-config": "^0.0.0",
     "@repo/ui": "*",
     "@repo/utils": "*",
     "@storybook/icons": "^1.2.9",
@@ -57,6 +56,7 @@
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.1.1",
     "@repo/eslint-config": "*",
+    "@repo/tailwind-config": "*",
     "@repo/typescript-config": "*",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20",

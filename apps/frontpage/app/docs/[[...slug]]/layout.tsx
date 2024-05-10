@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { Header, Footer } from '@repo/ui';
+import { Header, Footer, Container } from '@repo/ui';
 import Image from 'next/image';
-import { cn, container, fetchGithubCount } from '@repo/utils';
+import { fetchGithubCount } from '@repo/utils';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { TableOfContent } from '../../../components/docs/table-of-content';
 import { NavDocs } from '../../../components/docs/sidebar/nav-docs';
@@ -49,13 +49,15 @@ export default async function Layout({
         src="/bubbles.png"
         width={1800}
       />
-      <main className={cn(container, 'md:pl-5 lg:pr-8 flex gap-4 lg:gap-12')}>
-        <Sidebar>
-          <NavDocs activeVersion={activeVersion} tree={tree} />
-        </Sidebar>
-        {children}
-        <TableOfContent headings={page?.headings} />
-      </main>
+      <Container asChild className="md:pl-5 lg:pr-8 flex gap-4 lg:gap-12">
+        <main>
+          <Sidebar>
+            <NavDocs activeVersion={activeVersion} tree={tree} />
+          </Sidebar>
+          {children}
+          <TableOfContent headings={page?.headings} />
+        </main>
+      </Container>
       <Footer />
     </DocsProvider>
   );

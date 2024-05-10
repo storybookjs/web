@@ -12,8 +12,8 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
       <DropdownMenu.Trigger asChild>
         <button
           className={cn(
-            'group flex items-center justify-center gap-2 text-sm text-zinc-500 font-bold hover:bg-blue-100 hover:text-blue-500  dark:text-white dark:hover:bg-blue-500/10 h-9 w-9 rounded min-[920px]:hidden',
-            variant === 'home' && 'text-white',
+            'ui-group ui-flex ui-items-center ui-justify-center ui-gap-2 ui-text-sm ui-text-zinc-500 ui-font-bold hover:ui-bg-blue-100 hover:ui-text-blue-500  dark:ui-text-white dark:hover:ui-bg-blue-500/10 ui-h-9 ui-w-9 ui-rounded min-[920px]:ui-hidden',
+            variant === 'home' && 'ui-text-white',
           )}
           type="button"
         >
@@ -23,10 +23,10 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
       <DropdownMenu.Portal>
         <DropdownMenu.Content
           align="end"
-          className="bg-white w-screen md:w-64 h-[80vh] md:h-[50vh] rounded-b-lg md:rounded-lg shadow-xl data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade z-50 md:border md:border-zinc-200 mt-6 md:mt-2"
+          className="ui-bg-white ui-w-screen md:ui-w-64 h-[80vh] md:ui-h-[50vh] ui-rounded-b-lg md:ui-rounded-lg ui-shadow-xl data-[side=top]:ui-animate-slideDownAndFade data-[side=right]:ui-animate-slideLeftAndFade data-[side=bottom]:ui-animate-slideUpAndFade data-[side=left]:ui-animate-slideRightAndFade ui-z-50 md:ui-border md:ui-border-zinc-200 ui-mt-6 md:ui-mt-2"
         >
-          <ScrollArea.Root className="w-full h-full" type="always">
-            <ScrollArea.Viewport className="w-full h-full p-4 md:p-6 md:pt-5">
+          <ScrollArea.Root className="ui-w-full ui-h-full" type="always">
+            <ScrollArea.Viewport className="ui-w-full ui-h-full ui-p-4 md:ui-p-6 md:ui-pt-5">
               <DropdownLabel>Why</DropdownLabel>
               <DropdownItem href="/docs/get-started/why-storybook">
                 Why Storybook
@@ -75,7 +75,6 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
               <DropdownItem href="https://chromatic-ui.notion.site/Give-a-conference-talk-about-Storybook-e8d8e78d4d0a448a811a8d927194c527?pvs=4">
                 Conference board
               </DropdownItem>
-
               <DropdownLabel>Chromatic</DropdownLabel>
               <DropdownItem
                 href="https://www.chromatic.com/?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
@@ -117,7 +116,7 @@ interface DropdownItemProps {
 }
 
 export const DropdownLabel: FC<DropdownLabelProps> = ({ children }) => (
-  <DropdownMenu.Label className="flex items-center h-10 mt-4 text-md md:text-sm first:mt-0">
+  <DropdownMenu.Label className="ui-flex ui-items-center ui-h-10 ui-mt-4 ui-text-md md:ui-text-sm first:ui-mt-0">
     {children}
   </DropdownMenu.Label>
 );
@@ -130,7 +129,7 @@ export const DropdownItem: FC<DropdownItemProps> = ({
 }) => (
   <DropdownMenu.Item
     asChild
-    className="flex items-center h-10 pl-3 ml-1 border-l text-md md:text-sm md:h-8 border-l-zinc-200 text-zinc-500"
+    className="ui-flex ui-items-center ui-h-10 ui-pl-3 ui-ml-1 ui-border-l ui-text-md md:ui-text-sm md:ui-h-8 ui-border-l-zinc-200 ui-text-zinc-500"
   >
     {isExternal ? (
       <a href={href} target={target}>

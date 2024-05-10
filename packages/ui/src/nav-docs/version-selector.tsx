@@ -45,7 +45,7 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
           className="w-full h-10 px-2 mt-6"
           type="button"
         >
-          <div className="flex items-center justify-between w-full h-full text-sm transition-all border-b select-none border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300">
+          <div className="ui-flex ui-items-center ui-justify-between ui-w-full ui-h-full ui-text-sm ui-transition-all ui-border-b ui-select-none ui-border-zinc-200 ui-text-zinc-600 hover:ui-text-zinc-900 hover:ui-border-zinc-300">
             {activeVersion.label}
             <ChevronSmallDownIcon />
           </div>
@@ -54,14 +54,14 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
       <DropdownMenu.Portal>
         <DropdownMenu.Content
           align="start"
-          className="min-w-[200px] ml-1 bg-white rounded p-1 shadow-xl will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
+          className="ui-min-w-[200px] ui-ml-1 ui-bg-white ui-rounded ui-p-1 ui-shadow-xl ui-will-change-[opacity,transform] data-[side=top]:ui-animate-slideDownAndFade data-[side=right]:ui-animate-slideLeftAndFade data-[side=bottom]:ui-animate-slideUpAndFade data-[side=left]:ui-animate-slideRightAndFade"
           sideOffset={4}
         >
           <DropdownMenu.Group>
             {docsVersions.map((version) => (
               <DropdownMenu.Item asChild key={version.id}>
                 <Link
-                  className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
+                  className="ui-flex data-[highlighted]:ui-bg-slate-100 ui-select-none ui-outline-none ui-rounded ui-text-sm ui-px-3 ui-h-8 ui-items-center"
                   href={getLink(version.id)}
                 >
                   {version.label}
