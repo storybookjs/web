@@ -20,12 +20,20 @@ export const getPageData = async (
   const pathString = path.join('/');
   const indexPathMDX = `content/docs/${pathString}/index.mdx`;
   const indexPathMD = `content/docs/${pathString}/index.md`;
-  const linkPath =
-    `${rootPath}/${pathString}.mdx` || `${rootPath}/${pathString}.md`;
+
+  const mdxPath = `${rootPath}/${pathString}.mdx`;
+  const mdPath = `${rootPath}/${pathString}.md`;
+
+  const isMdx = fs.existsSync(mdxPath);
+  const isMd = fs.existsSync(mdPath);
+
+  let linkPath = null;
+  if (isMdx) linkPath = mdxPath;
+  if (isMd) linkPath = mdPath;
 
   const isIndexMDX = fs.existsSync(indexPathMDX);
   const isIndexMD = fs.existsSync(indexPathMD);
-  const isLink = fs.existsSync(linkPath);
+  const isLink = linkPath ? fs.existsSync(linkPath) : false;
 
   let newPath = null;
   if (isIndexMDX) newPath = indexPathMDX;
@@ -35,7 +43,7 @@ export const getPageData = async (
   if (!newPath) return undefined;
 
   const file = await fs.promises.readFile(
-    `${process.cwd()  }/${newPath}`,
+    `${process.cwd()}/${newPath}`,
     'utf8',
   );
 
@@ -47,7 +55,7 @@ export const getPageData = async (
         remarkPlugins: [],
         rehypePlugins: [
           rehypeSlug,
-          [rehypePrettyCode, rehypePrettyCodeOptions] as any,
+          [rehypePrettyCode, rehypePrettyCodeOptions] as never,
         ],
         format: 'mdx',
       },
@@ -83,7 +91,7 @@ export const getPageData = async (
     },
   });
 
-  const headings = extractHeadings(`${process.cwd()  }/${newPath}`);
+  const headings = extractHeadings(`${process.cwd()}/${newPath}`);
 
   // Get Tabs
   const pathToFiles = isLink

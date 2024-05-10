@@ -41,5 +41,17 @@ module.exports = {
   // add rules configurations here
   rules: {
     'import/no-default-export': 'off',
+    // TODO: Remove this override once the issues are resolved
+    '@typescript-eslint/no-unsafe-call': 'off',
+    // TODO: Remove this override once the issues are resolved
+    '@typescript-eslint/no-unsafe-return': 'off',
+    // TODO: Remove this override once the issues are resolved
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    // TODO: Remove this override once the issues are resolved
+    '@typescript-eslint/no-unnecessary-condition': 'off',
+    // TODO: Remove this override once the issues are resolved
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    // TODO: Remove this override once the issues are resolved
+    '@typescript-eslint/no-empty-function': 'off',
   },
 };

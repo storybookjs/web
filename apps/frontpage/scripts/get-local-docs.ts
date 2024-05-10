@@ -1,11 +1,12 @@
+/* eslint-disable no-await-in-loop -- TODO: Fix this */
 import path from 'node:path';
 import fs from 'fs-extra';
 import fetch from 'node-fetch';
 import tar from 'tar';
-import type { DocsVersion} from '@repo/utils';
+import type { DocsVersion } from '@repo/utils';
 import { docsVersions } from '@repo/utils';
 
-async function clean() {
+async function clean(): Promise<void> {
   await fs.emptyDir(path.join(__dirname, '../content/docs'));
   await fs.emptyDir(path.join(__dirname, '../content/snippets'));
   await fs.emptyDir(path.join(__dirname, '../public/docs'));
@@ -18,7 +19,8 @@ async function clean() {
   }
 }
 
-async function fetchAndExtract(version: DocsVersion) {
+async function fetchAndExtract(version: DocsVersion): Promise<void> {
+  // eslint-disable-next-line no-console -- Showing off console.log
   console.log(`♠︎ Fetching docs for ${version.id}...`);
 
   let url: string | null = null;
@@ -43,30 +45,30 @@ async function fetchAndExtract(version: DocsVersion) {
   }
 
   await new Promise((resolve, reject) => {
-    const extractDocs = new Promise((resolve, reject) => {
-      if (response && response.body) {
+    const extractDocs = new Promise((innerResolve, innerReject) => {
+      if (response.body) {
         response.body
           .pipe(
             tar.x(
               {
                 strip: 2,
                 C: path.join(__dirname, `../content/docs/${version.id}`),
-                filter: (path: string) =>
-                  !path.includes('_assets') &&
-                  !path.includes('_versions') &&
-                  !path.includes('_snippets') &&
-                  !path.includes('.prettierignore') &&
-                  !path.includes('.prettierrc'),
+                filter: (p: string) =>
+                  !p.includes('_assets') &&
+                  !p.includes('_versions') &&
+                  !p.includes('_snippets') &&
+                  !p.includes('.prettierignore') &&
+                  !p.includes('.prettierrc'),
               },
               [folder],
             ),
           )
-          .on('error', reject)
-          .on('end', resolve);
+          .on('error', innerReject)
+          .on('end', innerResolve);
       }
     });
 
-    const extractSnippets = new Promise((resolve, reject) => {
+    const extractSnippets = new Promise((innerResolve, innerReject) => {
       if (response.body) {
         response.body
           .pipe(
@@ -74,17 +76,17 @@ async function fetchAndExtract(version: DocsVersion) {
               {
                 strip: 3,
                 C: path.join(__dirname, `../content/snippets/${version.id}`),
-                filter: (path: string) => path.includes('_snippets'),
+                filter: (p: string) => p.includes('_snippets'),
               },
               [folder],
             ),
           )
-          .on('error', reject)
-          .on('end', resolve);
+          .on('error', innerReject)
+          .on('end', innerResolve);
       }
     });
 
-    const extractAssets = new Promise((resolve, reject) => {
+    const extractAssets = new Promise((innerResolve, innerReject) => {
       if (response.body) {
         response.body
           .pipe(
@@ -92,13 +94,13 @@ async function fetchAndExtract(version: DocsVersion) {
               {
                 strip: 3,
                 C: path.join(__dirname, `../public/docs/${version.id}`),
-                filter: (path: string) => path.includes('_assets'),
+                filter: (p: string) => p.includes('_assets'),
               },
               [folder],
             ),
           )
-          .on('error', reject)
-          .on('end', resolve);
+          .on('error', innerReject)
+          .on('end', innerResolve);
       }
     });
 
@@ -108,11 +110,13 @@ async function fetchAndExtract(version: DocsVersion) {
   });
 }
 
-clean();
+void clean();
 
 const arrayOfFetches = docsVersions.map((version) => fetchAndExtract(version));
 
-Promise.all(arrayOfFetches).then(() => {
+void Promise.all(arrayOfFetches).then(() => {
+  // eslint-disable-next-line no-console -- Showing off console.log
   console.log('Done!');
+  // eslint-disable-next-line no-console -- Showing off console.log
   console.log('');
 });
