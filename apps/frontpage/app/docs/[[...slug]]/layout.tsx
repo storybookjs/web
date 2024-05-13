@@ -46,6 +46,7 @@ export default async function Layout({
         alt="Storybook Docs"
         className="absolute top-0 left-0 w-full -z-10"
         height={339}
+        priority
         src="/bubbles.png"
         width={1800}
       />
