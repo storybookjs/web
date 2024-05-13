@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "frontpage",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "fetch-docs": "tsx --tsconfig tsconfig.json scripts/get-local-docs.ts",
-    "copy-other-sitemaps": "tsx --tsconfig apps/frontpage/tsconfig.json apps/frontpage/scripts/copy-other-sitemaps.ts"
+    "copy-other-sitemaps": "tsx --tsconfig apps/frontpage/tsconfig.json apps/frontpage/scripts/copy-other-sitemaps.ts",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",

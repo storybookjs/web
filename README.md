@@ -13,6 +13,10 @@ This project is structured around [Turborepo](https://turbo.build/repo). This do
 
 ## Main commands
 
+#### `npm install`
+
+> Install all dependencies
+
 #### `turbo fetch-docs`
 
 > Fetch docs from the monorepo
@@ -24,6 +28,10 @@ This project is structured around [Turborepo](https://turbo.build/repo). This do
 #### `turbo build`
 
 > Build all apps locally
+
+#### `npm run clean`
+
+> Clean the monorepo. You'll have to install dependencies again after running this command with `npm install`
 
 ## Connect with us!
 
