@@ -30,12 +30,6 @@ export async function CodeSnippets({ path, activeVersion }: LocalProps) {
     activeVersion,
   });
 
-  console.log(
-    'codeSnippetsContent',
-    path,
-    codeSnippetsContent.filter((obj) => obj.language === 'native-format'),
-  );
-
   // Render the Code Snippets component
   // This happen on the client since we need to use the context
   return <CodeSnippetsClient content={codeSnippetsContent} />;
