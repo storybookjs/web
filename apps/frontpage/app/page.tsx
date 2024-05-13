@@ -1,10 +1,10 @@
-import { Home } from '../components/home/home';
 import {
   fetchDiscordMembers,
   fetchGithubContributorCount,
   fetchGithubCount,
   fetchNpmDownloads,
-} from '@utils';
+} from '@repo/utils';
+import { Home } from '../components/home/home';
 
 export default async function Page() {
   const { number: githubCount } = await fetchGithubCount();
@@ -15,10 +15,10 @@ export default async function Page() {
 
   return (
     <Home
-      githubCount={githubCount}
-      npmDownloads={npmDownloads}
       contributorCount={contributorCount}
       discordMembers={discordMembers}
+      githubCount={githubCount}
+      npmDownloads={npmDownloads}
     />
   );
 }

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Apollo from "./images/apollo.svg";
 import Axe from "./images/axe.svg";
 import Chromatic from "./images/chromatic.svg";
@@ -28,7 +29,6 @@ import Zeroheight from "./images/zeroheight.svg";
 import Ionic from "./images/ionic.svg";
 import Launchdarkly from "./images/launchdarkly.svg";
 import Supernova from "./images/supernova.svg";
-import Image from "next/image";
 
 export function Integrations() {
   const integrations = [
@@ -219,33 +219,33 @@ export function Integrations() {
           if (isExternal)
             return (
               <a
-                key={name}
                 className="w-full h-auto flex items-center justify-center rounded-sm shadow-md pointer-events-none select-none md:pointer-events-auto"
+                key={name}
                 {...integration}
               >
                 <Image
+                  alt={name}
+                  className="w-full h-full block"
+                  height="80"
                   loading="lazy"
                   src={image}
-                  alt={name}
                   width="80"
-                  height="80"
-                  className="w-full h-full block"
                 />
               </a>
             );
           return (
             <div
-              key={name}
               className="w-full h-auto flex items-center justify-center rounded-sm shadow-md pointer-events-none select-none md:pointer-events-auto"
+              key={name}
               {...integration}
             >
               <Image
+                alt={name}
+                className="w-full h-full block"
+                height="80"
                 loading="lazy"
                 src={image}
-                alt={name}
                 width="80"
-                height="80"
-                className="w-full h-full block"
               />
             </div>
           );

@@ -2,13 +2,13 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useScroll, useSpring, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { ChevronSmallRightIcon } from '@storybook/icons';
+import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
 import { useEventListener } from '../../../hooks/use-event-listener';
-import { LogoCloudbees } from './Logo-cloudbees';
+import { LogoCloudbees } from './logo-cloudbee';
 import { PublishIntegrations } from './publish-integrations';
 import { EmbedIntegrations } from './embed-integrations';
 import { TestIntegrations } from './test-integrations';
-import { cn, container } from '@utils';
 
 export function Share() {
   const publishRef = useRef<HTMLImageElement | null>(null);
@@ -40,9 +40,9 @@ export function Share() {
   });
 
   const handleResize = () => {
-    const embed = embedRef && embedRef.current?.getBoundingClientRect();
-    const publish = publishRef && publishRef.current?.getBoundingClientRect();
-    const test = testRef && testRef.current?.getBoundingClientRect();
+    const embed = embedRef.current?.getBoundingClientRect();
+    const publish = publishRef.current?.getBoundingClientRect();
+    const test = testRef.current?.getBoundingClientRect();
 
     if (embed && publish && test) {
       const deltaX1 = embed.left - publish.left;
@@ -66,37 +66,32 @@ export function Share() {
 
   useEventListener('resize', handleResize);
 
-  const scrollProgress = useTransform(
+  const scrollProgress = useTransform<number, number>(
     [smoothPublishProgress, smoothTestProgress],
-    ([latestPublishProgress, latestTestProgress]: number[]) =>
-      latestPublishProgress + latestTestProgress
+    ([latestPublishProgress, latestTestProgress]) =>
+      (latestPublishProgress || 0) + (latestTestProgress || 0),
   );
 
-  const x = useTransform(
-    scrollProgress,
-    [0, 1, 2],
-    ['0%', `${delta.x[0]}px`, `${delta.x[1]}px`]
-  );
-  const y = useTransform(
-    scrollProgress,
-    [0, 1, 2],
-    ['0%', `${delta.y[0]}px`, `${delta.y[1]}px`]
-  );
+  // const x = useTransform(
+  //   scrollProgress,
+  //   [0, 1, 2],
+  //   ['0%', `${delta.x[0]}px`, `${delta.x[1]}px`],
+  // );
+  // const y = useTransform(
+  //   scrollProgress,
+  //   [0, 1, 2],
+  //   ['0%', `${delta.y[0]}px`, `${delta.y[1]}px`],
+  // );
   const scale = useTransform(
     scrollProgress,
     [0, 1, 2],
-    [1, delta.scale[0], delta.scale[1]]
+    [1, delta.scale[0], delta.scale[1]],
   );
   const opacity = useTransform(scrollProgress, [0, 1, 2], [1, 1, 0]);
 
   return (
     <div className="pt-12 overflow-hidden border-b border-zinc-600 sm:pt-20 md:pt-28">
-      <div
-        className={cn(
-          container,
-          'lg:px-8 text-white md:flex justify-between gap-20'
-        )}
-      >
+      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Share how the UI actually works
         </h2>
@@ -107,13 +102,8 @@ export function Share() {
             what&apos;s currently in production.
           </p>
         </div>
-      </div>
-      <div
-        className={cn(
-          container,
-          'pt-12 pb-4 grid grid-cols-1 grid-flow-dense justify-items-center items-center gap-12 md:pt-28 md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-x-24 md:gap-y-48'
-        )}
-      >
+      </Container>
+      <Container className="pt-12 pb-4 grid grid-cols-1 grid-flow-dense justify-items-center items-center gap-12 md:pt-28 md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-x-24 md:gap-y-48">
         <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white col-[1/-1] first-of-type:pt-0 sm:max-w-full sm:pt-16 md:col-[1/2]">
           <h3 className="text-2xl font-bold">
             Publish Storybook to get sign off from teammates
@@ -123,8 +113,8 @@ export function Share() {
             team can check that the UI looks right without touching code.
           </p>
           <Link
-            href="/docs/react/sharing/publish-storybook"
             className="flex items-center gap-2 font-bold text-blue-500"
+            href="/docs/react/sharing/publish-storybook"
           >
             Publish Storybook
             <ChevronSmallRightIcon />
@@ -133,10 +123,12 @@ export function Share() {
         <PublishIntegrations
           ref={publishRef}
           timeFrameStyles={{
-            x,
-            y,
-            scale,
-            opacity,
+            // TODO: These are ultimately passed to a motion.img component's style attribute,
+            //       but they're not valid CSS properties. Should they be translateX & translateY?
+            // x,
+            // y,
+            scale: scale.get(),
+            opacity: opacity.get(),
             transformOrigin: 'top left',
           }}
         />
@@ -149,8 +141,8 @@ export function Share() {
             community. Works with the oEmbed standard.
           </p>
           <Link
-            href="/docs/react/sharing/embed"
             className="flex items-center gap-2 font-bold text-blue-500"
+            href="/docs/react/sharing/embed"
           >
             Embed stories
             <ChevronSmallRightIcon />
@@ -169,23 +161,23 @@ export function Share() {
             once and import them into any JavaScript library.
           </p>
           <Link
-            href="/docs/react/writing-tests/stories-in-unit-tests"
             className="flex items-center gap-2 font-bold text-blue-500"
+            href="/docs/react/writing-tests/stories-in-unit-tests"
           >
             Reuse stories in tests and libraries
             <ChevronSmallRightIcon />
           </Link>
         </div>
         <TestIntegrations ref={testRef} />
-      </div>
+      </Container>
       <Testimonial
+        avatarUrl="https://avatars2.githubusercontent.com/u/8724083?s=460&v=4"
+        jobTitle="Author of Building Design Systems"
+        logo={<LogoCloudbees />}
+        name="Sarrah Vesselov"
         text="“Storybook is my go-to when starting a new design system. It makes
             getting something in place quick and easy for both design and
             engineering.”"
-        avatarUrl="https://avatars2.githubusercontent.com/u/8724083?s=460&v=4"
-        name="Sarrah Vesselov"
-        jobTitle="Author of Building Design Systems"
-        logo={<LogoCloudbees />}
       />
     </div>
   );

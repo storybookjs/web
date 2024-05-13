@@ -1,24 +1,25 @@
-import { CodeSnippetsProps, docsVersions } from '@utils';
-import { firefoxThemeLight } from '../themes/firefox-theme-vscode';
-import fs from 'fs';
+import fs from 'node:fs';
+import type { CodeSnippetsProps } from '@repo/utils';
+import { docsVersions } from '@repo/utils';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
+import { firefoxThemeLight } from '../themes/firefox-theme-vscode';
 
-interface Props {
+interface MetadataProps {
   path: string | undefined;
   activeVersion: string;
 }
 
-export const getMetadata = async ({ path, activeVersion }: Props) => {
-  const version = activeVersion ?? docsVersions[0].id;
+export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
+  const version = activeVersion ?? docsVersions[0]?.id;
 
   // Read the content of the MD file
   const source = await fs.promises.readFile(
-    process.cwd() + `/content/snippets/${version}/${path}`,
-    'utf8'
+    `${process.cwd()}/content/snippets/${version}/${path}`,
+    'utf8',
   );
 
   // Parse the content into a syntax tree
@@ -43,16 +44,20 @@ export const getMetadata = async ({ path, activeVersion }: Props) => {
         .use(remarkRehype)
         .use(rehypePrettyCode, {
           theme: firefoxThemeLight,
-        } as any)
+        } as never)
         .use(rehypeStringify)
         .process(valueWithBackticks);
 
-      const matches = block.meta?.match(/(\w+)="([^"]*)"/g);
+      const matches = block.meta?.match(/(?<temp2>\w+)="(?<temp1>[^"]*)"/g);
 
-      const metadata: { [key: string]: string } = {};
+      // console.log(path, 'matches', matches);
+      // -> init-command.md matches [ 'renderer="common"', 'language="js"', 'packageManager="npx"' ]
+
+      const metadata: Record<string, string> = {};
 
       if (matches) {
         matches.forEach((match) => {
+          // TODO: Based on the console.log above, the match is a string, not an array
           const [key, value] = match
             .split('=')
             .map((part) => part.replace(/"/g, ''));
@@ -65,7 +70,7 @@ export const getMetadata = async ({ path, activeVersion }: Props) => {
         ...metadata,
         content: result.value,
       };
-    })
+    }),
   );
 
   return content;

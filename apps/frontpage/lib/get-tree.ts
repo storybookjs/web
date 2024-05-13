@@ -1,9 +1,14 @@
-import { TreeProps } from '@utils';
-import fs from 'fs';
+import path from 'node:path';
+import fs from 'node:fs';
+import type { TreeProps } from '@repo/utils';
 import matter from 'gray-matter';
-import path from 'path';
 
-function getMetadata(filePath: string): any {
+interface Metadata {
+  title: string;
+  [key: string]: unknown;
+}
+
+function getMetadata(filePath: string): Metadata {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const {
     data: { navTitle, title, ...data },
@@ -31,13 +36,13 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
 
       if (childItems) {
         const indexFile = childItems.find(
-          (item) => item.name === 'index.mdx' || item.name === 'index.md'
+          (item) => item.name === 'index.mdx' || item.name === 'index.md',
         );
         const children = childItems
           .sort((a, b) =>
-            a?.sidebar?.order && b?.sidebar?.order
+            a.sidebar?.order && b.sidebar?.order
               ? a.sidebar.order - b.sidebar.order
-              : 0
+              : 0,
           )
           .filter((item) => item.name !== 'index.mdx')
           .filter((item) => item.name !== 'index.md');
@@ -80,9 +85,9 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
 
   return tree
     .sort((a, b) =>
-      a?.sidebar?.order && b?.sidebar?.order
+      a.sidebar?.order && b.sidebar?.order
         ? a.sidebar.order - b.sidebar.order
-        : 0
+        : 0,
     )
     .filter((item) => {
       // Here we are removing the index page from the tree

@@ -1,4 +1,4 @@
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 import snarkdown from 'snarkdown';
 
 type Variant = 'neutral' | 'positive' | 'info' | 'warning';
@@ -18,13 +18,13 @@ export interface CalloutProps extends CalloutContainerProps {
   children: string;
 }
 
-export const Callout = ({
+export function Callout({
   title,
   icon,
   children,
   variant,
   ...props
-}: CalloutProps) => {
+}: CalloutProps) {
   const appliedIcon = icon ?? VARIANT_DEFAULT_ICON[variant];
 
   return (
@@ -34,21 +34,17 @@ export const Callout = ({
         variant === 'neutral' && 'bg-slate-200',
         variant === 'positive' && 'bg-slate-200',
         variant === 'info' && 'bg-blue-100 border border-blue-200',
-        variant === 'warning' && 'bg-slate-200'
+        variant === 'warning' && 'bg-slate-200',
       )}
       {...props}
     >
-      {appliedIcon && (
-        <span className="hidden text-2xl md:flex" aria-hidden>
+      {appliedIcon ? <span aria-hidden className="hidden text-2xl md:flex">
           {appliedIcon}
-        </span>
-      )}
+        </span> : null}
       <div>
-        {title && (
-          <div dangerouslySetInnerHTML={{ __html: snarkdown(title) }} />
-        )}
+        {title ? <div dangerouslySetInnerHTML={{ __html: snarkdown(title) }} /> : null}
         <div className="mb-0 [&>p]:mb-0">{children}</div>
       </div>
     </div>
   );
-};
+}

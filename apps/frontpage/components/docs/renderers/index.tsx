@@ -1,14 +1,14 @@
 'use client';
 
-import { renderers } from '@utils';
-import { FC } from 'react';
-import { useDocs } from '../../../app/docs/provider';
+import { renderers } from '@repo/utils';
+import type { FC } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@ui';
+} from '@repo/ui';
+import { useDocs } from '../../../app/docs/provider';
 import { Button } from './button';
 
 interface RenderersProps {
@@ -20,19 +20,19 @@ export const Renderers: FC<RenderersProps> = () => {
 
   const firstThreeRenderers = renderers.slice(0, 3);
   const isInFirstThree = firstThreeRenderers.some(
-    (renderer) => renderer.id === activeRenderer
+    (renderer) => renderer.id === activeRenderer,
   );
   const isInFirstFour = renderers
     .slice(0, 4)
     .some((renderer) => renderer.id === activeRenderer);
   const activeRendererObj = renderers.find(
-    (renderer) => renderer.id === activeRenderer
+    (renderer) => renderer.id === activeRenderer,
   );
   const fourthRenderer = renderers[3];
   const restRenderers =
     !isInFirstFour && fourthRenderer
       ? [fourthRenderer, ...renderers.slice(4)].filter(
-          (r) => r.id !== activeRenderer
+          (r) => r.id !== activeRenderer,
         )
       : renderers.slice(4);
 
@@ -40,9 +40,9 @@ export const Renderers: FC<RenderersProps> = () => {
     <div className="flex gap-2 mb-8">
       {firstThreeRenderers.map((renderer) => (
         <Button
-          key={renderer.id}
           active={renderer.id === activeRenderer}
-          onClick={() => setRenderer(renderer.id)}
+          key={renderer.id}
+          onClick={() => { setRenderer(renderer.id); }}
         >
           {renderer.title}
         </Button>
@@ -50,16 +50,16 @@ export const Renderers: FC<RenderersProps> = () => {
       {!isInFirstThree && activeRendererObj ? (
         <Button
           active={activeRendererObj.id === activeRenderer}
-          onClick={() => setRenderer(activeRendererObj.id)}
+          onClick={() => { setRenderer(activeRendererObj.id); }}
         >
           {activeRendererObj.title}
         </Button>
       ) : (
         <Button
-          active={fourthRenderer.id === activeRenderer}
-          onClick={() => setRenderer(fourthRenderer.id)}
+          active={fourthRenderer?.id === activeRenderer}
+          onClick={() => { setRenderer(fourthRenderer?.id || ''); }}
         >
-          {fourthRenderer.title}
+          {fourthRenderer?.title || ''}
         </Button>
       )}
       <DropdownMenu>
@@ -70,7 +70,7 @@ export const Renderers: FC<RenderersProps> = () => {
           {restRenderers.map((renderer) => (
             <DropdownMenuItem
               key={renderer.id}
-              onClick={() => setRenderer(renderer.id)}
+              onClick={() => { setRenderer(renderer.id); }}
             >
               {renderer.title}
             </DropdownMenuItem>

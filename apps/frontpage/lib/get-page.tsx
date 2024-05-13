@@ -1,12 +1,12 @@
-import fs from 'fs';
-import { generateDocsTree } from './get-tree';
-import { firefoxThemeLight } from '../components/docs/mdx/code-snippets/themes/firefox-theme-vscode';
+import fs from 'node:fs';
 import rehypePrettyCode from 'rehype-pretty-code';
 import { compileMDX } from 'next-mdx-remote/rsc';
-import * as MDX from '../components/docs/mdx';
 import rehypeSlug from 'rehype-slug';
-import { DocsVersion } from '@utils';
+import type { DocsVersion } from '@repo/utils';
 import { extractHeadings } from 'extract-md-headings';
+import * as MDX from '../components/docs/mdx';
+import { firefoxThemeLight } from '../components/docs/mdx/code-snippets/themes/firefox-theme-vscode';
+import { generateDocsTree } from './get-tree';
 
 const rehypePrettyCodeOptions = {
   theme: firefoxThemeLight,
@@ -14,18 +14,26 @@ const rehypePrettyCodeOptions = {
 
 export const getPageData = async (
   path: string[],
-  activeVersion: DocsVersion
+  activeVersion: DocsVersion,
 ) => {
   const rootPath = 'content/docs';
   const pathString = path.join('/');
   const indexPathMDX = `content/docs/${pathString}/index.mdx`;
   const indexPathMD = `content/docs/${pathString}/index.md`;
-  const linkPath =
-    `${rootPath}/${pathString}.mdx` || `${rootPath}/${pathString}.md`;
+
+  const mdxPath = `${rootPath}/${pathString}.mdx`;
+  const mdPath = `${rootPath}/${pathString}.md`;
+
+  const isMdx = fs.existsSync(mdxPath);
+  const isMd = fs.existsSync(mdPath);
+
+  let linkPath = null;
+  if (isMdx) linkPath = mdxPath;
+  if (isMd) linkPath = mdPath;
 
   const isIndexMDX = fs.existsSync(indexPathMDX);
   const isIndexMD = fs.existsSync(indexPathMD);
-  const isLink = fs.existsSync(linkPath);
+  const isLink = linkPath ? fs.existsSync(linkPath) : false;
 
   let newPath = null;
   if (isIndexMDX) newPath = indexPathMDX;
@@ -35,8 +43,8 @@ export const getPageData = async (
   if (!newPath) return undefined;
 
   const file = await fs.promises.readFile(
-    process.cwd() + `/${newPath}`,
-    'utf8'
+    `${process.cwd()}/${newPath}`,
+    'utf8',
   );
 
   const { content, frontmatter } = await compileMDX<{ title: string }>({
@@ -47,7 +55,7 @@ export const getPageData = async (
         remarkPlugins: [],
         rehypePlugins: [
           rehypeSlug,
-          [rehypePrettyCode, rehypePrettyCodeOptions] as any,
+          [rehypePrettyCode, rehypePrettyCodeOptions] as never,
         ],
         format: 'mdx',
       },
@@ -64,34 +72,42 @@ export const getPageData = async (
       li: MDX.List,
       pre: MDX.Pre,
       details: () => <details>Hello world</details>,
+      // eslint-disable-next-line react/jsx-pascal-case -- TODO: Not sure why this through an error.
       img: (props) => <MDX.Img activeVersion={activeVersion.id} {...props} />,
       Video: (props) => (
+        // eslint-disable-next-line react/jsx-pascal-case -- TODO: Not sure why this through an error.
         <MDX.Video activeVersion={activeVersion.id} {...props} />
       ),
       CodeSnippets: (props) => (
+        // eslint-disable-next-line react/jsx-pascal-case -- TODO: Not sure why this through an error.
         <MDX.CodeSnippets activeVersion={activeVersion.id} {...props} />
       ),
       Callout: MDX.Callout,
-      IfRenderer: MDX.IfRenderer,
+      If: MDX.If,
+      IfRenderer: MDX.If,
       YouTubeCallout: MDX.YouTubeCallout,
       FeatureSnippets: MDX.FeatureSnippets,
+      // TODO: These three should be imported in the necessary MDX file(s)
+      HomeRenderers: MDX.HomeRenderers,
+      HomeConcepts: MDX.HomeConcepts,
+      HomeResources: MDX.HomeResources,
     },
   });
 
-  const headings = extractHeadings(process.cwd() + `/${newPath}`);
+  const headings = extractHeadings(`${process.cwd()}/${newPath}`);
 
   // Get Tabs
-  let pathToFiles = isLink
+  const pathToFiles = isLink
     ? `${rootPath}/${pathString}`.split('/').slice(0, -1).join('/')
     : `${rootPath}/${pathString}`;
 
   const parent = generateDocsTree(pathToFiles);
 
-  const sorted = parent?.sort((a, b) =>
-    a?.tab?.order && b?.tab?.order ? a.tab.order - b.tab.order : 0
+  const sorted = parent.sort((a, b) =>
+    a.tab?.order && b.tab?.order ? a.tab.order - b.tab.order : 0,
   );
 
-  const index = sorted?.find((item) => item.name === 'index.mdx');
+  const index = sorted.find((item) => item.name === 'index.mdx');
 
   return {
     ...frontmatter,

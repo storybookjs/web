@@ -1,8 +1,9 @@
 'use client';
 
-import { useCommunity } from '../../app/community/provider';
 import { useInView } from 'framer-motion';
-import { FC, ReactNode, useEffect, useRef } from 'react';
+import type { FC, ReactNode} from 'react';
+import { useEffect, useRef } from 'react';
+import { useCommunity } from '../../app/community/provider';
 
 interface AnchorProps {
   id: string;
@@ -22,8 +23,8 @@ export const Section: FC<AnchorProps> = ({ id, children, className }) => {
   }, [id, refInView, setActiveSegment]);
 
   return (
-    <div ref={ref} className={className}>
-      <div id={id} className="absolute -top-28" />
+    <div className={className} ref={ref}>
+      <div className="absolute -top-28" id={id} />
       {children}
     </div>
   );

@@ -1,5 +1,6 @@
 import React from "react";
-import { motion, MotionProps } from "framer-motion";
+import type { MotionProps } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface SidebarProps extends MotionProps {
   type: "rangeSlider" | "timeFrame";
@@ -9,11 +10,11 @@ interface SidebarProps extends MotionProps {
 const rangeSliderStories = ["default", "input-range", "no-selection"];
 const timeFrameStories = ["overview", "all-day", "last-hour", "no-selection"];
 
-export const Sidebar = ({
+export function Sidebar({
   activeStory,
   type = "rangeSlider",
   ...props
-}: SidebarProps & MotionProps) => {
+}: SidebarProps & MotionProps) {
   const modifyingControls = ["start-time", "end-time"].includes(activeStory);
   const storyID = modifyingControls ? "all-day" : activeStory;
 
@@ -25,25 +26,25 @@ export const Sidebar = ({
       {type === "rangeSlider" &&
         rangeSliderStories.map((id) => (
           <motion.img
+            alt=""
+            animate={{ opacity: storyID === id ? 1 : 0 }}
             className="absolute top-0 left-0 h-full"
             key={id}
             src={`/home/develop/sidebar-rs-${id}.svg`}
-            alt=""
-            animate={{ opacity: storyID === id ? 1 : 0 }}
             transition={{ duration: 0.1 }}
           />
         ))}
       {type === "timeFrame" &&
         timeFrameStories.map((id) => (
           <motion.img
+            alt=""
+            animate={{ opacity: storyID === id ? 1 : 0 }}
             className="absolute top-0 left-0 h-full"
             key={id}
             src={`/home/develop/sidebar-tf-${id}.svg`}
-            alt=""
-            animate={{ opacity: storyID === id ? 1 : 0 }}
             transition={{ duration: 0.1 }}
           />
         ))}
     </motion.div>
   );
-};
+}

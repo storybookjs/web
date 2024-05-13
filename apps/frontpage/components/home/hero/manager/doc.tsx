@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import type { FC, ReactNode } from "react";
 import { motion } from "framer-motion";
 import {
   GridAltIcon,
@@ -11,17 +11,17 @@ import {
   ZoomOutIcon,
   ZoomResetIcon,
 } from "@storybook/icons";
-import timeframe1 from "./timeframe-1.svg";
 import Image from "next/image";
+import timeframe1 from "./timeframe-1.svg";
 import { Controls } from "./controls";
 
 export const Doc: FC = () => {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
       className="absolute top-10 left-1/2 w-full text-black max-w-[840px] -translate-x-1/2 pt-8 md:pt-12 px-6"
+      exit={{ opacity: 0 }}
+      initial={{ opacity: 0 }}
     >
       <div className="text-3xl font-bold mb-4 md:mb-6">TimeFrame</div>
       <div className="mb-8 sm:hidden">
@@ -68,7 +68,7 @@ export const Doc: FC = () => {
           </ToolbarButton>
         </div>
         <div className="flex w-full justify-center py-4 sm:py-8 px-4">
-          <Image priority src={timeframe1} alt="TimeFrame" />
+          <Image alt="TimeFrame" priority src={timeframe1} />
         </div>
       </div>
       <div>

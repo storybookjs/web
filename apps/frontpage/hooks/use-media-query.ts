@@ -21,7 +21,7 @@ export function useMediaQuery(query: string | string[]): boolean[] {
       queries.map((q) => ({
         media: q,
         matches: window.matchMedia(q).matches,
-      }))
+      })),
     );
 
     const mediaQueryListeners = queries.map((q) => window.matchMedia(q));
@@ -29,7 +29,8 @@ export function useMediaQuery(query: string | string[]): boolean[] {
     const handler = (evt: MediaQueryListEvent) => {
       setValue((prev) => {
         return prev.slice().map((item) => {
-          if (item.media === evt.media) return { ...item, matches: evt.matches };
+          if (item.media === evt.media)
+            return { ...item, matches: evt.matches };
           return item;
         });
       });
@@ -44,7 +45,7 @@ export function useMediaQuery(query: string | string[]): boolean[] {
         mql.removeEventListener('change', handler);
       });
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- We don't want to run this effect on every render
   }, []);
 
   return value.map((item) => item.matches);

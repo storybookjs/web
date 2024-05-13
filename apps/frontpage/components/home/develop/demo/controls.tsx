@@ -1,5 +1,6 @@
-import React from "react";
-import { AnimationControls, motion, MotionProps } from "framer-motion";
+import React from 'react';
+import type { AnimationControls, MotionProps } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface ControlsProps extends MotionProps {
   startTimeControls: AnimationControls;
@@ -19,20 +20,20 @@ const charVariants = {
 
 const bgVariants = { initial: { opacity: 0 }, visible: { opacity: 1 } };
 
-export const Controls = ({
+export function Controls({
   startTimeControls,
   endTimeControls,
   ...props
-}: ControlsProps) => {
+}: ControlsProps) {
   return (
     <motion.div
       className="absolute top-0 left-0 bottom-0 w-full [clip-path: polygon(20%_50%,100%_50%,100%_92%,20%_92%)]"
       {...props}
     >
       <motion.img
+        alt=""
         className="absolute top-0 left-0 w-full"
         src="/home/develop/time-frame-controls.svg"
-        alt=""
       />
       <motion.svg
         className="absolute text-[11px] top-[79.7%] left-[81.7%] w-[13.6%] h-auto"
@@ -40,24 +41,23 @@ export const Controls = ({
         xmlns="http://www.w3.org/2000/svg"
       >
         <motion.rect
+          animate={startTimeControls}
+          fill="#fff"
+          height="20"
+          initial="initial"
+          transition={{ duration: 0.1, delay: 0.4 }}
+          variants={bgVariants}
+          width="120"
           x="2"
           y="2"
-          width="120"
-          height="20"
-          fill="#fff"
-          initial="initial"
-          animate={startTimeControls}
-          variants={bgVariants}
-          transition={{ duration: 0.1, delay: 0.4 }}
         />
         <text x="8" y="16">
-          {"07:30".split("").map((v, index) => (
+          {'07:30'.split('').map((v, index) => (
             <motion.tspan
-              // eslint-disable-next-line react/no-array-index-key
-              key={`${v}-${index}`}
+              animate={startTimeControls}
               custom={index}
               initial="initial"
-              animate={startTimeControls}
+              key={v}
               variants={charVariants}
             >
               {v}
@@ -66,23 +66,22 @@ export const Controls = ({
         </text>
       </motion.svg>
       <motion.svg
+        animate={endTimeControls}
         className="absolute text-[11px] top-[86.7%] left-[81.7%] w-[13.6%] h-auto"
+        initial="initial"
+        transition={{ duration: 0.1, delay: 0.4 }}
+        variants={bgVariants}
         viewBox="0 0 140 24"
         xmlns="http://www.w3.org/2000/svg"
-        initial="initial"
-        animate={endTimeControls}
-        variants={bgVariants}
-        transition={{ duration: 0.1, delay: 0.4 }}
       >
-        <rect x="2" y="2" width="120" height="20" fill="#fff" />
+        <rect fill="#fff" height="20" width="120" x="2" y="2" />
         <text x="8" y="16">
-          {"16:30".split("").map((v, index) => (
+          {'16:30'.split('').map((v, index) => (
             <motion.tspan
-              // eslint-disable-next-line react/no-array-index-key
-              key={`${v}-${index}`}
+              animate={endTimeControls}
               custom={index}
               initial="initial"
-              animate={endTimeControls}
+              key={v}
               variants={charVariants}
             >
               {v}
@@ -92,4 +91,4 @@ export const Controls = ({
       </motion.svg>
     </motion.div>
   );
-};
+}

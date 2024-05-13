@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { cn, container } from '@utils';
+import { Container } from '@repo/ui';
 
 const calendarVariants = {
   initial: { opacity: 0.5, filter: 'grayscale(100%)' },
@@ -23,59 +24,61 @@ const decorationVariants = {
 
 export const Publish: FC = () => {
   return (
-    <figure className={cn(container)} data-chromatic="ignore">
-      <div className="relative mt-12 mx-auto max-w-[400px] sm:mt-16">
-        <motion.img
-          className="absolute w-[8%] h-auto top-[73%] right-[15%] z-[2]"
-          variants={decorationVariants}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 'all' }}
-          transition={{ duration: 0.3, delay: 1.8 }}
-          src="/home/automate/arrow.svg"
-          alt=""
-        />
-        <motion.img
-          className="absolute w-[10%] h-auto left-[14%] bottom-[50%] z-[2]"
-          variants={decorationVariants}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 'all' }}
-          transition={{ duration: 0.3, delay: 1.8 }}
-          src="/home/automate/pointerhand.svg"
-          alt=""
-        />
-        <motion.img
-          className="block w-full"
-          src="/home/automate/datepicker-compact-week.svg"
-          alt=""
-          variants={calendarVariants}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 'all' }}
-          transition={{ duration: 0.8 }}
-        />
-        <motion.div
-          className="block absolute w-[8%] h-0 pb-[8%] top-0 right-0 transform-style-preserve-3d"
-          style={{ perspective: '1000px' }}
-          initial="initial"
-          variants={statusVariants}
-          whileInView={['spin', 'animate']}
-          viewport={{ once: true, amount: 'all' }}
-        >
-          <img
-            className="rotate-0 w-full absolute top-0 left-0 right-0 bottom-0 z-[2]"
-            style={{ backfaceVisibility: 'hidden' }}
-            src="/home/automate/status-publishing.svg"
+    <Container asChild data-chromatic="ignore">
+      <figure>
+        <div className="relative mt-12 mx-auto max-w-[400px] sm:mt-16">
+          <motion.img
             alt=""
+            className="absolute w-[8%] h-auto top-[73%] right-[15%] z-[2]"
+            initial="initial"
+            src="/home/automate/arrow.svg"
+            transition={{ duration: 0.3, delay: 1.8 }}
+            variants={decorationVariants}
+            viewport={{ once: true, amount: 'all' }}
+            whileInView="animate"
           />
-          <img
-            className="absolute top-0 bottom-0 left-0 right-0 w-full rotate-180"
-            src="/home/automate/status-published.svg"
+          <motion.img
             alt=""
+            className="absolute w-[10%] h-auto left-[14%] bottom-[50%] z-[2]"
+            initial="initial"
+            src="/home/automate/pointerhand.svg"
+            transition={{ duration: 0.3, delay: 1.8 }}
+            variants={decorationVariants}
+            viewport={{ once: true, amount: 'all' }}
+            whileInView="animate"
           />
-        </motion.div>
-      </div>
-    </figure>
+          <motion.img
+            alt=""
+            className="block w-full"
+            initial="initial"
+            src="/home/automate/datepicker-compact-week.svg"
+            transition={{ duration: 0.8 }}
+            variants={calendarVariants}
+            viewport={{ once: true, amount: 'all' }}
+            whileInView="animate"
+          />
+          <motion.div
+            className="block absolute w-[8%] h-0 pb-[8%] top-0 right-0 transform-style-preserve-3d"
+            initial="initial"
+            style={{ perspective: '1000px' }}
+            variants={statusVariants}
+            viewport={{ once: true, amount: 'all' }}
+            whileInView={['spin', 'animate']}
+          >
+            <img
+              alt=""
+              className="rotate-0 w-full absolute top-0 left-0 right-0 bottom-0 z-[2]"
+              src="/home/automate/status-publishing.svg"
+              style={{ backfaceVisibility: 'hidden' }}
+            />
+            <img
+              alt=""
+              className="absolute top-0 bottom-0 left-0 right-0 w-full rotate-180"
+              src="/home/automate/status-published.svg"
+            />
+          </motion.div>
+        </div>
+      </figure>
+    </Container>
   );
 };

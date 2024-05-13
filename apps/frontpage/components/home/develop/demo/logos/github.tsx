@@ -1,10 +1,6 @@
-import React from "react";
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export const LogoGithub = (props: Props) => {
+export function LogoGithub() {
   return (
     <svg
       className="w-full h-full"
@@ -16,4 +12,4 @@ export const LogoGithub = (props: Props) => {
       </g>
     </svg>
   );
-};
+}

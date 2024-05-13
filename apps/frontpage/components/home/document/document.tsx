@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import Link from 'next/link';
-import { Branch, Document as Doc, Overlap, Search } from './icons';
+import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
+import { Branch, Document as Doc, Overlap, Search } from './icons';
 import { LogoGitlab } from './logo-gitlab';
-import { cn, container } from '@utils';
 
 const features = [
   {
@@ -59,18 +59,13 @@ export const Document: FC = () => {
     <div className="pt-12 border-b border-zinc-600 sm:pt-20 md:pt-28">
       {features.map((feature) => (
         <Link
-          key={feature.title}
-          rel="preload"
           as="video"
           href={feature.media}
+          key={feature.title}
+          rel="preload"
         />
       ))}
-      <div
-        className={cn(
-          container,
-          'lg:px-8 text-white md:flex justify-between gap-20'
-        )}
-      >
+      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Document UI for your team to reuse
         </h2>
@@ -80,18 +75,18 @@ export const Document: FC = () => {
             place. That helps your team adopt existing UI patterns.
           </p>
         </div>
-      </div>
+      </Container>
       <IllustratedFeatureList
-        features={features}
         alignment="right"
         bgColor="#c3eeaf"
+        features={features}
       />
       <Testimonial
-        text="“Storybook has made developing components more streamlined by allowing us to easily include technical documentation within our design system!”"
         avatarUrl="https://avatars0.githubusercontent.com/u/3028593?s=460&v=4"
-        name="Taurie Davis"
         jobTitle="Author of Building Design Systems"
         logo={<LogoGitlab />}
+        name="Taurie Davis"
+        text="“Storybook has made developing components more streamlined by allowing us to easily include technical documentation within our design system!”"
       />
     </div>
   );

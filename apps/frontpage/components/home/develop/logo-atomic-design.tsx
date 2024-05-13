@@ -1,20 +1,16 @@
-import React from "react";
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export const LogoAtomicDesign = (props: Props) => {
+export function LogoAtomicDesign() {
   return (
     <svg
       height="36"
-      width="36"
       version="1.1"
       viewBox="0 0 300 300"
-      xmlns="http://www.w3.org/2000/svg"
+      width="36"
       x="0"
-      y="0"
       xmlSpace="preserve"
+      xmlns="http://www.w3.org/2000/svg"
+      y="0"
     >
       <g id="atom">
         <g>
@@ -38,4 +34,4 @@ export const LogoAtomicDesign = (props: Props) => {
       </g>
     </svg>
   );
-};
+}

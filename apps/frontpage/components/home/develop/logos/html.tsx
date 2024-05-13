@@ -1,11 +1,11 @@
 import React from "react";
 
-export const HTML5 = () => {
+export function HTML5() {
   return (
     <svg
-      width={24}
       height={24}
       viewBox="0 0 512 512"
+      width={24}
       xmlns="http://www.w3.org/2000/svg"
     >
       <title>HTML5 Logo</title>
@@ -22,4 +22,4 @@ export const HTML5 = () => {
       />
     </svg>
   );
-};
+}

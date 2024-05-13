@@ -1,13 +1,10 @@
+/* eslint-disable no-loss-of-precision -- TODO */
+/* eslint-disable @typescript-eslint/no-loss-of-precision -- TODO */
 'use client';
 
-/* eslint-disable @typescript-eslint/no-loss-of-precision */
 import React, { useRef, useEffect } from 'react';
-import {
-  motion,
-  MotionProps,
-  transform,
-  useAnimationControls,
-} from 'framer-motion';
+import type { MotionProps } from 'framer-motion';
+import { motion, transform, useAnimationControls } from 'framer-motion';
 
 const colors = [
   '#FC521F',
@@ -698,21 +695,21 @@ const shapeVariants = {
   }),
 };
 
-const Shape = ({ path, ...props }: { path: string } & MotionProps) => {
+function Shape({ path, ...props }: { path: string } & MotionProps) {
   return (
     <motion.path
-      fillRule="evenodd"
+      className="outline-none focus:outline-none"
       clipRule="evenodd"
       d={path}
       fill="#F6F9FC"
+      fillRule="evenodd"
       variants={shapeVariants}
-      className="outline-none focus:outline-none"
       {...props}
     />
   );
-};
+}
 
-export const PuzzlePieces = () => {
+export function PuzzlePieces() {
   const delays = useRef(shapes.map(() => 0));
   const rippleControls = useAnimationControls();
 
@@ -724,7 +721,7 @@ export const PuzzlePieces = () => {
       return transform(d, [0, MAX_DISTANCE], [0, 1]);
     });
 
-    rippleControls.start('visible');
+    void rippleControls.start('visible');
   }
 
   useEffect(() => {
@@ -734,29 +731,29 @@ export const PuzzlePieces = () => {
 
   return (
     <motion.svg
+      animate={rippleControls}
       className="block absolute top-0 left-0 z-0 w-full h-full sm:h-[460px] sm:max-w-[460px]"
-      width="460"
+      data-chromatic="ignore"
+      fill="none"
       height="460"
       viewBox="0 0 460 460"
-      fill="none"
+      width="460"
       xmlns="http://www.w3.org/2000/svg"
-      animate={rippleControls}
-      data-chromatic="ignore"
     >
       {shapes.map(({ id, x, y, path, color }, index) => (
         <Shape
-          key={id}
-          path={path}
-          onTap={() => {
-            sequence(x, y);
-          }}
           custom={{
             index,
             delay: delays,
             color,
           }}
+          key={id}
+          onTap={() => {
+            sequence(x, y);
+          }}
+          path={path}
         />
       ))}
     </motion.svg>
   );
-};
+}

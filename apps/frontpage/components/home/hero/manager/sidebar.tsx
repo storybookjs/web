@@ -1,5 +1,4 @@
-import { StorybookLogo } from '../../../../components/logos/storybook';
-import { cn } from '@utils';
+import { cn } from '@repo/utils';
 import {
   BookmarkHollowIcon,
   ChevronSmallDownIcon,
@@ -11,7 +10,8 @@ import {
   FolderIcon,
   SearchIcon,
 } from '@storybook/icons';
-import { FC } from 'react';
+import type { FC } from 'react';
+import { StorybookLogo } from "../../../logos/storybook";
 
 export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
   return (
@@ -36,25 +36,25 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
         </div>
         <ExpandAltIcon size={10} />
       </div>
-      <SidebarLine ic="group" ar="right" label="Badges" />
-      <SidebarLine ic="group" ar="right" label="Button" />
-      <SidebarLine ic="group" ar="down" label="Charts" />
-      <SidebarLine ic="component" ar="right" lvl={2} label="DatePicker" />
-      <SidebarLine ic="component" ar="right" lvl={2} label="PieChart" />
-      <SidebarLine ic="component" ar="right" lvl={2} label="RangeSlider" />
-      <SidebarLine ic="component" ar="right" lvl={2} label="SparkLine" />
-      <SidebarLine ic="component" ar="right" lvl={2} label="TimeFrame" />
-      <SidebarLine ic="docs" lvl={3} label="Overview" active={slide === 2} />
+      <SidebarLine ar="right" ic="group" label="Badges" />
+      <SidebarLine ar="right" ic="group" label="Button" />
+      <SidebarLine ar="down" ic="group" label="Charts" />
+      <SidebarLine ar="right" ic="component" label="DatePicker" lvl={2} />
+      <SidebarLine ar="right" ic="component" label="PieChart" lvl={2} />
+      <SidebarLine ar="right" ic="component" label="RangeSlider" lvl={2} />
+      <SidebarLine ar="right" ic="component" label="SparkLine" lvl={2} />
+      <SidebarLine ar="right" ic="component" label="TimeFrame" lvl={2} />
+      <SidebarLine active={slide === 2} ic="docs" label="Overview" lvl={3} />
       <SidebarLine
-        ic="story"
-        lvl={3}
-        label="No selection"
         active={slide === 1 || slide === 3 || slide === 4}
+        ic="story"
+        label="No selection"
+        lvl={3}
       />
-      <SidebarLine ic="story" lvl={3} label="Afternoon" />
-      <SidebarLine ic="story" lvl={3} label="All day" />
-      <SidebarLine ic="group" ar="down" label="Image" />
-      <SidebarLine ic="group" ar="down" label="Interstitial" />
+      <SidebarLine ic="story" label="Afternoon" lvl={3} />
+      <SidebarLine ic="story" label="All day" lvl={3} />
+      <SidebarLine ar="down" ic="group" label="Image" />
+      <SidebarLine ar="down" ic="group" label="Interstitial" />
     </div>
   );
 };
@@ -73,7 +73,7 @@ const SidebarLine: FC<{
         lvl === 1 && 'pl-2 pr-2',
         lvl === 2 && 'pl-6 pr-2',
         lvl === 3 && 'pl-16 pr-2',
-        active && 'bg-blue-500'
+        active && 'bg-blue-500',
       )}
     >
       {ar === 'down' && (

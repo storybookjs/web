@@ -1,16 +1,17 @@
 import React from 'react';
-import { cn, container } from '@utils';
-import { Button } from '../../../components/ui/button';
+import { cn } from '@repo/utils';
 import Link from 'next/link';
 import Image from 'next/image';
-import { AspectRatio } from '../../../components/ui/aspect-ratio';
-import { Community } from '../../community';
 import {
   DiscordIcon,
   GithubIcon,
   TwitterIcon,
   YoutubeIcon,
 } from '@storybook/icons';
+import { Container } from '@repo/ui';
+import { Button } from '../../ui/button';
+import { AspectRatio } from '../../ui/aspect-ratio';
+import { Community } from '../../community';
 
 const projects = [
   {
@@ -179,21 +180,16 @@ interface SocialValidationProps {
   discordMembers: string;
 }
 
-export const SocialValidation = ({
+export function SocialValidation({
   contributorCount,
   discordMembers,
-}: SocialValidationProps) => {
+}: SocialValidationProps) {
   return (
     <section
       className="pt-12 sm:pt-20 md:pt-28"
       style={{ scrollbarWidth: 'none' }}
     >
-      <div
-        className={cn(
-          container,
-          'lg:px-8 text-white md:flex justify-between gap-20'
-        )}
-      >
+      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Made for frontend developers
         </h2>
@@ -204,33 +200,33 @@ export const SocialValidation = ({
             techniques and get support.
           </p>
           <div className="flex items-center gap-8">
-            <Button variant="outlineHome" rounded="full" jumpOnHover asChild>
+            <Button asChild jumpOnHover rounded="full" variant="outlineHome">
               <Link href="/community/">Get involved</Link>
             </Button>
             <div className="flex flex-row-reverse items-center min-w-0">
               {contributors.map((image) => (
                 <Image
+                  alt=""
                   className="block w-10 h-10 -ml-1 rounded-full last:ml-0 odd:none sm:odd:block"
-                  loading="lazy"
-                  width={40}
                   height={40}
                   key={image}
+                  loading="lazy"
                   src={image}
-                  alt=""
+                  width={40}
                 />
               ))}
             </div>
           </div>
         </div>
-      </div>
+      </Container>
       <div className="px-8 py-0 pb-4 mt-12 text-white flex gap-8 scroll-p-8 sm:mt-20 mb-[calc(5rem-1rem)] md:mt-28 overflow-scroll snap-x">
         {storybooks.map((storybookProject) => (
           <a
             className="block no-underline w-[240px] sm:w-[480px] flex-none"
             href={storybookProject.url}
             key={storybookProject.name}
-            target="_blank"
             rel="noopener nofollow noreferrer"
+            target="_blank"
           >
             <div className="overflow-hidden rounded-md">
               <div className="flex items-center w-full h-4 gap-1 pl-2 bg-zinc-200 border-y border-t-transparent border-b-zinc-300">
@@ -239,19 +235,19 @@ export const SocialValidation = ({
                 <div className="bg-green-500 w-[5px] h-[5px] rounded-full" />
               </div>
               <Image
-                src={storybookProject.image.src}
                 alt={storybookProject.name}
-                width={storybookProject.image.width}
                 height={storybookProject.image.height}
+                src={storybookProject.image.src}
+                width={storybookProject.image.width}
               />
             </div>
             <div className="flex items-center mt-3 text-white">
               <Image
+                alt={storybookProject.name}
                 className="w-5 h-5 mr-2"
+                height={20}
                 src={storybookProject.logo}
                 width={20}
-                height={20}
-                alt={storybookProject.name}
               />
               <span className="text-sm">{storybookProject.name}</span>
             </div>
@@ -261,42 +257,38 @@ export const SocialValidation = ({
       <div className="px-8 py-0 pb-4 mt-12 flex gap-8 scroll-p-8 sm:mt-20 mb-[calc(5rem-1rem)] md:mt-28 overflow-scroll snap-x">
         {projects.map((project) => (
           <a
-            href={project.projectUrl}
-            target="_blank"
-            key={project.logoAlt}
             className="w-[240px] flex-none bg-red-500 rounded-md"
+            href={project.projectUrl}
+            key={project.logoAlt}
+            rel="noopener"
             style={{ backgroundColor: project.bgColor }}
+            target="_blank"
           >
             <AspectRatio
-              ratio={4 / 3}
               className="flex flex-col items-center justify-center gap-2 font-bold text-white"
+              ratio={4 / 3}
             >
               <Image
-                src={project.logoUrl}
                 alt={project.logoAlt}
-                width={project.width}
                 height={project.height}
+                src={project.logoUrl}
+                width={project.width}
               />
               {project.name}
             </AspectRatio>
           </a>
         ))}
       </div>
-      <div className={cn(container, 'pt-0 pb-12 sm:pb-20 md:pb-28')}>
+      <Container className="pt-0 pb-12 sm:pb-20 md:pb-28">
         <Community />
-      </div>
-      <div
-        className={cn(
-          container,
-          'pb-12 grid grid-cols-[1fr] md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(4,_1fr)] gap-8'
-        )}
-      >
+      </Container>
+      <Container className="pb-12 grid grid-cols-[1fr] md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(4,_1fr)] gap-8">
         <div className={cn(socialCard)}>
           <GithubIcon aria-label="Discord" className="text-white" size={48} />
           <div className="text-white text-md">
             {`Join ${contributorCount} contributors building the future of UI development.`}
           </div>
-          <Button variant="outlineHome" rounded="full" jumpOnHover asChild>
+          <Button asChild jumpOnHover rounded="full" variant="outlineHome">
             <a href="https://github.com/storybookjs/storybook">
               Star on Github
             </a>
@@ -315,7 +307,7 @@ export const SocialValidation = ({
           <div className="text-white text-md">
             {`Chat with ${discordMembers} frontend developers.`}
           </div>
-          <Button variant="outlineHome" rounded="full" jumpOnHover asChild>
+          <Button asChild jumpOnHover rounded="full" variant="outlineHome">
             <a href="https://discord.gg/storybook">Join Discord server</a>
           </Button>
           <div>
@@ -332,7 +324,7 @@ export const SocialValidation = ({
           <div className="text-white text-md">
             Get the latest news and updates from Storybook maintainers.
           </div>
-          <Button variant="outlineHome" rounded="full" jumpOnHover asChild>
+          <Button asChild jumpOnHover rounded="full" variant="outlineHome">
             <a href="https://twitter.com/storybookjs">Follow on Twitter</a>
           </Button>
           <div>
@@ -349,7 +341,7 @@ export const SocialValidation = ({
           <div className="text-white text-md">
             Watch tutorials, feature previews, and interviews.
           </div>
-          <Button variant="outlineHome" rounded="full" jumpOnHover asChild>
+          <Button asChild jumpOnHover rounded="full" variant="outlineHome">
             <a href="https://www.youtube.com/channel/UCr7Quur3eIyA_oe8FNYexfg">
               Watch on YouTube
             </a>
@@ -359,7 +351,7 @@ export const SocialValidation = ({
             <div className="text-sm text-zinc-500">Subscribers</div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
-};
+}

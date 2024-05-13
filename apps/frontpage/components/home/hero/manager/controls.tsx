@@ -1,5 +1,5 @@
-import { cn } from '@utils';
-import { FC } from 'react';
+import { cn } from '@repo/utils';
+import type { FC } from 'react';
 
 const content = [
   {
@@ -30,13 +30,13 @@ export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
       <div
         className={cn(
           'bg-[#F7F9FC] h-10 flex items-center px-4 text-[11px] tracking-widest uppercase font-bold text-[#2E3438] border-b border-b-[#D9E0E6]',
-          isPanel && 'hidden sm:flex'
+          isPanel && 'hidden sm:flex',
         )}
       >
         Props
       </div>
       {content.map((item) => (
-        <div key={item.label} className="flex border-b border-b-[#D9E0E6]">
+        <div className="flex border-b border-b-[#D9E0E6]" key={item.label}>
           <div className="text-[13px] w-1/2 md:w-[28%] lg:w-[22%] pl-4 py-2">
             {item.label}
           </div>
@@ -52,7 +52,7 @@ export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
             <div
               className={cn(
                 'border border-[#D9E0E6] rounded w-full h-7 flex items-center px-2',
-                item.muted && 'text-[#73828C]'
+                item.muted && 'text-[#73828C]',
               )}
             >
               {item.control}

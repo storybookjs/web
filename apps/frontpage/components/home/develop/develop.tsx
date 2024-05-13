@@ -1,15 +1,16 @@
 'use client';
 
 import React, { useRef } from 'react';
+import type { MotionValue } from 'framer-motion';
 import { useScroll, useTransform, useSpring, motion } from 'framer-motion';
 import Link from 'next/link';
-import { Angular, Vue, WebComponents, HTML5, ReactLogo } from './logos';
-import { ScrollDemo } from './demo/scroll-demo';
 import { ChevronSmallRightIcon } from '@storybook/icons';
+import { Container } from '@repo/ui';
 import { Integrations } from '../integrations/integrations';
 import { Testimonial } from '../testimonial';
+import { Angular, Vue, WebComponents, HTML5, ReactLogo } from './logos';
+import { ScrollDemo } from './demo/scroll-demo';
 import { LogoAtomicDesign } from './logo-atomic-design';
-import { cn, container } from '@utils';
 
 export function Develop() {
   // Step 1
@@ -21,7 +22,7 @@ export function Develop() {
   const smoothAppearProgress = useSpring(appearProgress, {
     stiffness: 1000,
     damping: 100,
-  });
+  }) as MotionValue<number>;
 
   // Step 1
   const { scrollYProgress: isolationProgress } = useScroll({
@@ -40,7 +41,7 @@ export function Develop() {
     offset: ['0 0.5', '.75 1'],
   });
   const activeStory = useTransform(storiesProgress, (value) =>
-    Math.floor(value * 3)
+    Math.floor(value * 3),
   );
 
   // Step 3
@@ -50,7 +51,7 @@ export function Develop() {
     offset: ['0 0.4', '.75 1'],
   });
   const activePanel = useTransform(addonsProgress, (value) =>
-    Math.floor(value * 4)
+    Math.floor(value * 4),
   );
   const smoothAddonsProgress = useSpring(addonsProgress, {
     stiffness: 1000,
@@ -71,17 +72,12 @@ export function Develop() {
   const y = useTransform(
     smoothAppearProgress,
     [0, 1],
-    ['calc(0% + 36px)', 'calc(-50% + 36px)']
+    ['calc(0% + 36px)', 'calc(-50% + 36px)'],
   );
 
   return (
     <section className="pt-[calc(3rem-40px)] border-b border-zinc-700 sm:pt-[calc(5rem-40px)] md:pt-[calc(7rem-72px)]">
-      <div
-        className={cn(
-          container,
-          'lg:px-8 text-white md:flex justify-between gap-20'
-        )}
-      >
+      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Develop durable user interfaces
         </h2>
@@ -99,9 +95,9 @@ export function Develop() {
               {['react', 'vue', 'angular', 'web-components', 'html'].map(
                 (i) => (
                   <Link
-                    key={i}
-                    href={`/docs/get-started/install/?renderer=${i}`}
                     className="flex items-center justify-center w-10 h-10 transition-all border rounded hover:-translate-y-1 border-zinc-700 hover:border-zinc-400"
+                    href={`/docs/get-started/install/?renderer=${i}`}
+                    key={i}
                   >
                     {i === 'react' && <ReactLogo />}
                     {i === 'vue' && <Vue />}
@@ -109,33 +105,26 @@ export function Develop() {
                     {i === 'web-components' && <WebComponents />}
                     {i === 'html' && <HTML5 />}
                   </Link>
-                )
+                ),
               )}
               <div className="text-zinc-400">+ 7</div>
             </div>
           </div>
         </div>
-      </div>
-      <div
-        className={cn(
-          container,
-          'pt-28 grid justify-items-center gap-24 grid-flow-dense md:pt-[27rem] md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr]'
-        )}
-      >
+      </Container>
+      <Container className="pt-28 grid justify-items-center gap-24 grid-flow-dense md:pt-[27rem] md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr]">
         <motion.figure
           className="sticky w-full -order-1 z-[999] m-0 self-start top-[34%] translate-y-[var(--mobile-y)] md:w-[150%] md:max-w-[800px] md:col-[2/3] md:top-[50vh] md:translate-y-[calc(-50%+36px)]"
           // TODO: Fix that - Probably by passing the value directly to the style prop
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          style={{ '--mobile-y': y }}
+          style={{ '--mobile-y': y } as React.CSSProperties}
         >
           <ScrollDemo
-            storyIndex={activeStory}
-            panelIndex={activePanel}
-            appearProgress={smoothAppearProgress}
-            isolationProgress={smoothIsolationProgress}
             addonsProgress={smoothAddonsProgress}
+            appearProgress={smoothAppearProgress}
             dropInProgress={smoothDropInProgress}
+            isolationProgress={smoothIsolationProgress}
+            panelIndex={activePanel}
+            storyIndex={activeStory}
           />
         </motion.figure>
         <div className="col-[1/2] w-full" ref={isolationRef}>
@@ -149,8 +138,8 @@ export function Develop() {
               APIs, or business logic.
             </p>
             <Link
-              href="/docs/get-started/why-storybook"
               className="flex items-center gap-2 font-bold text-blue-500"
+              href="/docs/get-started/why-storybook"
             >
               Why build UIs in isolation?
               <ChevronSmallRightIcon />
@@ -170,8 +159,8 @@ export function Develop() {
               development, testing, and QA.
             </p>
             <Link
-              href="/docs/get-started/whats-a-story"
               className="flex items-center gap-2 font-bold text-blue-500"
+              href="/docs/get-started/whats-a-story"
             >
               How to write a story
               <ChevronSmallRightIcon />
@@ -192,8 +181,8 @@ export function Develop() {
             </p>
             <div>
               <Link
-                href="/docs/addons/introduction"
                 className="flex items-center gap-2 font-bold text-blue-500"
+                href="/docs/addons/introduction"
               >
                 Learn about addons
                 <ChevronSmallRightIcon />
@@ -215,8 +204,8 @@ export function Develop() {
             </p>
             <div>
               <Link
-                href="/docs/get-started/why-storybook"
                 className="flex items-center gap-2 font-bold text-blue-500"
+                href="/docs/get-started/why-storybook"
               >
                 Why build UIs in isolation?
                 <ChevronSmallRightIcon />
@@ -225,13 +214,8 @@ export function Develop() {
           </div>
           <div className="h-[56rem] hidden md:block" />
         </div>
-      </div>
-      <div
-        className={cn(
-          container,
-          'pt-28 grid grid-cols-1 justify-items-center items-center gap-12 grid-flow-dense md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-24'
-        )}
-      >
+      </Container>
+      <Container className="pt-28 grid grid-cols-1 justify-items-center items-center gap-12 grid-flow-dense md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-24">
         <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white">
           <h3 className="text-2xl font-bold">
             Integrate with the tools you already use
@@ -242,8 +226,8 @@ export function Develop() {
             change their workflow.
           </p>
           <Link
-            href="/addons"
             className="flex items-center gap-2 font-bold text-blue-500"
+            href="/addons"
           >
             Browse integrations
             <ChevronSmallRightIcon />
@@ -266,16 +250,16 @@ export function Develop() {
           </div>
         </div>
         <Integrations />
-      </div>
+      </Container>
       <Testimonial
+        avatarUrl="https://avatars3.githubusercontent.com/u/383701?s=460&v=4"
+        jobTitle="Author of Atomic Design"
+        logo={<LogoAtomicDesign />}
+        name="Brad Frost"
         text="“Storybook is a powerful frontend workshop environment tool that
             allows teams to design, build, and organize UI components (and even
             full screens!) without getting tripped up over business logic and
             plumbing.”"
-        avatarUrl="https://avatars3.githubusercontent.com/u/383701?s=460&v=4"
-        name="Brad Frost"
-        jobTitle="Author of Atomic Design"
-        logo={<LogoAtomicDesign />}
       />
     </section>
   );

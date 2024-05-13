@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
-import { Nunito_Sans as FontSans } from 'next/font/google';
-import { cn } from '@utils';
+import { Nunito_Sans as nunitoSans } from 'next/font/google';
+import { cn } from '@repo/utils';
 import { Providers } from './providers';
-import './styles.css';
 import PlausibleProvider from 'next-plausible';
 
-const fontSans = FontSans({
+import './globals.css';
+import '@repo/ui/styles.css';
+
+const fontSans = nunitoSans({
   subsets: ['latin'],
+  display: 'swap',
   variable: '--font-sans',
 });
 
@@ -21,7 +24,7 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}): JSX.Element {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -30,7 +33,7 @@ export default function RootLayout({
       <body
         className={cn(
           'min-h-screen bg-white dark:bg-zinc-900 font-sans antialiased',
-          fontSans.variable
+          fontSans.variable,
         )}
       >
         <Providers>{children}</Providers>

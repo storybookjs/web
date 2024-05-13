@@ -1,8 +1,8 @@
+import { Header, Footer, Container } from '@repo/ui';
+import { fetchGithubCount } from '@repo/utils';
 import { NavTop } from '../../components/community/nav-top';
-import { Header, Footer } from '@ui';
 import { Community } from '../../components/community';
 import { NewsletterForm } from '../../components/newsletter-form/form';
-import { cn, smallContainer, fetchGithubCount } from '@utils';
 import { Numbers } from '../../components/community/numbers';
 import { NavSide } from '../../components/community/nav-side';
 import { Support } from '../../components/community/support';
@@ -19,38 +19,41 @@ export default async function Page() {
 
   return (
     <CommunityProvider>
-      <Header variant="system" githubCount={githubCount} />
+      <Header githubCount={githubCount} variant="system" />
       <NavTop />
-      <main className={cn(smallContainer, ' mt-10 md:mt-20')}>
-        <div className="justify-between gap-20 mb-10 lg:px-8 md:flex md:mb-16">
-          <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
-            Meet world-class frontend devs
-          </h2>
-          <div className="flex-1 pt-4">
-            <p className="mb-6 leading-7">
-              Storybook is one of the fastest growing frontend communities. Join
-              thousands fellow developers leveling up their skills together.
-            </p>
-            <div className="flex items-center gap-8">
-              <NewsletterForm variant="system" />
+      <Container asChild className="mt-10 md:mt-20" variant="small">
+        <main>
+          <div className="justify-between gap-20 mb-10 lg:px-8 md:flex md:mb-16">
+            <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
+              Meet world-class frontend devs
+            </h2>
+            <div className="flex-1 pt-4">
+              <p className="mb-6 leading-7">
+                Storybook is one of the fastest growing frontend communities.
+                Join thousands fellow developers leveling up their skills
+                together.
+              </p>
+              <div className="flex items-center gap-8">
+                <NewsletterForm variant="system" />
+              </div>
             </div>
           </div>
-        </div>
-        <Community />
-        <Numbers />
-        <div className="flex gap-16 pb-20 mb-20 border-b border-b-zinc-300">
-          <NavSide />
-          <div className="flex-1">
-            <Support />
-            <Events />
-            <BrandAndResources />
-            <Team />
-            <Contribute />
-            <Sponsor />
+          <Community />
+          <Numbers />
+          <div className="flex gap-16 pb-20 mb-20 border-b border-b-zinc-300">
+            <NavSide />
+            <div className="flex-1">
+              <Support />
+              <Events />
+              <BrandAndResources />
+              <Team />
+              <Contribute />
+              <Sponsor />
+            </div>
           </div>
-        </div>
-        <Testimonials />
-      </main>
+          <Testimonials />
+        </main>
+      </Container>
       <Footer />
     </CommunityProvider>
   );

@@ -1,12 +1,12 @@
 import React from "react";
 
-export const WebComponents = () => {
+export function WebComponents() {
   return (
     <svg
-      height="24"
-      width="24"
       fill="none"
+      height="24"
       viewBox="0 0 24 24"
+      width="24"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -43,8 +43,8 @@ export const WebComponents = () => {
       />
       <defs>
         <linearGradient
-          id="paint0_linear_1350_40335"
           gradientUnits="userSpaceOnUse"
+          id="paint0_linear_1350_40335"
           x1="9.195"
           x2="23.309"
           y1="11.786"
@@ -54,8 +54,8 @@ export const WebComponents = () => {
           <stop offset="1" stopColor="#29ABE2" />
         </linearGradient>
         <linearGradient
-          id="paint1_linear_1350_40335"
           gradientUnits="userSpaceOnUse"
+          id="paint1_linear_1350_40335"
           x1="23.308"
           x2="9.18"
           y1="12.523"
@@ -67,4 +67,4 @@ export const WebComponents = () => {
       </defs>
     </svg>
   );
-};
+}

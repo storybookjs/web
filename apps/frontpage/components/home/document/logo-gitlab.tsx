@@ -1,14 +1,10 @@
-import React from "react";
+import React from 'react';
 
-interface Props {
-  className?: string;
-}
-
-export const LogoGitlab = (props: Props) => {
+export function LogoGitlab() {
   return (
     <svg
-      height="24"
       fill="none"
+      height="24"
       viewBox="0 0 695 151"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -18,4 +14,4 @@ export const LogoGitlab = (props: Props) => {
       />
     </svg>
   );
-};
+}

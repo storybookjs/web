@@ -1,23 +1,24 @@
-import { getVersion } from '../../../lib/get-version';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { renderers, docsVersions, TreeProps, cn } from '@utils';
+import type { TreeProps } from '@repo/utils';
+import { renderers, docsVersions, cn } from '@repo/utils';
+import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
 import { generateDocsTree } from '../../../lib/get-tree';
 import { slugHasVersion } from '../../../lib/slug-has-version';
 
-interface Props {
+interface PageProps {
   params: {
     slug: string[];
   };
 }
 
-export const generateStaticParams = async () => {
+export const generateStaticParams = () => {
   const result: { slug: string[] }[] = [];
   const tree = generateDocsTree();
   const treeFirstVersion = generateDocsTree(
-    `content/docs/${docsVersions[0].id}`
+    `content/docs/${docsVersions[0]?.id}`,
   );
 
   const ids = (data: TreeProps[], removeVersion: boolean) => {
@@ -41,8 +42,8 @@ export const generateStaticParams = async () => {
   return result;
 };
 
-export default async function Page({ params: { slug } }: Props) {
-  const activeVersion = getVersion(slug);
+export default async function Page({ params: { slug } }: PageProps) {
+  const activeVersion = getVersion(slug) || { id: 'next', label: 'Next' };
   const hasVersion = slugHasVersion(slug);
   const newSlug = slug ? [...slug] : [];
   if (!hasVersion) newSlug.unshift(activeVersion.id);
@@ -60,27 +61,27 @@ export default async function Page({ params: { slug } }: Props) {
         >
           {page.title || 'Title is missing'}
         </h1>
-        <Renderers activeRenderer={renderers[0].id} />
-        {page.tabs && page.tabs.length > 0 && (
+        <Renderers activeRenderer={renderers[0]?.id || ''} />
+        {page.tabs && page.tabs.length > 0 ? (
           <div className="flex items-center gap-8 border-b border-zinc-200">
             {page.tabs.map((tab) => {
               const isActive = tab.slug === `/docs/${slug.join('/')}`;
 
               return (
                 <Link
-                  key={tab.name}
-                  href={tab.slug}
                   className={cn(
                     'border-b -mb-px pb-2 hover:text-blue-500 transition-colors px-2 text-sm capitalize',
-                    isActive && 'border-b border-blue-500 text-blue-500'
+                    isActive && 'border-b border-blue-500 text-blue-500',
                   )}
+                  href={tab.slug}
+                  key={tab.name}
                 >
-                  {tab?.tab?.title || tab.title}
+                  {tab.tab?.title || tab.title}
                 </Link>
               );
             })}
           </div>
-        )}
+        ) : null}
         <article
           className={cn(
             '[&>details]:my-6',
@@ -98,7 +99,7 @@ export default async function Page({ params: { slug } }: Props) {
             '[&>details>summary]:text-blue-600',
             '[&>details>summary]:cursor-pointer',
             '[&>details>summary>h3]:inline',
-            '[&>details>summary>h3]:text-xl'
+            '[&>details>summary>h3]:text-xl',
           )}
         >
           {page.content}

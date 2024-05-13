@@ -1,6 +1,6 @@
-import { CodeSnippetsFiltersProps, CodeSnippetsProps } from '@utils';
+import type { CodeSnippetsFiltersProps, CodeSnippetsProps } from '@repo/utils';
 
-interface Props {
+interface GetActiveContentProps {
   codeSnippetsContent: CodeSnippetsProps[];
   filters: CodeSnippetsFiltersProps;
   activePackageManager: string | null;
@@ -12,7 +12,7 @@ export const getActiveContent = ({
   filters,
   activePackageManager,
   activeLanguage,
-}: Props): CodeSnippetsProps | null => {
+}: GetActiveContentProps): CodeSnippetsProps | null => {
   const filterByPackageManager = codeSnippetsContent.filter((item) => {
     // If there is only one package manager, we don't need to filter
     if (filters.packageManagers.length <= 1) return true;
@@ -27,7 +27,7 @@ export const getActiveContent = ({
     return false;
   });
 
-  let filterByLanguage = filterByPackageManager.filter((item) => {
+  const filterByLanguage = filterByPackageManager.filter((item) => {
     // If there is only one language, we don't need to filter
     if (filters.languages.length <= 1) return true;
 
@@ -39,7 +39,7 @@ export const getActiveContent = ({
 
   if (activeLanguage === 'ts' && filterByLanguage.length === 0) {
     const getTsVersion = filterByPackageManager.find(
-      (v) => v.language === 'ts-4-9'
+      (v) => v.language === 'ts-4-9',
     );
     if (getTsVersion) {
       filterByLanguage.push(getTsVersion);
@@ -51,7 +51,7 @@ export const getActiveContent = ({
 
   if (activeLanguage === 'ts-4-9' && filterByLanguage.length === 0) {
     const getTsVersion = filterByPackageManager.find(
-      (v) => v.language === 'ts'
+      (v) => v.language === 'ts',
     );
     if (getTsVersion) {
       filterByLanguage.push(getTsVersion);
@@ -63,5 +63,5 @@ export const getActiveContent = ({
 
   if (filterByLanguage.length === 0) return null;
 
-  return filterByLanguage[0];
+  return filterByLanguage[0] || null;
 };

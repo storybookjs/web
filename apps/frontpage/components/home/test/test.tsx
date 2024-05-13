@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import Link from 'next/link';
-import { Accessibility, Code, Eye, Interact, Pixel, Projects } from './icons';
+import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
+import { Accessibility, Code, Eye, Interact, Pixel, Projects } from './icons';
 import { LogoAirbnb } from './logo-airbnb';
-import { cn, container } from '@utils';
 
 const features = [
   {
@@ -80,18 +80,13 @@ export const Test: FC = () => {
     <div className="pt-12 border-b border-zinc-600 sm:pt-20 md:pt-28">
       {features.map((feature) => (
         <Link
-          key={feature.title}
-          rel="preload"
           as="video"
           href={feature.media}
+          key={feature.title}
+          rel="preload"
         />
       ))}
-      <div
-        className={cn(
-          container,
-          'lg:px-8 text-white md:flex justify-between gap-20'
-        )}
-      >
+      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Test UIs with less effort and no flake
         </h2>
@@ -102,16 +97,16 @@ export const Test: FC = () => {
             cases. Reuse stories to power automated tests
           </p>
         </div>
-      </div>
-      <IllustratedFeatureList features={features} bgColor="#FDDD9C" />
+      </Container>
+      <IllustratedFeatureList bgColor="#FDDD9C" features={features} />
       <Testimonial
+        avatarUrl="https://avatars2.githubusercontent.com/u/1247751?s=100&v=4"
+        jobTitle="Tech lead"
+        logo={<LogoAirbnb />}
+        name="Adam Neary"
         text="“The tool we use for editing UI is Storybook. It is the perfect
             place to make sure your work aligns with designs to the pixel across
             breakpoints.”"
-        avatarUrl="https://avatars2.githubusercontent.com/u/1247751?s=100&v=4"
-        name="Adam Neary"
-        jobTitle="Tech lead"
-        logo={<LogoAirbnb />}
       />
     </div>
   );

@@ -1,14 +1,14 @@
+import type { CodeSnippetsProps } from '@repo/utils';
 import { getMetadata } from './utils/get-metadata';
 import { CodeSnippetsClient } from './client';
-import { CodeSnippetsProps } from '@utils';
 
-interface Props {
+interface LocalProps {
   paths?: string[];
   path?: string;
   activeVersion: string;
 }
 
-export const CodeSnippets = async ({ paths, path, activeVersion }: Props) => {
+export async function CodeSnippets({ paths, path, activeVersion }: LocalProps) {
   // This is how files are structured.
   // [renderer]/[filename].[option].[language].mdx
   // [renderer]/[filename].[language].mdx
@@ -32,4 +32,4 @@ export const CodeSnippets = async ({ paths, path, activeVersion }: Props) => {
   // Render the Code Snippets component
   // This happen on the client since we need to use the context
   return <CodeSnippetsClient content={codeSnippetsContent} />;
-};
+}
