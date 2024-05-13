@@ -20,6 +20,9 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
       "dotEnv": [".env"]
+    },
+    "clean": {
+      "cache": false
     }
   }
 }
