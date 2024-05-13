@@ -17,5 +17,6 @@ jobs:
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
+          storybookBuildDir: storybook-static
           workingDir: apps/frontpage
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
