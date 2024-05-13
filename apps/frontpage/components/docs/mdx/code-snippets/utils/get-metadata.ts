@@ -1,6 +1,5 @@
 import fs from 'node:fs';
-import type { CodeSnippetsProps } from '@repo/utils';
-import { docsVersions } from '@repo/utils';
+import type { CodeSnippetsProps, DocsVersion } from '@repo/utils';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import rehypePrettyCode from 'rehype-pretty-code';
@@ -10,15 +9,13 @@ import { firefoxThemeLight } from '../themes/firefox-theme-vscode';
 
 interface MetadataProps {
   path: string | undefined;
-  activeVersion: string;
+  activeVersion: DocsVersion;
 }
 
 export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
-  const version = activeVersion ?? docsVersions[0]?.id;
-
   // Read the content of the MD file
   const source = await fs.promises.readFile(
-    `${process.cwd()}/content/snippets/${version}/${path}`,
+    `${process.cwd()}/content/snippets/${activeVersion.id}/${path}`,
     'utf8',
   );
 

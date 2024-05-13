@@ -8,11 +8,11 @@ interface GetFiltersProps {
 export const getFilters = ({ codeSnippetsContent }: GetFiltersProps) => {
   const listOfLanguages = [
     ...new Set(codeSnippetsContent.map((obj) => obj.language)),
-  ].filter((r) => r !== null) as string[];
+  ].filter((r) => r !== null && r !== undefined) as string[];
 
-  const languagesWithData = listOfLanguages.map((obj) =>
-    languages.find((r) => r.id === obj),
-  );
+  const languagesWithData = listOfLanguages
+    .map((obj) => languages.find((r) => r.id === obj))
+    .filter((r) => r !== null && r !== undefined);
 
   // Package managers
   const transformPackageManager = codeSnippetsContent.map((pm) => {
@@ -20,9 +20,9 @@ export const getFilters = ({ codeSnippetsContent }: GetFiltersProps) => {
     return pm.packageManager;
   });
 
-  // Removing duplicates and null values
+  // Removing duplicates, null and undefined values
   const listOfPm = [...new Set(transformPackageManager)].filter(
-    (r) => r !== null,
+    (r) => r !== null && r !== undefined,
   ) as string[];
 
   // Add the right data for each package manager

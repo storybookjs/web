@@ -42,18 +42,22 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     <CodeWrapper
       options={
         <>
-          {filters && filters.languages.length > 1 ? <Dropdown
+          {filters && filters.languages.length > 1 ? (
+            <Dropdown
               action={setLanguage}
               activeId={activeLanguage}
               list={filters.languages}
               type="language"
-            /> : null}
-          {filters && filters.packageManagers.length > 1 ? <Dropdown
+            />
+          ) : null}
+          {filters && filters.packageManagers.length > 1 ? (
+            <Dropdown
               action={setPackageManager}
               activeId={activePackageManager}
               list={filters.packageManagers}
               type="packageManager"
-            /> : null}
+            />
+          ) : null}
         </>
       }
       title="Code Snippets"

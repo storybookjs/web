@@ -1,14 +1,13 @@
-import type { CodeSnippetsProps } from '@repo/utils';
+import type { CodeSnippetsProps, DocsVersion } from '@repo/utils';
 import { getMetadata } from './utils/get-metadata';
 import { CodeSnippetsClient } from './client';
 
 interface LocalProps {
-  paths?: string[];
   path?: string;
-  activeVersion: string;
+  activeVersion: DocsVersion;
 }
 
-export async function CodeSnippets({ paths, path, activeVersion }: LocalProps) {
+export async function CodeSnippets({ path, activeVersion }: LocalProps) {
   // This is how files are structured.
   // [renderer]/[filename].[option].[language].mdx
   // [renderer]/[filename].[language].mdx
@@ -24,10 +23,18 @@ export async function CodeSnippets({ paths, path, activeVersion }: LocalProps) {
   // Get metadata for all files from the Code Snippets component
   // This happen on the server since we need to call the file system (fs)
 
+  if (!path || !activeVersion) return null;
+
   const codeSnippetsContent: CodeSnippetsProps[] = await getMetadata({
-    path: path || paths?.[0],
+    path,
     activeVersion,
   });
+
+  console.log(
+    'codeSnippetsContent',
+    path,
+    codeSnippetsContent.filter((obj) => obj.language === 'native-format'),
+  );
 
   // Render the Code Snippets component
   // This happen on the client since we need to use the context
