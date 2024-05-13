@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "storybook dev -p 6006 --ci",
     "build": "storybook build",
+    "build-storybook": "storybook build",
     "clean": "rm -rf .turbo && rm -rf node_modules",
-    "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.mdx"
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.mdx",
+    "chromatic": "npx chromatic --project-token=chpt_34c705b51a7f543"
   },
   "dependencies": {
     "react": "^18.2.0",
