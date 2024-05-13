@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { Nunito_Sans as nunitoSans } from 'next/font/google';
 import { cn } from '@repo/utils';
-import { Providers } from './providers';
 import PlausibleProvider from 'next-plausible';
+import { Providers } from './providers';
 
 import './globals.css';
 import '@repo/ui/styles.css';
