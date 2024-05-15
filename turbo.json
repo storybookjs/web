@@ -11,6 +11,9 @@
     "fetch-docs": {
       "dependsOn": ["^fetch-docs"]
     },
+    "storybook": {
+      "dependsOn": ["^storybook"]
+    },
     "dev": {
       "cache": false,
       "persistent": true,
