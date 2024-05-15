@@ -24,6 +24,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@repo/utils": "^0.0.0",
     "@storybook/icons": "^1.2.9",
+    "copy-to-clipboard": "^3.3.3",
     "next": "^14.2.3",
     "zod": "^3.23.6"
   },
