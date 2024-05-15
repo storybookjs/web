@@ -5,7 +5,7 @@ import { getCookie, setCookie } from 'cookies-next';
 import type { ReactNode } from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
 
-interface DocsContextProps {
+export interface DocsContextProps {
   activeRenderer: null | string;
   setRenderer: (id: string) => void;
   activeLanguage: null | string;

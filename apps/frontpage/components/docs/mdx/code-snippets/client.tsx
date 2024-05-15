@@ -3,10 +3,7 @@
 import type { FC } from 'react';
 import type { CodeSnippetsProps } from '@repo/utils';
 import { useDocs } from '../../../../app/docs/provider';
-import { CodeWrapper } from './wrapper';
-import { getFilters } from './utils/get-filters';
-import { getActiveContent } from './utils/get-active-content';
-import { Dropdown } from './dropdown';
+import { CodeSnippetsComponent } from './code-snippets';
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[];
@@ -15,6 +12,9 @@ interface CodeSnippetsClientProps {
 export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   content,
 }) => {
+  console.log('Code Snippets Content:');
+  console.log(content);
+
   const {
     activeLanguage,
     activePackageManager,
@@ -22,61 +22,13 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     setPackageManager,
   } = useDocs();
 
-  // Get filters - If preformatted text, we don't need filters
-  const filters = getFilters({ codeSnippetsContent: content });
-
-  // Get active content for the Code Snippets component
-  const activeContent = getActiveContent({
-    codeSnippetsContent: content,
-    filters,
-    activeLanguage,
-    activePackageManager,
-  });
-
-  // Helper
-  // const contentWithoutCode = content?.map((obj) =>
-  //   (({ content, ...o }) => o)(obj)
-  // );
-
   return (
-    <CodeWrapper
-      options={
-        <>
-          {filters && filters.languages.length > 1 ? (
-            <Dropdown
-              action={setLanguage}
-              activeId={activeLanguage}
-              list={filters.languages}
-              type="language"
-            />
-          ) : null}
-          {filters && filters.packageManagers.length > 1 ? (
-            <Dropdown
-              action={setPackageManager}
-              activeId={activePackageManager}
-              list={filters.packageManagers}
-              type="packageManager"
-            />
-          ) : null}
-        </>
-      }
-      title="Code Snippets"
-    >
-      {activeContent?.content ? (
-        <section
-          dangerouslySetInnerHTML={{
-            __html: activeContent.content,
-          }}
-        />
-      ) : (
-        <div>
-          <div>Oh no! We could not find the code you are looking for.</div>
-          <div>
-            It would be great if you could report an issue on Github if you see
-            that message.
-          </div>
-        </div>
-      )}
-    </CodeWrapper>
+    <CodeSnippetsComponent
+      activeLanguage={activeLanguage}
+      activePackageManager={activePackageManager}
+      content={content}
+      setLanguage={setLanguage}
+      setPackageManager={setPackageManager}
+    />
   );
 };
