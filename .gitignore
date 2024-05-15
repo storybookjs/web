@@ -47,3 +47,5 @@ dist/
 
 # Storybook
 storybook-static/
+
+*storybook.log
