@@ -1,6 +1,6 @@
 'use client';
 
-import type { FC } from 'react';
+import { useState, type FC } from 'react';
 import type { CodeSnippetsProps } from '@repo/utils';
 import type { DocsContextProps } from '../../../../app/docs/provider';
 import { CodeWrapper } from './wrapper';
@@ -23,6 +23,19 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
   setLanguage,
   setPackageManager,
 }) => {
+  const [lanLocal, setLanLocal] = useState<null | string>(activeLanguage);
+  const [pmLocal, setPmLocal] = useState<null | string>(activePackageManager);
+
+  const handleLanguage = (id: string) => {
+    setLanLocal(id);
+    setLanguage(id);
+  };
+
+  const handlePackageManager = (id: string) => {
+    setPmLocal(id);
+    setPackageManager(id);
+  };
+
   // Get filters - If preformatted text, we don't need filters
   const filters = getFilters({ codeSnippetsContent: content });
 
@@ -30,8 +43,8 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
   const activeContent = getActiveContent({
     codeSnippetsContent: content,
     filters,
-    activeLanguage,
-    activePackageManager,
+    activeLanguage: lanLocal,
+    activePackageManager: pmLocal,
   });
 
   // Helper
@@ -39,24 +52,22 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
   //   (({ content, ...o }) => o)(obj)
   // );
 
-  // return <div>Hello</div>;
-
   return (
     <CodeWrapper
       options={
         <>
           {filters && filters.languages.length > 1 ? (
             <Dropdown
-              action={setLanguage}
-              activeId={activeLanguage}
+              action={handleLanguage}
+              activeId={lanLocal}
               list={filters.languages}
               type="language"
             />
           ) : null}
           {filters && filters.packageManagers.length > 1 ? (
             <Dropdown
-              action={setPackageManager}
-              activeId={activePackageManager}
+              action={handlePackageManager}
+              activeId={pmLocal}
               list={filters.packageManagers}
               type="packageManager"
             />

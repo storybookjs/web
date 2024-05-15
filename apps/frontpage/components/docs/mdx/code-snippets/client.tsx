@@ -12,9 +12,6 @@ interface CodeSnippetsClientProps {
 export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   content,
 }) => {
-  console.log('Code Snippets Content:');
-  console.log(content);
-
   const {
     activeLanguage,
     activePackageManager,
