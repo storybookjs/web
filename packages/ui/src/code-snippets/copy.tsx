@@ -1,3 +1,5 @@
+'use client';
+
 import { CheckIcon, CopyIcon } from '@storybook/icons';
 import { useState } from 'react';
 import copy from 'copy-to-clipboard';
