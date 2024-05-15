@@ -1,5 +1,5 @@
-import type { FC, ReactNode } from "react";
-import { motion } from "framer-motion";
+import type { FC, ReactNode } from 'react';
+import { motion } from 'framer-motion';
 import {
   PlayBackIcon,
   PlayNextIcon,
@@ -7,8 +7,8 @@ import {
   FastForwardIcon,
   RefreshIcon,
   CheckIcon,
-} from "@storybook/icons";
-import { Tabs } from "./tabs";
+} from '@storybook/icons';
+import { Tabs } from './tabs';
 
 export const PanelInteractions: FC = () => {
   return (
@@ -128,21 +128,21 @@ export const PanelInteractions: FC = () => {
   );
 };
 
-function Line({ children }: { children: ReactNode }) {
-  return <div className="border-b border-b-[#D9E0E6] flex items-center px-4 gap-2 py-3">
+const Line = ({ children }: { children: ReactNode }) => (
+  <div className="border-b border-b-[#D9E0E6] flex items-center px-4 gap-2 py-3">
     <CheckIcon className="text-[#7ABF39] flex-shrink-0" />
     <div className="leading-3">{children}</div>
   </div>
-}
+);
 
-function Span({
+const Span = ({
   children,
-  color = "#2E3438",
+  color = '#2E3438',
 }: {
   children: string;
   color?: string;
-}) {
-  return <span className="font-mono text-xs" style={{ color }}>
+}) => (
+  <span className="font-mono text-xs" style={{ color }}>
     {children}
   </span>
-}
+);

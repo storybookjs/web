@@ -6,11 +6,11 @@ import Link from 'next/link';
 import { cn } from '@repo/utils';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
-import { InitCommand } from './init-command';
 import { Manager } from './manager';
+import { InitCommand } from './init-command';
 import { Chrome } from './chrome';
 import SocialProof from './social-proof';
 
@@ -64,16 +64,31 @@ export function Hero({
   contributorCount: string;
 }) {
   const [slide, setSlide] = useState(1);
+  const intervalId = useRef<number | null>(null);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
+  const setSlideInterval = () => {
+    if (intervalId.current !== null) {
+      window.clearInterval(intervalId.current);
+    }
+
+    intervalId.current = window.setInterval(() => {
       setSlide((s) => (s === 4 ? 1 : s + 1));
     }, 3000);
+  };
 
+  useEffect(() => {
+    setSlideInterval();
     return () => {
-      clearInterval(interval);
+      if (intervalId.current) {
+        clearInterval(intervalId.current);
+      }
     };
   }, []);
+
+  const handleSlideChange = (newSlide: number) => {
+    setSlide(newSlide);
+    setSlideInterval();
+  };
 
   return (
     <Container className="lg:px-8 pt-12 md:pt-24 text-white justify-between gap-20 relative z-20">
@@ -142,7 +157,7 @@ export function Hero({
           <div
             className="flex items-center justify-center w-10 h-10 text-white rounded-full"
             onClick={() => {
-              setSlide(slide === 1 ? 4 : slide - 1);
+              handleSlideChange(slide === 1 ? 4 : slide - 1);
             }}
           >
             <ChevronLeftIcon />
@@ -151,7 +166,7 @@ export function Hero({
           <div
             className="flex items-center justify-center w-10 h-10 text-white rounded-full"
             onClick={() => {
-              setSlide(slide === 4 ? 1 : slide + 1);
+              handleSlideChange(slide === 4 ? 1 : slide + 1);
             }}
           >
             <ChevronRightIcon />
@@ -175,7 +190,7 @@ export function Hero({
               )}
               key={label}
               onClick={() => {
-                setSlide(i + 1);
+                handleSlideChange(i + 1);
               }}
               type="button"
             >

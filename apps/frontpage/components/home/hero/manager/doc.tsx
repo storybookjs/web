@@ -1,5 +1,5 @@
-import type { FC, ReactNode } from "react";
-import { motion } from "framer-motion";
+import type { FC, ReactNode } from 'react';
+import { motion } from 'framer-motion';
 import {
   GridAltIcon,
   GrowIcon,
@@ -10,10 +10,10 @@ import {
   ZoomIcon,
   ZoomOutIcon,
   ZoomResetIcon,
-} from "@storybook/icons";
-import Image from "next/image";
-import timeframe1 from "./timeframe-1.svg";
-import { Controls } from "./controls";
+} from '@storybook/icons';
+import Image from 'next/image';
+import timeframe1 from './timeframe-1.svg';
+import { Controls } from './controls';
 
 export const Doc: FC = () => {
   return (
