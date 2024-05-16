@@ -53,7 +53,7 @@ export const Header: FC<HeaderProps> = ({
         'ui-w-full ui-relative ui-z-50',
         variant === 'home' && 'ui-border-b ui-border-white/20',
         variant === 'system' &&
-          'ui-sticky ui-top-0 ui-z-40 ui-backdrop-blur ui-bg-white/80 dark:ui-bg-zinc-900/80 lg:ui-border-b lg:ui-border-zinc-200 dark:ui-border-zinc-700',
+          'ui-sticky ui-top-0 ui-z-40 ui-backdrop-blur ui-bg-white/60 dark:ui-bg-zinc-900/80 lg:ui-border-b lg:ui-border-black/5 dark:ui-border-zinc-700',
       )}
     >
       <div className="ui-mx-auto ui-max-w-8xl">
@@ -65,7 +65,10 @@ export const Header: FC<HeaderProps> = ({
           )}
         >
           <div className="ui-flex ui-items-center ui-gap-6">
-            <Link className="ui-pl-2 md:ui-pl-0" href="/">
+            <Link
+              className="ui-pl-2 md:ui-px-3 ui-h-8 ui-flex ui-items-center"
+              href="/"
+            >
               <StorybookLogo color={variant === 'home' ? 'white' : 'system'} />
             </Link>
             <NavigationMenu.Root className="max-[920px]:ui-hidden">
@@ -173,15 +176,15 @@ const Button: FC<ButtonProps> = ({
       <NavigationMenu.Link asChild>
         <Comp
           className={cn(
-            'ui-inline-flex ui-items-center ui-justify-center ui-whitespace-nowrap ui-rounded-md ui-text-sm ui-font-bold ui-ring-offset-white ui-transition-all focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 focus-visible:ui-ring-offset-2 disabled:ui-pointer-events-none disabled:ui-opacity-50 dark:ui-ring-offset-slate-950 dark:ui-focus-visible:ring-slate-300 ui-duration-300 ui-h-8 ui-px-2',
+            'ui-inline-flex ui-items-center ui-justify-center ui-whitespace-nowrap ui-rounded-md ui-text-sm ui-font-bold ui-transition-all focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 disabled:ui-pointer-events-none disabled:ui-opacity-50 dark:ui-focus-visible:ring-slate-300 ui-duration-300 ui-h-8 ui-px-2',
             variant === 'home' &&
               !active &&
               'ui-group ui-flex ui-items-center ui-justify-center ui-gap-2 ui-text-sm ui-text-white ui-font-bold hover:ui-bg-white/10 hover:ui-text-white',
             variant === 'system' &&
               !active &&
-              'ui-group ui-flex ui-items-center ui-justify-center ui-gap-2 ui-text-sm ui-text-zinc-500 ui-font-bold hover:ui-bg-blue-100 hover:ui-text-blue-500  dark:ui-text-white dark:hover:ui-bg-blue-500/10',
+              'ui-group ui-flex ui-items-center ui-justify-center ui-gap-2 ui-text-sm ui-text-zinc-500 ui-font-bold hover:ui-bg-[rgba(0,0,0,0.04)] hover:ui-text-blue-500  dark:ui-text-white dark:hover:ui-bg-blue-500/10',
             active &&
-              'ui-bg-blue-100 ui-text-blue-500 dark:ui-bg-blue-500/10 dark:ui-text-blue-500',
+              'ui-bg-[rgba(0,0,0,0.04)] ui-text-blue-500 dark:ui-bg-blue-500/10 dark:ui-text-blue-500',
           )}
           href={href}
           target={external ? '_blank' : undefined}
