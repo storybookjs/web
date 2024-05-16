@@ -78,7 +78,7 @@ export const Line: FC<{
 }> = ({ isActive, href, label, icon }) => (
   <Link
     className={cn(
-      'flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8',
+      'flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8 font-bold',
       isActive && 'text-blue-500',
     )}
     href={href}
