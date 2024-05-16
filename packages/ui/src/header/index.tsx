@@ -77,21 +77,26 @@ export const Header: FC<HeaderProps> = ({
                 >
                   Docs
                 </Button>
-                <Button href="#" variant={variant}>
+                <Button external href="/integrations" variant={variant}>
+                  Addons
+                </Button>
+                <Button external href="/showcase" variant={variant}>
                   Showcase
                 </Button>
-                <Button href="#" variant={variant}>
+                <Button external href="/blog" variant={variant}>
                   Blog
                 </Button>
                 <Button
                   external
-                  href="https://www.chromatic.com/?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
+                  externalIcon
+                  href="https://www.chromatic.com/storybook?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
                   variant={variant}
                 >
                   Visual Test
                 </Button>
                 <Button
                   external
+                  externalIcon
                   href="https://www.chromatic.com/sales?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
                   variant={variant}
                 >
@@ -148,6 +153,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'home' | 'system';
   active?: boolean;
   external?: boolean;
+  externalIcon?: boolean;
   href: string;
   children: string;
 }
@@ -155,6 +161,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: FC<ButtonProps> = ({
   variant,
   external = false,
+  externalIcon = false,
   active = false,
   href,
   children,
@@ -166,10 +173,12 @@ const Button: FC<ButtonProps> = ({
       <NavigationMenu.Link asChild>
         <Comp
           className={cn(
-            'ui-inline-flex ui-items-center ui-justify-center ui-whitespace-nowrap ui-rounded-md ui-text-sm ui-font-medium ui-ring-offset-white ui-transition-all focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 focus-visible:ui-ring-offset-2 disabled:ui-pointer-events-none disabled:ui-opacity-50 dark:ui-ring-offset-slate-950 dark:ui-focus-visible:ring-slate-300 ui-duration-300 ui-h-8 ui-px-2',
+            'ui-inline-flex ui-items-center ui-justify-center ui-whitespace-nowrap ui-rounded-md ui-text-sm ui-font-bold ui-ring-offset-white ui-transition-all focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 focus-visible:ui-ring-offset-2 disabled:ui-pointer-events-none disabled:ui-opacity-50 dark:ui-ring-offset-slate-950 dark:ui-focus-visible:ring-slate-300 ui-duration-300 ui-h-8 ui-px-2',
             variant === 'home' &&
+              !active &&
               'ui-group ui-flex ui-items-center ui-justify-center ui-gap-2 ui-text-sm ui-text-white ui-font-bold hover:ui-bg-white/10 hover:ui-text-white',
             variant === 'system' &&
+              !active &&
               'ui-group ui-flex ui-items-center ui-justify-center ui-gap-2 ui-text-sm ui-text-zinc-500 ui-font-bold hover:ui-bg-blue-100 hover:ui-text-blue-500  dark:ui-text-white dark:hover:ui-bg-blue-500/10',
             active &&
               'ui-bg-blue-100 ui-text-blue-500 dark:ui-bg-blue-500/10 dark:ui-text-blue-500',
@@ -178,7 +187,7 @@ const Button: FC<ButtonProps> = ({
           target={external ? '_blank' : undefined}
         >
           {children}
-          {external ? (
+          {externalIcon ? (
             <div className="ui-h-full ui-flex ui-items-start ui-py-1.5">
               <svg
                 fill="none"
