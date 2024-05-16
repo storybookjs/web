@@ -1,9 +1,10 @@
 import fs from 'node:fs';
-import rehypePrettyCode from 'rehype-pretty-code';
+import { rehypePrettyCode } from 'rehype-pretty-code';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import rehypeSlug from 'rehype-slug';
 import type { DocsVersion } from '@repo/utils';
 import { extractHeadings } from 'extract-md-headings';
+import { visit } from 'unist-util-visit';
 import {
   CodeSnippets,
   Callout,
@@ -28,10 +29,6 @@ import {
 } from '../components/docs/mdx';
 import { firefoxThemeLight } from '../components/docs/mdx/code-snippets/themes/firefox-theme-vscode';
 import { generateDocsTree } from './get-tree';
-
-const rehypePrettyCodeOptions = {
-  theme: firefoxThemeLight,
-};
 
 export const getPageData = async (
   path: string[],
@@ -68,6 +65,23 @@ export const getPageData = async (
     'utf8',
   );
 
+  interface NodeProps {
+    type?: string;
+    tagName?: string;
+    properties: string[];
+    raw: string;
+    children: {
+      properties: {
+        raw: string;
+      };
+      tagName: string;
+      raw: string;
+      children: {
+        value: string;
+      }[];
+    }[];
+  }
+
   const { content, frontmatter } = await compileMDX<{ title: string }>({
     source: file,
     options: {
@@ -76,7 +90,43 @@ export const getPageData = async (
         remarkPlugins: [],
         rehypePlugins: [
           rehypeSlug,
-          [rehypePrettyCode, rehypePrettyCodeOptions] as never,
+          // Get the raw code from the pre tag
+          // This is used to get the raw code for the pre component
+          // Solution found here: https://claritydev.net/blog/copy-to-clipboard-button-nextjs-mdx-rehype
+          () => (tree) => {
+            visit(tree, (node: NodeProps) => {
+              if (node?.type === 'element' && node?.tagName === 'pre') {
+                const [codeEl] = node.children;
+
+                if (codeEl.tagName !== 'code') return;
+
+                node.raw = codeEl.children?.[0].value;
+              }
+            });
+          },
+          [
+            rehypePrettyCode,
+            {
+              theme: firefoxThemeLight,
+            },
+          ] as never,
+          // After the code is formatted, we need to get the raw code
+          // This is used to get the raw code for the pre component
+          () => (tree) => {
+            visit(tree, 'element', (node: NodeProps) => {
+              if (node?.type === 'element' && node?.tagName === 'figure') {
+                if (!('data-rehype-pretty-code-figure' in node.properties)) {
+                  return;
+                }
+
+                for (const child of node.children) {
+                  if (child.tagName === 'pre') {
+                    child.properties.raw = node.raw;
+                  }
+                }
+              }
+            });
+          },
         ],
         format: 'mdx',
       },
