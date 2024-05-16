@@ -27,15 +27,20 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
 }) => {
   const [lanLocal, setLanLocal] = useState<null | string>(null);
   const [pmLocal, setPmLocal] = useState<null | string>(null);
-  const [rendererLocal, setRendererLocal] = useState<null | string>(null);
+  const [rendererLocal, setRendererLocal] = useState<null | string>('common');
 
-  console.log(lanLocal, pmLocal, rendererLocal);
+  // Get filters - If preformatted text, we don't need filters
+  const filters = getFilters({ content, rendererLocal });
 
   useEffect(() => {
     if (activeLanguage) setLanLocal(activeLanguage);
-    if (activePackageManager) setPmLocal(activePackageManager);
+    if (activePackageManager) {
+      setPmLocal(activePackageManager);
+    } else if (filters.packageManagers.length >= 1) {
+      setPmLocal(filters.packageManagers[0].id);
+    }
     if (activeRenderer) setRendererLocal(activeRenderer);
-  }, [activeLanguage, activePackageManager, activeRenderer]);
+  }, [activeLanguage, activePackageManager, activeRenderer, filters]);
 
   const handleLanguage = (id: string) => {
     setLanLocal(id);
@@ -47,9 +52,6 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
     setPackageManager(id);
   };
 
-  // Get filters - If preformatted text, we don't need filters
-  const filters = getFilters({ codeSnippetsContent: content });
-
   // Get active content for the Code Snippets component
   const activeContent = getActiveContent({
     codeSnippetsContent: content,
@@ -58,11 +60,6 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
     activePackageManager: pmLocal,
     activeRenderer: rendererLocal,
   });
-
-  // Helper
-  // const contentWithoutCode = content?.map((obj) =>
-  //   (({ content, ...o }) => o)(obj)
-  // );
 
   return (
     <CodeWrapper

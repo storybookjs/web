@@ -22,6 +22,9 @@ export const getActiveContent = ({
   });
 
   const filterByPackageManager = filterByRenderer.filter((item) => {
+    // If activePackageManager is null, we don't need to filter
+    if (!activePackageManager) return true;
+
     // If there is only one package manager, we don't need to filter
     if (filters.packageManagers.length <= 1) return true;
 
@@ -36,6 +39,9 @@ export const getActiveContent = ({
   });
 
   const filterByLanguage = filterByPackageManager.filter((item) => {
+    // If activeLanguage is null, we don't need to filter
+    if (!activeLanguage) return true;
+
     // If there is only one language, we don't need to filter
     if (filters.languages.length <= 1) return true;
 

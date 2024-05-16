@@ -38,7 +38,10 @@ export interface CodeSnippetsProps {
   content: React.ReactNode;
 }
 
-export type CodeSnippetsFilter = { id: string; title: string } | undefined;
+export interface CodeSnippetsFilter {
+  id: string;
+  title: string;
+}
 
 export interface CodeSnippetsFiltersProps {
   languages: CodeSnippetsFilter[];

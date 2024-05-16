@@ -1,13 +1,21 @@
 import type { CodeSnippetsFiltersProps, CodeSnippetsProps } from '@repo/utils';
 import { languages, packageManagers } from '@repo/utils';
+import type { DocsContextProps } from '../../../../../app/docs/provider';
 
 interface GetFiltersProps {
-  codeSnippetsContent: CodeSnippetsProps[];
+  content: CodeSnippetsProps[];
+  rendererLocal: DocsContextProps['activeRenderer'];
 }
 
-export const getFilters = ({ codeSnippetsContent }: GetFiltersProps) => {
+export const getFilters = ({ content, rendererLocal }: GetFiltersProps) => {
+  // Filter content by renderer
+  const filterByRenderer = content.filter((item) => {
+    if (item.renderer === rendererLocal) return true;
+    return false;
+  });
+
   const listOfLanguages = [
-    ...new Set(codeSnippetsContent.map((obj) => obj.language)),
+    ...new Set(filterByRenderer.map((obj) => obj.language)),
   ].filter((r) => r !== null && r !== undefined) as string[];
 
   const languagesWithData = listOfLanguages
@@ -15,7 +23,7 @@ export const getFilters = ({ codeSnippetsContent }: GetFiltersProps) => {
     .filter((r) => r !== null && r !== undefined);
 
   // Package managers
-  const transformPackageManager = codeSnippetsContent.map((pm) => {
+  const transformPackageManager = content.map((pm) => {
     if (pm.packageManager === 'npx') return 'npm';
     return pm.packageManager;
   });

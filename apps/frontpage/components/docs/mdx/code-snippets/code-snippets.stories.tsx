@@ -73,6 +73,7 @@ export const ReactJS: Story = {
   args: {
     ...ContentOnly.args,
     content: content2,
+    activeRenderer: 'react',
     activeLanguage: 'js',
   },
 };
