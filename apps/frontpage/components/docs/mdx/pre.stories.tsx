@@ -11,12 +11,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: `hello world`,
-  },
-};
-
-export const Markdown: Story = {
-  args: {
     children: (
       <code
         data-language="js"
