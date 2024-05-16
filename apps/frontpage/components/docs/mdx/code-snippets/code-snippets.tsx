@@ -29,6 +29,8 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
   const [pmLocal, setPmLocal] = useState<null | string>(null);
   const [rendererLocal, setRendererLocal] = useState<null | string>('common');
 
+  console.log('content', content);
+
   // Get filters - If preformatted text, we don't need filters
   const filters = getFilters({ content, rendererLocal });
 
@@ -61,6 +63,8 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
     activeRenderer: rendererLocal,
   });
 
+  console.log(activeContent);
+
   return (
     <CodeWrapper
       options={
@@ -83,7 +87,7 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
           ) : null}
         </>
       }
-      title="Code Snippets"
+      title={activeContent?.filename || ''}
     >
       {activeContent?.content ? (
         <section
