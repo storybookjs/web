@@ -31,7 +31,7 @@ export const Markdown: Story = {
           <span style={{ color: '#0074E8' }}>Canvas</span>
           <span style={{ color: '#4A4A4F' }}>{` }`}</span>
           <span style={{ color: '#DD00A9' }}> from</span>
-          <span style={{ color: '#003EAA' }}> '@storybook/blocks'</span>
+          <span style={{ color: '#003EAA' }}>{` '@storybook/blocks'`}</span>
           <span style={{ color: '#939393' }}>;</span>
         </span>
         <span data-line="">
@@ -40,7 +40,7 @@ export const Markdown: Story = {
           <span style={{ color: '#DD00A9' }}> as</span>
           <span style={{ color: '#0074E8' }}> ButtonStories</span>
           <span style={{ color: '#DD00A9' }}> from</span>
-          <span style={{ color: '#003EAA' }}> './Button.stories'</span>
+          <span style={{ color: '#003EAA' }}>{` './Button.stories'`}</span>
           <span style={{ color: '#939393' }}>;</span>
         </span>
         <span data-line=""> </span>
