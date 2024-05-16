@@ -63,6 +63,7 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
 
   return (
     <CodeWrapper
+      copy={activeContent?.content}
       options={
         <>
           {filters && filters.languages.length > 1 ? (

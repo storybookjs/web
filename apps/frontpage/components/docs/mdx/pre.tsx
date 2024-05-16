@@ -7,7 +7,7 @@ interface PreProps {
 
 export const Pre: FC<PreProps> = ({ children }) => {
   return (
-    <CodeWrapper>
+    <CodeWrapper copy={children}>
       <pre>{children}</pre>
     </CodeWrapper>
   );

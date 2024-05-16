@@ -1,14 +1,20 @@
 'use client';
 
 import { CheckIcon, CopyIcon } from '@storybook/icons';
+import { renderToStaticMarkup } from 'react-dom/server';
+import type { ReactNode } from 'react';
 import { useState } from 'react';
 import copy from 'copy-to-clipboard';
 
-export const Copy = () => {
+export const Copy = ({ content }: { content: ReactNode }) => {
   const [state, setState] = useState<'idle' | 'copied'>('idle');
 
   const onClick = () => {
-    copy('Text Boom!');
+    const textToConvertIntoString = renderToStaticMarkup(content);
+    copy(textToConvertIntoString, {
+      debug: true,
+      // format: 'text/html',
+    });
     setState('copied');
     setTimeout(() => {
       setState('idle');
