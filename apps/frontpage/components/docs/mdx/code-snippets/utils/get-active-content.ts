@@ -5,6 +5,7 @@ interface GetActiveContentProps {
   filters: CodeSnippetsFiltersProps;
   activePackageManager: string | null;
   activeLanguage: string | null;
+  activeRenderer: string | null;
 }
 
 export const getActiveContent = ({
@@ -12,8 +13,15 @@ export const getActiveContent = ({
   filters,
   activePackageManager,
   activeLanguage,
+  activeRenderer,
 }: GetActiveContentProps): CodeSnippetsProps | null => {
-  const filterByPackageManager = codeSnippetsContent.filter((item) => {
+  const filterByRenderer = codeSnippetsContent.filter((item) => {
+    if (item.renderer === activeRenderer) return true;
+
+    return false;
+  });
+
+  const filterByPackageManager = filterByRenderer.filter((item) => {
     // If there is only one package manager, we don't need to filter
     if (filters.packageManagers.length <= 1) return true;
 

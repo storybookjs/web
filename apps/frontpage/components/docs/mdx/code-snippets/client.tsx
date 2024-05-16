@@ -13,6 +13,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   content,
 }) => {
   const {
+    activeRenderer,
     activeLanguage,
     activePackageManager,
     setLanguage,
@@ -23,6 +24,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     <CodeSnippetsComponent
       activeLanguage={activeLanguage}
       activePackageManager={activePackageManager}
+      activeRenderer={activeRenderer}
       content={content}
       setLanguage={setLanguage}
       setPackageManager={setPackageManager}

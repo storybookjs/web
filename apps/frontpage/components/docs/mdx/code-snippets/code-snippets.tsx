@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FC } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import type { CodeSnippetsProps } from '@repo/utils';
 import type { DocsContextProps } from '../../../../app/docs/provider';
 import { CodeWrapper } from './wrapper';
@@ -10,8 +10,9 @@ import { Dropdown } from './dropdown';
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[];
-  activeLanguage: DocsContextProps['activeLanguage'];
-  activePackageManager: DocsContextProps['activePackageManager'];
+  activeLanguage?: DocsContextProps['activeLanguage'];
+  activePackageManager?: DocsContextProps['activePackageManager'];
+  activeRenderer?: DocsContextProps['activeRenderer'];
   setLanguage: DocsContextProps['setLanguage'];
   setPackageManager: DocsContextProps['setPackageManager'];
 }
@@ -20,11 +21,21 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
   content,
   activeLanguage,
   activePackageManager,
+  activeRenderer,
   setLanguage,
   setPackageManager,
 }) => {
-  const [lanLocal, setLanLocal] = useState<null | string>(activeLanguage);
-  const [pmLocal, setPmLocal] = useState<null | string>(activePackageManager);
+  const [lanLocal, setLanLocal] = useState<null | string>(null);
+  const [pmLocal, setPmLocal] = useState<null | string>(null);
+  const [rendererLocal, setRendererLocal] = useState<null | string>(null);
+
+  console.log(lanLocal, pmLocal, rendererLocal);
+
+  useEffect(() => {
+    if (activeLanguage) setLanLocal(activeLanguage);
+    if (activePackageManager) setPmLocal(activePackageManager);
+    if (activeRenderer) setRendererLocal(activeRenderer);
+  }, [activeLanguage, activePackageManager, activeRenderer]);
 
   const handleLanguage = (id: string) => {
     setLanLocal(id);
@@ -45,6 +56,7 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
     filters,
     activeLanguage: lanLocal,
     activePackageManager: pmLocal,
+    activeRenderer: rendererLocal,
   });
 
   // Helper
