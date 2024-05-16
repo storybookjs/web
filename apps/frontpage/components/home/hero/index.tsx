@@ -64,30 +64,30 @@ export function Hero({
   contributorCount: string;
 }) {
   const [slide, setSlide] = useState(1);
-  const intervalId = useRef<number | null>(null);
+  // const intervalId = useRef<number | null>(null);
 
-  const setSlideInterval = () => {
-    if (intervalId.current !== null) {
-      window.clearInterval(intervalId.current);
-    }
+  // const setSlideInterval = () => {
+  //   if (intervalId.current !== null) {
+  //     window.clearInterval(intervalId.current);
+  //   }
 
-    intervalId.current = window.setInterval(() => {
-      setSlide((s) => (s === 4 ? 1 : s + 1));
-    }, 3000);
-  };
+  //   intervalId.current = window.setInterval(() => {
+  //     setSlide((s) => (s === 4 ? 1 : s + 1));
+  //   }, 3000);
+  // };
 
-  useEffect(() => {
-    setSlideInterval();
-    return () => {
-      if (intervalId.current) {
-        clearInterval(intervalId.current);
-      }
-    };
-  }, []);
+  // useEffect(() => {
+  //   setSlideInterval();
+  //   return () => {
+  //     if (intervalId.current) {
+  //       clearInterval(intervalId.current);
+  //     }
+  //   };
+  // }, []);
 
   const handleSlideChange = (newSlide: number) => {
     setSlide(newSlide);
-    setSlideInterval();
+    // setSlideInterval();
   };
 
   return (

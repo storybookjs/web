@@ -27,8 +27,8 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
         Find components
       </div>
       <SidebarLine ic="docs" label="Introduction" />
-      <SidebarLine ic="docs" label="Install and configure" />
-      <SidebarLine ic="docs" label="Changelog" />
+      {/* <SidebarLine ic="docs" label="Install and configure" />
+      <SidebarLine ic="docs" label="Changelog" /> */}
       <div className="text-[#73828C] text-[11px] uppercase font-bold tracking-wider pt-5 pb-2 flex items-center px-2 justify-between">
         <div className="flex gap-1">
           <ChevronSmallRightIcon className="text-[#73828C] group-hover:text-white" />

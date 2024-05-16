@@ -10,14 +10,7 @@ export const Tabs: FC<{ active?: number; slide?: number }> = ({
   active = 0,
   slide,
 }) => {
-  let tabs = [
-    'Controls',
-    'Interactions',
-    'Visual tests',
-    'Accessibility',
-    'Design',
-  ];
-
+  let tabs = ['Controls', 'Interactions'];
   if (slide === 4) tabs = ['Controls', 'Visual tests'];
 
   return (
