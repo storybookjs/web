@@ -25,7 +25,7 @@ export default async function Layout({
   params: { slug: string[] };
 }) {
   const { number: githubCount } = await fetchGithubCount();
-  const activeVersion = getVersion(slug) || { id: 'next', label: 'Next' };
+  const activeVersion = getVersion(slug);
   const path = `content/docs/${activeVersion.id}`;
   const tree = generateDocsTree(path);
   const hasVersion = slugHasVersion(slug);
@@ -46,6 +46,7 @@ export default async function Layout({
         alt="Storybook Docs"
         className="absolute top-0 left-0 w-full -z-10"
         height={339}
+        priority
         src="/bubbles.png"
         width={1800}
       />

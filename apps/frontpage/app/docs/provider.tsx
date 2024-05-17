@@ -5,7 +5,7 @@ import { getCookie, setCookie } from 'cookies-next';
 import type { ReactNode } from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
 
-interface DocsContextProps {
+export interface DocsContextProps {
   activeRenderer: null | string;
   setRenderer: (id: string) => void;
   activeLanguage: null | string;
@@ -14,7 +14,9 @@ interface DocsContextProps {
   setPackageManager: (id: string) => void;
 }
 
-const DocsContext = createContext<DocsContextProps | undefined>(undefined);
+export const DocsContext = createContext<DocsContextProps | undefined>(
+  undefined,
+);
 
 export function DocsProvider({ children }: { children: ReactNode }) {
   const [activeRenderer, setActiveRenderer] = useState<null | string>(null);

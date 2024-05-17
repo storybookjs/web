@@ -1,16 +1,34 @@
 import fs from 'node:fs';
-import rehypePrettyCode from 'rehype-pretty-code';
+import { rehypePrettyCode } from 'rehype-pretty-code';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import rehypeSlug from 'rehype-slug';
 import type { DocsVersion } from '@repo/utils';
 import { extractHeadings } from 'extract-md-headings';
-import * as MDX from '../components/docs/mdx';
+import { visit } from 'unist-util-visit';
+import {
+  CodeSnippets,
+  Callout,
+  YouTubeCallout,
+  FeatureSnippets,
+  HomeConcepts,
+  HomeResources,
+  HomeRenderers,
+  Video,
+  Pre,
+  List,
+  Img,
+  If,
+  UnorderedList,
+  Hr,
+  P,
+  A,
+  H4,
+  H3,
+  H2,
+  H1,
+} from '../components/docs/mdx';
 import { firefoxThemeLight } from '../components/docs/mdx/code-snippets/themes/firefox-theme-vscode';
 import { generateDocsTree } from './get-tree';
-
-const rehypePrettyCodeOptions = {
-  theme: firefoxThemeLight,
-};
 
 export const getPageData = async (
   path: string[],
@@ -47,6 +65,23 @@ export const getPageData = async (
     'utf8',
   );
 
+  interface NodeProps {
+    type?: string;
+    tagName?: string;
+    properties: string[];
+    raw: string;
+    children: {
+      properties: {
+        raw: string;
+      };
+      tagName: string;
+      raw: string;
+      children: {
+        value: string;
+      }[];
+    }[];
+  }
+
   const { content, frontmatter } = await compileMDX<{ title: string }>({
     source: file,
     options: {
@@ -55,42 +90,73 @@ export const getPageData = async (
         remarkPlugins: [],
         rehypePlugins: [
           rehypeSlug,
-          [rehypePrettyCode, rehypePrettyCodeOptions] as never,
+          // Get the raw code from the pre tag
+          // This is used to get the raw code for the pre component
+          // Solution found here: https://claritydev.net/blog/copy-to-clipboard-button-nextjs-mdx-rehype
+          () => (tree) => {
+            visit(tree, (node: NodeProps) => {
+              if (node?.type === 'element' && node?.tagName === 'pre') {
+                const [codeEl] = node.children;
+
+                if (codeEl.tagName !== 'code') return;
+
+                node.raw = codeEl.children?.[0].value;
+              }
+            });
+          },
+          [
+            rehypePrettyCode,
+            {
+              theme: firefoxThemeLight,
+            },
+          ] as never,
+          // After the code is formatted, we need to get the raw code
+          // This is used to get the raw code for the pre component
+          () => (tree) => {
+            visit(tree, 'element', (node: NodeProps) => {
+              if (node?.type === 'element' && node?.tagName === 'figure') {
+                if (!('data-rehype-pretty-code-figure' in node.properties)) {
+                  return;
+                }
+
+                for (const child of node.children) {
+                  if (child.tagName === 'pre') {
+                    child.properties.raw = node.raw;
+                  }
+                }
+              }
+            });
+          },
         ],
         format: 'mdx',
       },
     },
     components: {
-      h1: MDX.H1,
-      h2: MDX.H2,
-      h3: MDX.H3,
-      h4: MDX.H4,
-      a: MDX.A,
-      p: MDX.P,
-      hr: MDX.Hr,
-      ul: MDX.UnorderedList,
-      li: MDX.List,
-      pre: MDX.Pre,
+      h1: H1,
+      h2: H2,
+      h3: H3,
+      h4: H4,
+      a: A,
+      p: P,
+      hr: Hr,
+      ul: UnorderedList,
+      li: List,
+      pre: Pre,
       details: () => <details>Hello world</details>,
-      // eslint-disable-next-line react/jsx-pascal-case -- TODO: Not sure why this through an error.
-      img: (props) => <MDX.Img activeVersion={activeVersion.id} {...props} />,
-      Video: (props) => (
-        // eslint-disable-next-line react/jsx-pascal-case -- TODO: Not sure why this through an error.
-        <MDX.Video activeVersion={activeVersion.id} {...props} />
-      ),
+      img: (props) => <Img activeVersion={activeVersion.id} {...props} />,
+      Video: (props) => <Video activeVersion={activeVersion.id} {...props} />,
       CodeSnippets: (props) => (
-        // eslint-disable-next-line react/jsx-pascal-case -- TODO: Not sure why this through an error.
-        <MDX.CodeSnippets activeVersion={activeVersion.id} {...props} />
+        <CodeSnippets activeVersion={activeVersion} {...props} />
       ),
-      Callout: MDX.Callout,
-      If: MDX.If,
-      IfRenderer: MDX.If,
-      YouTubeCallout: MDX.YouTubeCallout,
-      FeatureSnippets: MDX.FeatureSnippets,
+      Callout,
+      If,
+      IfRenderer: If,
+      YouTubeCallout,
+      FeatureSnippets,
       // TODO: These three should be imported in the necessary MDX file(s)
-      HomeRenderers: MDX.HomeRenderers,
-      HomeConcepts: MDX.HomeConcepts,
-      HomeResources: MDX.HomeResources,
+      HomeRenderers,
+      HomeConcepts,
+      HomeResources,
     },
   });
 
