@@ -5,8 +5,14 @@ import type { FC, ReactNode } from 'react';
 import { cn } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
-import { ScrollBar } from "../../ui/scroll-area";
-import { ChangelogIcon, DocsIcon, TutorialsIcon } from './icons';
+import { ScrollBar } from '../../ui/scroll-area';
+import {
+  APIIcon,
+  ChangelogIcon,
+  DocsIcon,
+  IntegrationsIcon,
+  TutorialsIcon,
+} from './icons';
 
 interface SidebarProps {
   children: ReactNode;
@@ -21,36 +27,39 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
         <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
           <div className="py-12 pl-1 pr-4">
             <nav className="flex flex-col gap-1.5 text-sm font-medium">
-              <Link
-                className={cn(
-                  'flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8',
-                  pathname === '/docs' && 'text-blue-500',
-                )}
+              <Line
                 href="/docs"
-              >
-                <DocsIcon />
-                Documentation
-              </Link>
-              <Link
-                className={cn(
-                  'flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8',
-                  pathname === '/tutorials' && 'text-blue-500',
-                )}
-                href="#"
-              >
-                <TutorialsIcon />
-                Tutorials
-              </Link>
-              <Link
-                className={cn(
-                  'flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8',
-                  pathname.startsWith('/releases') && 'text-blue-500',
-                )}
+                icon={<DocsIcon />}
+                isActive={
+                  pathname.startsWith('/docs') &&
+                  !pathname.startsWith('/docs/api')
+                }
+                label="Documentation"
+              />
+              <Line
+                href="/docs/api"
+                icon={<APIIcon />}
+                isActive={pathname.startsWith('/docs/api')}
+                label="API"
+              />
+              <Line
+                href="/#"
+                icon={<TutorialsIcon />}
+                isActive={pathname === '/tutorials'}
+                label="Tutorials"
+              />
+              <Line
+                href="/integrations"
+                icon={<IntegrationsIcon />}
+                isActive={false}
+                label="Addons"
+              />
+              <Line
                 href="/releases"
-              >
-                <ChangelogIcon />
-                Changelog
-              </Link>
+                icon={<ChangelogIcon />}
+                isActive={pathname.startsWith('/releases')}
+                label="Changelog"
+              />
             </nav>
             {children}
           </div>
@@ -60,3 +69,21 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
     </nav>
   );
 };
+
+export const Line: FC<{
+  isActive: boolean;
+  href: string;
+  icon: ReactNode;
+  label: string;
+}> = ({ isActive, href, label, icon }) => (
+  <Link
+    className={cn(
+      'flex items-center gap-3 hover:text-blue-500 transition-colors px-2 h-8 font-bold',
+      isActive && 'text-blue-500',
+    )}
+    href={href}
+  >
+    {icon}
+    {label}
+  </Link>
+);
