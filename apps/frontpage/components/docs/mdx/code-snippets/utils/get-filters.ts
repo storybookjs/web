@@ -10,7 +10,8 @@ interface GetFiltersProps {
 export const getFilters = ({ content, activeRenderer }: GetFiltersProps) => {
   // Filter content by renderer
   const filterByRenderer = content.filter((item) => {
-    if (item.renderer === activeRenderer) return true;
+    if (item.renderer === activeRenderer || item.renderer === 'common')
+      return true;
     return false;
   });
 

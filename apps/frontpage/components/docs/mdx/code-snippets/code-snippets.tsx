@@ -51,7 +51,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
           {filters && filters.languages.length > 1 ? (
             <Dropdown
               action={handleLanguage}
-              activeId={activeLanguage}
+              activeId={activeContent?.language || ''}
               list={filters.languages}
               type="language"
             />
@@ -59,7 +59,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
           {filters && filters.packageManagers.length > 1 ? (
             <Dropdown
               action={handlePackageManager}
-              activeId={activePackageManager}
+              activeId={activeContent?.packageManager || ''}
               list={filters.packageManagers}
               type="packageManager"
             />

@@ -42,7 +42,7 @@ const meta = {
     },
   },
   args: {
-    activeRenderer: 'angular',
+    activeRenderer: 'react',
     activeLanguage: null,
     activePackageManager: null,
     content: content1,

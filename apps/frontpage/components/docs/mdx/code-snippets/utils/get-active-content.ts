@@ -16,7 +16,8 @@ export const getActiveContent = ({
   activeRenderer,
 }: GetActiveContentProps): CodeSnippetsProps | null => {
   const filterByRenderer = codeSnippetsContent.filter((item) => {
-    if (item.renderer === activeRenderer) return true;
+    if (item.renderer === activeRenderer || item.renderer === 'common')
+      return true;
 
     return false;
   });
