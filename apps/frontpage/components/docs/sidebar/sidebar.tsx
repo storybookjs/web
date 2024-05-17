@@ -52,7 +52,7 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
                 href="/integrations"
                 icon={<IntegrationsIcon />}
                 isActive={false}
-                label="Integrations"
+                label="Addons"
               />
               <Line
                 href="/releases"
