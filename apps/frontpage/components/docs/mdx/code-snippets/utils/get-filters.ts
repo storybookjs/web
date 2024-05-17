@@ -4,13 +4,13 @@ import type { DocsContextProps } from '../../../../../app/docs/provider';
 
 interface GetFiltersProps {
   content: CodeSnippetsProps[];
-  rendererLocal: DocsContextProps['activeRenderer'];
+  activeRenderer: DocsContextProps['activeRenderer'];
 }
 
-export const getFilters = ({ content, rendererLocal }: GetFiltersProps) => {
+export const getFilters = ({ content, activeRenderer }: GetFiltersProps) => {
   // Filter content by renderer
   const filterByRenderer = content.filter((item) => {
-    if (item.renderer === rendererLocal) return true;
+    if (item.renderer === activeRenderer) return true;
     return false;
   });
 

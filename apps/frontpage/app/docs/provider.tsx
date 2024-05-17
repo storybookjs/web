@@ -14,7 +14,9 @@ export interface DocsContextProps {
   setPackageManager: (id: string) => void;
 }
 
-const DocsContext = createContext<DocsContextProps | undefined>(undefined);
+export const DocsContext = createContext<DocsContextProps | undefined>(
+  undefined,
+);
 
 export function DocsProvider({ children }: { children: ReactNode }) {
   const [activeRenderer, setActiveRenderer] = useState<null | string>(null);

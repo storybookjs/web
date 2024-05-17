@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState, type FC } from 'react';
+import type { FC } from 'react';
 import type { CodeSnippetsProps } from '@repo/utils';
-import type { DocsContextProps } from '../../../../app/docs/provider';
+import { useDocs } from '../../../../app/docs/provider';
 import { CodeWrapper } from './wrapper';
 import { getFilters } from './utils/get-filters';
 import { getActiveContent } from './utils/get-active-content';
@@ -10,45 +10,27 @@ import { Dropdown } from './dropdown';
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[];
-  activeLanguage?: DocsContextProps['activeLanguage'];
-  activePackageManager?: DocsContextProps['activePackageManager'];
-  activeRenderer?: DocsContextProps['activeRenderer'];
-  setLanguage: DocsContextProps['setLanguage'];
-  setPackageManager: DocsContextProps['setPackageManager'];
 }
 
-export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
+export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   content,
-  activeLanguage,
-  activePackageManager,
-  activeRenderer,
-  setLanguage,
-  setPackageManager,
 }) => {
-  const [lanLocal, setLanLocal] = useState<null | string>(null);
-  const [pmLocal, setPmLocal] = useState<null | string>(null);
-  const [rendererLocal, setRendererLocal] = useState<null | string>('common');
+  const {
+    activeRenderer,
+    activeLanguage,
+    activePackageManager,
+    setLanguage,
+    setPackageManager,
+  } = useDocs();
 
   // Get filters - If preformatted text, we don't need filters
-  const filters = getFilters({ content, rendererLocal });
-
-  useEffect(() => {
-    if (activeLanguage) setLanLocal(activeLanguage);
-    if (activePackageManager) {
-      setPmLocal(activePackageManager);
-    } else if (filters.packageManagers.length >= 1) {
-      setPmLocal(filters.packageManagers[0].id);
-    }
-    if (activeRenderer) setRendererLocal(activeRenderer);
-  }, [activeLanguage, activePackageManager, activeRenderer, filters]);
+  const filters = getFilters({ content, activeRenderer });
 
   const handleLanguage = (id: string) => {
-    setLanLocal(id);
     setLanguage(id);
   };
 
   const handlePackageManager = (id: string) => {
-    setPmLocal(id);
     setPackageManager(id);
   };
 
@@ -56,9 +38,9 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
   const activeContent = getActiveContent({
     codeSnippetsContent: content,
     filters,
-    activeLanguage: lanLocal,
-    activePackageManager: pmLocal,
-    activeRenderer: rendererLocal,
+    activeLanguage,
+    activePackageManager,
+    activeRenderer,
   });
 
   return (
@@ -69,7 +51,7 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
           {filters && filters.languages.length > 1 ? (
             <Dropdown
               action={handleLanguage}
-              activeId={lanLocal}
+              activeId={activeLanguage}
               list={filters.languages}
               type="language"
             />
@@ -77,7 +59,7 @@ export const CodeSnippetsComponent: FC<CodeSnippetsClientProps> = ({
           {filters && filters.packageManagers.length > 1 ? (
             <Dropdown
               action={handlePackageManager}
-              activeId={pmLocal}
+              activeId={activePackageManager}
               list={filters.packageManagers}
               type="packageManager"
             />

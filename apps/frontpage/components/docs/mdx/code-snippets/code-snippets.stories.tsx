@@ -1,12 +1,16 @@
+import { useArgs } from '@storybook/preview-api';
 import type { Meta, StoryObj } from '@storybook/react';
-import { CodeSnippetsComponent } from './code-snippets';
+import { fn } from '@storybook/test';
+import type { ComponentProps } from 'react';
+import { DocsContext } from '../../../../app/docs/provider';
+import { CodeSnippetsClient } from './code-snippets';
 import { content1 } from './mocked-data/content-1';
 import { content2 } from './mocked-data/content-2';
 import { content3 } from './mocked-data/content-3';
 
 const meta = {
   title: 'CodeSnippets',
-  component: CodeSnippetsComponent,
+  component: CodeSnippetsClient,
   argTypes: {
     activeRenderer: {
       control: 'select',
@@ -24,30 +28,71 @@ const meta = {
       ],
     },
     activeLanguage: {
-      control: 'select',
+      control: 'radio',
       options: ['js', 'ts', 'ts-4.9'],
     },
     activePackageManager: {
-      control: 'select',
+      control: 'radio',
       options: ['npm', 'npx', 'yarn', 'pnpm'],
     },
+    content: {
+      control: {
+        type: 'object',
+      },
+    },
   },
-} satisfies Meta<typeof CodeSnippetsComponent>;
+  args: {
+    activeRenderer: 'angular',
+    activeLanguage: null,
+    activePackageManager: null,
+    content: content1,
+  },
+  decorators: [
+    (Story, { args }) => {
+      const [_, setArgs] = useArgs();
+      return (
+        <DocsContext.Provider
+          value={{
+            ...args,
+            setLanguage: fn()
+              .mockName('setLanguage')
+              .mockImplementation((id) => {
+                setArgs({ activeLanguage: id });
+              }),
+            setPackageManager: fn()
+              .mockName('setPackageManager')
+              .mockImplementation((id) => {
+                setArgs({ activePackageManager: id });
+              }),
+            setRenderer: fn()
+              .mockName('setRenderer')
+              .mockImplementation((id) => {
+                setArgs({ activeRenderer: id });
+              }),
+          }}
+        >
+          <Story />
+        </DocsContext.Provider>
+      );
+    },
+  ],
+} satisfies Meta<
+  ComponentProps<typeof CodeSnippetsClient> & {
+    activeRenderer: string | null;
+    activePackageManager: string | null;
+    activeLanguage: string | null;
+  }
+>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const ContentOnly: Story = {
-  args: {
-    content: content1,
-    setLanguage: () => {},
-    setPackageManager: () => {},
-  },
+  args: {},
 };
 
 export const PackageNPM: Story = {
   args: {
-    ...ContentOnly.args,
     content: content1,
     activePackageManager: 'npm',
   },
@@ -55,7 +100,6 @@ export const PackageNPM: Story = {
 
 export const PackageYARN: Story = {
   args: {
-    ...ContentOnly.args,
     content: content1,
     activePackageManager: 'yarn',
   },
@@ -63,7 +107,6 @@ export const PackageYARN: Story = {
 
 export const PackagePNPM: Story = {
   args: {
-    ...ContentOnly.args,
     content: content1,
     activePackageManager: 'pnpm',
   },
@@ -71,7 +114,6 @@ export const PackagePNPM: Story = {
 
 export const ReactJS: Story = {
   args: {
-    ...ContentOnly.args,
     content: content2,
     activeRenderer: 'react',
     activeLanguage: 'js',
@@ -80,7 +122,6 @@ export const ReactJS: Story = {
 
 export const ReactTS: Story = {
   args: {
-    ...ContentOnly.args,
     content: content2,
     activeLanguage: 'ts',
   },
@@ -88,7 +129,6 @@ export const ReactTS: Story = {
 
 export const ContentUndefined: Story = {
   args: {
-    ...ContentOnly.args,
     content: content3,
   },
 };

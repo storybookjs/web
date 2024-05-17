@@ -1,6 +1,6 @@
 import type { CodeSnippetsProps, DocsVersion } from '@repo/utils';
 import { getMetadata } from './utils/get-metadata';
-import { CodeSnippetsClient } from './client';
+import { CodeSnippetsClient } from './code-snippets';
 
 interface LocalProps {
   path?: string;
