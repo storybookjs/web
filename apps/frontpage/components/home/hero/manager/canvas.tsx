@@ -1,8 +1,7 @@
 import type { FC } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { cn } from '@repo/utils';
-import timeframe1 from './timeframe-1.svg';
+import { Component } from './component';
 
 export const Canvas: FC<{ slide: number }> = ({ slide }) => {
   return (
@@ -15,7 +14,7 @@ export const Canvas: FC<{ slide: number }> = ({ slide }) => {
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
     >
-      <Image alt="TimeFrame" priority src={timeframe1} />
+      <Component />
     </motion.div>
   );
 };

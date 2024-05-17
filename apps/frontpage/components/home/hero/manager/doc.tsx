@@ -11,9 +11,8 @@ import {
   ZoomOutIcon,
   ZoomResetIcon,
 } from '@storybook/icons';
-import Image from 'next/image';
-import timeframe1 from './timeframe-1.svg';
 import { Controls } from './controls';
+import { Component } from './component';
 
 export const Doc: FC = () => {
   return (
@@ -23,12 +22,12 @@ export const Doc: FC = () => {
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
     >
-      <div className="text-3xl font-bold mb-4 md:mb-6">TimeFrame</div>
+      <div className="mb-4 text-3xl font-bold md:mb-6">TimeFrame</div>
       <div className="mb-8 sm:hidden">
         TimeFrame is a component that allows you to select a range of data
         points from a time period.
       </div>
-      <div className="mb-8 hidden sm:block">
+      <div className="hidden mb-8 sm:block">
         TimeFrame is a component that allows you to select a range of data
         points from a time period. It combines a time chart visualization and
         slider. TimeFrames are often used in tandem with a form or as a facet in
@@ -67,8 +66,8 @@ export const Doc: FC = () => {
             <ShareAltIcon />
           </ToolbarButton>
         </div>
-        <div className="flex w-full justify-center py-4 sm:py-8 px-4">
-          <Image alt="TimeFrame" priority src={timeframe1} />
+        <div className="flex justify-center w-full px-4 py-4 sm:py-16">
+          <Component />
         </div>
       </div>
       <div>

@@ -27,34 +27,46 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
         Find components
       </div>
       <SidebarLine ic="docs" label="Introduction" />
-      {/* <SidebarLine ic="docs" label="Install and configure" />
-      <SidebarLine ic="docs" label="Changelog" /> */}
       <div className="text-[#73828C] text-[11px] uppercase font-bold tracking-wider pt-5 pb-2 flex items-center px-2 justify-between">
         <div className="flex gap-1">
           <ChevronSmallRightIcon className="text-[#73828C] group-hover:text-white" />
-          Library
+          Application
         </div>
         <ExpandAltIcon size={10} />
       </div>
-      <SidebarLine ar="right" ic="group" label="Badges" />
-      <SidebarLine ar="right" ic="group" label="Button" />
-      <SidebarLine ar="down" ic="group" label="Charts" />
-      <SidebarLine ar="right" ic="component" label="DatePicker" lvl={2} />
-      <SidebarLine ar="right" ic="component" label="PieChart" lvl={2} />
-      <SidebarLine ar="right" ic="component" label="RangeSlider" lvl={2} />
-      <SidebarLine ar="right" ic="component" label="SparkLine" lvl={2} />
-      <SidebarLine ar="right" ic="component" label="TimeFrame" lvl={2} />
-      <SidebarLine active={slide === 2} ic="docs" label="Overview" lvl={3} />
+      <SidebarLine ar="right" ic="component" label="AI Prompt" />
+      <SidebarLine
+        active={slide === 2}
+        ic="docs"
+        label="Documentation"
+        lvl={2}
+      />
+      <SidebarLine ic="story" label="Default" lvl={2} />
       <SidebarLine
         active={slide === 1 || slide === 3 || slide === 4}
         ic="story"
-        label="No selection"
-        lvl={3}
+        label="With Output"
+        lvl={2}
       />
-      <SidebarLine ic="story" label="Afternoon" lvl={3} />
-      <SidebarLine ic="story" label="All day" lvl={3} />
-      <SidebarLine ar="down" ic="group" label="Image" />
-      <SidebarLine ar="down" ic="group" label="Interstitial" />
+      <SidebarLine ic="story" label="Error" lvl={2} />
+      <SidebarLine ar="right" ic="component" label="Dashboard" lvl={1} />
+      <SidebarLine ar="right" ic="component" label="Homepage" lvl={1} />
+      <SidebarLine ar="right" ic="component" label="User Profile" lvl={1} />
+      <SidebarLine ar="right" ic="component" label="Sign In" lvl={1} />
+      <div className="text-[#73828C] text-[11px] uppercase font-bold tracking-wider pt-5 pb-2 flex items-center px-2 justify-between">
+        <div className="flex gap-1">
+          <ChevronSmallRightIcon className="text-[#73828C] group-hover:text-white" />
+          Design System
+        </div>
+        <ExpandAltIcon size={10} />
+      </div>
+      <SidebarLine ar="down" ic="group" label="ActivityList" />
+      <SidebarLine ar="down" ic="group" label="Form" />
+      <SidebarLine ar="down" ic="component" label="Avatar" />
+      <SidebarLine ar="down" ic="component" label="Button" />
+      <SidebarLine ar="down" ic="component" label="Footer" />
+      <SidebarLine ar="down" ic="component" label="Header" />
+      <SidebarLine ar="down" ic="component" label="Pagination" />
     </div>
   );
 };
@@ -63,7 +75,7 @@ const SidebarLine: FC<{
   ic: 'docs' | 'story' | 'group' | 'component';
   label: string;
   ar?: 'down' | 'right';
-  lvl?: 1 | 2 | 3;
+  lvl?: 1 | 2;
   active?: boolean;
 }> = ({ ic, label, ar, lvl = 1, active }) => {
   return (
@@ -71,8 +83,7 @@ const SidebarLine: FC<{
       className={cn(
         'group flex items-center gap-1.5 rounded h-7 cursor-default select-none',
         lvl === 1 && 'pl-2 pr-2',
-        lvl === 2 && 'pl-6 pr-2',
-        lvl === 3 && 'pl-16 pr-2',
+        lvl === 2 && 'pl-11 pr-2',
         active && 'bg-blue-500',
       )}
     >
