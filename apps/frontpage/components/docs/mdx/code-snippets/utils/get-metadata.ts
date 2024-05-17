@@ -66,6 +66,7 @@ export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
       return {
         language: block.lang || undefined,
         ...metadata,
+        raw: block.value,
         content: result.value,
       };
     }),
