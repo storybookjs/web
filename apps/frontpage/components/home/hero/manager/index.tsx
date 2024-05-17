@@ -19,7 +19,7 @@ export const Manager: FC<{ slide: number }> = ({ slide }) => {
         <AnimatePresence>
           {slide !== 2 && <Canvas slide={slide} />}
         </AnimatePresence>
-        <Toolbar slide={slide} />
+        <Toolbar />
         <AnimatePresence>{slide === 1 && <PanelControls />}</AnimatePresence>
         <AnimatePresence>{slide === 2 && <Doc />}</AnimatePresence>
         <AnimatePresence>

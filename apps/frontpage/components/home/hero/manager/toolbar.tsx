@@ -13,7 +13,7 @@ import type { FC, ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@repo/utils';
 
-export const Toolbar: FC<{ slide: number }> = ({ slide }) => {
+export const Toolbar = () => {
   return (
     <motion.div
       animate={{ y: 0 }}

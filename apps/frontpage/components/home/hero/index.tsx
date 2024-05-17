@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { cn } from '@repo/utils';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
 import { Manager } from './manager';
@@ -91,7 +91,7 @@ export function Hero({
   };
 
   return (
-    <Container className="lg:px-8 pt-12 md:pt-24 text-white justify-between gap-20 relative z-20">
+    <Container className="relative z-20 justify-between gap-20 pt-12 text-white lg:px-8 md:pt-24">
       <h1 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold max-sm:max-w-80">
         Build UIs without the grunt work
       </h1>
