@@ -35,8 +35,8 @@ export interface CodeSnippetsProps {
   renderer?: string;
   packageManager?: string | null;
   language?: string;
-  content: React.ReactNode;
-  raw: string;
+  content?: React.ReactNode;
+  raw?: string;
 }
 
 export interface CodeSnippetsFilter {
