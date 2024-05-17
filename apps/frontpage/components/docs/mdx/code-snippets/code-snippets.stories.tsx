@@ -112,6 +112,13 @@ export const PackagePNPM: Story = {
   },
 };
 
+export const ReactNoLanguage: Story = {
+  args: {
+    content: content2,
+    activeRenderer: 'react',
+  },
+};
+
 export const ReactJS: Story = {
   args: {
     content: content2,
@@ -124,6 +131,21 @@ export const ReactTS: Story = {
   args: {
     content: content2,
     activeLanguage: 'ts',
+  },
+};
+
+export const AngularNoLanguage: Story = {
+  args: {
+    content: content2,
+    activeRenderer: 'angular',
+  },
+};
+
+export const AngularJS: Story = {
+  args: {
+    content: content2,
+    activeRenderer: 'angular',
+    activeLanguage: 'js',
   },
 };
 
