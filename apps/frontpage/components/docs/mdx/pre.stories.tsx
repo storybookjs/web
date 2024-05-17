@@ -11,6 +11,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    raw: `import { Meta, Canvas } from '@storybook/blocks';
+import * as ButtonStories from './Button.stories';
+  
+<Meta of={ButtonStories} />
+  
+<Canvas of={ButtonStories.Primary} />
+    `,
     children: (
       <code
         data-language="js"

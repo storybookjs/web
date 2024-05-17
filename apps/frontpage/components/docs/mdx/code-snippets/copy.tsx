@@ -5,16 +5,15 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 import copy from 'copy-to-clipboard';
+import { decode } from 'he';
 
 export const Copy = ({ content }: { content: ReactNode }) => {
   const [state, setState] = useState<'idle' | 'copied'>('idle');
 
   const onClick = () => {
     const textToConvertIntoString = renderToStaticMarkup(content);
-    copy(textToConvertIntoString, {
-      debug: true,
-      // format: 'text/html',
-    });
+    const decodedText = decode(textToConvertIntoString);
+    copy(decodedText);
     setState('copied');
     setTimeout(() => {
       setState('idle');
