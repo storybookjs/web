@@ -8,6 +8,8 @@ import {
   DocumentIcon,
   ExpandAltIcon,
   FolderIcon,
+  PlayIcon,
+  PlusIcon,
   SearchIcon,
 } from '@storybook/icons';
 import type { FC } from 'react';
@@ -18,13 +20,23 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
     <div className="hidden sm:block w-[230px] h-full bg-[#F7F9FC] border-r border-r-[#D9E0E6] px-3">
       <div className="flex items-center justify-between pt-5 pb-4 pl-2">
         <StorybookLogo />
-        <div className="flex items-center justify-center w-8 h-8">
-          <CogIcon className="text-[#73828C]" />
+        <div className="flex items-center">
+          <div className="flex items-center justify-center w-8 h-8">
+            <PlayIcon className="text-[#73828C]" />
+          </div>
+          <div className="flex items-center justify-center w-8 h-8">
+            <CogIcon className="text-[#73828C]" />
+          </div>
         </div>
       </div>
-      <div className="flex border border-[#D9E0E6] rounded h-8 w-full text-sm items-center px-2 gap-2 text-[#73828C] mb-4">
-        <SearchIcon />
-        Find components
+      <div className="flex items-center gap-2 mb-4">
+        <div className="flex flex-1 border border-[#D9E0E6] rounded h-8 w-full text-sm items-center px-2 gap-2 text-[#73828C]">
+          <SearchIcon />
+          Find components
+        </div>
+        <div className="w-8 h-8 border border-[#D9E0E6] rounded flex items-center justify-center text-[#73828C]">
+          <PlusIcon />
+        </div>
       </div>
       <SidebarLine ic="docs" label="Introduction" />
       <div className="text-[#73828C] text-[11px] uppercase font-bold tracking-wider pt-5 pb-2 flex items-center px-2 justify-between">
