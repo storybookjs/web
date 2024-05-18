@@ -16,6 +16,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   content,
 }) => {
   const {
+    activeRenderer,
     activeLanguage,
     activePackageManager,
     setLanguage,
@@ -23,7 +24,15 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   } = useDocs();
 
   // Get filters - If preformatted text, we don't need filters
-  const filters = getFilters({ codeSnippetsContent: content });
+  const filters = getFilters({ content, activeRenderer });
+
+  const handleLanguage = (id: string) => {
+    setLanguage(id);
+  };
+
+  const handlePackageManager = (id: string) => {
+    setPackageManager(id);
+  };
 
   // Get active content for the Code Snippets component
   const activeContent = getActiveContent({
@@ -31,32 +40,33 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     filters,
     activeLanguage,
     activePackageManager,
+    activeRenderer,
   });
-
-  // Helper
-  // const contentWithoutCode = content?.map((obj) =>
-  //   (({ content, ...o }) => o)(obj)
-  // );
 
   return (
     <CodeWrapper
+      copy={activeContent?.raw || ''}
       options={
         <>
-          {filters && filters.languages.length > 1 ? <Dropdown
-              action={setLanguage}
-              activeId={activeLanguage}
+          {filters && filters.languages.length > 1 ? (
+            <Dropdown
+              action={handleLanguage}
+              activeId={activeContent?.language || ''}
               list={filters.languages}
               type="language"
-            /> : null}
-          {filters && filters.packageManagers.length > 1 ? <Dropdown
-              action={setPackageManager}
-              activeId={activePackageManager}
+            />
+          ) : null}
+          {filters && filters.packageManagers.length > 1 ? (
+            <Dropdown
+              action={handlePackageManager}
+              activeId={activeContent?.packageManager || ''}
               list={filters.packageManagers}
               type="packageManager"
-            /> : null}
+            />
+          ) : null}
         </>
       }
-      title="Code Snippets"
+      title={activeContent?.filename || ''}
     >
       {activeContent?.content ? (
         <section
