@@ -13,15 +13,16 @@ import type { FC, ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@repo/utils';
 
-export const Toolbar = () => {
+export const Toolbar: FC<{ slide: number }> = ({ slide }) => {
   return (
     <motion.div
-      animate={{ y: 0 }}
+      animate={{ y: 0, right: slide === 2 ? 0 : 400 }}
       className={cn(
-        'absolute top-0 left-0 h-10 border-b border-b-[#D9E0E6] flex items-center px-2 justify-between right-0 overflow-hidden lg:right-[400px]',
+        'absolute top-0 left-0 h-10 border-b border-b-[#D9E0E6] flex items-center px-2 justify-between right-0 overflow-hidden',
       )}
       exit={{ y: -40 }}
       initial={{ y: -40 }}
+      transition={{ duration: 0.2 }}
     >
       <div className="flex mr-2">
         <ToolbarButton>

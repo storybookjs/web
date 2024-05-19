@@ -10,10 +10,11 @@ export const Component = () => {
   }));
 
   return (
-    <div className="relative">
-      <div className="h-16 bg-[#222448] rounded-full flex items-center justify-between pl-6 pr-2 gap-6 w-[520px] relative z-10">
-        <div className="flex items-center flex-shrink-0 gap-3 text-lg font-medium text-white/40">
+    <div className="relative w-full flex justify-center">
+      <div className="h-14 sm:h-16 bg-[#222448] rounded-full flex items-center justify-between pl-6 pr-2 gap-6 w-full max-w-[600px] relative z-10">
+        <div className="flex items-center min-w-0 gap-3 text-base sm:text-lg font-medium text-white/40 w-full">
           <svg
+            className="hidden sm:block flex-shrink-0"
             fill="none"
             height={24}
             viewBox="0 0 24 24"
@@ -28,9 +29,9 @@ export const Component = () => {
               strokeWidth="2"
             />
           </svg>
-          An app for a candy shop
+          <p className="truncate">An app for a candy shop</p>
         </div>
-        <div className="relative flex items-center justify-center w-32 h-12 overflow-hidden font-medium text-white border rounded-full text-md bg-white/20 border-white/10">
+        <div className="relative flex-shrink-0 flex items-center justify-center w-28 sm:w-32 h-10 sm:h-12 overflow-hidden font-medium text-white border rounded-full text-md bg-white/20 border-white/10">
           Generate
           {dots.map((dot) => (
             <div

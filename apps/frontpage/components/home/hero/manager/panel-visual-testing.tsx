@@ -14,7 +14,7 @@ export const PanelVisualTesting = ({ slide }: { slide: number }) => {
   return (
     <motion.div
       animate={{ y: 0, opacity: 1 }}
-      className="absolute bottom-0 left-0 w-full h-[50%] sm:h-[40%] lg:bottom-auto lg:left-auto lg:top-0 lg:right-0 lg:h-full lg:w-[400px] border-t border-t-[#D9E0E6] lg:border-t-0 lg:border-l lg:border-l-[#D9E0E6] flex flex-col"
+      className="absolute bottom-0 left-0 w-full h-[55%] sm:h-[40%] lg:bottom-auto lg:left-auto lg:top-0 lg:right-0 lg:h-full lg:w-[400px] border-t border-t-[#D9E0E6] lg:border-t-0 lg:border-l lg:border-l-[#D9E0E6] flex flex-col"
       exit={{ y: 40, opacity: 0 }}
       initial={{ y: 40, opacity: 0 }}
     >

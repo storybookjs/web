@@ -14,35 +14,33 @@ export const PanelInteractions: FC = () => {
   return (
     <motion.div
       animate={{ y: 0, opacity: 1 }}
-      className="absolute bottom-0 left-0 w-full h-[50%] sm:h-[40%] lg:bottom-auto lg:left-auto lg:top-0 lg:right-0 lg:h-full lg:w-[400px] border-t border-t-[#D9E0E6] lg:border-t-0 lg:border-l lg:border-l-[#D9E0E6] flex flex-col text-black"
+      className="absolute bottom-0 left-0 w-full h-[55%] sm:h-[40%] lg:bottom-auto lg:left-auto lg:top-0 lg:right-0 lg:h-full lg:w-[400px] border-t border-t-[#D9E0E6] lg:border-t-0 lg:border-l lg:border-l-[#D9E0E6] flex flex-col text-black"
       exit={{ y: 40, opacity: 0 }}
       initial={{ y: 40, opacity: 0 }}
     >
       <Tabs active={1} />
-      <div className="bg-[#F7F9FC] h-10 flex items-center px-4 border-b border-b-[#D9E0E6] justify-between">
-        <div className="flex gap-3 items-center">
-          <div className="h-6 bg-[#7ABF39] px-3 rounded text-[11px] font-bold uppercase tracking-widest flex items-center text-white">
-            Pass
+      <div className="bg-[#F7F9FC] h-10 flex items-center px-4 border-b border-b-[#D9E0E6] gap-3 flex-shrink-0">
+        <div className="h-6 bg-[#7ABF39] px-3 rounded text-[11px] font-bold uppercase tracking-widest flex items-center text-white">
+          Pass
+        </div>
+        <div className="text-[#818386] text-[13px] flex-shrink-0 border border-slate-300 h-6 px-2 rounded flex items-center justify-center">
+          Scroll to end
+        </div>
+        <div className="flex">
+          <div className="w-7 h-7 flex items-center justify-center text-[#2E3438]">
+            <RewindIcon />
           </div>
-          <div className="text-[#818386] text-[13px] flex-shrink-0 border border-slate-300 h-6 px-2 rounded flex items-center justify-center">
-            Scroll to end
+          <div className="w-7 h-7 flex items-center justify-center text-[#2E3438]">
+            <PlayBackIcon />
           </div>
-          <div className="flex">
-            <div className="w-7 h-7 flex items-center justify-center text-[#2E3438]">
-              <RewindIcon />
-            </div>
-            <div className="w-7 h-7 flex items-center justify-center text-[#2E3438]">
-              <PlayBackIcon />
-            </div>
-            <div className="w-7 h-7 flex items-center justify-center text-[#BABEC2]">
-              <PlayNextIcon />
-            </div>
-            <div className="w-7 h-7 flex items-center justify-center text-[#BABEC2]">
-              <FastForwardIcon />
-            </div>
-            <div className="w-7 h-7 flex items-center justify-center text-[#BABEC2]">
-              <RefreshIcon />
-            </div>
+          <div className="w-7 h-7 flex items-center justify-center text-[#BABEC2]">
+            <PlayNextIcon />
+          </div>
+          <div className="w-7 h-7 flex items-center justify-center text-[#BABEC2]">
+            <FastForwardIcon />
+          </div>
+          <div className="w-7 h-7 flex items-center justify-center text-[#BABEC2]">
+            <RefreshIcon />
           </div>
         </div>
       </div>

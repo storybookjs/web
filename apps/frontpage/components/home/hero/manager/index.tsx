@@ -16,10 +16,8 @@ export const Manager: FC<{ slide: number }> = ({ slide }) => {
     >
       <Sidebar slide={slide} />
       <div className="relative flex-1 w-full h-full bg-white">
-        <AnimatePresence>
-          {slide !== 2 && <Canvas slide={slide} />}
-        </AnimatePresence>
-        <Toolbar />
+        <AnimatePresence>{slide !== 2 && <Canvas />}</AnimatePresence>
+        <Toolbar slide={slide} />
         <AnimatePresence>{slide === 1 && <PanelControls />}</AnimatePresence>
         <AnimatePresence>{slide === 2 && <Doc />}</AnimatePresence>
         <AnimatePresence>
