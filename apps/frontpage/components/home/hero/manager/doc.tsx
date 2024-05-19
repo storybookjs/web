@@ -66,7 +66,7 @@ export const Doc: FC = () => {
             <ShareAltIcon />
           </ToolbarButton>
         </div>
-        <div className="flex justify-center w-full px-4 py-4 sm:py-16">
+        <div className="flex justify-center w-full px-4 py-10 sm:py-16">
           <Component />
         </div>
       </div>
