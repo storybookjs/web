@@ -22,13 +22,13 @@ export const Doc: FC = () => {
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
     >
-      <div className="mb-4 text-3xl font-bold md:mb-6">TimeFrame</div>
+      <div className="mb-4 text-3xl font-bold md:mb-6">AI Prompt</div>
       <div className="mb-8 sm:hidden">
-        TimeFrame is a component that allows you to select a range of data
+        AI Prompt is a component that allows you to select a range of data
         points from a time period.
       </div>
       <div className="hidden mb-8 sm:block">
-        TimeFrame is a component that allows you to select a range of data
+        AI Prompt is a component that allows you to select a range of data
         points from a time period. It combines a time chart visualization and
         slider. TimeFrames are often used in tandem with a form or as a facet in
         search.
