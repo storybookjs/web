@@ -5,9 +5,10 @@ import {
   ExpandAltIcon,
   PassedIcon,
 } from '@storybook/icons';
+import Image from 'next/image';
 import { Chrome } from '../../../icons/chrome';
 import { Tabs } from './tabs';
-import { Component } from './component';
+import component from './component-large.svg';
 
 export const PanelVisualTesting = ({ slide }: { slide: number }) => {
   return (
@@ -29,7 +30,7 @@ export const PanelVisualTesting = ({ slide }: { slide: number }) => {
         <div className="text-slate-500">3 modes, 3 browsers • Ran 1m ago</div>
       </div>
       <div className="flex-1 px-8 py-6">
-        <Component />
+        <Image alt="Component" src={component} />
       </div>
       <div className="border-t border-t-[#D9E0E6] text-[#73828C] h-10 text-sm px-4 flex items-center gap-5">
         <div className="flex items-center gap-1.5">

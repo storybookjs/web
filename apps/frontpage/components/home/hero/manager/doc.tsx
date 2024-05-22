@@ -11,8 +11,9 @@ import {
   ZoomOutIcon,
   ZoomResetIcon,
 } from '@storybook/icons';
+import Image from 'next/image';
 import { Controls } from './controls';
-import { Component } from './component';
+import component from './component-small.svg';
 
 export const Doc: FC = () => {
   return (
@@ -67,7 +68,7 @@ export const Doc: FC = () => {
           </ToolbarButton>
         </div>
         <div className="flex justify-center w-full px-4 py-10 sm:py-16">
-          <Component />
+          <Image alt="Component" src={component} />
         </div>
       </div>
       <div>
