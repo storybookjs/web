@@ -1,3 +1,4 @@
+import type { ValueAnimationTransition } from 'framer-motion';
 import { motion, useAnimate } from 'framer-motion';
 import { useEffect } from 'react';
 import { ComponentImage } from './component-image';
@@ -11,33 +12,63 @@ export const Component = () => {
   const [scopeAddToCart, animateAddToCart] = useAnimate();
 
   useEffect(() => {
-    void (async () => {
-      await animate(
-        scope.current,
+    let isCancelled = false;
+
+    const enterAnimation = async () => {
+      const animateIfNotCancelled = async (
+        animation: { opacity?: number; y?: number; fill?: string },
+        options: ValueAnimationTransition,
+      ) => {
+        if (!isCancelled && scope.current) {
+          await animate(scope.current, animation, options);
+        }
+      };
+
+      await animateIfNotCancelled(
         { opacity: 1, y: 0, fill: '#000' },
         { duration: DURATION, delay: DELAY },
       );
-      await animate(
-        scope.current,
+      await animateIfNotCancelled(
         { fill: '#fff' },
         { duration: DURATION, delay: 1.15 },
       );
-    })();
+    };
+
+    void enterAnimation();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [animate, scope]);
 
   useEffect(() => {
-    void (async () => {
-      await animateAddToCart(
-        scopeAddToCart.current,
+    let isCancelled = false;
+
+    const enterAnimation = async () => {
+      const animateIfNotCancelled = async (
+        animation: { fill?: string; opacity?: number },
+        options: ValueAnimationTransition,
+      ) => {
+        if (!isCancelled && scopeAddToCart.current) {
+          await animateAddToCart(scopeAddToCart.current, animation, options);
+        }
+      };
+
+      await animateIfNotCancelled(
         { opacity: 0.6, fill: '#666D82' },
         { duration: DURATION, delay: DELAY },
       );
-      await animateAddToCart(
-        scopeAddToCart.current,
+      await animateIfNotCancelled(
         { fill: '#fff' },
         { duration: DURATION, delay: 1.15 },
       );
-    })();
+    };
+
+    void enterAnimation();
+
+    return () => {
+      isCancelled = true;
+    };
   }, [animateAddToCart, scopeAddToCart]);
 
   return (

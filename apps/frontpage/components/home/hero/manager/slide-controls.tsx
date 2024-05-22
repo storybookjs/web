@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import type { ValueAnimationTransition } from 'framer-motion';
 import { motion, useAnimate } from 'framer-motion';
 import { UndoIcon } from '@storybook/icons';
 import Image from 'next/image';
@@ -14,10 +15,25 @@ export const SlideControls = () => {
   const [scope, animate] = useAnimate();
 
   useEffect(() => {
-    void (async () => {
-      await animate(scope.current, { y: 280 });
-      await animate(
-        scope.current,
+    let isCancelled = false;
+    const enterAnimation = async () => {
+      const animateIfNotCancelled = async (
+        animation: {
+          opacity?: number;
+          scale?: number;
+          x?: number;
+          y?: number;
+          fill?: string;
+        },
+        options?: ValueAnimationTransition,
+      ) => {
+        if (!isCancelled && scope.current) {
+          await animate(scope.current, animation, options);
+        }
+      };
+
+      await animateIfNotCancelled({ y: 280 });
+      await animateIfNotCancelled(
         {
           x: 210,
           y: 200,
@@ -25,24 +41,29 @@ export const SlideControls = () => {
         },
         { duration: 0.4 },
       );
-      await animate(
-        scope.current,
+      await animateIfNotCancelled(
         { scale: 0.8 },
         { duration: 0.1, delay: 0.2 },
       );
-      await animate(scope.current, { scale: 1 }, { duration: 0.1 });
-      await animate(
-        scope.current,
+      await animateIfNotCancelled({ scale: 1 }, { duration: 0.1 });
+      await animateIfNotCancelled(
         { x: 240, y: 256 },
         { duration: 0.1, delay: 1 },
       );
-      await animate(
-        scope.current,
+      await animateIfNotCancelled(
         { scale: 0.8 },
         { duration: 0.1, delay: 0.2 },
       );
-      await animate(scope.current, { scale: 1 }, { duration: 0.1 });
-    })();
+      await animateIfNotCancelled({ scale: 1 }, { duration: 0.1 });
+    };
+
+    if (scope.current) {
+      void enterAnimation();
+    }
+
+    return () => {
+      isCancelled = true;
+    };
   }, [animate, scope]);
 
   return (
