@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { cn } from '@repo/utils';
 import Image from 'next/image';
-import component from './component-large.svg';
 import componentSmall from './component-small.svg';
+import { Component } from './component';
 
 export const Canvas = () => {
   return (
@@ -14,11 +14,7 @@ export const Canvas = () => {
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
     >
-      <Image
-        alt="Component"
-        className="max-h-full hidden sm:block"
-        src={component}
-      />
+      <Component />
       <Image
         alt="Component"
         className="max-h-full sm:hidden"

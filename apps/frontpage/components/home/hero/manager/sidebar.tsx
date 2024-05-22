@@ -57,10 +57,10 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
       <SidebarLine
         active={slide === 1 || slide === 3 || slide === 4}
         ic="story"
-        label="Space Grey"
+        label="Expanded"
         lvl={2}
       />
-      <SidebarLine ic="story" label="Liked" lvl={2} />
+      <SidebarLine ic="story" label="Added to cart" lvl={2} />
       <SidebarLine ar="right" ic="component" label="Dashboard" lvl={1} />
       <SidebarLine ar="right" ic="component" label="Homepage" lvl={1} />
       <SidebarLine ar="right" ic="component" label="User Profile" lvl={1} />

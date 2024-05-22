@@ -1,5 +1,6 @@
 import { cn } from '@repo/utils';
 import type { FC, ReactNode } from 'react';
+import { motion } from 'framer-motion';
 
 export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
   return (
@@ -20,13 +21,55 @@ export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
         required
       />
       <Line
-        control={<Boolean value />}
+        control={
+          <div className="relative flex items-center h-8 px-0.5 rounded-full bg-slate-200">
+            <div className="relative z-10 flex items-center justify-center h-full w-14">
+              False
+            </div>
+            <div className="relative z-10 flex items-center justify-center h-full w-14">
+              True
+            </div>
+            <motion.div
+              animate={{ x: isPanel ? 0 : 56 }}
+              className="absolute bg-white rounded-full w-14 h-7"
+              initial={{ x: 56 }}
+              transition={{ duration: 0.2, delay: 1.2 }}
+            />
+          </div>
+        }
         description="Disable the component"
         isPanel={isPanel}
         label="inStock"
       />
       <Line
-        control={<Color value="#D8DDDD" />}
+        control={
+          <div className="border border-[#D9E0E6] rounded w-full h-7 flex items-center px-2 justify-between">
+            <div className="flex items-center gap-2">
+              <motion.div
+                animate={{ backgroundColor: '#485353' }}
+                className="w-4 h-4 rounded border border-[#D9E0E6]"
+                initial={{ backgroundColor: '#D8DDDD' }}
+                transition={{ duration: 0.2, delay: 2.7 }}
+              />
+              #D8DDDD
+            </div>
+            <svg
+              fill="none"
+              height="12"
+              width="12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clipPath="url(#a)" fill="#73828C">
+                <path d="M7.7 1.399a.429.429 0 0 0-.828-.226l-2.571 9.429a.429.429 0 0 0 .827.225L7.699 1.4ZM2.846 3.1a.429.429 0 0 1 .055.603L.986 6l1.915 2.297a.429.429 0 0 1-.659.549L.1 6.274a.429.429 0 0 1 0-.548l2.143-2.572a.429.429 0 0 1 .604-.055ZM9.154 3.1a.429.429 0 0 0-.055.603L11.014 6 9.099 8.297a.429.429 0 0 0 .659.549L11.9 6.274a.429.429 0 0 0 0-.548L9.758 3.154a.429.429 0 0 0-.604-.055Z" />
+              </g>
+              <defs>
+                <clipPath id="a">
+                  <path d="M0 0h12v12H0z" fill="#fff" />
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+        }
         description="Card background color"
         isPanel={isPanel}
         label="backgroundColor"
@@ -123,66 +166,6 @@ const Input = ({
       )}
     >
       <div className="truncate w-full">{value}</div>
-    </div>
-  );
-};
-
-const Boolean = ({ value }: { value: boolean }) => {
-  return (
-    <div className="relative flex items-center h-8 px-0.5 rounded-full bg-slate-200">
-      <div className="relative z-10 flex items-center justify-center h-full w-14">
-        False
-      </div>
-      <div className="relative z-10 flex items-center justify-center h-full w-14">
-        True
-      </div>
-      <div
-        className={cn(
-          'absolute bg-white rounded-full w-14 h-7',
-          value && 'left-[58px]',
-          !value && 'left-0',
-        )}
-      />
-    </div>
-  );
-};
-
-const Color = ({
-  value,
-  muted = false,
-}: {
-  value: string;
-  muted?: boolean;
-}) => {
-  return (
-    <div
-      className={cn(
-        'border border-[#D9E0E6] rounded w-full h-7 flex items-center px-2 justify-between',
-        muted && 'text-[#73828C]',
-      )}
-    >
-      <div className="flex items-center gap-2">
-        <div
-          className="w-4 h-4 rounded border border-[#D9E0E6]"
-          style={{ backgroundColor: value }}
-        />
-        {value}
-      </div>
-      <svg
-        fill="none"
-        height="12"
-        width="12"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <g clipPath="url(#a)" fill="#73828C">
-          <path d="M7.7 1.399a.429.429 0 0 0-.828-.226l-2.571 9.429a.429.429 0 0 0 .827.225L7.699 1.4ZM2.846 3.1a.429.429 0 0 1 .055.603L.986 6l1.915 2.297a.429.429 0 0 1-.659.549L.1 6.274a.429.429 0 0 1 0-.548l2.143-2.572a.429.429 0 0 1 .604-.055ZM9.154 3.1a.429.429 0 0 0-.055.603L11.014 6 9.099 8.297a.429.429 0 0 0 .659.549L11.9 6.274a.429.429 0 0 0 0-.548L9.758 3.154a.429.429 0 0 0-.604-.055Z" />
-        </g>
-        <defs>
-          <clipPath id="a">
-            <path d="M0 0h12v12H0z" fill="#fff" />
-          </clipPath>
-        </defs>
-      </svg>
     </div>
   );
 };
