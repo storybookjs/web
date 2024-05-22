@@ -23,16 +23,16 @@ export const Doc: FC = () => {
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
     >
-      <div className="mb-4 text-3xl font-bold md:mb-6">AI Prompt</div>
+      <div className="mb-4 text-3xl font-bold md:mb-6">Card</div>
       <div className="mb-8 sm:hidden">
         AI Prompt is a component that allows you to select a range of data
         points from a time period.
       </div>
       <div className="hidden mb-8 sm:block">
-        AI Prompt is a component that allows you to select a range of data
-        points from a time period. It combines a time chart visualization and
-        slider. TimeFrames are often used in tandem with a form or as a facet in
-        search.
+        The Card component is designed to display product information in a
+        compact, visually appealing widget. This component is ideal for
+        e-commerce websites or any application where products need to be
+        showcased with an option to purchase.
       </div>
       <div className="rounded border border-[#D9E0E6] mb-8">
         <div className="h-10 border-b border-b-[#D9E0E6] w-full flex items-center px-2 justify-between">

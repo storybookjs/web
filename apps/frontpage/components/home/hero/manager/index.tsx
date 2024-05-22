@@ -1,12 +1,10 @@
 import type { FC } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Sidebar } from './sidebar';
-import { Toolbar } from './toolbar';
-import { PanelControls } from './panel-controls';
-import { Doc } from './doc';
-import { PanelInteractions } from './panel-interactions';
-import { Canvas } from './canvas';
-import { PanelVisualTesting } from './panel-visual-testing';
+import { SlideControls } from './slide-controls';
+import { SlideDocs } from './slide-docs';
+import { SlideInteractions } from './slide-interactions';
+import { SlideVisualTesting } from './slide-visual-testing';
 
 export const Manager: FC<{ slide: number }> = ({ slide }) => {
   return (
@@ -16,15 +14,13 @@ export const Manager: FC<{ slide: number }> = ({ slide }) => {
     >
       <Sidebar slide={slide} />
       <div className="relative flex-1 w-full h-full bg-white">
-        <AnimatePresence>{slide !== 2 && <Canvas />}</AnimatePresence>
-        <Toolbar slide={slide} />
-        <AnimatePresence>{slide === 1 && <PanelControls />}</AnimatePresence>
-        <AnimatePresence>{slide === 2 && <Doc />}</AnimatePresence>
+        <AnimatePresence>{slide === 1 && <SlideControls />}</AnimatePresence>
+        <AnimatePresence>{slide === 2 && <SlideDocs />}</AnimatePresence>
         <AnimatePresence>
-          {slide === 3 && <PanelInteractions />}
+          {slide === 3 && <SlideInteractions />}
         </AnimatePresence>
         <AnimatePresence>
-          {slide === 4 && <PanelVisualTesting slide={slide} />}
+          {slide === 4 && <SlideVisualTesting />}
         </AnimatePresence>
       </div>
     </div>

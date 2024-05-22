@@ -10,19 +10,15 @@ import {
   ZoomResetIcon,
 } from '@storybook/icons';
 import type { FC, ReactNode } from 'react';
-import { motion } from 'framer-motion';
 import { cn } from '@repo/utils';
 
 export const Toolbar: FC<{ slide: number }> = ({ slide }) => {
   return (
-    <motion.div
-      animate={{ y: 0 }}
+    <div
       className={cn(
         'absolute top-0 left-0 h-10 border-b border-b-[#D9E0E6] flex items-center px-2 justify-between right-0 overflow-hidden lg:right-[400px]',
         slide === 2 && 'lg:right-0',
       )}
-      exit={{ y: -40 }}
-      initial={{ y: -40 }}
     >
       <div className="flex mr-2">
         <ToolbarButton>
@@ -54,7 +50,7 @@ export const Toolbar: FC<{ slide: number }> = ({ slide }) => {
       <ToolbarButton>
         <ShareAltIcon />
       </ToolbarButton>
-    </motion.div>
+    </div>
   );
 };
 
