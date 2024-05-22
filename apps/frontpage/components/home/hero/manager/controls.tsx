@@ -13,42 +13,40 @@ export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
         Props
       </div>
       <Line
-        control={<Input value="Generate" />}
+        control={<Input value="Space Helmet X24" />}
         description="Button label"
         isPanel={isPanel}
-        label="buttonLabel"
-        required
-      />
-      <Line
-        control={<Input value="What should I make?" />}
-        description="Placeholder text"
-        isPanel={isPanel}
-        label="placeholder"
+        label="productTitle"
         required
       />
       <Line
         control={<Boolean value />}
         description="Disable the component"
         isPanel={isPanel}
-        label="disabled"
+        label="inStock"
       />
       <Line
-        control={<Color value="#222448" />}
-        description="Primary color of the component"
+        control={<Color value="#D8DDDD" />}
+        description="Card background color"
         isPanel={isPanel}
-        label="primaryColor"
+        label="backgroundColor"
       />
-      <Line
-        control={<Range value={0.6} />}
-        isPanel={isPanel}
-        label="playfulness"
-      />
+      <Line control={<Range value={0.6} />} isPanel={isPanel} label="padding" />
       <Line
         control={<Radio />}
         defaultValue="medium"
         description="Size of the prompt"
         isPanel={isPanel}
-        label="size"
+        label="selectedColor"
+      />
+      <Line
+        control={
+          <Input value="Introducing the Space Helmet X24: a sleek, durable motorcycle helmet with advanced ventilation, anti-fog visor, and stylish graphics. Experience ultimate protection and comfort for your rides." />
+        }
+        description="description paragraph"
+        isPanel={isPanel}
+        label="description"
+        required
       />
     </div>
   );
@@ -124,7 +122,7 @@ const Input = ({
         muted && 'text-[#73828C]',
       )}
     >
-      {value}
+      <div className="truncate w-full">{value}</div>
     </div>
   );
 };
@@ -203,7 +201,7 @@ const Range = ({ value }: { value: number }) => {
           style={{ width: `${value * 100}%` }}
         />
       </div>
-      <div>100</div>
+      <div>40</div>
     </div>
   );
 };
@@ -211,23 +209,21 @@ const Range = ({ value }: { value: number }) => {
 const Radio = () => {
   return (
     <div className={cn('w-full flex flex-col gap-2')}>
-      {[{ label: 'small' }, { label: 'medium' }, { label: 'large' }].map(
-        (item) => (
-          <div className="flex items-center gap-2" key={item.label}>
-            <div
-              className={cn(
-                'w-4 h-4 border rounded-full border-[#D9E0E6] flex items-center justify-center',
-                item.label === 'medium' && 'border border-blue-500',
-              )}
-            >
-              {item.label === 'medium' && (
-                <div className="w-3 h-3 bg-blue-500 rounded-full" />
-              )}
-            </div>
-            {item.label}
+      {['Pink', 'Space Grey', 'White'].map((item) => (
+        <div className="flex items-center gap-2" key={item}>
+          <div
+            className={cn(
+              'w-4 h-4 border rounded-full border-[#D9E0E6] flex items-center justify-center',
+              item === 'Space Grey' && 'border border-blue-500',
+            )}
+          >
+            {item === 'Space Grey' && (
+              <div className="w-3 h-3 bg-blue-500 rounded-full" />
+            )}
           </div>
-        ),
-      )}
+          {item}
+        </div>
+      ))}
     </div>
   );
 };

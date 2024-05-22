@@ -46,7 +46,7 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
         </div>
         <ExpandAltIcon size={10} />
       </div>
-      <SidebarLine ar="right" ic="component" label="AI Prompt" />
+      <SidebarLine ar="right" ic="component" label="Card" />
       <SidebarLine
         active={slide === 2}
         ic="docs"
@@ -57,10 +57,10 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
       <SidebarLine
         active={slide === 1 || slide === 3 || slide === 4}
         ic="story"
-        label="With Output"
+        label="Space Grey"
         lvl={2}
       />
-      <SidebarLine ic="story" label="Error" lvl={2} />
+      <SidebarLine ic="story" label="Liked" lvl={2} />
       <SidebarLine ar="right" ic="component" label="Dashboard" lvl={1} />
       <SidebarLine ar="right" ic="component" label="Homepage" lvl={1} />
       <SidebarLine ar="right" ic="component" label="User Profile" lvl={1} />
