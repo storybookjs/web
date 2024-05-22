@@ -39,7 +39,7 @@ export const PanelControls: FC = () => {
       );
       await animate(scope.current, { scale: 1 }, { duration: 0.1 });
     })();
-  });
+  }, [animate, scope]);
 
   return (
     <motion.div
