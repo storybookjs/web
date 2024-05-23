@@ -1,6 +1,5 @@
 import type { FC, ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import {
   GridAltIcon,
   GrowIcon,
@@ -14,7 +13,7 @@ import {
 } from '@storybook/icons';
 import { Controls } from './controls';
 import { Toolbar } from './toolbar';
-import componentSmall from './component-small.svg';
+import { ComponentSmall } from './component-small';
 
 export const SlideDocs = () => {
   return (
@@ -71,7 +70,7 @@ export const SlideDocs = () => {
             </ToolbarButton>
           </div>
           <div className="flex justify-center w-full px-4 py-10 sm:py-16">
-            <Image alt="Component" src={componentSmall} />
+            <ComponentSmall />
           </div>
         </div>
         <div>

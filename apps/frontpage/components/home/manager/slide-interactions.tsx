@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { cn } from '@repo/utils';
 import {
   PlayBackIcon,
@@ -12,8 +11,8 @@ import {
 } from '@storybook/icons';
 import { Tabs } from './tabs';
 import { Toolbar } from './toolbar';
-import componentSmall from './component-small.svg';
-// import { Component } from './component';
+import { ComponentInteractions } from './component-interaction';
+import { ComponentSmall } from './component-small';
 
 export const SlideInteractions = () => {
   return (
@@ -28,12 +27,8 @@ export const SlideInteractions = () => {
           'absolute w-full top-10 h-[calc(45%-40px)] flex items-center justify-center text-black bg-white transition-all p-4 sm:p-8 sm:h-[calc(60%-40px)] lg:w-[calc(100%-400px)] lg:h-[calc(100%-40px)]',
         )}
       >
-        {/* <Component /> */}
-        <Image
-          alt="Component"
-          className="max-h-full sm:hidden"
-          src={componentSmall}
-        />
+        <ComponentInteractions />
+        <ComponentSmall className="max-h-full sm:hidden" />
       </div>
       <Toolbar slide={1} />
       <div className="absolute bottom-0 left-0 w-full h-[55%] sm:h-[40%] lg:bottom-auto lg:left-auto lg:top-0 lg:right-0 lg:h-full lg:w-[400px] border-t border-t-[#D9E0E6] lg:border-t-0 lg:border-l lg:border-l-[#D9E0E6] flex flex-col text-black">

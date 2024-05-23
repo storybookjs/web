@@ -3,7 +3,7 @@ import { motion, useAnimate } from 'framer-motion';
 import { useEffect } from 'react';
 import { ComponentImage } from './component-image';
 
-export const Component = () => {
+export const ComponentControls = () => {
   const DURATION = 0.2;
   const DELAY = 1.4;
   const DELAY2 = 2.7;
@@ -73,6 +73,7 @@ export const Component = () => {
 
   return (
     <svg
+      className="max-h-full"
       fill="none"
       height="471"
       viewBox="0 0 480 471"
@@ -265,7 +266,7 @@ export const Component = () => {
         >
           <use
             transform="matrix(0.00051866 0 0 0.00049975 -0.277989 0)"
-            xlinkHref="#image0_379_37063"
+            xlinkHref="#sb-product-image"
           />
         </pattern>
         <ComponentImage />
