@@ -11,11 +11,15 @@ import {
   ZoomOutIcon,
   ZoomResetIcon,
 } from '@storybook/icons';
+import { useMediaQuery } from '../../../hooks/use-media-query';
 import { Controls } from './controls';
 import { Toolbar } from './toolbar';
 import { ComponentSmall } from './component-small';
+import { ComponentDiff1 } from './component-diff1';
 
 export const SlideDocs = () => {
+  const [isMobile] = useMediaQuery('(max-width: 640px)');
+
   return (
     <motion.div
       animate={{ opacity: 1 }}
@@ -25,10 +29,10 @@ export const SlideDocs = () => {
     >
       <Toolbar slide={2} />
       <motion.div
-        animate={{ x: '-50%', y: -400 }}
+        animate={{ x: '-50%', y: isMobile ? -1000 : -1300 }}
         className="absolute top-10 left-1/2 w-full text-black max-w-[840px] -translate-x-1/2 pt-8 md:pt-12 px-6"
         initial={{ x: '-50%', y: 0 }}
-        transition={{ delay: 0.6, duration: 2, ease: 'easeInOut' }}
+        transition={{ delay: 0.6, duration: 3, ease: 'easeInOut' }}
       >
         <div className="mb-4 text-3xl font-bold md:mb-6">Card</div>
         <div className="mb-8 sm:hidden">
@@ -78,15 +82,28 @@ export const SlideDocs = () => {
             <ComponentSmall />
           </div>
         </div>
-        <div>
-          <div className="flex mb-2">
-            <div className="text-[13px] w-[22%] pl-4">Name</div>
-            <div className="text-[13px] w-[28%]">Description</div>
-            <div className="text-[13px] w-[25%]">Default</div>
-            <div className="text-[13px] w-[25%]">Controls</div>
+        <div className="flex mb-2">
+          <div className="text-[13px] w-[22%] pl-4">Name</div>
+          <div className="text-[13px] w-[28%]">Description</div>
+          <div className="text-[13px] w-[25%]">Default</div>
+          <div className="text-[13px] w-[25%]">Controls</div>
+        </div>
+        <div className="rounded border border-[#D9E0E6] mb-12">
+          <Controls isAnimated={false} />
+        </div>
+        <div className="text-sm font-bold tracking-[0.25em] uppercase text-slate-500 mb-6">
+          Stories
+        </div>
+        <div className="mb-8">
+          <div className="mb-4 text-xl font-bold md:mb-4">Default</div>
+          <div className="border border-[#D9E0E6] rounded flex justify-center w-full px-4 sm:py-12">
+            <ComponentSmall />
           </div>
-          <div className="rounded border border-[#D9E0E6] mb-8">
-            <Controls isAnimated={false} />
+        </div>
+        <div className="mb-8">
+          <div className="mb-4 text-xl font-bold md:mb-4">Expanded</div>
+          <div className="border border-[#D9E0E6] rounded flex justify-center w-full px-4 py-6 sm:py-12 sm:pl-10">
+            <ComponentDiff1 />
           </div>
         </div>
       </motion.div>

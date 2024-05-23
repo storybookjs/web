@@ -3,8 +3,8 @@ import { useEffect, useState, type FC, type ReactNode } from 'react';
 import type { ValueAnimationTransition } from 'framer-motion';
 import { motion, useAnimate } from 'framer-motion';
 import Image from 'next/image';
-import hand from './hand.svg';
 import { useMediaQuery } from '../../../hooks/use-media-query';
+import hand from './hand.svg';
 
 export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
   isPanel = false,
