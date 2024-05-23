@@ -3,7 +3,7 @@ import { ComponentImage } from './component-image';
 export const ComponentInteractions = () => {
   return (
     <svg
-      className="max-h-full"
+      className="hidden max-h-full sm:block"
       fill="none"
       height="471"
       viewBox="0 0 480 471"

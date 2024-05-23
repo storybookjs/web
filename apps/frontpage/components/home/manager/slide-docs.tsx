@@ -86,7 +86,7 @@ export const SlideDocs = () => {
             <div className="text-[13px] w-[25%]">Controls</div>
           </div>
           <div className="rounded border border-[#D9E0E6] mb-8">
-            <Controls />
+            <Controls isAnimated={false} />
           </div>
         </div>
       </motion.div>

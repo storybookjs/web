@@ -73,8 +73,8 @@ export const SlideVisualTesting = () => {
       <div className="absolute bottom-0 left-0 w-full h-[55%] sm:h-[40%] lg:bottom-auto lg:left-auto lg:top-0 lg:right-0 lg:h-full lg:w-[400px] border-t border-t-[#D9E0E6] lg:border-t-0 lg:border-l lg:border-l-[#D9E0E6] flex flex-col">
         <Tabs active={1} slide={4} />
         <motion.div
-          animate={{ height: 'auto', borderBottomColor: '#D9E0E6' }}
-          className="overflow-hidden border-b"
+          animate={{ height: 40, borderBottomColor: '#D9E0E6' }}
+          className="relative flex-shrink-0 overflow-hidden border-b"
           initial={{ height: 0, borderBottomColor: 'transparent' }}
           transition={{ delay: DELAY }}
         >

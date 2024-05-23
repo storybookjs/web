@@ -1,10 +1,85 @@
 import { cn } from '@repo/utils';
-import type { FC, ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState, type FC, type ReactNode } from 'react';
+import type { ValueAnimationTransition } from 'framer-motion';
+import { motion, useAnimate } from 'framer-motion';
+import Image from 'next/image';
+import hand from './hand.svg';
+import { useMediaQuery } from '../../../hooks/use-media-query';
 
-export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
+export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
+  isPanel = false,
+  isAnimated = true,
+}) => {
+  const [scope, animate] = useAnimate();
+  const [hex, setHex] = useState('#D8DDDD');
+  const [isMobile] = useMediaQuery('(max-width: 640px)');
+
+  useEffect(() => {
+    let isCancelled = false;
+    const enterAnimation = async () => {
+      const animateIfNotCancelled = async (
+        animation: {
+          opacity?: number;
+          scale?: number;
+          x?: number;
+          y?: number;
+          fill?: string;
+        },
+        options?: ValueAnimationTransition,
+      ) => {
+        if (!isCancelled && scope.current) {
+          await animate(scope.current, animation, options);
+        }
+      };
+
+      await animateIfNotCancelled({ y: 280 });
+      await animateIfNotCancelled(
+        {
+          x: 210,
+          y: 174,
+          opacity: 1,
+        },
+        { duration: 0.4 },
+      );
+      await animateIfNotCancelled(
+        { scale: 0.8 },
+        { duration: 0.1, delay: 0.2 },
+      );
+      await animateIfNotCancelled({ scale: 1 }, { duration: 0.1 });
+      await animateIfNotCancelled(
+        { x: 240, y: 64 },
+        { duration: 0.2, delay: 1 },
+      );
+      await animateIfNotCancelled(
+        { scale: 0.8 },
+        { duration: 0.1, delay: 0.2 },
+      );
+      setHex('#485353');
+      await animateIfNotCancelled({ scale: 1 }, { duration: 0.1 });
+      await animateIfNotCancelled(
+        { opacity: 0 },
+        { duration: 0.4, delay: 1.8 },
+      );
+    };
+
+    if (scope.current && isAnimated && !isMobile) {
+      void enterAnimation();
+    }
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [animate, scope, isAnimated, isMobile]);
   return (
-    <div>
+    <div className="relative">
+      <Image
+        alt="Hand"
+        className="absolute top-0 z-20 opacity-0"
+        height={48}
+        ref={scope}
+        src={hand}
+        width={48}
+      />
       <div
         className={cn(
           'bg-[#F7F9FC] h-10 flex items-center px-4 text-[11px] tracking-widest uppercase font-bold text-[#2E3438] border-b border-b-[#D9E0E6]',
@@ -14,44 +89,19 @@ export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
         Props
       </div>
       <Line
-        control={<Input value="Space Helmet X24" />}
-        description="Button label"
-        isPanel={isPanel}
-        label="productTitle"
-        required
-      />
-      <Line
-        control={
-          <div className="relative flex items-center h-8 px-0.5 rounded-full bg-slate-200">
-            <div className="relative z-10 flex items-center justify-center h-full w-14">
-              False
-            </div>
-            <div className="relative z-10 flex items-center justify-center h-full w-14">
-              True
-            </div>
-            <motion.div
-              animate={{ x: isPanel ? 0 : 56 }}
-              className="absolute bg-white rounded-full w-14 h-7"
-              initial={{ x: 56 }}
-              transition={{ duration: 0.2, delay: 1.2 }}
-            />
-          </div>
-        }
-        description="Disable the component"
-        isPanel={isPanel}
-        label="inStock"
-      />
-      <Line
         control={
           <div className="border border-[#D9E0E6] rounded w-full h-7 flex items-center px-2 justify-between">
             <div className="flex items-center gap-2">
               <motion.div
-                animate={{ backgroundColor: '#485353' }}
+                animate={{
+                  backgroundColor:
+                    isAnimated && !isMobile ? '#485353' : '#D8DDDD',
+                }}
                 className="w-4 h-4 rounded border border-[#D9E0E6]"
                 initial={{ backgroundColor: '#D8DDDD' }}
                 transition={{ duration: 0.2, delay: 2.7 }}
               />
-              #D8DDDD
+              {hex}
             </div>
             <svg
               fill="none"
@@ -74,14 +124,6 @@ export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
         isPanel={isPanel}
         label="backgroundColor"
       />
-      <Line control={<Range value={0.6} />} isPanel={isPanel} label="padding" />
-      <Line
-        control={<Radio />}
-        defaultValue="medium"
-        description="Size of the prompt"
-        isPanel={isPanel}
-        label="selectedColor"
-      />
       <Line
         control={
           <Input value="Introducing the Space Helmet X24: a sleek, durable motorcycle helmet with advanced ventilation, anti-fog visor, and stylish graphics. Experience ultimate protection and comfort for your rides." />
@@ -90,6 +132,42 @@ export const Controls: FC<{ isPanel?: boolean }> = ({ isPanel = false }) => {
         isPanel={isPanel}
         label="description"
         required
+      />
+      <Line
+        control={
+          <div className="relative flex items-center h-8 px-0.5 rounded-full bg-slate-200">
+            <div className="relative z-10 flex items-center justify-center h-full w-14">
+              False
+            </div>
+            <div className="relative z-10 flex items-center justify-center h-full w-14">
+              True
+            </div>
+            <motion.div
+              animate={{ x: isAnimated && !isMobile && isPanel ? 0 : 56 }}
+              className="absolute bg-white rounded-full w-14 h-7"
+              initial={{ x: 56 }}
+              transition={{ duration: 0.2, delay: 1.2 }}
+            />
+          </div>
+        }
+        description="Disable the component"
+        isPanel={isPanel}
+        label="inStock"
+      />
+      <Line control={<Range value={0.6} />} isPanel={isPanel} label="padding" />
+      <Line
+        control={<Input value="Space Helmet X24" />}
+        description="Button label"
+        isPanel={isPanel}
+        label="productTitle"
+        required
+      />
+      <Line
+        control={<Radio />}
+        defaultValue="medium"
+        description="Size of the prompt"
+        isPanel={isPanel}
+        label="selectedColor"
       />
     </div>
   );
@@ -165,7 +243,7 @@ const Input = ({
         muted && 'text-[#73828C]',
       )}
     >
-      <div className="truncate w-full">{value}</div>
+      <div className="w-full truncate">{value}</div>
     </div>
   );
 };

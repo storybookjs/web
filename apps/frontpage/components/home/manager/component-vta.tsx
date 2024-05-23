@@ -3,6 +3,7 @@ import { ComponentImage } from './component-image';
 export const ComponentVTA = () => {
   return (
     <svg
+      className="hidden max-h-full sm:block"
       fill="none"
       viewBox="0 0 480 501"
       width="480"

@@ -2,11 +2,9 @@ import { useEffect } from 'react';
 import type { ValueAnimationTransition } from 'framer-motion';
 import { motion, useAnimate } from 'framer-motion';
 import { UndoIcon } from '@storybook/icons';
-import Image from 'next/image';
 import { cn } from '@repo/utils';
 import { Tabs } from './tabs';
 import { Controls } from './controls';
-import hand from './hand.svg';
 import { Toolbar } from './toolbar';
 import { ComponentControls } from './component-controls';
 import { ComponentSmall } from './component-small';
@@ -83,14 +81,6 @@ export const SlideControls = () => {
       </div>
       <Toolbar slide={1} />
       <div className="absolute bottom-0 left-0 w-full h-[55%] sm:h-[40%] lg:bottom-auto lg:left-auto lg:top-0 lg:right-0 lg:h-full lg:w-[400px] border-t border-t-[#D9E0E6] lg:border-t-0 lg:border-l lg:border-l-[#D9E0E6] flex flex-col text-black">
-        <Image
-          alt="Hand"
-          className="absolute top-0 z-20 opacity-0"
-          height={48}
-          ref={scope}
-          src={hand}
-          width={48}
-        />
         <Tabs active={0} />
         <div className="flex h-10 flex-shrink-0 items-center border-b border-b-[#D9E0E6]">
           <div className="text-[13px] w-1/2 md:w-1/2 flex-shrink-0 pl-4">

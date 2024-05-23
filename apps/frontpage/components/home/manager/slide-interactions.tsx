@@ -180,9 +180,9 @@ const Line = ({ children }: { children: ReactNode }) => (
     className="border-b border-b-[#D9E0E6] flex items-center px-5 gap-4 py-3"
     variants={item}
   >
-    <div className="h-4 w-4 relative flex items-center justify-center">
+    <div className="relative flex items-center justify-center w-4 h-4">
       <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
         variants={{
           visible: { opacity: 1 },
           hidden: { opacity: 0 },
@@ -191,7 +191,7 @@ const Line = ({ children }: { children: ReactNode }) => (
         <CheckIcon className="text-[#7ABF39] flex-shrink-0" />
       </motion.div>
       <motion.div
-        className="w-2 h-2 bg-slate-200 rounded-full"
+        className="w-2 h-2 rounded-full bg-slate-200"
         variants={{
           visible: { opacity: 0 },
           hidden: { opacity: 1 },
