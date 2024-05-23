@@ -54,13 +54,13 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
         lvl={2}
       />
       <SidebarLine ic="story" label="Default" lvl={2} />
+      <SidebarLine active={slide === 1} ic="story" label="Expanded" lvl={2} />
       <SidebarLine
-        active={slide === 1 || slide === 3 || slide === 4}
+        active={slide === 3 || slide === 4}
         ic="story"
-        label="Expanded"
+        label="Added to cart"
         lvl={2}
       />
-      <SidebarLine ic="story" label="Added to cart" lvl={2} />
       <SidebarLine ar="right" ic="component" label="Dashboard" lvl={1} />
       <SidebarLine ar="right" ic="component" label="Homepage" lvl={1} />
       <SidebarLine ar="right" ic="component" label="User Profile" lvl={1} />
