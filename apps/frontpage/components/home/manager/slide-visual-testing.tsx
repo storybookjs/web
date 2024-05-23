@@ -11,6 +11,7 @@ import { Tabs } from './tabs';
 import { Toolbar } from './toolbar';
 import { ComponentSmall } from './component-small';
 import { ComponentVTA } from './component-vta';
+import { ComponentDiff } from './component-diff';
 
 export const SlideVisualTesting = () => {
   return (
@@ -41,8 +42,8 @@ export const SlideVisualTesting = () => {
           </div>
           <div className="text-slate-500">3 modes, 3 browsers • Ran 1m ago</div>
         </div>
-        <div className="flex-1 px-8 py-6">
-          {/* <Image alt="Component" src={component} /> */}
+        <div className="flex items-start justify-start flex-1 px-8 py-6">
+          <ComponentDiff />
         </div>
         <div className="border-t border-t-[#D9E0E6] text-[#73828C] h-10 text-sm px-4 flex items-center gap-5">
           <div className="flex items-center gap-1.5">
