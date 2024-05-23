@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
-import { Manager } from './manager';
+import { Manager } from '../manager';
 import { InitCommand } from './init-command';
 import { Chrome } from './chrome';
 import SocialProof from './social-proof';

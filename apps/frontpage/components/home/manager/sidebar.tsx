@@ -13,7 +13,7 @@ import {
   SearchIcon,
 } from '@storybook/icons';
 import type { FC } from 'react';
-import { StorybookLogo } from '../../../logos/storybook';
+import { StorybookLogo } from '../../logos/storybook';
 
 export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
   return (

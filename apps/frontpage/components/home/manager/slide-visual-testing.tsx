@@ -7,7 +7,7 @@ import {
   ExpandAltIcon,
   PassedIcon,
 } from '@storybook/icons';
-import { Chrome } from '../../../icons/chrome';
+import { Chrome } from '../../icons/chrome';
 import { Tabs } from './tabs';
 import { Toolbar } from './toolbar';
 import componentSmall from './component-small.svg';
