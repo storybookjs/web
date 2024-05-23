@@ -16,7 +16,7 @@ export const Toolbar: FC<{ slide: number }> = ({ slide }) => {
   return (
     <div
       className={cn(
-        'absolute top-0 left-0 h-10 border-b border-b-[#D9E0E6] flex items-center px-2 justify-between right-0 overflow-hidden lg:right-[400px]',
+        'absolute top-0 left-0 h-10 border-b border-b-[#D9E0E6] flex items-center px-2 justify-between right-0 overflow-hidden lg:right-[400px] z-10 bg-white',
         slide === 2 && 'lg:right-0',
       )}
     >

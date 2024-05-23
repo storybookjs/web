@@ -4,7 +4,6 @@ export const ComponentVTA = () => {
   return (
     <svg
       fill="none"
-      height="501"
       viewBox="0 0 480 501"
       width="480"
       xmlns="http://www.w3.org/2000/svg"

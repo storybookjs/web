@@ -24,7 +24,12 @@ export const SlideDocs = () => {
       initial={{ opacity: 0 }}
     >
       <Toolbar slide={2} />
-      <div className="absolute top-10 left-1/2 w-full text-black max-w-[840px] -translate-x-1/2 pt-8 md:pt-12 px-6">
+      <motion.div
+        animate={{ x: '-50%', y: -400 }}
+        className="absolute top-10 left-1/2 w-full text-black max-w-[840px] -translate-x-1/2 pt-8 md:pt-12 px-6"
+        initial={{ x: '-50%', y: 0 }}
+        transition={{ delay: 0.6, duration: 2, ease: 'easeInOut' }}
+      >
         <div className="mb-4 text-3xl font-bold md:mb-6">Card</div>
         <div className="mb-8 sm:hidden">
           AI Prompt is a component that allows you to select a range of data
@@ -69,7 +74,7 @@ export const SlideDocs = () => {
               <ShareAltIcon />
             </ToolbarButton>
           </div>
-          <div className="flex justify-center w-full px-4 py-10 sm:py-16">
+          <div className="flex justify-center w-full px-4 py-10 sm:py-12">
             <ComponentSmall />
           </div>
         </div>
@@ -84,7 +89,7 @@ export const SlideDocs = () => {
             <Controls />
           </div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

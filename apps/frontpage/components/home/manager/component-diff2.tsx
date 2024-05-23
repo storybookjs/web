@@ -1,6 +1,6 @@
 import { ComponentImage } from './component-image';
 
-export const ComponentDiff = () => {
+export const ComponentDiff2 = () => {
   return (
     <svg
       fill="none"
