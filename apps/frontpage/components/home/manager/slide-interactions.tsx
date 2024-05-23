@@ -16,7 +16,7 @@ import { ComponentSmall } from './component-small';
 
 const list = {
   visible: {
-    transition: { staggerChildren: 0.6, delayChildren: 0.6 },
+    transition: { staggerChildren: 0.4, delayChildren: 0.6 },
   },
   hidden: {
     transition: { staggerChildren: 0.05 },
@@ -40,7 +40,7 @@ export const SlideInteractions = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setText('Pass');
-    }, 2450);
+    }, 2800);
 
     return () => {
       clearTimeout(timeout);
@@ -70,7 +70,7 @@ export const SlideInteractions = () => {
             animate={{ backgroundColor: '#7ABF39' }}
             className="h-6 px-3 rounded text-[11px] font-bold uppercase tracking-widest flex items-center text-white"
             initial={{ backgroundColor: '#FFAC31' }}
-            transition={{ delay: 2.45 }}
+            transition={{ delay: 2.8 }}
           >
             {text}
           </motion.div>
@@ -97,79 +97,68 @@ export const SlideInteractions = () => {
         </div>
         <motion.div animate="visible" initial="hidden" variants={list}>
           <Line>
-            <Span>userEvent.</Span>
-            <Span color="#0271b6">type</Span>
-            <Span>(</Span>
             <Span color="#0271b6">within</Span>
-            <Span>(</Span>
-            <Span>{`<`}</Span>
+            <Span color="#000000">{`(<`}</Span>
             <Span color="#6f2cac">div</Span>
-            <Span color="#1f99e5">#storybook-root</Span>
-            <Span>{`>`}</Span>
-            <Span>).</Span>
-            <Span color="#0271b6">getByTestId</Span>
-            <Span>(</Span>
-            <Span color="#16b242">{`"Email"`}</Span>
-            <Span>{`), `}</Span>
-            <Span color="#16b242">{`"email@provider.com"`}</Span>
-            <Span>{`, { `}</Span>
-            <Span>{`delay: `}</Span>
-            <Span color="#6f2cac">100 </Span>
-            <Span>{`})`}</Span>
-          </Line>
-          <Line>
-            <Span>userEvent.</Span>
-            <Span color="#0271b6">type</Span>
-            <Span>(</Span>
-            <Span color="#0271b6">within</Span>
-            <Span>(</Span>
-            <Span>{`<`}</Span>
-            <Span color="#6f2cac">div</Span>
-            <Span color="#1f99e5">#storybook-root</Span>
-            <Span>{`>`}</Span>
-            <Span>).</Span>
-            <Span color="#0271b6">getByTestId</Span>
-            <Span>(</Span>
-            <Span color="#16b242">{`"Password"`}</Span>
-            <Span>{`), `}</Span>
-            <Span color="#16b242">{`"a-random-password"`}</Span>
-            <Span>{`, { `}</Span>
-            <Span>{`delay: `}</Span>
-            <Span color="#6f2cac">100 </Span>
-            <Span>{`})`}</Span>
-          </Line>
-          <Line>
-            <Span>userEvent.</Span>
-            <Span color="#0271b6">type</Span>
-            <Span>(</Span>
-            <Span color="#0271b6">within</Span>
-            <Span>(</Span>
-            <Span>{`<`}</Span>
-            <Span color="#6f2cac">div</Span>
-            <Span color="#1f99e5">#storybook-root</Span>
-            <Span>{`>`}</Span>
-            <Span>).</Span>
-            <Span color="#0271b6">getByRole</Span>
-            <Span>(</Span>
+            <Span color="#1f99e5">#main</Span>
+            <Span color="#000000">{`>).`}</Span>
+            <Span color="#0271b6">findByRole</Span>
+            <Span color="#000000">(</Span>
             <Span color="#16b242">{`"button"`}</Span>
-            <Span>))</Span>
+            <Span color="#000000">{`, {`}</Span>
+            <Span color="#5f5f5f">name: </Span>
+            <Span color="#16b242">{`"Add to cart"`}</Span>
+            <Span color="#000000">{` })`}</Span>
           </Line>
           <Line>
-            <Span>expect</Span>
-            <Span>(</Span>
+            <Span color="#000000">userEvent.</Span>
+            <Span color="#0271b6">click</Span>
+            <Span color="#000000">{`(<`}</Span>
+            <Span color="#6f2cac">button</Span>
+            <Span color="#0271b6">.add-to-cart</Span>
+            <Span color="#000000">{`>)`}</Span>
+          </Line>
+          <Line>
             <Span color="#0271b6">within</Span>
-            <Span>(</Span>
-            <Span>{`<`}</Span>
-            <Span color="#6f2cac">div</Span>
-            <Span color="#1f99e5">#storybook-root</Span>
-            <Span>{`>`}</Span>
-            <Span>).</Span>
-            <Span color="#0271b6">getByText</Span>
-            <Span>(</Span>
-            <Span color="#16b242">{`"Looking good!"`}</Span>
-            <Span>)).</Span>
+            <Span color="#000000">{`(<`}</Span>
+            <Span color="#6f2cac">button</Span>
+            <Span color="#1f99e5">.add-to-cart</Span>
+            <Span color="#000000">).</Span>
+            <Span color="#0271b6">findByRole</Span>
+            <Span color="#000000">(</Span>
+            <Span color="#16b242">{`"image"`}</Span>
+            <Span color="#000000">{`, {`}</Span>
+            <Span color="#5f5f5f">name: </Span>
+            <Span color="#16b242">{`"checkmark"`}</Span>
+            <Span color="#000000">{` })`}</Span>
+          </Line>
+          <Line>
+            <Span color="#0271b6">expect</Span>
+            <Span color="#000000">(</Span>
+            <Span color="#fc8047">SVGSVGElement</Span>
+            <Span color="#000000">).</Span>
             <Span color="#0271b6">toBeInTheDocument</Span>
-            <Span>()</Span>
+            <Span color="#000000">()</Span>
+          </Line>
+          <Line>
+            <Span color="#0271b6">within</Span>
+            <Span color="#000000">{`(<`}</Span>
+            <Span color="#6f2cac">button</Span>
+            <Span color="#1f99e5">.add-to-cart</Span>
+            <Span color="#000000">{`>).`}</Span>
+            <Span color="#0271b6">findByText</Span>
+            <Span color="#000000">(</Span>
+            <Span color="#16b242">{`"Added"`}</Span>
+            <Span color="#000000">)</Span>
+          </Line>
+          <Line>
+            <Span color="#0271b6">within</Span>
+            <Span color="#000000">{`(<`}</Span>
+            <Span color="#6f2cac">button</Span>
+            <Span color="#1f99e5">.add-to-cart</Span>
+            <Span color="#000000">{`>).`}</Span>
+            <Span color="#0271b6">toBeInTheDocument</Span>
+            <Span color="#000000">()</Span>
           </Line>
         </motion.div>
       </div>

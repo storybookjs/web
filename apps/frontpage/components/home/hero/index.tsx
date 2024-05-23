@@ -73,7 +73,7 @@ export function Hero({
 
     intervalId.current = window.setInterval(() => {
       setSlide((s) => (s === 4 ? 1 : s + 1));
-    }, 5000);
+    }, 4500);
   };
 
   useEffect(() => {

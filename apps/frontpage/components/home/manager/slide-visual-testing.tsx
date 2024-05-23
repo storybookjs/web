@@ -21,7 +21,7 @@ export const SlideVisualTesting = () => {
   const [changeTitle, setChangeTitle] = useState('No changes');
 
   const DELAY = 0.6;
-  const DURATION = 2.4;
+  const DURATION = 2;
 
   useEffect(() => {
     const timeout = setTimeout(
