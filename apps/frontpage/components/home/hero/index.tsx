@@ -16,9 +16,9 @@ import SocialProof from './social-proof';
 
 const features = [
   'Development',
-  'Documentation',
   'Interaction Testing',
   'Visual Testing',
+  'Documentation',
 ];
 
 function Star({ x = 0, y = 0, w = 14, delay = 0 }) {
@@ -179,9 +179,9 @@ export function Hero({
             className={cn(
               'bg-white h-0.5 absolute top-0 transition-all',
               slide === 1 && 'left-0 w-[96px]',
-              slide === 2 && 'left-[144px] w-[110px]',
-              slide === 3 && 'left-[302px] w-[132px]',
-              slide === 4 && 'left-[482px] w-[101px]',
+              slide === 2 && 'left-[144px] w-[132px]',
+              slide === 3 && 'left-[324px] w-[101px]',
+              slide === 4 && 'left-[474px] w-[110px]',
             )}
           />
           {features.map((label, i) => (

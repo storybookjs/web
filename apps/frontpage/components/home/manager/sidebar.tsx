@@ -48,7 +48,7 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
       </div>
       <SidebarLine ar="right" ic="component" label="ProductCard" />
       <SidebarLine
-        active={slide === 2}
+        active={slide === 4}
         ic="docs"
         label="Documentation"
         lvl={2}
@@ -56,7 +56,7 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
       <SidebarLine ic="story" label="Default" lvl={2} />
       <SidebarLine active={slide === 1} ic="story" label="Expanded" lvl={2} />
       <SidebarLine
-        active={slide === 3 || slide === 4}
+        active={slide === 2 || slide === 3}
         ic="story"
         label="Added to cart"
         lvl={2}

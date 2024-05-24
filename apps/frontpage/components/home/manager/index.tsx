@@ -15,13 +15,13 @@ export const Manager: FC<{ slide: number }> = ({ slide }) => {
       <Sidebar slide={slide} />
       <div className="relative flex-1 w-full h-full bg-white">
         <AnimatePresence>{slide === 1 && <SlideControls />}</AnimatePresence>
-        <AnimatePresence>{slide === 2 && <SlideDocs />}</AnimatePresence>
         <AnimatePresence>
-          {slide === 3 && <SlideInteractions />}
+          {slide === 2 && <SlideInteractions />}
         </AnimatePresence>
         <AnimatePresence>
-          {slide === 4 && <SlideVisualTesting />}
+          {slide === 3 && <SlideVisualTesting />}
         </AnimatePresence>
+        <AnimatePresence>{slide === 4 && <SlideDocs />}</AnimatePresence>
       </div>
     </div>
   );
