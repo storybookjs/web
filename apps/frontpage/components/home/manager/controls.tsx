@@ -262,15 +262,15 @@ const Range = ({ value }: { value: number }) => {
 const Radio = () => {
   return (
     <div className={cn('w-full flex flex-col gap-2')}>
-      {['Pink', 'Space Grey', 'White'].map((item) => (
+      {['White', 'Space Grey', 'Yellow'].map((item) => (
         <div className="flex items-center gap-2" key={item}>
           <div
             className={cn(
               'w-4 h-4 border rounded-full border-[#D9E0E6] flex items-center justify-center',
-              item === 'Space Grey' && 'border border-blue-500',
+              item === 'White' && 'border border-blue-500',
             )}
           >
-            {item === 'Space Grey' && (
+            {item === 'White' && (
               <div className="w-3 h-3 bg-blue-500 rounded-full" />
             )}
           </div>
