@@ -1,11 +1,11 @@
-import Image from "next/image";
-import logoEu from "./logos/logo-eu.svg";
-import logoGithub from "./logos/logo-github.svg";
-import logoAirbnb from "./logos/logo-airbnb.svg";
-import logoVSCode from "./logos/logo-vscode.svg";
-import logoMozilla from "./logos/logo-mozilla.svg";
-import logoMonday from "./logos/logo-monday.svg";
-import logoBBC from "./logos/logo-bbc.svg";
+import Image from 'next/image';
+import logoEu from './logos/logo-eu.svg';
+import logoGithub from './logos/logo-github.svg';
+import logoAirbnb from './logos/logo-airbnb.svg';
+import logoVSCode from './logos/logo-vscode.svg';
+import logoMozilla from './logos/logo-mozilla.svg';
+import logoMonday from './logos/logo-monday.svg';
+import logoBBC from './logos/logo-bbc.svg';
 
 export default function SocialProof() {
   return (

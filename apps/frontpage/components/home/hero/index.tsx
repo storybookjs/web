@@ -6,19 +6,19 @@ import Link from 'next/link';
 import { cn } from '@repo/utils';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
+import { Manager } from '../manager';
 import { InitCommand } from './init-command';
-import { Manager } from './manager';
 import { Chrome } from './chrome';
 import SocialProof from './social-proof';
 
 const features = [
   'Development',
-  'Documentation',
   'Interaction Testing',
   'Visual Testing',
+  'Documentation',
 ];
 
 function Star({ x = 0, y = 0, w = 14, delay = 0 }) {
@@ -64,19 +64,36 @@ export function Hero({
   contributorCount: string;
 }) {
   const [slide, setSlide] = useState(1);
+  const intervalId = useRef<number | null>(null);
+
+  const setSlideInterval = () => {
+    if (intervalId.current !== null) {
+      window.clearInterval(intervalId.current);
+    }
+
+    intervalId.current = window.setInterval(() => {
+      setSlide((s) => (s === 4 ? 1 : s + 1));
+    }, 4500);
+  };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSlide((s) => (s === 4 ? 1 : s + 1));
-    }, 3000);
-
+    setSlideInterval();
     return () => {
-      clearInterval(interval);
+      if (intervalId.current) {
+        clearInterval(intervalId.current);
+      }
     };
   }, []);
 
+  const handleSlideChange = (newSlide: number) => {
+    setSlide(newSlide);
+    if (intervalId.current) {
+      clearInterval(intervalId.current);
+    }
+  };
+
   return (
-    <Container className="lg:px-8 pt-12 md:pt-24 text-white justify-between gap-20 relative z-20">
+    <Container className="relative z-20 justify-between gap-20 pt-12 text-white lg:px-8 md:pt-24">
       <h1 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold max-sm:max-w-80">
         Build UIs without the grunt work
       </h1>
@@ -142,7 +159,7 @@ export function Hero({
           <div
             className="flex items-center justify-center w-10 h-10 text-white rounded-full"
             onClick={() => {
-              setSlide(slide === 1 ? 4 : slide - 1);
+              handleSlideChange(slide === 1 ? 4 : slide - 1);
             }}
           >
             <ChevronLeftIcon />
@@ -151,7 +168,7 @@ export function Hero({
           <div
             className="flex items-center justify-center w-10 h-10 text-white rounded-full"
             onClick={() => {
-              setSlide(slide === 4 ? 1 : slide + 1);
+              handleSlideChange(slide === 4 ? 1 : slide + 1);
             }}
           >
             <ChevronRightIcon />
@@ -162,9 +179,9 @@ export function Hero({
             className={cn(
               'bg-white h-0.5 absolute top-0 transition-all',
               slide === 1 && 'left-0 w-[96px]',
-              slide === 2 && 'left-[144px] w-[110px]',
-              slide === 3 && 'left-[302px] w-[132px]',
-              slide === 4 && 'left-[482px] w-[101px]',
+              slide === 2 && 'left-[144px] w-[132px]',
+              slide === 3 && 'left-[324px] w-[101px]',
+              slide === 4 && 'left-[474px] w-[110px]',
             )}
           />
           {features.map((label, i) => (
@@ -175,7 +192,7 @@ export function Hero({
               )}
               key={label}
               onClick={() => {
-                setSlide(i + 1);
+                handleSlideChange(i + 1);
               }}
               type="button"
             >

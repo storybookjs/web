@@ -11,6 +11,7 @@ import { content3 } from './mocked-data/content-3';
 const meta = {
   title: 'CodeSnippets',
   component: CodeSnippetsClient,
+  tags: ['autodocs'],
   argTypes: {
     activeRenderer: {
       control: 'select',

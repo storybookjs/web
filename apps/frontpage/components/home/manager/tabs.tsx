@@ -6,17 +6,15 @@ import {
 } from '@storybook/icons';
 import { cn } from '@repo/utils';
 
-export const Tabs: FC<{ active?: number }> = ({ active = 0 }) => {
-  const tabs = [
-    'Controls',
-    'Interactions',
-    'Visual tests',
-    'Accessibility',
-    'Design',
-  ];
+export const Tabs: FC<{ active?: number; slide?: number }> = ({
+  active = 0,
+  slide,
+}) => {
+  let tabs = ['Controls', 'Interactions'];
+  if (slide === 4) tabs = ['Controls', 'Visual tests'];
 
   return (
-    <div className="w-full h-10 flex border-b border-b-[#D9E0E6] justify-between items-center">
+    <div className="w-full h-10 flex flex-shrink-0 border-b border-b-[#D9E0E6] justify-between items-center">
       <div className="flex h-full">
         {tabs.map((label, i) => (
           <div
@@ -32,8 +30,8 @@ export const Tabs: FC<{ active?: number }> = ({ active = 0 }) => {
             {label}
           </div>
         ))}
-        <div className="h-full flex items-center text-sm px-4 font-bold text-[#76828B] gap-1 md:hidden">
-          Addons
+        <div className="h-full flex items-center text-sm px-4 font-bold text-[#76828B] gap-1">
+          <span className="hidden min-[360px]:block">Addons</span>
           <ChevronSmallDownIcon />
         </div>
       </div>
