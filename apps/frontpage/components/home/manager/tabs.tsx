@@ -30,12 +30,7 @@ export const Tabs: FC<{ active?: number; slide?: number }> = ({
             {label}
           </div>
         ))}
-        <div
-          className={cn(
-            'h-full flex items-center text-sm px-4 font-bold text-[#76828B] gap-1 md:hidden',
-            slide === 4 && 'md:flex lg:hidden',
-          )}
-        >
+        <div className="h-full flex items-center text-sm px-4 font-bold text-[#76828B] gap-1">
           <span className="hidden min-[360px]:block">Addons</span>
           <ChevronSmallDownIcon />
         </div>
