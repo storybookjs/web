@@ -31,14 +31,18 @@ export const SlideDocs = () => {
       <motion.div
         animate={{
           x: '-50%',
-          y: isMobile ? [0, -900, -900, 0] : [0, -900, -900, 0],
+          y: isMobile ? [0, -860, -860, 0] : [0, -900, -900, 0],
         }}
         className="absolute top-10 left-1/2 w-full text-black max-w-[840px] -translate-x-1/2 pt-8 md:pt-12 px-6"
         initial={{ x: '-50%', y: 0 }}
         transition={{ delay: 0.6, duration: 3.6, ease: 'easeInOut' }}
       >
         <div className="mb-4 text-3xl font-bold md:mb-6">ProductCard</div>
-        <div className="hidden mb-8">
+        <div className="mb-8 sm:hidden">
+          The ProductCard component is designed to display product information
+          in a compact, visually appealing widget.
+        </div>
+        <div className="hidden sm:block mb-8">
           The ProductCard component is designed to display product information
           in a compact, visually appealing widget. This component is ideal for
           e-commerce websites or any application where products need to be
