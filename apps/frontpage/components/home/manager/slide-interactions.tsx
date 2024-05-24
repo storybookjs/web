@@ -40,7 +40,7 @@ export const SlideInteractions = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setText('Pass');
-    }, 2800);
+    }, 2400);
 
     return () => {
       clearTimeout(timeout);
@@ -70,7 +70,7 @@ export const SlideInteractions = () => {
             animate={{ backgroundColor: '#7ABF39' }}
             className="w-14 h-6 px-3 justify-center rounded text-[11px] font-bold uppercase tracking-widest flex items-center text-white"
             initial={{ backgroundColor: '#FFAC31' }}
-            transition={{ delay: 2.8 }}
+            transition={{ delay: 2.4 }}
           >
             {text}
           </motion.div>
@@ -150,15 +150,6 @@ export const SlideInteractions = () => {
             <Span color="#000000">(</Span>
             <Span color="#16b242">{`"Added"`}</Span>
             <Span color="#000000">)</Span>
-          </Line>
-          <Line>
-            <Span color="#0271b6">within</Span>
-            <Span color="#000000">{`(<`}</Span>
-            <Span color="#6f2cac">button</Span>
-            <Span color="#1f99e5">.add-to-cart</Span>
-            <Span color="#000000">{`>).`}</Span>
-            <Span color="#0271b6">toBeInTheDocument</Span>
-            <Span color="#000000">()</Span>
           </Line>
         </motion.div>
       </div>
