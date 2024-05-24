@@ -73,10 +73,13 @@ export const SlideVisualTesting = () => {
       <div className="absolute bottom-0 left-0 w-full h-[55%] sm:h-[40%] lg:bottom-auto lg:left-auto lg:top-0 lg:right-0 lg:h-full lg:w-[400px] border-t border-t-[#D9E0E6] lg:border-t-0 lg:border-l lg:border-l-[#D9E0E6] flex flex-col">
         <Tabs active={1} slide={4} />
         <motion.div
-          animate={{ height: 40, borderBottomColor: '#D9E0E6' }}
+          animate={{
+            height: [null, 40, 40, 0],
+            borderBottomColor: ['#ffffff', '#D9E0E6', '#D9E0E6', '#ffffff'],
+          }}
           className="relative flex-shrink-0 overflow-hidden border-b"
           initial={{ height: 0, borderBottomColor: 'transparent' }}
-          transition={{ delay: DELAY }}
+          transition={{ delay: DELAY, duration: 3, times: [0, 0.1, 0.9, 1] }}
         >
           <div className="relative hidden sm:flex text-black text-sm h-10 items-center justify-between flex-shrink-0 px-4 bg-[#F6F9FC]">
             <span className="relative z-10">
@@ -97,7 +100,7 @@ export const SlideVisualTesting = () => {
                 animate={{ opacity: 0 }}
                 className="absolute top-0 left-0 text-green-500"
                 initial={{ opacity: 1 }}
-                transition={{ delay: DURATION }}
+                transition={{ delay: DURATION + DELAY }}
               >
                 <PassedIcon />
               </motion.div>
@@ -105,7 +108,7 @@ export const SlideVisualTesting = () => {
                 animate={{ opacity: 1 }}
                 className="absolute top-0 left-0 text-[#e69d00]"
                 initial={{ opacity: 0 }}
-                transition={{ delay: DURATION }}
+                transition={{ delay: DURATION + DELAY }}
               >
                 <ChangedIcon />
               </motion.div>
