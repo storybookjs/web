@@ -19,7 +19,7 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
   return (
     <div className="hidden sm:block w-[230px] h-full bg-[#F7F9FC] border-r border-r-[#D9E0E6] px-3">
       <div className="flex items-center justify-between pt-5 pb-4 pl-2">
-        <StorybookLogo />
+        <StorybookLogo color="dark" />
         <div className="flex items-center">
           <div className="flex items-center justify-center w-8 h-8">
             <PlayIcon className="text-[#73828C]" />
