@@ -68,7 +68,7 @@ export const SlideInteractions = () => {
         <div className="bg-[#F7F9FC] h-10 flex items-center px-4 border-b border-b-[#D9E0E6] gap-3 flex-shrink-0">
           <motion.div
             animate={{ backgroundColor: '#7ABF39' }}
-            className="h-6 px-3 rounded text-[11px] font-bold uppercase tracking-widest flex items-center text-white"
+            className="w-14 h-6 px-3 justify-center rounded text-[11px] font-bold uppercase tracking-widest flex items-center text-white"
             initial={{ backgroundColor: '#FFAC31' }}
             transition={{ delay: 2.8 }}
           >
