@@ -46,7 +46,7 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
         </div>
         <ExpandAltIcon size={10} />
       </div>
-      <SidebarLine ar="right" ic="component" label="Card" />
+      <SidebarLine ar="right" ic="component" label="ProductCard" />
       <SidebarLine
         active={slide === 2}
         ic="docs"

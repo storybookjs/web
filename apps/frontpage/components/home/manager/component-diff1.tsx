@@ -3,7 +3,7 @@ import { ComponentImage } from './component-image';
 export const ComponentDiff1 = () => {
   return (
     <svg
-      className="max-h-full"
+      className="max-h-full max-w-[500px]"
       fill="none"
       viewBox="0 0 480 471"
       width="100%"
