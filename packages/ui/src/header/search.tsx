@@ -20,9 +20,10 @@ export const Search: FC<HeaderProps> = ({ variant }) => {
       </div>
       <div
         className={cn(
-          'ui-text-[11px] dark:ui-text-zinc-500 ui-px-1.5 ui-rounded',
+          'ui-text-[11px] ui-px-1.5 ui-rounded',
           variant === 'home' && 'ui-bg-white/10 ui-text-white',
-          variant !== 'home' && 'ui-bg-zinc-100 dark:ui-bg-zinc-800',
+          variant !== 'home' &&
+            'ui-bg-zinc-100 dark:ui-bg-zinc-800 dark:ui-text-zinc-400',
         )}
       >
         ⌘K
