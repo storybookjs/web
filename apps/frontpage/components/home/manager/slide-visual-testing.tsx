@@ -81,7 +81,7 @@ export const SlideVisualTesting = () => {
           initial={{ height: 0, borderBottomColor: 'transparent' }}
           transition={{ delay: DELAY, duration: 3, times: [0, 0.1, 0.9, 1] }}
         >
-          <div className="relative hidden sm:flex text-black text-sm h-10 items-center justify-between flex-shrink-0 px-4 bg-[#F6F9FC]">
+          <div className="relative flex text-black text-sm h-10 items-center justify-between flex-shrink-0 px-4 bg-[#F6F9FC]">
             <span className="relative z-10">
               👀 Running visual test {Math.floor(counter * 1.24)}/124...
             </span>
