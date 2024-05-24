@@ -20,7 +20,7 @@ export const Dropdown: FC<DropdownProps> = ({ list, activeId, action }) => {
       <DropdownMenu.Trigger asChild>
         <DropdownMenu.Trigger
           aria-label="Customise options"
-          className="flex items-center justify-between h-8 gap-1 px-2 text-sm transition-all rounded select-none group text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 hover:bg-slate-200"
+          className="flex items-center justify-between h-8 gap-1 px-2 text-sm transition-all rounded select-none group text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 hover:bg-slate-200 dark:hover:bg-slate-800 dark:hover:text-slate-500"
           type="button"
         >
           {activeItem?.title}

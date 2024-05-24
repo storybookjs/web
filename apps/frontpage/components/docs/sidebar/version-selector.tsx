@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import Link from 'next/link';
-import type { DocsVersion} from '@repo/utils';
+import type { DocsVersion } from '@repo/utils';
 import { docsVersions } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 
@@ -26,7 +26,7 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
     const isVersionInUrl = activeVersionIndex !== -1;
 
     const newSegments = [...segments];
-    let newHref = `/${  newSegments.join('/')}`;
+    let newHref = `/${newSegments.join('/')}`;
 
     if (!isVersionInUrl && !isFirstVersion)
       newHref = newHref.replace('/docs', `/docs/${version}`);
@@ -45,7 +45,7 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
           className="w-full h-10 px-2 mt-6"
           type="button"
         >
-          <div className="flex items-center justify-between w-full h-full text-sm transition-all border-b select-none border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300">
+          <div className="flex items-center justify-between w-full h-full text-sm transition-all border-b select-none border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-slate-800 dark:text-white">
             {activeVersion.label}
             <ChevronSmallDownIcon />
           </div>

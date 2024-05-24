@@ -54,7 +54,7 @@ export const Header: FC<HeaderProps> = ({
         'ui-w-full ui-relative ui-z-50',
         variant === 'home' && 'ui-border-b ui-border-white/20',
         variant === 'system' &&
-          'ui-sticky ui-top-0 ui-z-40 ui-backdrop-blur ui-bg-white/60 dark:ui-bg-zinc-900/80 lg:ui-border-b lg:ui-border-black/5 dark:ui-border-zinc-700',
+          'ui-sticky ui-top-0 ui-z-40 ui-backdrop-blur ui-bg-white/60 dark:ui-bg-slate-950/80 lg:ui-border-b lg:ui-border-black/5 dark:ui-border-slate-800',
       )}
     >
       <div className="ui-mx-auto ui-max-w-8xl">

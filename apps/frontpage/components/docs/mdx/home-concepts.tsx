@@ -45,14 +45,18 @@ function Card({
 }) {
   return (
     <Link
-      className="gap-3 p-6 transition-all border rounded-md border-slate-200 hover:border-slate-300 hover:-translate-y-px"
+      className="gap-3 p-6 transition-all border rounded-md border-slate-200 hover:border-slate-300 hover:-translate-y-px dark:border-slate-800 dark:hover:border-slate-600"
       href={href}
     >
       <div className="flex items-center gap-4 mb-4">
         <Image alt="" height="20" src={`/images/icons/${logo}`} width="20" />
-        <h3 className="font-bold text-black text-md">{title}</h3>
+        <h3 className="font-bold text-black dark:text-white text-md">
+          {title}
+        </h3>
       </div>
-      <p className="text-sm leading-6 text-slate-600">{content}</p>
+      <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
+        {content}
+      </p>
     </Link>
   );
 }

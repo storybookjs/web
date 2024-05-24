@@ -80,7 +80,7 @@ const Element: FC<ElementProps> = ({ heading, isInView, setIsInView }) => {
     <li key={heading.id}>
       <a
         className={cn(
-          'flex items-center text-sm text-zinc-700 hover:text-blue-500 transition-colors w-full mb-3',
+          'flex items-center text-sm text-zinc-700 dark:text-slate-400 dark:hover:text-blue-500 hover:text-blue-500 transition-colors w-full mb-3',
           heading.level > 2 && 'ml-5',
           active && 'text-blue-500',
         )}
