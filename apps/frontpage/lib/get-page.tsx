@@ -110,7 +110,10 @@ export const getPageData = async (
           [
             rehypePrettyCode,
             {
-              theme: firefoxThemeLight,
+              theme: {
+                dark: 'github-dark-dimmed',
+                light: firefoxThemeLight,
+              },
             },
           ] as never,
           // After the code is formatted, we need to get the raw code

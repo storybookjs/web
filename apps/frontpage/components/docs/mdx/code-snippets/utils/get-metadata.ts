@@ -41,7 +41,10 @@ export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
         .use(remarkParse)
         .use(remarkRehype)
         .use(rehypePrettyCode, {
-          theme: firefoxThemeLight,
+          theme: {
+            dark: 'github-dark-dimmed',
+            light: firefoxThemeLight,
+          },
         } as never)
         .use(rehypeStringify)
         .process(valueWithBackticks);
