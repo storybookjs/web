@@ -35,8 +35,8 @@ export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
       await animateIfNotCancelled({ y: 280 });
       await animateIfNotCancelled(
         {
-          x: 210,
-          y: 174,
+          x: 264,
+          y: 186,
           opacity: 1,
         },
         { duration: 0.4 },
@@ -47,7 +47,7 @@ export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
       );
       await animateIfNotCancelled({ scale: 1 }, { duration: 0.1 });
       await animateIfNotCancelled(
-        { x: 240, y: 64 },
+        { x: 240, y: 132 },
         { duration: 0.2, delay: 1 },
       );
       await animateIfNotCancelled(
@@ -80,14 +80,22 @@ export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
         src={hand}
         width={48}
       />
-      <div
-        className={cn(
-          'bg-[#F7F9FC] h-10 flex items-center px-4 text-[11px] tracking-widest uppercase font-bold text-[#2E3438] border-b border-b-[#D9E0E6]',
-          isPanel && 'hidden sm:flex',
-        )}
-      >
-        Props
-      </div>
+      <Line
+        control={
+          <Input value="Introducing the Space Helmet X24: a sleek, durable motorcycle helmet with advanced ventilation, anti-fog visor, and stylish graphics. Experience ultimate protection and comfort for your rides." />
+        }
+        description="description paragraph"
+        isPanel={isPanel}
+        label="description"
+        required
+      />
+      <Line
+        control={<Input value="Space Helmet X24" />}
+        description="Button label"
+        isPanel={isPanel}
+        label="productTitle"
+        required
+      />
       <Line
         control={
           <div className="border border-[#D9E0E6] rounded w-full h-7 flex items-center px-2 justify-between">
@@ -126,15 +134,6 @@ export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
       />
       <Line
         control={
-          <Input value="Introducing the Space Helmet X24: a sleek, durable motorcycle helmet with advanced ventilation, anti-fog visor, and stylish graphics. Experience ultimate protection and comfort for your rides." />
-        }
-        description="description paragraph"
-        isPanel={isPanel}
-        label="description"
-        required
-      />
-      <Line
-        control={
           <div className="relative flex items-center h-8 px-0.5 rounded-full bg-slate-200">
             <div className="relative z-10 flex items-center justify-center h-full w-14">
               False
@@ -143,25 +142,18 @@ export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
               True
             </div>
             <motion.div
-              animate={{ x: isAnimated && !isMobile && isPanel ? 0 : 56 }}
+              animate={{ x: isAnimated && !isMobile && isPanel ? 56 : 0 }}
               className="absolute bg-white rounded-full w-14 h-7"
-              initial={{ x: 56 }}
+              initial={{ x: 0 }}
               transition={{ duration: 0.2, delay: 1.2 }}
             />
           </div>
         }
         description="Disable the component"
         isPanel={isPanel}
-        label="inStock"
+        label="outOfStock"
       />
       <Line control={<Range value={0.6} />} isPanel={isPanel} label="padding" />
-      <Line
-        control={<Input value="Space Helmet X24" />}
-        description="Button label"
-        isPanel={isPanel}
-        label="productTitle"
-        required
-      />
       <Line
         control={<Radio />}
         defaultValue="medium"
