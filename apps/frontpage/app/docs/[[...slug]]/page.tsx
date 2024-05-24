@@ -61,7 +61,9 @@ export default async function Page({ params: { slug } }: PageProps) {
         >
           {page.title || 'Title is missing'}
         </h1>
-        <Renderers activeRenderer={renderers[0]?.id || ''} />
+        {!page.hideRendererSelector && (
+          <Renderers activeRenderer={renderers[0]?.id || ''} />
+        )}
         {page.tabs && page.tabs.length > 0 ? (
           <div className="flex items-center gap-8 border-b border-zinc-200">
             {page.tabs.map((tab) => {

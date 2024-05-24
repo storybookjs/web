@@ -82,7 +82,10 @@ export const getPageData = async (
     }[];
   }
 
-  const { content, frontmatter } = await compileMDX<{ title: string }>({
+  const { content, frontmatter } = await compileMDX<{
+    title?: string;
+    hideRendererSelector?: boolean;
+  }>({
     source: file,
     options: {
       parseFrontmatter: true,
