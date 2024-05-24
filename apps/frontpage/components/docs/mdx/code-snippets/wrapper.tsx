@@ -19,7 +19,6 @@ export const CodeWrapper: FC<CodeWrapperProps> = ({
     <div className="w-full mb-6 overflow-hidden border rounded border-zinc-300">
       <div className="flex items-center justify-between h-12 py-2 pl-5 pr-4 border-b border-b-zinc-300 bg-slate-50">
         <div className="flex items-center gap-2 text-sm font-bold">
-          BOOM
           <TSIcon /> {title || ''}
         </div>
         <div className="flex items-center gap-2">
