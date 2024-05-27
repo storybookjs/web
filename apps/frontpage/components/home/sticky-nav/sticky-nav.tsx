@@ -44,7 +44,10 @@ export function StickyNav({
           initial={{ opacity: 0 }}
           {...props}
         >
-          <Container className="h-full flex items-center justify-between">
+          <Container
+            asChild
+            className="h-full flex items-center justify-between"
+          >
             <section>
               <MobileMenu
                 items={items}
