@@ -39,7 +39,7 @@ export default async function Page() {
           </div>
           <Community />
           <Numbers />
-          <div className="flex gap-16 pb-20 mb-20 border-b border-b-zinc-300">
+          <div className="flex gap-16 pb-20 mb-20 border-b border-b-zinc-300 dark:border-b-slate-700">
             <NavSide />
             <div className="flex-1">
               <Support />
