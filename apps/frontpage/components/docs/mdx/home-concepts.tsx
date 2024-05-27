@@ -45,7 +45,7 @@ function Card({
 }) {
   return (
     <Link
-      className="gap-3 p-6 transition-all border rounded-md border-slate-200 hover:border-slate-300 hover:-translate-y-px dark:border-slate-800 dark:hover:border-slate-600"
+      className="gap-3 p-6 transition-all border rounded-md border-slate-200 hover:border-slate-300 hover:-translate-y-px dark:border-slate-700 dark:hover:border-slate-600"
       href={href}
     >
       <div className="flex items-center gap-4 mb-4">

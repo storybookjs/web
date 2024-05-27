@@ -89,7 +89,7 @@ function Card({
 }) {
   return (
     <Link
-      className="flex items-center h-20 gap-3 pl-5 transition-all border rounded-md border-slate-200 hover:border-slate-300 hover:-translate-y-px dark:border-slate-800 dark:hover:border-slate-600"
+      className="flex items-center h-20 gap-3 pl-5 transition-all border rounded-md border-slate-200 hover:border-slate-300 hover:-translate-y-px dark:border-slate-700 dark:hover:border-slate-600"
       href={href}
     >
       <Image

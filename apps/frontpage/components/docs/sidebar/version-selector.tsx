@@ -45,7 +45,7 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
           className="w-full h-10 px-2 mt-6"
           type="button"
         >
-          <div className="flex items-center justify-between w-full h-full text-sm transition-all border-b select-none border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-slate-800 dark:text-white">
+          <div className="flex items-center justify-between w-full h-full text-sm transition-all border-b select-none border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-slate-700 dark:text-white">
             {activeVersion.label}
             <ChevronSmallDownIcon />
           </div>
