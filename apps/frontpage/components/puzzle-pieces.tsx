@@ -680,14 +680,11 @@ const shapes = [
 
 const MAX_DISTANCE = 460;
 
-function Shape({ path, ...props }: { path: string } & MotionProps) {
-  const getPreferredScheme = () =>
-    window && window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches
-      ? 'dark'
-      : 'light';
-
-  const defaultColor = getPreferredScheme() === 'dark' ? '#1A202C' : '#F6F9FC';
-
+function Shape({
+  path,
+  defaultColor,
+  ...props
+}: { path: string; defaultColor: string } & MotionProps) {
   return (
     <motion.path
       className="outline-none focus:outline-none"
@@ -734,6 +731,15 @@ export function PuzzlePieces() {
     sequence(originShape.x, originShape.y);
   });
 
+  if (typeof window === 'undefined') return null;
+
+  const getPreferredScheme = () =>
+    window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches
+      ? 'dark'
+      : 'light';
+
+  const defaultColor = getPreferredScheme() === 'dark' ? '#1A202C' : '#F6F9FC';
+
   return (
     <motion.svg
       animate={rippleControls}
@@ -752,6 +758,7 @@ export function PuzzlePieces() {
             delay: delays,
             color,
           }}
+          defaultColor={defaultColor}
           key={id}
           onTap={() => {
             sequence(x, y);
