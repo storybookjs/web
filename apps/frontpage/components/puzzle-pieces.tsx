@@ -680,29 +680,14 @@ const shapes = [
 
 const MAX_DISTANCE = 460;
 
-const getPreferredScheme = () =>
-  window && window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches
-    ? 'dark'
-    : 'light';
-
-const defaultColor = getPreferredScheme() === 'dark' ? '#1A202C' : '#F6F9FC';
-
-const shapeVariants = {
-  visible: ({
-    delay,
-    color,
-    index,
-  }: {
-    delay: React.RefObject<number[]>;
-    color: string;
-    index: number;
-  }) => ({
-    fill: [defaultColor, color, defaultColor],
-    transition: { delay: delay.current ? delay.current[index] : 0 },
-  }),
-};
-
 function Shape({ path, ...props }: { path: string } & MotionProps) {
+  const getPreferredScheme = () =>
+    window && window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches
+      ? 'dark'
+      : 'light';
+
+  const defaultColor = getPreferredScheme() === 'dark' ? '#1A202C' : '#F6F9FC';
+
   return (
     <motion.path
       className="outline-none focus:outline-none"
@@ -710,7 +695,20 @@ function Shape({ path, ...props }: { path: string } & MotionProps) {
       d={path}
       fill={defaultColor}
       fillRule="evenodd"
-      variants={shapeVariants}
+      variants={{
+        visible: ({
+          delay,
+          color,
+          index,
+        }: {
+          delay: React.RefObject<number[]>;
+          color: string;
+          index: number;
+        }) => ({
+          fill: [defaultColor, color, defaultColor],
+          transition: { delay: delay.current ? delay.current[index] : 0 },
+        }),
+      }}
       {...props}
     />
   );
