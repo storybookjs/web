@@ -6,7 +6,7 @@ import remarkParse from 'remark-parse';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
-import { firefoxThemeLight } from '../themes/firefox-theme-vscode';
+import { rehypePrettyCodeOptions } from '../../../../../lib/rehype-pretty-code-options';
 
 interface MetadataProps {
   path: string | undefined;
@@ -40,12 +40,7 @@ export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
       const result = await unified()
         .use(remarkParse)
         .use(remarkRehype)
-        .use(rehypePrettyCode, {
-          theme: {
-            dark: 'github-dark-dimmed',
-            light: firefoxThemeLight,
-          },
-        } as never)
+        .use(rehypePrettyCode, rehypePrettyCodeOptions as never)
         .use(rehypeStringify)
         .process(valueWithBackticks);
 
