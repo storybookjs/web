@@ -680,6 +680,13 @@ const shapes = [
 
 const MAX_DISTANCE = 460;
 
+const getPreferredScheme = () =>
+  window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches
+    ? 'dark'
+    : 'light';
+
+const defaultColor = getPreferredScheme() === 'dark' ? '#1A202C' : '#F6F9FC';
+
 const shapeVariants = {
   visible: ({
     delay,
@@ -690,7 +697,7 @@ const shapeVariants = {
     color: string;
     index: number;
   }) => ({
-    fill: ['#F6F9FC', color, '#F6F9FC'],
+    fill: [defaultColor, color, defaultColor],
     transition: { delay: delay.current ? delay.current[index] : 0 },
   }),
 };
@@ -701,7 +708,7 @@ function Shape({ path, ...props }: { path: string } & MotionProps) {
       className="outline-none focus:outline-none"
       clipRule="evenodd"
       d={path}
-      fill="#F6F9FC"
+      fill={defaultColor}
       fillRule="evenodd"
       variants={shapeVariants}
       {...props}
