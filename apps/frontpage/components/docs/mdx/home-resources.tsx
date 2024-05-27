@@ -14,7 +14,7 @@ export function HomeResources() {
         <Card href="/docs/migration-guide" title="Migrate to 8.0" />
         <Card href="/docs/faq" title="FAQ" />
       </div>
-      <div className="grid grid-cols-1 gap-4 pt-12 mb-6 border-t sm:grid-cols-2 border-slate-200 dark:border-slate-800">
+      <div className="grid grid-cols-1 gap-4 pt-12 mb-6 border-t sm:grid-cols-2 border-slate-200 dark:border-slate-700">
         <div>
           <h3 className="mb-2 text-xl font-bold">Need some help?</h3>
           <a

@@ -1,8 +1,7 @@
-import { Header, Footer, Container } from '@repo/ui';
+import { Header, Footer, Container, NewsletterForm } from '@repo/ui';
 import { fetchGithubCount } from '@repo/utils';
 import { NavTop } from '../../components/community/nav-top';
 import { Community } from '../../components/community';
-import { NewsletterForm } from '../../components/newsletter-form/form';
 import { Numbers } from '../../components/community/numbers';
 import { NavSide } from '../../components/community/nav-side';
 import { Support } from '../../components/community/support';
@@ -34,13 +33,13 @@ export default async function Page() {
                 together.
               </p>
               <div className="flex items-center gap-8">
-                <NewsletterForm variant="system" />
+                <NewsletterForm />
               </div>
             </div>
           </div>
           <Community />
           <Numbers />
-          <div className="flex gap-16 pb-20 mb-20 border-b border-b-zinc-300">
+          <div className="flex gap-16 pb-20 mb-20 border-b border-b-zinc-300 dark:border-b-slate-700">
             <NavSide />
             <div className="flex-1">
               <Support />

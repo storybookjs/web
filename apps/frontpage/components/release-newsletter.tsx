@@ -1,5 +1,5 @@
-import type { FC } from "react";
-import { NewsletterForm } from "./newsletter-form/form";
+import type { FC } from 'react';
+import { NewsletterForm } from '@repo/ui';
 
 export const ReleaseNewsletter: FC = () => {
   return (
@@ -8,7 +8,7 @@ export const ReleaseNewsletter: FC = () => {
       <div className="text-md text-zinc-500 mb-6">
         Get news, free tutorials, and Storybook tips emailed to you.
       </div>
-      <NewsletterForm variant="system" />
+      <NewsletterForm />
     </div>
   );
 };

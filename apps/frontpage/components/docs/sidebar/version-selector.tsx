@@ -1,12 +1,17 @@
 'use client';
 
 import type { FC } from 'react';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import Link from 'next/link';
 import type { DocsVersion } from '@repo/utils';
 import { docsVersions } from '@repo/utils';
 import { usePathname } from 'next/navigation';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@repo/ui';
 
 interface VersionSelectorProps {
   activeVersion: DocsVersion;
@@ -38,39 +43,20 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
   };
 
   return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
-        <DropdownMenu.Trigger
-          aria-label="Customise options"
-          className="w-full h-10 px-2 mt-6"
-          type="button"
-        >
-          <div className="flex items-center justify-between w-full h-full text-sm transition-all border-b select-none border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-slate-800 dark:text-white">
-            {activeVersion.label}
-            <ChevronSmallDownIcon />
-          </div>
-        </DropdownMenu.Trigger>
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Portal>
-        <DropdownMenu.Content
-          align="start"
-          className="min-w-[200px] ml-1 bg-white rounded p-1 shadow-xl will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
-          sideOffset={4}
-        >
-          <DropdownMenu.Group>
-            {docsVersions.map((version) => (
-              <DropdownMenu.Item asChild key={version.id}>
-                <Link
-                  className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
-                  href={getLink(version.id)}
-                >
-                  {version.label}
-                </Link>
-              </DropdownMenu.Item>
-            ))}
-          </DropdownMenu.Group>
-        </DropdownMenu.Content>
-      </DropdownMenu.Portal>
-    </DropdownMenu.Root>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <div className="w-full h-10 px-2 mt-6 flex items-center justify-between text-sm transition-all border-b select-none border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-slate-700 dark:text-white">
+          {activeVersion.label}
+          <ChevronSmallDownIcon />
+        </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="ui-min-w-[12.5rem]">
+        {docsVersions.map((version) => (
+          <DropdownMenuItem asChild key={version.id}>
+            <Link href={getLink(version.id)}>{version.label}</Link>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

@@ -9,7 +9,7 @@ import type { FC } from 'react';
 
 export const NavTop: FC = () => {
   return (
-    <div className="w-full h-10 border-b border-zinc-200">
+    <div className="w-full h-10 border-b border-zinc-200 dark:border-slate-700">
       <Container className="h-full flex justify-between items-center">
         <div className="flex h-full">
           <a

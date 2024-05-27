@@ -1,4 +1,3 @@
-/* eslint-disable import/named -- TODO: Fix this when React 19 is out */
 'use client';
 
 import { cn } from '@repo/utils';
@@ -6,34 +5,27 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { CloseIcon } from '@storybook/icons';
-import { Button } from '../ui/button';
 import { saveNewsletter } from './actions';
-
-interface NewsletterFormProps {
-  variant?: 'system' | 'dark';
-}
 
 const initialState = {
   message: '',
 };
 
-function SubmitButton() {
+function SubmitButton(): JSX.Element {
   const { pending } = useFormStatus();
 
   return (
-    <Button
+    <button
       aria-disabled={pending}
-      className="absolute -translate-y-1/2 right-2 top-1/2"
-      size="md"
+      className="ui-absolute ui-flex ui-items-center ui-justify-center ui-h-8 ui-gap-2 ui-px-2 ui-text-sm ui-font-bold ui-text-white ui-transition-all ui-duration-300 -ui-translate-y-1/2 ui-bg-blue-500 ui-rounded-md ui-whitespace-nowrap ui-ring-offset-white focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 focus-visible:ui-ring-offset-2 disabled:ui-pointer-events-none disabled:ui-opacity-50 dark:ui-ring-offset-slate-950 dark:focus-visible:ui-ring-slate-300 group hover:ui-bg-blue-600 ui-right-2 ui-top-1/2"
       type="submit"
-      variant="solid"
     >
       Subscribe
-    </Button>
+    </button>
   );
 }
 
-export const NewsletterForm: FC<NewsletterFormProps> = ({ variant }) => {
+export const NewsletterForm: FC = () => {
   const [state, formAction] = useFormState(saveNewsletter, initialState);
   const [status, setStatus] = useState<'idle' | 'done' | 'error'>('idle');
   const [email, setEmail] = useState('');
@@ -48,9 +40,9 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({ variant }) => {
       {(status === 'done' || status === 'error') && (
         <div
           className={cn(
-            'absolute top-0 left-0 w-full h-full z-10 rounded-md flex items-center justify-between px-4',
-            status === 'done' && 'bg-green-300',
-            status === 'error' && 'bg-red-300',
+            'ui-absolute ui-top-0 ui-left-0 ui-w-full ui-h-full ui-z-10 ui-rounded-md ui-flex ui-items-center ui-justify-between ui-px-4',
+            status === 'done' && 'ui-bg-green-300',
+            status === 'error' && 'ui-bg-red-300',
           )}
         >
           {status === 'done' && <div>Thanks, you are all signed up!</div>}
@@ -67,12 +59,8 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({ variant }) => {
           </button>
         </div>
       )}
-
       <input
-        className={cn(
-          'rounded-md pl-4 pr-[100px] w-full h-full transition-color bg-white text-zinc-800',
-          variant === 'system' && 'border border-zinc-200',
-        )}
+        className="ui-rounded-md ui-pl-4 ui-pr-[100px] ui-w-full ui-h-full ui-transition-color ui-bg-white ui-text-zinc-800 dark:ui-bg-slate-900 ui-border ui-border-zinc-200 dark:ui-border-slate-700"
         id="email"
         name="email"
         onChange={(e) => {

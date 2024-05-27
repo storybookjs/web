@@ -5,7 +5,7 @@ import {
   TwitterIcon,
   YoutubeIcon,
 } from '@storybook/icons';
-import type { FC} from 'react';
+import type { FC } from 'react';
 import { useMemo } from 'react';
 import { zonedTimeToUtc, format } from 'date-fns-tz';
 import { isPast } from 'date-fns';
@@ -98,7 +98,7 @@ export const Events: FC = () => {
         Developers of all skill levels welcome.
       </p>
       <div className="flex flex-col md:flex-row gap-8 mb-8">
-        <div className="flex-1 border border-zinc-300 rounded p-6 md:p-8 flex gap-4 md:gap-6">
+        <div className="flex-1 border border-zinc-300 dark:border-slate-700 rounded p-6 md:p-8 flex gap-4 md:gap-6">
           <YoutubeIcon className="w-10 h-10 text-[#ea3223]" />
           <div className="flex-1">
             <h2 className="font-bold text-lg">Subscribe to YouTube channel</h2>
@@ -114,7 +114,7 @@ export const Events: FC = () => {
             </a>
           </div>
         </div>
-        <div className="flex-1 border border-zinc-300 rounded p-6 md:p-8 flex gap-4 md:gap-6">
+        <div className="flex-1 border border-zinc-300 dark:border-slate-700 rounded p-6 md:p-8 flex gap-4 md:gap-6">
           <TwitterIcon className="w-10 h-10 text-[#4999e9]" />
           <div className="flex-1">
             <h2 className="font-bold text-lg">Twitter</h2>
@@ -132,7 +132,7 @@ export const Events: FC = () => {
         </div>
       </div>
       <div className="flex flex-col md:flex-row gap-8 mb-8">
-        <div className="flex-1 border border-zinc-300 rounded p-6 md:p-8 flex gap-4 md:gap-6">
+        <div className="flex-1 border border-zinc-300 dark:border-slate-700 rounded p-6 md:p-8 flex gap-4 md:gap-6">
           <DiscordIcon className="w-10 h-10 text-[#5a65ea]" />
           <div className="flex-1">
             <h2 className="font-bold text-lg">Follow #announcements chat</h2>
@@ -188,14 +188,16 @@ export const Events: FC = () => {
         <ul>
           {localizedSessions.upcoming.map((session) => (
             <li
-              className="flex items-center h-11 border-b border-b-zinc-300 justify-between"
+              className="flex items-center h-11 border-b border-b-zinc-300 dark:border-b-slate-700 justify-between"
               key={session.id}
             >
               <div className="flex items-center gap-4">
-                <CalendarIcon className="w-4 h-4 text-zinc-500" />
+                <CalendarIcon className="w-4 h-4 text-zinc-500 dark:text-slate-400" />
                 <div className="text-md font-bold">{session.title}</div>
                 <div> — </div>
-                <div className="text-md text-zinc-500">{session.dateShort}</div>
+                <div className="text-md text-zinc-500 dark:text-slate-400">
+                  {session.dateShort}
+                </div>
               </div>
               <a
                 className="flex gap-2 items-center text-blue-500"
@@ -209,7 +211,7 @@ export const Events: FC = () => {
           ))}
         </ul>
         {localizedSessions.upcoming.length === 0 && (
-          <div className="border border-dashed border-zinc-300 rounded p-6">
+          <div className="border border-dashed border-zinc-300 dark:border-slate-700 rounded p-6">
             No upcoming sessions scheduled at the moment. To stay informed about
             new sessions, please sign up for our newsletter.
           </div>
@@ -218,14 +220,16 @@ export const Events: FC = () => {
         <ul>
           {localizedSessions.past.map((session) => (
             <li
-              className="flex items-center h-11 border-b border-b-zinc-300"
+              className="flex items-center h-11 border-b border-b-zinc-300 dark:border-slate-700"
               key={session.id}
             >
               <div className="flex items-center gap-4">
-                <CalendarIcon className="w-4 h-4 text-zinc-500" />
+                <CalendarIcon className="w-4 h-4 text-zinc-500 dark:text-slate-400" />
                 <div className="text-md font-bold">{session.title}</div>
                 <div> — </div>
-                <div className="text-md text-zinc-500">{session.dateShort}</div>
+                <div className="text-md text-zinc-500 dark:text-slate-400">
+                  {session.dateShort}
+                </div>
               </div>
             </li>
           ))}
