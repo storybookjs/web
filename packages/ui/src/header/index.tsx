@@ -118,7 +118,7 @@ export const Header: FC<HeaderProps> = ({
                 variant === 'home' &&
                   'ui-border-white/30 hover:ui-border-white ui-text-white',
                 variant === 'system' &&
-                  'ui-border ui-border-zinc-200 dark:ui-border-zinc-700 ui-text-zinc-500 dark:ui-text-white',
+                  'ui-border ui-border-zinc-200 dark:ui-border-slate-700 ui-text-zinc-500 dark:ui-text-white',
               )}
               href="https://github.com/storybookjs/storybook"
               rel="noreferrer noopener"

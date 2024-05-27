@@ -24,7 +24,7 @@ export default async function NotFound() {
           </p>
           <PuzzlePieces />
         </div>
-        <div className="flex w-full gap-4 p-6 mb-8 border rounded border-zinc-300 md:p-8 md:gap-6 lg:items-center">
+        <div className="flex w-full gap-4 p-6 mb-8 border rounded border-zinc-300 dark:border-slate-800 md:p-8 md:gap-6 lg:items-center">
           <SearchIllustration />
           <div className="flex flex-col flex-1 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
             <div className="mb-2 lg:mb-0">
@@ -34,7 +34,7 @@ export default async function NotFound() {
               </p>
             </div>
             <button
-              className="flex items-center justify-between h-10 px-3 transition-colors border rounded border-zinc-300 lg:w-60 xl:w-72 hover:border-blue-500 group"
+              className="flex items-center justify-between h-10 px-3 transition-colors border rounded border-zinc-300 dark:border-slate-800 lg:w-60 xl:w-72 hover:border-blue-500 group"
               type="button"
             >
               <div className="flex items-center gap-2 text-sm text-zinc-500">
@@ -46,7 +46,7 @@ export default async function NotFound() {
           </div>
         </div>
         <div className="flex flex-col w-full gap-8 md:flex-row">
-          <div className="flex flex-1 gap-4 p-6 border rounded border-zinc-300 md:p-8 md:gap-6">
+          <div className="flex flex-1 gap-4 p-6 border rounded border-zinc-300 dark:border-slate-800 md:p-8 md:gap-6">
             <DiscordIcon className="w-10 h-10 text-[#5B65EA]" />
             <div className="flex-1">
               <h2 className="text-lg font-bold">
@@ -65,7 +65,7 @@ export default async function NotFound() {
               </a>
             </div>
           </div>
-          <div className="flex flex-1 gap-4 p-6 border rounded border-zinc-300 md:p-8 md:gap-6">
+          <div className="flex flex-1 gap-4 p-6 border rounded border-zinc-300 dark:border-slate-800 md:p-8 md:gap-6">
             <GithubIcon className="w-10 h-10" />
             <div className="flex-1">
               <h2 className="text-lg font-bold">File an issue on GitHub</h2>
