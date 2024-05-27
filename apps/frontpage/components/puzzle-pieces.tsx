@@ -681,7 +681,7 @@ const shapes = [
 const MAX_DISTANCE = 460;
 
 const getPreferredScheme = () =>
-  window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches
+  window && window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches
     ? 'dark'
     : 'light';
 
