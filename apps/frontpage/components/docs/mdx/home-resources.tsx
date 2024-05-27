@@ -14,13 +14,14 @@ export function HomeResources() {
         <Card href="/docs/migration-guide" title="Migrate to 8.0" />
         <Card href="/docs/faq" title="FAQ" />
       </div>
-      <div className="grid grid-cols-1 gap-4 pt-12 mb-6 border-t sm:grid-cols-2 border-slate-200">
+      <div className="grid grid-cols-1 gap-4 pt-12 mb-6 border-t sm:grid-cols-2 border-slate-200 dark:border-slate-800">
         <div>
           <h3 className="mb-2 text-xl font-bold">Need some help?</h3>
           <a
             className="flex items-center gap-1 text-blue-500 transition-colors hover:text-blue-600"
             href="https://github.com/storybookjs/storybook/discussions/categories/help"
-            rel="noopener" target="_blank"
+            rel="noopener"
+            target="_blank"
           >
             Join a discussion on GitHub
             <ChevronSmallRightIcon />
@@ -31,7 +32,8 @@ export function HomeResources() {
           <a
             className="flex items-center gap-1 text-blue-500 transition-colors hover:text-blue-600"
             href="https://storybook.js.org/releases/"
-            rel="noopener" target="_blank"
+            rel="noopener"
+            target="_blank"
           >
             See changelog
             <ChevronSmallRightIcon />

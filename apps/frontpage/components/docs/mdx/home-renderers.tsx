@@ -89,7 +89,7 @@ function Card({
 }) {
   return (
     <Link
-      className="flex items-center h-20 gap-3 pl-5 transition-all border rounded-md border-slate-200 hover:border-slate-300 hover:-translate-y-px"
+      className="flex items-center h-20 gap-3 pl-5 transition-all border rounded-md border-slate-200 hover:border-slate-300 hover:-translate-y-px dark:border-slate-800 dark:hover:border-slate-600"
       href={href}
     >
       <Image
@@ -100,11 +100,17 @@ function Card({
       />
       {subtitle ? (
         <div>
-          <h3 className="font-bold text-black text-md">{title}</h3>
-          <p className="text-sm text-slate-600">{subtitle}</p>
+          <h3 className="font-bold text-black dark:text-white text-md">
+            {title}
+          </h3>
+          <p className="text-sm text-slate-600 dark:text-slate-400">
+            {subtitle}
+          </p>
         </div>
       ) : (
-        <h3 className="font-bold text-black text-md">{title}</h3>
+        <h3 className="font-bold text-black dark:text-white text-md">
+          {title}
+        </h3>
       )}
     </Link>
   );

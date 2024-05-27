@@ -56,7 +56,7 @@ export default async function Page({ params: { slug } }: PageProps) {
     <div className="flex-1 w-full py-12">
       <div className="max-w-[720px] mx-auto">
         <h1
-          className="relative mt-0 mb-6 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500"
+          className="relative mt-0 mb-6 text-4xl font-bold text-black dark:text-white transition-colors duration-200 group-hover:text-blue-500"
           data-docs-heading
         >
           {page.title || 'Title is missing'}

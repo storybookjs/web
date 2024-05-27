@@ -27,8 +27,8 @@ import {
   H2,
   H1,
 } from '../components/docs/mdx';
-import { firefoxThemeLight } from '../components/docs/mdx/code-snippets/themes/firefox-theme-vscode';
 import { generateDocsTree } from './get-tree';
+import { rehypePrettyCodeOptions } from './rehype-pretty-code-options';
 
 export const getPageData = async (
   path: string[],
@@ -107,12 +107,7 @@ export const getPageData = async (
               }
             });
           },
-          [
-            rehypePrettyCode,
-            {
-              theme: firefoxThemeLight,
-            },
-          ] as never,
+          [rehypePrettyCode, rehypePrettyCodeOptions] as never,
           // After the code is formatted, we need to get the raw code
           // This is used to get the raw code for the pre component
           () => (tree) => {

@@ -49,7 +49,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                           <li>
                             {(!lvl2.children || lvl2.children.length === 0) && (
                               <Link
-                                className="flex items-center h-8 px-2 text-sm transition-colors text-zinc-600 hover:text-blue-500"
+                                className="flex items-center h-8 px-2 text-sm transition-colors text-zinc-600 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-500"
                                 href={getUrl(lvl2.slug)}
                               >
                                 {lvl2.sidebar?.title || lvl2.title}

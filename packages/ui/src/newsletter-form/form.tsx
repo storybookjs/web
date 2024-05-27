@@ -66,8 +66,9 @@ export const NewsletterForm: FC<NewsletterFormProps> = ({ variant }) => {
 
       <input
         className={cn(
-          'ui-rounded-md ui-pl-4 ui-pr-[100px] ui-w-full ui-h-full ui-transition-color ui-bg-white ui-text-zinc-800',
-          variant === 'system' && 'ui-border ui-border-zinc-200',
+          'ui-rounded-md ui-pl-4 ui-pr-[100px] ui-w-full ui-h-full ui-transition-color ui-bg-white ui-text-zinc-800 dark:ui-bg-slate-900',
+          variant === 'system' &&
+            'ui-border ui-border-zinc-200 dark:ui-border-slate-800',
         )}
         id="email"
         name="email"

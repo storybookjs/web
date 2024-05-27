@@ -58,7 +58,7 @@ const Circle: FC<CircleProps> = ({ children, href, variant }) => {
         variant === 'home' &&
           'ui-border ui-border-zinc-700 hover:ui-border-zinc-400',
         variant !== 'home' &&
-          'ui-bg-white hover:ui-border-zinc-400 dark:ui-bg-zinc-800 dark:ui-border-zinc-700 dark:hover:ui-border-zinc-500',
+          'ui-bg-white hover:ui-border-zinc-400 dark:ui-bg-slate-900 dark:ui-border-slate-700 dark:hover:ui-border-slate-500',
       )}
       href={href}
       rel="noreferrer"

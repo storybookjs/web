@@ -10,7 +10,7 @@ export const Search: FC<HeaderProps> = ({ variant }) => {
         'ui-w-44 ui-h-8 ui-rounded-full ui-text-sm ui-flex ui-items-center ui-justify-between ui-px-3 max-[440px]:ui-hidden',
         variant === 'home' && 'ui-border ui-border-white/30 ui-text-white',
         variant === 'system' &&
-          'ui-border ui-border-zinc-200 dark:ui-border-zinc-700 ui-text-zinc-500 dark:ui-text-white',
+          'ui-border ui-border-zinc-200 dark:ui-border-slate-700 ui-text-zinc-500 dark:ui-text-white',
       )}
       type="button"
     >
@@ -20,9 +20,10 @@ export const Search: FC<HeaderProps> = ({ variant }) => {
       </div>
       <div
         className={cn(
-          'ui-text-[11px] dark:ui-text-zinc-500 ui-px-1.5 ui-rounded',
+          'ui-text-[11px] ui-px-1.5 ui-rounded',
           variant === 'home' && 'ui-bg-white/10 ui-text-white',
-          variant !== 'home' && 'ui-bg-zinc-100 dark:ui-bg-zinc-800',
+          variant !== 'home' &&
+            'ui-bg-zinc-100 dark:ui-bg-zinc-800 dark:ui-text-zinc-400',
         )}
       >
         ⌘K

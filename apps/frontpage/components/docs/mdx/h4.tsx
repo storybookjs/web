@@ -1,5 +1,5 @@
-import { LinkIcon } from "@storybook/icons";
-import type { DetailedHTMLProps, HTMLAttributes } from "react";
+import { LinkIcon } from '@storybook/icons';
+import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 type H3Props = DetailedHTMLProps<
   HTMLAttributes<HTMLHeadingElement>,
@@ -11,7 +11,7 @@ export function H4({ children, id }: H3Props) {
     <h4 className="relative text-xl mb-4 font-bold group" data-docs-heading>
       <div className="absolute -translate-y-24" id={id} />
       <a
-        className="text-black group-hover:text-blue-600 transition-colors duration-200"
+        className="text-black dark:text-white group-hover:text-blue-600 transition-colors duration-200"
         href={`#${id}`}
       >
         {children}

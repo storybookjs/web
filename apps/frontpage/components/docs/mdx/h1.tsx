@@ -10,7 +10,7 @@ export function H1({ children, id }: H1Props) {
     <h1 className="relative text-4xl mt-0 mb-6 font-bold" data-docs-heading>
       <div className="absolute -translate-y-24" id={id} />
       <a
-        className="text-black group-hover:text-blue-600 transition-colors duration-200"
+        className="text-black dark:text-white group-hover:text-blue-600 transition-colors duration-200"
         href={`#${id}`}
       >
         {children}
