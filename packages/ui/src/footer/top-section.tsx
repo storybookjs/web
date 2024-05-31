@@ -18,7 +18,7 @@ export function TopSection({ variant }: TopSectionProps): JSX.Element {
     <div className="ui-mb-14">
       <div className="ui-mb-4 ui-font-bold ui-text-md">Join the community</div>
       <div className="ui-flex ui-flex-col ui-items-start ui-gap-8 lg:ui-flex-row lg:ui-justify-between lg:ui-items-center">
-        <div className="ui-flex ui-flex-col ui-flex-1 ui-w-full ui-gap-4 sm:ui-flex-row sm:ui-items-center sm:ui-gap-6">
+        <div className="ui-flex ui-flex-col ui-w-full sm:ui-w-auto ui-gap-4 sm:ui-flex-row sm:ui-items-center sm:ui-gap-6">
           <NewsletterForm />
           <div className="ui-text-zinc-400">6,378 developers and counting</div>
         </div>
