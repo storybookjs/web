@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import type { MotionValue } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { Player } from './player';
 
@@ -9,7 +10,15 @@ const symbolVariants = {
 
 export const PublishIntegrations = forwardRef<
   HTMLImageElement | null,
-  { timeFrameStyles: React.CSSProperties }
+  {
+    timeFrameStyles: {
+      x: MotionValue<string>;
+      y: MotionValue<string>;
+      scale: number;
+      opacity: number;
+      transformOrigin: string;
+    };
+  }
 >(({ timeFrameStyles }, ref) => {
   return (
     <motion.div

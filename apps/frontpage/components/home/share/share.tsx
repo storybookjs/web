@@ -72,16 +72,16 @@ export function Share() {
       (latestPublishProgress || 0) + (latestTestProgress || 0),
   );
 
-  // const x = useTransform(
-  //   scrollProgress,
-  //   [0, 1, 2],
-  //   ['0%', `${delta.x[0]}px`, `${delta.x[1]}px`],
-  // );
-  // const y = useTransform(
-  //   scrollProgress,
-  //   [0, 1, 2],
-  //   ['0%', `${delta.y[0]}px`, `${delta.y[1]}px`],
-  // );
+  const x = useTransform(
+    scrollProgress,
+    [0, 1, 2],
+    ['0%', `${delta.x[0]}px`, `${delta.x[1]}px`],
+  );
+  const y = useTransform(
+    scrollProgress,
+    [0, 1, 2],
+    ['0%', `${delta.y[0]}px`, `${delta.y[1]}px`],
+  );
   const scale = useTransform(
     scrollProgress,
     [0, 1, 2],
@@ -123,10 +123,8 @@ export function Share() {
         <PublishIntegrations
           ref={publishRef}
           timeFrameStyles={{
-            // TODO: These are ultimately passed to a motion.img component's style attribute,
-            //       but they're not valid CSS properties. Should they be translateX & translateY?
-            // x,
-            // y,
+            x,
+            y,
             scale: scale.get(),
             opacity: opacity.get(),
             transformOrigin: 'top left',
