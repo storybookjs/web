@@ -124,7 +124,7 @@ export function ScrollDemo({
       />
       <App scrollProgress={dropInProgress} />
       <Connector
-        className="w-[24%] h-auto absolute top-[20%] left[17.8%] rotate[-56deg] z-[2]"
+        className="w-[24%] h-auto absolute top-[20%] left-[17.8%] rotate-[-56deg] z-[2]"
         name="rs-to-app"
         progress={connectorProgress}
       />
