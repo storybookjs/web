@@ -10,7 +10,7 @@ import { TestIntegrations } from './test-integrations';
 export function Share() {
   return (
     <div className="pt-12 overflow-hidden border-b border-zinc-600 sm:pt-20 md:pt-28">
-      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
+      <Container className="text-white md:flex justify-between gap-20">
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Share how the UI actually works
         </h2>
@@ -23,8 +23,8 @@ export function Share() {
         </div>
       </Container>
       <Container>
-        <div className="flex flex-row items-center gap-24 pt-28">
-          <div className="flex flex-col gap-6 text-white w-[320px] flex-shrink-0">
+        <div className="flex flex-col md:flex-row md:items-center gap-8 sm:gap-16 md:gap-24 pt-12 md:pt-28">
+          <div className="flex flex-col gap-6 text-white max-w-[520px] md:max-w-[320px] flex-shrink-0">
             <h3 className="text-2xl font-bold">
               Publish Storybook to get sign off from teammates
             </h3>
@@ -42,8 +42,8 @@ export function Share() {
           </div>
           <PublishIntegrations />
         </div>
-        <div className="flex flex-row items-center gap-24 pt-28">
-          <div className="flex flex-col gap-6 text-white w-[320px] flex-shrink-0">
+        <div className="flex flex-col md:flex-row md:items-center gap-8 sm:gap-16 md:gap-24 pt-12 md:pt-28">
+          <div className="flex flex-col gap-6 text-white max-w-[520px] md:max-w-[320px] flex-shrink-0">
             <h3 className="text-2xl font-bold">
               Embed stories in wikis, Markdown, and Figma
             </h3>
@@ -61,8 +61,8 @@ export function Share() {
           </div>
           <EmbedIntegrations />
         </div>
-        <div className="flex flex-row items-center gap-24 pt-28">
-          <div className="flex flex-col gap-6 text-white w-[320px] flex-shrink-0">
+        <div className="flex flex-col md:flex-row md:items-center gap-8 sm:gap-16 md:gap-24 pt-12 md:pt-28">
+          <div className="flex flex-col gap-6 text-white max-w-[520px] md:max-w-[320px] flex-shrink-0">
             <h3 className="text-2xl font-bold">
               <span className="inline-block border border-zinc-600 bg-zinc-800 rounded px-2 font-mono text-[19px]">
                 import

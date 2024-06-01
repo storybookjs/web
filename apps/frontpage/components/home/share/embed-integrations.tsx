@@ -159,14 +159,13 @@ const embedIntegrations = [
 
 export const EmbedIntegrations = () => {
   return (
-    <div className="w-full relative max-w-[800px] ml-[30px] sm:ml-[30px] md:w-[150%] md:col-[2/3] lg:ml-[120px]">
+    <div className="w-full relative max-w-[800px] md:w-[150%] lg:ml-[120px]">
       <IntegrationsCarousel integrations={embedIntegrations} />
       <Image
         alt=""
-        className="block w-[56%] max-w-[440px] h-auto absolute top-[22%] left-[-30%] opacity-100 user-select-none pointer-events-none sm:left-[-60px] lg:[-120px]"
+        className="block w-[56%] max-w-[440px] h-auto absolute top-[22%] -left-4  opacity-100 user-select-none pointer-events-none sm:left-[-60px] md:left-[-30%] lg:left-[-120px]"
         height="244"
         src={timeFramePicker}
-        style={{ opacity: 0 }}
         width="458"
       />
     </div>
