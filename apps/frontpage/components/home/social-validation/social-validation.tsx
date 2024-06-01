@@ -2,12 +2,7 @@ import React from 'react';
 import { cn } from '@repo/utils';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  DiscordIcon,
-  GithubIcon,
-  TwitterIcon,
-  YoutubeIcon,
-} from '@storybook/icons';
+import { DiscordIcon, GithubIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
 import { Button } from '../../ui/button';
 import { AspectRatio } from '../../ui/aspect-ratio';
@@ -37,7 +32,7 @@ const projects = [
     bgColor: '#333333',
     width: 88,
     height: 30,
-    logoAlt: 'Audi',
+    logoAlt: 'Audi UI React',
     logoUrl: '/home/community/logos/audi.svg',
     projectUrl: 'https://storybook.js.org/showcase/audi-ui-react',
   },
@@ -46,7 +41,7 @@ const projects = [
     bgColor: '#0078d4',
     width: 40,
     height: 70,
-    logoAlt: 'Audi',
+    logoAlt: 'Fluent UI React',
     logoUrl: '/home/community/logos/fluent.svg',
     projectUrl: 'https://storybook.js.org/showcase/microsoft-fluent-ui-react',
   },
@@ -55,7 +50,7 @@ const projects = [
     bgColor: '#3171A6',
     width: 52,
     height: 52,
-    logoAlt: 'WordPress',
+    logoAlt: 'WordPress Gutenberg',
     logoUrl: '/home/community/logos/wordpress.svg',
     projectUrl: 'https://storybook.js.org/showcase/wordpress-gutenberg',
   },
@@ -64,7 +59,7 @@ const projects = [
     bgColor: '#0b3d91',
     width: 100,
     height: 28,
-    logoAlt: 'WordPress',
+    logoAlt: 'Nasa Explorer 1',
     logoUrl: '/home/community/logos/nasa.svg',
     projectUrl: 'https://storybook.js.org/showcase/nasa-jpl-explorer-1',
   },
@@ -316,16 +311,26 @@ export function SocialValidation({
           </div>
         </div>
         <div className={cn(socialCard)}>
-          <TwitterIcon
-            aria-label="Discord"
-            className="text-[#4999E9]"
-            size={48}
-          />
+          <div className="w-12 h-12 flex items-center justify-center">
+            <svg
+              aria-label="Twitter"
+              fill="none"
+              height="40"
+              viewBox="0 0 14 14"
+              width="40"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11.02.446h2.137L8.49 5.816l5.51 7.28H9.67L6.298 8.683l-3.88 4.413H.282l5.004-5.735L0 .446h4.442l3.064 4.048L11.02.446zm-.759 11.357h1.18L3.796 1.655H2.502l7.759 10.148z"
+                fill="#fff"
+              />
+            </svg>
+          </div>
           <div className="text-white text-md">
             Get the latest news and updates from Storybook maintainers.
           </div>
           <Button asChild jumpOnHover rounded="full" variant="outlineHome">
-            <a href="https://twitter.com/storybookjs">Follow on Twitter</a>
+            <a href="https://twitter.com/storybookjs">Follow on X</a>
           </Button>
           <div>
             <div className="text-sm text-white">24,200+</div>
@@ -333,11 +338,24 @@ export function SocialValidation({
           </div>
         </div>
         <div className={cn(socialCard)}>
-          <YoutubeIcon
-            aria-label="Discord"
-            className="text-[#EA3223]"
-            size={48}
-          />
+          <div className="w-12 h-12 flex items-center justify-center">
+            <svg
+              fill="none"
+              height="49"
+              viewBox="0 0 48 49"
+              width="48"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M46.9969 12.9116C46.4449 10.84 44.8186 9.20874 42.7533 8.65511C39.0101 7.64893 24 7.64893 24 7.64893C24 7.64893 8.98999 7.64893 5.2467 8.65511C3.18153 9.20874 1.55497 10.84 1.00302 12.9116C0 16.6662 0 24.5 0 24.5C0 24.5 0 32.3336 1.00302 36.0886C1.55497 38.16 3.18153 39.7912 5.2467 40.3451C8.98999 41.3511 24 41.3511 24 41.3511C24 41.3511 39.0101 41.3511 42.7533 40.3451C44.8186 39.7912 46.4449 38.16 46.9969 36.0886C48 32.3336 48 24.5 48 24.5C48 24.5 48 16.6662 46.9969 12.9116Z"
+                fill="#ED1D24"
+              />
+              <path
+                d="M19.0909 31.6124L31.6364 24.5003L19.0909 17.3875V31.6124Z"
+                fill="white"
+              />
+            </svg>
+          </div>
           <div className="text-white text-md">
             Watch tutorials, feature previews, and interviews.
           </div>

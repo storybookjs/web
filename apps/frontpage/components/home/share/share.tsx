@@ -1,174 +1,88 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
-import { useScroll, useSpring, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
-import { useEventListener } from '../../../hooks/use-event-listener';
 import { LogoCloudbees } from './logo-cloudbee';
 import { PublishIntegrations } from './publish-integrations';
 import { EmbedIntegrations } from './embed-integrations';
 import { TestIntegrations } from './test-integrations';
 
 export function Share() {
-  const publishRef = useRef<HTMLImageElement | null>(null);
-  const embedRef = useRef<HTMLImageElement | null>(null);
-  const testRef = useRef<HTMLImageElement | null>(null);
-
-  const { scrollYProgress: publishYProgress } = useScroll({
-    target: embedRef,
-    offset: ['0.25 1', '0 0.5'],
-  });
-  const smoothPublishProgress = useSpring(publishYProgress, {
-    stiffness: 1000,
-    damping: 100,
-  });
-
-  const { scrollYProgress: testYProgress } = useScroll({
-    target: testRef,
-    offset: ['1 1', '0 0.5'],
-  });
-  const smoothTestProgress = useSpring(testYProgress, {
-    stiffness: 1000,
-    damping: 100,
-  });
-
-  const [delta, setDelta] = useState({
-    x: [0, 0],
-    y: [0, 0],
-    scale: [1, 1],
-  });
-
-  const handleResize = () => {
-    const embed = embedRef.current?.getBoundingClientRect();
-    const publish = publishRef.current?.getBoundingClientRect();
-    const test = testRef.current?.getBoundingClientRect();
-
-    if (embed && publish && test) {
-      const deltaX1 = embed.left - publish.left;
-      const deltaX2 = test.left - publish.left;
-      const deltaY1 = embed.top - publish.top;
-      const deltaY2 = test.top - publish.top;
-      const scale1 = embed.width / publish.width;
-      const scale2 = test.width / publish.width;
-
-      setDelta({
-        x: [deltaX1, deltaX2],
-        y: [deltaY1, deltaY2],
-        scale: [scale1, scale2],
-      });
-    }
-  };
-
-  useLayoutEffect(() => {
-    handleResize();
-  }, []);
-
-  useEventListener('resize', handleResize);
-
-  const scrollProgress = useTransform<number, number>(
-    [smoothPublishProgress, smoothTestProgress],
-    ([latestPublishProgress, latestTestProgress]) =>
-      (latestPublishProgress || 0) + (latestTestProgress || 0),
-  );
-
-  // const x = useTransform(
-  //   scrollProgress,
-  //   [0, 1, 2],
-  //   ['0%', `${delta.x[0]}px`, `${delta.x[1]}px`],
-  // );
-  // const y = useTransform(
-  //   scrollProgress,
-  //   [0, 1, 2],
-  //   ['0%', `${delta.y[0]}px`, `${delta.y[1]}px`],
-  // );
-  const scale = useTransform(
-    scrollProgress,
-    [0, 1, 2],
-    [1, delta.scale[0], delta.scale[1]],
-  );
-  const opacity = useTransform(scrollProgress, [0, 1, 2], [1, 1, 0]);
-
   return (
     <div className="pt-12 overflow-hidden border-b border-zinc-600 sm:pt-20 md:pt-28">
-      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
+      <Container className="text-white md:flex justify-between gap-20">
         <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
           Share how the UI actually works
         </h2>
         <div className="flex-1 pt-4">
-          <p className="mb-6 leading-7">
+          <p className="mb-6 leading-7 max-w-[520px]">
             Stories show how UIs actually work not just a static design of how
             they&apos;re supposed to work. That keeps everyone aligned on
             what&apos;s currently in production.
           </p>
         </div>
       </Container>
-      <Container className="pt-12 pb-4 grid grid-cols-1 grid-flow-dense justify-items-center items-center gap-12 md:pt-28 md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-x-24 md:gap-y-48">
-        <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white col-[1/-1] first-of-type:pt-0 sm:max-w-full sm:pt-16 md:col-[1/2]">
-          <h3 className="text-2xl font-bold">
-            Publish Storybook to get sign off from teammates
-          </h3>
-          <p className="leading-7 text-md">
-            Publish Storybook as a website for stakeholders to reference. Your
-            team can check that the UI looks right without touching code.
-          </p>
-          <Link
-            className="flex items-center gap-2 font-bold text-blue-500"
-            href="/docs/react/sharing/publish-storybook"
-          >
-            Publish Storybook
-            <ChevronSmallRightIcon />
-          </Link>
+      <Container>
+        <div className="flex flex-col md:flex-row md:items-center gap-8 sm:gap-16 md:gap-24 pt-12 md:pt-28">
+          <div className="flex flex-col gap-6 text-white max-w-[520px] md:max-w-[320px] flex-shrink-0">
+            <h3 className="text-2xl font-bold">
+              Publish Storybook to get sign off from teammates
+            </h3>
+            <p className="leading-7 text-md">
+              Publish Storybook as a website for stakeholders to reference. Your
+              team can check that the UI looks right without touching code.
+            </p>
+            <Link
+              className="flex items-center gap-2 font-bold text-blue-500"
+              href="/docs/react/sharing/publish-storybook"
+            >
+              Publish Storybook
+              <ChevronSmallRightIcon />
+            </Link>
+          </div>
+          <PublishIntegrations />
         </div>
-        <PublishIntegrations
-          ref={publishRef}
-          timeFrameStyles={{
-            // TODO: These are ultimately passed to a motion.img component's style attribute,
-            //       but they're not valid CSS properties. Should they be translateX & translateY?
-            // x,
-            // y,
-            scale: scale.get(),
-            opacity: opacity.get(),
-            transformOrigin: 'top left',
-          }}
-        />
-        <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white col-[1/-1] first-of-type:pt-0 sm:max-w-full sm:pt-16 md:col-[1/2]">
-          <h3 className="text-2xl font-bold">
-            Embed stories in wikis, Markdown, and Figma
-          </h3>
-          <p className="leading-7 text-md">
-            Embed stories to showcase your work to teammates and the developer
-            community. Works with the oEmbed standard.
-          </p>
-          <Link
-            className="flex items-center gap-2 font-bold text-blue-500"
-            href="/docs/react/sharing/embed"
-          >
-            Embed stories
-            <ChevronSmallRightIcon />
-          </Link>
+        <div className="flex flex-col md:flex-row md:items-center gap-8 sm:gap-16 md:gap-24 pt-12 md:pt-28">
+          <div className="flex flex-col gap-6 text-white max-w-[520px] md:max-w-[320px] flex-shrink-0">
+            <h3 className="text-2xl font-bold">
+              Embed stories in wikis, Markdown, and Figma
+            </h3>
+            <p className="leading-7 text-md">
+              Embed stories to showcase your work to teammates and the developer
+              community. Works with the oEmbed standard.
+            </p>
+            <Link
+              className="flex items-center gap-2 font-bold text-blue-500"
+              href="/docs/react/sharing/embed"
+            >
+              Embed stories
+              <ChevronSmallRightIcon />
+            </Link>
+          </div>
+          <EmbedIntegrations />
         </div>
-        <EmbedIntegrations ref={embedRef} />
-        <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white col-[1/-1] first-of-type:pt-0 sm:max-w-full sm:pt-16 md:col-[1/2]">
-          <h3 className="text-2xl font-bold">
-            <span className="inline-block border border-zinc-600 bg-zinc-800 rounded px-2 font-mono text-[19px]">
-              import
-            </span>{' '}
-            stories into other JavaScript tooling
-          </h3>
-          <p className="leading-7 text-md">
-            Stories are a portable standard based on ES6 modules. Write stories
-            once and import them into any JavaScript library.
-          </p>
-          <Link
-            className="flex items-center gap-2 font-bold text-blue-500"
-            href="/docs/react/writing-tests/stories-in-unit-tests"
-          >
-            Reuse stories in tests and libraries
-            <ChevronSmallRightIcon />
-          </Link>
+        <div className="flex flex-col md:flex-row md:items-center gap-8 sm:gap-16 md:gap-24 pt-12 md:pt-28">
+          <div className="flex flex-col gap-6 text-white max-w-[520px] md:max-w-[320px] flex-shrink-0">
+            <h3 className="text-2xl font-bold">
+              <span className="inline-block border border-zinc-600 bg-zinc-800 rounded px-2 font-mono text-[19px]">
+                import
+              </span>{' '}
+              stories into other JavaScript tooling
+            </h3>
+            <p className="leading-7 text-md">
+              Stories are a portable standard based on ES6 modules. Write
+              stories once and import them into any JavaScript library.
+            </p>
+            <Link
+              className="flex items-center gap-2 font-bold text-blue-500"
+              href="/docs/react/writing-tests/stories-in-unit-tests"
+            >
+              Reuse stories in tests and libraries
+              <ChevronSmallRightIcon />
+            </Link>
+          </div>
+          <TestIntegrations />
         </div>
-        <TestIntegrations ref={testRef} />
       </Container>
       <Testimonial
         avatarUrl="https://avatars2.githubusercontent.com/u/8724083?s=460&v=4"
