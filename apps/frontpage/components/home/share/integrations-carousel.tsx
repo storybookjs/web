@@ -1,6 +1,7 @@
 import { cn } from '@repo/utils';
 import type { ComponentProps, ReactNode, FC } from 'react';
 import React, { useState, useRef } from 'react';
+import Image from 'next/image';
 import type { Button } from '../../ui/button';
 
 interface IntegrationProps extends ComponentProps<typeof Button> {
@@ -44,7 +45,7 @@ export const IntegrationsCarousel: FC<IntegrationsCarouselProps> = ({
             type="button"
             {...integration}
           >
-            <img alt={name} src={image} />
+            <Image alt={name || ''} src={image} />
           </button>
         ))}
         <div className="text-zinc-600">+ and more</div>
