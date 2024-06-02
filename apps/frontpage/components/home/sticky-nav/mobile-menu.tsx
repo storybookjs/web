@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import Link from 'next/link';
-import { Button } from "../../ui/button";
+import { Button } from '../../ui/button';
 
 interface MenuItemProps {
   id: string;
@@ -28,7 +28,7 @@ export const MobileMenu: FC<MenuProps> = ({ items, label }) => {
       <DropdownMenu.Portal>
         <DropdownMenu.Content
           align="start"
-          className="min-w-[200px] ml-1 bg-white rounded p-1 shadow-xl will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
+          className="min-w-[200px] ml-1 bg-white rounded p-1 shadow-xl will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade z-50"
           sideOffset={4}
         >
           <DropdownMenu.Group>
