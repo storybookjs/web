@@ -12,8 +12,9 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
       <DropdownMenu.Trigger asChild>
         <button
           className={cn(
-            'ui-group ui-flex ui-items-center ui-justify-center ui-gap-2 ui-text-sm ui-text-zinc-500 ui-font-bold hover:ui-bg-blue-100 hover:ui-text-blue-500  dark:ui-text-white dark:hover:ui-bg-blue-500/10 ui-h-9 ui-w-9 ui-rounded min-[920px]:ui-hidden',
+            'ui-group ui-flex ui-items-center ui-justify-center ui-gap-2 ui-text-sm  ui-font-bold hover:ui-bg-blue-100 hover:ui-text-blue-500  dark:ui-text-white dark:hover:ui-bg-blue-500/10 ui-h-9 ui-w-9 ui-rounded min-[920px]:ui-hidden',
             variant === 'home' && 'ui-text-white',
+            variant === 'system' && 'ui-text-zinc-500',
           )}
           type="button"
         >

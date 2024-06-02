@@ -173,14 +173,14 @@ export function MergeAndShip() {
               <div className="flex-1 min-w-0">
                 <div className="relative w-full h-6">
                   <motion.div
-                    className="absolute top-0 left-0 w-full overflow-ellipsis text-black"
+                    className="absolute top-0 left-0 w-full truncate text-black"
                     transition={{ duration: 0.4 }}
                     variants={textVariantsChecked}
                   >
                     <b>{label}</b> - {done}
                   </motion.div>
                   <motion.div
-                    className="absolute top-0 left-0 w-full overflow-ellipsis text-black"
+                    className="absolute top-0 left-0 w-full truncate text-black"
                     transition={{ duration: 0.4 }}
                     variants={textVariantsChecking}
                   >
