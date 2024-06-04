@@ -36,7 +36,10 @@ export const NewsletterForm: FC = () => {
   }, [state.message]);
 
   return (
-    <form action={formAction} className="relative w-full max-w-[360px] h-12">
+    <form
+      action={formAction}
+      className="ui-relative ui-w-full ui-min-w-[360px] ui-h-12"
+    >
       {(status === 'done' || status === 'error') && (
         <div
           className={cn(
