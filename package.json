@@ -13,12 +13,12 @@
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "prettier": "^3.2.5",
-    "turbo": "^1.13.3"
+    "turbo": "^2.0.1"
   },
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "npm@10.7.0",
+  "packageManager": "npm@10.8.0",
   "workspaces": [
     "apps/*",
     "packages/*"
