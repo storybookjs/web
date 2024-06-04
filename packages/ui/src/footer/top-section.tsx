@@ -15,7 +15,9 @@ export function TopSection({ variant }: TopSectionProps): JSX.Element {
       <div className="ui-flex ui-flex-col ui-items-start ui-gap-8 lg:ui-flex-row lg:ui-justify-between lg:ui-items-center">
         <div className="ui-flex ui-flex-col ui-w-full sm:ui-w-auto ui-gap-4 sm:ui-flex-row sm:ui-items-center sm:ui-gap-6">
           <NewsletterForm />
-          <div className="ui-text-zinc-400">6,378 developers and counting</div>
+          <div className="ui-text-slate-400 w-full">
+            6,378 developers and counting
+          </div>
         </div>
         <div className="ui-flex ui-items-center ui-gap-4">
           <Circle href="http://github.com/storybookjs" variant={variant}>
