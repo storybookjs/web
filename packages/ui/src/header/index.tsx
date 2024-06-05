@@ -12,6 +12,7 @@ import { Search } from './search';
 import { MobileMenu } from './mobile-menu';
 import { Submenu } from './submenu';
 import { Button } from './button';
+import { nav } from './nav';
 
 interface TreeMetaProps {
   title: string;
@@ -54,7 +55,7 @@ export const Header: FC<HeaderProps> = ({
         'ui-w-full ui-relative ui-z-50',
         variant === 'home' && 'ui-border-b ui-border-white/20',
         variant === 'system' &&
-          'ui-sticky ui-top-0 ui-z-40 ui-backdrop-blur ui-bg-white/60 dark:ui-bg-slate-950/80 lg:ui-border-b lg:ui-border-black/5 dark:ui-border-slate-700',
+          'ui-sticky ui-top-0 ui-z-40 ui-backdrop-blur ui-bg-white/80 sm:ui-bg-white/60 dark:ui-bg-slate-950/80 lg:ui-border-b lg:ui-border-black/5 dark:ui-border-slate-700',
       )}
     >
       <div className="ui-mx-auto ui-max-w-8xl">
@@ -74,38 +75,17 @@ export const Header: FC<HeaderProps> = ({
             </Link>
             <NavigationMenu.Root className="max-[920px]:ui-hidden">
               <NavigationMenu.List className="ui-flex ui-gap-2">
-                <Button
-                  active={pathname === '/docs'}
-                  href="/docs"
-                  variant={variant}
-                >
-                  Docs
-                </Button>
-                <Button external href="/integrations" variant={variant}>
-                  Addons
-                </Button>
-                <Button external href="/showcase" variant={variant}>
-                  Showcase
-                </Button>
-                <Button external href="/blog" variant={variant}>
-                  Blog
-                </Button>
-                <Button
-                  external
-                  externalIcon
-                  href="https://www.chromatic.com/storybook?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
-                  variant={variant}
-                >
-                  Visual Test
-                </Button>
-                <Button
-                  external
-                  externalIcon
-                  href="https://www.chromatic.com/sales?utm_source=storybook_website&utm_medium=link&utm_campaign=storybook"
-                  variant={variant}
-                >
-                  Enterprise
-                </Button>
+                {nav.map((item) => (
+                  <Button
+                    active={pathname === item.href}
+                    external={item.external}
+                    externalIcon={item.externalIcon}
+                    href={item.href}
+                    key={item.title}
+                    title={item.title}
+                    variant={variant}
+                  />
+                ))}
               </NavigationMenu.List>
             </NavigationMenu.Root>
           </div>
@@ -113,7 +93,7 @@ export const Header: FC<HeaderProps> = ({
             <a
               aria-label="Star Storybook on GitHub"
               className={cn(
-                'ui-h-8 ui-flex ui-items-center ui-justify-center ui-border ui-rounded-full ui-transition-colors max-[440px]:ui-hidden ui-px-3 ui-gap-2',
+                'ui-h-8 ui-flex ui-items-center ui-justify-center ui-border ui-rounded-full ui-transition-colors max-[992px]:ui-hidden ui-px-3 ui-gap-2',
                 githubCount === 0 && 'w-8 px-0',
                 variant === 'home' &&
                   'ui-border-white/30 hover:ui-border-white ui-text-white',
@@ -138,7 +118,7 @@ export const Header: FC<HeaderProps> = ({
                 </span>
               )}
             </a>
-            <Search variant={variant} />
+            <Search className="max-[440px]:ui-hidden" variant={variant} />
           </div>
           <MobileMenu variant={variant} />
         </div>
