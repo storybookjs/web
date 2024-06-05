@@ -1,5 +1,8 @@
 {
   "rewrites": [
-    { "source": "/blog", "destination": "https://storybookblog.vercel.app/" }
+    {
+      "source": "/tutorials",
+      "destination": "https://storybook-tutorials.netlify.app/"
+    }
   ]
 }
