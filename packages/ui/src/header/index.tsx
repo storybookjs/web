@@ -1,51 +1,27 @@
 'use client';
 
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { cn } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { GithubIcon } from '@storybook/icons';
-import type { DocsVersion } from '@repo/utils';
 import { StorybookLogo } from '../logos/storybook';
 import { Search } from './search';
 import { MobileMenu } from './mobile-menu';
-import { Submenu } from './submenu';
 import { Button } from './button';
 import { nav } from './nav';
 
-interface TreeMetaProps {
-  title: string;
-  sidebar?: {
-    title?: string;
-    order?: number;
-  };
-  tab?: {
-    title?: string;
-    order?: number;
-  };
-  isTab?: boolean;
-}
-
-interface TreeProps extends TreeMetaProps {
-  name: string;
-  slug: string;
-  pathSegment: string;
-  type: 'directory' | 'link' | 'tab';
-  children?: TreeProps[];
-}
 export interface HeaderProps {
   variant?: 'home' | 'system';
-  tree?: TreeProps[];
-  activeVersion?: DocsVersion;
   githubCount?: number;
+  subMenu?: ReactNode;
 }
 
 export const Header: FC<HeaderProps> = ({
   variant = 'home',
-  tree,
-  activeVersion,
   githubCount = 0,
+  subMenu,
 }) => {
   const pathname = usePathname();
 
@@ -122,13 +98,7 @@ export const Header: FC<HeaderProps> = ({
           </div>
           <MobileMenu variant={variant} />
         </div>
-        {pathname.startsWith('/docs') && (
-          <Submenu
-            activeVersion={activeVersion}
-            tree={tree}
-            variant={variant}
-          />
-        )}
+        {subMenu}
       </div>
     </header>
   );
