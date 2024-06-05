@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/tutorials",
-      "destination": "https://storybook-tutorials.netlify.app/"
+      "destination": "https://storybook-tutorials.netlify.app/tutorials"
     }
   ]
 }
