@@ -9,13 +9,13 @@ import { TestIntegrations } from './test-integrations';
 
 export function Share() {
   return (
-    <div className="pt-12 overflow-hidden border-b border-zinc-600 sm:pt-20 md:pt-28">
-      <Container className="text-white md:flex justify-between gap-20">
-        <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
+    <div className="overflow-hidden border-b border-zinc-600 pt-12 sm:pt-20 md:pt-28">
+      <Container className="justify-between gap-20 text-white md:flex">
+        <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
           Share how the UI actually works
         </h2>
         <div className="flex-1 pt-4">
-          <p className="mb-6 leading-7 max-w-[520px]">
+          <p className="mb-6 max-w-[520px] leading-7">
             Stories show how UIs actually work not just a static design of how
             they&apos;re supposed to work. That keeps everyone aligned on
             what&apos;s currently in production.
@@ -23,12 +23,12 @@ export function Share() {
         </div>
       </Container>
       <Container>
-        <div className="flex flex-col md:flex-row md:items-center gap-8 sm:gap-16 md:gap-24 pt-12 md:pt-28">
-          <div className="flex flex-col gap-6 text-white max-w-[520px] md:max-w-[320px] flex-shrink-0">
+        <div className="flex flex-col gap-8 pt-12 sm:gap-16 md:flex-row md:items-center md:gap-24 md:pt-40">
+          <div className="flex max-w-[520px] flex-shrink-0 flex-col gap-6 text-white md:max-w-[320px]">
             <h3 className="text-2xl font-bold">
               Publish Storybook to get sign off from teammates
             </h3>
-            <p className="leading-7 text-md">
+            <p className="text-md leading-7">
               Publish Storybook as a website for stakeholders to reference. Your
               team can check that the UI looks right without touching code.
             </p>
@@ -42,12 +42,12 @@ export function Share() {
           </div>
           <PublishIntegrations />
         </div>
-        <div className="flex flex-col md:flex-row md:items-center gap-8 sm:gap-16 md:gap-24 pt-12 md:pt-28">
-          <div className="flex flex-col gap-6 text-white max-w-[520px] md:max-w-[320px] flex-shrink-0">
+        <div className="flex flex-col gap-8 pt-12 sm:gap-16 md:flex-row md:items-center md:gap-24 md:pt-48">
+          <div className="flex max-w-[520px] flex-shrink-0 flex-col gap-6 text-white md:max-w-[320px]">
             <h3 className="text-2xl font-bold">
               Embed stories in wikis, Markdown, and Figma
             </h3>
-            <p className="leading-7 text-md">
+            <p className="text-md leading-7">
               Embed stories to showcase your work to teammates and the developer
               community. Works with the oEmbed standard.
             </p>
@@ -61,15 +61,15 @@ export function Share() {
           </div>
           <EmbedIntegrations />
         </div>
-        <div className="flex flex-col md:flex-row md:items-center gap-8 sm:gap-16 md:gap-24 pt-12 md:pt-28">
-          <div className="flex flex-col gap-6 text-white max-w-[520px] md:max-w-[320px] flex-shrink-0">
+        <div className="flex flex-col gap-8 pt-12 sm:gap-16 md:flex-row md:items-center md:gap-24 md:pt-48">
+          <div className="flex max-w-[520px] flex-shrink-0 flex-col gap-6 text-white md:max-w-[320px]">
             <h3 className="text-2xl font-bold">
-              <span className="inline-block border border-zinc-600 bg-zinc-800 rounded px-2 font-mono text-[19px]">
+              <span className="inline-block rounded border border-zinc-600 bg-zinc-800 px-2 font-mono text-[19px]">
                 import
               </span>{' '}
               stories into other JavaScript tooling
             </h3>
-            <p className="leading-7 text-md">
+            <p className="text-md leading-7">
               Stories are a portable standard based on ES6 modules. Write
               stories once and import them into any JavaScript library.
             </p>
