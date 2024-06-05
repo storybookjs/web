@@ -1,12 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/tutorials",
-      "destination": "https://storybook-tutorials.netlify.app/tutorials"
+      "source": "/tutorials/:match*",
+      "destination": "https://storybook-tutorials.netlify.app/tutorials/:match*"
     },
     {
-      "source": "/blog",
-      "destination": "https://storybook-blog.netlify.app/blog/"
+      "source": "/blog/:match*",
+      "destination": "https://storybook-blog.netlify.app/blog/:match*"
     }
   ]
 }
