@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   title: 'Storybook: Frontend workshop for UI development',
   description:
     "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
+  openGraph: {
+    url: 'https://storybook.js.org',
+    siteName: 'Storybook',
+  },
 };
 
 export default function RootLayout({
