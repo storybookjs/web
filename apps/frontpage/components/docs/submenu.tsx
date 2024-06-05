@@ -27,7 +27,7 @@ export const Submenu: FC<SubmenuProps> = ({ tree, activeVersion }) => {
   }
 
   return (
-    <div className="flex items-center gap-3 border-b border-zinc-200 p-4 text-sm sm:px-8 md:hidden dark:border-zinc-700">
+    <div className="flex items-center gap-3 border-b border-zinc-200 p-4 text-sm sm:px-8 md:hidden dark:border-slate-800">
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
           <button
@@ -42,7 +42,7 @@ export const Submenu: FC<SubmenuProps> = ({ tree, activeVersion }) => {
         <DropdownMenu.Portal>
           <DropdownMenu.Content
             align="end"
-            className="data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade mt-[17px] h-[74vh] w-screen rounded-b-lg bg-white shadow-xl md:mt-2 md:h-[50vh] md:w-64 md:rounded-lg md:border md:border-zinc-200"
+            className="data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade mt-[17px] h-[74vh] w-screen rounded-b-lg bg-white shadow-xl md:mt-2 md:h-[50vh] md:w-64 md:rounded-lg dark:bg-slate-950"
           >
             <ScrollArea.Root className="h-full w-full">
               <ScrollArea.Viewport className="h-full w-full p-4 md:p-6 md:pt-5">
@@ -63,9 +63,9 @@ export const Submenu: FC<SubmenuProps> = ({ tree, activeVersion }) => {
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
-      <div className="text-md flex items-center gap-1 font-bold text-slate-500">
+      <div className="text-md flex items-center gap-1 font-bold text-slate-500 dark:text-white">
         Docs <ChevronSmallRightIcon />
-        <span className="text-black">{title}</span>
+        <span className="text-black dark:text-white">{title}</span>
       </div>
     </div>
   );
