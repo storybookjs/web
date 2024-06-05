@@ -32,7 +32,7 @@ export const DocsMainNav: FC = () => {
         label="API"
       />
       <Line
-        href="/#"
+        href="/tutorials"
         icon={<TutorialsIcon />}
         isActive={pathname === '/tutorials'}
         label="Tutorials"
