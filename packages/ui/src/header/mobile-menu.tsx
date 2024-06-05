@@ -15,11 +15,11 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
       <DropdownMenu.Trigger asChild>
         <button
           className={cn(
-            'ui-group ui-flex ui-items-center ui-justify-center dark:ui-text-white dark:hover:ui-bg-blue-500/10 ui-h-9 ui-w-9 ui-rounded min-[920px]:ui-hidden focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 dark:ui-focus-visible:ring-slate-300 ui-duration-300',
+            'ui-group ui-flex ui-items-center ui-gap-2 ui-justify-center ui-h-9 ui-w-9 ui-rounded min-[920px]:ui-hidden focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 dark:ui-focus-visible:ring-slate-300 ui-duration-300',
             variant === 'home' &&
-              'ui-group ui-flex ui-items-center ui-justify-center ui-gap-2 ui-text-sm ui-text-white ui-font-bold hover:ui-bg-white/10 hover:ui-text-white',
+              'ui-text-white ui-font-bold hover:ui-bg-white/10 hover:ui-text-white',
             variant === 'system' &&
-              'ui-group ui-flex ui-items-center ui-justify-center ui-gap-2 ui-text-sm ui-text-zinc-500 ui-font-bold hover:ui-bg-[rgba(0,0,0,0.04)] hover:ui-text-blue-500 dark:ui-text-white dark:hover:ui-bg-white/5',
+              'ui-text-zinc-500 ui-font-bold hover:ui-bg-[rgba(0,0,0,0.04)] hover:ui-text-blue-500 dark:ui-text-white dark:hover:ui-bg-white/5',
           )}
           type="button"
         >

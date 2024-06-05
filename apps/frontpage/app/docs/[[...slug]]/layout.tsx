@@ -4,12 +4,13 @@ import Image from 'next/image';
 import { fetchGithubCount } from '@repo/utils';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { TableOfContent } from '../../../components/docs/table-of-content';
-import { NavDocs } from '../../../components/docs/sidebar/nav-docs';
+import { NavDocs } from '../../../components/docs/sidebar/docs-nav';
 import { generateDocsTree } from '../../../lib/get-tree';
 import { DocsProvider } from '../provider';
 import { getVersion } from '../../../lib/get-version';
 import { slugHasVersion } from '../../../lib/slug-has-version';
 import { getPageData } from '../../../lib/get-page';
+import { Submenu } from '../../../components/docs/submenu';
 
 export const metadata: Metadata = {
   title: 'Storybook',
@@ -37,20 +38,19 @@ export default async function Layout({
   return (
     <DocsProvider>
       <Header
-        activeVersion={activeVersion}
         githubCount={githubCount}
-        tree={tree}
+        subMenu={<Submenu activeVersion={activeVersion} tree={tree} />}
         variant="system"
       />
       <Image
         alt="Storybook Docs"
-        className="absolute top-0 left-0 w-full -z-10"
+        className="absolute left-0 top-0 -z-10 w-full"
         height={339}
         priority
         src="/bubbles.png"
         width={1800}
       />
-      <Container asChild className="md:pl-5 lg:pr-8 flex gap-4 lg:gap-12">
+      <Container asChild className="flex gap-4 md:pl-5 lg:gap-12 lg:pr-8">
         <main>
           <Sidebar>
             <NavDocs activeVersion={activeVersion} tree={tree} />

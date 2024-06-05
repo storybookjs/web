@@ -1,51 +1,27 @@
 'use client';
 
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { cn } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { GithubIcon } from '@storybook/icons';
-import type { DocsVersion } from '@repo/utils';
 import { StorybookLogo } from '../logos/storybook';
 import { Search } from './search';
 import { MobileMenu } from './mobile-menu';
-import { Submenu } from './submenu';
 import { Button } from './button';
 import { nav } from './nav';
 
-interface TreeMetaProps {
-  title: string;
-  sidebar?: {
-    title?: string;
-    order?: number;
-  };
-  tab?: {
-    title?: string;
-    order?: number;
-  };
-  isTab?: boolean;
-}
-
-interface TreeProps extends TreeMetaProps {
-  name: string;
-  slug: string;
-  pathSegment: string;
-  type: 'directory' | 'link' | 'tab';
-  children?: TreeProps[];
-}
 export interface HeaderProps {
   variant?: 'home' | 'system';
-  tree?: TreeProps[];
-  activeVersion?: DocsVersion;
   githubCount?: number;
+  subMenu?: ReactNode;
 }
 
 export const Header: FC<HeaderProps> = ({
   variant = 'home',
-  tree,
-  activeVersion,
   githubCount = 0,
+  subMenu,
 }) => {
   const pathname = usePathname();
 
@@ -55,7 +31,7 @@ export const Header: FC<HeaderProps> = ({
         'ui-w-full ui-relative ui-z-50',
         variant === 'home' && 'ui-border-b ui-border-white/20',
         variant === 'system' &&
-          'ui-sticky ui-top-0 ui-z-40 ui-backdrop-blur ui-bg-white/80 sm:ui-bg-white/60 dark:ui-bg-slate-950/80 lg:ui-border-b lg:ui-border-black/5 dark:ui-border-slate-700',
+          'ui-sticky ui-top-0 ui-z-40 ui-backdrop-blur ui-bg-white/80 sm:ui-bg-white/60 dark:ui-bg-slate-950/80 lg:ui-border-b lg:ui-border-black/5 dark:ui-border-slate-800',
       )}
     >
       <div className="ui-mx-auto ui-max-w-8xl">
@@ -63,7 +39,7 @@ export const Header: FC<HeaderProps> = ({
           className={cn(
             'ui-h-18 ui-py-4 ui-px-4 sm:ui-px-8 md:ui-px-8 lg:ui-border-0 ui-flex ui-items-center ui-justify-between',
             variant === 'system' &&
-              'ui-border-b ui-border-zinc-200 dark:ui-border-zinc-700',
+              'ui-border-b ui-border-zinc-200 dark:ui-border-slate-800',
           )}
         >
           <div className="ui-flex ui-items-center ui-gap-6">
@@ -122,13 +98,7 @@ export const Header: FC<HeaderProps> = ({
           </div>
           <MobileMenu variant={variant} />
         </div>
-        {pathname.startsWith('/docs') && (
-          <Submenu
-            activeVersion={activeVersion}
-            tree={tree}
-            variant={variant}
-          />
-        )}
+        {subMenu}
       </div>
     </header>
   );
