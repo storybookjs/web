@@ -3,6 +3,10 @@
     {
       "source": "/tutorials",
       "destination": "https://storybook-tutorials.netlify.app/tutorials"
+    },
+    {
+      "source": "/blog",
+      "destination": "https://storybook-blog.netlify.app/blog/"
     }
   ]
 }
