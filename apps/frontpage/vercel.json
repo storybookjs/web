@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/blog", "destination": "https://storybookjs.vercel.app/" }
+    { "source": "/blog", "destination": "https://storybookblog.vercel.app/" }
   ]
 }
