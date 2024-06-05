@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Nunito_Sans as nunitoSans } from 'next/font/google';
 import { cn } from '@repo/utils';
 import { Providers } from './providers';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import './globals.css';
 import '@repo/ui/styles.css';
@@ -36,6 +37,7 @@ export default function RootLayout({
         )}
       >
         <Providers>{children}</Providers>
+        <SpeedInsights />
       </body>
     </html>
   );

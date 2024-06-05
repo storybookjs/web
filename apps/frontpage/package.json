@@ -25,6 +25,7 @@
     "@repo/ui": "*",
     "@repo/utils": "*",
     "@storybook/icons": "^1.2.9",
+    "@vercel/speed-insights": "^1.0.11",
     "class-variance-authority": "^0.7.0",
     "cookies-next": "^4.1.1",
     "copy-to-clipboard": "^3.3.3",
