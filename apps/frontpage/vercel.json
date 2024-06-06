@@ -11,6 +11,10 @@
     {
       "source": "/showcase/:match*",
       "destination": "https://storybook-component-catalog.netlify.app/showcase/:match*"
+    },
+    {
+      "source": "/status/:match*",
+      "destination": "https://storybook-status.netlify.app/status/:match*"
     }
   ]
 }
