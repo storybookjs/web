@@ -7,6 +7,10 @@
     {
       "source": "/blog/:match*",
       "destination": "https://storybook-blog.netlify.app/blog/:match*"
+    },
+    {
+      "source": "/showcase/:match*",
+      "destination": "https://storybook-component-catalog.netlify.app/showcase/:match*"
     }
   ]
 }
