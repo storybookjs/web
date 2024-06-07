@@ -6,7 +6,7 @@ interface PProps {
 
 export const P: FC<PProps> = ({ children }) => {
   return (
-    <p className="text-md leading-7 mb-4 mt-0 [&>a]:text-blue-700">
+    <p className="text-md mb-6 mt-0 leading-7 [&>a]:text-blue-500">
       {children}
     </p>
   );
