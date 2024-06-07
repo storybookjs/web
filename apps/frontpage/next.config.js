@@ -252,6 +252,94 @@ module.exports = {
         destination: '/docs/api/writing-presets',
         permanent: true,
       },
+      ////// Other ////////////////////////////////////
+      {
+        source: '/telemetry',
+        destination: '/docs/configure/telemetry',
+        permanent: true,
+      },
+      ////// Renderers ////////////////////////////////
+      {
+        source: '/docs/react/get-started/examples',
+        destination: '/showcase',
+        permanent: true,
+      },
+      {
+        source: '/docs/vue/get-started/examples',
+        destination: '/showcase',
+        permanent: true,
+      },
+      {
+        source: '/docs/angular/get-started/examples',
+        destination: '/showcase',
+        permanent: true,
+      },
+      {
+        source: '/docs/web-components/get-started/examples',
+        destination: '/showcase',
+        permanent: true,
+      },
+      {
+        source: '/docs/ember/get-started/examples',
+        destination: '/showcase',
+        permanent: true,
+      },
+      {
+        source: '/docs/html/get-started/examples',
+        destination: '/showcase',
+        permanent: true,
+      },
+      {
+        source: '/docs/mithril/get-started/examples',
+        destination: '/showcase',
+        permanent: true,
+      },
+      {
+        source: '/docs/marko/get-started/examples',
+        destination: '/showcase',
+        permanent: true,
+      },
+      {
+        source: '/docs/svelte/get-started/examples',
+        destination: '/showcase',
+        permanent: true,
+      },
+      {
+        source: '/docs/riot/get-started/examples',
+        destination: '/showcase',
+        permanent: true,
+      },
+      {
+        source: '/docs/preact/get-started/examples',
+        destination: '/showcase',
+        permanent: true,
+      },
+      {
+        source: '/docs/rax/get-started/examples',
+        destination: '/showcase',
+        permanent: true,
+      },
+      ////// Addons ///////////////////////////////////
+      {
+        source: '/addons/addon-gallery',
+        destination: '/integrations',
+        permanent: true,
+      },
+      {
+        source: '/addons',
+        destination: '/integrations',
+        permanent: true,
+      },
+      {
+        source: '/recipes',
+        destination: '/integrations',
+        permanent: true,
+      },
+      {
+        source: '/addons/tags/:tag',
+        destination: '/integrations/tag/:tag',
+        permanent: true,
+      },
       /////////////////////////////////////////////////
       /////////////// 🐺 Wild Cards ///////////////////
       /////////////////////////////////////////////////
