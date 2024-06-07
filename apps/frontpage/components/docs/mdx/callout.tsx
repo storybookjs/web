@@ -30,19 +30,24 @@ export function Callout({
   return (
     <div
       className={cn(
-        'p-6 rounded flex gap-4',
-        variant === 'neutral' && 'bg-slate-200',
-        variant === 'positive' && 'bg-slate-200',
-        variant === 'info' && 'bg-blue-100 border border-blue-200',
-        variant === 'warning' && 'bg-slate-200',
+        'mb-6 flex gap-4 rounded p-6',
+        variant === 'neutral' && 'bg-slate-200 dark:bg-slate-600',
+        variant === 'positive' && 'bg-slate-200 dark:bg-slate-600',
+        variant === 'info' &&
+          'border border-blue-200 bg-blue-100 dark:border-slate-700 dark:bg-slate-900',
+        variant === 'warning' && 'bg-slate-200 dark:bg-slate-600',
       )}
       {...props}
     >
-      {appliedIcon ? <span aria-hidden className="hidden text-2xl md:flex">
+      {appliedIcon ? (
+        <span aria-hidden className="hidden text-2xl md:flex">
           {appliedIcon}
-        </span> : null}
+        </span>
+      ) : null}
       <div>
-        {title ? <div dangerouslySetInnerHTML={{ __html: snarkdown(title) }} /> : null}
+        {title ? (
+          <div dangerouslySetInnerHTML={{ __html: snarkdown(title) }} />
+        ) : null}
         <div className="mb-0 [&>p]:mb-0">{children}</div>
       </div>
     </div>
