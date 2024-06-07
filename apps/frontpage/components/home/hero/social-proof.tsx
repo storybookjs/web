@@ -9,19 +9,23 @@ import logoBBC from './logos/logo-bbc.svg';
 
 export default function SocialProof() {
   return (
-    <div className="w-full text-zinc-600 relative border-b border-b-white/20 z-10 m-auto px-4 py-12 sm:py-16 md:py-20 mb-12 md:mb-20">
-      <div className="flex justify-evenly items-center  gap-8 md:gap-12 lg:gap-16 opacity-50 flex-wrap">
-        <Image alt="VSCode" className="w-8" src={logoVSCode} />
-        <Image alt="EU" className="w-8 hidden sm:block" src={logoEu} />
-        <Image alt="Github" className="w-20" src={logoGithub} />
-        <Image alt="Airbnb" className="w-20" src={logoAirbnb} />
-        <Image alt="Mozilla" className="w-20" src={logoMozilla} />
+    <div className="relative z-10 m-auto mb-12 w-full border-b border-b-white/20 px-4 py-12 text-zinc-600 sm:py-16 md:mb-20 md:py-20">
+      <div className="flex flex-wrap items-center justify-evenly gap-8 opacity-50 md:gap-12 lg:gap-16">
+        <Image alt="VSCode" className="w-8 lg:w-10" src={logoVSCode} />
+        <Image alt="EU" className="hidden w-8 sm:block lg:w-12" src={logoEu} />
+        <Image alt="Github" className="w-20 lg:w-24" src={logoGithub} />
+        <Image alt="Airbnb" className="w-20 lg:w-28" src={logoAirbnb} />
+        <Image alt="Mozilla" className="w-20 lg:w-28" src={logoMozilla} />
         <Image
           alt="Monday.com"
-          className="w-32 hidden sm:block"
+          className="hidden w-32 md:block lg:w-36"
           src={logoMonday}
         />
-        <Image alt="BBC" className="w-20" src={logoBBC} />
+        <Image
+          alt="BBC"
+          className="hidden w-20 lg:w-28 xl:block"
+          src={logoBBC}
+        />
       </div>
     </div>
   );
