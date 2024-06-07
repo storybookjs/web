@@ -48,7 +48,27 @@ module.exports = {
         destination: '/docs',
         permanent: true,
       },
-      /////// Older (prev 5.0 doc URLs) /////////////
+      {
+        source: '/telemetry',
+        destination: '/docs/configure/telemetry',
+        permanent: true,
+      },
+      {
+        source: '/design-system',
+        destination: 'https://master--5ccbc373887ca40020446347.chromatic.com',
+        permanent: true,
+      },
+      {
+        source: '/migration-guides/7.0',
+        destination: 'https://storybook.js.org/docs/7.0/migration-guide',
+        permanent: true,
+      },
+      {
+        source: '/migration-guides/8.0',
+        destination: 'https://storybook.js.org/docs/8.0/migration-guide',
+        permanent: true,
+      },
+      /* Supporting old docs URLs */
       {
         source: '/basics/slow-start-guide',
         destination: '/docs/configure',
@@ -56,6 +76,11 @@ module.exports = {
       },
       {
         source: '/docs/basics/slow-start-guide',
+        destination: '/docs/configure',
+        permanent: true,
+      },
+      {
+        source: '/docs/guides/slow-start-guide',
         destination: '/docs/configure',
         permanent: true,
       },
@@ -71,7 +96,12 @@ module.exports = {
           'https://github.com/storybookjs/react-native#storybook-for-react-native',
         permanent: true,
       },
-      ///////// Pre 6.0 URLs ///////////////////////
+      {
+        source: '/docs/guides/guide-react-native',
+        destination:
+          'https://github.com/storybookjs/react-native#storybook-for-react-native',
+        permanent: true,
+      },
       {
         source: '/docs/basics/writing-stories',
         destination: '/docs/get-started/whats-a-story',
@@ -79,12 +109,12 @@ module.exports = {
       },
       {
         source: '/docs/basics/exporting-storybook',
-        destination: '/docs/workflows/publish-storybook',
+        destination: '/docs/sharing/publish-storybook',
         permanent: true,
       },
       {
         source: '/docs/basics/faq',
-        destination: '/docs/workflows/faq',
+        destination: '/docs/faq',
         permanent: true,
       },
       {
@@ -93,35 +123,18 @@ module.exports = {
           'https://github.com/storybookjs/storybook/blob/next/examples/README.md',
         permanent: true,
       },
-      {
-        source: '/docs/examples',
-        destination: '/docs/get-started/examples',
-        permanent: true,
-      },
-      {
-        source: '/docs/guides/slow-start-guide',
-        destination: '/docs/configure',
-        permanent: true,
-      },
-      {
-        source: '/docs/guides/guide-react-native',
-        destination:
-          'https://github.com/storybookjs/react-native#storybook-for-react-native',
-        permanent: true,
-      },
-      {
-        source: '/docs/configurations/overview',
-        destination: '/docs/configure',
-        permanent: true,
-      },
+      // TODO: Refactor and/or add explanation for why these aren't generated like the others (because they cannot have a version in the URL)
+      ...(
+        [null, 'react', 'vue', 'angular', 'web-components', 'ember', 'html', 'mithril', 'marko', 'svelte', 'riot', 'preact', 'rax']
+        .map((r) => ({
+          source: `/docs${r ? '/r' : ''}/get-started/examples`,
+          destination: '/showcase',
+          permanent: true,
+        }))
+      ),
       {
         source: '/docs/configurations/options-parameter',
         destination: '/docs/configure/features-and-behavior',
-        permanent: true,
-      },
-      {
-        source: '/docs/configurations/default-config',
-        destination: '/docs/configure',
         permanent: true,
       },
       {
@@ -189,7 +202,7 @@ module.exports = {
       },
       {
         source: '/docs/formats/mdx-syntax',
-        destination: '/docs/api/mdx',
+        destination: '/docs/writing-docs/mdx',
         permanent: true,
       },
       {
@@ -239,7 +252,7 @@ module.exports = {
       },
       {
         source: '/docs/presets/introduction',
-        destination: '/docs/api/presets',
+        destination: '/docs/addons/writing-presets',
         permanent: true,
       },
       {
@@ -249,77 +262,10 @@ module.exports = {
       },
       {
         source: '/docs/presets/writing-presets',
-        destination: '/docs/api/writing-presets',
+        destination: '/docs/addons/writing-presets',
         permanent: true,
       },
-      ////// Other ////////////////////////////////////
-      {
-        source: '/telemetry',
-        destination: '/docs/configure/telemetry',
-        permanent: true,
-      },
-      ////// Renderers ////////////////////////////////
-      {
-        source: '/docs/react/get-started/examples',
-        destination: '/showcase',
-        permanent: true,
-      },
-      {
-        source: '/docs/vue/get-started/examples',
-        destination: '/showcase',
-        permanent: true,
-      },
-      {
-        source: '/docs/angular/get-started/examples',
-        destination: '/showcase',
-        permanent: true,
-      },
-      {
-        source: '/docs/web-components/get-started/examples',
-        destination: '/showcase',
-        permanent: true,
-      },
-      {
-        source: '/docs/ember/get-started/examples',
-        destination: '/showcase',
-        permanent: true,
-      },
-      {
-        source: '/docs/html/get-started/examples',
-        destination: '/showcase',
-        permanent: true,
-      },
-      {
-        source: '/docs/mithril/get-started/examples',
-        destination: '/showcase',
-        permanent: true,
-      },
-      {
-        source: '/docs/marko/get-started/examples',
-        destination: '/showcase',
-        permanent: true,
-      },
-      {
-        source: '/docs/svelte/get-started/examples',
-        destination: '/showcase',
-        permanent: true,
-      },
-      {
-        source: '/docs/riot/get-started/examples',
-        destination: '/showcase',
-        permanent: true,
-      },
-      {
-        source: '/docs/preact/get-started/examples',
-        destination: '/showcase',
-        permanent: true,
-      },
-      {
-        source: '/docs/rax/get-started/examples',
-        destination: '/showcase',
-        permanent: true,
-      },
-      ////// Addons ///////////////////////////////////
+      /* Addons */
       {
         source: '/addons/addon-gallery',
         destination: '/integrations',
@@ -340,9 +286,7 @@ module.exports = {
         destination: '/integrations/tag/:tag',
         permanent: true,
       },
-      /////////////////////////////////////////////////
-      /////////////// 🐺 Wild Cards ///////////////////
-      /////////////////////////////////////////////////
+      /* 🐺 Wild Cards */
       {
         source: '/basics/:path*',
         destination: '/docs',
@@ -359,7 +303,17 @@ module.exports = {
         permanent: true,
       },
       {
+        source: '/docs/configurations/:path*',
+        destination: '/docs/configure',
+        permanent: true,
+      },
+      {
         source: '/examples/:path*',
+        destination: '/docs',
+        permanent: true,
+      },
+      {
+        source: '/docs/examples/:path*',
         destination: '/docs',
         permanent: true,
       },
@@ -369,8 +323,18 @@ module.exports = {
         permanent: true,
       },
       {
+        source: '/docs/logos/:path*',
+        destination: '/docs',
+        permanent: true,
+      },
+      {
         source: '/testing/:path*',
         destination: '/docs',
+        permanent: true,
+      },
+      {
+        source: '/docs/testing/:path*',
+        destination: '/docs/writing-tests',
         permanent: true,
       },
       {
