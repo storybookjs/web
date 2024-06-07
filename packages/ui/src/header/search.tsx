@@ -39,7 +39,7 @@ export const Search: FC<SearchProps> = ({
             'ui-text-[11px] ui-px-1.5 ui-rounded',
             variant === 'home' && 'ui-bg-white/10 ui-text-white',
             variant !== 'home' &&
-              'ui-bg-zinc-100 dark:ui-bg-zinc-800 dark:ui-text-zinc-400',
+              'ui-bg-zinc-100 dark:ui-bg-slate-800 dark:ui-text-zinc-400',
           )}
         >
           ⌘K
