@@ -29,11 +29,11 @@ export const TableOfContent: FC<TableOfContentProps> = ({ headings }) => {
   const [isInView, setIsInView] = useState<string[]>([]);
 
   return (
-    <nav className="w-[228px] hidden lg:block sticky self-start top-[72px]">
+    <nav className="sticky top-[72px] hidden w-[228px] self-start lg:block">
       <ScrollArea className="h-[calc(100vh-72px)] w-full">
-        <div className="py-12 ">
+        <div className="py-12">
           <div className="block h-8 text-sm font-bold">On this page</div>
-          <ul className="mt-4">
+          <ul className="mt-1">
             {headings?.map((heading) => {
               return (
                 <Element
@@ -80,7 +80,7 @@ const Element: FC<ElementProps> = ({ heading, isInView, setIsInView }) => {
     <li key={heading.id}>
       <a
         className={cn(
-          'flex items-center text-sm text-zinc-700 dark:text-slate-400 dark:hover:text-blue-500 hover:text-blue-500 transition-colors w-full mb-3',
+          'mb-3 flex w-full items-center text-sm text-zinc-700 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500',
           heading.level > 2 && 'ml-5',
           active && 'text-blue-500',
         )}

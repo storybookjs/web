@@ -9,8 +9,8 @@ export const NavSide: FC = () => {
   const { activeSegment, setActiveSegment } = useCommunity();
 
   return (
-    <div className="w-[200px] hidden lg:block sticky self-start top-28">
-      <div className="w-40 pb-6 mb-6 border-b border-b-zinc-300 dark:border-b-slate-700">
+    <div className="sticky top-28 hidden w-[200px] self-start lg:block">
+      <div className="mb-6 w-40 border-b border-b-zinc-300 pb-6 dark:border-b-slate-700">
         {[
           { label: '⭐  Support', href: '#support' },
           { label: '🎪  Events & streams', href: '#events-streams' },
@@ -26,7 +26,7 @@ export const NavSide: FC = () => {
           return (
             <a
               className={cn(
-                'h-10 flex items-center',
+                'flex h-10 items-center',
                 isActive && 'text-blue-500',
               )}
               href={href}
@@ -46,7 +46,7 @@ export const NavSide: FC = () => {
         Get a README badge
       </div>
       <a
-        className="border border-dashed border-purple-400 w-28 rounded flex items-center justify-center bg-purple-100 h-[50px]"
+        className="flex h-[50px] w-28 items-center justify-center rounded border border-dashed border-purple-400 bg-purple-100 dark:border-slate-500 dark:bg-slate-700"
         href="https://github.com/storybookjs/brand/tree/master/badge"
         rel="noreferrer"
         target="_blank"
