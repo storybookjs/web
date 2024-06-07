@@ -22,9 +22,9 @@ export const Dropdown: FC<DropdownProps> = ({ list, activeId, action }) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center justify-between h-8 gap-1 px-2 text-sm transition-all rounded select-none group text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 hover:bg-slate-200 dark:hover:bg-slate-800 dark:hover:text-slate-400 dark:data-[state=open]:bg-slate-800 dark:data-[state=open]:text-slate-400">
+      <DropdownMenuTrigger className="group flex h-8 select-none items-center justify-between gap-1 rounded px-2 text-sm text-zinc-600 transition-all hover:border-zinc-300 hover:bg-slate-200 hover:text-zinc-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:data-[state=open]:bg-slate-800 dark:data-[state=open]:text-slate-400">
         {activeItem?.title}
-        <ChevronSmallDownIcon className="group-data-[state=open]:rotate-180 transition-transform" />
+        <ChevronSmallDownIcon className="transition-transform group-data-[state=open]:rotate-180" />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {list.map((item) => {

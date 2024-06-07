@@ -6,8 +6,9 @@ import type { FC } from 'react';
 import { Fragment } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import type { DocsVersion, TreeProps } from '@repo/utils';
-import { docsVersions } from '@repo/utils';
+import { cn, docsVersions } from '@repo/utils';
 import { VersionSelector } from './version-selector';
+import { usePathname } from 'next/navigation';
 
 interface NavDocsProps {
   tree: TreeProps[] | null | undefined;
@@ -23,6 +24,10 @@ const getUrl = (slug: string) => {
 };
 
 export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
+  const pathname = usePathname();
+
+  console.log(pathname);
+
   return (
     <>
       <VersionSelector activeVersion={activeVersion} />
@@ -31,7 +36,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
           ? tree.map((lvl1) => (
               <li key={lvl1.pathSegment}>
                 <Link
-                  className="flex items-center h-8 px-2 mt-6 text-sm font-bold transition-colors hover:text-blue-500"
+                  className="mt-6 flex h-8 items-center px-2 text-sm font-bold transition-colors hover:text-blue-500"
                   href={getUrl(lvl1.slug)}
                 >
                   {lvl1.sidebar?.title || lvl1.title}
@@ -49,7 +54,11 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                           <li>
                             {(!lvl2.children || lvl2.children.length === 0) && (
                               <Link
-                                className="flex items-center h-8 px-2 text-sm transition-colors text-zinc-600 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-500"
+                                className={cn(
+                                  'flex h-8 items-center px-2 text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500',
+                                  pathname === getUrl(lvl2.slug) &&
+                                    'text-blue-500 dark:text-blue-500',
+                                )}
                                 href={getUrl(lvl2.slug)}
                               >
                                 {lvl2.sidebar?.title || lvl2.title}
@@ -59,13 +68,13 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                               <Accordion.Item value="item-1">
                                 <Accordion.Trigger asChild>
                                   <button
-                                    className="flex items-center justify-between w-full h-8 px-2 text-sm group"
+                                    className="group flex h-8 w-full items-center justify-between px-2 text-sm"
                                     type="button"
                                   >
                                     {lvl2.sidebar?.title || lvl2.title}
                                     <ChevronSmallRightIcon
                                       aria-hidden
-                                      className="ease-in-out transition-transform duration-300 group-data-[state=open]:rotate-90"
+                                      className="transition-transform duration-300 ease-in-out group-data-[state=open]:rotate-90"
                                     />
                                   </button>
                                 </Accordion.Trigger>
@@ -78,7 +87,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                                           key={lvl3.pathSegment}
                                         >
                                           <Link
-                                            className="flex items-center h-8 p-4 text-sm border-l border-zinc-200"
+                                            className="flex h-8 items-center border-l border-zinc-200 p-4 text-sm"
                                             href={getUrl(lvl3.slug)}
                                           >
                                             {lvl3.sidebar?.title || lvl3.title}

@@ -6,7 +6,7 @@ interface AProps {
 
 export const A: FC<AProps> = ({ children, ...rest }) => {
   return (
-    <a className="text-blue-700" {...rest}>
+    <a className="text-blue-500" {...rest}>
       {children}
     </a>
   );

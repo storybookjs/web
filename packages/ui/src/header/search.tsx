@@ -23,7 +23,7 @@ export const Search: FC<SearchProps> = ({
         variant === 'system' &&
           !isMobile &&
           'ui-border ui-border-zinc-200 dark:ui-border-slate-700 ui-text-zinc-500 dark:ui-text-white',
-        isMobile && 'ui-bg-slate-100 ui-px-4 ui-mb-3',
+        isMobile && 'ui-bg-slate-100 dark:ui-bg-slate-800 ui-px-4 ui-mb-3',
         !isMobile && 'ui-px-3 ui-w-44',
         className,
       )}
@@ -39,7 +39,7 @@ export const Search: FC<SearchProps> = ({
             'ui-text-[11px] ui-px-1.5 ui-rounded',
             variant === 'home' && 'ui-bg-white/10 ui-text-white',
             variant !== 'home' &&
-              'ui-bg-zinc-100 dark:ui-bg-zinc-800 dark:ui-text-zinc-400',
+              'ui-bg-zinc-100 dark:ui-bg-slate-800 dark:ui-text-zinc-400',
           )}
         >
           ⌘K

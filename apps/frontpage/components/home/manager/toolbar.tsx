@@ -1,7 +1,9 @@
 import {
   GridAltIcon,
+  GridIcon,
   GrowIcon,
   OutlineIcon,
+  PhotoIcon,
   RulerIcon,
   ShareAltIcon,
   SyncIcon,
@@ -13,35 +15,44 @@ import type { FC, ReactNode } from 'react';
 import { cn } from '@repo/utils';
 
 export const Toolbar: FC<{ slide: number }> = ({ slide }) => {
+  console.log(slide);
   return (
     <div
       className={cn(
-        'absolute top-0 left-0 h-10 border-b border-b-[#D9E0E6] flex items-center px-2 justify-between right-0 overflow-hidden lg:right-[400px] z-10 bg-white',
-        slide === 2 && 'lg:right-0',
+        'absolute left-0 right-0 top-0 z-10 flex h-10 items-center justify-between overflow-hidden border-b border-b-[#D9E0E6] bg-white px-2 lg:right-[400px]',
+        slide === 4 && 'lg:right-0',
       )}
     >
-      <div className="flex mr-2">
-        <ToolbarButton>
+      <div className="mr-2 flex">
+        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
           <SyncIcon />
         </ToolbarButton>
-        <ToolbarButton>
+        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
           <ZoomIcon />
         </ToolbarButton>
-        <ToolbarButton>
+        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
           <ZoomOutIcon />
         </ToolbarButton>
-        <ToolbarButton>
+        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
           <ZoomResetIcon />
         </ToolbarButton>
-        <ToolbarButton>
+        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
           <GrowIcon />
         </ToolbarButton>
-        <div className="w-px bg-[#D9E0E6] h-6 mx-2" />
-        <ToolbarButton>
+        <div
+          className={cn('mx-2 h-6 w-px bg-[#D9E0E6]', slide === 4 && 'hidden')}
+        />
+        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
           <RulerIcon />
         </ToolbarButton>
-        <ToolbarButton>
+        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
           <GridAltIcon />
+        </ToolbarButton>
+        <ToolbarButton className={cn(slide !== 4 && 'hidden')}>
+          <PhotoIcon />
+        </ToolbarButton>
+        <ToolbarButton className={cn(slide !== 4 && 'hidden')}>
+          <GridIcon />
         </ToolbarButton>
         <ToolbarButton>
           <OutlineIcon />
@@ -54,9 +65,17 @@ export const Toolbar: FC<{ slide: number }> = ({ slide }) => {
   );
 };
 
-const ToolbarButton: FC<{ children: ReactNode }> = ({ children }) => {
+const ToolbarButton: FC<{ children: ReactNode; className?: string }> = ({
+  children,
+  className,
+}) => {
   return (
-    <div className="text-[#73828C] w-7 h-7 flex items-center justify-center">
+    <div
+      className={cn(
+        'flex h-7 w-7 items-center justify-center text-[#73828C]',
+        className,
+      )}
+    >
       {children}
     </div>
   );

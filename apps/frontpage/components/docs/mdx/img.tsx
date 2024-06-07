@@ -31,7 +31,6 @@ export function Img({ src, alt, activeVersion }: ImgProps) {
   return (
     <Image
       alt={alt || ''}
-      className="my-6"
       height={dimensions.height}
       src={path}
       width={dimensions.width}

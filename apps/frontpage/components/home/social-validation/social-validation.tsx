@@ -7,6 +7,7 @@ import { Container } from '@repo/ui';
 import { Button } from '../../ui/button';
 import { AspectRatio } from '../../ui/aspect-ratio';
 import { Community } from '../../community';
+import { Youtube } from '../../logos/youtube';
 
 const projects = [
   {
@@ -184,8 +185,8 @@ export function SocialValidation({
       className="pt-12 sm:pt-20 md:pt-28"
       style={{ scrollbarWidth: 'none' }}
     >
-      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
-        <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
+      <Container className="justify-between gap-20 text-white md:flex lg:px-8">
+        <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
           Made for frontend developers
         </h2>
         <div className="flex-1 pt-4">
@@ -198,11 +199,11 @@ export function SocialValidation({
             <Button asChild jumpOnHover rounded="full" variant="outlineHome">
               <Link href="/community/">Get involved</Link>
             </Button>
-            <div className="flex flex-row-reverse items-center min-w-0">
+            <div className="flex min-w-0 flex-row-reverse items-center">
               {contributors.map((image) => (
                 <Image
                   alt=""
-                  className="block w-10 h-10 -ml-1 rounded-full last:ml-0 odd:none sm:odd:block"
+                  className="odd:none -ml-1 block h-10 w-10 rounded-full last:ml-0 sm:odd:block"
                   height={40}
                   key={image}
                   loading="lazy"
@@ -214,20 +215,20 @@ export function SocialValidation({
           </div>
         </div>
       </Container>
-      <div className="px-8 py-0 pb-4 mt-12 text-white flex gap-8 scroll-p-8 sm:mt-20 mb-[calc(5rem-1rem)] md:mt-28 overflow-scroll snap-x">
+      <div className="mb-[calc(5rem-1rem)] mt-12 flex snap-x scroll-p-8 gap-8 overflow-scroll px-8 py-0 pb-4 text-white sm:mt-20 md:mt-28">
         {storybooks.map((storybookProject) => (
           <a
-            className="block no-underline w-[240px] sm:w-[480px] flex-none"
+            className="block w-[240px] flex-none no-underline sm:w-[480px]"
             href={storybookProject.url}
             key={storybookProject.name}
             rel="noopener nofollow noreferrer"
             target="_blank"
           >
             <div className="overflow-hidden rounded-md">
-              <div className="flex items-center w-full h-4 gap-1 pl-2 bg-zinc-200 border-y border-t-transparent border-b-zinc-300">
-                <div className="bg-red-500 w-[5px] h-[5px] rounded-full" />
-                <div className="bg-yellow-500 w-[5px] h-[5px] rounded-full" />
-                <div className="bg-green-500 w-[5px] h-[5px] rounded-full" />
+              <div className="flex h-4 w-full items-center gap-1 border-y border-b-zinc-300 border-t-transparent bg-zinc-200 pl-2">
+                <div className="h-[5px] w-[5px] rounded-full bg-red-500" />
+                <div className="h-[5px] w-[5px] rounded-full bg-yellow-500" />
+                <div className="h-[5px] w-[5px] rounded-full bg-green-500" />
               </div>
               <Image
                 alt={storybookProject.name}
@@ -236,10 +237,10 @@ export function SocialValidation({
                 width={storybookProject.image.width}
               />
             </div>
-            <div className="flex items-center mt-3 text-white">
+            <div className="mt-3 flex items-center text-white">
               <Image
                 alt={storybookProject.name}
-                className="w-5 h-5 mr-2"
+                className="mr-2 h-5 w-5"
                 height={20}
                 src={storybookProject.logo}
                 width={20}
@@ -249,10 +250,10 @@ export function SocialValidation({
           </a>
         ))}
       </div>
-      <div className="px-8 py-0 pb-4 mt-12 flex gap-8 scroll-p-8 sm:mt-20 mb-[calc(5rem-1rem)] md:mt-28 overflow-scroll snap-x">
+      <div className="mb-[calc(5rem-1rem)] mt-12 flex snap-x scroll-p-8 gap-8 overflow-scroll px-8 py-0 pb-4 sm:mt-20 md:mt-28">
         {projects.map((project) => (
           <a
-            className="w-[240px] flex-none bg-red-500 rounded-md"
+            className="w-[240px] flex-none rounded-md bg-red-500"
             href={project.projectUrl}
             key={project.logoAlt}
             rel="noopener"
@@ -274,13 +275,13 @@ export function SocialValidation({
           </a>
         ))}
       </div>
-      <Container className="pt-0 pb-12 sm:pb-20 md:pb-28">
+      <Container className="pb-12 pt-0 sm:pb-20 md:pb-28">
         <Community />
       </Container>
-      <Container className="pb-12 grid grid-cols-[1fr] md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(4,_1fr)] gap-8">
+      <Container className="grid grid-cols-[1fr] gap-8 pb-12 md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(4,_1fr)]">
         <div className={cn(socialCard)}>
           <GithubIcon aria-label="Discord" className="text-white" size={48} />
-          <div className="text-white text-md">
+          <div className="text-md text-white">
             {`Join ${contributorCount} contributors building the future of UI development.`}
           </div>
           <Button asChild jumpOnHover rounded="full" variant="outlineHome">
@@ -299,7 +300,7 @@ export function SocialValidation({
             className="text-[#5A65EA]"
             size={48}
           />
-          <div className="text-white text-md">
+          <div className="text-md text-white">
             {`Chat with ${discordMembers} frontend developers.`}
           </div>
           <Button asChild jumpOnHover rounded="full" variant="outlineHome">
@@ -311,7 +312,7 @@ export function SocialValidation({
           </div>
         </div>
         <div className={cn(socialCard)}>
-          <div className="w-12 h-12 flex items-center justify-center">
+          <div className="flex h-12 w-12 items-center justify-center">
             <svg
               aria-label="Twitter"
               fill="none"
@@ -326,7 +327,7 @@ export function SocialValidation({
               />
             </svg>
           </div>
-          <div className="text-white text-md">
+          <div className="text-md text-white">
             Get the latest news and updates from Storybook maintainers.
           </div>
           <Button asChild jumpOnHover rounded="full" variant="outlineHome">
@@ -338,25 +339,10 @@ export function SocialValidation({
           </div>
         </div>
         <div className={cn(socialCard)}>
-          <div className="w-12 h-12 flex items-center justify-center">
-            <svg
-              fill="none"
-              height="49"
-              viewBox="0 0 48 49"
-              width="48"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M46.9969 12.9116C46.4449 10.84 44.8186 9.20874 42.7533 8.65511C39.0101 7.64893 24 7.64893 24 7.64893C24 7.64893 8.98999 7.64893 5.2467 8.65511C3.18153 9.20874 1.55497 10.84 1.00302 12.9116C0 16.6662 0 24.5 0 24.5C0 24.5 0 32.3336 1.00302 36.0886C1.55497 38.16 3.18153 39.7912 5.2467 40.3451C8.98999 41.3511 24 41.3511 24 41.3511C24 41.3511 39.0101 41.3511 42.7533 40.3451C44.8186 39.7912 46.4449 38.16 46.9969 36.0886C48 32.3336 48 24.5 48 24.5C48 24.5 48 16.6662 46.9969 12.9116Z"
-                fill="#ED1D24"
-              />
-              <path
-                d="M19.0909 31.6124L31.6364 24.5003L19.0909 17.3875V31.6124Z"
-                fill="white"
-              />
-            </svg>
+          <div className="flex h-12 w-12 items-center justify-center">
+            <Youtube />
           </div>
-          <div className="text-white text-md">
+          <div className="text-md text-white">
             Watch tutorials, feature previews, and interviews.
           </div>
           <Button asChild jumpOnHover rounded="full" variant="outlineHome">
