@@ -10,6 +10,7 @@ import { useMemo } from 'react';
 import { zonedTimeToUtc, format } from 'date-fns-tz';
 import { isPast } from 'date-fns';
 import { Section } from './section';
+import { Youtube } from '../logos/youtube';
 
 const rezoneDate = (date: Date) => zonedTimeToUtc(date, 'America/Los_Angeles');
 
@@ -92,21 +93,21 @@ export const Events: FC = () => {
 
   return (
     <Section className="relative mb-8 md:mb-16" id="events-streams">
-      <h2 className="font-bold text-2xl mb-2">Join live events & streams</h2>
+      <h2 className="mb-2 text-2xl font-bold">Join live events & streams</h2>
       <p className="mb-8">
         Storybook&apos;s thriving community can help answer your questions.
         Developers of all skill levels welcome.
       </p>
-      <div className="flex flex-col md:flex-row gap-8 mb-8">
-        <div className="flex-1 border border-zinc-300 dark:border-slate-700 rounded p-6 md:p-8 flex gap-4 md:gap-6">
-          <YoutubeIcon className="w-10 h-10 text-[#ea3223]" />
+      <div className="mb-8 flex flex-col gap-8 md:flex-row">
+        <div className="flex flex-1 gap-4 rounded border border-zinc-300 p-6 md:gap-6 md:p-8 dark:border-slate-700">
+          <Youtube size={40} />
           <div className="flex-1">
-            <h2 className="font-bold text-lg">Subscribe to YouTube channel</h2>
+            <h2 className="text-lg font-bold">Subscribe to YouTube channel</h2>
             <p className="mb-3 text-zinc-500">
               Watch insider previews, feature demos, and interviews.
             </p>
             <a
-              className="flex gap-2 items-center text-blue-500"
+              className="flex items-center gap-2 text-blue-500"
               href="https://www.youtube.com/channel/UCr7Quur3eIyA_oe8FNYexfg"
             >
               Watch now
@@ -114,15 +115,15 @@ export const Events: FC = () => {
             </a>
           </div>
         </div>
-        <div className="flex-1 border border-zinc-300 dark:border-slate-700 rounded p-6 md:p-8 flex gap-4 md:gap-6">
-          <TwitterIcon className="w-10 h-10 text-[#4999e9]" />
+        <div className="flex flex-1 gap-4 rounded border border-zinc-300 p-6 md:gap-6 md:p-8 dark:border-slate-700">
+          <TwitterIcon className="h-10 w-10 text-[#4999e9]" />
           <div className="flex-1">
-            <h2 className="font-bold text-lg">Twitter</h2>
+            <h2 className="text-lg font-bold">Twitter</h2>
             <p className="mb-3 text-zinc-500">
               Get the latest event updates from Storybook maintainers.
             </p>
             <a
-              className="flex gap-2 items-center text-blue-500"
+              className="flex items-center gap-2 text-blue-500"
               href="https://twitter.com/storybookjs"
             >
               Follow now
@@ -131,16 +132,16 @@ export const Events: FC = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row gap-8 mb-8">
-        <div className="flex-1 border border-zinc-300 dark:border-slate-700 rounded p-6 md:p-8 flex gap-4 md:gap-6">
-          <DiscordIcon className="w-10 h-10 text-[#5a65ea]" />
+      <div className="mb-8 flex flex-col gap-8 md:flex-row">
+        <div className="flex flex-1 gap-4 rounded border border-zinc-300 p-6 md:gap-6 md:p-8 dark:border-slate-700">
+          <DiscordIcon className="h-10 w-10 text-[#5a65ea]" />
           <div className="flex-1">
-            <h2 className="font-bold text-lg">Follow #announcements chat</h2>
+            <h2 className="text-lg font-bold">Follow #announcements chat</h2>
             <p className="mb-3 text-zinc-500">
               Join our community chat to learn about live events and streams.
             </p>
             <a
-              className="flex gap-2 items-center text-blue-500"
+              className="flex items-center gap-2 text-blue-500"
               href="https://discord.gg/storybook"
             >
               Chat now
@@ -151,7 +152,7 @@ export const Events: FC = () => {
         <div className="flex-1 px-6 md:px-8" />
       </div>
       <div>
-        <h3 className="font-bold text-lg mb-3">Storybook Sessions</h3>
+        <h3 className="mb-3 text-lg font-bold">Storybook Sessions</h3>
         <div>
           <p>
             Join us for these 1-hour sessions, hosted by the{' '}
@@ -162,7 +163,7 @@ export const Events: FC = () => {
             testing, and documenting UIs using Storybook. You&apos;ll learn how
             to:
           </p>
-          <ul className="list-inside list-disc pl-4 my-4">
+          <ul className="my-4 list-inside list-disc pl-4">
             <li>
               Utilize addons to debug CSS, verify event handlers, and mock API
               requests.
@@ -184,15 +185,15 @@ export const Events: FC = () => {
             </li>
           </ul>
         </div>
-        <h3 className="font-bold text-lg mb-3 mt-6">Upcoming</h3>
+        <h3 className="mb-3 mt-6 text-lg font-bold">Upcoming</h3>
         <ul>
           {localizedSessions.upcoming.map((session) => (
             <li
-              className="flex items-center h-11 border-b border-b-zinc-300 dark:border-b-slate-700 justify-between"
+              className="flex h-11 items-center justify-between border-b border-b-zinc-300 dark:border-b-slate-700"
               key={session.id}
             >
               <div className="flex items-center gap-4">
-                <CalendarIcon className="w-4 h-4 text-zinc-500 dark:text-slate-400" />
+                <CalendarIcon className="h-4 w-4 text-zinc-500 dark:text-slate-400" />
                 <div className="text-md font-bold">{session.title}</div>
                 <div> — </div>
                 <div className="text-md text-zinc-500 dark:text-slate-400">
@@ -200,7 +201,7 @@ export const Events: FC = () => {
                 </div>
               </div>
               <a
-                className="flex gap-2 items-center text-blue-500"
+                className="flex items-center gap-2 text-blue-500"
                 href={session.registrationLink}
                 rel="noreferrer"
                 target="_blank"
@@ -211,20 +212,20 @@ export const Events: FC = () => {
           ))}
         </ul>
         {localizedSessions.upcoming.length === 0 && (
-          <div className="border border-dashed border-zinc-300 dark:border-slate-700 rounded p-6">
+          <div className="rounded border border-dashed border-zinc-300 p-6 dark:border-slate-700">
             No upcoming sessions scheduled at the moment. To stay informed about
             new sessions, please sign up for our newsletter.
           </div>
         )}
-        <h3 className="font-bold text-lg mb-3 mt-6">Past</h3>
+        <h3 className="mb-3 mt-6 text-lg font-bold">Past</h3>
         <ul>
           {localizedSessions.past.map((session) => (
             <li
-              className="flex items-center h-11 border-b border-b-zinc-300 dark:border-slate-700"
+              className="flex h-11 items-center border-b border-b-zinc-300 dark:border-slate-700"
               key={session.id}
             >
               <div className="flex items-center gap-4">
-                <CalendarIcon className="w-4 h-4 text-zinc-500 dark:text-slate-400" />
+                <CalendarIcon className="h-4 w-4 text-zinc-500 dark:text-slate-400" />
                 <div className="text-md font-bold">{session.title}</div>
                 <div> — </div>
                 <div className="text-md text-zinc-500 dark:text-slate-400">
