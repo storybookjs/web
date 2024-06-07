@@ -47,8 +47,13 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/basics/quick-start-guide',
-        destination: '/docs/get-started',
+        source: '/basics/:path*',
+        destination: '/docs',
+        permanent: true,
+      },
+      {
+        source: '/docs/basics/:path*',
+        destination: '/docs',
         permanent: true,
       },
       {
@@ -57,8 +62,8 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/basics/guide-react',
-        destination: '/docs/get-started',
+        source: '/docs/basics/slow-start-guide',
+        destination: '/docs/configure',
         permanent: true,
       },
       {
@@ -68,89 +73,9 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/basics/guide-vue',
-        destination: '/docs/get-started',
-        permanent: true,
-      },
-      {
-        source: '/basics/guide-angular',
-        destination: '/docs/get-started',
-        permanent: true,
-      },
-      {
-        source: '/basics/guide-mithril',
-        destination: '/docs/get-started',
-        permanent: true,
-      },
-      {
-        source: '/basics/guide-ember',
-        destination: '/docs/get-started',
-        permanent: true,
-      },
-      {
-        source: '/basics/guide-riot',
-        destination: '/docs/get-started',
-        permanent: true,
-      },
-      {
-        source: '/basics/guide-html',
-        destination: '/docs/get-started',
-        permanent: true,
-      },
-      {
-        source: '/docs/basics/quick-start-guide',
-        destination: '/docs/get-started',
-        permanent: true,
-      },
-      {
-        source: '/docs/basics/slow-start-guide',
-        destination: '/docs/configure',
-        permanent: true,
-      },
-      {
-        source: '/docs/basics/slow-start-guide',
-        destination: '/docs/configure',
-        permanent: true,
-      },
-      {
-        source: '/docs/basics/guide-react',
-        destination: '/docs/get-started',
-        permanent: true,
-      },
-      {
         source: '/docs/basics/guide-react-native',
         destination:
           'https://github.com/storybookjs/react-native#storybook-for-react-native',
-        permanent: true,
-      },
-      {
-        source: '/docs/basics/guide-vue',
-        destination: '/docs/get-started',
-        permanent: true,
-      },
-      {
-        source: '/docs/basics/guide-angular',
-        destination: '/docs/get-started',
-        permanent: true,
-      },
-      {
-        source: '/docs/basics/guide-mithril',
-        destination: '/docs/get-started',
-        permanent: true,
-      },
-      {
-        source: '/docs/basics/guide-ember',
-        destination: '/docs/get-started',
-        permanent: true,
-      },
-      {
-        source: '/docs/basics/guide-riot',
-        destination: '/docs/get-started',
-        permanent: true,
-      },
-      {
-        source: '/docs/basics/guide-html',
-        destination: '/docs/get-started',
         permanent: true,
       },
     ];
