@@ -39,21 +39,21 @@ export function StickyNav({
       {isVisible ? (
         <motion.div
           animate={{ opacity: 1 }}
-          className="fixed top-0 z-50 w-full h-10 bg-black md:h-18"
+          className="md:h-18 fixed top-0 z-50 h-10 w-full bg-slate-950"
           exit={{ opacity: 0 }}
           initial={{ opacity: 0 }}
           {...props}
         >
           <Container
             asChild
-            className="h-full flex items-center justify-between"
+            className="flex h-full items-center justify-between"
           >
             <section>
               <MobileMenu
                 items={items}
                 label={activeItem?.label || items[0]?.label || ''}
               />
-              <div className="items-center hidden gap-2 md:flex">
+              <div className="hidden items-center gap-2 md:flex">
                 {items.map((item) => (
                   <Button
                     active={activeSection === item.id ? 'home' : undefined}
@@ -68,7 +68,7 @@ export function StickyNav({
               </div>
               <div className="flex items-center gap-5">
                 <Button asChild size="md" variant="ghostHome">
-                  <a className="items-center hidden md:flex" href="#page-top">
+                  <a className="hidden items-center md:flex" href="#page-top">
                     <ArrowUpIcon />
                     Jump to top
                   </a>

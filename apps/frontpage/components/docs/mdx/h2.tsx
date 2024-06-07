@@ -9,7 +9,7 @@ type H2Props = DetailedHTMLProps<
 export function H2({ children, id }: H2Props) {
   return (
     <h2
-      className="group relative mb-6 mt-0 text-2xl font-bold"
+      className="group relative mb-6 mt-10 text-2xl font-bold"
       data-docs-heading
     >
       <div className="absolute -translate-y-24" id={id} />
