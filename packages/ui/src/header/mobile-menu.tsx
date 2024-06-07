@@ -34,12 +34,16 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
             variant === 'home' &&
               'ui-bg-white ui-w-[calc(100vw-24px)] ui-ml-3 ui-rounded-lg ui-mt-2',
             variant === 'system' &&
-              'ui-bg-white/80 dark:ui-bg-slate-950/80 md:ui-border md:ui-border-zinc-200 ui-w-screen ui-rounded-b-lg md:ui-rounded-lg ui-mt-[18px] md:ui-mt-2',
+              'ui-bg-white/80 dark:ui-bg-slate-950/80 ui-border-b md:ui-border ui-border-slate-700 ui-w-screen md:ui-rounded-lg ui-mt-[18px] md:ui-mt-2',
           )}
         >
           <ScrollArea.Root className="ui-w-full ui-h-full" type="always">
             <ScrollArea.Viewport className="ui-w-full ui-h-full ui-p-4 md:ui-p-2 md:ui-py-3">
-              <Search isMobile variant={variant} />
+              <Search
+                className="ui-hidden max-[440px]:ui-block"
+                isMobile
+                variant={variant}
+              />
               {nav.map((item) => (
                 <DropdownItem
                   external={item.external}
