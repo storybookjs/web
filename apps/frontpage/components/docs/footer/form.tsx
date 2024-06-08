@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { Button } from '../../ui/button';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { sendFeedback } from './actions';
 import { useFormState, useFormStatus } from 'react-dom';
 import { ReactionsProps } from './footer';

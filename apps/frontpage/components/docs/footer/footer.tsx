@@ -5,12 +5,12 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Form } from './form';
 
-export type ReactionsProps = null | 'positive' | 'negative';
+export type ReactionsProps = null | 'up' | 'down';
 
 export const DocsFooter = () => {
   const [reaction, setReaction] = useState<ReactionsProps>(null);
 
-  const selectReaction = (r: 'positive' | 'negative') => {
+  const selectReaction = (r: 'up' | 'down') => {
     if (reaction === null) setReaction(r);
     if (reaction === r) setReaction(null);
     if (reaction && reaction !== r) setReaction(r);
@@ -45,18 +45,18 @@ export const DocsFooter = () => {
             <button
               className={cn(
                 'h-8 w-8 rounded-full hover:bg-blue-100',
-                reaction === 'positive' && 'bg-blue-100',
+                reaction === 'up' && 'bg-blue-100',
               )}
-              onClick={() => selectReaction('positive')}
+              onClick={() => selectReaction('up')}
             >
               👍
             </button>
             <button
               className={cn(
                 'h-8 w-8 rounded-full hover:bg-blue-100',
-                reaction === 'negative' && 'bg-blue-100',
+                reaction === 'down' && 'bg-blue-100',
               )}
-              onClick={() => selectReaction('negative')}
+              onClick={() => selectReaction('down')}
             >
               👎
             </button>
