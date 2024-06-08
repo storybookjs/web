@@ -1,6 +1,11 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
+  "globalEnv": [
+    "GATSBY_DOCS_FEEDBACK_TRICKY_HEADER",
+    "GITHUB_STORYBOOK_BOT_PAT",
+    "URL"
+  ],
   "pipeline": {
     "lint": {
       "dependsOn": ["^lint"]
