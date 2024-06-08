@@ -54,6 +54,11 @@ module.exports = {
         permanent: true,
       },
       {
+        source: '/versions.json',
+        destination: '/versions',
+        permanent: true,
+      },
+      {
         source: '/design-system',
         destination: 'https://master--5ccbc373887ca40020446347.chromatic.com',
         permanent: true,
