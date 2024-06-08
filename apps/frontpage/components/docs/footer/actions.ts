@@ -26,5 +26,5 @@ export async function sendFeedback(
 
   console.log(data);
 
-  return { message: 'Your feedback has been received!' };
+  return { message: 'ok' };
 }

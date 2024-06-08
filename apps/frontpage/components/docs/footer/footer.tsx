@@ -2,20 +2,13 @@
 
 import { cn } from '@repo/utils';
 import { useEffect, useState } from 'react';
-import { Button } from '../../ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
-import { sendFeedback } from './actions';
-import { useFormState, useFormStatus } from 'react-dom';
+import { Form } from './form';
 
-const initialState = {
-  message: '',
-};
-
-type ReactionsProps = null | 'positive' | 'negative';
+export type ReactionsProps = null | 'positive' | 'negative';
 
 export const DocsFooter = () => {
   const [reaction, setReaction] = useState<ReactionsProps>(null);
-  const [state, formAction] = useFormState(sendFeedback, initialState);
 
   const selectReaction = (r: 'positive' | 'negative') => {
     if (reaction === null) setReaction(r);
@@ -70,29 +63,7 @@ export const DocsFooter = () => {
           </div>
         </div>
         <AnimatePresence>
-          {reaction && (
-            <motion.form
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration, ease }}
-              className="flex flex-1 flex-col items-end gap-3 px-3 pb-3"
-              action={formAction}
-            >
-              <input type="hidden" name="reaction" value={reaction} />
-              <textarea
-                id="feedback"
-                name="feedback"
-                required
-                className="h-24 w-full rounded-md border border-zinc-200 p-2 text-sm"
-                placeholder="Your feedback..."
-              />
-              <SubmitButton />
-              <p aria-live="polite" className="sr-only" role="status">
-                {state?.message}
-              </p>
-            </motion.form>
-          )}
+          {reaction && <Form reaction={reaction} setReaction={setReaction} />}
         </AnimatePresence>
       </motion.div>
       <button
@@ -104,13 +75,3 @@ export const DocsFooter = () => {
     </div>
   );
 };
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button variant="solid" size="md" type="submit" aria-disabled={pending}>
-      Send feedback
-    </Button>
-  );
-}
