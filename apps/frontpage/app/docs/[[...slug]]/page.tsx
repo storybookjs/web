@@ -7,7 +7,7 @@ import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
 import { generateDocsTree } from '../../../lib/get-tree';
 import { slugHasVersion } from '../../../lib/slug-has-version';
-import { DocsFooter } from '../../../components/docs/footer';
+import { DocsFooter } from '../../../components/docs/footer/footer';
 
 interface PageProps {
   params: {
