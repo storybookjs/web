@@ -1,6 +1,6 @@
 export const DocsFooter = () => {
   return (
-    <div className="flex items-center justify-between pb-6 pt-12">
+    <div className="flex flex-wrap items-center justify-between gap-4 pb-6 pt-12">
       <div className="text-md flex h-12 items-center gap-3 rounded-full border border-zinc-200 pl-4 pr-2">
         Was this page useful?
         <div className="flex items-center gap-2">
@@ -8,7 +8,7 @@ export const DocsFooter = () => {
           <Button>👎</Button>
         </div>
       </div>
-      <button className="hidden h-12 items-center rounded-full border border-zinc-200 px-5 transition-all hover:-translate-y-1 hover:border-zinc-400 md:flex">
+      <button className="flex h-12 items-center rounded-full border border-zinc-200 px-5 transition-all hover:-translate-y-1 hover:border-zinc-400">
         ✍️ Edit on Github
       </button>
     </div>
