@@ -15,6 +15,9 @@ export const fetchYouTubeSubscribers = async (): Promise<{
   );
 
   const data = (await response.json()) as YoutubeData;
+
+  console.log('BLA YOUTUBE', data.items[0].statistics.subscriberCount);
+
   const number = parseInt(data.items[0].statistics.subscriberCount, 10);
 
   if (!response.ok) return { number: 0, formattedResult: '0' };
