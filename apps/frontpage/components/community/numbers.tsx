@@ -2,12 +2,24 @@
 
 import type { FC } from 'react';
 
-export const Numbers: FC = () => {
+interface NumbersProps {
+  githubCount: string;
+  contributorsCount: string;
+  discordMembersCount: string;
+  npmDownloadsCount: string;
+}
+
+export const Numbers: FC<NumbersProps> = ({
+  githubCount,
+  contributorsCount,
+  discordMembersCount,
+  npmDownloadsCount,
+}) => {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-6 my-12 pb-12 border-b border-b-zinc-300 dark:border-b-slate-700">
+    <div className="my-12 grid grid-cols-2 gap-6 border-b border-b-zinc-300 pb-12 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 dark:border-b-slate-700">
       {[
         {
-          number: '17.01m',
+          number: npmDownloadsCount,
           label: 'Downloads/month',
         },
         {
@@ -15,15 +27,15 @@ export const Numbers: FC = () => {
           label: 'Integrations',
         },
         {
-          number: '81,378',
+          number: githubCount,
           label: 'GitHub Stars',
         },
         {
-          number: '2,137',
+          number: contributorsCount,
           label: 'Contributors',
         },
         {
-          number: '20,250',
+          number: discordMembersCount,
           label: 'Discord members',
         },
         {

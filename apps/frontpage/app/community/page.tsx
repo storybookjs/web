@@ -1,5 +1,10 @@
 import { Header, Footer, Container, NewsletterForm } from '@repo/ui';
-import { fetchGithubCount } from '@repo/utils';
+import {
+  fetchDiscordMembers,
+  fetchGithubContributorCount,
+  fetchGithubCount,
+  fetchNpmDownloads,
+} from '@repo/utils';
 import { NavTop } from '../../components/community/nav-top';
 import { Community } from '../../components/community';
 import { Numbers } from '../../components/community/numbers';
@@ -14,7 +19,11 @@ import { Testimonials } from '../../components/community/testimonials';
 import { CommunityProvider } from './provider';
 
 export default async function Page() {
-  const { number: githubCount } = await fetchGithubCount();
+  const { number: githubCount, formattedResult: githubCountFormatted } =
+    await fetchGithubCount();
+  const { formattedResult: contributors } = await fetchGithubContributorCount();
+  const { formattedResult: discordMembers } = await fetchDiscordMembers();
+  const { formattedResult: npmDownloads } = await fetchNpmDownloads();
 
   return (
     <CommunityProvider>
@@ -22,8 +31,8 @@ export default async function Page() {
       <NavTop />
       <Container asChild className="mt-10 md:mt-20" variant="small">
         <main>
-          <div className="justify-between gap-20 mb-10 lg:px-8 md:flex md:mb-16">
-            <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
+          <div className="mb-10 justify-between gap-20 md:mb-16 md:flex lg:px-8">
+            <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
               Meet world-class frontend devs
             </h2>
             <div className="flex-1 pt-4">
@@ -38,8 +47,13 @@ export default async function Page() {
             </div>
           </div>
           <Community />
-          <Numbers />
-          <div className="flex gap-16 pb-20 mb-20 border-b border-b-zinc-300 dark:border-b-slate-700">
+          <Numbers
+            githubCount={githubCountFormatted}
+            contributorsCount={contributors}
+            discordMembersCount={discordMembers}
+            npmDownloadsCount={npmDownloads}
+          />
+          <div className="mb-20 flex gap-16 border-b border-b-zinc-300 pb-20 dark:border-b-slate-700">
             <NavSide />
             <div className="flex-1">
               <Support />
