@@ -26,8 +26,6 @@ const getUrl = (slug: string) => {
 export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
   const pathname = usePathname();
 
-  console.log(pathname);
-
   return (
     <>
       <VersionSelector activeVersion={activeVersion} />
