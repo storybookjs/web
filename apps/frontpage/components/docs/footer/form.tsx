@@ -1,6 +1,6 @@
 'use client';
 
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Button } from '../../ui/button';
 import { motion } from 'framer-motion';
 import { sendFeedback } from './actions';
@@ -10,6 +10,7 @@ import { useParams, usePathname } from 'next/navigation';
 import { useDocs } from '../../../app/docs/provider';
 import { getVersion } from '../../../lib/get-version';
 import { url } from 'inspector';
+import { set } from 'date-fns';
 
 const initialState = {
   message: '',
@@ -105,12 +106,15 @@ export const Form = ({
 
 function SubmitButton() {
   const { pending } = useFormStatus();
+  const [text, setText] = useState('Send feedback');
 
-  console.log(pending);
+  useEffect(() => {
+    if (pending) setText('Sending...');
+  }, [pending]);
 
   return (
     <Button variant="solid" size="md" type="submit" aria-disabled={pending}>
-      {pending ? 'Sending...' : 'Send feedback'}
+      {text}
     </Button>
   );
 }
