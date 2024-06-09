@@ -7,6 +7,7 @@ interface NumbersProps {
   contributorsCount: string;
   discordMembersCount: string;
   npmDownloadsCount: string;
+  youtubeSubscribersCount: string;
 }
 
 export const Numbers: FC<NumbersProps> = ({
@@ -14,6 +15,7 @@ export const Numbers: FC<NumbersProps> = ({
   contributorsCount,
   discordMembersCount,
   npmDownloadsCount,
+  youtubeSubscribersCount,
 }) => {
   return (
     <div className="my-12 grid grid-cols-2 gap-6 border-b border-b-zinc-300 pb-12 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 dark:border-b-slate-700">
@@ -39,11 +41,11 @@ export const Numbers: FC<NumbersProps> = ({
           label: 'Discord members',
         },
         {
-          number: '18,350',
+          number: '24.4k',
           label: 'Twitter followers',
         },
         {
-          number: '6,440',
+          number: youtubeSubscribersCount,
           label: 'YouTube subscribers',
         },
       ].map(({ number, label }) => (

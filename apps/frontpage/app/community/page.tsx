@@ -4,6 +4,7 @@ import {
   fetchGithubContributorCount,
   fetchGithubCount,
   fetchNpmDownloads,
+  fetchYouTubeSubscribers,
 } from '@repo/utils';
 import { NavTop } from '../../components/community/nav-top';
 import { Community } from '../../components/community';
@@ -24,6 +25,8 @@ export default async function Page() {
   const { formattedResult: contributors } = await fetchGithubContributorCount();
   const { formattedResult: discordMembers } = await fetchDiscordMembers();
   const { formattedResult: npmDownloads } = await fetchNpmDownloads();
+  const { formattedResult: youtubeSubscribers } =
+    await fetchYouTubeSubscribers();
 
   return (
     <CommunityProvider>
@@ -52,6 +55,7 @@ export default async function Page() {
             contributorsCount={contributors}
             discordMembersCount={discordMembers}
             npmDownloadsCount={npmDownloads}
+            youtubeSubscribersCount={youtubeSubscribers}
           />
           <div className="mb-20 flex gap-16 border-b border-b-zinc-300 pb-20 dark:border-b-slate-700">
             <NavSide />
