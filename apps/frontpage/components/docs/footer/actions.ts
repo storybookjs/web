@@ -4,6 +4,12 @@ import { z } from 'zod';
 import dedent from 'dedent';
 import fetch from 'node-fetch';
 
+import { headers } from 'next/headers';
+import type { TreeProps } from '@repo/utils';
+import { docsVersions } from '@repo/utils';
+import { generateDocsTree } from '../../../lib/get-tree';
+import { language } from 'gray-matter';
+
 export async function sendFeedback(
   prevState: {
     message: string;
@@ -13,11 +19,17 @@ export async function sendFeedback(
   const schema = z.object({
     feedback: z.string().min(1),
     reaction: z.string(),
+    slug: z.string(),
+    renderer: z.string(),
+    language: z.string(),
   });
 
   const parse = schema.safeParse({
     feedback: formData.get('feedback'),
     reaction: formData.get('reaction'),
+    slug: formData.get('slug'),
+    renderer: formData.get('renderer'),
+    language: formData.get('language'),
   });
 
   if (!parse.success) {
@@ -26,10 +38,61 @@ export async function sendFeedback(
 
   const data = parse.data;
 
+  const siteUrl = process.env.URL;
+
   const pat = process.env.GITHUB_STORYBOOK_BOT_PAT;
   if (!pat) {
     throw new Error('GITHUB_STORYBOOK_BOT_PAT not found in environment');
   }
+
+  const versions = docsVersions.map(({ id }) => id);
+
+  const slugs = new Set<string>([]);
+
+  function addSlugs(tree: TreeProps[]) {
+    tree.forEach((node) => {
+      if (node.type === 'directory') {
+        addSlugs(node.children!);
+      } else {
+        slugs.add(node.slug);
+      }
+    });
+  }
+
+  versions.forEach((v) => {
+    const tree = generateDocsTree(`content/docs/${v}`);
+    addSlugs(tree);
+  });
+
+  // TODO: See if this should be used elsewhere
+  function buildPathWithVersion(slug: string, overrideVersion: string) {
+    const version = overrideVersion; // || (isLatest ? null : versionString);
+    const parts = slug.split('/');
+    if (version) {
+      parts.splice(2, 0, version);
+    }
+    return parts.join('/');
+  }
+
+  // TODO: Use something other than a header?
+  // const trickyHeader = process.env.GATSBY_DOCS_FEEDBACK_TRICKY_HEADER;
+  // if (!trickyHeader) {
+  //   throw new Error(
+  //     'GATSBY_DOCS_FEEDBACK_TRICKY_HEADER not found in environment',
+  //   );
+  // }
+
+  /**
+   * Netlify (and Vercel?) doesn't provide a way to determine the deploy context, but we can
+   * adjust the value of a custom env var per-context, so we infer the context from that.
+   */
+  // const isProduction = !trickyHeader.endsWith('-not-prod');
+  const isProduction = true;
+
+  // const { trickyHeaderKey, trickyHeaderValue } =
+  //   /^key-(?<trickyHeaderKey>.+)-value-(?<trickyHeaderValue>.+)$/.exec(
+  //     trickyHeader,
+  //   )?.groups || {};
 
   const repositoryOwner = 'storybookjs';
   const repositoryName = 'storybook';
@@ -37,11 +100,13 @@ export async function sendFeedback(
   // Corresponds to "Documentation feedback" category
   const categoryId = 'DIC_kwDOAzqfmc4CWGpo';
 
+  type Rating = 'up' | 'down';
+
   function createTitle(path: string) {
     return `Feedback for ${path} docs page`;
   }
 
-  function createRating(upOrDown, value) {
+  function createRating(upOrDown: Rating, value: number | string) {
     return `<!--start-${upOrDown}-->${value}<!--end-${upOrDown}-->`;
   }
 
@@ -50,19 +115,11 @@ export async function sendFeedback(
     down: '👎',
   };
 
-  function buildPathWithVersion(slug, overrideVersion) {
-    const version = overrideVersion || (isLatest ? null : versionString);
-    const parts = slug.split('/');
-    if (version) {
-      parts.splice(2, 0, version);
-    }
-    return parts.join('/');
-  }
-
-  function createDiscussionBody(rating: 'up' | 'down') {
+  function createDiscussionBody(rating: Rating) {
     return [
-      `| ${ratingSymbols['up']} | ${ratingSymbols['down']} |`,
+      `| ${ratingSymbols.up} | ${ratingSymbols.down} |`,
       '| :-: | :-: |',
+      // prettier-ignore
       `| ${createRating('up', rating === 'up' ? 1 : 0)} | ${createRating('down', rating === 'down' ? 1 : 0)} |`,
     ].join('\r\n');
   }
@@ -74,10 +131,18 @@ export async function sendFeedback(
     codeLanguage,
     rating,
     comment,
+  }: {
+    slug: string;
+    version: string;
+    renderer: string;
+    codeLanguage: string;
+    rating: Rating;
+    comment: string;
   }) {
     const path = buildPathWithVersion(slug, version);
     const link = `**[${path}](https://storybook.js.org${path})**`;
 
+    // prettier-ignore
     const meta = [
       `| ${ratingSymbols[rating]} | v${version} | ${renderer} | ${codeLanguage} |`,
       '| - | - | - | - |',
@@ -88,16 +153,26 @@ export async function sendFeedback(
       .join('\r\n\r\n');
   }
 
-  function updateRating(body, rating) {
+  function updateRating(body: string, rating: Rating) {
     const regex = new RegExp(createRating(rating, '(\\d+)'));
-    const currentRating = body.match(regex)[1];
+    const currentRating = body.match(regex)?.[1];
+    if (!currentRating) {
+      throw new Error(`
+  Could not find current ${rating} rating in:
+  "${body}"
+      `);
+    }
+
     return body.replace(
       regex,
       createRating(rating, parseInt(currentRating, 10) + 1),
     );
   }
 
-  async function queryGitHub(query, { variables = {} } = {}) {
+  async function queryGitHub<D extends object>(
+    query: string,
+    { variables = {} } = {},
+  ): Promise<D> {
     let response;
     try {
       response = await fetch('https://api.github.com/graphql', {
@@ -113,7 +188,10 @@ export async function sendFeedback(
       });
 
       if (response) {
-        const { data, errors } = await response.json();
+        const { data, errors } = (await response.json()) as {
+          data: D;
+          errors: Error[];
+        };
         if (!errors || errors.length === 0) {
           return data;
         }
@@ -133,19 +211,42 @@ export async function sendFeedback(
     }
   }
 
-  async function getDiscussion(title) {
+  interface Discussion {
+    body: string;
+    closed: boolean;
+    id: string;
+    number: number;
+    title: string;
+    url: string;
+  }
+
+  type PartialDiscussion = Pick<
+    Discussion,
+    'title' | 'id' | 'number' | 'closed'
+  >;
+
+  async function getDiscussion(title: string) {
     console.info('Fetching discussions...');
-    let discussions = [];
+    let discussions: PartialDiscussion[] = [];
     let after;
     do {
       const {
         repository: {
           discussions: {
             nodes: newDiscussions,
+            // @ts-expect-error - The type of `pageInfo` is correct. And the types of these two properties are correct later. WTF?
             pageInfo: { hasNextPage, endCursor },
           },
         },
-      } = await queryGitHub(
+        // eslint-disable-next-line no-await-in-loop -- This is node; we can deal with it
+      } = await queryGitHub<{
+        repository: {
+          discussions: {
+            nodes: PartialDiscussion[];
+            pageInfo: { hasNextPage: boolean; endCursor: string };
+          };
+        };
+      }>(
         dedent(`
         query GetDiscussions($owner: String!, $name: String!, $after: String, $categoryId: ID!) {
           repository(owner: $owner, name: $name) {
@@ -183,12 +284,22 @@ export async function sendFeedback(
     return discussions.find((discussion) => discussion.title === title);
   }
 
-  async function updateDiscussion({ number, id, rating }) {
+  async function updateDiscussion({
+    number,
+    id,
+    rating,
+  }: Pick<Discussion, 'id' | 'number'> & { rating: Rating }) {
     const {
       repository: {
         discussion: { body: currentBody },
       },
-    } = await queryGitHub(
+    } = await queryGitHub<{
+      repository: {
+        discussion: {
+          body: string;
+        };
+      };
+    }>(
       dedent(`
         query GetDiscussion($owner: String!, $name: String!, $number: Int!) {
           repository(owner: $owner, name: $name) {
@@ -212,7 +323,13 @@ export async function sendFeedback(
       updateDiscussion: {
         discussion: { body: updatedBody },
       },
-    } = await queryGitHub(
+    } = await queryGitHub<{
+      updateDiscussion: {
+        discussion: {
+          body: string;
+        };
+      };
+    }>(
       dedent(`
         mutation UpdateDiscussion($discussionId: ID!, $body: String!) { 
           updateDiscussion(input: {
@@ -235,13 +352,9 @@ export async function sendFeedback(
     console.info('... done!', 'Updated body:\n', updatedBody);
   }
 
-  async function reOpenDiscussion({ id }) {
+  async function reOpenDiscussion({ id }: Pick<Discussion, 'id'>) {
     console.info('Re-opening discussion...');
-    const {
-      reopenDiscussion: {
-        discussion: { closed },
-      },
-    } = await queryGitHub(
+    await queryGitHub(
       dedent(`
         mutation ReopenDiscussion($discussionId: ID!) {
           reopenDiscussion(input: {
@@ -271,13 +384,27 @@ export async function sendFeedback(
     codeLanguage,
     rating,
     comment,
+  }: Pick<Discussion, 'id'> & {
+    slug: string;
+    version: string;
+    renderer: string;
+    codeLanguage: string;
+    rating: Rating;
+    comment: string;
   }) {
     console.info('Adding comment to discussion...');
     const {
       addDiscussionComment: {
         comment: { body: addedComment, url },
       },
-    } = await queryGitHub(
+    } = await queryGitHub<{
+      addDiscussionComment: {
+        comment: {
+          body: string;
+          url: string;
+        };
+      };
+    }>(
       dedent(`
         mutation AddDiscussionComment($discussionId: ID!, $body: String!) {
           addDiscussionComment(input: {
@@ -309,7 +436,14 @@ export async function sendFeedback(
     return url;
   }
 
-  async function createDiscussion({ path, rating, title }) {
+  async function createDiscussion({
+    path,
+    rating,
+    title,
+  }: Pick<Discussion, 'title'> & {
+    path: string;
+    rating: Rating;
+  }): Promise<PartialDiscussion> {
     console.info(`Creating new discussion for ${path}...`);
     const {
       createDiscussion: {
@@ -322,7 +456,11 @@ export async function sendFeedback(
           url,
         },
       },
-    } = await queryGitHub(
+    } = await queryGitHub<{
+      createDiscussion: {
+        discussion: Discussion;
+      };
+    }>(
       dedent(`
         mutation CreateDiscussion($repositoryId: ID!, $categoryId: ID!, $title: String!, $body: String!) { 
           createDiscussion(input: {
@@ -369,44 +507,47 @@ export async function sendFeedback(
     };
   }
 
+  const requestsCache: Record<string, number> = {};
+
+  // Beginning submit feedback
+
+  const slug = data.slug;
+  const version = '8.1';
+  const renderer = data.renderer;
+  const codeLanguage = data.language;
+  const rating = data.reaction as Rating;
+  const comment = data.feedback;
+  const spuriousComment = '';
+
   const now = Date.now();
+
+  const headersList = headers();
+
   try {
-    // const { body, headers } = event;
-
-    // TODO: To fix
-    // const ip = headers['x-nf-client-connection-ip'];
-    // if (requestsCache[ip] && now - requestsCache[ip] < 1000) {
-    //   console.info(`Too many requests from ${ip}, ignoring`);
-    //   return {
-    //     statusCode: 401,
-    //     body: JSON.stringify({}),
-    //   };
-    // }
-    // requestsCache[ip] = now;
-
-    // const received = JSON.parse(body);
-    // console.info('Received:', JSON.stringify(received, null, 2));
-
-    const received = {
-      slug: 'docs/learn/get-started',
-      version: '8.1',
-      renderer: 'react',
-      codeLanguage: 'react',
-      rating: data.reaction,
-      comment: data.feedback,
-      spuriousComment: false,
-    };
-
-    const { slug, version, renderer, codeLanguage, rating, comment } = received;
+    const ip =
+      headersList.get('x-real-ip') ||
+      headersList.get('x-forwarded-for') ||
+      'unknown';
+    if (requestsCache[ip] && now - requestsCache[ip] < 1000) {
+      throw new Error(`Too many requests from ${ip}, ignoring`);
+    }
+    requestsCache[ip] = now;
 
     const path = slug.replace('/docs', '');
 
-    // const hasValidTrickyHeader = headers[trickyHeaderKey] === trickyHeaderValue;
-    // const hasValidOrigin = isProduction ? headers['origin'] === siteUrl : true;
-    // const hasValidReferer = headers['referer']?.endsWith(path);
+    // const hasValidTrickyHeader =
+    //   headersList.get(trickyHeaderKey) === trickyHeaderValue;
+    // const hasValidOrigin = isProduction
+    //   ? headersList.get('origin') === siteUrl
+    //   : true;
+    // const hasValidReferer = headersList.get('referer')?.endsWith(path);
 
-    // if (!hasValidTrickyHeader || !hasValidOrigin || !hasValidReferer) {
-    //   console.info('Invalid headers, ignoring');
+    // if (
+    //   !hasValidTrickyHeader ||
+    //   !hasValidOrigin ||
+    //   !hasValidReferer ||
+    //   spuriousComment
+    // ) {
     //   console.info(
     //     JSON.stringify(
     //       {
@@ -421,26 +562,15 @@ export async function sendFeedback(
     //       2,
     //     ),
     //   );
-    //   return {
-    //     statusCode: 401,
-    //     body: JSON.stringify({}),
-    //   };
+    //   throw new Error('Invalid request, ignoring');
     // }
 
-    // if (spuriousComment) {
-    //   console.info('Spurious comment, ignoring');
-    //   return {
-    //     statusCode: 401,
-    //     body: JSON.stringify({}),
-    //   };
-    // }
-
-    // const hasValidSlug = slugs.includes(slug);
+    // const hasValidSlug = slugs.has(slug);
     // const hasValidVersion = versions.includes(version);
-    // const hasValidRating = Object.keys(ratingSymbols).includes(rating);
+    // const hasValidRating =
+    //   rating && Object.keys(ratingSymbols).includes(rating);
 
     // if (!hasValidVersion || !hasValidRating) {
-    //   console.info('Invalid data, ignoring');
     //   console.info(
     //     JSON.stringify(
     //       {
@@ -456,11 +586,21 @@ export async function sendFeedback(
     //       2,
     //     ),
     //   );
-    //   return {
-    //     statusCode: 401,
-    //     body: JSON.stringify({}),
-    //   };
+    //   throw new Error('Invalid data, ignoring');
     // }
+
+    const fullObj = JSON.stringify(
+      {
+        renderer,
+        slug,
+        version,
+        rating,
+      },
+      null,
+      2,
+    );
+
+    console.log('FULL OBJ', fullObj);
 
     const title = createTitle(path);
 
@@ -489,9 +629,11 @@ export async function sendFeedback(
     //   comment,
     // });
 
+    // return { url };
+    // Bring back URL to use in the module
     return { message: 'ok' };
   } catch (error) {
-    console.info(error.toString());
-    return { message: 'error' };
+    return { message: 'fail' };
+    // throw new Error((error as Error).message);
   }
 }

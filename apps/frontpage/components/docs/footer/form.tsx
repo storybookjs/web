@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 import { sendFeedback } from './actions';
 import { useFormState, useFormStatus } from 'react-dom';
 import { ReactionsProps } from './footer';
+import { usePathname } from 'next/navigation';
+import { useDocs } from '../../../app/docs/provider';
 
 const initialState = {
   message: '',
@@ -19,6 +21,8 @@ export const Form = ({
   setReaction: Dispatch<SetStateAction<ReactionsProps>>;
 }) => {
   const [state, formAction] = useFormState(sendFeedback, initialState);
+  const pathname = usePathname();
+  const { activeRenderer, activeLanguage } = useDocs();
 
   useEffect(() => {
     if (state.message === 'ok') {
@@ -59,6 +63,13 @@ export const Form = ({
         </motion.div>
       )}
       <input type="hidden" name="reaction" value={reaction} />
+      <input type="hidden" name="slug" value={pathname} />
+      {activeRenderer && (
+        <input type="hidden" name="renderer" value={activeRenderer} />
+      )}
+      {activeLanguage && (
+        <input type="hidden" name="language" value={activeLanguage} />
+      )}
       <textarea
         id="feedback"
         name="feedback"
