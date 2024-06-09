@@ -1,7 +1,7 @@
 interface YoutubeData {
-  items: {
-    statistics: {
-      subscriberCount: string;
+  items?: {
+    statistics?: {
+      subscriberCount?: string;
     };
   }[];
 }
@@ -16,8 +16,12 @@ export const fetchYouTubeSubscribers = async (): Promise<{
 
   const data = (await response.json()) as YoutubeData;
 
-  // const number = parseInt(data.items[0].statistics.subscriberCount, 10);
-  const number = 100;
+  // Check if data.items is defined and has at least one item
+  if (!data.items || data.items.length === 0) {
+    return { number: 0, formattedResult: '0' };
+  }
+
+  const number = parseInt(data.items[0].statistics?.subscriberCount ?? '0', 10);
 
   if (!response.ok) return { number: 0, formattedResult: '0' };
 
