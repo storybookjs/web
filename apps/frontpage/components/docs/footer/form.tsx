@@ -6,11 +6,14 @@ import { motion } from 'framer-motion';
 import { sendFeedback } from './actions';
 import { useFormState, useFormStatus } from 'react-dom';
 import { ReactionsProps } from './footer';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { useDocs } from '../../../app/docs/provider';
+import { getVersion } from '../../../lib/get-version';
+import { url } from 'inspector';
 
 const initialState = {
   message: '',
+  url: '',
 };
 
 export const Form = ({
@@ -22,13 +25,15 @@ export const Form = ({
 }) => {
   const [state, formAction] = useFormState(sendFeedback, initialState);
   const pathname = usePathname();
+  const params = useParams<{ slug: string[] }>();
   const { activeRenderer, activeLanguage } = useDocs();
+  const activeVersion = getVersion(params.slug);
 
   useEffect(() => {
     if (state.message === 'ok') {
       setTimeout(() => {
         setReaction(null);
-      }, 2000);
+      }, 4000);
     }
   }, [state.message]);
 
@@ -59,7 +64,17 @@ export const Form = ({
           className="absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center gap-1 bg-white text-sm"
         >
           <div>Your feedback has been received!</div>
-          <div>Thank you for your help!</div>
+          {!!state.url ? (
+            <a
+              className="text-blue-500 underline underline-offset-4"
+              target="_blank"
+              href={state.url}
+            >
+              View on Github
+            </a>
+          ) : (
+            <div>Thank you for your help!</div>
+          )}
         </motion.div>
       )}
       <input type="hidden" name="reaction" value={reaction} />
@@ -69,6 +84,9 @@ export const Form = ({
       )}
       {activeLanguage && (
         <input type="hidden" name="language" value={activeLanguage} />
+      )}
+      {activeVersion && (
+        <input type="hidden" name="version" value={activeVersion.id} />
       )}
       <textarea
         id="feedback"

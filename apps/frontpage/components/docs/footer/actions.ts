@@ -22,14 +22,16 @@ export async function sendFeedback(
     slug: z.string(),
     renderer: z.string(),
     language: z.string(),
+    version: z.string(),
   });
 
   const parse = schema.safeParse({
+    slug: formData.get('slug'),
     feedback: formData.get('feedback'),
     reaction: formData.get('reaction'),
-    slug: formData.get('slug'),
     renderer: formData.get('renderer'),
     language: formData.get('language'),
+    version: formData.get('version'),
   });
 
   if (!parse.success) {
@@ -37,8 +39,6 @@ export async function sendFeedback(
   }
 
   const data = parse.data;
-
-  const siteUrl = process.env.URL;
 
   const pat = process.env.GITHUB_STORYBOOK_BOT_PAT;
   if (!pat) {
@@ -87,7 +87,7 @@ export async function sendFeedback(
    * adjust the value of a custom env var per-context, so we infer the context from that.
    */
   // const isProduction = !trickyHeader.endsWith('-not-prod');
-  const isProduction = true;
+  // const isProduction = true;
 
   // const { trickyHeaderKey, trickyHeaderValue } =
   //   /^key-(?<trickyHeaderKey>.+)-value-(?<trickyHeaderValue>.+)$/.exec(
@@ -119,7 +119,6 @@ export async function sendFeedback(
     return [
       `| ${ratingSymbols.up} | ${ratingSymbols.down} |`,
       '| :-: | :-: |',
-      // prettier-ignore
       `| ${createRating('up', rating === 'up' ? 1 : 0)} | ${createRating('down', rating === 'down' ? 1 : 0)} |`,
     ].join('\r\n');
   }
@@ -142,7 +141,6 @@ export async function sendFeedback(
     const path = buildPathWithVersion(slug, version);
     const link = `**[${path}](https://storybook.js.org${path})**`;
 
-    // prettier-ignore
     const meta = [
       `| ${ratingSymbols[rating]} | v${version} | ${renderer} | ${codeLanguage} |`,
       '| - | - | - | - |',
@@ -512,12 +510,12 @@ export async function sendFeedback(
   // Beginning submit feedback
 
   const slug = data.slug;
-  const version = '8.1';
+  const version = data.version;
   const renderer = data.renderer;
   const codeLanguage = data.language;
   const rating = data.reaction as Rating;
   const comment = data.feedback;
-  const spuriousComment = '';
+  // const spuriousComment = '';
 
   const now = Date.now();
 
@@ -589,19 +587,6 @@ export async function sendFeedback(
     //   throw new Error('Invalid data, ignoring');
     // }
 
-    const fullObj = JSON.stringify(
-      {
-        renderer,
-        slug,
-        version,
-        rating,
-      },
-      null,
-      2,
-    );
-
-    console.log('FULL OBJ', fullObj);
-
     const title = createTitle(path);
 
     let currentDiscussion = await getDiscussion(title);
@@ -619,19 +604,20 @@ export async function sendFeedback(
       await reOpenDiscussion(currentDiscussion);
     }
 
-    // const url = await addDiscussionComment({
-    //   ...currentDiscussion,
-    //   slug,
-    //   version,
-    //   renderer,
-    //   codeLanguage,
-    //   rating,
-    //   comment,
-    // });
+    const url = await addDiscussionComment({
+      ...currentDiscussion,
+      slug,
+      version,
+      renderer,
+      codeLanguage,
+      rating,
+      comment,
+    });
 
-    // return { url };
-    // Bring back URL to use in the module
-    return { message: 'ok' };
+    return {
+      message: 'ok',
+      url,
+    };
   } catch (error) {
     return { message: 'fail' };
     // throw new Error((error as Error).message);

@@ -26,6 +26,7 @@ export default async function Layout({
   params: { slug: string[] };
 }) {
   const { number: githubCount } = await fetchGithubCount();
+  console.log(slug);
   const activeVersion = getVersion(slug);
   const path = `content/docs/${activeVersion.id}`;
   const tree = generateDocsTree(path);
