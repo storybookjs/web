@@ -106,9 +106,11 @@ export const Form = ({
 function SubmitButton() {
   const { pending } = useFormStatus();
 
+  console.log(pending);
+
   return (
     <Button variant="solid" size="md" type="submit" aria-disabled={pending}>
-      Send feedback
+      {pending ? 'Sending...' : 'Send feedback'}
     </Button>
   );
 }
