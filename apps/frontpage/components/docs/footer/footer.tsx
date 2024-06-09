@@ -4,11 +4,14 @@ import { cn } from '@repo/utils';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Form } from './form';
+import { usePathname } from 'next/navigation';
 
 export type ReactionsProps = null | 'up' | 'down';
+const githubDocsBaseUrl = 'https://github.com/storybookjs/storybook/tree/next';
 
 export const DocsFooter = () => {
   const [reaction, setReaction] = useState<ReactionsProps>(null);
+  const pathname = usePathname();
 
   const selectReaction = (r: 'up' | 'down') => {
     if (reaction === null) setReaction(r);
@@ -66,12 +69,13 @@ export const DocsFooter = () => {
           {reaction && <Form reaction={reaction} setReaction={setReaction} />}
         </AnimatePresence>
       </motion.div>
-      <button
-        type="submit"
+      <a
+        href={`${githubDocsBaseUrl}${pathname}.mdx`}
+        target="_blank"
         className="textsm flex h-12 items-center rounded-full border border-zinc-200 px-5 text-sm transition-all hover:-translate-y-1 hover:border-zinc-400"
       >
         ✍️ Edit on Github
-      </button>
+      </a>
     </div>
   );
 };
