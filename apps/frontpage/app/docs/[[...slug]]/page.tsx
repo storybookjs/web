@@ -14,31 +14,43 @@ interface PageProps {
   };
 }
 
+const latestVersion = docsVersions[0].id;
+const preReleaseVersion = docsVersions.find((v) => v.preRelease)?.id;
+
 export const generateStaticParams = () => {
   const result: { slug: string[] }[] = [];
   const tree = generateDocsTree();
-  const treeFirstVersion = generateDocsTree(
-    `content/docs/${docsVersions[0]?.id}`,
-  );
 
-  const ids = (data: TreeProps[], removeVersion: boolean) => {
+  const getSlugs = (data: TreeProps[]) => {
     data.forEach((item) => {
       if ('slug' in item) {
         const newSlug = item.slug.replace('/docs/', '').split('/');
-        if (removeVersion) newSlug.shift();
+        const slugVersion = newSlug[0];
+        const [major, minor] = slugVersion.split('.');
+
+        const isLatest = slugVersion === latestVersion;
+        const isPreRelease = preReleaseVersion && slugVersion === preReleaseVersion;
+        const isPreReleaseMinor = isPreRelease && minor !== '0'
+        
+        if (isLatest) {
+          // Remove the version
+          newSlug.shift();
+        } else if (!isPreReleaseMinor) {
+          // Simplify version to only major portion
+          newSlug[0] = major;
+        }
         result.push({
           slug: newSlug,
         });
       }
       if (item.children) {
-        ids(item.children, removeVersion);
+        getSlugs(item.children);
       }
     });
   };
+  getSlugs(tree);
 
-  ids(treeFirstVersion, true);
-  ids(tree, false);
-
+  console.log(JSON.stringify(result, null, 2));
   return result;
 };
 
