@@ -63,18 +63,6 @@ dotenv.config();
     instructions: false,
   });
 
-  // Now create a watch on monorepoPath to replace /apps/frontpage/content/docs with the new content
-  // This will be a simple fs.watch on the directory
-  // When a file changes, we will copy the file to the frontpage directory
-  // We will also need to create a new file if the file is new
-  // We will need to delete the file if the file is deleted
-  // We will need to update the file if the file is updated
-  // We will need to update the file if the file is renamed
-  // We will need to update the file if the file is moved
-  // We will need to update the file if the file is moved and renamed
-  // We will need to update the file if the file is moved and updated
-  // We will need to update the file if the file is moved, renamed, and updated
-
   const pathToDocs = path.join(
     './apps/frontpage/content/docs',
     versionPrompt.version,
