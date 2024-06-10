@@ -1,9 +1,9 @@
 import prompts from 'prompts';
-const fs = require('fs');
 const path = require('path');
 import dotenv from 'dotenv';
 import chalk from 'chalk';
 import { docsVersions } from './packages/utils/src/docs-versions';
+import * as fs from 'fs-extra';
 
 dotenv.config();
 
@@ -40,13 +40,14 @@ dotenv.config();
   }
 
   // Check if the directory exists in path
-  const monorepoAbsolutePath = path.join(__dirname, monorepoRelativePath);
-  const exists = fs.existsSync(`${monorepoAbsolutePath}/docs`);
+  const pathToStorybookDocs = path.join(
+    __dirname,
+    `${monorepoRelativePath}/docs`,
+  );
+  const exists = fs.existsSync(pathToStorybookDocs);
 
   if (!exists) {
-    console.log(
-      `✳︎ ${chalk.cyan(`${monorepoAbsolutePath}/docs`)} does not exists.`,
-    );
+    console.log(`✳︎ ${chalk.cyan(pathToStorybookDocs)} does not exists.`);
     process.exit(1);
   }
 
@@ -63,16 +64,40 @@ dotenv.config();
     instructions: false,
   });
 
-  const pathToDocs = path.join(
+  const pathToLocalDocs = path.join(
     './apps/frontpage/content/docs',
     versionPrompt.version,
   );
-  const pathToSnippets = path.join(
-    './apps/frontpage/content/snippets',
-    versionPrompt.version,
-  );
 
-  fs.watch(monorepoAbsolutePath, { recursive: true }, () => {
-    console.log(`✳︎ Some changes were made in. Refreshing the docs...`);
+  console.log('✳︎ Syncing the docs from Storybook to the your local docs...');
+
+  fs.watch(pathToStorybookDocs, { recursive: true }, () => {
+    console.log(`✳︎ Some changes were made. Refreshing the docs...`);
+
+    // Move all files docs to the local docs
+    fs.copySync(pathToStorybookDocs, pathToLocalDocs, {
+      filter: (src) => {
+        if (
+          src.includes('.prettierignore') ||
+          src.includes('.prettierrc') ||
+          src.includes('_assets') ||
+          src.includes('_snippets')
+        )
+          return false;
+        return true;
+      },
+    });
+
+    // Move snippets to the local snippets
+    fs.copySync(
+      path.join(pathToStorybookDocs, '_snippets'),
+      path.join('./apps/frontpage/content/snippets', versionPrompt.version),
+    );
+
+    // Move assets to the local docs
+    fs.copySync(
+      path.join(pathToStorybookDocs, '_assets'),
+      path.join('./apps/frontpage/public/docs', versionPrompt.version),
+    );
   });
 })();
