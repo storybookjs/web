@@ -1,6 +1,7 @@
 import { cn } from '@repo/utils';
 import { SearchIcon } from '@storybook/icons';
 import type { FC } from 'react';
+import { DocSearch } from '@docsearch/react';
 
 interface SearchProps {
   variant?: 'home' | 'system';
@@ -33,6 +34,29 @@ export const Search: FC<SearchProps> = ({
         <SearchIcon className="ui-w-3 ui-h-3" />
         Search docs
       </div>
+      <DocSearch
+        apiKey={process.env.ALGOLIA_API_KEY}
+        {...algoliaDocSearchConfig}
+        placeholder={label}
+        searchParameters={{
+          // prettier-ignore
+          facetFilters: [
+                /*
+                    Used to allow recipes to come through global search
+                    along with docs. Values inside an array act as an OR
+                    between the containing values
+                */
+                [`tags:docs`, `tags:recipes`],
+                [`version:${version}`, `version:agnostic`],
+              ],
+        }}
+        translations={{
+          button: {
+            buttonAriaLabel: label,
+            buttonText: label,
+          },
+        }}
+      />
       {!isMobile && (
         <div
           className={cn(
