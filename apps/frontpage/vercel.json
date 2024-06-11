@@ -14,7 +14,7 @@
     },
     {
       "source": "/status/:match*",
-      "destination": "https://storybook-status.netlify.app/status/:match*"
+      "destination": "https://github.com/storybookjs/storybook/issues/23279"
     },
     {
       "source": "/tutorials/:match*",
