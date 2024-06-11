@@ -13,10 +13,6 @@
       "destination": "https://storybook-component-catalog.netlify.app/showcase/:match*"
     },
     {
-      "source": "/status/:match*",
-      "destination": "https://github.com/storybookjs/storybook/issues/23279"
-    },
-    {
       "source": "/tutorials/:match*",
       "destination": "https://storybook-tutorials.netlify.app/tutorials/:match*"
     },
