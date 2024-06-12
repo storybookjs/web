@@ -1,14 +1,13 @@
 import type { Metadata } from 'next';
 import { Header, Footer, Container } from '@repo/ui';
 import Image from 'next/image';
-import { fetchGithubCount } from '@repo/utils';
+import { fetchGithubCount, latestVersion } from '@repo/utils';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { TableOfContent } from '../../../components/docs/table-of-content';
 import { NavDocs } from '../../../components/docs/sidebar/docs-nav';
 import { generateDocsTree } from '../../../lib/get-tree';
 import { DocsProvider } from '../provider';
 import { getVersion } from '../../../lib/get-version';
-import { slugHasVersion } from '../../../lib/slug-has-version';
 import { getPageData } from '../../../lib/get-page';
 import { Submenu } from '../../../components/docs/submenu';
 
@@ -29,11 +28,12 @@ export default async function Layout({
   const activeVersion = getVersion(slug);
   const path = `content/docs/${activeVersion.id}`;
   const tree = generateDocsTree(path);
-  const hasVersion = slugHasVersion(slug);
-  const newSlug = slug ? [...slug] : [];
-  if (!hasVersion) newSlug.unshift(activeVersion.id);
+  const isLatest = activeVersion.id === latestVersion.id;
+  const slugToFetch = slug ? [...slug] : [];
+  if (!isLatest) slugToFetch.shift();
+  slugToFetch.unshift(activeVersion.id);
 
-  const page = await getPageData(newSlug, activeVersion);
+  const page = await getPageData(slugToFetch, activeVersion);
 
   return (
     <DocsProvider>
