@@ -9,11 +9,20 @@ interface SearchProps {
   isMobile?: boolean;
 }
 
+const algoliaDocSearchConfig = {
+  appId: '6L6UWBTLCK',
+  indexName: 'storybook-js',
+};
+
 export const Search: FC<SearchProps> = ({
   variant,
   className,
   isMobile = false,
 }) => {
+  const label = 'Search docs';
+
+  console.log(process.env.ALGOLIA_API_KEY)
+
   return (
     <button
       className={cn(
@@ -34,7 +43,7 @@ export const Search: FC<SearchProps> = ({
         <SearchIcon className="ui-w-3 ui-h-3" />
         Search docs
       </div>
-      <DocSearch
+      {/* <DocSearch
         apiKey={process.env.ALGOLIA_API_KEY}
         {...algoliaDocSearchConfig}
         placeholder={label}
@@ -56,7 +65,7 @@ export const Search: FC<SearchProps> = ({
             buttonText: label,
           },
         }}
-      />
+      /> */}
       {!isMobile && (
         <div
           className={cn(
