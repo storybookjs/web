@@ -56,7 +56,7 @@ module.exports = {
       {
         source: '/status',
         destination: 'https://github.com/storybookjs/storybook/issues/23279',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/versions.json',
