@@ -1,16 +1,15 @@
 'use client';
 
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { Button } from '../../ui/button';
-import { motion } from 'framer-motion';
-import { sendFeedback } from './actions';
 import { useFormState, useFormStatus } from 'react-dom';
-import { ReactionsProps } from './footer';
+import { motion } from 'framer-motion';
 import { useParams, usePathname } from 'next/navigation';
+
 import { useDocs } from '../../../app/docs/provider';
 import { getVersion } from '../../../lib/get-version';
-import { url } from 'inspector';
-import { set } from 'date-fns';
+import { Button } from '../../ui/button';
+import { sendFeedback } from './actions';
+import { ReactionsProps } from './footer';
 
 const initialState = {
   message: '',
