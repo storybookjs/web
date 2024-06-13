@@ -26,6 +26,10 @@ module.exports = {
         protocol: 'https',
         hostname: 'images.opencollective.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
     ],
   },
   // This was added to fix the error with remarkExpressiveCode
