@@ -39,10 +39,18 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'categories',
-      title: 'Categories',
+      name: 'tags',
+      title: 'Tags',
       type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
+      of: [{type: 'reference', to: {type: 'tag'}}],
+    }),
+    defineField({
+      name: 'whatsNew',
+      title: "What's new",
+      description:
+        'If this is set to true, this post will appear in the "What\'s new" section in Storybook?',
+      type: 'boolean',
+      initialValue: false,
     }),
     defineField({
       name: 'publishedAt',
