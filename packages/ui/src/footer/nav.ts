@@ -17,7 +17,6 @@ export const footerNav = [
       { title: 'Tutorials', href: '/tutorials' },
       { title: 'Changelog', href: '/releases' },
       { title: 'Telemetry', href: '/docs/configure/telemetry' },
-      { title: 'Status', href: '/status' },
     ],
   },
   {
