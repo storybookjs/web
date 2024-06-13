@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import Link from 'next/link';
 import type { DocsVersion } from '@repo/utils';
-import { docsVersions } from '@repo/utils';
+import { docsVersions, latestVersion } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import {
   DropdownMenu,
@@ -23,21 +23,24 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
   const pathname = usePathname();
   const segments = pathname.slice(1).split('/');
 
-  const getLink = (version: string) => {
-    const isFirstVersion = version === docsVersions[0]?.id;
-    const activeVersionIndex = segments.findIndex(
-      (segment) => segment === activeVersion.id,
-    );
-    const isVersionInUrl = activeVersionIndex !== -1;
+  const onLatestVersion = activeVersion.id === latestVersion.id;
+
+  const getLink = (version: DocsVersion) => {
+    const toLatestVersion = version.id === latestVersion.id;
 
     const newSegments = [...segments];
     let newHref = `/${newSegments.join('/')}`;
 
-    if (!isVersionInUrl && !isFirstVersion)
-      newHref = newHref.replace('/docs', `/docs/${version}`);
-    if (isVersionInUrl) newHref = newHref.replace(activeVersion.id, version);
-    if (isVersionInUrl && isFirstVersion)
-      newHref = newHref.replace(`/${version}`, '');
+    if (onLatestVersion && !toLatestVersion) {
+      newHref = newHref.replace('/docs', `/docs/${version.inSlug || version.id}`);
+    } else if (!onLatestVersion && toLatestVersion) {
+      newHref = newHref.replace(`/docs/${activeVersion.inSlug || activeVersion.id}`, '/docs');
+    } else {
+      newHref = newHref.replace(
+        `/docs/${activeVersion.inSlug || activeVersion.id}`,
+        `/docs/${version.inSlug || version.id}`
+      );
+    }
 
     return newHref;
   };
@@ -53,7 +56,7 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
       <DropdownMenuContent className="ui-min-w-[12.5rem]">
         {docsVersions.map((version) => (
           <DropdownMenuItem asChild key={version.id}>
-            <Link href={getLink(version.id)}>{version.label}</Link>
+            <Link href={getLink(version)}>{version.label}</Link>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

@@ -8,3 +8,4 @@ export { fetchGithubCount } from './fetch-github-count';
 export { fetchNpmDownloads } from './fetch-npm-downloads';
 export { fetchGithubContributorCount } from './fetch-github-contributors-count';
 export { fetchDiscordMembers } from './fetch-discord-members';
+export { fetchYouTubeSubscribers } from './fetch-youtube-subscribers';

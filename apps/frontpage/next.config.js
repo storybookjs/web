@@ -54,6 +54,16 @@ module.exports = {
         permanent: true,
       },
       {
+        source: '/status',
+        destination: 'https://github.com/storybookjs/storybook/issues/23279',
+        permanent: false,
+      },
+      {
+        source: '/versions.json',
+        destination: '/versions',
+        permanent: true,
+      },
+      {
         source: '/design-system',
         destination: 'https://master--5ccbc373887ca40020446347.chromatic.com',
         permanent: true,
@@ -124,14 +134,25 @@ module.exports = {
         permanent: true,
       },
       // TODO: Refactor and/or add explanation for why these aren't generated like the others (because they cannot have a version in the URL)
-      ...(
-        [null, 'react', 'vue', 'angular', 'web-components', 'ember', 'html', 'mithril', 'marko', 'svelte', 'riot', 'preact', 'rax']
-        .map((r) => ({
-          source: `/docs${r ? '/r' : ''}/get-started/examples`,
-          destination: '/showcase',
-          permanent: true,
-        }))
-      ),
+      ...[
+        null,
+        'react',
+        'vue',
+        'angular',
+        'web-components',
+        'ember',
+        'html',
+        'mithril',
+        'marko',
+        'svelte',
+        'riot',
+        'preact',
+        'rax',
+      ].map((r) => ({
+        source: `/docs${r ? '/r' : ''}/get-started/examples`,
+        destination: '/showcase',
+        permanent: true,
+      })),
       {
         source: '/docs/configurations/options-parameter',
         destination: '/docs/configure/features-and-behavior',
