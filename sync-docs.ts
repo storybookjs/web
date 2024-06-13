@@ -96,6 +96,10 @@ dotenv.config();
     versionPrompt.version.id,
   );
 
+  if (!fs.existsSync(pathToLocalDocs)) {
+    fs.mkdirSync(pathToLocalDocs);
+  }
+
   console.log(
     `✳︎ Syncing the docs from Storybook to your local ${versionPrompt.version.label} docs`,
   );
@@ -106,33 +110,32 @@ dotenv.config();
     : '';
   console.log(`\n✳︎ 👀 http://localhost:3000/docs/${slugVersion}\n`);
 
-  fs.watch(pathToStorybookDocs, { recursive: true }, () => {
-    console.log(`✳︎ Some changes were made. Refreshing the docs...`);
+  fs.rmSync(pathToLocalDocs, { recursive: true });
+  fs.cpSync(pathToStorybookDocs, pathToLocalDocs, { recursive: true });
 
-    // Move all files docs to the local docs
-    fs.copySync(pathToStorybookDocs, pathToLocalDocs, {
-      filter: (src) => {
-        if (
-          src.includes('.prettierignore') ||
-          src.includes('.prettierrc') ||
-          src.includes('_assets') ||
-          src.includes('_snippets')
-        )
-          return false;
-        return true;
-      },
+  fs.watch(pathToStorybookDocs, { recursive: true }, (_, filename) => {
+    const srcFilePath = path.join(pathToStorybookDocs, filename);
+    const targetFilePath = path.join(pathToLocalDocs, filename);
+    const targetDir = targetFilePath.split('/').slice(0, -1).join('/');
+
+    // Syncs create file
+    if (!fs.existsSync(targetFilePath)) {
+      fs.mkdirSync(targetDir, { recursive: true });
+      fs.closeSync(fs.openSync(targetFilePath, 'w'));
+      console.log(`Created ${filename}`);
+    }
+
+    // Syncs remove file
+    if (!fs.existsSync(srcFilePath)) {
+      fs.unlinkSync(targetFilePath);
+      console.log(`Removed ${filename}`);
+      return;
+    }
+
+    // Syncs update file
+    fs.copyFile(srcFilePath, targetFilePath, (err) => {
+      console.log(`Updated ${filename}`);
+      if (err) throw err;
     });
-
-    // Move snippets to the local snippets
-    fs.copySync(
-      path.join(pathToStorybookDocs, '_snippets'),
-      path.join('./apps/frontpage/content/snippets', versionPrompt.version.id),
-    );
-
-    // Move assets to the local docs
-    fs.copySync(
-      path.join(pathToStorybookDocs, '_assets'),
-      path.join('./apps/frontpage/public/docs', versionPrompt.version.id),
-    );
   });
 })();
