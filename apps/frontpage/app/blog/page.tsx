@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { client } from '../../lib/sanity/client';
 
-type Post = {
+export type Post = {
   _id: string;
   title?: string;
   slug?: {

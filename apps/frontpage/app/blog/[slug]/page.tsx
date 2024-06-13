@@ -1,3 +1,7 @@
+import { notFound } from 'next/navigation';
+import { client } from '../../../lib/sanity/client';
+import { Post } from '../page';
+
 interface PageProps {
   params: {
     slug: string[];
@@ -11,7 +15,12 @@ export const generateStaticParams = () => {
 };
 
 export default async function Page({ params: { slug } }: PageProps) {
-  // if (!page) notFound();
+  const post = await client.fetch<Post>(
+    `*[_type == "post" && slug.current == $slug][0]`,
+    { slug },
+  );
 
-  return <div className="">{slug}</div>;
+  if (!post) notFound();
+
+  return <div className="">{post.title}</div>;
 }
