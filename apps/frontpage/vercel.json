@@ -1,10 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/blog/:match*",
-      "destination": "https://storybook-blog.netlify.app/blog/:match*"
-    },
-    {
       "source": "/day/:match*",
       "destination": "https://storybook-day-2023.netlify.app/day/:match*"
     },

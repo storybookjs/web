@@ -16,7 +16,6 @@ export const nav = [
   {
     title: 'Blog',
     href: '/blog',
-    external: true,
   },
   {
     title: 'Visual Test',
