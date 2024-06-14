@@ -27,6 +27,7 @@ export interface TreeProps extends TreeMetaProps {
   pathSegment: string;
   type: 'directory' | 'link' | 'tab';
   children?: TreeProps[];
+  draft?: boolean;
 }
 
 export interface CodeSnippetsProps {

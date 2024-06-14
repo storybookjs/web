@@ -26,7 +26,7 @@ export const generateStaticParams = () => {
         const { id: versionId, inSlug: versionInSlug } = getVersion(newSlug);
 
         const isLatest = versionId === latestVersionId;
-        
+
         if (isLatest) {
           // Remove the version
           newSlug.shift();
@@ -59,10 +59,10 @@ export default async function Page({ params: { slug } }: PageProps) {
   if (!page) notFound();
 
   return (
-    <div className="flex-1 w-full py-12">
-      <div className="max-w-[720px] mx-auto">
+    <div className="w-full flex-1 py-12">
+      <div className="mx-auto max-w-[720px]">
         <h1
-          className="relative mt-0 mb-6 text-4xl font-bold text-black dark:text-white transition-colors duration-200 group-hover:text-blue-500"
+          className="relative mb-6 mt-0 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
           data-docs-heading
         >
           {page.title || 'Title is missing'}
@@ -78,7 +78,7 @@ export default async function Page({ params: { slug } }: PageProps) {
               return (
                 <Link
                   className={cn(
-                    'border-b -mb-px pb-2 hover:text-blue-500 transition-colors px-2 text-sm capitalize',
+                    '-mb-px border-b px-2 pb-2 text-sm capitalize transition-colors hover:text-blue-500',
                     isActive && 'border-b border-blue-500 text-blue-500',
                   )}
                   href={tab.slug}

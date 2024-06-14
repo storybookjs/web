@@ -29,7 +29,7 @@ export const TableOfContent: FC<TableOfContentProps> = ({ headings }) => {
   const [isInView, setIsInView] = useState<string[]>([]);
 
   return (
-    <nav className="sticky top-[72px] hidden w-[228px] self-start lg:block">
+    <nav className="sticky top-[72px] hidden w-[228px] self-start xl:block">
       <ScrollArea className="h-[calc(100vh-72px)] w-full">
         <div className="py-12">
           <div className="block h-8 text-sm font-bold">On this page</div>
