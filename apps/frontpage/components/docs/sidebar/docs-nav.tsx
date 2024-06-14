@@ -36,6 +36,8 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
 };
 
 const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
+  if (lvl1.name === 'versions' || lvl1.name === 'index.mdx') return null;
+
   return (
     <li key={lvl1.pathSegment}>
       <Link
