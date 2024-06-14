@@ -37,10 +37,8 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
 
       for (let i = 0; i < t.length; i++) {
         const current = t[i];
-        console.log('Checking', getUrl(current.slug), 'against', pathname);
         if (getUrl(current.slug) === pathname) {
           parent?.pathSegment && setParentAccordion([parent?.pathSegment]);
-          console.log('Match found at current level', current);
           return current;
         }
 
