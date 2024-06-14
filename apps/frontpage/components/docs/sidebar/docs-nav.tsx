@@ -34,7 +34,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
           ? tree.map((lvl1) => (
               <li key={lvl1.pathSegment}>
                 <Link
-                  className="mt-6 flex h-8 items-center px-2 text-sm font-bold transition-colors hover:text-blue-500"
+                  className="mt-6 flex items-center px-2 py-2 text-sm font-bold transition-colors hover:text-blue-500"
                   href={getUrl(lvl1.slug)}
                 >
                   {lvl1.sidebar?.title || lvl1.title}
@@ -53,7 +53,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                             {(!lvl2.children || lvl2.children.length === 0) && (
                               <Link
                                 className={cn(
-                                  'flex h-8 items-center px-2 text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500',
+                                  'flex items-center px-2 py-[5px] text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500',
                                   pathname === getUrl(lvl2.slug) &&
                                     'text-blue-500 dark:text-blue-500',
                                 )}
@@ -66,7 +66,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                               <Accordion.Item value="item-1">
                                 <Accordion.Trigger asChild>
                                   <button
-                                    className="group flex h-8 w-full items-center justify-between px-2 text-sm"
+                                    className="group flex w-full items-center justify-between px-2 py-[5px] text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
                                     type="button"
                                   >
                                     {lvl2.sidebar?.title || lvl2.title}
@@ -85,7 +85,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
                                           key={lvl3.pathSegment}
                                         >
                                           <Link
-                                            className="flex h-8 items-center border-l border-zinc-200 p-4 text-sm"
+                                            className="flex items-center border-l border-zinc-200 px-4 py-[5px] text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
                                             href={getUrl(lvl3.slug)}
                                           >
                                             {lvl3.sidebar?.title || lvl3.title}
