@@ -15,7 +15,6 @@ import type { FC, ReactNode } from 'react';
 import { cn } from '@repo/utils';
 
 export const Toolbar: FC<{ slide: number }> = ({ slide }) => {
-  console.log(slide);
   return (
     <div
       className={cn(
