@@ -5,5 +5,5 @@ type TableProps = DetailedHTMLProps<
   HTMLHeadingElement
 >;
 export function Table({ children }: TableProps) {
-  return <table className="mb-6 text-sm">{children}</table>;
+  return <table className="mb-6 w-full text-sm">{children}</table>;
 }
