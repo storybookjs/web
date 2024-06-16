@@ -19,8 +19,6 @@ export function Img({ src, alt, activeVersion }: ImgProps) {
   const path = `/docs/${activeVersion}/${pathWithoutRoot}`;
   const localPath = `${process.cwd()}/public${path}`;
 
-  console.log('localPath', localPath);
-
   // Check if the file exists
   const fileExists = fs.existsSync(localPath);
   if (!fileExists) return null;
