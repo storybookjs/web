@@ -13,6 +13,34 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: 'This is a default callout',
+    children: 'This is a callout',
+  },
+};
+
+export const Neutral: Story = {
+  args: {
+    ...Default.args,
+    variant: 'neutral',
+  },
+};
+
+export const Positive: Story = {
+  args: {
+    ...Default.args,
+    variant: 'positive',
+  },
+};
+
+export const Info: Story = {
+  args: {
+    ...Default.args,
+    variant: 'info',
+  },
+};
+
+export const Warning: Story = {
+  args: {
+    ...Default.args,
+    variant: 'warning',
   },
 };
