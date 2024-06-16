@@ -17,7 +17,9 @@ interface ImgProps extends ImageProps {
 export function Img({ src, alt, activeVersion }: ImgProps) {
   const pathWithoutRoot = src?.replace('../_assets/', '');
   const path = `/docs/${activeVersion}/${pathWithoutRoot}`;
-  const localPath = `public${path}`;
+  const localPath = `${process.cwd()}/public${path}`;
+
+  console.log('localPath', localPath);
 
   // Check if the file exists
   const fileExists = fs.existsSync(localPath);
