@@ -11,6 +11,7 @@ export function H3({ children, id }: H3Props) {
     <h3
       className="group relative mb-4 mt-10 text-xl font-bold"
       data-docs-heading
+      id={id}
     >
       <div className="absolute -translate-y-24" id={id} />
       <a
