@@ -9,7 +9,8 @@
     "storybook": "turbo run storybook",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "clean": "turbo run clean && rm -rf node_modules && rm -rf .turbo",
-    "sync-docs": "tsx --tsconfig tsconfig.json sync-docs.ts"
+    "sync-docs": "tsx --tsconfig tsconfig.json sync-docs.ts",
+    "test": "turbo test"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
