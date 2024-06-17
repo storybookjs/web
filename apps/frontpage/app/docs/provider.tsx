@@ -5,9 +5,9 @@ import { getCookie, setCookie } from 'cookies-next';
 import type { ReactNode } from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
 import {
-  COOKIELANGUAGEID,
-  COOKIEPACKAGEMANAGERID,
-  COOKIERENDERID,
+  cookieLanguageId,
+  cookiePackageManagerId,
+  cookieRenderId,
 } from '../../constants';
 
 export interface DocsContextProps {
@@ -31,9 +31,9 @@ export function DocsProvider({ children }: { children: ReactNode }) {
   >(null);
 
   useEffect(() => {
-    const cookieRenderer = getCookie(COOKIERENDERID);
-    const cookieLanguage = getCookie(COOKIELANGUAGEID);
-    const cookiePackageManager = getCookie(COOKIEPACKAGEMANAGERID);
+    const cookieRenderer = getCookie(cookieRenderId);
+    const cookieLanguage = getCookie(cookieLanguageId);
+    const cookiePackageManager = getCookie(cookiePackageManagerId);
 
     if (cookieRenderer) {
       setActiveRenderer(cookieRenderer);
@@ -56,17 +56,17 @@ export function DocsProvider({ children }: { children: ReactNode }) {
 
   const setRenderer = (id: string) => {
     setActiveRenderer(id);
-    setCookie(COOKIERENDERID, id);
+    setCookie(cookieRenderId, id);
   };
 
   const setLanguage = (id: string) => {
     setActiveLanguage(id);
-    setCookie(COOKIELANGUAGEID, id);
+    setCookie(cookieLanguageId, id);
   };
 
   const setPackageManager = (id: string) => {
     setActivePackageManager(id);
-    setCookie(COOKIEPACKAGEMANAGERID, id);
+    setCookie(cookiePackageManagerId, id);
   };
 
   return (
