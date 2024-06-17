@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { TreeProps } from '@repo/utils';
-import { renderers, docsVersions, latestVersion, cn } from '@repo/utils';
+import { renderers, latestVersion, cn } from '@repo/utils';
 import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
