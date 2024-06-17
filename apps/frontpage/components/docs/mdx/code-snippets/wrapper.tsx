@@ -26,7 +26,7 @@ export const CodeWrapper: FC<CodeWrapperProps> = ({
           {copy ? <Copy content={copy} /> : null}
         </div>
       </div>
-      <div className="max-w-full overflow-scroll p-4 text-sm dark:bg-slate-900">
+      <div className="max-w-full overflow-auto p-4 text-sm dark:bg-slate-900">
         {children}
       </div>
     </div>
