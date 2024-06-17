@@ -52,36 +52,6 @@ module.exports = {
         destination: '/docs',
         permanent: true,
       },
-      {
-        source: '/telemetry',
-        destination: '/docs/configure/telemetry',
-        permanent: true,
-      },
-      {
-        source: '/status',
-        destination: 'https://github.com/storybookjs/storybook/issues/23279',
-        permanent: false,
-      },
-      {
-        source: '/versions.json',
-        destination: '/versions',
-        permanent: true,
-      },
-      {
-        source: '/design-system',
-        destination: 'https://master--5ccbc373887ca40020446347.chromatic.com',
-        permanent: true,
-      },
-      {
-        source: '/migration-guides/7.0',
-        destination: 'https://storybook.js.org/docs/7.0/migration-guide',
-        permanent: true,
-      },
-      {
-        source: '/migration-guides/8.0',
-        destination: 'https://storybook.js.org/docs/8.0/migration-guide',
-        permanent: true,
-      },
     ];
   },
 };
