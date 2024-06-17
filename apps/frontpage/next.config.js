@@ -137,26 +137,6 @@ module.exports = {
           'https://github.com/storybookjs/storybook/blob/next/examples/README.md',
         permanent: true,
       },
-      // TODO: Refactor and/or add explanation for why these aren't generated like the others (because they cannot have a version in the URL)
-      // ...[
-      //   null,
-      //   'react',
-      //   'vue',
-      //   'angular',
-      //   'web-components',
-      //   'ember',
-      //   'html',
-      //   'mithril',
-      //   'marko',
-      //   'svelte',
-      //   'riot',
-      //   'preact',
-      //   'rax',
-      // ].map((r) => ({
-      //   source: `/docs${r ? '/r' : ''}/get-started/examples`,
-      //   destination: '/showcase',
-      //   permanent: true,
-      // })),
       {
         source: '/docs/configurations/options-parameter',
         destination: '/docs/configure/features-and-behavior',
@@ -309,62 +289,6 @@ module.exports = {
       {
         source: '/addons/tags/:tag',
         destination: '/integrations/tag/:tag',
-        permanent: true,
-      },
-      /* 🐺 Wild Cards */
-      {
-        source: '/basics/:path*',
-        destination: '/docs',
-        permanent: true,
-      },
-      {
-        source: '/docs/basics/:path*',
-        destination: '/docs',
-        permanent: true,
-      },
-      {
-        source: '/configurations/:path*',
-        destination: '/docs/configure',
-        permanent: true,
-      },
-      {
-        source: '/docs/configurations/:path*',
-        destination: '/docs/configure',
-        permanent: true,
-      },
-      {
-        source: '/examples/:path*',
-        destination: '/docs',
-        permanent: true,
-      },
-      {
-        source: '/docs/examples/:path*',
-        destination: '/docs',
-        permanent: true,
-      },
-      {
-        source: '/logos/:path*',
-        destination: '/docs',
-        permanent: true,
-      },
-      {
-        source: '/docs/logos/:path*',
-        destination: '/docs',
-        permanent: true,
-      },
-      {
-        source: '/testing/:path*',
-        destination: '/docs',
-        permanent: true,
-      },
-      {
-        source: '/docs/testing/:path*',
-        destination: '/docs/writing-tests',
-        permanent: true,
-      },
-      {
-        source: '/docs/guides/:path*',
-        destination: '/docs',
         permanent: true,
       },
     ];
