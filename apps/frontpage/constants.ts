@@ -1,3 +1,3 @@
-export const COOKIERENDERID = 'sb-docs-renderer';
-export const COOKIELANGUAGEID = 'sb-docs-language';
-export const COOKIEPACKAGEMANAGERID = 'sb-docs-package-manager';
+export const cookieRenderId = 'sb-docs-renderer';
+export const cookieLanguageId = 'sb-docs-language';
+export const cookiePackageManagerId = 'sb-docs-package-manager';
