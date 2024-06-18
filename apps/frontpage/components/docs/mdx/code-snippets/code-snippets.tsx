@@ -11,18 +11,28 @@ import { InfoIcon } from '@storybook/icons';
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[];
+  serverActiveRenderer: string;
+  serverActiveLanguage: string;
+  serverActivePackageManager: string;
 }
 
 export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   content,
+  serverActiveRenderer,
+  serverActiveLanguage,
+  serverActivePackageManager,
 }) => {
-  const {
-    activeRenderer,
-    activeLanguage,
+  let {
     activePackageManager,
+    activeLanguage,
+    activeRenderer,
     setLanguage,
     setPackageManager,
   } = useDocs();
+
+  activeLanguage ??= serverActiveLanguage;
+  activeRenderer ??= serverActiveRenderer;
+  activePackageManager ??= serverActivePackageManager;
 
   // Get filters - If preformatted text, we don't need filters
   const filters = getFilters({ content, activeRenderer });

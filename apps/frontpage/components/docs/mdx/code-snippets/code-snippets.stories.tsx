@@ -13,7 +13,7 @@ const meta = {
   component: CodeSnippetsClient,
   tags: ['autodocs'],
   argTypes: {
-    activeRenderer: {
+    serverActiveRenderer: {
       control: 'select',
       options: [
         'react',
@@ -28,11 +28,11 @@ const meta = {
         'solid',
       ],
     },
-    activeLanguage: {
+    serverActiveLanguage: {
       control: 'radio',
       options: ['js', 'ts', 'ts-4.9'],
     },
-    activePackageManager: {
+    serverActivePackageManager: {
       control: 'radio',
       options: ['npm', 'npx', 'yarn', 'pnpm'],
     },
@@ -43,9 +43,9 @@ const meta = {
     },
   },
   args: {
-    activeRenderer: 'react',
-    activeLanguage: null,
-    activePackageManager: null,
+    serverActiveRenderer: 'react',
+    serverActiveLanguage: 'js',
+    serverActivePackageManager: 'npm',
     content: content1,
   },
   decorators: [
@@ -54,21 +54,23 @@ const meta = {
       return (
         <DocsContext.Provider
           value={{
-            ...args,
+            activeLanguage: args.serverActiveLanguage,
+            activePackageManager: args.serverActivePackageManager,
+            activeRenderer: args.serverActiveRenderer,
             setLanguage: fn()
               .mockName('setLanguage')
               .mockImplementation((id) => {
-                setArgs({ activeLanguage: id });
+                setArgs({ serverActiveLanguage: id });
               }),
             setPackageManager: fn()
               .mockName('setPackageManager')
               .mockImplementation((id) => {
-                setArgs({ activePackageManager: id });
+                setArgs({ serverActivePackageManager: id });
               }),
             setRenderer: fn()
               .mockName('setRenderer')
               .mockImplementation((id) => {
-                setArgs({ activeRenderer: id });
+                setArgs({ serverActiveRenderer: id });
               }),
           }}
         >
@@ -79,9 +81,9 @@ const meta = {
   ],
 } satisfies Meta<
   ComponentProps<typeof CodeSnippetsClient> & {
-    activeRenderer: string | null;
-    activePackageManager: string | null;
-    activeLanguage: string | null;
+    serverActiveRenderer: string | null;
+    serverActivePackageManager: string | null;
+    serverActiveLanguage: string | null;
   }
 >;
 
@@ -95,66 +97,66 @@ export const ContentOnly: Story = {
 export const PackageNPM: Story = {
   args: {
     content: content1,
-    activePackageManager: 'npm',
+    serverActivePackageManager: 'npm',
   },
 };
 
 export const PackageYARN: Story = {
   args: {
     content: content1,
-    activePackageManager: 'yarn',
+    serverActivePackageManager: 'yarn',
   },
 };
 
 export const PackagePNPM: Story = {
   args: {
     content: content1,
-    activePackageManager: 'pnpm',
+    serverActivePackageManager: 'pnpm',
   },
 };
 
 export const ReactNoLanguage: Story = {
   args: {
     content: content2,
-    activeRenderer: 'react',
+    serverActiveRenderer: 'react',
   },
 };
 
 export const ReactJS: Story = {
   args: {
     content: content2,
-    activeRenderer: 'react',
-    activeLanguage: 'js',
+    serverActiveRenderer: 'react',
+    serverActiveLanguage: 'js',
   },
 };
 
 export const ReactTS: Story = {
   args: {
     content: content2,
-    activeLanguage: 'ts',
+    serverActiveLanguage: 'ts',
   },
 };
 
 export const AngularNoLanguage: Story = {
   args: {
     content: content2,
-    activeRenderer: 'angular',
+    serverActiveRenderer: 'angular',
   },
 };
 
 export const AngularJS: Story = {
   args: {
     content: content2,
-    activeRenderer: 'angular',
-    activeLanguage: 'js',
+    serverActiveRenderer: 'angular',
+    serverActiveLanguage: 'js',
   },
 };
 
 export const NoRenderer: Story = {
   args: {
     content: content2,
-    activeRenderer: 'ember',
-    activeLanguage: 'js',
+    serverActiveRenderer: 'ember',
+    serverActiveLanguage: 'js',
   },
 };
 
