@@ -56,6 +56,8 @@ export default async function Page({ params: { slug } }: PageProps) {
 
   const page = await getPageData(slugToFetch, activeVersion);
 
+  console.log(page);
+
   if (!page) notFound();
 
   return (
