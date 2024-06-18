@@ -559,7 +559,6 @@ export async function sendFeedback(
     const title = createTitle(path);
 
     let currentDiscussion = await getDiscussion(title);
-    // let currentDiscussion = undefined;
 
     if (currentDiscussion) {
       console.info(`Found discussion for ${path}`);

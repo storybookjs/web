@@ -43,7 +43,7 @@ export const DocsFooter = () => {
         transition={{ duration, ease }}
         className="flex flex-col overflow-hidden rounded-3xl border border-zinc-200"
       >
-        <div className="flex h-12 items-center gap-2 pl-5 pr-3 text-sm">
+        <div className="flex flex-shrink-0 h-12 items-center gap-2 pl-5 pr-3 text-sm">
           Was this page useful?
           <div className="flex items-center gap-1">
             <button

@@ -35,12 +35,12 @@ export const Form = ({
   const activeVersion = getVersion(params.slug);
 
   useEffect(() => {
-    if (state.message === 'ok') {
+    if (state.status === 'ok') {
       setTimeout(() => {
         setReaction(null);
       }, 4000);
     }
-  }, [state.message]);
+  }, [state.status]);
 
   const duration = 0.2;
   const ease = 'easeInOut';
