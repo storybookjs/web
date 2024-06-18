@@ -1,13 +1,17 @@
+import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 
 interface AProps {
   children?: ReactNode;
+  href?: string;
 }
 
-export const A: FC<AProps> = ({ children, ...rest }) => {
+export const A: FC<AProps> = ({ children, href, ...rest }) => {
+  const hrefWithoutExtension = href ? href.replace(/\.mdx/, '') : '';
+
   return (
-    <a className="text-blue-500" {...rest}>
+    <Link className="text-blue-500" href={hrefWithoutExtension} {...rest}>
       {children}
-    </a>
+    </Link>
   );
 };
