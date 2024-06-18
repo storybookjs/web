@@ -47,7 +47,7 @@ export const RenderersClient: FC<RenderersProps> = ({
     if (!isInFirstList && activeRendererObj) {
       setLastRenderer(activeRendererObj);
     }
-  }, [isMobile]);
+  }, [isMobile, activeRenderer]);
 
   const restRenderers = renderers.filter((r) => {
     return !firstList.includes(r) && r !== lastRenderer;
