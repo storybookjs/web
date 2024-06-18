@@ -56,7 +56,7 @@ export default async function Page({ params: { slug } }: PageProps) {
 
   const page = await getPageData(slugToFetch, activeVersion);
 
-  if (!page) notFound();
+  // if (!page) notFound();
 
   return (
     <div className="w-full min-w-0 flex-1 py-12">
