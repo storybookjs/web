@@ -48,5 +48,15 @@ export const generateStaticParams = () => {
 };
 
 export default async function Page({ params: { slug } }: PageProps) {
+  const activeVersion = getVersion(slug);
+  const isLatest = activeVersion.id === latestVersion.id;
+  const slugToFetch = slug ? [...slug] : [];
+  if (!isLatest) slugToFetch.shift();
+  slugToFetch.unshift(activeVersion.id);
+
+  const page = await getPageData(slugToFetch, activeVersion);
+
+  // if (!page) notFound();
+
   return <div>hello</div>;
 }
