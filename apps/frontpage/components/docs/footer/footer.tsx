@@ -41,7 +41,7 @@ export const DocsFooter = () => {
           borderRadius: reaction ? 4 : 24,
         }}
         transition={{ duration, ease }}
-        className="overflow-hidden rounded-3xl border border-zinc-200"
+        className="flex flex-col overflow-hidden rounded-3xl border border-zinc-200"
       >
         <div className="flex h-12 items-center gap-2 pl-5 pr-3 text-sm">
           Was this page useful?
