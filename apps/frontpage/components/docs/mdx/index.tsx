@@ -13,7 +13,7 @@ export { FeatureSnippets } from './feature-snippets';
 export { If } from './if';
 export { Video } from './video';
 export { YouTubeCallout } from './youtube-callout';
-export { UnorderedList, List } from './unordered-list';
+export { UnorderedList, List, OrderedList } from './lists';
 export { HomeRenderers } from './home-renderers';
 export { HomeConcepts } from './home-concepts';
 export { HomeResources } from './home-resources';
