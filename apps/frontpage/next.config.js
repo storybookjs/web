@@ -74,6 +74,11 @@ module.exports = {
     return config;
   },
   transpilePackages: ['@repo/ui', '@repo/utils'],
+  experimental: {
+    outputFileTracingIncludes: {
+      '/docs/**': ['./content/docs/**'],
+    },
+  },
   async redirects() {
     // Add the wild cards at the bottom of the list
     // to avoid conflicts with the more specific redirects
