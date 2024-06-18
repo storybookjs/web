@@ -6,6 +6,7 @@ import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
 import { generateDocsTree } from '../../../lib/get-tree';
+import { DocsFooter } from '../../../components/docs/footer/footer';
 
 interface PageProps {
   params: {
@@ -112,6 +113,7 @@ export default async function Page({ params: { slug } }: PageProps) {
         >
           {page.content}
         </article>
+        <DocsFooter />
       </div>
     </div>
   );

@@ -27,13 +27,15 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
   const newPath = pathToFiles || 'content/docs';
   const newDocsRoot = docsRoot || newPath;
 
-  const files = fs.readdirSync(newPath);
+  const files = fs.readdirSync(path.join(process.cwd(), newPath));
   const tree: TreeProps[] = [];
 
   if (shouldParse(newPath)) {
     files.forEach((file) => {
       const filePath = path.join(newPath, file);
-      const slug = filePath.replace('content/', '/').replace(/\.mdx?$|\.md$/, '');
+      const slug = filePath
+        .replace('content/', '/')
+        .replace(/\.mdx?$|\.md$/, '');
       const isDirectory = fs.lstatSync(filePath).isDirectory();
 
       if (isDirectory) {
