@@ -58,7 +58,11 @@ export default async function Page({ params: { slug } }: PageProps) {
 
   console.log(page);
 
-  if (!page) notFound();
+  // if (!page) notFound();
+
+  if (!page) return <div>Hello World</div>;
+
+  return <div>Hello World</div>;
 
   return (
     <div className="w-full min-w-0 flex-1 py-12">
@@ -67,12 +71,12 @@ export default async function Page({ params: { slug } }: PageProps) {
           className="relative mb-6 mt-0 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
           data-docs-heading
         >
-          {page.title || 'Title is missing'}
+          {page?.title || 'Title is missing'}
         </h1>
-        {!page.hideRendererSelector && <Renderers />}
-        {page.tabs && page.tabs.length > 0 ? (
+        {!page?.hideRendererSelector && <Renderers />}
+        {page?.tabs && page.tabs.length > 0 ? (
           <div className="flex items-center gap-8 border-b border-zinc-200">
-            {page.tabs.map((tab) => {
+            {page?.tabs.map((tab) => {
               const isActive = tab.slug === `/docs/${slug.join('/')}`;
 
               return (
@@ -110,7 +114,7 @@ export default async function Page({ params: { slug } }: PageProps) {
             '[&>details>summary>h3]:text-xl',
           )}
         >
-          {page.content}
+          {page?.content}
         </article>
       </div>
     </div>
