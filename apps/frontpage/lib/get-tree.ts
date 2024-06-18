@@ -26,7 +26,7 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
   const files = fs.readdirSync(newPath);
   const tree: TreeProps[] = [];
 
-  if (newPath.includes('/versions')) return;
+  if (newPath.includes('/versions')) return tree;
 
   files.forEach((file) => {
     const filePath = path.join(newPath, file);
