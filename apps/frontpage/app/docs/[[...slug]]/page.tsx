@@ -59,7 +59,7 @@ export default async function Page({ params: { slug } }: PageProps) {
   if (!page) notFound();
 
   return (
-    <div className="w-full flex-1 py-12 min-w-0">
+    <div className="w-full min-w-0 flex-1 py-12">
       <div className="mx-auto max-w-[720px]">
         <h1
           className="relative mb-6 mt-0 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"

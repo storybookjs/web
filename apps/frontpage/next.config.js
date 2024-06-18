@@ -273,11 +273,6 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/docs/addons/writing-addons',
-        destination: '/docs/addons/writing-addons',
-        permanent: true,
-      },
-      {
         source: '/addons/writing-addons',
         destination: '/docs/addons/writing-addons',
         permanent: true,
