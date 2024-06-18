@@ -8,10 +8,18 @@ interface AProps {
 
 export const A: FC<AProps> = ({ children, href, ...rest }) => {
   const hrefWithoutExtension = href ? href.replace(/\.mdx/, '') : '';
+  const isInternalLink = href?.includes('.mdx') ?? false;
+
+  if (isInternalLink)
+    return (
+      <Link className="text-blue-500" href={hrefWithoutExtension} {...rest}>
+        {children}
+      </Link>
+    );
 
   return (
-    <Link className="text-blue-500" href={hrefWithoutExtension} {...rest}>
+    <a className="text-blue-500" href={href} {...rest}>
       {children}
-    </Link>
+    </a>
   );
 };
