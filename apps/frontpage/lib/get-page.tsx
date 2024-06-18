@@ -31,6 +31,7 @@ import {
   Th,
   Tr,
   Td,
+  OrderedList,
 } from '../components/docs/mdx';
 import { generateDocsTree } from './get-tree';
 import { rehypePrettyCodeOptions } from './rehype-pretty-code-options';
@@ -143,6 +144,7 @@ export const getPageData = async (
       p: P,
       hr: Hr,
       ul: UnorderedList,
+      ol: OrderedList,
       li: List,
       pre: Pre,
       table: Table,
