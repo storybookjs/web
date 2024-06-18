@@ -26,6 +26,12 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
   const files = fs.readdirSync(newPath);
   const tree: TreeProps[] = [];
 
+  if (newPath.includes('/versions')) {
+    console.log('Boom!');
+    console.log('newPath', newPath);
+    return;
+  }
+
   files.forEach((file) => {
     const filePath = path.join(newPath, file);
     const slug = filePath.replace('content/', '/').replace(/\.mdx?$|\.md$/, '');
