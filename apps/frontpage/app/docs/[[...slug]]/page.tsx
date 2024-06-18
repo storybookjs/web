@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { TreeProps } from '@repo/utils';
-import { renderers, docsVersions, latestVersion, cn } from '@repo/utils';
+import { renderers, latestVersion, cn } from '@repo/utils';
 import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
@@ -27,7 +27,7 @@ export const generateStaticParams = () => {
         const { id: versionId, inSlug: versionInSlug } = getVersion(newSlug);
 
         const isLatest = versionId === latestVersionId;
-        
+
         if (isLatest) {
           // Remove the version
           newSlug.shift();
@@ -60,7 +60,7 @@ export default async function Page({ params: { slug } }: PageProps) {
   if (!page) notFound();
 
   return (
-    <div className="w-full flex-1 py-12">
+    <div className="w-full flex-1 py-12 min-w-0">
       <div className="mx-auto max-w-[720px]">
         <h1
           className="relative mb-6 mt-0 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"

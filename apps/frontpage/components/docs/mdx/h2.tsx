@@ -11,6 +11,7 @@ export function H2({ children, id }: H2Props) {
     <h2
       className="group relative mb-6 mt-10 text-2xl font-bold"
       data-docs-heading
+      id={id}
     >
       <div className="absolute -translate-y-24" id={id} />
       <a

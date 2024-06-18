@@ -17,3 +17,7 @@ export { UnorderedList, List } from './unordered-list';
 export { HomeRenderers } from './home-renderers';
 export { HomeConcepts } from './home-concepts';
 export { HomeResources } from './home-resources';
+export { Table } from './table';
+export { Th } from './th';
+export { Tr } from './tr';
+export { Td } from './td';
