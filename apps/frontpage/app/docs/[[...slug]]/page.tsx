@@ -42,7 +42,7 @@ export const generateStaticParams = () => {
       }
     });
   };
-  tree && getSlugs(tree);
+  getSlugs(tree);
 
   return result;
 };
