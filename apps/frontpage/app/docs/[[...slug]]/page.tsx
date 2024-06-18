@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { TreeProps } from '@repo/utils';
-import { renderers, latestVersion, cn } from '@repo/utils';
+import { latestVersion, cn } from '@repo/utils';
 import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
@@ -68,9 +68,7 @@ export default async function Page({ params: { slug } }: PageProps) {
         >
           {page.title || 'Title is missing'}
         </h1>
-        {!page.hideRendererSelector && (
-          <Renderers activeRenderer={renderers[0]?.id || ''} />
-        )}
+        {!page.hideRendererSelector && <Renderers />}
         {page.tabs && page.tabs.length > 0 ? (
           <div className="flex items-center gap-8 border-b border-zinc-200">
             {page.tabs.map((tab) => {
