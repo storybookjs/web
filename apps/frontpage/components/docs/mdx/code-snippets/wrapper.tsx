@@ -7,6 +7,7 @@ interface CodeWrapperProps {
   children: ReactNode;
   title?: string;
   copy?: ReactNode;
+  top?: ReactNode;
 }
 
 export const CodeWrapper: FC<CodeWrapperProps> = ({
@@ -14,9 +15,11 @@ export const CodeWrapper: FC<CodeWrapperProps> = ({
   children,
   title,
   copy,
+  top,
 }) => {
   return (
     <div className="mb-6 w-full overflow-hidden rounded border border-zinc-300 dark:border-slate-700">
+      <div>{top}</div>
       <div className="flex h-12 items-center justify-between border-b border-b-zinc-300 bg-slate-50 py-2 pl-5 pr-4 dark:border-slate-700 dark:bg-slate-950">
         <div className="flex items-center gap-2 text-sm text-black dark:text-slate-400">
           <TSIcon /> {title || ''}

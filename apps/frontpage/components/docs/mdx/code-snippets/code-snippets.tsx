@@ -44,9 +44,33 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     activeRenderer,
   });
 
+  const tabs = content
+    .map((item) => item.tabTitle)
+    .filter((title) => title !== undefined);
+
+  console.log(tabs);
+
   return (
     <CodeWrapper
       copy={activeContent?.raw || ''}
+      top={
+        tabs.length > 1 ? (
+          <div className="flex gap-2">
+            {tabs.map((tab, index) => (
+              <button
+                key={index}
+                className={`rounded px-4 py-2 text-sm ${
+                  activeContent?.tabTitle === tab
+                    ? 'bg-slate-200 text-zinc-900'
+                    : 'bg-slate-50 text-zinc-600'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        ) : null
+      }
       options={
         <>
           {filters && filters.languages.length > 1 ? (
