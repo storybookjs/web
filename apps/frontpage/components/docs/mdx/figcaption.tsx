@@ -1,17 +1,18 @@
 'use client';
 
-import { useEffect, type FC, type ReactNode } from 'react';
-import { useFigure } from './figure-provider';
+import { useContext, useEffect, type FC, type ReactNode } from 'react';
+import { FigureContext } from './figure-provider';
 
 interface PreProps {
   children?: ReactNode;
 }
 
 export const Figcaption: FC<PreProps> = (props) => {
-  const { setTitle } = useFigure();
+  const context = useContext(FigureContext);
+  const { setTitle } = context || {};
 
   useEffect(() => {
-    setTitle(props.children as string);
+    setTitle && setTitle(props.children as string);
   }, []);
 
   return (

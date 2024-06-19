@@ -26,11 +26,3 @@ export function FigureProvider({ children }: { children: ReactNode }) {
     </FigureContext.Provider>
   );
 }
-
-export function useFigure() {
-  const context = useContext(FigureContext);
-  if (context === undefined) {
-    throw new Error('useFigure must be used within a FigureProvider');
-  }
-  return context;
-}
