@@ -6,6 +6,7 @@ interface GetActiveContentProps {
   activePackageManager: string | null;
   activeLanguage: string | null;
   activeRenderer: string | null;
+  activeTab: string | null;
 }
 
 export const getActiveContent = ({
@@ -14,6 +15,7 @@ export const getActiveContent = ({
   activePackageManager,
   activeLanguage,
   activeRenderer,
+  activeTab,
 }: GetActiveContentProps): {
   activeContent: CodeSnippetsProps | null;
   error: string | null;
@@ -102,6 +104,18 @@ export const getActiveContent = ({
   }
 
   if (filterByLanguage.length === 0) return { activeContent: null, error };
+
+  if (activeTab) {
+    const filterByTab = filterByLanguage.filter((item) => {
+      if (item.tabTitle === activeTab) return true;
+      return false;
+    });
+
+    return {
+      activeContent: filterByTab[0] || null,
+      error: null,
+    };
+  }
 
   return {
     activeContent: filterByLanguage[0] || null,

@@ -1,7 +1,7 @@
 'use client';
 
-import type { FC } from 'react';
-import type { CodeSnippetsProps } from '@repo/utils';
+import { useEffect, useState, type FC } from 'react';
+import { cn, type CodeSnippetsProps } from '@repo/utils';
 import { useDocs } from '../../../../app/docs/provider';
 import { CodeWrapper } from './wrapper';
 import { getFilters } from './utils/get-filters';
@@ -23,6 +23,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     setLanguage,
     setPackageManager,
   } = useDocs();
+  const [activeTab, setTab] = useState<string | null>(null);
 
   // Get filters - If preformatted text, we don't need filters
   const filters = getFilters({ content, activeRenderer });
@@ -35,6 +36,16 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     setPackageManager(id);
   };
 
+  const tabs = content
+    .map((item) => item.tabTitle)
+    .filter((title) => title !== undefined) as string[];
+
+  useEffect(() => {
+    if (tabs && tabs.length > 0) {
+      setTab(tabs[0]);
+    }
+  }, []);
+
   // Get active content for the Code Snippets component
   const { activeContent, error } = getActiveContent({
     content,
@@ -42,13 +53,8 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     activeLanguage,
     activePackageManager,
     activeRenderer,
+    activeTab,
   });
-
-  const tabs = content
-    .map((item) => item.tabTitle)
-    .filter((title) => title !== undefined);
-
-  console.log(tabs);
 
   return (
     <CodeWrapper
@@ -59,11 +65,14 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
             {tabs.map((tab, index) => (
               <button
                 key={index}
-                className={`rounded px-4 py-2 text-sm ${
-                  activeContent?.tabTitle === tab
-                    ? 'bg-slate-200 text-zinc-900'
-                    : 'bg-slate-50 text-zinc-600'
-                }`}
+                className={cn(
+                  'flex h-7 items-center justify-center rounded border px-2 text-sm transition-colors',
+                  activeTab === tab &&
+                    'border-slate-500 bg-slate-500 text-white dark:border-slate-700 dark:bg-slate-700 dark:text-slate-400',
+                  activeTab !== tab &&
+                    'border-zinc-300 hover:border-blue-500 hover:text-blue-500 dark:border-slate-700 dark:text-slate-500 dark:hover:border-blue-500 dark:hover:text-blue-500',
+                )}
+                onClick={() => setTab(tab)}
               >
                 {tab}
               </button>
