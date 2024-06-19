@@ -107,6 +107,7 @@ export default async function Page({ params: { slug } }: PageProps) {
             '[&>details>summary]:cursor-pointer',
             '[&>details>summary>h3]:inline',
             '[&>details>summary>h3]:text-xl',
+            '[&>code]:text-sm',
           )}
         >
           {page.content}
