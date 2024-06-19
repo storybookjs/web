@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Header, Footer, Container } from '@repo/ui';
 import Image from 'next/image';
-import { TreeProps, fetchGithubCount, latestVersion } from '@repo/utils';
+import { fetchGithubCount, latestVersion } from '@repo/utils';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { TableOfContent } from '../../../components/docs/table-of-content';
 import { NavDocs } from '../../../components/docs/sidebar/docs-nav';
@@ -10,47 +10,11 @@ import { DocsProvider } from '../provider';
 import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Submenu } from '../../../components/docs/submenu';
-import { Suspense } from 'react';
-import Loading from './loading';
 
 export const metadata: Metadata = {
   title: 'Storybook',
   description:
     "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
-};
-
-const latestVersionId = latestVersion.id;
-
-export const generateStaticParams = () => {
-  const result: { slug: string[] }[] = [];
-  const tree = generateDocsTree();
-
-  const getSlugs = (data: TreeProps[]) => {
-    data.forEach((item) => {
-      if ('slug' in item) {
-        const newSlug = item.slug.replace('/docs/', '').split('/');
-        const { id: versionId, inSlug: versionInSlug } = getVersion(newSlug);
-
-        const isLatest = versionId === latestVersionId;
-
-        if (isLatest) {
-          // Remove the version
-          newSlug.shift();
-        } else if (versionInSlug) {
-          newSlug[0] = versionInSlug;
-        }
-        result.push({
-          slug: newSlug,
-        });
-      }
-      if (item.children) {
-        getSlugs(item.children);
-      }
-    });
-  };
-  getSlugs(tree);
-
-  return result;
 };
 
 export default async function Layout({
