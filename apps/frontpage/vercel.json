@@ -1,12 +1,32 @@
 {
   "rewrites": [
     {
+      "source": "/addons/addon-gallery",
+      "destination": "https://storybook-frontpage.netlify.app/integrations"
+    },
+    {
+      "source": "/addons/:match*",
+      "destination": "https://storybook-frontpage.netlify.app/addons/:match*"
+    },
+    {
       "source": "/blog/:match*",
       "destination": "https://storybook-blog.netlify.app/blog/:match*"
     },
     {
       "source": "/day/:match*",
       "destination": "https://storybook-day-2023.netlify.app/day/:match*"
+    },
+    {
+      "source": "/integrations/:match*",
+      "destination": "https://storybook-frontpage.netlify.app/integrations/:match*"
+    },
+    {
+      "source": "/recipes",
+      "destination": "https://storybook-frontpage.netlify.app/integrations"
+    },
+    {
+      "source": "/recipes/:match*",
+      "destination": "https://storybook-frontpage.netlify.app/recipes/:match*"
     },
     {
       "source": "/showcase/:match*",
