@@ -1,9 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Pre } from './pre';
+import { FigureProvider } from './figure-provider';
 
 const meta = {
   title: 'Pre',
   component: Pre,
+  decorators: [
+    (Story) => (
+      <FigureProvider>
+        <Story />
+      </FigureProvider>
+    ),
+  ],
 } satisfies Meta<typeof Pre>;
 
 export default meta;
