@@ -61,8 +61,6 @@ export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
         });
       }
 
-      console.log(metadata);
-
       return {
         language: block.lang || undefined,
         ...metadata,
