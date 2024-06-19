@@ -100,17 +100,15 @@ function Card({
       />
       {subtitle ? (
         <div>
-          <h3 className="text-md font-bold text-black dark:text-white">
+          <p className="text-md font-bold text-black dark:text-white">
             {title}
-          </h3>
+          </p>
           <p className="text-sm text-slate-600 dark:text-slate-400">
             {subtitle}
           </p>
         </div>
       ) : (
-        <h3 className="text-md font-bold text-black dark:text-white">
-          {title}
-        </h3>
+        <p className="text-md font-bold text-black dark:text-white">{title}</p>
       )}
     </Link>
   );
