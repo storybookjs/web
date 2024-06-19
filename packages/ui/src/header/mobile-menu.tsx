@@ -4,12 +4,16 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import Link from 'next/link';
 import { cn } from '@repo/utils';
+import { Search } from '../search';
 import { Arrow } from './arrow';
-import { Search } from './search';
 import { nav } from './nav';
 import type { HeaderProps } from '.';
 
-export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
+export const MobileMenu: FC<HeaderProps> = ({
+  algoliaApiKey,
+  variant,
+  version,
+}) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -40,9 +44,11 @@ export const MobileMenu: FC<HeaderProps> = ({ variant }) => {
           <ScrollArea.Root className="ui-w-full ui-h-full" type="always">
             <ScrollArea.Viewport className="ui-w-full ui-h-full ui-p-4 md:ui-p-2 md:ui-py-3">
               <Search
+                algoliaApiKey={algoliaApiKey}
                 className="ui-hidden max-[440px]:ui-block"
                 isMobile
                 variant={variant}
+                version={version}
               />
               {nav.map((item) => (
                 <DropdownItem

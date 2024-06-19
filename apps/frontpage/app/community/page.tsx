@@ -30,7 +30,10 @@ export default async function Page() {
 
   return (
     <CommunityProvider>
-      <Header githubCount={githubCount} variant="system" />
+      <Header
+        algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
+        githubCount={githubCount}
+      />
       <NavTop />
       <Container asChild className="mt-10 md:mt-20" variant="small">
         <main>

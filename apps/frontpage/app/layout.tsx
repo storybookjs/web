@@ -1,9 +1,15 @@
 import type { Metadata } from 'next';
 import { Nunito_Sans as nunitoSans } from 'next/font/google';
+import {
+  GLOBAL_SEARCH_META_KEYS,
+  GLOBAL_SEARCH_AGNOSTIC,
+  GLOBAL_SEARCH_IMPORTANCE,
+} from '@repo/ui';
 import { cn } from '@repo/utils';
 import { Providers } from './providers';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
+import '@docsearch/css';
 import './globals.css';
 import '@repo/ui/styles.css';
 
@@ -21,6 +27,11 @@ export const metadata: Metadata = {
   openGraph: {
     url: 'https://storybook.js.org',
     siteName: 'Storybook',
+  },
+  other: {
+    // Set the docsearch index facets defaults
+    [GLOBAL_SEARCH_META_KEYS.VERSION]: GLOBAL_SEARCH_AGNOSTIC,
+    [GLOBAL_SEARCH_META_KEYS.IMPORTANCE]: GLOBAL_SEARCH_IMPORTANCE.AGNOSTIC,
   },
 };
 

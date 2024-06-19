@@ -21,6 +21,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@docsearch/css": "^3.6.0",
     "@google-cloud/bigquery": "^7.7.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-aspect-ratio": "^1.0.3",

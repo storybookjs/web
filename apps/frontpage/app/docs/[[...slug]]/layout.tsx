@@ -1,5 +1,12 @@
-import type { Metadata } from 'next';
-import { Header, Footer, Container } from '@repo/ui';
+import type { Metadata, ResolvingMetadata } from 'next';
+import {
+  Header,
+  Footer,
+  Container,
+  GLOBAL_SEARCH_META_KEYS,
+  GLOBAL_SEARCH_AGNOSTIC,
+  GLOBAL_SEARCH_IMPORTANCE,
+} from '@repo/ui';
 import Image from 'next/image';
 import { fetchGithubCount, latestVersion } from '@repo/utils';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
@@ -11,19 +18,31 @@ import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Submenu } from '../../../components/docs/submenu';
 
-export const metadata: Metadata = {
-  title: 'Storybook',
-  description:
-    "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
-};
+interface PageProps {
+  children: React.ReactNode;
+  params: { slug: string[] };
+}
+
+export async function generateMetadata({
+  params: { slug },
+}: PageProps): Promise<Metadata> {
+  const activeVersion = getVersion(slug);
+
+  return {
+    title: 'Storybook',
+    description:
+      "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
+    other: {
+      [GLOBAL_SEARCH_META_KEYS.VERSION]: activeVersion.id,
+      [GLOBAL_SEARCH_META_KEYS.IMPORTANCE]: GLOBAL_SEARCH_IMPORTANCE.DOCS,
+    },
+  };
+}
 
 export default async function Layout({
   children,
   params: { slug },
-}: {
-  children: React.ReactNode;
-  params: { slug: string[] };
-}) {
+}: PageProps) {
   const { number: githubCount } = await fetchGithubCount();
   const activeVersion = getVersion(slug);
   const path = `content/docs/${activeVersion.id}`;
@@ -38,9 +57,10 @@ export default async function Layout({
   return (
     <DocsProvider>
       <Header
+        algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
         githubCount={githubCount}
         subMenu={<Submenu activeVersion={activeVersion} tree={tree} />}
-        variant="system"
+        version={activeVersion.id}
       />
       <Image
         alt="Storybook Docs"
