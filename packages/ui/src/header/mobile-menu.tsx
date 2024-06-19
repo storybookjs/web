@@ -53,7 +53,6 @@ export const MobileMenu: FC<HeaderProps> = ({
               {nav.map((item) => (
                 <DropdownItem
                   external={item.external}
-                  externalIcon={item.externalIcon}
                   href={item.href}
                   key={item.title}
                   title={item.title}
@@ -87,13 +86,11 @@ interface DropdownItemProps {
   title: ReactNode;
   external?: boolean;
   href: string;
-  externalIcon?: boolean;
 }
 
 export const DropdownItem: FC<DropdownItemProps> = ({
   title,
   external,
-  externalIcon,
   href,
 }) => {
   const Comp = external ? 'a' : Link;
@@ -105,7 +102,7 @@ export const DropdownItem: FC<DropdownItemProps> = ({
     >
       <Comp href={href} target={external ? '_blank' : undefined}>
         {title}
-        {externalIcon ? (
+        {external ? (
           <div className="ui-h-full ui-flex ui-items-start ui-py-1.5">
             <Arrow />
           </div>
