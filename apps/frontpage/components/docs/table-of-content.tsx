@@ -7,16 +7,12 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { useScrollDirection } from 'react-use-scroll-direction';
 import { ScrollArea } from '../ui/scroll-area';
+import { useDocs } from '../../app/docs/provider';
 
 interface Heading {
-  id: number;
-  slug: string;
+  id: string;
   title: string;
   level: number;
-}
-
-interface TableOfContentProps {
-  headings?: Heading[];
 }
 
 interface ElementProps {
@@ -25,8 +21,23 @@ interface ElementProps {
   setIsInView: Dispatch<SetStateAction<string[]>>;
 }
 
-export const TableOfContent: FC<TableOfContentProps> = ({ headings }) => {
+export const TableOfContent: FC = () => {
+  const { activeRenderer } = useDocs();
   const [isInView, setIsInView] = useState<string[]>([]);
+  const [headings, setHeadings] = useState<Heading[]>([]);
+
+  useEffect(() => {
+    const selectors = document.querySelectorAll(
+      'h2, h3, h4',
+    ) as NodeListOf<HTMLHeadingElement>;
+
+    const elements = Array.from(selectors).map((elem) => ({
+      id: elem.id,
+      title: elem.innerText,
+      level: Number(elem.nodeName.charAt(1)),
+    }));
+    setHeadings(elements);
+  }, [activeRenderer]);
 
   return (
     <nav className="sticky top-[72px] hidden w-[228px] self-start xl:block">
@@ -57,24 +68,23 @@ const Element: FC<ElementProps> = ({ heading, isInView, setIsInView }) => {
   // This is quite a dirty solution that don't always work.
   // TODO: Find a better solution.
   useEffect(() => {
-    const box = document.getElementById(heading.slug) as ElementOrSelector;
+    const box = document.getElementById(heading.id) as ElementOrSelector;
 
     inView(box, () => {
-      const isInArray = isInView.includes(heading.slug);
+      const isInArray = isInView.includes(heading.id);
       !isInArray && isScrollingUp
-        ? setIsInView((value) => [...new Set([heading.slug, ...value])])
-        : setIsInView((value) => [...new Set([...value, heading.slug])]);
+        ? setIsInView((value) => [...new Set([heading.id, ...value])])
+        : setIsInView((value) => [...new Set([...value, heading.id])]);
 
       return () => {
-        setIsInView((value) => value.filter((slug) => slug !== heading.slug));
+        setIsInView((value) => value.filter((slug) => slug !== heading.id));
       };
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps -- This is intentional
   }, [isScrollingUp]);
 
-  const active =
-    isInView.length > 0 ? isInView[0].includes(heading.slug) : false;
+  const active = isInView.length > 0 ? isInView[0].includes(heading.id) : false;
 
   return (
     <li key={heading.id}>
@@ -84,7 +94,7 @@ const Element: FC<ElementProps> = ({ heading, isInView, setIsInView }) => {
           heading.level > 2 && 'ml-5',
           active && 'text-blue-500',
         )}
-        href={`#${heading.slug}`}
+        href={`#${heading.id}`}
       >
         {heading.title}
       </a>

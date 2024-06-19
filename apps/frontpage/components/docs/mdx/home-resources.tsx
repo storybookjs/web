@@ -16,7 +16,7 @@ export function HomeResources() {
       </div>
       <div className="mb-6 grid grid-cols-1 gap-4 border-t border-slate-200 pt-12 sm:grid-cols-2 dark:border-slate-700">
         <div>
-          <h3 className="mb-2 text-xl font-bold">Need some help?</h3>
+          <p className="mb-2 text-xl font-bold">Need some help?</p>
           <a
             className="flex items-center gap-1 text-blue-500 transition-colors hover:text-blue-600"
             href="https://github.com/storybookjs/storybook/discussions/categories/help"
@@ -28,7 +28,7 @@ export function HomeResources() {
           </a>
         </div>
         <div>
-          <h3 className="mb-2 text-xl font-bold">Latest product updates</h3>
+          <p className="mb-2 text-xl font-bold">Latest product updates</p>
           <a
             className="flex items-center gap-1 text-blue-500 transition-colors hover:text-blue-600"
             href="https://storybook.js.org/releases/"
