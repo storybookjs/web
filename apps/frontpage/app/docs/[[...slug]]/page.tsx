@@ -61,7 +61,7 @@ export default async function Page({ params: { slug } }: PageProps) {
 
   return (
     <div className="w-full min-w-0 flex-1 py-12">
-      <div className="mx-auto max-w-[720px]">
+      <main className="mx-auto max-w-[720px]">
         <h1
           className="relative mb-6 mt-0 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
           data-docs-heading
@@ -91,7 +91,7 @@ export default async function Page({ params: { slug } }: PageProps) {
             })}
           </div>
         ) : null}
-        <article
+        <div
           className={cn(
             '[&>details]:my-6',
             '[&>details]:relative',
@@ -112,9 +112,9 @@ export default async function Page({ params: { slug } }: PageProps) {
           )}
         >
           {page.content}
-        </article>
+        </div>
         <DocsFooter />
-      </div>
+      </main>
     </div>
   );
 }

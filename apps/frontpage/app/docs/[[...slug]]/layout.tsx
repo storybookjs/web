@@ -8,7 +8,7 @@ import {
   GLOBAL_SEARCH_IMPORTANCE,
 } from '@repo/ui';
 import Image from 'next/image';
-import { fetchGithubCount, latestVersion } from '@repo/utils';
+import { TreeProps, fetchGithubCount, latestVersion } from '@repo/utils';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { TableOfContent } from '../../../components/docs/table-of-content';
 import { NavDocs } from '../../../components/docs/sidebar/docs-nav';
@@ -37,6 +37,41 @@ export async function generateMetadata({
       [GLOBAL_SEARCH_META_KEYS.IMPORTANCE]: GLOBAL_SEARCH_IMPORTANCE.DOCS,
     },
   };
+}
+
+function TOCSectionTitles({
+  tree,
+  slug,
+}: {
+  tree: TreeProps[];
+  slug?: string[];
+}) {
+  function getTocSectionTitles() {
+    const title: string[] = [];
+
+    function buildTitle(items: TreeProps[], pathPartIndex: number) {
+      const item = items.find(
+        (item) =>
+          item.name.replace('.mdx', '') === (slug as string[])[pathPartIndex],
+      );
+      if (item) {
+        title.push(item.sidebar?.title || item.title);
+        if (item.children) {
+          buildTitle(item.children, pathPartIndex + 1);
+        }
+      }
+    }
+
+    if (slug) buildTitle(tree, 0);
+
+    return title.join(' » ');
+  }
+
+  const tocSectionTitles = getTocSectionTitles();
+
+  return tocSectionTitles ? (
+    <span hidden id="toc-section-titles">{`Docs » ${tocSectionTitles}`}</span>
+  ) : null;
 }
 
 export default async function Layout({
@@ -70,14 +105,15 @@ export default async function Layout({
         src="/bubbles.png"
         width={1800}
       />
-      <Container asChild className="flex gap-4 md:pl-5 lg:gap-12 lg:pr-8">
-        <main>
+      <TOCSectionTitles tree={tree} slug={slug} />
+      <Container className="flex gap-4 md:pl-5 lg:gap-12 lg:pr-8">
+        <>
           <Sidebar>
             <NavDocs activeVersion={activeVersion} tree={tree} />
           </Sidebar>
           {children}
           <TableOfContent headings={page?.headings} />
-        </main>
+        </>
       </Container>
       <Footer />
     </DocsProvider>
