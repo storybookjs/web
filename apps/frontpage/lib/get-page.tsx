@@ -4,7 +4,6 @@ import remarkGfm from 'remark-gfm';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import rehypeSlug from 'rehype-slug';
 import type { DocsVersion } from '@repo/utils';
-import { extractHeadings } from 'extract-md-headings';
 import { visit } from 'unist-util-visit';
 import {
   CodeSnippets,
@@ -168,8 +167,6 @@ export const getPageData = async (
     },
   });
 
-  const headings = extractHeadings(`${process.cwd()}/${newPath}`);
-
   // Get Tabs
   const pathToFiles = isLink
     ? `${rootPath}/${pathString}`.split('/').slice(0, -1).join('/')
@@ -187,6 +184,5 @@ export const getPageData = async (
     ...frontmatter,
     tabs: index?.isTab ? parent : [],
     content,
-    headings,
   };
 };

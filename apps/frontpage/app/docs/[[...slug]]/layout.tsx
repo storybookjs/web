@@ -56,7 +56,7 @@ export default async function Layout({
             <NavDocs activeVersion={activeVersion} tree={tree} />
           </Sidebar>
           {children}
-          <TableOfContent headings={page?.headings} />
+          <TableOfContent />
         </main>
       </Container>
       <Footer />
