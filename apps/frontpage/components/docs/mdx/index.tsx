@@ -21,3 +21,5 @@ export { Table } from './table';
 export { Th } from './th';
 export { Tr } from './tr';
 export { Td } from './td';
+export { Figure } from './figure';
+export { Figcaption } from './figcaption';

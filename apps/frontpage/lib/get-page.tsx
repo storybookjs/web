@@ -31,6 +31,8 @@ import {
   Tr,
   Td,
   OrderedList,
+  Figure,
+  Figcaption,
 } from '../components/docs/mdx';
 import { generateDocsTree } from './get-tree';
 import { rehypePrettyCodeOptions } from './rehype-pretty-code-options';
@@ -150,6 +152,8 @@ export const getPageData = async (
       th: Th,
       tr: Tr,
       td: Td,
+      figure: Figure,
+      figcaption: Figcaption,
       img: (props) => <Img activeVersion={activeVersion.id} {...props} />,
       Video: (props) => <Video activeVersion={activeVersion.id} {...props} />,
       CodeSnippets: (props) => (
