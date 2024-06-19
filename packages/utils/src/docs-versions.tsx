@@ -42,13 +42,13 @@ export const docsVersions: DocsVersion[] = [
     label: '7.6',
     id: '7.6',
     inSlug: '7',
-    branch: 'charles-transform-docs-next',
+    branch: 'charles-docs-transform-7-6',
   },
   {
     label: '6.5',
     id: '6.5',
     inSlug: '6',
-    branch: 'charles-transform-docs-next',
+    branch: 'charles-docs-transform-6.5',
   },
 ];
 
