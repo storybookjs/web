@@ -150,7 +150,6 @@ export const getPageData = async (
       th: Th,
       tr: Tr,
       td: Td,
-      details: () => <details>Hello world</details>,
       img: (props) => <Img activeVersion={activeVersion.id} {...props} />,
       Video: (props) => <Video activeVersion={activeVersion.id} {...props} />,
       CodeSnippets: (props) => (
