@@ -30,17 +30,20 @@ export default async function Page({ params: { slug } }: PageProps) {
 
   return (
     <>
-      <Header githubCount={githubCount} variant="system" />
-      <Container asChild className="lg:pl-5 lg:pr-8 flex gap-4">
+      <Header
+        algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
+        githubCount={githubCount}
+      />
+      <Container asChild className="flex gap-4 lg:pl-5 lg:pr-8">
         <main>
           <Sidebar>
-            <div className="flex flex-col pt-4 mt-4 border-t border-zinc-200">
+            <div className="mt-4 flex flex-col border-t border-zinc-200 pt-4">
               {releases
                 .sort((a, b) => b.localeCompare(a))
                 .map((release) => (
                   <Link
                     className={cn(
-                      'flex items-center text-sm h-8 text-zinc-600 hover:text-blue-500 transition-colors px-2',
+                      'flex h-8 items-center px-2 text-sm text-zinc-600 transition-colors hover:text-blue-500',
                       release === slug && 'text-blue-500',
                     )}
                     href={`/releases/${release}`}
@@ -51,8 +54,8 @@ export default async function Page({ params: { slug } }: PageProps) {
                 ))}
             </div>
           </Sidebar>
-          <article className="flex-1 w-full max-w-3xl py-12">
-            <h1 className="mt-0 mb-6 text-4xl font-bold">
+          <article className="w-full max-w-3xl flex-1 py-12">
+            <h1 className="mb-6 mt-0 text-4xl font-bold">
               {page?.frontmatter.title || 'Page Not Found'}
             </h1>
             {page?.content}

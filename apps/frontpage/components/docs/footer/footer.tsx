@@ -32,7 +32,7 @@ export const DocsFooter = () => {
   }, [reaction]);
 
   return (
-    <div className="flex flex-wrap justify-between gap-4 pb-6 pt-12">
+    <div className="page-footer flex flex-wrap justify-between gap-4 pb-6 pt-12">
       <motion.div
         initial={{ width: 'auto', height: 48, borderRadius: 24 }}
         animate={{
