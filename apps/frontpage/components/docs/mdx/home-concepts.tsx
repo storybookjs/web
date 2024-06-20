@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export function HomeConcepts() {
   return (
-    <div className="grid grid-cols-1 gap-4 mb-6 sm:grid-cols-2">
+    <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
       <Card
         content="A story captures the rendered state of a UI component. Each component can have multiple stories, where each story describes a different component state."
         href="/docs/writing-stories"
@@ -45,14 +45,12 @@ function Card({
 }) {
   return (
     <Link
-      className="gap-3 p-6 transition-all border rounded-md border-slate-200 hover:border-slate-300 hover:-translate-y-px dark:border-slate-700 dark:hover:border-slate-600"
+      className="gap-3 rounded-md border border-slate-200 p-6 transition-all hover:-translate-y-px hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600"
       href={href}
     >
-      <div className="flex items-center gap-4 mb-4">
+      <div className="mb-4 flex items-center gap-4">
         <Image alt="" height="20" src={`/images/icons/${logo}`} width="20" />
-        <h3 className="font-bold text-black dark:text-white text-md">
-          {title}
-        </h3>
+        <p className="text-md font-bold text-black dark:text-white">{title}</p>
       </div>
       <p className="text-sm leading-6 text-slate-600 dark:text-slate-400">
         {content}

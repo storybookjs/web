@@ -32,13 +32,19 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
     let newHref = `/${newSegments.join('/')}`;
 
     if (onLatestVersion && !toLatestVersion) {
-      newHref = newHref.replace('/docs', `/docs/${version.inSlug || version.id}`);
+      newHref = newHref.replace(
+        '/docs',
+        `/docs/${version.inSlug || version.id}`,
+      );
     } else if (!onLatestVersion && toLatestVersion) {
-      newHref = newHref.replace(`/docs/${activeVersion.inSlug || activeVersion.id}`, '/docs');
+      newHref = newHref.replace(
+        `/docs/${activeVersion.inSlug || activeVersion.id}`,
+        '/docs',
+      );
     } else {
       newHref = newHref.replace(
         `/docs/${activeVersion.inSlug || activeVersion.id}`,
-        `/docs/${version.inSlug || version.id}`
+        `/docs/${version.inSlug || version.id}`,
       );
     }
 
@@ -48,12 +54,12 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="w-full h-10 px-2 mt-6 flex items-center justify-between text-sm transition-all border-b select-none border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-slate-700 dark:text-white">
+        <div className="mt-6 flex h-10 w-full cursor-pointer select-none items-center justify-between border-b border-zinc-200 px-2 text-sm text-zinc-600 transition-all hover:border-zinc-300 hover:text-zinc-900 dark:border-slate-700 dark:text-white">
           {activeVersion.label}
           <ChevronSmallDownIcon />
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="ui-min-w-[12.5rem]">
+      <DropdownMenuContent className="min-w-40">
         {docsVersions.map((version) => (
           <DropdownMenuItem asChild key={version.id}>
             <Link href={getLink(version)}>{version.label}</Link>

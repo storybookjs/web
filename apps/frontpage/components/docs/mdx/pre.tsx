@@ -1,5 +1,8 @@
-import type { FC, ReactNode } from 'react';
+'use client';
+
+import { useContext, type FC, type ReactNode } from 'react';
 import { CodeWrapper } from './code-snippets/wrapper';
+import { FigureContext } from './figure-provider';
 
 interface PreProps {
   children?: ReactNode;
@@ -7,8 +10,11 @@ interface PreProps {
 }
 
 export const Pre: FC<PreProps> = ({ children, raw }) => {
+  const context = useContext(FigureContext);
+  const { title } = context || {};
+
   return (
-    <CodeWrapper copy={raw}>
+    <CodeWrapper copy={raw} title={title || ''}>
       <pre>{children}</pre>
     </CodeWrapper>
   );

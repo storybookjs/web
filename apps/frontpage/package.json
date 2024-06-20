@@ -39,7 +39,6 @@
     "date-fns": "^2.0.0",
     "date-fns-tz": "^2.0.0",
     "dedent": "^1.5.3",
-    "extract-md-headings": "^0.2.7",
     "framer-motion": "^11.2.6",
     "fs-extra": "^11.2.0",
     "gray-matter": "^4.0.3",

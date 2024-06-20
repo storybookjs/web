@@ -4,7 +4,6 @@ import remarkGfm from 'remark-gfm';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import rehypeSlug from 'rehype-slug';
 import type { DocsVersion } from '@repo/utils';
-import { extractHeadings } from 'extract-md-headings';
 import { visit } from 'unist-util-visit';
 import {
   CodeSnippets,
@@ -32,6 +31,8 @@ import {
   Tr,
   Td,
   OrderedList,
+  Figure,
+  Figcaption,
 } from '../components/docs/mdx';
 import { generateDocsTree } from './get-tree';
 import { rehypePrettyCodeOptions } from './rehype-pretty-code-options';
@@ -151,7 +152,8 @@ export const getPageData = async (
       th: Th,
       tr: Tr,
       td: Td,
-      details: () => <details>Hello world</details>,
+      figure: Figure,
+      figcaption: Figcaption,
       img: (props) => <Img activeVersion={activeVersion.id} {...props} />,
       Video: (props) => <Video activeVersion={activeVersion.id} {...props} />,
       CodeSnippets: (props) => (
@@ -165,10 +167,9 @@ export const getPageData = async (
       HomeRenderers,
       HomeConcepts,
       HomeResources,
+      FrameworkSupportTable: (props) => <div {...props}>{props.children}</div>,
     },
   });
-
-  const headings = extractHeadings(`${process.cwd()}/${newPath}`);
 
   // Get Tabs
   const pathToFiles = isLink
@@ -187,6 +188,5 @@ export const getPageData = async (
     ...frontmatter,
     tabs: index?.isTab ? parent : [],
     content,
-    headings,
   };
 };
