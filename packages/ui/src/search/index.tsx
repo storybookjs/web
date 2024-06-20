@@ -1,8 +1,8 @@
 'use client';
 
-import { cn } from '@repo/utils';
 import type { FC } from 'react';
 import { DocSearch } from '@docsearch/react';
+import { cn } from '@repo/utils';
 import type { HeaderProps } from '../header';
 import { GLOBAL_SEARCH_AGNOSTIC } from '../constants';
 
@@ -28,7 +28,45 @@ export const Search: FC<SearchProps> = ({
 
   return (
     <div
-      className={className}
+      className={cn(
+        '[&_.DocSearch-Button]:ui-bg-transparent',
+        '[&_.DocSearch-Button]:ui-rounded-full',
+        '[&_.DocSearch-Button]:ui-h-8',
+        '[&_.DocSearch-Button]:ui-px-3',
+        '[&_.DocSearch-Button_.DocSearch-Search-Icon]:ui-w-[14px]',
+        '[&_.DocSearch-Button_.DocSearch-Search-Icon]:ui-h-[14px]',
+        '[&_.DocSearch-Button-Placeholder]:ui-text-sm',
+        '[&_.DocSearch-Button-Keys]:ui-bg-red-500',
+        '[&_.DocSearch-Button-Keys]:ui-min-w-0',
+        '[&_.DocSearch-Button-Keys]:ui-flex',
+        '[&_.DocSearch-Button-Keys]:ui-items-center',
+        '[&_.DocSearch-Button-Keys]:ui-gap-1',
+        '[&_.DocSearch-Button-Keys]:ui-px-1.5',
+        '[&_.DocSearch-Button-Keys]:ui-rounded-sm',
+        '[&_.DocSearch-Button-Key]:ui-mr-0',
+        '[&_.DocSearch-Button-Key]:ui-bg-none',
+        '[&_.DocSearch-Button-Key]:ui-rounded-none',
+        '[&_.DocSearch-Button-Key]:ui-shadow-none',
+        '[&_.DocSearch-Button-Key]:ui-top-0',
+        '[&_.DocSearch-Button-Key]:ui-p-0',
+        '[&_.DocSearch-Button-Key]:ui-w-auto',
+        '[&_.DocSearch-Button-Key]:ui-text-[11px]',
+        variant === 'home' &&
+          !isMobile &&
+          '[&_.DocSearch-Button]:ui-border [&_.DocSearch-Button]:ui-border-solid [&_.DocSearch-Button]:ui-border-white/30 [&_.DocSearch-Button]:ui-text-white [&_.DocSearch-Button_.DocSearch-Search-Icon]:ui-text-white',
+        variant === 'system' &&
+          !isMobile &&
+          '[&_.DocSearch-Button]:ui-border [&_.DocSearch-Button]:ui-border-solid [&_.DocSearch-Button]:ui-border-zinc-200 [&_.DocSearch-Button]:dark:ui-border-slate-700 [&_.DocSearch-Button]:ui-text-zinc-500 [&_.DocSearch-Button]:dark:ui-text-white [&_.DocSearch-Button_.DocSearch-Search-Icon]:ui-text-zinc-500 [&_.DocSearch-Button]:dark:[&_.DocSearch-Button_.DocSearch-Search-Icon]:ui-text-white',
+        isMobile &&
+          '[&_.DocSearch-Button]:ui-bg-slate-100 [&_.DocSearch-Button]:dark:ui-bg-slate-800 [&_.DocSearch-Button]:ui-px-4 [&_.DocSearch-Button]:ui-mb-3',
+        !isMobile &&
+          '[&_.DocSearch-Button]:ui-px-3 [&_.DocSearch-Button]:ui-w-44',
+        variant === 'home' &&
+          '[&_.DocSearch-Button-Keys]:ui-bg-white/10 [&_.DocSearch-Button-Key]:ui-text-white',
+        variant !== 'home' &&
+          '[&_.DocSearch-Button-Keys]:ui-bg-zinc-100 [&_.DocSearch-Button-Keys]:dark:ui-bg-slate-800 [&_.DocSearch-Button-Key]:dark:ui-text-zinc-400',
+        className,
+      )}
       style={{
         // TODO: These are the defaults: replace with our values
         // @ts-expect-error - TS doesn't like the custom properties
@@ -45,11 +83,6 @@ export const Search: FC<SearchProps> = ({
         '--docsearch-modal-background': '#f5f6f7',
         '--docsearch-modal-shadow':
           'inset 1px 1px 0 0 hsla(0,0%,100%,0.5),0 3px 8px 0 #555a64',
-        '--docsearch-searchbox-height': '56px',
-        '--docsearch-searchbox-background': '#ebedf0',
-        '--docsearch-searchbox-focus-background': '#fff',
-        '--docsearch-searchbox-shadow':
-          'inset 0 0 0 2px var(--docsearch-primary-color)',
         '--docsearch-hit-height': '56px',
         '--docsearch-hit-color': '#444950',
         '--docsearch-hit-active-color': '#fff',
@@ -71,7 +104,6 @@ export const Search: FC<SearchProps> = ({
         {...algoliaDocSearchConfig}
         placeholder={label}
         searchParameters={{
-          // prettier-ignore
           facetFilters: [
             /*
              * Used to allow recipes to come through global search
