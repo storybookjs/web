@@ -43,6 +43,9 @@ apps/frontpage/content/snippets
 apps/frontpage/public/docs-assets
 apps/frontpage/generated-redirects.json
 
+# Generated sitemaps
+apps/frontpage/public/sitemap
+
 # ui
 dist/
 
