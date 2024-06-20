@@ -2,26 +2,30 @@
 
 import type { FC, ReactNode } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import { cn } from '@repo/utils';
+import { cn, latestVersion } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { GithubIcon } from '@storybook/icons';
 import { StorybookLogo } from '../logos/storybook';
-import { Search } from './search';
+import { Search } from '../search';
 import { MobileMenu } from './mobile-menu';
 import { Button } from './button';
 import { nav } from './nav';
 
 export interface HeaderProps {
-  variant?: 'home' | 'system';
+  algoliaApiKey: string;
   githubCount?: number;
   subMenu?: ReactNode;
+  variant?: 'home' | 'system';
+  version?: string;
 }
 
 export const Header: FC<HeaderProps> = ({
-  variant = 'home',
+  algoliaApiKey,
   githubCount = 0,
   subMenu,
+  variant = 'system',
+  version = latestVersion.id,
 }) => {
   const pathname = usePathname();
 
@@ -94,9 +98,18 @@ export const Header: FC<HeaderProps> = ({
                 </span>
               )}
             </a>
-            <Search className="max-[440px]:ui-hidden" variant={variant} />
+            <Search
+              algoliaApiKey={algoliaApiKey}
+              className="max-[440px]:ui-hidden"
+              variant={variant}
+              version={version}
+            />
           </div>
-          <MobileMenu variant={variant} />
+          <MobileMenu
+            algoliaApiKey={algoliaApiKey}
+            variant={variant}
+            version={version}
+          />
         </div>
         {subMenu}
       </div>

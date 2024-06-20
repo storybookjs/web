@@ -1,3 +1,38 @@
+const generatedRedirects = require('./generated-redirects.json');
+
+const historicalVersions = [
+  '8.1',
+  '8.0',
+  '7.6',
+  '7.5',
+  '7.4',
+  '7.3',
+  '7.2',
+  '7.1',
+  '7.0',
+  '6.5',
+  '6.4',
+  '6.3',
+  '6.2',
+  '6.1',
+  '6.0',
+];
+
+const renderers = [
+  'react',
+  'vue',
+  'angular',
+  'web-components',
+  'ember',
+  'html',
+  'mithril',
+  'marko',
+  'svelte',
+  'riot',
+  'preact',
+  'rax',
+];
+
 /** @type {import('next').NextConfig} */
 module.exports = {
   images: {
@@ -39,10 +74,16 @@ module.exports = {
     return config;
   },
   transpilePackages: ['@repo/ui', '@repo/utils'],
+  experimental: {
+    outputFileTracingIncludes: {
+      '/docs/**': ['./content/docs/**'],
+    },
+  },
   async redirects() {
     // Add the wild cards at the bottom of the list
     // to avoid conflicts with the more specific redirects
     return [
+      // TODO: Are we adding /docs/index.mdx to all versions?
       {
         source: '/docs/get-started',
         destination: '/docs',
@@ -52,6 +93,11 @@ module.exports = {
         source: '/telemetry',
         destination: '/docs/configure/telemetry',
         permanent: true,
+      },
+      {
+        source: '/status',
+        destination: 'https://github.com/storybookjs/storybook/issues/23279',
+        permanent: false,
       },
       {
         source: '/versions.json',
@@ -128,15 +174,6 @@ module.exports = {
           'https://github.com/storybookjs/storybook/blob/next/examples/README.md',
         permanent: true,
       },
-      // TODO: Refactor and/or add explanation for why these aren't generated like the others (because they cannot have a version in the URL)
-      ...(
-        [null, 'react', 'vue', 'angular', 'web-components', 'ember', 'html', 'mithril', 'marko', 'svelte', 'riot', 'preact', 'rax']
-        .map((r) => ({
-          source: `/docs${r ? '/r' : ''}/get-started/examples`,
-          destination: '/showcase',
-          permanent: true,
-        }))
-      ),
       {
         source: '/docs/configurations/options-parameter',
         destination: '/docs/configure/features-and-behavior',
@@ -241,11 +278,6 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/docs/addons/writing-addons',
-        destination: '/docs/addons/writing-addons',
-        permanent: true,
-      },
-      {
         source: '/addons/writing-addons',
         destination: '/docs/addons/writing-addons',
         permanent: true,
@@ -291,6 +323,30 @@ module.exports = {
         destination: '/integrations/tag/:tag',
         permanent: true,
       },
+      ...renderers.map((r) => ({
+        source: `/docs${r}/get-started/examples`,
+        destination: '/showcase',
+        permanent: true,
+      })),
+      ...historicalVersions.map((v) => ({
+        source: `/docs/${v}`,
+        destination: `/docs/${v.split('.')[0]}/get-started/install`,
+        permanent: true,
+      })),
+      // The `/get-started` route is only valid for 8.0+
+      ...historicalVersions.reduce((acc, v) => {
+        if (Number(v) < 8) {
+          renderers.forEach((r) => {
+            acc.push({
+              source: `/docs/${v}/${r}/get-started`,
+              destination: `/docs/${v.split('.')[0]}/get-started/install`,
+              permanent: true,
+            });
+          });
+        }
+        return acc;
+      }, []),
+      ...generatedRedirects,
       /* 🐺 Wild Cards */
       {
         source: '/basics/:path*',

@@ -7,6 +7,7 @@ import { CodeWrapper } from './wrapper';
 import { getFilters } from './utils/get-filters';
 import { getActiveContent } from './utils/get-active-content';
 import { Dropdown } from './dropdown';
+import { InfoIcon } from '@storybook/icons';
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[];
@@ -35,8 +36,8 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   };
 
   // Get active content for the Code Snippets component
-  const activeContent = getActiveContent({
-    codeSnippetsContent: content,
+  const { activeContent, error } = getActiveContent({
+    content,
     filters,
     activeLanguage,
     activePackageManager,
@@ -69,11 +70,19 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
       title={activeContent?.filename || ''}
     >
       {activeContent?.content ? (
-        <section
-          dangerouslySetInnerHTML={{
-            __html: activeContent.content,
-          }}
-        />
+        <>
+          {error && (
+            <div className="mb-4 flex items-center gap-2 rounded border border-orange-300 bg-orange-100 px-4 py-3 text-orange-900 dark:border-orange-800 dark:bg-orange-950 dark:text-orange-400">
+              <InfoIcon />
+              {error}
+            </div>
+          )}
+          <section
+            dangerouslySetInnerHTML={{
+              __html: activeContent.content,
+            }}
+          />
+        </>
       ) : (
         <div>
           <div>Oh no! We could not find the code you are looking for.</div>

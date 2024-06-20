@@ -9,13 +9,13 @@ import { docsVersions } from '@repo/utils';
 async function clean(): Promise<void> {
   await emptyDir(path.join(__dirname, '../content/docs'));
   await emptyDir(path.join(__dirname, '../content/snippets'));
-  await emptyDir(path.join(__dirname, '../public/docs'));
+  await emptyDir(path.join(__dirname, '../public/docs-assets'));
 
   // Create directories for each version
   for (const version of docsVersions) {
     await mkdirp(path.join(__dirname, `../content/docs/${version.id}`));
     await mkdirp(path.join(__dirname, `../content/snippets/${version.id}`));
-    await mkdirp(path.join(__dirname, `../public/docs/${version.id}`));
+    await mkdirp(path.join(__dirname, `../public/docs-assets/${version.id}`));
   }
 }
 
@@ -93,7 +93,7 @@ async function fetchAndExtract(version: DocsVersion): Promise<void> {
             x(
               {
                 strip: 3,
-                C: path.join(__dirname, `../public/docs/${version.id}`),
+                C: path.join(__dirname, `../public/docs-assets/${version.id}`),
                 filter: (p: string) => p.includes('_assets'),
               },
               [folder],

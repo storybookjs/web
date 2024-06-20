@@ -150,6 +150,14 @@ export const AngularJS: Story = {
   },
 };
 
+export const NoRenderer: Story = {
+  args: {
+    content: content2,
+    activeRenderer: 'ember',
+    activeLanguage: 'js',
+  },
+};
+
 export const ContentUndefined: Story = {
   args: {
     content: content3,

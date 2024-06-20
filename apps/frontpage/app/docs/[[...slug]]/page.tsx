@@ -1,12 +1,12 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { TreeProps } from '@repo/utils';
-import { renderers, docsVersions, cn } from '@repo/utils';
+import { renderers, latestVersion, cn } from '@repo/utils';
 import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
 import { generateDocsTree } from '../../../lib/get-tree';
-import { slugHasVersion } from '../../../lib/slug-has-version';
+import { DocsFooter } from '../../../components/docs/footer/footer';
 
 interface PageProps {
   params: {
@@ -14,8 +14,7 @@ interface PageProps {
   };
 }
 
-const latestVersion = docsVersions[0].id;
-const preReleaseVersion = docsVersions.find((v) => v.preRelease)?.id;
+const latestVersionId = latestVersion.id;
 
 export const generateStaticParams = () => {
   const result: { slug: string[] }[] = [];
@@ -25,19 +24,15 @@ export const generateStaticParams = () => {
     data.forEach((item) => {
       if ('slug' in item) {
         const newSlug = item.slug.replace('/docs/', '').split('/');
-        const slugVersion = newSlug[0];
-        const [major, minor] = slugVersion.split('.');
+        const { id: versionId, inSlug: versionInSlug } = getVersion(newSlug);
 
-        const isLatest = slugVersion === latestVersion;
-        const isPreRelease = preReleaseVersion && slugVersion === preReleaseVersion;
-        const isPreReleaseMinor = isPreRelease && minor !== '0'
-        
+        const isLatest = versionId === latestVersionId;
+
         if (isLatest) {
           // Remove the version
           newSlug.shift();
-        } else if (!isPreReleaseMinor) {
-          // Simplify version to only major portion
-          newSlug[0] = major;
+        } else if (versionInSlug) {
+          newSlug[0] = versionInSlug;
         }
         result.push({
           slug: newSlug,
@@ -50,25 +45,25 @@ export const generateStaticParams = () => {
   };
   getSlugs(tree);
 
-  console.log(JSON.stringify(result, null, 2));
   return result;
 };
 
 export default async function Page({ params: { slug } }: PageProps) {
-  const activeVersion = getVersion(slug) || { id: 'next', label: 'Next' };
-  const hasVersion = slugHasVersion(slug);
-  const newSlug = slug ? [...slug] : [];
-  if (!hasVersion) newSlug.unshift(activeVersion.id);
+  const activeVersion = getVersion(slug);
+  const isLatest = activeVersion.id === latestVersion.id;
+  const slugToFetch = slug ? [...slug] : [];
+  if (!isLatest) slugToFetch.shift();
+  slugToFetch.unshift(activeVersion.id);
 
-  const page = await getPageData(newSlug, activeVersion);
+  const page = await getPageData(slugToFetch, activeVersion);
 
   if (!page) notFound();
 
   return (
-    <div className="flex-1 w-full py-12">
-      <div className="max-w-[720px] mx-auto">
+    <div className="w-full min-w-0 flex-1 py-12">
+      <main className="mx-auto max-w-[720px]">
         <h1
-          className="relative mt-0 mb-6 text-4xl font-bold text-black dark:text-white transition-colors duration-200 group-hover:text-blue-500"
+          className="relative mb-6 mt-0 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
           data-docs-heading
         >
           {page.title || 'Title is missing'}
@@ -84,7 +79,7 @@ export default async function Page({ params: { slug } }: PageProps) {
               return (
                 <Link
                   className={cn(
-                    'border-b -mb-px pb-2 hover:text-blue-500 transition-colors px-2 text-sm capitalize',
+                    '-mb-px border-b px-2 pb-2 text-sm capitalize transition-colors hover:text-blue-500',
                     isActive && 'border-b border-blue-500 text-blue-500',
                   )}
                   href={tab.slug}
@@ -96,7 +91,7 @@ export default async function Page({ params: { slug } }: PageProps) {
             })}
           </div>
         ) : null}
-        <article
+        <div
           className={cn(
             '[&>details]:my-6',
             '[&>details]:relative',
@@ -117,8 +112,9 @@ export default async function Page({ params: { slug } }: PageProps) {
           )}
         >
           {page.content}
-        </article>
-      </div>
+        </div>
+        <DocsFooter />
+      </main>
     </div>
   );
 }

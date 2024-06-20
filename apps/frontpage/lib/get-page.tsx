@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import { rehypePrettyCode } from 'rehype-pretty-code';
+import remarkGfm from 'remark-gfm';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import rehypeSlug from 'rehype-slug';
 import type { DocsVersion } from '@repo/utils';
@@ -26,6 +27,11 @@ import {
   H3,
   H2,
   H1,
+  Table,
+  Th,
+  Tr,
+  Td,
+  OrderedList,
 } from '../components/docs/mdx';
 import { generateDocsTree } from './get-tree';
 import { rehypePrettyCodeOptions } from './rehype-pretty-code-options';
@@ -90,7 +96,7 @@ export const getPageData = async (
     options: {
       parseFrontmatter: true,
       mdxOptions: {
-        remarkPlugins: [],
+        remarkPlugins: [remarkGfm],
         rehypePlugins: [
           rehypeSlug,
           // Get the raw code from the pre tag
@@ -138,8 +144,13 @@ export const getPageData = async (
       p: P,
       hr: Hr,
       ul: UnorderedList,
+      ol: OrderedList,
       li: List,
       pre: Pre,
+      table: Table,
+      th: Th,
+      tr: Tr,
+      td: Td,
       details: () => <details>Hello world</details>,
       img: (props) => <Img activeVersion={activeVersion.id} {...props} />,
       Video: (props) => <Video activeVersion={activeVersion.id} {...props} />,
@@ -151,7 +162,6 @@ export const getPageData = async (
       IfRenderer: If,
       YouTubeCallout,
       FeatureSnippets,
-      // TODO: These three should be imported in the necessary MDX file(s)
       HomeRenderers,
       HomeConcepts,
       HomeResources,
