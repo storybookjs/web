@@ -167,6 +167,7 @@ export const getPageData = async (
       HomeRenderers,
       HomeConcepts,
       HomeResources,
+      FrameworkSupportTable: (props) => <div {...props}>{props.children}</div>,
     },
   });
 
