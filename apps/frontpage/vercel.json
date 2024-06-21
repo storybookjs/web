@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/addons/:match*",
+      "destination": "https://storybook-blog.netlify.app/addons/:match*"
+    },
+    {
       "source": "/blog/:match*",
       "destination": "https://storybook-blog.netlify.app/blog/:match*"
     },
