@@ -1,8 +1,40 @@
 {
   "rewrites": [
     {
+      "source": "/blog/:match*",
+      "destination": "https://storybook-blog.netlify.app/blog/:match*"
+    },
+    {
+      "source": "/day/:match*",
+      "destination": "https://storybook-day-2023.netlify.app/day/:match*"
+    },
+    {
       "source": "/integrations/:match*",
-      "destination": "https://storybook-web-addons.netlify.app/integrations/:match*"
+      "destination": "https://storybook-tutorials.netlify.app/tutorials/:match*"
+    },
+    {
+      "source": "/showcase/:match*",
+      "destination": "https://storybook-component-catalog.netlify.app/showcase/:match*"
+    },
+    {
+      "source": "/tutorials/:match*",
+      "destination": "https://storybook-tutorials.netlify.app/tutorials/:match*"
+    },
+    {
+      "source": "/event-log",
+      "destination": "https://us-central1-storybook-warehouse.cloudfunctions.net/storybook-event-log-production-event-log"
+    },
+    {
+      "source": "/whats-new/v1/:match*",
+      "destination": "https://storybook-dx.netlify.app/.netlify/functions/whats-new/:match*"
+    },
+    {
+      "source": "/sb-event/js/script.js",
+      "destination": "https://plausible.io/js/script.js"
+    },
+    {
+      "source": "/sb-event/api/event",
+      "destination": "https://plausible.io/api/event"
     }
   ]
 }
