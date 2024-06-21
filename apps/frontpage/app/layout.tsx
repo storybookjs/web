@@ -6,8 +6,11 @@ import {
   GLOBAL_SEARCH_IMPORTANCE,
 } from '@repo/ui';
 import { cn } from '@repo/utils';
+import PlausibleProvider from 'next-plausible';
 import { Providers } from './providers';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { GoogleAnalytics } from '@next/third-parties/google';
+import { Analytics } from '@vercel/analytics/react';
 
 import '@docsearch/css';
 import './globals.css';
@@ -42,6 +45,9 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <PlausibleProvider domain="storybook.js.org" />
+      </head>
       <body
         className={cn(
           'min-h-screen bg-white font-sans antialiased dark:bg-slate-950',
@@ -50,7 +56,9 @@ export default function RootLayout({
       >
         <Providers>{children}</Providers>
         <SpeedInsights />
+        <Analytics />
       </body>
+      <GoogleAnalytics gaId="G-MN8NJ34M7T" />
     </html>
   );
 }
