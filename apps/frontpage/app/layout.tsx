@@ -9,6 +9,7 @@ import { cn } from '@repo/utils';
 import PlausibleProvider from 'next-plausible';
 import { Providers } from './providers';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 import '@docsearch/css';
 import './globals.css';
@@ -55,6 +56,7 @@ export default function RootLayout({
         <Providers>{children}</Providers>
         <SpeedInsights />
       </body>
+      <GoogleAnalytics gaId="G-MN8NJ34M7T" />
     </html>
   );
 }
