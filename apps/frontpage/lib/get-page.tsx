@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import { rehypePrettyCode } from 'rehype-pretty-code';
+import remarkGfm from 'remark-gfm';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import rehypeSlug from 'rehype-slug';
 import type { DocsVersion } from '@repo/utils';
-import { extractHeadings } from 'extract-md-headings';
 import { visit } from 'unist-util-visit';
 import {
   CodeSnippets,
@@ -26,6 +26,13 @@ import {
   H3,
   H2,
   H1,
+  Table,
+  Th,
+  Tr,
+  Td,
+  OrderedList,
+  Figure,
+  Figcaption,
 } from '../components/docs/mdx';
 import { generateDocsTree } from './get-tree';
 import { rehypePrettyCodeOptions } from './rehype-pretty-code-options';
@@ -90,7 +97,7 @@ export const getPageData = async (
     options: {
       parseFrontmatter: true,
       mdxOptions: {
-        remarkPlugins: [],
+        remarkPlugins: [remarkGfm],
         rehypePlugins: [
           rehypeSlug,
           // Get the raw code from the pre tag
@@ -138,9 +145,15 @@ export const getPageData = async (
       p: P,
       hr: Hr,
       ul: UnorderedList,
+      ol: OrderedList,
       li: List,
       pre: Pre,
-      details: () => <details>Hello world</details>,
+      table: Table,
+      th: Th,
+      tr: Tr,
+      td: Td,
+      figure: Figure,
+      figcaption: Figcaption,
       img: (props) => <Img activeVersion={activeVersion.id} {...props} />,
       Video: (props) => <Video activeVersion={activeVersion.id} {...props} />,
       CodeSnippets: (props) => (
@@ -151,14 +164,12 @@ export const getPageData = async (
       IfRenderer: If,
       YouTubeCallout,
       FeatureSnippets,
-      // TODO: These three should be imported in the necessary MDX file(s)
       HomeRenderers,
       HomeConcepts,
       HomeResources,
+      FrameworkSupportTable: (props) => <div {...props}>{props.children}</div>,
     },
   });
-
-  const headings = extractHeadings(`${process.cwd()}/${newPath}`);
 
   // Get Tabs
   const pathToFiles = isLink
@@ -177,6 +188,5 @@ export const getPageData = async (
     ...frontmatter,
     tabs: index?.isTab ? parent : [],
     content,
-    headings,
   };
 };

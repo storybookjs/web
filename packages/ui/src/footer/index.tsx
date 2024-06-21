@@ -13,7 +13,7 @@ export interface FooterProps {
 
 export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
   return (
-    <div
+    <footer
       className={cn(
         variant !== 'home' &&
           'ui-bg-slate-50 ui-text-slate-800 ui-border-t ui-border-zinc-200 dark:ui-bg-slate-950 dark:ui-text-white dark:ui-border-zinc-700',
@@ -132,6 +132,6 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
           </div>
         </div>
       </Container>
-    </div>
+    </footer>
   );
 };

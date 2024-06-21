@@ -18,7 +18,10 @@ interface DropdownProps {
 }
 
 export const Dropdown: FC<DropdownProps> = ({ list, activeId, action }) => {
-  const activeItem = list.find((item) => item?.id === activeId);
+  let newActiveId = activeId;
+  if (activeId === 'npx') newActiveId = 'npm';
+
+  const activeItem = list.find((item) => item?.id === newActiveId);
 
   return (
     <DropdownMenu>

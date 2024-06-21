@@ -44,7 +44,7 @@ export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
         .use(rehypeStringify)
         .process(valueWithBackticks);
 
-      const matches = block.meta?.match(/(?<temp2>\w+)="(?<temp1>[^"]*)"/g);
+      const matches = block.meta?.match(/(\w+)="([^"]*)"/g);
 
       // console.log(path, 'matches', matches);
       // -> init-command.md matches [ 'renderer="common"', 'language="js"', 'packageManager="npx"' ]

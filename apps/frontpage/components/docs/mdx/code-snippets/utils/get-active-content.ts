@@ -1,7 +1,7 @@
 import type { CodeSnippetsFiltersProps, CodeSnippetsProps } from '@repo/utils';
 
 interface GetActiveContentProps {
-  codeSnippetsContent: CodeSnippetsProps[];
+  content: CodeSnippetsProps[];
   filters: CodeSnippetsFiltersProps;
   activePackageManager: string | null;
   activeLanguage: string | null;
@@ -9,20 +9,45 @@ interface GetActiveContentProps {
 }
 
 export const getActiveContent = ({
-  codeSnippetsContent,
+  content,
   filters,
   activePackageManager,
   activeLanguage,
   activeRenderer,
-}: GetActiveContentProps): CodeSnippetsProps | null => {
-  const filterByRenderer = codeSnippetsContent.filter((item) => {
+}: GetActiveContentProps): {
+  activeContent: CodeSnippetsProps | null;
+  error: string | null;
+} => {
+  let error: string | null = null;
+
+  const filterByRenderer = content.filter((item) => {
     if (item.renderer === activeRenderer || item.renderer === 'common')
       return true;
-
     return false;
   });
 
-  const filterByPackageManager = filterByRenderer.filter((item) => {
+  let filteredContent = filterByRenderer;
+
+  if (filterByRenderer.length === 0) {
+    // If there's no content after filtering, we need to return a default value
+    // Trying to find if there's any react content
+    const reactContent = content.filter((item) => {
+      if (item.renderer === 'react') return true;
+      return false;
+    });
+
+    if (reactContent.length === 0) {
+      // If there's no react content, we need to return the first content
+      filteredContent = content;
+      error = `This snippet doesn't exist for ${activeRenderer}.`;
+    } else {
+      // If there's react content, we need to show that
+      filteredContent = reactContent;
+      error = `This snippet doesn't exist for ${activeRenderer}. In the meantime, here's the React snippet.`;
+    }
+  }
+
+  const filterByPackageManager = filteredContent.filter((item) => {
     // If activePackageManager is null, we don't need to filter
     if (!activePackageManager) return true;
 
@@ -76,7 +101,10 @@ export const getActiveContent = ({
     }
   }
 
-  if (filterByLanguage.length === 0) return null;
+  if (filterByLanguage.length === 0) return { activeContent: null, error };
 
-  return filterByLanguage[0] || null;
+  return {
+    activeContent: filterByLanguage[0] || null,
+    error,
+  };
 };

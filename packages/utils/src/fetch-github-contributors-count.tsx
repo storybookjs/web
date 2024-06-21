@@ -22,7 +22,8 @@ export const fetchGithubContributorCount = async (): Promise<{
     const link = linkHeader ? linkHeader.split(';')[1] : null;
 
     // Parse contributor count
-    const match = link && /&page=(?<temp1>\d+)/.exec(link);
+    // eslint-disable-next-line prefer-named-capture-group -- We don't need a named capture group
+    const match = link && /&page=(\d+)/.exec(link);
     const contributorCount = match ? match[1] : 0;
 
     return {

@@ -14,9 +14,9 @@ export interface DocsVersion {
 
 /**
  * All published versions of the docs.
- * 
+ *
  * This list relies on some conventions:
- * 
+ *
  * 1. The latest version must always be first.
  * 2. The `label` should be... TODO
  * 3. The `id` must be unique and should be of the form `major.minor` for clarity.
@@ -28,27 +28,27 @@ export interface DocsVersion {
  **/
 export const docsVersions: DocsVersion[] = [
   {
-    label: '8.1 (latest)',
+    label: 'Version 8.1',
     id: '8.1',
-    branch: 'charles-transform-docs-1',
+    branch: 'charles-transform-docs-next',
   },
+  // {
+  //   label: '8.2 (beta)',
+  //   id: '8.2',
+  //   branch: 'charles-transform-docs-next',
+  //   preRelease: true,
+  // },
   {
-    label: '8.2 (beta)',
-    id: '8.2',
-    branch: 'charles-transform-docs-1',
-    preRelease: true,
-  },
-  {
-    label: '7.6',
+    label: 'Version 7',
     id: '7.6',
     inSlug: '7',
-    branch: 'charles-transform-docs-1',
+    branch: 'charles-docs-transform-7-6',
   },
   {
-    label: '6.5',
+    label: 'Version 6',
     id: '6.5',
     inSlug: '6',
-    branch: 'charles-transform-docs-1',
+    branch: 'charles-docs-transform-6.5',
   },
 ];
 
