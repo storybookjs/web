@@ -3,8 +3,9 @@ import { client, urlFor } from '../../../lib/sanity/client';
 import { Post } from '../page';
 import Image from 'next/image';
 import { format, parseISO } from 'date-fns';
-import { ChevronLeftIcon, ChevronSmallLeftIcon } from '@storybook/icons';
+import { ChevronSmallLeftIcon } from '@storybook/icons';
 import Link from 'next/link';
+import Body from '../../../components/blog/body';
 
 interface PageProps {
   params: {
@@ -104,6 +105,9 @@ export default async function Page({ params: { slug } }: PageProps) {
               className="object-cover"
             />
           )}
+        </div>
+        <div className="mx-auto max-w-[640px]">
+          {post.body && <Body value={post.body} />}
         </div>
       </div>
     </>

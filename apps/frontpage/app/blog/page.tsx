@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { cn } from '@repo/utils';
 import { format, parseISO } from 'date-fns';
+import { PortableTextBlock } from 'next-sanity';
 
 export type Post = {
   _id: string;
@@ -24,6 +25,7 @@ export type Post = {
     };
   }[];
   publishedAt?: string;
+  body?: PortableTextBlock[];
 };
 
 export type Tag = {
