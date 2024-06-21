@@ -9,14 +9,14 @@ import {
 } from '@repo/ui';
 import Image from 'next/image';
 import { TreeProps, fetchGithubCount, latestVersion } from '@repo/utils';
-import { Sidebar } from '../../../components/docs/sidebar/sidebar';
-import { TableOfContent } from '../../../components/docs/table-of-content';
-import { NavDocs } from '../../../components/docs/sidebar/docs-nav';
-import { generateDocsTree } from '../../../lib/get-tree';
-import { DocsProvider } from '../provider';
-import { getVersion } from '../../../lib/get-version';
-import { getPageData } from '../../../lib/get-page';
-import { Submenu } from '../../../components/docs/submenu';
+import { Sidebar } from '../../components/docs/sidebar/sidebar';
+import { TableOfContent } from '../../components/docs/table-of-content';
+import { NavDocs } from '../../components/docs/sidebar/docs-nav';
+import { generateDocsTree } from '../../lib/get-tree';
+import { DocsProvider } from './provider';
+import { getVersion } from '../../lib/get-version';
+import { getPageData } from '../../lib/get-page';
+import { Submenu } from '../../components/docs/submenu';
 
 interface PageProps {
   children: React.ReactNode;
