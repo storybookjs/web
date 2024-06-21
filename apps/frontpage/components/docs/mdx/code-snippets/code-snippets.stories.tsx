@@ -7,6 +7,11 @@ import { CodeSnippetsClient } from './code-snippets';
 import { content1 } from './mocked-data/content-1';
 import { content2 } from './mocked-data/content-2';
 import { content3 } from './mocked-data/content-3';
+import { contentMultiTab } from './mocked-data/content-multiple-tabs';
+import { contentMultiTabVue3Only } from './mocked-data/content-multiple-tabs-vue-3-only';
+import { contentMultiTabVue3OnlySuffix } from './mocked-data/content-multiple-tabs-vue-3-only-suffix';
+import { contentMultiTabVue2And3 } from './mocked-data/content-multiple-tabs-vue-2-and-3';
+import { contentMultiTabVue2And3Suffix } from './mocked-data/content-multiple-tabs-vue-2-and-3-suffix';
 
 const meta = {
   title: 'CodeSnippets',
@@ -142,10 +147,41 @@ export const AngularNoLanguage: Story = {
   },
 };
 
-export const AngularJS: Story = {
+export const multipleTabs: Story = {
   args: {
-    content: content2,
-    activeRenderer: 'angular',
+    content: contentMultiTab,
+    activeLanguage: 'js',
+  },
+};
+
+export const multipleTabsVue3Only: Story = {
+  args: {
+    content: contentMultiTabVue3Only,
+    activeRenderer: 'vue',
+    activeLanguage: 'js',
+  },
+};
+
+export const multipleTabsVue3OnlySuffix: Story = {
+  args: {
+    content: contentMultiTabVue3OnlySuffix,
+    activeRenderer: 'vue',
+    activeLanguage: 'js',
+  },
+};
+
+export const multipleTabsVue2And3: Story = {
+  args: {
+    content: contentMultiTabVue2And3,
+    activeRenderer: 'vue',
+    activeLanguage: 'js',
+  },
+};
+
+export const multipleTabsVue2And3Suffix: Story = {
+  args: {
+    content: contentMultiTabVue2And3Suffix,
+    activeRenderer: 'vue',
     activeLanguage: 'js',
   },
 };

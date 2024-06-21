@@ -23,3 +23,4 @@ export { Tr } from './tr';
 export { Td } from './td';
 export { Figure } from './figure';
 export { Figcaption } from './figcaption';
+export { Code } from './code';
