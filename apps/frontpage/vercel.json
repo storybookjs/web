@@ -9,6 +9,10 @@
       "destination": "https://storybook-day-2023.netlify.app/day/:match*"
     },
     {
+      "source": "/integrations/:match*",
+      "destination": "https://storybook-web-addons.netlify.app/integrations/:match*"
+    },
+    {
       "source": "/showcase/:match*",
       "destination": "https://storybook-component-catalog.netlify.app/showcase/:match*"
     },
