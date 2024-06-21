@@ -6,7 +6,6 @@ import {
   GLOBAL_SEARCH_IMPORTANCE,
 } from '@repo/ui';
 import { cn } from '@repo/utils';
-import PlausibleProvider from 'next-plausible';
 import { Providers } from './providers';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GoogleAnalytics } from '@next/third-parties/google';
@@ -46,7 +45,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <PlausibleProvider domain="storybook.js.org" />
+        {/* <PlausibleProvider domain="storybook.js.org" /> */}
+        <script
+          defer
+          data-domain="storybook.js.org"
+          src="/js/script.js"
+        ></script>
       </head>
       <body
         className={cn(

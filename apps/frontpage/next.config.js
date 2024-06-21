@@ -1,5 +1,4 @@
 const generatedRedirects = require('./generated-redirects.json');
-const { withPlausibleProxy } = require('next-plausible');
 
 const historicalVersions = [
   '8.1',
@@ -35,7 +34,7 @@ const renderers = [
 ];
 
 /** @type {import('next').NextConfig} */
-module.exports = withPlausibleProxy()({
+module.exports = {
   images: {
     remotePatterns: [
       {
@@ -62,6 +61,10 @@ module.exports = withPlausibleProxy()({
         protocol: 'https',
         hostname: 'images.opencollective.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
     ],
   },
   // This was added to fix the error with remarkExpressiveCode
@@ -84,6 +87,15 @@ module.exports = withPlausibleProxy()({
     // Add the wild cards at the bottom of the list
     // to avoid conflicts with the more specific redirects
     return [
+      // Plausible Analytics
+      {
+        source: '/js/script.js',
+        destination: 'https://plausible.io/js/script.js',
+      },
+      {
+        source: '/api/event', // Or '/api/event/' if you have `trailingSlash: true` in this config
+        destination: 'https://plausible.io/api/event',
+      },
       // TODO: Are we adding /docs/index.mdx to all versions?
       {
         source: '/docs/get-started',
@@ -406,4 +418,4 @@ module.exports = withPlausibleProxy()({
       },
     ];
   },
-});
+};
