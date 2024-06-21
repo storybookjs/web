@@ -49,6 +49,7 @@
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.3.0",
     "node-fetch": "^3.3.2",
+    "posthog-js": "^1.139.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-lite-youtube-embed": "^2.4.0",
