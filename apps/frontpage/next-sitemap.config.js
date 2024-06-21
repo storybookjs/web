@@ -1,22 +1,8 @@
-// TODO: Generate this in a script from /packages/utils/src/docs-versions.ts
-const docsVersions = [
-  {
-    label: 'Version Test 1',
-    id: '8.0-test-1',
-    branch: 'charles-docs-new-structure',
-  },
-  {
-    label: 'Version Test 2',
-    id: '8.0-test-2',
-    branch: 'charles-docs-new-structure',
-  },
-];
-
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: 'https://storybook.js.org',
-  sourceDir: 'apps/frontpage/.next',
-  outDir: 'apps/frontpage/public',
+  sourceDir: '.next',
+  outDir: 'public',
   sitemapBaseFileName: 'sitemap/sitemap',
   exclude: [
     '/docs-urls',
@@ -27,7 +13,8 @@ module.exports = {
     '/opengraph-image.jpg',
   ],
   transform: async (config, path) => {
-    if (docsVersions.some(({ id }) => path.includes(id))) return null;
+    // Filter out the versioned paths
+    if (/docs\/\d+\//.test(path)) return null;
 
     return {
       loc: path, // => this will be exported as http(s)://<config.siteUrl>/<path>

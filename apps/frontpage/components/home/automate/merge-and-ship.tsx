@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
 
 const checksVariants = {
   initial: {
@@ -98,32 +99,36 @@ export function MergeAndShip() {
               transition={{ duration: 0.4, delay: 1.4 }}
               variants={statusVariants}
             >
-              <img
+              <Image
                 alt=""
                 className="w-full absolute top-0 left-0 right-0 bottom-0 z-[2]"
+                height={28}
                 src="/home/automate/ci-check-yellow.svg"
                 style={{ backfaceVisibility: 'hidden', transform: 'rotate(0)' }}
+                width={28}
               />
-              <img
+              <Image
                 alt=""
                 className="w-full absolute top-0 left-0 right-0 bottom-0"
+                height={28}
                 src="/home/automate/ci-check-green.svg"
                 style={{
                   backfaceVisibility: 'hidden',
                   transform: 'rotateY(180deg)',
                 }}
+                width={28}
               />
             </motion.div>
             <div className="relative w-full h-6 font-bold">
               <motion.div
-                className="absolute top-0 left-0 w-full truncate"
+                className="absolute top-0 left-0 w-full truncate text-black"
                 transition={{ duration: 0.4, delay: 1.4 }}
                 variants={textVariantsChecked}
               >
                 All CI checks have passed!
               </motion.div>
               <motion.div
-                className="absolute top-0 left-0 w-full truncate"
+                className="absolute top-0 left-0 w-full truncate text-black"
                 transition={{ duration: 0.4, delay: 1.4 }}
                 variants={textVariantsChecking}
               >
@@ -142,47 +147,53 @@ export function MergeAndShip() {
                 transition={{ duration: 0.4 }}
                 variants={statusVariants}
               >
-                <img
+                <Image
                   alt=""
                   className="w-full absolute top-0 left-0 right-0 bottom-0 z-[2]"
+                  height={24}
                   src="/home/automate/progress.svg"
                   style={{
                     backfaceVisibility: 'hidden',
                     transform: 'rotateY(0deg)',
                   }}
+                  width={24}
                 />
-                <img
+                <Image
                   alt=""
                   className="w-full absolute top-0 left-0 right-0 bottom-0"
+                  height={24}
                   src="/home/automate/passed.svg"
                   style={{
                     backfaceVisibility: 'hidden',
                     transform: 'rotateY(180deg)',
                   }}
+                  width={24}
                 />
               </motion.div>
               <div className="flex-1 min-w-0">
                 <div className="relative w-full h-6">
                   <motion.div
-                    className="absolute top-0 left-0 w-full overflow-ellipsis"
+                    className="absolute top-0 left-0 w-full truncate text-black"
                     transition={{ duration: 0.4 }}
                     variants={textVariantsChecked}
                   >
-                    <b>{label}</b> – {done}
+                    <b>{label}</b> - {done}
                   </motion.div>
                   <motion.div
-                    className="absolute top-0 left-0 w-full overflow-ellipsis"
+                    className="absolute top-0 left-0 w-full truncate text-black"
                     transition={{ duration: 0.4 }}
                     variants={textVariantsChecking}
                   >
-                    <b>{label}</b> – {checking}
+                    <b>{label}</b> - {checking}
                   </motion.div>
                 </div>
               </div>
-              <img
+              <Image
                 alt=""
-                className="block w-[22px] h-[22px]"
+                className="block"
+                height={24}
                 src="home/automate/icon-chromatic.svg"
+                width={24}
               />
             </div>
           ))}

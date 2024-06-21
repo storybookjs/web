@@ -1,38 +1,52 @@
-"use client";
+'use client';
 
-import type { FC } from "react";
+import type { FC } from 'react';
 
-export const Numbers: FC = () => {
+interface NumbersProps {
+  githubCount: string;
+  contributorsCount: string;
+  discordMembersCount: string;
+  npmDownloadsCount: string;
+  youtubeSubscribersCount: string;
+}
+
+export const Numbers: FC<NumbersProps> = ({
+  githubCount,
+  contributorsCount,
+  discordMembersCount,
+  npmDownloadsCount,
+  youtubeSubscribersCount,
+}) => {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-6 my-12 pb-12 border-b border-b-zinc-300">
+    <div className="my-12 grid grid-cols-2 gap-6 border-b border-b-zinc-300 pb-12 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 dark:border-b-slate-700">
       {[
         {
-          number: "17.01m",
-          label: "Downloads/month",
+          number: npmDownloadsCount,
+          label: 'Downloads/month',
         },
         {
-          number: "400+",
-          label: "Integrations",
+          number: '400+',
+          label: 'Integrations',
         },
         {
-          number: "81,378",
-          label: "GitHub Stars",
+          number: githubCount,
+          label: 'GitHub Stars',
         },
         {
-          number: "2,137",
-          label: "Contributors",
+          number: contributorsCount,
+          label: 'Contributors',
         },
         {
-          number: "20,250",
-          label: "Discord members",
+          number: discordMembersCount,
+          label: 'Discord members',
         },
         {
-          number: "18,350",
-          label: "Twitter followers",
+          number: '24.4k',
+          label: 'Twitter followers',
         },
         {
-          number: "6,440",
-          label: "YouTube subscribers",
+          number: youtubeSubscribersCount,
+          label: 'YouTube subscribers',
         },
       ].map(({ number, label }) => (
         <div className="" key={label}>

@@ -35,7 +35,7 @@ const DESTINATION = path.join(__dirname, '../public/sitemap');
 const SITEMAP_FILENAME = 'sitemap.xml';
 
 function stripDirname(file: string): string {
-  return file.replace(/.*(?<temp1>\/public\/.*)/, '$1');
+  return file.replace(/.*(\/public\/.*)/, '$1');
 }
 
 async function copySitemaps(): Promise<void> {

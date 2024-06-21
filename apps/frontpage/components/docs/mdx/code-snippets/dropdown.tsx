@@ -1,9 +1,14 @@
 'use client';
 
 import type { FC } from 'react';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import type { CodeSnippetsFilter } from '@repo/utils';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@repo/ui';
 
 interface DropdownProps {
   list: CodeSnippetsFilter[];
@@ -13,43 +18,31 @@ interface DropdownProps {
 }
 
 export const Dropdown: FC<DropdownProps> = ({ list, activeId, action }) => {
-  const activeItem = list.find((item) => item?.id === activeId);
+  let newActiveId = activeId;
+  if (activeId === 'npx') newActiveId = 'npm';
+
+  const activeItem = list.find((item) => item?.id === newActiveId);
 
   return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
-        <DropdownMenu.Trigger
-          aria-label="Customise options"
-          className="flex items-center justify-between h-8 gap-1 px-2 text-sm transition-all rounded select-none group text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 hover:bg-slate-200"
-          type="button"
-        >
-          {activeItem?.title}
-          <ChevronSmallDownIcon className="group-data-[state=open]:rotate-180 transition-transform" />
-        </DropdownMenu.Trigger>
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Portal>
-        <DropdownMenu.Content
-          align="start"
-          className="ml-1 bg-white rounded p-1 shadow-xl will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
-          sideOffset={4}
-        >
-          <DropdownMenu.Group>
-            {list.map((item) => {
-              return (
-                <DropdownMenu.Item
-                  className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
-                  key={item?.id}
-                  onClick={() => {
-                    item?.id && action(item.id);
-                  }}
-                >
-                  {item?.title}
-                </DropdownMenu.Item>
-              );
-            })}
-          </DropdownMenu.Group>
-        </DropdownMenu.Content>
-      </DropdownMenu.Portal>
-    </DropdownMenu.Root>
+    <DropdownMenu>
+      <DropdownMenuTrigger className="group flex h-8 select-none items-center justify-between gap-1 rounded px-2 text-sm text-zinc-600 transition-all hover:border-zinc-300 hover:bg-slate-200 hover:text-zinc-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:data-[state=open]:bg-slate-800 dark:data-[state=open]:text-slate-400">
+        {activeItem?.title}
+        <ChevronSmallDownIcon className="transition-transform group-data-[state=open]:rotate-180" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        {list.map((item) => {
+          return (
+            <DropdownMenuItem
+              key={item?.id}
+              onClick={() => {
+                item?.id && action(item.id);
+              }}
+            >
+              {item?.title}
+            </DropdownMenuItem>
+          );
+        })}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

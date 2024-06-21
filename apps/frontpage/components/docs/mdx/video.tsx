@@ -21,7 +21,7 @@ export const Video: FC<VideoProps> = ({ src, activeVersion }) => {
   if (!fileExists) return null;
 
   return (
-    <video autoPlay loop muted playsInline>
+    <video autoPlay loop muted playsInline className="mb-6">
       <source src={path} type="video/mp4" />
     </video>
   );

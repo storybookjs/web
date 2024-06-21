@@ -1,7 +1,8 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
-  "pipeline": {
+  "globalEnv": ["GCP_CREDENTIALS", "SKIP_IP_HASH", "ALGOLIA_API_KEY"],
+  "tasks": {
     "lint": {
       "dependsOn": ["^lint"]
     },
@@ -11,10 +12,13 @@
     "fetch-docs": {
       "dependsOn": ["^fetch-docs"]
     },
+    "storybook": {
+      "dependsOn": ["^storybook"]
+    },
     "dev": {
       "cache": false,
       "persistent": true,
-      "dotEnv": [".env"]
+      "inputs": ["$TURBO_DEFAULT$", ".env"]
     },
     "build": {
       "dependsOn": ["^build"],
@@ -24,10 +28,13 @@
         "!.next/cache/**",
         "storybook-static/**"
       ],
-      "dotEnv": [".env"]
+      "inputs": ["$TURBO_DEFAULT$", ".env"]
     },
     "clean": {
       "cache": false
+    },
+    "test": {
+      "dependsOn": ["^test"]
     }
   }
 }

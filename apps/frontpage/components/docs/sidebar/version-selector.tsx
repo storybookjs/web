@@ -1,12 +1,17 @@
 'use client';
 
 import type { FC } from 'react';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import Link from 'next/link';
-import type { DocsVersion} from '@repo/utils';
-import { docsVersions } from '@repo/utils';
+import type { DocsVersion } from '@repo/utils';
+import { docsVersions, latestVersion } from '@repo/utils';
 import { usePathname } from 'next/navigation';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@repo/ui';
 
 interface VersionSelectorProps {
   activeVersion: DocsVersion;
@@ -18,59 +23,49 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
   const pathname = usePathname();
   const segments = pathname.slice(1).split('/');
 
-  const getLink = (version: string) => {
-    const isFirstVersion = version === docsVersions[0]?.id;
-    const activeVersionIndex = segments.findIndex(
-      (segment) => segment === activeVersion.id,
-    );
-    const isVersionInUrl = activeVersionIndex !== -1;
+  const onLatestVersion = activeVersion.id === latestVersion.id;
+
+  const getLink = (version: DocsVersion) => {
+    const toLatestVersion = version.id === latestVersion.id;
 
     const newSegments = [...segments];
-    let newHref = `/${  newSegments.join('/')}`;
+    let newHref = `/${newSegments.join('/')}`;
 
-    if (!isVersionInUrl && !isFirstVersion)
-      newHref = newHref.replace('/docs', `/docs/${version}`);
-    if (isVersionInUrl) newHref = newHref.replace(activeVersion.id, version);
-    if (isVersionInUrl && isFirstVersion)
-      newHref = newHref.replace(`/${version}`, '');
+    if (onLatestVersion && !toLatestVersion) {
+      newHref = newHref.replace(
+        '/docs',
+        `/docs/${version.inSlug || version.id}`,
+      );
+    } else if (!onLatestVersion && toLatestVersion) {
+      newHref = newHref.replace(
+        `/docs/${activeVersion.inSlug || activeVersion.id}`,
+        '/docs',
+      );
+    } else {
+      newHref = newHref.replace(
+        `/docs/${activeVersion.inSlug || activeVersion.id}`,
+        `/docs/${version.inSlug || version.id}`,
+      );
+    }
 
     return newHref;
   };
 
   return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
-        <DropdownMenu.Trigger
-          aria-label="Customise options"
-          className="w-full h-10 px-2 mt-6"
-          type="button"
-        >
-          <div className="flex items-center justify-between w-full h-full text-sm transition-all border-b select-none border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300">
-            {activeVersion.label}
-            <ChevronSmallDownIcon />
-          </div>
-        </DropdownMenu.Trigger>
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Portal>
-        <DropdownMenu.Content
-          align="start"
-          className="min-w-[200px] ml-1 bg-white rounded p-1 shadow-xl will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
-          sideOffset={4}
-        >
-          <DropdownMenu.Group>
-            {docsVersions.map((version) => (
-              <DropdownMenu.Item asChild key={version.id}>
-                <Link
-                  className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
-                  href={getLink(version.id)}
-                >
-                  {version.label}
-                </Link>
-              </DropdownMenu.Item>
-            ))}
-          </DropdownMenu.Group>
-        </DropdownMenu.Content>
-      </DropdownMenu.Portal>
-    </DropdownMenu.Root>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <div className="mt-6 flex h-10 w-full cursor-pointer select-none items-center justify-between border-b border-zinc-200 px-2 text-sm text-zinc-600 transition-all hover:border-zinc-300 hover:text-zinc-900 dark:border-slate-700 dark:text-white">
+          {activeVersion.label}
+          <ChevronSmallDownIcon />
+        </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="min-w-40">
+        {docsVersions.map((version) => (
+          <DropdownMenuItem asChild key={version.id}>
+            <Link href={getLink(version)}>{version.label}</Link>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

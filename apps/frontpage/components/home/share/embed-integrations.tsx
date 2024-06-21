@@ -1,9 +1,17 @@
 import type { FC } from 'react';
-import React, { forwardRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { AspectRatio } from '../../ui/aspect-ratio';
 import { IntegrationsCarousel } from './integrations-carousel';
+import mediumPreview from './images/medium.png';
+import mediumLogo from './images/medium.svg';
+import nextPreview from './images/next.png';
+import nextLogo from './images/next-js.svg';
+import figmaPreview from './images/figma.png';
+import figmaLogo from './images/figma.svg';
+import notionPreview from './images/notion.png';
+import notionLogo from './images/notion.svg';
+import timeFramePicker from './images/time-frame-picker.svg';
 
 const Connector: FC<{ name: string; style: React.CSSProperties }> = ({
   name,
@@ -73,15 +81,15 @@ const embedIntegrations = [
   {
     index: 1,
     name: 'NextJS',
-    image: '/home/share/next-js.svg',
+    image: nextLogo,
     color: '#000',
     media: (
       // transform is to prevent the slight jump before the animation starts
       <AspectRatio ratio={1202 / 910} style={{ transform: 'translate(0, 0)' }}>
-        <img
+        <Image
           alt="Embed stories using iframes in your NextJS sites"
           className="block w-full h-auto"
-          src="/home/share/next.png"
+          src={nextPreview}
         />
         <Connector
           key="nextjs"
@@ -94,14 +102,14 @@ const embedIntegrations = [
   {
     index: 2,
     name: 'Figma',
-    image: '/home/share/figma.svg',
+    image: figmaLogo,
     color: '#000',
     media: (
       <AspectRatio ratio={1202 / 910} style={{ transform: 'translate(0, 0)' }}>
-        <img
+        <Image
           alt="Use the Storybook Connect plugin to embed stories in a Figma file"
           className="block w-full h-auto"
-          src="/home/share/figma.png"
+          src={figmaPreview}
         />
         <Connector
           key="figma"
@@ -114,14 +122,14 @@ const embedIntegrations = [
   {
     index: 3,
     name: 'Notion',
-    image: '/home/share/notion.svg',
+    image: notionLogo,
     color: '#fff',
     media: (
       <AspectRatio ratio={1202 / 910} style={{ transform: 'translate(0, 0)' }}>
-        <img
+        <Image
           alt="Embed stories in Notion documents using the oEmbed support"
           className="block w-full h-auto"
-          src="/home/share/notion.png"
+          src={notionPreview}
         />
         <Connector
           key="notion"
@@ -134,14 +142,14 @@ const embedIntegrations = [
   {
     index: 4,
     name: 'Medium',
-    image: '/home/share/medium.svg',
+    image: mediumLogo,
     color: '#F5C347',
     media: (
       <AspectRatio ratio={1202 / 910} style={{ transform: 'translate(0, 0)' }}>
-        <img
+        <Image
           alt="Embed stories in Medium articles using the oEmbed support"
           className="block w-full h-auto"
-          src="/home/share/medium.png"
+          src={mediumPreview}
         />
         <Connector name="Medium" style={{ top: '53%', left: '28%' }} />
       </AspectRatio>
@@ -149,21 +157,17 @@ const embedIntegrations = [
   },
 ];
 
-export const EmbedIntegrations = forwardRef<HTMLImageElement>((_, ref) => {
+export const EmbedIntegrations = () => {
   return (
-    <div className="w-full relative max-w-[800px] ml-[30px] sm:ml-[30px] md:w-[150%] md:col-[2/3] lg:ml-[120px]">
+    <div className="w-full relative max-w-[800px] md:w-[150%] lg:ml-[120px]">
       <IntegrationsCarousel integrations={embedIntegrations} />
       <Image
         alt=""
-        className="block w-[56%] max-w-[440px] h-auto absolute top-[22%] left-[-30%] opacity-100 user-select-none pointer-events-none sm:left-[-60px] lg:[-120px]"
+        className="block w-[56%] max-w-[440px] h-auto absolute top-[22%] -left-4  opacity-100 user-select-none pointer-events-none sm:left-[-60px] md:left-[-30%] lg:left-[-120px]"
         height="244"
-        ref={ref}
-        src="/home/share/time-frame-picker.svg"
-        style={{ opacity: 0 }}
+        src={timeFramePicker}
         width="458"
       />
     </div>
   );
-});
-
-EmbedIntegrations.displayName = 'EmbedIntegrations';
+};

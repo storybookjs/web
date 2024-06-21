@@ -1,30 +1,54 @@
 export interface DocsVersion {
-  /** Used for visual display, e.g. the docs sidebar */
-  label: string;
-  /** Used for routes */
+  /** For fetching content */
   id: string;
+  /** For visual display, e.g. the docs sidebar */
+  label: string;
+  /** For routes */
+  inSlug?: string;
+  preRelease?: boolean;
+  /** The rest of these define the method used to fetch content */
   branch?: string;
   commit?: string;
   tag?: string;
 }
 
 /**
- * ********************************************
- * ** List of versions of the documentation  **
- * ********************************************
+ * All published versions of the docs.
+ *
+ * This list relies on some conventions:
+ *
+ * 1. The latest version must always be first.
+ * 2. The `label` should be... TODO
+ * 3. The `id` must be unique and should be of the form `major.minor` for clarity.
+ * 4. For the pre-release version (there should only be one), `preRelease: true` must be set.
+ * 5. The `inSlug` property (set to the major version) must be defined for:
+ *    - Non-latest non-pre-release versions (e.g. 7.6, 6.5)
+ *    - Pre-release major versions (e.g. 9.0, when in alpha/beta/RC)
+ * 6. Either a `branch`, `commit`, or `tag` must be provided for fetching content.
  **/
-
-/** Latest version must ALWAYS be first */
 export const docsVersions: DocsVersion[] = [
   {
-    label: 'Version Test 1',
-    id: '8.0-test-1',
-    branch: 'charles-docs-new-structure',
+    label: 'Version 8.1',
+    id: '8.1',
+    branch: 'charles-transform-docs-next',
+  },
+  // {
+  //   label: '8.2 (beta)',
+  //   id: '8.2',
+  //   branch: 'charles-transform-docs-next',
+  //   preRelease: true,
+  // },
+  {
+    label: 'Version 7',
+    id: '7.6',
+    inSlug: '7',
+    branch: 'charles-docs-transform-7-6',
   },
   {
-    label: 'Version Test 2',
-    id: '8.0-test-2',
-    branch: 'charles-docs-new-structure',
+    label: 'Version 6',
+    id: '6.5',
+    inSlug: '6',
+    branch: 'charles-docs-transform-6.5',
   },
 ];
 

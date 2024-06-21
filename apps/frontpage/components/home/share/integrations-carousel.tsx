@@ -1,6 +1,7 @@
 import { cn } from '@repo/utils';
 import type { ComponentProps, ReactNode, FC } from 'react';
 import React, { useState, useRef } from 'react';
+import Image from 'next/image';
 import type { Button } from '../../ui/button';
 
 interface IntegrationProps extends ComponentProps<typeof Button> {
@@ -28,7 +29,7 @@ export const IntegrationsCarousel: FC<IntegrationsCarouselProps> = ({
   return (
     <div className={className} ref={ref}>
       <figure className="m-0">{activeIntegration.media}</figure>
-      <div className="flex items-center gap-[10px] mt-5">
+      <div className="flex items-center gap-4 mt-5">
         {integrations.map(({ name, image, ...integration }, index) => (
           <button
             className={cn(
@@ -44,10 +45,10 @@ export const IntegrationsCarousel: FC<IntegrationsCarouselProps> = ({
             type="button"
             {...integration}
           >
-            <img alt={name} src={image} />
+            <Image alt={name || ''} src={image} />
           </button>
         ))}
-        <div className="text-zinc-600">+ and more</div>
+        <div className="text-slate-500 ml-2">+ and more</div>
       </div>
     </div>
   );

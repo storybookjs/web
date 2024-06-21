@@ -4,8 +4,13 @@ import { languages, packageManagers, renderers } from '@repo/utils';
 import { getCookie, setCookie } from 'cookies-next';
 import type { ReactNode } from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
+import {
+  cookieLanguageId,
+  cookiePackageManagerId,
+  cookieRenderId,
+} from '../../constants';
 
-interface DocsContextProps {
+export interface DocsContextProps {
   activeRenderer: null | string;
   setRenderer: (id: string) => void;
   activeLanguage: null | string;
@@ -14,7 +19,9 @@ interface DocsContextProps {
   setPackageManager: (id: string) => void;
 }
 
-const DocsContext = createContext<DocsContextProps | undefined>(undefined);
+export const DocsContext = createContext<DocsContextProps | undefined>(
+  undefined,
+);
 
 export function DocsProvider({ children }: { children: ReactNode }) {
   const [activeRenderer, setActiveRenderer] = useState<null | string>(null);
@@ -23,12 +30,8 @@ export function DocsProvider({ children }: { children: ReactNode }) {
     null | string
   >(null);
 
-  const cookieRendererId = 'sb-docs-renderer';
-  const cookieLanguageId = 'sb-docs-language';
-  const cookiePackageManagerId = 'sb-docs-package-manager';
-
   useEffect(() => {
-    const cookieRenderer = getCookie(cookieRendererId);
+    const cookieRenderer = getCookie(cookieRenderId);
     const cookieLanguage = getCookie(cookieLanguageId);
     const cookiePackageManager = getCookie(cookiePackageManagerId);
 
@@ -53,7 +56,7 @@ export function DocsProvider({ children }: { children: ReactNode }) {
 
   const setRenderer = (id: string) => {
     setActiveRenderer(id);
-    setCookie(cookieRendererId, id);
+    setCookie(cookieRenderId, id);
   };
 
   const setLanguage = (id: string) => {

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { StorybookLogo } from '../logos/storybook';
 import { ChromaticLogo } from '../logos/chromatic';
 import { Container } from '../container';
-import { Form } from './form';
+import { TopSection } from './top-section';
 import { footerNav } from './nav';
 
 export interface FooterProps {
@@ -13,16 +13,16 @@ export interface FooterProps {
 
 export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
   return (
-    <div
+    <footer
       className={cn(
         variant !== 'home' &&
-          'ui-bg-slate-50 ui-text-slate-800 ui-border-t ui-border-zinc-200 dark:ui-bg-zinc-900 dark:ui-text-white dark:ui-border-zinc-700',
+          'ui-bg-slate-50 ui-text-slate-800 ui-border-t ui-border-zinc-200 dark:ui-bg-slate-950 dark:ui-text-white dark:ui-border-zinc-700',
         variant === 'home' &&
           'ui-bg-homeBackground ui-text-white ui-border-t border-zinc-700',
       )}
     >
       <Container className="lg:ui-px-8 ui-py-12">
-        <Form variant={variant} />
+        <TopSection variant={variant} />
         <div className="ui-flex ui-flex-wrap ui-mb-6 sm:ui-mb-20">
           {footerNav.map((nav) => (
             <div
@@ -35,10 +35,10 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
                   return (
                     <a
                       className={cn(
-                        'ui-text-zinc-600 hover:ui-text-blue-500 ui-transition-colors ui-text-md',
-                        variant === 'home' && 'ui-text-zinc-400',
+                        'hover:ui-text-blue-500 ui-transition-colors ui-text-md',
+                        variant === 'home' && 'ui-text-slate-400',
                         variant !== 'home' &&
-                          'ui-text-zinc-600 dark:ui-text-zinc-400',
+                          'ui-text-zinc-600 dark:ui-text-slate-400',
                       )}
                       href={link.href}
                       key={link.title}
@@ -51,10 +51,10 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
                 return (
                   <Link
                     className={cn(
-                      'ui-text-zinc-600 hover:ui-text-blue-500 ui-transition-colors ui-text-md',
-                      variant === 'home' && 'ui-text-zinc-400',
+                      'hover:ui-text-blue-500 ui-transition-colors ui-text-md',
+                      variant === 'home' && 'ui-text-slate-400',
                       variant !== 'home' &&
-                        'ui-text-zinc-600 dark:ui-text-zinc-400',
+                        'ui-text-zinc-600 dark:ui-text-slate-400',
                     )}
                     href={link.href}
                     key={link.title}
@@ -110,7 +110,7 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
             Special thanks to{' '}
             <a
               className={cn(
-                'ui-text-zinc-600 hover:ui-text-blue-500 ui-transition-colors ui-text-md',
+                'hover:ui-text-blue-500 ui-transition-colors ui-text-md',
                 variant === 'home' && 'ui-text-white',
                 variant !== 'home' && 'ui-text-zinc-600 dark:ui-text-white',
               )}
@@ -121,7 +121,7 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
             and{' '}
             <a
               className={cn(
-                'ui-text-zinc-600 hover:ui-text-blue-500 ui-transition-colors ui-text-md',
+                'hover:ui-text-blue-500 ui-transition-colors ui-text-md',
                 variant === 'home' && 'ui-text-white',
                 variant !== 'home' && 'ui-text-zinc-600 dark:ui-text-white',
               )}
@@ -132,6 +132,6 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
           </div>
         </div>
       </Container>
-    </div>
+    </footer>
   );
 };

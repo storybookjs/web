@@ -27,6 +27,7 @@ export interface TreeProps extends TreeMetaProps {
   pathSegment: string;
   type: 'directory' | 'link' | 'tab';
   children?: TreeProps[];
+  draft?: boolean;
 }
 
 export interface CodeSnippetsProps {
@@ -35,10 +36,14 @@ export interface CodeSnippetsProps {
   renderer?: string;
   packageManager?: string | null;
   language?: string;
-  content: React.ReactNode;
+  content?: React.ReactNode;
+  raw?: string;
 }
 
-export type CodeSnippetsFilter = { id: string; title: string } | undefined;
+export interface CodeSnippetsFilter {
+  id: string;
+  title: string;
+}
 
 export interface CodeSnippetsFiltersProps {
   languages: CodeSnippetsFilter[];

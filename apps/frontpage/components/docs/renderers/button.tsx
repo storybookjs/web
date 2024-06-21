@@ -20,8 +20,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         className={cn(
-          'inline-flex items-center justify-center h-7 rounded border border-zinc-300 text-sm px-2 hover:border-blue-500 transition-colors text-zinc-800 hover:text-blue-500 gap-1 data-[state=open]:text-blue-500 data-[state=open]:border-blue-500 outline-blue-500 outline-offset-3',
-          active && 'border-blue-500 text-blue-500',
+          'outline-offset-3 inline-flex h-7 items-center justify-center gap-1 rounded border border-zinc-300 px-2 text-sm text-zinc-800 outline-blue-500 transition-colors hover:border-blue-500 hover:text-blue-500 data-[state=open]:border-blue-500 data-[state=open]:text-blue-500',
+          active &&
+            'border-blue-500 text-blue-500 dark:border-blue-500 dark:text-blue-500',
+          !active &&
+            'dark:border-slate-700 dark:text-slate-500 dark:hover:border-slate-500',
         )}
         onClick={onClick}
         ref={ref}

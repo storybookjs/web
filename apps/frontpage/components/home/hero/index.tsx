@@ -6,26 +6,26 @@ import Link from 'next/link';
 import { cn } from '@repo/utils';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
+import { Manager } from '../manager';
 import { InitCommand } from './init-command';
-import { Manager } from './manager';
 import { Chrome } from './chrome';
 import SocialProof from './social-proof';
 
 const features = [
   'Development',
-  'Documentation',
   'Interaction Testing',
   'Visual Testing',
+  'Documentation',
 ];
 
 function Star({ x = 0, y = 0, w = 14, delay = 0 }) {
   return (
     <motion.svg
       animate={{ rotate: 360, opacity: 1, scale: 1 }}
-      className="absolute top-0 left-0"
+      className="absolute left-0 top-0"
       fill="none"
       height={w}
       initial={{ x, y, opacity: 0, scale: 0.5 }}
@@ -64,24 +64,41 @@ export function Hero({
   contributorCount: string;
 }) {
   const [slide, setSlide] = useState(1);
+  const intervalId = useRef<number | null>(null);
+
+  const setSlideInterval = () => {
+    if (intervalId.current !== null) {
+      window.clearInterval(intervalId.current);
+    }
+
+    intervalId.current = window.setInterval(() => {
+      setSlide((s) => (s === 4 ? 1 : s + 1));
+    }, 4500);
+  };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSlide((s) => (s === 4 ? 1 : s + 1));
-    }, 3000);
-
+    setSlideInterval();
     return () => {
-      clearInterval(interval);
+      if (intervalId.current) {
+        clearInterval(intervalId.current);
+      }
     };
   }, []);
 
+  const handleSlideChange = (newSlide: number) => {
+    setSlide(newSlide);
+    if (intervalId.current) {
+      clearInterval(intervalId.current);
+    }
+  };
+
   return (
-    <Container className="lg:px-8 pt-12 md:pt-24 text-white justify-between gap-20 relative z-20">
-      <h1 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold max-sm:max-w-80">
+    <Container className="relative z-20 justify-between gap-20 overflow-hidden pt-12 text-white md:pt-24 lg:px-8">
+      <h1 className="flex-1 text-4xl font-bold max-sm:max-w-80 md:text-[56px]/[70px]">
         Build UIs without the grunt work
       </h1>
-      <div className="flex-1 pt-4 mb-8 md:mb-20">
-        <p className="mb-8 sm:mb-12 leading-7 max-w-[500px]">
+      <div className="mb-8 flex-1 pt-4 md:mb-20">
+        <p className="mb-8 max-w-[500px] leading-7 sm:mb-12">
           Storybook is a frontend workshop for building UI components and pages
           in isolation. Thousands of teams use it for UI development, testing,
           and documentation. It&apos;s open source and free.
@@ -90,7 +107,7 @@ export function Hero({
           <div className="flex flex-col gap-8 sm:flex-row">
             <div className="flex gap-4">
               <Link
-                className="flex items-center justify-center h-12 px-6 font-bold text-black bg-white rounded-full text-md"
+                className="text-md flex h-12 items-center justify-center rounded-full bg-white px-6 font-bold text-black"
                 href="/docs"
               >
                 Get Started
@@ -102,21 +119,21 @@ export function Hero({
                 className="md:hidden"
                 href="https://github.com/storybookjs/storybook/releases"
               >
-                <div className="text-white text-md">v8</div>
+                <div className="text-md text-white">v8</div>
                 <div className="text-sm text-white/60">Latest version</div>
               </a>
               <div>
-                <div className="text-white text-md">{npmDownloads}</div>
+                <div className="text-md text-white">{npmDownloads}</div>
                 <div className="text-sm text-white/60">Installs per month</div>
               </div>
               <div>
-                <div className="text-white text-md">{contributorCount}</div>
+                <div className="text-md text-white">{contributorCount}</div>
                 <div className="text-sm text-white/60">Contributors</div>
               </div>
             </div>
           </div>
           <a
-            className="hidden text-sm transition-colors md:flex md:items-end text-white/60 hover:text-white"
+            className="hidden text-sm text-white/60 transition-colors hover:text-white md:flex md:items-end"
             href="https://github.com/storybookjs/storybook/releases"
             rel="noreferrer"
             target="_blank"
@@ -137,21 +154,21 @@ export function Hero({
           </a>
         </div>
       </div>
-      <div className="flex justify-between border-t select-none border-t-white/20 md:justify-center">
-        <div className="flex items-center justify-between w-full h-20 md:hidden">
+      <div className="flex select-none justify-between border-t border-t-white/20 md:justify-center">
+        <div className="flex h-20 w-full items-center justify-between md:hidden">
           <div
-            className="flex items-center justify-center w-10 h-10 text-white rounded-full"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-white"
             onClick={() => {
-              setSlide(slide === 1 ? 4 : slide - 1);
+              handleSlideChange(slide === 1 ? 4 : slide - 1);
             }}
           >
             <ChevronLeftIcon />
           </div>
           <div className="text-md">{features[slide - 1]}</div>
           <div
-            className="flex items-center justify-center w-10 h-10 text-white rounded-full"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-white"
             onClick={() => {
-              setSlide(slide === 4 ? 1 : slide + 1);
+              handleSlideChange(slide === 4 ? 1 : slide + 1);
             }}
           >
             <ChevronRightIcon />
@@ -160,11 +177,11 @@ export function Hero({
         <div className="relative hidden h-20 gap-12 md:flex">
           <div
             className={cn(
-              'bg-white h-0.5 absolute top-0 transition-all',
+              'absolute top-0 h-0.5 bg-white transition-all',
               slide === 1 && 'left-0 w-[96px]',
-              slide === 2 && 'left-[144px] w-[110px]',
-              slide === 3 && 'left-[302px] w-[132px]',
-              slide === 4 && 'left-[482px] w-[101px]',
+              slide === 2 && 'left-[144px] w-[132px]',
+              slide === 3 && 'left-[324px] w-[101px]',
+              slide === 4 && 'left-[474px] w-[110px]',
             )}
           />
           {features.map((label, i) => (
@@ -175,7 +192,7 @@ export function Hero({
               )}
               key={label}
               onClick={() => {
-                setSlide(i + 1);
+                handleSlideChange(i + 1);
               }}
               type="button"
             >

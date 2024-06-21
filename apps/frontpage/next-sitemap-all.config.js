@@ -1,8 +1,8 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: 'https://storybook.js.org',
-  sourceDir: 'apps/frontpage/.next',
-  outDir: 'apps/frontpage/public',
+  sourceDir: '.next',
+  outDir: 'public',
   sitemapBaseFileName: 'sitemap/sitemap-all',
   exclude: [
     '/docs-urls',

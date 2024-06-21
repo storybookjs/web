@@ -2,16 +2,12 @@ import React from 'react';
 import { cn } from '@repo/utils';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  DiscordIcon,
-  GithubIcon,
-  TwitterIcon,
-  YoutubeIcon,
-} from '@storybook/icons';
+import { DiscordIcon, GithubIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
 import { Button } from '../../ui/button';
 import { AspectRatio } from '../../ui/aspect-ratio';
 import { Community } from '../../community';
+import { Youtube } from '../../logos/youtube';
 
 const projects = [
   {
@@ -37,7 +33,7 @@ const projects = [
     bgColor: '#333333',
     width: 88,
     height: 30,
-    logoAlt: 'Audi',
+    logoAlt: 'Audi UI React',
     logoUrl: '/home/community/logos/audi.svg',
     projectUrl: 'https://storybook.js.org/showcase/audi-ui-react',
   },
@@ -46,7 +42,7 @@ const projects = [
     bgColor: '#0078d4',
     width: 40,
     height: 70,
-    logoAlt: 'Audi',
+    logoAlt: 'Fluent UI React',
     logoUrl: '/home/community/logos/fluent.svg',
     projectUrl: 'https://storybook.js.org/showcase/microsoft-fluent-ui-react',
   },
@@ -55,7 +51,7 @@ const projects = [
     bgColor: '#3171A6',
     width: 52,
     height: 52,
-    logoAlt: 'WordPress',
+    logoAlt: 'WordPress Gutenberg',
     logoUrl: '/home/community/logos/wordpress.svg',
     projectUrl: 'https://storybook.js.org/showcase/wordpress-gutenberg',
   },
@@ -64,7 +60,7 @@ const projects = [
     bgColor: '#0b3d91',
     width: 100,
     height: 28,
-    logoAlt: 'WordPress',
+    logoAlt: 'Nasa Explorer 1',
     logoUrl: '/home/community/logos/nasa.svg',
     projectUrl: 'https://storybook.js.org/showcase/nasa-jpl-explorer-1',
   },
@@ -189,8 +185,8 @@ export function SocialValidation({
       className="pt-12 sm:pt-20 md:pt-28"
       style={{ scrollbarWidth: 'none' }}
     >
-      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
-        <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
+      <Container className="justify-between gap-20 text-white md:flex lg:px-8">
+        <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
           Made for frontend developers
         </h2>
         <div className="flex-1 pt-4">
@@ -203,11 +199,11 @@ export function SocialValidation({
             <Button asChild jumpOnHover rounded="full" variant="outlineHome">
               <Link href="/community/">Get involved</Link>
             </Button>
-            <div className="flex flex-row-reverse items-center min-w-0">
+            <div className="flex min-w-0 flex-row-reverse items-center">
               {contributors.map((image) => (
                 <Image
                   alt=""
-                  className="block w-10 h-10 -ml-1 rounded-full last:ml-0 odd:none sm:odd:block"
+                  className="odd:none -ml-1 block h-10 w-10 rounded-full last:ml-0 sm:odd:block"
                   height={40}
                   key={image}
                   loading="lazy"
@@ -219,20 +215,20 @@ export function SocialValidation({
           </div>
         </div>
       </Container>
-      <div className="px-8 py-0 pb-4 mt-12 text-white flex gap-8 scroll-p-8 sm:mt-20 mb-[calc(5rem-1rem)] md:mt-28 overflow-scroll snap-x">
+      <div className="mb-[calc(5rem-1rem)] mt-12 flex snap-x scroll-p-8 gap-8 overflow-scroll px-8 py-0 pb-4 text-white sm:mt-20 md:mt-28">
         {storybooks.map((storybookProject) => (
           <a
-            className="block no-underline w-[240px] sm:w-[480px] flex-none"
+            className="block w-[240px] flex-none no-underline sm:w-[480px]"
             href={storybookProject.url}
             key={storybookProject.name}
             rel="noopener nofollow noreferrer"
             target="_blank"
           >
             <div className="overflow-hidden rounded-md">
-              <div className="flex items-center w-full h-4 gap-1 pl-2 bg-zinc-200 border-y border-t-transparent border-b-zinc-300">
-                <div className="bg-red-500 w-[5px] h-[5px] rounded-full" />
-                <div className="bg-yellow-500 w-[5px] h-[5px] rounded-full" />
-                <div className="bg-green-500 w-[5px] h-[5px] rounded-full" />
+              <div className="flex h-4 w-full items-center gap-1 border-y border-b-zinc-300 border-t-transparent bg-zinc-200 pl-2">
+                <div className="h-[5px] w-[5px] rounded-full bg-red-500" />
+                <div className="h-[5px] w-[5px] rounded-full bg-yellow-500" />
+                <div className="h-[5px] w-[5px] rounded-full bg-green-500" />
               </div>
               <Image
                 alt={storybookProject.name}
@@ -241,10 +237,10 @@ export function SocialValidation({
                 width={storybookProject.image.width}
               />
             </div>
-            <div className="flex items-center mt-3 text-white">
+            <div className="mt-3 flex items-center text-white">
               <Image
                 alt={storybookProject.name}
-                className="w-5 h-5 mr-2"
+                className="mr-2 h-5 w-5"
                 height={20}
                 src={storybookProject.logo}
                 width={20}
@@ -254,10 +250,10 @@ export function SocialValidation({
           </a>
         ))}
       </div>
-      <div className="px-8 py-0 pb-4 mt-12 flex gap-8 scroll-p-8 sm:mt-20 mb-[calc(5rem-1rem)] md:mt-28 overflow-scroll snap-x">
+      <div className="mb-[calc(5rem-1rem)] mt-12 flex snap-x scroll-p-8 gap-8 overflow-scroll px-8 py-0 pb-4 sm:mt-20 md:mt-28">
         {projects.map((project) => (
           <a
-            className="w-[240px] flex-none bg-red-500 rounded-md"
+            className="w-[240px] flex-none rounded-md bg-red-500"
             href={project.projectUrl}
             key={project.logoAlt}
             rel="noopener"
@@ -279,13 +275,13 @@ export function SocialValidation({
           </a>
         ))}
       </div>
-      <Container className="pt-0 pb-12 sm:pb-20 md:pb-28">
+      <Container className="pb-12 pt-0 sm:pb-20 md:pb-28">
         <Community />
       </Container>
-      <Container className="pb-12 grid grid-cols-[1fr] md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(4,_1fr)] gap-8">
+      <Container className="grid grid-cols-[1fr] gap-8 pb-12 md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(4,_1fr)]">
         <div className={cn(socialCard)}>
           <GithubIcon aria-label="Discord" className="text-white" size={48} />
-          <div className="text-white text-md">
+          <div className="text-md text-white">
             {`Join ${contributorCount} contributors building the future of UI development.`}
           </div>
           <Button asChild jumpOnHover rounded="full" variant="outlineHome">
@@ -304,7 +300,7 @@ export function SocialValidation({
             className="text-[#5A65EA]"
             size={48}
           />
-          <div className="text-white text-md">
+          <div className="text-md text-white">
             {`Chat with ${discordMembers} frontend developers.`}
           </div>
           <Button asChild jumpOnHover rounded="full" variant="outlineHome">
@@ -316,16 +312,26 @@ export function SocialValidation({
           </div>
         </div>
         <div className={cn(socialCard)}>
-          <TwitterIcon
-            aria-label="Discord"
-            className="text-[#4999E9]"
-            size={48}
-          />
-          <div className="text-white text-md">
+          <div className="flex h-12 w-12 items-center justify-center">
+            <svg
+              aria-label="Twitter"
+              fill="none"
+              height="40"
+              viewBox="0 0 14 14"
+              width="40"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11.02.446h2.137L8.49 5.816l5.51 7.28H9.67L6.298 8.683l-3.88 4.413H.282l5.004-5.735L0 .446h4.442l3.064 4.048L11.02.446zm-.759 11.357h1.18L3.796 1.655H2.502l7.759 10.148z"
+                fill="#fff"
+              />
+            </svg>
+          </div>
+          <div className="text-md text-white">
             Get the latest news and updates from Storybook maintainers.
           </div>
           <Button asChild jumpOnHover rounded="full" variant="outlineHome">
-            <a href="https://twitter.com/storybookjs">Follow on Twitter</a>
+            <a href="https://twitter.com/storybookjs">Follow on X</a>
           </Button>
           <div>
             <div className="text-sm text-white">24,200+</div>
@@ -333,12 +339,10 @@ export function SocialValidation({
           </div>
         </div>
         <div className={cn(socialCard)}>
-          <YoutubeIcon
-            aria-label="Discord"
-            className="text-[#EA3223]"
-            size={48}
-          />
-          <div className="text-white text-md">
+          <div className="flex h-12 w-12 items-center justify-center">
+            <Youtube />
+          </div>
+          <div className="text-md text-white">
             Watch tutorials, feature previews, and interviews.
           </div>
           <Button asChild jumpOnHover rounded="full" variant="outlineHome">

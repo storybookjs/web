@@ -20,7 +20,7 @@ export function AddonsPanel({
 
   return (
     <motion.div
-      className="absolute top-0 left-0 bottom-0 w-full"
+      className="absolute top-0 left-0 bottom-0 w-full overflow-hidden"
       style={{ clipPath: 'polygon(20% 50%, 100% 50%, 100% 100%, 20% 100%)' }}
       {...props}
     >

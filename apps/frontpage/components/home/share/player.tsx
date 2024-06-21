@@ -2,13 +2,18 @@ import type { FC } from 'react';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@repo/utils';
+import Image from 'next/image';
 import { AspectRatio } from '../../ui/aspect-ratio';
+import avatar1 from './images/avatar-1.png';
+import avatar2 from './images/avatar-2.png';
+import avatar3 from './images/avatar-3.png';
+import avatar4 from './images/avatar-4.png';
 
 const players = {
-  blue: '/home/share/avatar-1.png',
-  red: '/home/share/avatar-2.png',
-  yellow: '/home/share/avatar-3.png',
-  purple: '/home/share/avatar-4.png',
+  blue: avatar1,
+  red: avatar2,
+  yellow: avatar3,
+  purple: avatar4,
 };
 
 interface PlayerProps {
@@ -117,7 +122,7 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
           animate: { scale: 2.14285714, opacity: 0.3 },
         }}
       />
-      <img
+      <Image
         alt="Player"
         className="border-2 border-white rounded-[50%] shadow-sm block w-[28%] h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         src={players[type]}

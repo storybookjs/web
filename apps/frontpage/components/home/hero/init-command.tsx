@@ -21,7 +21,7 @@ export const InitCommand: FC = () => {
       onClick={onClick}
       type="button"
     >
-      <span>~</span>npx storybook@latest init
+      npx storybook@latest init
       <CopyIcon />
       <AnimatePresence>
         {state ? (
