@@ -1,6 +1,7 @@
 import type { CodeSnippetsFiltersProps, CodeSnippetsProps } from '@repo/utils';
 
 interface GetActiveContentProps {
+  activeContentTabs?: CodeSnippetsProps[] | null;
   content: CodeSnippetsProps[];
   filters: CodeSnippetsFiltersProps;
   activePackageManager: string | null;
@@ -9,15 +10,14 @@ interface GetActiveContentProps {
   activeTab: string | null;
 }
 
-export const getActiveContent = ({
+export const getActiveContentTabs = ({
   content,
   filters,
   activePackageManager,
   activeLanguage,
   activeRenderer,
-  activeTab,
-}: GetActiveContentProps): {
-  activeContent: CodeSnippetsProps | null;
+}: Omit<GetActiveContentProps, 'activeContentTabs' | 'activeTab'>): {
+  activeContentTabs: CodeSnippetsProps[] | null;
   error: string | null;
 } => {
   let error: string | null = null;
@@ -80,11 +80,16 @@ export const getActiveContent = ({
   });
 
   if (activeLanguage === 'ts' && filterByLanguage.length === 0) {
-    const getTsVersion = filterByPackageManager.find(
+    const tsVersions = filterByPackageManager.filter(
       (v) => v.language === 'ts-4-9',
     );
-    if (getTsVersion) {
-      filterByLanguage.push(getTsVersion);
+    const jsVersions = filterByPackageManager.filter(
+      (v) => v.language === 'js',
+    );
+    if (tsVersions.length > 0) {
+      filterByLanguage.splice(-1, 0, ...tsVersions);
+    } else if (jsVersions.length > 0) {
+      filterByLanguage.splice(-1, 0, ...jsVersions);
     } else {
       // This mean there's an error
       // We need to show an error message
@@ -92,33 +97,71 @@ export const getActiveContent = ({
   }
 
   if (activeLanguage === 'ts-4-9' && filterByLanguage.length === 0) {
-    const getTsVersion = filterByPackageManager.find(
+    const tsVersions = filterByPackageManager.filter(
       (v) => v.language === 'ts',
     );
-    if (getTsVersion) {
-      filterByLanguage.push(getTsVersion);
+    const jsVersions = filterByPackageManager.filter(
+      (v) => v.language === 'js',
+    );
+    if (tsVersions.length > 0) {
+      filterByLanguage.splice(-1, 0, ...tsVersions);
+    } else if (jsVersions.length > 0) {
+      filterByLanguage.splice(-1, 0, ...jsVersions);
     } else {
       // This mean there's an error
       // We need to show an error message
     }
   }
 
-  if (filterByLanguage.length === 0) return { activeContent: null, error };
+  if (filterByLanguage.length === 0) return { activeContentTabs: null, error };
+
+  return {
+    activeContentTabs: filterByLanguage || null,
+    error,
+  };
+};
+
+export const getActiveContent = ({
+  activeContentTabs: activeContentTabsProp,
+  content,
+  filters,
+  activePackageManager,
+  activeLanguage,
+  activeRenderer,
+  activeTab,
+}: GetActiveContentProps): {
+  activeContent: CodeSnippetsProps | null;
+  error: string | null;
+} => {
+  let tabs = activeContentTabsProp;
+  let error: string | null = null;
+
+  if (!tabs) {
+    const { activeContentTabs, error: errorTabs } = getActiveContentTabs({
+      content,
+      filters,
+      activePackageManager,
+      activeLanguage,
+      activeRenderer,
+    });
+    tabs = activeContentTabs;
+    error = errorTabs;
+  }
 
   if (activeTab) {
-    const filterByTab = filterByLanguage.filter((item) => {
+    const filterByTab = tabs?.filter((item) => {
       if (item.tabTitle === activeTab) return true;
       return false;
     });
 
     return {
-      activeContent: filterByTab[0] || null,
+      activeContent: filterByTab?.[0] || null,
       error: null,
     };
   }
 
   return {
-    activeContent: filterByLanguage[0] || null,
+    activeContent: tabs?.[0] || null,
     error,
   };
 };
