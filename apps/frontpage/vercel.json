@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/addons/:match*",
-      "destination": "https://storybook-web-addons.netlify.app/:match*"
+      "destination": "https://storybook-web-addons.netlify.app/addons/:match*"
     },
     {
       "source": "/blog/:match*",
