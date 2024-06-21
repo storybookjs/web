@@ -10,7 +10,7 @@
     },
     {
       "source": "/integrations/:match*",
-      "destination": "https://storybook-tutorials.netlify.app/tutorials/:match*"
+      "destination": "https://storybook-web-addons.netlify.app/integrations/:match*"
     },
     {
       "source": "/showcase/:match*",
