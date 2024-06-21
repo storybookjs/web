@@ -68,7 +68,9 @@ const Tabs = ({
           activeTab !== tab.id &&
             'border-zinc-300 hover:border-blue-500 hover:text-blue-500 dark:border-slate-700 dark:text-slate-500 dark:hover:border-blue-500 dark:hover:text-blue-500',
         )}
-        onClick={() => { onTabChange(tab.id) }}
+        onClick={() => {
+          onTabChange(tab.id);
+        }}
       >
         {tab.title}
       </button>
@@ -122,10 +124,24 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     }) as Tab[];
 
   useEffect(() => {
-    if (tabs && tabs.length > 0 && !activeTab) {
+    if (
+      activeLanguage &&
+      activePackageManager &&
+      activeRenderer &&
+      tabs &&
+      tabs.length > 0 &&
+      !activeTab
+    ) {
       setTab(tabs[0].id);
     }
-  }, [activeTab, tabs]);
+  }, [
+    activeTab,
+    tabs,
+    tabs.length,
+    activeLanguage,
+    activePackageManager,
+    activeRenderer,
+  ]);
 
   // Get active snippet content
   const { activeContent, error: errorActiveContent } = getActiveContent({
