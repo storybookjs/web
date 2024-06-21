@@ -67,6 +67,7 @@ module.exports = {
       },
     ],
   },
+  trailingSlash: true,
   // This was added to fix the error with remarkExpressiveCode
   // https://stackoverflow.com/questions/77009138/module-has-no-exports-error-works-fine-on-stackblitz-but-fails-locally
   webpack: (config) => {
