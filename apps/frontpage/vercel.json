@@ -9,16 +9,12 @@
       "destination": "https://storybook-web-addons.netlify.app/integrations"
     },
     {
-      "source": "/integrations/:match*",
-      "destination": "https://storybook-web-addons.netlify.app/integrations/:match*"
+      "source": "/addons/tag/:match*",
+      "destination": "https://storybook-web-addons.netlify.app/integrations/tag/:match*"
     },
     {
       "source": "/addons/:match*",
       "destination": "https://storybook-web-addons.netlify.app/addons/:match*"
-    },
-    {
-      "source": "/addons/tag/:match*",
-      "destination": "https://storybook-web-addons.netlify.app/integrations/tag/:match*"
     },
     {
       "source": "/blog/:match*",
@@ -29,12 +25,20 @@
       "destination": "https://storybook-day-2023.netlify.app/day/:match*"
     },
     {
-      "source": "/recipes/:match*",
-      "destination": "https://storybook-web-addons.netlify.app/recipes/:match*"
+      "source": "/integrations/tag/:match*",
+      "destination": "https://storybook-web-addons.netlify.app/integrations/tag/:match*"
+    },
+    {
+      "source": "/integrations/:match*",
+      "destination": "https://storybook-web-addons.netlify.app/integrations/:match*"
     },
     {
       "source": "/recipes",
       "destination": "https://storybook-web-addons.netlify.app/integrations"
+    },
+    {
+      "source": "/recipes/:match*",
+      "destination": "https://storybook-web-addons.netlify.app/recipes/:match*"
     },
     {
       "source": "/showcase/:match*",
