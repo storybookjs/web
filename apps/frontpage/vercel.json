@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/addons",
+      "destination": "https://storybook-web-addons.netlify.app/integrations"
+    },
+    {
+      "source": "/addons/addon-gallery",
+      "destination": "https://storybook-web-addons.netlify.app/integrations"
+    },
+    {
       "source": "/integrations/:match*",
       "destination": "https://storybook-web-addons.netlify.app/integrations/:match*"
     },
@@ -11,14 +19,6 @@
     {
       "source": "/addons/tag/:match*",
       "destination": "https://storybook-web-addons.netlify.app/integrations/tag/:match*"
-    },
-    {
-      "source": "/addons",
-      "destination": "https://storybook-web-addons.netlify.app/integrations"
-    },
-    {
-      "source": "/addons/addon-gallery",
-      "destination": "https://storybook-web-addons.netlify.app/integrations"
     },
     {
       "source": "/blog/:match*",
