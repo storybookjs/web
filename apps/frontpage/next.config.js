@@ -1,4 +1,5 @@
 const generatedRedirects = require('./generated-redirects.json');
+const { withPlausibleProxy } = require('next-plausible');
 
 const historicalVersions = [
   '8.1',
@@ -34,7 +35,7 @@ const renderers = [
 ];
 
 /** @type {import('next').NextConfig} */
-module.exports = {
+module.exports = withPlausibleProxy()({
   images: {
     remotePatterns: [
       {
@@ -405,4 +406,4 @@ module.exports = {
       },
     ];
   },
-};
+});
