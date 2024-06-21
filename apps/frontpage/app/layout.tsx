@@ -45,11 +45,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* <PlausibleProvider domain="storybook.js.org" /> */}
         <script
           defer
           data-domain="storybook.js.org"
-          src="/js/script.js"
+          data-api="/sb-event/api/event"
+          src="/sb-event/js/script.js"
         ></script>
       </head>
       <body

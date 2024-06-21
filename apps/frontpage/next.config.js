@@ -89,12 +89,12 @@ module.exports = {
     return [
       // Plausible Analytics
       {
-        source: '/js/script.js',
+        source: '/sb-event/js/script.js',
         destination: 'https://plausible.io/js/script.js',
         permanent: true,
       },
       {
-        source: '/api/event', // Or '/api/event/' if you have `trailingSlash: true` in this config
+        source: '/sb-event/api/event',
         destination: 'https://plausible.io/api/event',
         permanent: true,
       },
