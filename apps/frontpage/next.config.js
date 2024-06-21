@@ -87,17 +87,6 @@ module.exports = {
     // Add the wild cards at the bottom of the list
     // to avoid conflicts with the more specific redirects
     return [
-      // Plausible Analytics
-      {
-        source: '/sb-event/js/script.js',
-        destination: 'https://plausible.io/js/script.js',
-        permanent: true,
-      },
-      {
-        source: '/sb-event/api/event',
-        destination: 'https://plausible.io/api/event',
-        permanent: true,
-      },
       // TODO: Are we adding /docs/index.mdx to all versions?
       {
         source: '/docs/get-started',

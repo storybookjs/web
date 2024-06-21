@@ -23,6 +23,14 @@
     {
       "source": "/whats-new/v1/:match*",
       "destination": "https://storybook-dx.netlify.app/.netlify/functions/whats-new/:match*"
+    },
+    {
+      "source": "/sb-event/js/script.js",
+      "destination": "https://plausible.io/js/script.js"
+    },
+    {
+      "source": "/sb-event/api/event",
+      "destination": "https://plausible.io/api/event"
     }
   ]
 }
