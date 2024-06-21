@@ -91,10 +91,12 @@ module.exports = {
       {
         source: '/js/script.js',
         destination: 'https://plausible.io/js/script.js',
+        permanent: true,
       },
       {
         source: '/api/event', // Or '/api/event/' if you have `trailingSlash: true` in this config
         destination: 'https://plausible.io/api/event',
+        permanent: true,
       },
       // TODO: Are we adding /docs/index.mdx to all versions?
       {
