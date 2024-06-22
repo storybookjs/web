@@ -22,7 +22,7 @@ const fontSans = nunitoSans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://storybookjs.vercel.app'),
+  metadataBase: new URL('https://storybook.js.org'),
   title: 'Storybook: Frontend workshop for UI development',
   description:
     "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
