@@ -2,7 +2,8 @@ import { Preview } from '../components/preview';
 import { buildTagLinks } from '../lib/build-tag-links';
 import { fetchHomeData } from '../lib/fetch-home-data';
 import { TagList } from '../components/tag-list';
-import { PlusIcon, SearchIcon } from '@storybook/icons';
+import { BookIcon, EditIcon, PlusIcon, SearchIcon } from '@storybook/icons';
+import Link from 'next/link';
 
 export default async function Home() {
   const {
@@ -46,15 +47,38 @@ export default async function Home() {
       </div>
 
       <div className="flex flex-col gap-12 mb-24 md:flex-row">
-        <div className="w-[260px] flex-shrink-0">
+        <div className="w-[250px] flex-shrink-0">
           <div className="flex items-center w-full h-10 gap-2 px-5 border rounded-full border-zinc-300">
             <SearchIcon /> Search integrations
           </div>
-          <h3 className="mt-12 mb-8 text-2xl font-bold">Categories</h3>
-          <div className="flex flex-col gap-2 mt-8">
-            {categories.map((category) => (
-              <div key={category.name}>{category.name}</div>
+          <div className="flex items-center py-2 mt-10 text-sm font-bold">
+            Categories
+          </div>
+          <ul className="pb-8 -ml-2 border-b border-b-zinc-300">
+            {categories.map(({ name, href }) => (
+              <li key={name}>
+                <a
+                  href={href}
+                  className="flex items-center px-2 py-[5px] text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
+                >
+                  {name}
+                </a>
+              </li>
             ))}
+          </ul>
+          <div className="flex flex-col gap-4 mt-6">
+            <Link
+              href="/docs/addons/install-addons"
+              className="flex items-center gap-2 text-sm transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
+            >
+              <BookIcon /> How to install addons
+            </Link>
+            <Link
+              href="/docs/addons/writing-addons"
+              className="flex items-center gap-2 text-sm transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
+            >
+              <EditIcon /> Create an addon
+            </Link>
           </div>
         </div>
         <div className="flex-1">
