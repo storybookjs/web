@@ -1,6 +1,6 @@
 'use client';
 
-import Link, { LinkProps } from 'next/link';
+import Link from 'next/link';
 import humanFormat from 'human-format';
 import { AvatarList } from '@repo/ui';
 import { VerifiedBadge } from './verified-badge';
@@ -26,77 +26,6 @@ interface AddonItemProps {
   };
   status?: 'default' | 'essential' | 'deprecated';
 }
-
-const AddonItemWrapper = ({
-  orientation,
-  ...props
-}: {
-  children?: React.ReactNode;
-  orientation?: Orientation;
-}) => <div {...props} />;
-// ${hoverEffect}
-// display: flex;
-// flex-direction: column;
-// padding: ${spacing.padding.medium}px ${spacing.padding.medium}px 0;
-// text-decoration: none;
-// position: relative;
-// background: white;
-
-// @media (min-width: ${breakpoint * 1.5}px) {
-//   padding: ${spacing.padding.medium}px;
-
-//   ${(props) =>
-//     props.orientation === 'horizontal' &&
-//     `
-//       flex-direction: row;
-//       align-items: center;
-//     `}
-// }
-
-const ClickIntercept = (props: LinkProps) => <Link {...props} />;
-// position: absolute;
-// top: 0;
-// left: 0;
-// right: 0;
-// bottom: 0;
-// z-index: 1;
-
-// const Image = ({
-//   isLoading,
-//   orientation,
-//   src,
-//   ...props
-// }: {
-//   children?: React.ReactNode;
-//   isLoading?: boolean;
-//   orientation?: Orientation;
-//   src: string;
-// }) => <div {...props} />;
-// // flex: none;
-// // width: 48px;
-// // height: 48px;
-// // margin-right: ${spacing.padding.medium}px;
-// // background-image: url(${(props: any) => props.src});
-// // background-size: contain;
-// // background-position: center;
-// // background-repeat: no-repeat;
-
-// // ${(props) =>
-// //   props.isLoading &&
-// //   css`
-// //     ${inlineGlow}
-// //   `}
-
-// // @media (min-width: ${breakpoint * 1.5}px) {
-// //   width: 64px;
-// //   height: 64px;
-
-// //   ${(props) =>
-// //     props.orientation === 'vertical' &&
-// //     `
-// //       margin-bottom: 16px;
-// //     `}
-// // }
 
 const Title = ({
   isLoading,
@@ -155,22 +84,6 @@ const AddonInfo = ({
 // align-items: flex-start;
 // word-break: break-word;
 
-// @media (min-width: ${breakpoint * 1.5}px) {
-//   ${(props) =>
-//     props.orientation === 'horizontal' &&
-//     `
-//       align-items: center;
-//       margin-right: ${spacing.padding.large}px;
-//     `}
-
-//   ${(props) =>
-//     props.orientation === 'vertical' &&
-//     `
-//       display: block;
-//       margin-bottom: ${spacing.padding.medium}px;
-//     `}
-// }
-
 const Spacer = (props: any) => <div {...props} />;
 // border-top: 1px solid ${color.border};
 // margin-top: ${spacing.padding.large}px;
@@ -180,18 +93,6 @@ const Spacer = (props: any) => <div {...props} />;
 //   min-width: 0;
 //   margin: 0;
 //   border: 0;
-// }
-
-const Meta = (props: any) => <div {...props} />;
-// display: flex;
-// align-items: center;
-// justify-content: space-between;
-
-// padding-top: 16px;
-// padding-bottom: 16px;
-
-// @media (min-width: ${breakpoint * 1.5}px) {
-//   padding: 0;
 // }
 
 // TODO: https://github.com/storybookjs/design-system/blob/master/src/components/Cardinal.tsx
@@ -220,14 +121,12 @@ export const AddonItem = ({
   ...props
 }: AddonItemProps) => {
   return (
-    <div className={cn('border border-zinc-300')} {...props}>
+    <div className={cn('rounded border border-zinc-300 p-4')} {...props}>
       {!isLoading && <Link href={`/addons/${name}/`} />}
       <AddonInfo orientation={orientation}>
-        {/* <Image
-        orientation={orientation}
-        isLoading={isLoading}
-        src={icon && icon !== '' ? icon : emptySVG}
-      /> */}
+        <div className="relative h-16 w-16">
+          {icon && <Image src={icon} alt="" fill={true} />}
+        </div>
         <div>
           <Title isLoading={isLoading}>
             <span>{isLoading ? 'loading' : displayName || name}</span>

@@ -8,6 +8,16 @@ const nextConfig = {
         hostname: 'www.gravatar.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.githubusercontent.com',
+        port: '',
+      },
     ],
   },
 };
