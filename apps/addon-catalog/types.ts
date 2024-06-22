@@ -58,7 +58,11 @@ interface Tag {
   disabled: boolean | null;
   icon: string | null;
   relatedTags: Tag[] | null;
-}
+  topIntegrations: {
+    addons: Addon[] | null;
+    recipes: Recipe[] | null;
+  } | null;
+};
 
 interface User {
   type: 'User';
