@@ -3,6 +3,7 @@ import { cn, fetchGithubCount } from '@repo/utils';
 import { Nunito_Sans as nunitoSans } from 'next/font/google';
 import { Header, Footer, Container } from '@repo/ui';
 
+import '@docsearch/css';
 import './globals.css';
 import '@repo/ui/styles.css';
 import { Providers } from './providers';
