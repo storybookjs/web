@@ -1,11 +1,7 @@
 import { AddonItem } from '../components/addon-item';
-import { RecipesList } from '../components/recipes-list';
 import { buildTagLinks } from '../lib/build-tag-links';
 import { fetchHomeData } from '../lib/fetch-home-data';
 import { TagList } from '../components/tag-list';
-
-const PopularRecipes = (props: any) => <RecipesList {...props} />;
-// margin-bottom: 3rem;
 
 export default async function Home() {
   const {
@@ -14,13 +10,12 @@ export default async function Home() {
     trendingTags = [],
     vta,
   } = (await fetchHomeData()) || {};
-  // console.log({ popularAddons, popularRecipes, trendingTags, vta })
 
   const tagLinks = buildTagLinks(trendingTags);
 
   return (
     <>
-      <div className="mb-8 mt-12 flex items-start justify-between">
+      <div className="flex items-start justify-between mt-12 mb-8">
         <div>
           <h1 className="mb-4 text-5xl">Integrations</h1>
           <p>
@@ -28,7 +23,7 @@ export default async function Home() {
             advanced features.
           </p>
         </div>
-        <button className="text-md h-12 flex-shrink-0 rounded-full bg-blue-500 px-6 text-white">
+        <button className="flex-shrink-0 h-12 px-6 text-white bg-blue-500 rounded-full text-md">
           Add your integration
         </button>
       </div>
@@ -36,16 +31,18 @@ export default async function Home() {
         <div className="w-[220px] flex-shrink-0">Sidebar</div>
         <div className="flex-1">
           <TagList tagLinks={tagLinks} />
-          <h3 className="mb-6 mt-12 text-2xl font-bold">New to Storybook 8</h3>
+          <h3 className="mt-12 mb-6 text-2xl font-bold">New to Storybook 8</h3>
           {vta && <AddonItem key={vta.id} orientation="horizontal" {...vta} />}
-          <h3 className="mb-6 mt-12 text-2xl font-bold">Popular addons</h3>
+          <h3 className="mt-12 mb-6 text-2xl font-bold">Popular addons</h3>
           <div className="grid grid-cols-3 gap-6">
             {popularAddons.map((addon) => (
               <AddonItem key={addon.id} orientation="vertical" {...addon} />
             ))}
           </div>
-          <h3 className="mb-6 mt-12 text-2xl font-bold">Popular recipes</h3>
-          <PopularRecipes recipeItems={popularRecipes} />
+          <h3 className="mt-12 mb-6 text-2xl font-bold">Popular recipes</h3>
+          {popularRecipes.map((recipe) => (
+            <AddonItem key={recipe.id} orientation="horizontal" {...recipe} />
+          ))}
         </div>
       </div>
     </>

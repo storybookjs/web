@@ -2,18 +2,6 @@ import { ADDON_FRAGMENT, RECIPE_FRAGMENT } from '../constants';
 import { fetchAddonsQuery, gql } from './fetch-addons-query';
 import { validateResponse } from './validate-response';
 
-type Addon = {
-  id: string;
-  repositoryUrl: string;
-  npmUrl: string;
-  tags: Tag[];
-  authors: Author[];
-};
-
-type Recipe = {
-  tags: Tag[];
-};
-
 type AddonsHomeData = {
   popular: {
     addons: Addon[];
