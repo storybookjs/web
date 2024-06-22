@@ -114,7 +114,6 @@ export default async function Home() {
   } = (await fetchHomeData()) || {};
   // console.log({ popularAddons, popularRecipes, trendingTags, vta })
 
-  // const tagLinks = useMemo(() => buildTagLinks(trendingTags), [trendingTags]);
   const tagLinks = buildTagLinks(trendingTags);
 
   return (
