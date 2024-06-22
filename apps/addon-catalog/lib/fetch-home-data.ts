@@ -2,7 +2,7 @@ import { ADDON_FRAGMENT, RECIPE_FRAGMENT } from '../constants';
 import { fetchAddonsQuery, gql } from './fetch-addons-query';
 import { validateResponse } from './validate-response';
 
-type AddonsHomeData = {
+interface AddonsHomeData {
   popular: {
     addons: Addon[];
     recipes: Recipe[];
@@ -10,11 +10,11 @@ type AddonsHomeData = {
   vta: Addon;
 };
 
-type TagWithOccurrence = Tag & { occurrence: number };
+interface TagWithOccurrence extends Tag { occurrence: number };
 
 function createTagOccurrenceHash(...addons: Addon[]) {
   return addons
-    .reduce<Tag[]>((allTags, { tags }) => [...allTags, ...tags], [])
+    .reduce<Tag[]>((allTags, { tags }) => [...allTags, ...(tags || [])], [])
     .filter(({ icon }) => icon === null)
     .reduce<Record<string, TagWithOccurrence>>(
       (hash, tag) => ({

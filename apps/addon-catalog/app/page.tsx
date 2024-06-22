@@ -62,17 +62,17 @@ export default async function Home() {
             <TagList tagLinks={tagLinks} />
           </div>
           <h3 className="mt-12 mb-8 text-2xl font-bold">New to Storybook 8</h3>
-          {vta && <Preview key={vta.id} orientation="horizontal" {...vta} />}
+          {vta && <Preview key={vta.name} orientation="horizontal" {...vta} />}
           <h3 className="mt-12 mb-8 text-2xl font-bold">Popular addons</h3>
           <div className="grid grid-cols-3 gap-6">
             {popularAddons.map((addon) => (
-              <Preview key={addon.id} orientation="vertical" {...addon} />
+              <Preview key={addon.name} orientation="vertical" {...addon} />
             ))}
           </div>
           <h3 className="mt-12 mb-8 text-2xl font-bold">Popular recipes</h3>
           <div className="flex flex-col gap-6">
             {popularRecipes.slice(0, 6).map((recipe) => (
-              <Preview key={recipe.id} orientation="horizontal" {...recipe} />
+              <Preview key={recipe.name} orientation="horizontal" {...recipe} />
             ))}
           </div>
         </div>

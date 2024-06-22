@@ -4,33 +4,29 @@ import Image from 'next/image';
 import { VerifiedIcon } from '@storybook/icons';
 import Link from 'next/link';
 
-interface AddonItemProps {
-  icon?: string;
-  name?: string;
-  displayName?: string;
-  description?: string;
-  weeklyDownloads?: number;
-  authors: Author[];
-  orientation?: 'vertical' | 'horizontal';
-  appearance?: 'official' | 'integrators' | 'community';
-  verifiedCreator?: string;
+interface AddonItemProps
+  extends Pick<
+      Addon,
+      'name' | 'authors' | 'description' | 'displayName' | 'icon' | 'status'
+    >,
+    Partial<Pick<Addon, 'verified' | 'verifiedCreator' | 'weeklyDownloads'>> {
   from?: {
     title?: string;
     link?: string;
   };
-  status?: 'default' | 'essential' | 'deprecated';
+  orientation?: 'vertical' | 'horizontal';
 }
 
 export const Preview = ({
+  authors,
+  description,
+  displayName,
   icon,
   name,
-  description,
-  weeklyDownloads,
-  authors,
-  appearance,
-  displayName,
   orientation,
   status,
+  verified,
+  weeklyDownloads,
 }: AddonItemProps) => {
   return (
     <Link
@@ -50,14 +46,14 @@ export const Preview = ({
             : 'mb-8 flex-col gap-4',
         )}
       >
-        <div className="relative w-16 h-16">
+        <div className="relative h-16 w-16">
           {icon && <Image src={icon} alt="" fill={true} />}
         </div>
         <div>
           <div className="flex items-center gap-2">
             <div className="font-bold">{displayName ?? name}</div>
-            {appearance &&
-              ['official', 'integrators'].includes(appearance) &&
+            {verified &&
+              ['official', 'integrators'].includes(verified) &&
               status !== 'deprecated' && (
                 <VerifiedIcon className="text-blue-500" />
               )}
@@ -79,13 +75,13 @@ export const Preview = ({
           <div className="flex items-center">
             {authors.slice(0, 3).map((author) => (
               <div
-                key={author.id}
-                className="relative w-8 h-8 -ml-2 overflow-hidden rounded-full"
+                key={author.username}
+                className="relative -ml-2 h-8 w-8 overflow-hidden rounded-full"
               >
-                {author.avatarUrl && (
+                {author.gravatarUrl && (
                   <Image
-                    src={`https:${author.avatarUrl}`}
-                    alt={author.name || ''}
+                    src={`https:${author.gravatarUrl}`}
+                    alt={author.username || ''}
                     fill={true}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />

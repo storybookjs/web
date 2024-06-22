@@ -1,32 +1,30 @@
 export const ADDON_FRAGMENT = `
   type: __typename
-  id: name
   name
   displayName
   description
   icon
   authors {
-    id: username
-    avatarUrl: gravatarUrl
-    name: username
+    username
+    gravatarUrl
+    username
   }
   weeklyDownloads
-  appearance: verified
+  verified
   verifiedCreator
 `;
 
 export const RECIPE_FRAGMENT = `
   type: __typename
-  id: name
   name
   displayName
   description
   icon
   accentColor
   authors {
-    id: username
-    avatarUrl: gravatarUrl
-    name: username
+    username
+    gravatarUrl
+    username
   }
-  views: weeklyViews
+  weeklyViews
 `;
