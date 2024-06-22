@@ -2,7 +2,7 @@ import { GraphQLClient } from 'graphql-request';
 
 export { gql } from 'graphql-request';
 
-const client = new GraphQLClient(process.env.ADDONS_API_ENDPOINT || '');
+const client = new GraphQLClient(process.env.NEXT_PUBLIC_ADDONS_API_ENDPOINT || '');
 
 export async function fetchAddonsQuery<
   D,
