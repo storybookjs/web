@@ -54,7 +54,7 @@ export default async function Home() {
           <div className="flex items-center py-2 mt-10 text-sm font-bold">
             Categories
           </div>
-          <ul className="pb-8 -ml-2 border-b border-b-zinc-300">
+          <ul className="pb-6 -ml-2 border-b border-b-zinc-300">
             {categories.map(({ name, href }) => (
               <li key={name}>
                 <a
