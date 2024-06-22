@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { Pill } from '@repo/ui';
 
 interface TagProps {
   name: string;
@@ -19,7 +20,7 @@ export const TagList = ({ tagLinks }: TagListProps) => {
   const moreTags = tagLinks.slice(6);
 
   return (
-    <div className="flex flex-row items-center gap-2">
+    <div className="flex max-w-[800px] flex-row flex-wrap items-center gap-2">
       {primaryTags.map(({ name, link }) => (
         <TagItem key={link} name={name} link={link} />
       ))}
@@ -33,6 +34,7 @@ export const TagList = ({ tagLinks }: TagListProps) => {
             setMoreTagsVisible(true);
           }}
           type="button"
+          className="text-sm transition-colors hover:text-blue-500"
         >
           {`+ ${moreTags.length} more`}
         </button>
@@ -42,10 +44,7 @@ export const TagList = ({ tagLinks }: TagListProps) => {
 };
 
 const TagItem = ({ name, link }: TagProps) => (
-  <Link
-    href={link}
-    className="flex h-7 items-center justify-center rounded bg-blue-100 px-2"
-  >
-    {name}
-  </Link>
+  <Pill asChild>
+    <Link href={link}>{name}</Link>
+  </Pill>
 );
