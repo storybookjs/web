@@ -28,7 +28,7 @@ export const Pill = ({
         active &&
           'ui-border-blue-500 ui-text-blue-500 dark:ui-border-blue-500 dark:ui-text-blue-500',
         !active &&
-          'ui-dark:border-slate-700 dark:ui-text-slate-500 dark:hover:ui-border-slate-500',
+          'dark:ui-border-slate-700 dark:ui-text-slate-500 dark:hover:ui-border-slate-500 dark:hover:ui-text-slate-500',
       )}
       onClick={onClick}
       {...props}

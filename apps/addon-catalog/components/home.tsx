@@ -37,10 +37,10 @@ export const Home = ({
   return (
     <div className="mb-24">
       <div className="mb-12 flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
-        <div className="relative flex h-10 w-full flex-shrink-0 items-center rounded-full border border-zinc-300 md:w-[250px]">
-          <SearchIcon className="absolute left-4" />
+        <div className="relative flex h-10 w-full flex-shrink-0 items-center rounded-full border border-zinc-300 md:w-[250px] dark:border-slate-700">
+          <SearchIcon className="absolute left-4 dark:text-slate-500" />
           <input
-            className="h-full w-full rounded-full pl-10"
+            className="h-full w-full rounded-full bg-transparent pl-10 placeholder:text-slate-500"
             placeholder="Search integrations"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -55,7 +55,7 @@ export const Home = ({
             <div className="flex items-center py-2 text-sm font-bold">
               Categories
             </div>
-            <ul className="-ml-2 border-b border-b-zinc-300 pb-6">
+            <ul className="-ml-2 border-b border-b-zinc-300 pb-6 dark:border-b-slate-700">
               {categories.map(({ name, href }) => (
                 <li key={name}>
                   <a
