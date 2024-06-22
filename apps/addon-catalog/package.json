@@ -13,6 +13,7 @@
   "dependencies": {
     "@docsearch/css": "^3.6.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@repo/ui": "*",
     "@storybook/icons": "^1.2.9",
     "graphql-request": "^7.1.0",
     "human-format": "^1.2.0",
