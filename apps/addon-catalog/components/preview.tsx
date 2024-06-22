@@ -21,7 +21,7 @@ interface AddonItemProps {
   status?: 'default' | 'essential' | 'deprecated';
 }
 
-export const AddonItem = ({
+export const Preview = ({
   icon,
   name,
   description,
@@ -50,7 +50,7 @@ export const AddonItem = ({
             : 'mb-8 flex-col gap-4',
         )}
       >
-        <div className="relative h-16 w-16">
+        <div className="relative w-16 h-16">
           {icon && <Image src={icon} alt="" fill={true} />}
         </div>
         <div>
@@ -80,7 +80,7 @@ export const AddonItem = ({
             {authors.slice(0, 3).map((author) => (
               <div
                 key={author.id}
-                className="relative -ml-2 h-8 w-8 overflow-hidden rounded-full"
+                className="relative w-8 h-8 -ml-2 overflow-hidden rounded-full"
               >
                 {author.avatarUrl && (
                   <Image

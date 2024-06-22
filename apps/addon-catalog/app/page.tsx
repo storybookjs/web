@@ -1,4 +1,4 @@
-import { AddonItem } from '../components/addon-item';
+import { Preview } from '../components/preview';
 import { buildTagLinks } from '../lib/build-tag-links';
 import { fetchHomeData } from '../lib/fetch-home-data';
 import { TagList } from '../components/tag-list';
@@ -27,22 +27,24 @@ export default async function Home() {
           Add your integration
         </button>
       </div>
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col mb-24 md:flex-row">
         <div className="w-[220px] flex-shrink-0">Sidebar</div>
         <div className="flex-1">
           <TagList tagLinks={tagLinks} />
-          <h3 className="mt-12 mb-6 text-2xl font-bold">New to Storybook 8</h3>
-          {vta && <AddonItem key={vta.id} orientation="horizontal" {...vta} />}
-          <h3 className="mt-12 mb-6 text-2xl font-bold">Popular addons</h3>
+          <h3 className="mt-12 mb-8 text-2xl font-bold">New to Storybook 8</h3>
+          {vta && <Preview key={vta.id} orientation="horizontal" {...vta} />}
+          <h3 className="mt-12 mb-8 text-2xl font-bold">Popular addons</h3>
           <div className="grid grid-cols-3 gap-6">
             {popularAddons.map((addon) => (
-              <AddonItem key={addon.id} orientation="vertical" {...addon} />
+              <Preview key={addon.id} orientation="vertical" {...addon} />
             ))}
           </div>
-          <h3 className="mt-12 mb-6 text-2xl font-bold">Popular recipes</h3>
-          {popularRecipes.map((recipe) => (
-            <AddonItem key={recipe.id} orientation="horizontal" {...recipe} />
-          ))}
+          <h3 className="mt-12 mb-8 text-2xl font-bold">Popular recipes</h3>
+          <div className="flex flex-col gap-6">
+            {popularRecipes.slice(0, 6).map((recipe) => (
+              <Preview key={recipe.id} orientation="horizontal" {...recipe} />
+            ))}
+          </div>
         </div>
       </div>
     </>
