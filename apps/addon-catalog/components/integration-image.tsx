@@ -1,5 +1,4 @@
-import { AspectRatio, Icon } from '@repo/ui';
-import { Component, ComponentProps } from 'react';
+import { ComponentProps } from 'react';
 
 const ConnectorSVG = (props: any) => <svg {...props} />;
 // margin-left: -1px;
@@ -59,13 +58,13 @@ const IntegrationIcon = (props: { image: string }) => <div {...props} />;
 // background-repeat: no-repeat;
 // background-size: contain;
 
-const Integration = (
-  props: ComponentProps<typeof AspectRatio> & {
-    accent: string;
-    icon: string;
-    hideDropShadow?: boolean;
-  },
-) => <AspectRatio {...props} />;
+// const Integration = (
+//   props: ComponentProps<typeof AspectRatio> & {
+//     accent: string;
+//     icon: string;
+//     hideDropShadow?: boolean;
+//   },
+// ) => <AspectRatio {...props} />;
 // width: 40px;
 // height: 40px;
 // background-color: ${({ accent }) => accent};
@@ -120,26 +119,16 @@ export const IntegrationImage = ({
     <Container>
       {withConnector && (
         <>
-          <Integration
-            ratio="1/1"
-            accent="#FF4785"
-            icon={icon}
-            hideDropShadow={hideDropShadow}
-          >
-            <Icon icon="storybook" />
+          <div>
+            {/* <Icon icon="storybook" /> */}
             <Circle />
-          </Integration>
+          </div>
           <Connector />
         </>
       )}
-      <Integration
-        ratio="1/1"
-        accent={accent}
-        icon={icon}
-        hideDropShadow={hideDropShadow}
-      >
+      <div>
         <IntegrationIcon image={icon} />
-      </Integration>
+      </div>
       <Title>{name}</Title>
     </Container>
   );
