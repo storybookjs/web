@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/addons",
+      "destination": "https://web-addon-catalog.vercel.app/addons"
+    },
+    {
       "source": "/addons/:match*",
       "destination": "https://web-addon-catalog.vercel.app/addons/:match*"
     },
