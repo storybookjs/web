@@ -1,7 +1,7 @@
 type Appearance = 'official' | 'integrator' | 'community';
 
 interface Addon {
-  type: 'Addon',
+  type: 'Addon';
   name: string;
   authors: User[] | null;
   compatibility: Framework[] | null;
@@ -16,18 +16,19 @@ interface Addon {
   publishedAt: number | null;
   readme: string | null;
   repositoryUrl: string | null;
-  status: Status | null,
+  status: Status | null;
   tags: Tag[] | null;
   verified: Verified | null;
   verifiedCreator: string | null;
   weeklyDownloads: number | null;
   yearlyDownloads: number | null;
-};
+}
 
-interface Framework extends Pick<Tag, 'description' | 'displayName' | 'icon' | 'name'> {}
+interface Framework
+  extends Pick<Tag, 'description' | 'displayName' | 'icon' | 'name'> {}
 
 interface Recipe {
-  type: 'Recipe',
+  type: 'Recipe';
   name: string;
   accentColor: string | null;
   addons: Addon[] | null;
@@ -39,17 +40,17 @@ interface Recipe {
   monthlyViews: number | null;
   publishedAt: number | null;
   publisher: User | null;
-  status: Status | null,
+  status: Status | null;
   tags: Tag[] | null;
   updatedAt: number | null;
   weeklyViews: number | null;
   yearlyViews: number | null;
-};
+}
 
 type Status = 'default' | 'essential' | 'deprecated';
 
 interface Tag {
-  type: 'Tag',
+  type: 'Tag';
   // displayName is nullable in the GraphQL schema, but buildTagLinks implies it's always available
   displayName: string;
   name: string;
@@ -57,13 +58,18 @@ interface Tag {
   disabled: boolean | null;
   icon: string | null;
   relatedTags: Tag[] | null;
-};
+}
 
 interface User {
-  type: 'User',
+  type: 'User';
   username: string;
   email: string | null;
   gravatarUrl: string | null;
 }
 
 type Verified = 'integrators' | 'official';
+
+interface TagLinkType {
+  link: string;
+  name: string;
+}

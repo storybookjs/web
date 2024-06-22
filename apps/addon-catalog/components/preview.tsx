@@ -32,21 +32,21 @@ export const Preview = ({
     <Link
       href={`/${name}`}
       className={cn(
-        'flex rounded border border-zinc-300 p-6 transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:border-blue-500',
+        'flex justify-between rounded border border-zinc-300 p-6 transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:border-blue-500',
         orientation === 'horizontal'
-          ? 'flex-row justify-between'
-          : 'flex-col justify-between',
+          ? 'flex-col lg:flex-row lg:gap-8'
+          : 'flex-col',
       )}
     >
       <div
         className={cn(
-          'flex',
+          'flex gap-4',
           orientation === 'horizontal'
-            ? 'flex-row items-center gap-4'
-            : 'mb-8 flex-col gap-4',
+            ? 'mb-8 flex-col lg:mb-0 lg:flex-row lg:items-center'
+            : 'mb-8 flex-col',
         )}
       >
-        <div className="relative h-16 w-16">
+        <div className="relative h-16 w-16 flex-shrink-0">
           {icon && <Image src={icon} alt="" fill={true} />}
         </div>
         <div>
@@ -61,7 +61,7 @@ export const Preview = ({
           <div className="">{description}</div>
         </div>
       </div>
-      <div className={cn('flex items-center justify-between gap-12')}>
+      <div className="flex flex-shrink-0 items-center justify-between gap-12">
         <div className="flex flex-col">
           <div className="font-bold">
             {humanFormat(weeklyDownloads || 0, {
