@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface TagItemProps {
   children?: React.ReactNode;
   isLoading?: boolean;
@@ -11,6 +9,7 @@ function randomString(min: number, max: number): string {
     .toString(36)
     .slice(1);
 }
+
 export const TagItem = ({ isLoading, children, ...rest }: TagItemProps) => (
   <div {...rest} {...(isLoading && { 'aria-label': 'Loading tag' })}>
     {isLoading ? randomString(5, 12) : children}

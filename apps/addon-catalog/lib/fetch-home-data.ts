@@ -2,19 +2,12 @@ import { ADDON_FRAGMENT, RECIPE_FRAGMENT } from '../constants';
 import { fetchAddonsQuery, gql } from './fetch-addons-query';
 import { validateResponse } from './validate-response';
 
-// TODO: Better place for these types
-type Tag = {
-  name: string;
-  displayName: string;
-  description: string;
-  icon: string;
-};
-
 type Addon = {
   id: string;
   repositoryUrl: string;
   npmUrl: string;
   tags: Tag[];
+  authors: Author[];
 };
 
 type Recipe = {

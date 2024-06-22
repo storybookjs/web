@@ -40,10 +40,6 @@ export const AddonsGrid = ({
   ...props
 }: AddonsGridProps) => (
   <section>
-    <SectionHeader>
-      <Title>{title}</Title>
-      {actions}
-    </SectionHeader>
     <Grid {...props}>
       {addonItems.map((addon) => (
         <AddonItem
