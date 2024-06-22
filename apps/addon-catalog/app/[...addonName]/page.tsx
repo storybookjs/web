@@ -9,7 +9,7 @@ interface AddonDetailsProps {
 
 export async function generateStaticParams() {
   const addons = await fetchAddonsData() || [];
-  return addons.map((name) => ({ params: { name: name.split('/') } }));
+  return addons.map((name) => ({ params: { addonName: name.split('/') } }));
 }
 
 export default async function AddonDetails({ params }: AddonDetailsProps) {
