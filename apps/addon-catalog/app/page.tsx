@@ -39,7 +39,7 @@ export default async function Home() {
           <h3 className="mb-4 mt-12 text-2xl">New to Storybook 8</h3>
           {vta && <AddonItem key={vta.id} orientation="horizontal" {...vta} />}
           <h3 className="mb-4 mt-12 text-2xl">Popular addons</h3>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-6">
             {popularAddons.map((addon) => (
               <AddonItem key={addon.id} orientation="vertical" {...addon} />
             ))}

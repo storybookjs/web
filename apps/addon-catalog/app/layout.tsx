@@ -5,6 +5,7 @@ import { Header, Footer, Container } from '@repo/ui';
 
 import './globals.css';
 import '@repo/ui/styles.css';
+import { Providers } from './providers';
 
 const fontSans = nunitoSans({
   subsets: ['latin'],
@@ -36,7 +37,9 @@ export default async function RootLayout({
           algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
           githubCount={githubCount}
         />
-        <Container>{children}</Container>
+        <Providers>
+          <Container>{children}</Container>
+        </Providers>
         <Footer />
       </body>
     </html>

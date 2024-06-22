@@ -1,13 +1,7 @@
-'use client';
-
-import Link from 'next/link';
 import humanFormat from 'human-format';
-import { AvatarList } from '@repo/ui';
-import { VerifiedBadge } from './verified-badge';
 import { cn } from '@repo/utils';
 import Image from 'next/image';
-
-type Orientation = 'vertical' | 'horizontal';
+import { VerifiedIcon } from '@storybook/icons';
 
 interface AddonItemProps {
   icon?: string;
@@ -16,9 +10,8 @@ interface AddonItemProps {
   description?: string;
   weeklyDownloads?: number;
   authors: Author[];
-  orientation?: Orientation;
+  orientation?: 'vertical' | 'horizontal';
   appearance?: 'official' | 'integrators' | 'community';
-  isLoading?: boolean;
   verifiedCreator?: string;
   from?: {
     title?: string;
@@ -27,141 +20,44 @@ interface AddonItemProps {
   status?: 'default' | 'essential' | 'deprecated';
 }
 
-const Title = ({
-  isLoading,
-  ...props
-}: {
-  children?: React.ReactNode;
-  isLoading?: boolean;
-}) => <div {...props} />;
-// font-weight: ${typography.weight.bold};
-// font-size: ${typography.size.s3}px;
-// line-height: ${typography.size.m2}px;
-// color: ${color.darker};
-// display: flex;
-// align-items: center;
-// position: relative;
-
-// ${(props) =>
-//   props.isLoading &&
-//   css`
-//     line-height: ${typography.size.m1}px;
-//     span {
-//       ${inlineGlow}
-//       margin-bottom: 8px;
-//     }
-//   `}
-
-const Description = ({
-  isLoading,
-  ...props
-}: {
-  children?: React.ReactNode;
-  isLoading?: boolean;
-}) => <div {...props} />;
-// font-size: ${typography.size.s2}px;
-// line-height: ${typography.size.m1}px;
-// color: ${color.darkest};
-// position: relative;
-
-// ${(props) =>
-//   props.isLoading &&
-//   css`
-//     line-height: ${typography.size.s3}px;
-//     span {
-//       ${inlineGlow}
-//     }
-//   `}
-
-const AddonInfo = ({
-  orientation,
-  ...props
-}: {
-  children?: React.ReactNode;
-  orientation?: Orientation;
-}) => <div {...props} />;
-// display: flex;
-// align-items: flex-start;
-// word-break: break-word;
-
-const Spacer = (props: any) => <div {...props} />;
-// border-top: 1px solid ${color.border};
-// margin-top: ${spacing.padding.large}px;
-
-// @media (min-width: ${breakpoint * 1.5}px) {
-//   flex: 1 1 auto;
-//   min-width: 0;
-//   margin: 0;
-//   border: 0;
-// }
-
-// TODO: https://github.com/storybookjs/design-system/blob/master/src/components/Cardinal.tsx
-const Cardinal = (props: any) => <div {...props} />;
-
-const Stats = (props: any) => <Cardinal {...props} />;
-// padding: 0;
-// margin-right: ${spacing.padding.large}px;
-
-const Authors = (props: any) => <AvatarList {...props} />;
-// min-width: 95.5px;
-
 export const AddonItem = ({
   icon,
   name,
-  displayName,
   description,
   weeklyDownloads,
   authors,
-  orientation,
   appearance,
-  isLoading,
-  verifiedCreator,
-  from,
+  displayName,
   status,
-  ...props
 }: AddonItemProps) => {
   return (
-    <div className={cn('rounded border border-zinc-300 p-4')} {...props}>
-      {!isLoading && <Link href={`/addons/${name}/`} />}
-      <AddonInfo orientation={orientation}>
-        <div className="relative h-16 w-16">
+    <div className={cn('rounded border border-zinc-300 p-6')}>
+      <div>
+        <div className="relative mb-4 h-16 w-16">
           {icon && <Image src={icon} alt="" fill={true} />}
         </div>
         <div>
-          <Title isLoading={isLoading}>
-            <span>{isLoading ? 'loading' : displayName || name}</span>
+          <div className="flex items-center gap-2">
+            <div className="font-bold">{displayName ?? name}</div>
             {appearance &&
               ['official', 'integrators'].includes(appearance) &&
               status !== 'deprecated' && (
-                <VerifiedBadge
-                  appearance={appearance}
-                  creator={verifiedCreator}
-                />
+                <VerifiedIcon className="text-blue-500" />
               )}
-          </Title>
-          <Description isLoading={isLoading}>
-            <span>
-              {isLoading ? 'loading description of addon' : description}
-            </span>
-          </Description>
+          </div>
+          <div className="mb-8">{description}</div>
         </div>
-      </AddonInfo>
-      <Spacer />
-      <div className={cn('flex')}>
-        <Stats
-          size="small"
-          count={
-            isLoading
-              ? undefined
-              : humanFormat(weeklyDownloads || 0, {
-                  decimals: 1,
-                  separator: '',
-                })
-          }
-          text={isLoading ? undefined : 'Downloads'}
-          noPlural
-          isLoading={isLoading}
-        />
+      </div>
+      <div className={cn('flex items-center justify-between')}>
+        <div className="flex flex-col">
+          <div className="font-bold">
+            {humanFormat(weeklyDownloads || 0, {
+              decimals: 1,
+              separator: '',
+            })}
+          </div>
+          <div className="text-xs text-zinc-600">Downloads</div>
+        </div>
         <div className="flex items-center">
           {authors?.slice(0, 3).map((author) => (
             <div

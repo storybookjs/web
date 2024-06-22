@@ -2,10 +2,8 @@ import { ComponentProps } from 'react';
 import humanFormat from 'human-format';
 import Link from 'next/link';
 
-import { AvatarList } from '@repo/ui';
 import emptySVG from '../images/recipe-empty.svg';
 import { IntegrationImage } from './integration-image';
-import { VerifiedBadge } from './verified-badge';
 
 type Orientation = 'vertical' | 'horizontal';
 
@@ -213,9 +211,6 @@ const Stats = (props: any) => <Cardinal {...props} />;
 // margin-right: ${spacing.padding.large}px;
 // min-width: 72px;
 
-const Authors = (props: any) => <AvatarList {...props} />;
-// min-width: 95.5px;
-
 export const RecipeItem = ({
   icon = emptySVG,
   accentColor = '#ca8fff',
@@ -251,7 +246,7 @@ export const RecipeItem = ({
         <Title isLoading={isLoading}>
           <span>
             {isLoading ? 'loading' : `How to setup ${displayName || name}`}
-            {!isLoading && <VerifiedBadge appearance="official" />}
+            {/* {!isLoading && <VerifiedBadge appearance="official" />} */}
           </span>
         </Title>
         <Description isLoading={isLoading}>
@@ -277,10 +272,10 @@ export const RecipeItem = ({
         noPlural
         isLoading={isLoading}
       />
-      <Authors
+      {/* <Authors
         users={isLoading ? undefined : authors || []}
         isLoading={isLoading}
-      />
+      /> */}
     </Meta>
   </RecipeItemWrapper>
 );
