@@ -1,9 +1,6 @@
-import { Preview } from '../components/preview';
 import { buildTagLinks } from '../lib/build-tag-links';
 import { fetchHomeData } from '../lib/fetch-home-data';
-import { TagList } from '../components/tag-list';
-import { BookIcon, EditIcon, PlusIcon, SearchIcon } from '@storybook/icons';
-import Link from 'next/link';
+import { PlusIcon } from '@storybook/icons';
 import { Home } from '../components/home';
 
 export default async function Page() {

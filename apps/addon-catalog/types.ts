@@ -1,33 +1,32 @@
-declare module 'rehype-urls'
+declare module 'rehype-urls';
 
 type Appearance = 'official' | 'integrator' | 'community';
 
 interface Addon {
-  type: 'Addon';
-  name: string;
-  authors: User[] | null;
-  compatibility: Framework[] | null;
-  description: string | null;
-  disabled: boolean | null;
-  displayName: string | null;
-  downloadsAcceleration: number | null;
-  homepageUrl: string | null;
-  icon: string | null;
-  monthlyDownloads: number | null;
-  npmUrl: string | null;
-  publishedAt: number | null;
-  readme: string | null;
-  repositoryUrl: string | null;
-  status: Status | null;
-  tags: Tag[] | null;
-  verified: Verified | null;
-  verifiedCreator: string | null;
-  weeklyDownloads: number | null;
-  yearlyDownloads: number | null;
+  type?: 'Addon';
+  name?: string;
+  authors?: User[] | null;
+  compatibility?: Framework[] | null;
+  description?: string | null;
+  disabled?: boolean | null;
+  displayName?: string | null;
+  downloadsAcceleration?: number | null;
+  homepageUrl?: string | null;
+  icon?: string | null;
+  monthlyDownloads?: number | null;
+  npmUrl?: string | null;
+  publishedAt?: number | null;
+  readme?: string | null;
+  repositoryUrl?: string | null;
+  status?: Status | null;
+  tags?: Tag[] | null;
+  verified?: Verified | null;
+  verifiedCreator?: string | null;
+  weeklyDownloads?: number | null;
+  yearlyDownloads?: number | null;
 }
 
-interface Framework
-  extends Pick<Tag, 'description' | 'displayName' | 'icon' | 'name'> {}
+interface Framework extends Pick<Tag, 'displayName' | 'icon' | 'name'> {}
 
 interface Recipe {
   type: 'Recipe';
@@ -52,24 +51,25 @@ interface Recipe {
 type Status = 'default' | 'essential' | 'deprecated';
 
 interface Tag {
-  type: 'Tag';
+  type?: 'Tag';
   // displayName is nullable in the GraphQL schema, but buildTagLinks implies it's always available
-  displayName: string;
+  displayName?: string;
   name: string;
-  description: string | null;
-  disabled: boolean | null;
-  icon: string | null;
-  relatedTags: Tag[] | null;
-  topIntegrations: {
+  description?: string | null;
+  disabled?: boolean | null;
+  icon?: string | null;
+  relatedTags?: Tag[] | null;
+  topIntegrations?: {
     addons: Addon[] | null;
     recipes: Recipe[] | null;
   } | null;
-};
+  link?: string;
+}
 
 interface User {
-  type: 'User';
+  type?: 'User';
   username: string;
-  email: string | null;
+  email?: string | null;
   gravatarUrl: string | null;
 }
 
