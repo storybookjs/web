@@ -76,7 +76,7 @@ export async function fetchTagsData({
     return await fetchPartialData();
   } catch (error) {
     // @ts-expect-error - Seems safe
-    throw new Error(`Failed to fetch addons data: ${error.message}`);
+    throw new Error(`Failed to fetch tags data: ${error.message}`);
   }
 }
 
