@@ -21,6 +21,7 @@
     "graphql-request": "^7.1.0",
     "human-format": "^1.2.0",
     "next": "14.2.4",
+    "next-mdx-remote": "^5.0.0",
     "react": "^18",
     "react-dom": "^18",
     "rehype": "^13.0.1",

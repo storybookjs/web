@@ -1,11 +1,12 @@
-// import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
-// import { fetchAddonsData } from '../../lib/fetch-addons-data';
+import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
+import { fetchAddonsData } from '../../lib/fetch-addons-data';
 import { ArrowLeftIcon } from '@storybook/icons';
 import Link from 'next/link';
 import { fakeAddon } from '../../components/fake-addon';
 import { AddonHero } from '../../components/addon/addon-hero';
 import { AddonReadme } from '../../components/addon/addon-readme';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
+import { MDXRemote } from 'next-mdx-remote';
 
 interface AddonDetailsProps {
   params: {
@@ -20,13 +21,15 @@ interface AddonDetailsProps {
 
 export default async function AddonDetails({ params }: AddonDetailsProps) {
   // TODO: Better decoding?
-  // const name = params.addonName.join('/').replace('%40', '@');
-  // const addon = await fetchAddonDetailsData(name);
-  const addon = fakeAddon;
+  const name = params.addonName.join('/').replace('%40', '@');
+  const addon = await fetchAddonDetailsData(name);
+  // const addon = fakeAddon;
 
   if (!addon) {
     return <div>Not found</div>;
   }
+
+  console.log(addon.readme);
 
   return (
     <main className="mb-20 mt-8">

@@ -8,27 +8,30 @@ interface AddonsData {
   addons: Addon[];
 }
 
-interface AddonValue extends Pick<
-  Addon,
-  | 'name'
-  | 'displayName'
-  | 'description'
-  | 'icon'
-  | 'authors'
-  | 'weeklyDownloads'
-  | 'verified'
-  | 'verifiedCreator'
-  | 'tags'
-  | 'compatibility'
-  | 'status'
-  | 'readme'
-  | 'publishedAt'
-  | 'repositoryUrl'
-  | 'homepageUrl'
-  | 'npmUrl'
-> {}
+interface AddonValue
+  extends Pick<
+    Addon,
+    | 'name'
+    | 'displayName'
+    | 'description'
+    | 'icon'
+    | 'authors'
+    | 'weeklyDownloads'
+    | 'verified'
+    | 'verifiedCreator'
+    | 'tags'
+    | 'compatibility'
+    | 'status'
+    | 'readme'
+    | 'publishedAt'
+    | 'repositoryUrl'
+    | 'homepageUrl'
+    | 'npmUrl'
+  > {}
 
-function createAddonBaseLink(addon: Pick<Addon, 'repositoryUrl' | 'npmUrl'>): string {
+function createAddonBaseLink(
+  addon: Pick<Addon, 'repositoryUrl' | 'npmUrl'>,
+): string {
   return `${addon.repositoryUrl || addon.npmUrl}/`;
 }
 
@@ -92,7 +95,7 @@ export async function GET(
 ) {
   // TODO: Better decoding?
   const name = params.name.join('/').replace('%40', '@');
-  
+
   let addon: AddonValue | undefined;
   try {
     // TODO: Cache this data
@@ -120,6 +123,7 @@ export async function GET(
   return Response.json({
     ...restAddon,
     tags: tags ? buildTagLinks(tags) : [],
-    readme: readme ? processor.processSync(readme).toString() : null,
+    // readme: readme ? processor.processSync(readme).toString() : null,
+    readme,
   });
 }
