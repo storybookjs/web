@@ -1,4 +1,4 @@
-import { basePath, host } from '../next.config.mjs';
+import { basePath, host } from '../constants';
 
 export async function fetchTagDetailsData(name: string): Promise<Tag | null> {
   let tag: Tag | null = null;

@@ -1,14 +1,10 @@
 import fs from 'node:fs';
+import path from 'node:path';
 import withMDX from '@next/mdx';
 
-export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
-const vercelUrl = process.env.VERCEL_URL || process.env.VERCEL_BRANCH_URL;
-export const host = vercelUrl
-  ? `https://${vercelUrl}`
-  : 'http://localhost:3001';
-
-const RECIPES_FOLDER = './app/recipes';
+const RECIPES_FOLDER = new URL('./app/recipes', import.meta.url).pathname;
 
 /**
  * Rewrites for recipes for namespaced packages
