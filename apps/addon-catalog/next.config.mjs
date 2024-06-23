@@ -56,6 +56,15 @@ const nextConfig = withMDX()({
     ],
   },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  async redirects() {
+    return [
+      {
+        source: '/recipes',
+        destination: '/',
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     return [...recipeForNamespacedPackageRewrites];
   },
