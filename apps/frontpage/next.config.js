@@ -306,27 +306,6 @@ module.exports = {
         destination: '/docs/addons/writing-presets',
         permanent: true,
       },
-      /* Addons */
-      {
-        source: '/addons/addon-gallery',
-        destination: '/integrations',
-        permanent: true,
-      },
-      {
-        source: '/addons',
-        destination: '/integrations',
-        permanent: true,
-      },
-      {
-        source: '/recipes',
-        destination: '/integrations',
-        permanent: true,
-      },
-      {
-        source: '/addons/tags/:tag',
-        destination: '/integrations/tag/:tag',
-        permanent: true,
-      },
       ...renderers.map((r) => ({
         source: `/docs${r}/get-started/examples`,
         destination: '/showcase',
