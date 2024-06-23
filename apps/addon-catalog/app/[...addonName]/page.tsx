@@ -13,10 +13,10 @@ interface AddonDetailsProps {
   };
 }
 
-export async function generateStaticParams() {
-  const addons = (await fetchAddonsData()) || [];
-  return addons.map((name) => ({ params: { addonName: name?.split('/') } }));
-}
+// export async function generateStaticParams() {
+//   const addons = (await fetchAddonsData()) || [];
+//   return addons.map((name) => ({ params: { addonName: name?.split('/') } }));
+// }
 
 export default async function AddonDetails({ params }: AddonDetailsProps) {
   // TODO: Better decoding?
@@ -30,7 +30,7 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
 
   return (
     <main className="mb-20 mt-8">
-      <div className="mb-8">
+      <div className="mb-16">
         <Link
           href="/integrations"
           className="flex items-center gap-2 transition-colors hover:text-blue-500"
