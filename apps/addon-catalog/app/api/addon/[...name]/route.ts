@@ -1,6 +1,5 @@
 import { ADDON_FRAGMENT } from '../../../../constants';
 import { buildTagLinks } from '../../../../lib/build-tag-links';
-import { createMarkdownProcessor } from '../../../../lib/create-markdown-processor';
 import { fetchAddonsQuery, gql } from '../../../../lib/fetch-addons-query';
 import { validateResponse } from '../../../../lib/validate-response';
 
@@ -28,12 +27,6 @@ interface AddonValue
     | 'homepageUrl'
     | 'npmUrl'
   > {}
-
-function createAddonBaseLink(
-  addon: Pick<Addon, 'repositoryUrl' | 'npmUrl'>,
-): string {
-  return `${addon.repositoryUrl || addon.npmUrl}/`;
-}
 
 async function fetchAddonsData(): Promise<AddonValue[] | null> {
   let value: AddonValue[] | null = null;
@@ -115,15 +108,10 @@ export async function GET(
     });
   }
 
-  const { readme, tags, ...restAddon } = addon;
-
-  const baseLink = createAddonBaseLink(restAddon);
-  const processor = createMarkdownProcessor(baseLink);
+  const { tags, ...restAddon } = addon;
 
   return Response.json({
     ...restAddon,
     tags: tags ? buildTagLinks(tags) : [],
-    // readme: readme ? processor.processSync(readme).toString() : null,
-    readme,
   });
 }

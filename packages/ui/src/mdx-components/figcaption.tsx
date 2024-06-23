@@ -3,11 +3,12 @@
 import { useContext, useEffect, type FC, type ReactNode } from 'react';
 import { FigureContext } from './figure-provider';
 
-interface PreProps {
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions -- With an interface, we get this error in ./index: https://github.com/microsoft/TypeScript/issues/5711
+type FigcaptionProps = {
   children?: ReactNode;
-}
+};
 
-export const Figcaption: FC<PreProps> = (props) => {
+export const Figcaption: FC<FigcaptionProps> = (props) => {
   const context = useContext(FigureContext);
   const { setTitle } = context || {};
 
@@ -16,7 +17,7 @@ export const Figcaption: FC<PreProps> = (props) => {
   }, []);
 
   return (
-    <figcaption {...props} className="hidden">
+    <figcaption {...props} className="ui-hidden">
       {props.children}
     </figcaption>
   );

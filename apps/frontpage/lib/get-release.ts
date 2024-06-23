@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import { compileMDX } from 'next-mdx-remote/rsc';
-import * as MDX from '../components/docs/mdx';
+
+import { mdxComponents } from '@repo/ui';
 
 export async function getRelease(version: string) {
   if (!version) return undefined;
@@ -16,16 +17,7 @@ export async function getRelease(version: string) {
       parseFrontmatter: true,
     },
     components: {
-      h1: MDX.H1,
-      h2: MDX.H2,
-      h3: MDX.H3,
-      h4: MDX.H1,
-      a: MDX.A,
-      p: MDX.P,
-      hr: MDX.Hr,
-      ul: MDX.UnorderedList,
-      li: MDX.List,
-      pre: MDX.Pre,
+      ...mdxComponents,
     },
   });
 }

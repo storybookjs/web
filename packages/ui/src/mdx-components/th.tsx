@@ -5,5 +5,5 @@ type TableProps = DetailedHTMLProps<
   HTMLHeadingElement
 >;
 export function Th({ children }: TableProps) {
-  return <th className="py-4 text-left">{children}</th>;
+  return <th className="ui-py-4 ui-text-left">{children}</th>;
 }

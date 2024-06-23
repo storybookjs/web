@@ -22,7 +22,7 @@ export const Copy = ({ content }: { content: ReactNode }) => {
 
   return (
     <button
-      className="flex h-8 select-none items-center justify-between gap-1 rounded px-2 text-sm text-slate-600 transition-all hover:border-zinc-300 hover:bg-slate-200 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800"
+      className="ui-flex ui-h-8 ui-select-none ui-items-center ui-justify-between ui-gap-1 ui-rounded ui-px-2 ui-text-sm ui-text-slate-600 ui-transition-all hover:ui-border-zinc-300 hover:ui-bg-slate-200 hover:ui-text-slate-900 dark:ui-text-slate-400 dark:ui-hover:bg-slate-800"
       onClick={onClick}
       type="button"
     >

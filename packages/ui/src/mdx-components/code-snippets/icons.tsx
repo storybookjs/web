@@ -1,9 +1,10 @@
 import type { FC } from 'react';
 import React from 'react';
 
-interface IconProps {
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions -- With an interface, we get this error in ./index: https://github.com/microsoft/TypeScript/issues/5711
+type IconProps = {
   className?: string;
-}
+};
 
 export const TSIcon: FC<IconProps> = ({ className }) => (
   <svg

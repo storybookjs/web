@@ -27,20 +27,20 @@ export function Callout({
   return (
     <div
       className={cn(
-        'mb-6 flex gap-4 rounded p-6',
+        'ui-mb-6 ui-flex ui-gap-4 ui-rounded ui-p-6',
         variant === 'neutral' &&
-          'border border-blue-200 bg-blue-100 dark:border-slate-700 dark:bg-slate-900',
+          'ui-border ui-border-blue-200 ui-bg-blue-100 dark:ui-border-slate-700 dark:ui-bg-slate-900',
         variant === 'positive' &&
-          'border border-blue-200 bg-blue-100 dark:border-slate-700 dark:bg-slate-900',
+          'ui-border ui-border-blue-200 ui-bg-blue-100 dark:ui-border-slate-700 dark:ui-bg-slate-900',
         variant === 'info' &&
-          'border border-blue-200 bg-blue-100 dark:border-slate-700 dark:bg-slate-900',
+          'ui-border ui-border-blue-200 ui-bg-blue-100 dark:ui-border-slate-700 dark:ui-bg-slate-900',
         variant === 'warning' &&
-          'border border-orange-200 bg-orange-100 dark:border-orange-800 dark:bg-orange-950',
+          'ui-border ui-border-orange-200 ui-bg-orange-100 dark:ui-border-orange-800 dark:ui-bg-orange-950',
       )}
       {...props}
     >
       {appliedIcon ? (
-        <span aria-hidden className="hidden text-2xl md:flex">
+        <span aria-hidden className="ui-hidden ui-text-2xl md:ui-flex">
           {appliedIcon}
         </span>
       ) : null}
@@ -48,7 +48,8 @@ export function Callout({
         {title ? (
           <div dangerouslySetInnerHTML={{ __html: snarkdown(title) }} />
         ) : null}
-        <div className="mb-0 [&>p]:mb-0">{children}</div>
+        {/* TODO: Check prefix placement in ones like `[&>p]:ui-mb-0` */}
+        <div className="ui-mb-0 [&>p]:ui-mb-0">{children}</div>
       </div>
     </div>
   );
