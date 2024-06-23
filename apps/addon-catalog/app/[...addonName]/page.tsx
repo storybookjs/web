@@ -1,5 +1,5 @@
 // import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
-import { fetchAddonsData } from '../../lib/fetch-addons-data';
+// import { fetchAddonsData } from '../../lib/fetch-addons-data';
 import { ArrowLeftIcon } from '@storybook/icons';
 import Link from 'next/link';
 import { fakeAddon } from '../../components/fake-addon';
@@ -20,7 +20,7 @@ interface AddonDetailsProps {
 
 export default async function AddonDetails({ params }: AddonDetailsProps) {
   // TODO: Better decoding?
-  const name = params.addonName.join('/').replace('%40', '@');
+  // const name = params.addonName.join('/').replace('%40', '@');
   // const addon = await fetchAddonDetailsData(name);
   const addon = fakeAddon;
 
@@ -32,7 +32,7 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
     <main className="mb-20 mt-8">
       <div className="mb-16">
         <Link
-          href="/integrations"
+          href="/"
           className="flex items-center gap-2 transition-colors hover:text-blue-500"
         >
           <ArrowLeftIcon />
@@ -44,9 +44,6 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
         <AddonReadme addon={addon} />
         <AddonSidebar addon={addon} />
       </div>
-      <pre className="mt-16 w-full overflow-scroll">
-        {JSON.stringify({ addon }, null, 2)}
-      </pre>
     </main>
   );
 }
