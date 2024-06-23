@@ -47,13 +47,8 @@ const withMDX = createMDX({
       // This is used to get the raw code for the pre component
       () => (tree) => {
         visit(tree, 'element', (node) => {
-          if (
-            node.type === 'element' &&
-            node.tagName === 'figure'
-          ) {
-            if (
-              !('data-rehype-pretty-code-figure' in node.properties)
-            ) {
+          if (node.type === 'element' && node.tagName === 'figure') {
+            if (!('data-rehype-pretty-code-figure' in node.properties)) {
               return;
             }
 
@@ -67,7 +62,7 @@ const withMDX = createMDX({
       },
     ],
   },
-})
+});
 
 /**
  * Rewrites for recipes for namespaced packages
@@ -85,11 +80,14 @@ const withMDX = createMDX({
  */
 const recipeForNamespacedPackageRewrites = fs
   .readdirSync(RECIPES_FOLDER)
-  .filter((folder) => {
-    const maybeSubFolder = fs.readdirSync(`${RECIPES_FOLDER}/${folder}`);
-    return fs
-      .statSync(`${RECIPES_FOLDER}/${folder}/${maybeSubFolder}`)
-      .isDirectory();
+  .filter((recipeFolder) => {
+    const recipePath = `${RECIPES_FOLDER}/${recipeFolder}`;
+    const maybeSubFolders = fs.statSync(recipePath).isDirectory()
+      ? fs.readdirSync(recipePath)
+      : [];
+    return maybeSubFolders.some((maybeSubFolder) =>
+      fs.statSync(`${recipePath}/${maybeSubFolder}`).isDirectory(),
+    );
   })
   .map((folder) => ({
     source: `/recipes/@${folder}/:name*`,
