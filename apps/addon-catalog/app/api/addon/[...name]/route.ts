@@ -1,4 +1,4 @@
-import { ADDON_FRAGMENT, RECIPE_FRAGMENT } from '../../../../constants';
+import { ADDON_FRAGMENT } from '../../../../constants';
 import { fetchAddonsQuery, gql } from '../../../../lib/fetch-addons-query';
 import { validateResponse } from '../../../../lib/validate-response';
 
@@ -26,7 +26,7 @@ type AddonValue = Pick<
   | 'npmUrl'
 >;
 
-export async function fetchAddonsData(): Promise<AddonValue[] | null> {
+async function fetchAddonsData(): Promise<AddonValue[] | null> {
   let value: AddonValue[] | null = null;
   try {
     async function fetchPartialData(skip: number = 0): Promise<AddonValue[]> {

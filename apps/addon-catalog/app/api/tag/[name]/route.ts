@@ -16,7 +16,7 @@ type TagValue = Pick<
   | 'topIntegrations'
 >;
 
-export async function fetchTagsData({
+async function fetchTagsData({
   isCategory,
 }: {
   isCategory?: boolean;
