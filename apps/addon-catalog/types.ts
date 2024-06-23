@@ -1,3 +1,5 @@
+declare module 'rehype-urls'
+
 type Appearance = 'official' | 'integrator' | 'community';
 
 interface Addon {

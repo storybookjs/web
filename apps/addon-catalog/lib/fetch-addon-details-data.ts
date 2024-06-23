@@ -4,7 +4,6 @@ export async function fetchAddonDetailsData(
   name: string,
 ): Promise<Addon | null> {
   let addon: Addon | null = null;
-  console.log('>>>>>>>>>>>>>>>>>>', `${host}${basePath}/api/addon/${name}`)
   try {
     const res = await fetch(`${host}${basePath}/api/addon/${name}`);
     addon = await res.json();

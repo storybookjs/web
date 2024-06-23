@@ -1,12 +1,14 @@
 import { ADDON_FRAGMENT } from '../../../../constants';
+import { buildTagLinks } from '../../../../lib/build-tag-links';
+import { createMarkdownProcessor } from '../../../../lib/create-markdown-processor';
 import { fetchAddonsQuery, gql } from '../../../../lib/fetch-addons-query';
 import { validateResponse } from '../../../../lib/validate-response';
 
-type AddonsData = {
+interface AddonsData {
   addons: Addon[];
-};
+}
 
-type AddonValue = Pick<
+interface AddonValue extends Pick<
   Addon,
   | 'name'
   | 'displayName'
@@ -24,7 +26,11 @@ type AddonValue = Pick<
   | 'repositoryUrl'
   | 'homepageUrl'
   | 'npmUrl'
->;
+> {}
+
+function createAddonBaseLink(addon: Pick<Addon, 'repositoryUrl' | 'npmUrl'>): string {
+  return `${addon.repositoryUrl || addon.npmUrl}/`;
+}
 
 async function fetchAddonsData(): Promise<AddonValue[] | null> {
   let value: AddonValue[] | null = null;
@@ -94,8 +100,6 @@ export async function GET(
 
     addon = addons.find((addon) => addon.name === name);
 
-    console.log('>>>>>>>>>>>>>>>>>>', addon);
-
     if (!addon) {
       return new Response(`Addon not found: ${name}`, {
         status: 400,
@@ -108,5 +112,14 @@ export async function GET(
     });
   }
 
-  return Response.json(addon);
+  const { readme, tags, ...restAddon } = addon;
+
+  const baseLink = createAddonBaseLink(restAddon);
+  const processor = createMarkdownProcessor(baseLink);
+
+  return Response.json({
+    ...restAddon,
+    tags: tags ? buildTagLinks(tags) : [],
+    readme: readme ? processor.processSync(readme).toString() : null,
+  });
 }
