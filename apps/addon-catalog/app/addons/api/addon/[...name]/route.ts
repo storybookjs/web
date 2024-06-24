@@ -91,8 +91,10 @@ export async function GET(
 
   let addon: AddonValue | undefined;
   try {
+    console.log('HERE!!!!!!');
     // TODO: Cache this data
     const addons = (await fetchAddonsData()) || [];
+    console.log({ addons });
 
     addon = addons.find((addon) => addon.name === name);
 
