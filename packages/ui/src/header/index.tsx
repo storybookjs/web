@@ -59,7 +59,6 @@ export const Header: FC<HeaderProps> = ({
                   <Button
                     active={pathname === item.href}
                     external={item.external}
-                    externalIcon={item.externalIcon}
                     href={item.href}
                     key={item.title}
                     title={item.title}

@@ -10,7 +10,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'home' | 'system';
   active?: boolean;
   external?: boolean;
-  externalIcon?: boolean;
   href: string;
   title: string;
 }
@@ -18,7 +17,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button: FC<ButtonProps> = ({
   variant,
   external = false,
-  externalIcon = false,
   active = false,
   href,
   title,
@@ -44,7 +42,7 @@ export const Button: FC<ButtonProps> = ({
           target={external ? '_blank' : undefined}
         >
           {title}
-          {externalIcon ? (
+          {external ? (
             <div className="ui-h-full ui-flex ui-items-start ui-py-1.5">
               <Arrow />
             </div>
