@@ -1,4 +1,4 @@
-import { ADDON_FRAGMENT } from '../constants';
+import { addonFragment } from '@repo/utils';
 import { fetchAddonsQuery, gql } from './fetch-addons-query';
 
 interface AddonData {
@@ -13,7 +13,7 @@ export async function fetchAddonDetailsData(
       gql`
         query Addon($name: String!) {
           detail(name: $name) {
-            ${ADDON_FRAGMENT}
+            ${addonFragment}
             tags {
               name
               displayName

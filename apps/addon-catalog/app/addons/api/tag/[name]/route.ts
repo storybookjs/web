@@ -1,4 +1,4 @@
-import { ADDON_FRAGMENT, RECIPE_FRAGMENT } from '../../../../../constants';
+import { addonFragment, recipeFragment } from '@repo/utils';
 import { fetchAddonsQuery, gql } from '../../../../../lib/fetch-addons-query';
 import { validateResponse } from '../../../../../lib/validate-response';
 
@@ -42,13 +42,13 @@ async function fetchTagsData({
               }
               topIntegrations(sort: monthlyDownloads) {
                 addons {
-                  ${ADDON_FRAGMENT}
+                  ${addonFragment}
                 }
   
                 recipes {
-                  ${RECIPE_FRAGMENT}
+                  ${recipeFragment}
                   addons {
-                    ${ADDON_FRAGMENT}
+                    ${addonFragment}
                   }
                 }
               }
