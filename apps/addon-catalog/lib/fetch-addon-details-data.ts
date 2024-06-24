@@ -5,7 +5,11 @@ export async function fetchAddonDetailsData(
 ): Promise<Addon | null> {
   let addon: Addon | null = null;
   try {
-    const res = await fetch(`${host}${basePath}/api/addon/${name}`);
+    const res = await fetch(`${host}${basePath}/api/addon/${name}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     addon = await res.json();
   } catch (error) {
     // @ts-expect-error - Seems safe
