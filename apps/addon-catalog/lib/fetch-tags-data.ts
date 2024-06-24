@@ -1,5 +1,4 @@
-import { fetchAddonsQuery, gql } from './fetch-addons-query';
-import { validateResponse } from './validate-response';
+import { validateResponse, fetchAddonsQuery, gql } from '@repo/utils';
 
 type TagsData = {
   tags: Pick<Tag, 'name'>[];

@@ -1,6 +1,10 @@
-import { addonFragment, recipeFragment } from '@repo/utils';
-import { fetchAddonsQuery, gql } from '../../../../../lib/fetch-addons-query';
-import { validateResponse } from '../../../../../lib/validate-response';
+import {
+  addonFragment,
+  recipeFragment,
+  validateResponse,
+  fetchAddonsQuery,
+  gql,
+} from '@repo/utils';
 
 type TagsData = {
   tags: Tag[];

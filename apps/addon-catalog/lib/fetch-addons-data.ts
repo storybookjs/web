@@ -1,5 +1,4 @@
-import { fetchAddonsQuery, gql } from './fetch-addons-query';
-import { validateResponse } from './validate-response';
+import { validateResponse, fetchAddonsQuery, gql } from '@repo/utils';
 
 type AddonsData = {
   addons: Pick<Addon, 'name'>[];
@@ -21,7 +20,7 @@ export async function fetchAddonsData(): Promise<AddonsValue | null> {
         `,
         {
           variables: { skip },
-        }
+        },
       );
 
       validateResponse(() => data?.addons);

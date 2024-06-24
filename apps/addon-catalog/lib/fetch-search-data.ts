@@ -1,5 +1,4 @@
-import { addonFragment } from '@repo/utils';
-import { fetchAddonsQuery, gql } from './fetch-addons-query';
+import { addonFragment, fetchAddonsQuery, gql } from '@repo/utils';
 
 type TagsData = {
   partialSearchIntegrations: {
