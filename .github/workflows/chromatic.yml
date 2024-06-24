@@ -14,6 +14,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Build packages
+        run: npm run build-ui-only
+
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
