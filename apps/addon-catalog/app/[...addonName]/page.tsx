@@ -1,11 +1,11 @@
-import { fetchAddonDetailsData } from '../../../lib/fetch-addon-details-data';
+import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 // import { fetchAddonsData } from '../../../lib/fetch-addons-data';
 import { ArrowLeftIcon } from '@storybook/icons';
 import Link from 'next/link';
 import { MDXContent } from '@repo/ui';
 // import { fakeAddon } from '../../../components/fake-addon';
-import { AddonHero } from '../../../components/addon/addon-hero';
-import { AddonSidebar } from '../../../components/addon/addon-sidebar';
+import { AddonHero } from '../../components/addon/addon-hero';
+import { AddonSidebar } from '../../components/addon/addon-sidebar';
 
 interface AddonDetailsProps {
   params: {
@@ -32,7 +32,7 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
     <main className="mb-20 mt-8">
       <div className="mb-16">
         <Link
-          href="/addons"
+          href="/"
           className="flex items-center gap-2 transition-colors hover:text-blue-500"
         >
           <ArrowLeftIcon />
