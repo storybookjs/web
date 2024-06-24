@@ -6,8 +6,8 @@ export { Header } from './header';
 export { ChromaticLogo } from './logos/chromatic';
 export { mdxComponents } from './mdx/components';
 export { MDXContent } from './mdx/content';
-export * from './mdx/options'
-export { CodeSnippetsWrapper } from './mdx/components/code-snippets/wrapper'
+export * from './mdx/options';
+export { CodeSnippetsWrapper } from './code-snippets-wrapper/wrapper';
 export { NewsletterForm } from './newsletter-form';
 export { Search } from './search';
 export { Pill } from './pill';

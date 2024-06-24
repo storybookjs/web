@@ -1,4 +1,5 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import type { ReactNode } from 'react';
 import { mdxComponents } from './components';
 import { MDXRemoteOptions } from './options';
 
@@ -7,7 +8,7 @@ interface MDXContentProps {
   source?: string | null;
 }
 
-export function MDXContent({ components, source }: MDXContentProps) {
+export function MDXContent({ components, source }: MDXContentProps): ReactNode {
   return source ? (
     <MDXRemote
       components={{ ...mdxComponents, ...components }}
