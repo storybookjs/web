@@ -1,20 +1,46 @@
-import { basePath, host } from '../constants';
+import { ADDON_FRAGMENT } from '../constants';
+import { fetchAddonsQuery, gql } from './fetch-addons-query';
+
+interface AddonData {
+  detail: Addon;
+}
 
 export async function fetchAddonDetailsData(
   name: string,
 ): Promise<Addon | null> {
-  let addon: Addon | null = null;
   try {
-    const res = await fetch(`${host}${basePath}/api/addon/${name}`, {
-      headers: {
-        'Content-Type': 'application/json',
+    const data = await fetchAddonsQuery<AddonData, { name: string }>(
+      gql`
+        query Addon($name: String!) {
+          detail(name: $name) {
+            ${ADDON_FRAGMENT}
+            tags {
+              name
+              displayName
+              description
+              icon
+            }
+            compatibility {
+              name
+              displayName
+              icon
+            }
+            status
+            readme
+            publishedAt
+            repositoryUrl
+            homepageUrl
+            npmUrl
+          }
+        }
+      `,
+      {
+        variables: { name },
       },
-    });
-    addon = await res.json();
-  } catch (error) {
-    // @ts-expect-error - Seems safe
-    throw new Error(`Failed to fetch addon details data: ${error.message}`);
-  }
+    );
 
-  return addon;
+    return data.detail;
+  } catch (error) {
+    throw new Error(`Failed to fetch addon details data: ${error}`);
+  }
 }
