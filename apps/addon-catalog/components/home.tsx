@@ -19,11 +19,23 @@ export const Home = ({
   return (
     <HomeWrapper tagLinks={tagLinks}>
       <h3 className="mb-8 text-2xl font-bold">New to Storybook 8</h3>
-      {vta && <Preview key={vta.name} orientation="horizontal" element={vta} />}
+      {vta && (
+        <Preview
+          key={vta.name}
+          orientation="horizontal"
+          element={vta}
+          type="addon"
+        />
+      )}
       <h3 className="mb-8 mt-12 text-2xl font-bold">Popular addons</h3>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
         {popularAddons.map((addon) => (
-          <Preview key={addon.name} orientation="vertical" element={addon} />
+          <Preview
+            key={addon.name}
+            orientation="vertical"
+            element={addon}
+            type="addon"
+          />
         ))}
       </div>
       <h3 className="mb-8 mt-12 text-2xl font-bold">Popular recipes</h3>
@@ -33,6 +45,7 @@ export const Home = ({
             key={recipe.name}
             orientation="horizontal"
             element={recipe}
+            type="recipe"
           />
         ))}
       </div>
