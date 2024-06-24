@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { MDXContent } from '@repo/ui';
-import { fetchRecipeDetailsData } from '../../../lib/fetch-recipe-details-data';
-import { fetchRecipesData } from '../../../lib/fetch-recipes-data';
+import { fetchRecipeDetailsData } from '../../../../lib/fetch-recipe-details-data';
+import { fetchRecipesData } from '../../../../lib/fetch-recipes-data';
 
 interface RecipeDetailsProps {
   params: {

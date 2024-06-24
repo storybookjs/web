@@ -1,5 +1,5 @@
-import { fetchTagDetailsData } from '../../../lib/fetch-tag-details-data';
-import { fetchTagsData } from '../../../lib/fetch-tags-data';
+import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
+import { fetchTagsData } from '../../../../lib/fetch-tags-data';
 
 interface TagDetailsProps {
   params: {
@@ -15,7 +15,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function TagDetails({ params: { name } }: TagDetailsProps) {
+export default async function TagDetails({
+  params: { name },
+}: TagDetailsProps) {
   const tag = await fetchTagDetailsData(name);
 
   /**
@@ -24,13 +26,7 @@ export default async function TagDetails({ params: { name } }: TagDetailsProps) 
 
   return (
     <main className="p-8">
-      <pre>
-        {JSON.stringify(
-          tag,
-          null,
-          2,
-        )}
-      </pre>
+      <pre>{JSON.stringify(tag, null, 2)}</pre>
     </main>
   );
 }

@@ -1,7 +1,7 @@
-import { ADDON_FRAGMENT, RECIPE_FRAGMENT } from '../../../../constants';
-import { buildTagLinks } from '../../../../lib/build-tag-links';
-import { fetchAddonsQuery, gql } from '../../../../lib/fetch-addons-query';
-import { validateResponse } from '../../../../lib/validate-response';
+import { ADDON_FRAGMENT, RECIPE_FRAGMENT } from '../../../../../constants';
+import { buildTagLinks } from '../../../../../lib/build-tag-links';
+import { fetchAddonsQuery, gql } from '../../../../../lib/fetch-addons-query';
+import { validateResponse } from '../../../../../lib/validate-response';
 
 interface RecipesData {
   recipes: Recipe[];

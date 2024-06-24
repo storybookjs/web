@@ -1,6 +1,6 @@
-import { ADDON_FRAGMENT, RECIPE_FRAGMENT } from '../../../../constants';
-import { fetchAddonsQuery, gql } from '../../../../lib/fetch-addons-query';
-import { validateResponse } from '../../../../lib/validate-response';
+import { ADDON_FRAGMENT, RECIPE_FRAGMENT } from '../../../../../constants';
+import { fetchAddonsQuery, gql } from '../../../../../lib/fetch-addons-query';
+import { validateResponse } from '../../../../../lib/validate-response';
 
 type TagsData = {
   tags: Tag[];
@@ -91,9 +91,7 @@ export async function GET(
     categoriesData = (await fetchTagsData({ isCategory: true })) || [];
     const tagsData = (await fetchTagsData()) || [];
 
-    tag = [...categoriesData, ...tagsData].find(
-      (tag) => tag.name === name,
-    );
+    tag = [...categoriesData, ...tagsData].find((tag) => tag.name === name);
 
     if (!tag) {
       return new Response(`Tag not found: ${name}`, {
