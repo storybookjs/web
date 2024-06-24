@@ -1,5 +1,5 @@
-import { ADDON_FRAGMENT } from '../constants';
-import { fetchAddonsQuery, gql } from './fetch-addons-query';
+import { addonFragment } from '@repo/utils';
+import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
 
 interface AddonData {
   detail: Addon;
@@ -13,7 +13,7 @@ export async function fetchAddonDetailsData(
       gql`
         query Addon($name: String!) {
           detail(name: $name) {
-            ${ADDON_FRAGMENT}
+            ${addonFragment}
             tags {
               name
               displayName

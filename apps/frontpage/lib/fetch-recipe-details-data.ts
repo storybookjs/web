@@ -1,7 +1,6 @@
-import { ADDON_FRAGMENT, RECIPE_FRAGMENT } from '../constants';
 import { buildTagLinks } from './build-tag-links';
-import { fetchAddonsQuery, gql } from './fetch-addons-query';
-import { validateResponse } from './validate-response';
+import { validateResponse, addonFragment, recipeFragment } from '@repo/utils';
+import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
 
 interface RecipesData {
   recipes: Recipe[];
@@ -31,7 +30,7 @@ async function fetchRecipesData(): Promise<RecipeValue[] | null> {
         gql`
           query Recipes($skip: Int!) {
             recipes(limit: 30, skip: $skip) {
-              ${RECIPE_FRAGMENT}
+              ${recipeFragment}
               status
               publishedAt
               updatedAt
@@ -42,7 +41,7 @@ async function fetchRecipesData(): Promise<RecipeValue[] | null> {
                 icon
               }
               addons {
-                ${ADDON_FRAGMENT}
+                ${addonFragment}
               }
             }
           }
@@ -97,5 +96,5 @@ export async function fetchRecipeDetailsData(
   return {
     ...restRecipe,
     tags: tags ? buildTagLinks(tags) : [],
-  }
+  };
 }

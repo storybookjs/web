@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "graphql-request": "^7.1.0",
     "tailwind-merge": "^2.3.0"
   }
 }

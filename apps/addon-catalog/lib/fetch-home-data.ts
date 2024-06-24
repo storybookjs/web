@@ -1,6 +1,6 @@
-import { ADDON_FRAGMENT, RECIPE_FRAGMENT } from '../constants';
-import { fetchAddonsQuery, gql } from './fetch-addons-query';
-import { validateResponse } from './validate-response';
+import { addonFragment, recipeFragment } from '@repo/utils';
+import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
+import { validateResponse } from '@repo/utils';
 
 interface AddonsHomeData {
   popular: {
@@ -8,9 +8,11 @@ interface AddonsHomeData {
     recipes: Recipe[];
   };
   vta: Addon;
-};
+}
 
-interface TagWithOccurrence extends Tag { occurrence: number };
+interface TagWithOccurrence extends Tag {
+  occurrence: number;
+}
 
 function createTagOccurrenceHash(...addons: Addon[]) {
   return addons
@@ -53,7 +55,7 @@ export async function fetchHomeData(): Promise<AddonsHomeValue | null> {
         query AddonsHome {
           popular: topIntegrations(sort: featuredMonthly, limit: 9) {
             addons {
-              ${ADDON_FRAGMENT}
+              ${addonFragment}
               tags {
                 name
                 displayName
@@ -64,7 +66,7 @@ export async function fetchHomeData(): Promise<AddonsHomeValue | null> {
               npmUrl
             }
             recipes {
-              ${RECIPE_FRAGMENT}
+              ${recipeFragment}
               tags {
                 name
                 displayName
@@ -74,7 +76,7 @@ export async function fetchHomeData(): Promise<AddonsHomeValue | null> {
             }
           }
           vta: detail(name: "@chromatic-com/storybook") {
-            ${ADDON_FRAGMENT}
+            ${addonFragment}
             tags {
               name
               displayName

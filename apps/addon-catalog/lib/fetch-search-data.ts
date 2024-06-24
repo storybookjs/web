@@ -1,5 +1,5 @@
-import { ADDON_FRAGMENT, RECIPE_FRAGMENT, basePath, host } from '../constants';
-import { fetchAddonsQuery, gql } from './fetch-addons-query';
+import { addonFragment } from '@repo/utils';
+import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
 
 type TagsData = {
   partialSearchIntegrations: {
@@ -15,7 +15,7 @@ export async function fetchSearchData(name: string): Promise<Addon[] | null> {
           query Tag($query: String!) {
             partialSearchIntegrations(query: $query) {
               addons {
-                ${ADDON_FRAGMENT}
+                ${addonFragment}
               }
             }
           }
