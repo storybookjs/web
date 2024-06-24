@@ -1,5 +1,6 @@
-// import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
+import { HomeWrapper } from '../../../../components/home-wrapper';
 import { fetchTagsData } from '../../../../lib/fetch-tags-data';
+import { fetchSearchData } from '../../../../lib/fetch-search-data';
 
 interface TagDetailsProps {
   params: {
@@ -18,16 +19,19 @@ export async function generateStaticParams() {
 export default async function TagDetails({
   params: { name },
 }: TagDetailsProps) {
-  // const tag = await fetchTagDetailsData(name);
+  const addons = await fetchSearchData(name);
+
+  console.log(addons);
 
   /**
    * You can use `tag.isCategory` to render the correct template
    */
 
   return (
-    <main className="p-8">
-      Tag page
+    <HomeWrapper>
+      <h3 className="mb-8 text-2xl font-bold">{name}</h3>
+      {addons?.map((addon) => <div>{addon.name}</div>)}
       {/* <pre>{JSON.stringify(tag, null, 2)}</pre> */}
-    </main>
+    </HomeWrapper>
   );
 }
