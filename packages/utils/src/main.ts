@@ -9,3 +9,8 @@ export { fetchNpmDownloads } from './fetch-npm-downloads';
 export { fetchGithubContributorCount } from './fetch-github-contributors-count';
 export { fetchDiscordMembers } from './fetch-discord-members';
 export { fetchYouTubeSubscribers } from './fetch-youtube-subscribers';
+export { fetchAddonsQuery, gql } from './fetch-addons-query';
+export { validateResponse } from './validate-response';
+
+// Constants
+export { addonFragment, recipeFragment } from './constants';
