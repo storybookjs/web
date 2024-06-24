@@ -6,7 +6,7 @@ type ImageProps = DetailedHTMLProps<
   HTMLVideoElement
 >;
 
-interface VideoProps extends ImageProps {
+type VideoProps = ImageProps & {
   activeVersion: string;
   src?: string;
 }
@@ -21,7 +21,7 @@ export const Video: FC<VideoProps> = ({ src, activeVersion }) => {
   if (!fileExists) return null;
 
   return (
-    <video autoPlay loop muted playsInline className="mb-6">
+    <video autoPlay className="mb-6" loop muted playsInline>
       <source src={path} type="video/mp4" />
     </video>
   );

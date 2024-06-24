@@ -2,8 +2,8 @@
 
 import { useEffect, useState, type FC } from 'react';
 import { cn, type CodeSnippetsProps } from '@repo/utils';
+import { CodeSnippetsWrapper } from '@repo/ui';
 import { useDocs } from '../../../../app/docs/provider';
-import { CodeWrapper } from './wrapper';
 import { getFilters } from './utils/get-filters';
 import {
   getActiveContentTabs,
@@ -157,7 +157,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   const error = errorTabs || errorActiveContent;
 
   return (
-    <CodeWrapper
+    <CodeSnippetsWrapper
       copy={activeContent?.raw || ''}
       top={
         tabs && tabs.length > 1 ? (
@@ -209,6 +209,6 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
           </div>
         </div>
       )}
-    </CodeWrapper>
+    </CodeSnippetsWrapper>
   );
 };
