@@ -1,4 +1,4 @@
-import { validateResponse } from '../lib/validate-response';
+import { validateResponse } from '@repo/utils';
 import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
 
 type AddonsData = {
