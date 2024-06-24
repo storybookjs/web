@@ -10,7 +10,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "clean": "turbo run clean && rm -rf node_modules && rm -rf .turbo",
     "sync-docs": "tsx --tsconfig tsconfig.json sync-docs.ts",
-    "test": "turbo test"
+    "test": "turbo test",
+    "turbo": "turbo"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",

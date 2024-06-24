@@ -5,7 +5,8 @@ export const nav = [
   },
   {
     title: 'Addons',
-    href: '/integrations',
+    href: '/addons',
+    external: true,
   },
   {
     title: 'Showcase',

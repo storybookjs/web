@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
+      "source": "/addons",
+      "destination": "https://web-addon-catalog.vercel.app/addons"
+    },
+    {
       "source": "/addons/:match*",
-      "destination": "https://storybook-web-addons.netlify.app/addons/:match*"
+      "destination": "https://web-addon-catalog.vercel.app/addons/:match*"
     },
     {
       "source": "/blog/:match*",

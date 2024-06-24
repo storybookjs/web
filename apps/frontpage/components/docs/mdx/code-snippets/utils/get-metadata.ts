@@ -6,7 +6,7 @@ import remarkParse from 'remark-parse';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
-import { rehypePrettyCodeOptions } from '../../../../../lib/rehype-pretty-code-options';
+import { rehypePrettyCodeOptions } from '@repo/ui';
 
 interface MetadataProps {
   path: string | undefined;
