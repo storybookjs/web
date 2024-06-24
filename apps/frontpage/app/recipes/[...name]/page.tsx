@@ -6,7 +6,6 @@ import {
   Header,
   MDXContent,
   Pill,
-  StorybookLogo,
   SubHeader,
 } from '@repo/ui';
 import { fetchRecipeDetailsData } from '../../../lib/fetch-recipe-details-data';
