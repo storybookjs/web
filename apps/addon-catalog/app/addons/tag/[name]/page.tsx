@@ -31,7 +31,7 @@ export default async function TagDetails({
       <h3 className="mb-8 text-2xl font-bold">{name}</h3>
       <div className="flex flex-col gap-6">
         {addons?.map((addon) => (
-          <Preview key={addon.name} {...addon} orientation="horizontal" />
+          <Preview key={addon.name} element={addon} orientation="horizontal" />
         ))}
       </div>
     </HomeWrapper>
