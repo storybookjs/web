@@ -6,7 +6,6 @@ export const nav = [
   {
     title: 'Addons',
     href: '/addons',
-    external: true,
   },
   {
     title: 'Showcase',
