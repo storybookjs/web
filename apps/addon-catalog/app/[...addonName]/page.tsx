@@ -2,11 +2,10 @@ import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 import { fetchAddonsData } from '../../lib/fetch-addons-data';
 import { ArrowLeftIcon } from '@storybook/icons';
 import Link from 'next/link';
+import { MDXContent } from '@repo/ui';
 import { fakeAddon } from '../../components/fake-addon';
 import { AddonHero } from '../../components/addon/addon-hero';
-import { AddonReadme } from '../../components/addon/addon-readme';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
-import { MDXRemote } from 'next-mdx-remote';
 
 interface AddonDetailsProps {
   params: {
@@ -44,7 +43,9 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
       </div>
       <AddonHero addon={addon} />
       <div className="flex flex-col gap-12 lg:flex-row">
-        <AddonReadme addon={addon} />
+        <div className="min-w-0 flex-1">
+          <MDXContent source={addon.readme} />
+        </div>
         <AddonSidebar addon={addon} />
       </div>
     </main>

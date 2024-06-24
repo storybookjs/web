@@ -11,6 +11,10 @@ export async function getRelease(version: string) {
     'utf8',
   );
 
+  /**
+   * TODO: Refactor this to use the MDXRemote component
+   *       Because then we can import MDXContent from @repo/ui
+   */
   return compileMDX<{ title: string }>({
     source: file,
     options: {
