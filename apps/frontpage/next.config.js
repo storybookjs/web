@@ -65,6 +65,10 @@ module.exports = {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
       },
+      {
+        protocol: 'https',
+        hostname: '*.gravatar.com',
+      },
     ],
   },
   // This was added to fix the error with remarkExpressiveCode
