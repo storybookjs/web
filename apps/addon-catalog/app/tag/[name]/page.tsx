@@ -1,7 +1,7 @@
-import { HomeWrapper } from '../../../../components/home-wrapper';
-import { fetchTagsData } from '../../../../lib/fetch-tags-data';
-import { fetchSearchData } from '../../../../lib/fetch-search-data';
-import { Preview } from '../../../../components/preview';
+import { HomeWrapper } from '../../../components/home-wrapper';
+import { fetchTagsData } from '../../../lib/fetch-tags-data';
+import { fetchSearchData } from '../../../lib/fetch-search-data';
+import { Preview } from '../../../components/preview';
 
 interface TagDetailsProps {
   params: {
