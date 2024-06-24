@@ -25,7 +25,7 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
   // const addon = fakeAddon;
 
   if (!addon) {
-    return <div>Not found</div>;
+    return <div>Not found.</div>;
   }
 
   return (
