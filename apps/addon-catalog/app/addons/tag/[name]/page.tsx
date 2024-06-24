@@ -1,4 +1,4 @@
-import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
+// import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
 import { fetchTagsData } from '../../../../lib/fetch-tags-data';
 
 interface TagDetailsProps {
@@ -18,7 +18,7 @@ export async function generateStaticParams() {
 export default async function TagDetails({
   params: { name },
 }: TagDetailsProps) {
-  const tag = await fetchTagDetailsData(name);
+  // const tag = await fetchTagDetailsData(name);
 
   /**
    * You can use `tag.isCategory` to render the correct template
@@ -26,7 +26,8 @@ export default async function TagDetails({
 
   return (
     <main className="p-8">
-      <pre>{JSON.stringify(tag, null, 2)}</pre>
+      Tag page
+      {/* <pre>{JSON.stringify(tag, null, 2)}</pre> */}
     </main>
   );
 }

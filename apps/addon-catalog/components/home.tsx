@@ -15,15 +15,15 @@ interface HomeProps {
 }
 
 const categories = [
-  { name: 'Popular', href: '/integrations' },
-  { name: 'Essential', href: '/integrations/tag/essentials' },
-  { name: 'Code', href: '/integrations/tag/essentials' },
-  { name: 'Data & State', href: '/integrations/tag/essentials' },
-  { name: 'Test', href: '/integrations/tag/essentials' },
-  { name: 'Style', href: '/integrations/tag/essentials' },
-  { name: 'Design', href: '/integrations/tag/essentials' },
-  { name: 'Appearance', href: '/integrations/tag/essentials' },
-  { name: 'Organize', href: '/integrations/tag/essentials' },
+  { name: 'Popular', href: '/addons' },
+  { name: 'Essential', href: '/addons/tag/essentials' },
+  { name: 'Code', href: '/addons/tag/essentials' },
+  { name: 'Data & State', href: '/addons/tag/essentials' },
+  { name: 'Test', href: '/addons/tag/essentials' },
+  { name: 'Style', href: '/addons/tag/essentials' },
+  { name: 'Design', href: '/addons/tag/essentials' },
+  { name: 'Appearance', href: '/addons/tag/essentials' },
+  { name: 'Organize', href: '/addons/tag/essentials' },
 ];
 
 export const Home = ({
