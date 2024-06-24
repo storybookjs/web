@@ -20,15 +20,17 @@ interface AddonDetailsProps {
 
 export default async function AddonDetails({ params }: AddonDetailsProps) {
   // TODO: Better decoding?
-  const name = params.addonName.join('/').replace('%40', '@');
-  const addon = await fetchAddonDetailsData(name);
-  // const addon = fakeAddon;
+  // const name = params.addonName.join('/').replace('%40', '@');
+  // const addon = await fetchAddonDetailsData(name);
+  const addon = fakeAddon;
 
-  if (!addon) {
-    return <div>Not found</div>;
-  }
+  // if (!addon) {
+  //   return <div>Not found</div>;
+  // }
 
-  console.log(addon.readme);
+  // console.log(addon);
+
+  return <div>Hello</div>;
 
   return (
     <main className="mb-20 mt-8">

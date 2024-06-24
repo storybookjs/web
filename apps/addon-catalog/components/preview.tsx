@@ -30,7 +30,7 @@ export const Preview = ({
 }: AddonItemProps) => {
   return (
     <Link
-      href={`/${name}`}
+      href={`/addons/${name}`}
       className={cn(
         'flex justify-between rounded border border-zinc-300 p-6 transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:border-blue-500 dark:border-slate-800 dark:hover:border-blue-500',
         orientation === 'horizontal'
