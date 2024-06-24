@@ -1,4 +1,5 @@
-import { fetchAddonsQuery, gql, validateResponse } from '@repo/utils';
+import { validateResponse } from '@repo/utils';
+import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
 
 type RecipesData = {
   recipes: Pick<Recipe, 'name'>[];

@@ -1,5 +1,6 @@
 import { addonFragment, recipeFragment } from '@repo/utils';
-import { validateResponse, fetchAddonsQuery, gql } from '@repo/utils';
+import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
+import { validateResponse } from '../lib/validate-response';
 
 interface AddonsHomeData {
   popular: {

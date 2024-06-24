@@ -1,4 +1,5 @@
-import { validateResponse, fetchAddonsQuery, gql } from '@repo/utils';
+import { validateResponse } from '../lib/validate-response';
+import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
 
 type AddonsData = {
   addons: Pick<Addon, 'name'>[];

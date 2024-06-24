@@ -1,11 +1,6 @@
 import { buildTagLinks } from './build-tag-links';
-import {
-  fetchAddonsQuery,
-  gql,
-  validateResponse,
-  addonFragment,
-  recipeFragment,
-} from '@repo/utils';
+import { validateResponse, addonFragment, recipeFragment } from '@repo/utils';
+import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
 
 interface RecipesData {
   recipes: Recipe[];
