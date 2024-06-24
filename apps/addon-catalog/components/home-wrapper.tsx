@@ -67,12 +67,12 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
               <ul className="-ml-2 border-b border-b-zinc-300 pb-6 dark:border-b-slate-700">
                 {categories.map(({ name, href }) => (
                   <li key={name}>
-                    <a
+                    <Link
                       href={href}
                       className="flex items-center px-2 py-[5px] text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
                     >
                       {name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

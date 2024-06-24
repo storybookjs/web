@@ -47,7 +47,7 @@ export const Preview = ({
         )}
       >
         <div className="relative h-16 w-16 flex-shrink-0">
-          {icon && <Image src={icon} alt="" fill={true} />}
+          {icon && <img src={icon} alt={name} />}
         </div>
         <div>
           <div className="flex items-center gap-2">
