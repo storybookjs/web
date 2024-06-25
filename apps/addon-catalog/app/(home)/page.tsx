@@ -32,7 +32,7 @@ export default async function Page() {
       </div>
       <h3 className="mb-8 mt-12 text-2xl font-bold">Popular recipes</h3>
       <div className="flex flex-col gap-6">
-        {popularRecipes.slice(0, 6).map((recipe) => (
+        {popularRecipes.map((recipe) => (
           <Preview
             key={recipe.name}
             orientation="horizontal"
