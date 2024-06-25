@@ -32,9 +32,25 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
             : 'mb-8 flex-col',
         )}
       >
-        <div className="relative h-16 w-16 flex-shrink-0">
-          {element.icon && <img src={element.icon} alt={element.name} />}
-        </div>
+        {!isRecipe && (
+          <div className="relative h-16 w-16 flex-shrink-0">
+            {element.icon && <img src={element.icon} alt={element.name} />}
+          </div>
+        )}
+        {'accentColor' in element && (
+          <div
+            className="relative flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-md"
+            style={{ backgroundColor: element.accentColor || 'transparent' }}
+          >
+            {element.icon && (
+              <img
+                src={element.icon}
+                alt={element.name}
+                className="h-10 w-10"
+              />
+            )}
+          </div>
+        )}
         <div>
           <div className="flex items-center gap-2">
             <div className="font-bold">
