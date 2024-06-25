@@ -9,14 +9,13 @@ import {
 } from '@repo/ui';
 import Image from 'next/image';
 import { TreeProps, fetchGithubCount, latestVersion } from '@repo/utils';
-import { Sidebar } from '../../components/docs/sidebar/sidebar';
-import { TableOfContent } from '../../components/docs/table-of-content';
-import { NavDocs } from '../../components/docs/sidebar/docs-nav';
-import { generateDocsTree } from '../../lib/get-tree';
-import { DocsProvider } from './provider';
-import { getVersion } from '../../lib/get-version';
-import { getPageData } from '../../lib/get-page';
-import { Submenu } from '../../components/docs/submenu';
+import { Sidebar } from '../../../components/docs/sidebar/sidebar';
+import { TableOfContent } from '../../../components/docs/table-of-content';
+import { NavDocs } from '../../../components/docs/sidebar/docs-nav';
+import { generateDocsTree } from '../../../lib/get-tree';
+import { DocsProvider } from '../provider';
+import { getVersion } from '../../../lib/get-version';
+import { Submenu } from '../../../components/docs/submenu';
 
 interface PageProps {
   children: React.ReactNode;
@@ -78,16 +77,16 @@ export default async function Layout({
   children,
   params: { slug },
 }: PageProps) {
+  console.log('docs layout, slug', slug);
   const { number: githubCount } = await fetchGithubCount();
   const activeVersion = getVersion(slug);
+  console.log('docs layout, activeVersion', JSON.stringify(activeVersion, null, 2));
   const path = `content/docs/${activeVersion.id}`;
   const tree = generateDocsTree(path);
   const isLatest = activeVersion.id === latestVersion.id;
   const slugToFetch = slug ? [...slug] : [];
   if (!isLatest) slugToFetch.shift();
   slugToFetch.unshift(activeVersion.id);
-
-  const page = await getPageData(slugToFetch, activeVersion);
 
   return (
     <DocsProvider>

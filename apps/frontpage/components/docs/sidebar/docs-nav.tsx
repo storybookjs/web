@@ -5,21 +5,27 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { useEffect, useState, type FC } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import type { DocsVersion, TreeProps } from '@repo/utils';
-import { cn, docsVersions } from '@repo/utils';
+import { cn, docsVersions, latestVersion } from '@repo/utils';
 import { VersionSelector } from './version-selector';
 import { usePathname } from 'next/navigation';
+import { getVersion } from '../../../lib/get-version';
 
 interface NavDocsProps {
   tree: TreeProps[] | null | undefined;
   activeVersion: DocsVersion;
 }
 
-const getUrl = (slug: string) => {
-  const newSlug = slug.replace('/docs/', '').split('/');
-  const hasFirstVersion = docsVersions[0]?.id === newSlug[0];
-  if (hasFirstVersion) newSlug.shift();
+const getUrl = (slug: string, activeVersion: DocsVersion) => {
+  if (activeVersion.id === latestVersion.id) {
+    return slug.replace(`/docs/${activeVersion.id}`, '/docs');
+  } else if (activeVersion.id !== latestVersion.id && activeVersion.inSlug) {
+    return slug.replace(
+      `/docs/${activeVersion.id}`,
+      `/docs/${activeVersion.inSlug}`,
+    );
+  }
 
-  return `/docs/${newSlug.join('/')}`;
+  return slug;
 };
 
 export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
@@ -37,7 +43,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
 
       for (let i = 0; i < t.length; i++) {
         const current = t[i];
-        if (getUrl(current.slug) === pathname) {
+        if (getUrl(current.slug, activeVersion) === pathname) {
           parent?.pathSegment && setParentAccordion([parent?.pathSegment]);
           return current;
         }
@@ -60,28 +66,46 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
       <VersionSelector activeVersion={activeVersion} />
       <ul className="mt-7 md:mt-9">
         {tree
-          ? tree.map((lvl1) => <Level1 key={lvl1.pathSegment} lvl1={lvl1} />)
+          ? tree.map((lvl1) => (
+              <Level1
+                key={lvl1.pathSegment}
+                lvl1={lvl1}
+                activeVersion={activeVersion}
+              />
+            ))
           : []}
       </ul>
     </Accordion.Root>
   );
 };
 
-const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
+const Level1 = ({
+  lvl1,
+  activeVersion,
+}: {
+  lvl1: TreeProps;
+  activeVersion: DocsVersion;
+}) => {
   if (lvl1.name === 'versions' || lvl1.name === 'index.mdx') return null;
 
   return (
     <li key={lvl1.pathSegment}>
       <Link
         className="mt-6 flex items-center px-2 py-2 text-sm font-bold transition-colors hover:text-blue-500"
-        href={getUrl(lvl1.slug)}
+        href={getUrl(lvl1.slug, activeVersion)}
       >
         {lvl1.sidebar?.title || lvl1.title}
       </Link>
       {lvl1.children && lvl1.children.length > 0 ? (
         <ul>
           {lvl1.children.map((lvl2) => {
-            return <Level2 key={lvl2.pathSegment} lvl2={lvl2} />;
+            return (
+              <Level2
+                key={lvl2.pathSegment}
+                lvl2={lvl2}
+                activeVersion={activeVersion}
+              />
+            );
           })}
         </ul>
       ) : null}
@@ -89,11 +113,17 @@ const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
   );
 };
 
-const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
+const Level2 = ({
+  lvl2,
+  activeVersion,
+}: {
+  lvl2: TreeProps;
+  activeVersion: DocsVersion;
+}) => {
   const pathname = usePathname();
   const isDraft = lvl2.draft === true ? true : false;
   const hasChildren = lvl2.children && lvl2.children.length > 0;
-  const slug = getUrl(lvl2.slug);
+  const slug = getUrl(lvl2.slug, activeVersion);
 
   if (isDraft) return null;
 
@@ -127,7 +157,13 @@ const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
           <Accordion.Content>
             <ul>
               {lvl2.children?.map((lvl3) => {
-                return <Level3 key={lvl3.pathSegment} lvl3={lvl3} />;
+                return (
+                  <Level3
+                    key={lvl3.pathSegment}
+                    lvl3={lvl3}
+                    activeVersion={activeVersion}
+                  />
+                );
               })}
             </ul>
           </Accordion.Content>
@@ -137,9 +173,15 @@ const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
   );
 };
 
-const Level3 = ({ lvl3 }: { lvl3: TreeProps }) => {
+const Level3 = ({
+  lvl3,
+  activeVersion,
+}: {
+  lvl3: TreeProps;
+  activeVersion: DocsVersion;
+}) => {
   const isDraft = lvl3.draft === true ? true : false;
-  const slug = getUrl(lvl3.slug);
+  const slug = getUrl(lvl3.slug, activeVersion);
   const pathname = usePathname();
 
   if (isDraft) return null;
