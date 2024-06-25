@@ -31,14 +31,14 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
       <div className="mb-8 mt-12 flex items-start justify-between">
         <div>
           <h1 className="mb-4 text-4xl font-bold">Integrations</h1>
-          <p>
+          <p className="text-black dark:text-slate-400">
             Integrate your tools with Storybook to connect workflows and unlock
             advanced features.
           </p>
         </div>
         <a
           href="/docs/react/addons/integration-catalog"
-          className="text-md hidden h-10 flex-shrink-0 items-center gap-2 rounded-full bg-blue-500 px-5 text-white md:flex"
+          className="hidden h-10 flex-shrink-0 items-center gap-2 rounded-full bg-blue-500 px-5 text-sm font-bold text-white md:flex"
         >
           <PlusIcon />
           Add your integration
@@ -49,7 +49,7 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
           <div className="relative flex h-10 w-full flex-shrink-0 items-center rounded-full border border-zinc-300 md:w-[250px] dark:border-slate-700">
             <SearchIcon className="absolute left-4 dark:text-slate-500" />
             <input
-              className="h-full w-full rounded-full bg-transparent pl-10 placeholder:text-slate-500"
+              className="h-full w-full rounded-full bg-transparent pl-10 placeholder:text-slate-500 dark:placeholder:text-slate-400"
               placeholder="Search integrations"
               value={search}
               onChange={(e) => setSearch(e.target.value)}

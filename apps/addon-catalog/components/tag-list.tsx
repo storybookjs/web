@@ -38,7 +38,7 @@ export const TagList = ({ tagLinks }: TagListProps) => {
             setMoreTagsVisible(true);
           }}
           type="button"
-          className="text-sm transition-colors hover:text-blue-500"
+          className="text-sm text-black transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
         >
           {`+ ${moreTags.length} more`}
         </button>

@@ -21,7 +21,7 @@ export function AddonHero({ addon }: { addon: Addon }) {
               )}
           </div>
           <p className="mb-4">{addon.description}</p>
-          <button className="flex cursor-pointer items-center gap-4 rounded bg-zinc-100 px-4 py-2">
+          <button className="flex cursor-pointer items-center gap-4 rounded bg-zinc-100 px-4 py-2 dark:bg-slate-800 dark:text-slate-300">
             npm install {addon.name} <CopyIcon />
           </button>
         </div>

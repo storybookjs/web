@@ -19,7 +19,7 @@ export const SubHeader = ({
   return (
     <div
       className={cn(
-        'ui-mb-16 ui-h-16 ui-items-center ui-justify-between ui-border-b ui-border-zinc-100 flex',
+        'ui-mb-16 ui-h-16 ui-items-center ui-justify-between ui-border-b ui-border-zinc-100 dark:ui-border-slate-800 flex',
         className,
       )}
     >
