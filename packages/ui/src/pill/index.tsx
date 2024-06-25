@@ -6,28 +6,34 @@ import { Slot, Slottable } from '@radix-ui/react-slot';
 interface ButtonProps {
   onClick?: () => void;
   children: ReactNode;
-  active?: boolean;
+  isActive?: boolean;
   arrow?: boolean;
   asChild?: boolean;
+  noHover?: boolean;
 }
 
 export const Pill = ({
   onClick,
   children = '',
-  active = false,
+  isActive = false,
   arrow = false,
   asChild = false,
+  noHover = false,
   ...props
 }: ButtonProps): ReactNode => {
-  const Comp = asChild ? Slot : 'button';
+  let Comp = asChild ? Slot : 'button';
+  if (noHover) Comp = 'div';
 
   return (
     <Comp
       className={cn(
-        'ui-outline-offset-3 ui-inline-flex ui-h-7 ui-items-center ui-justify-center ui-gap-1 ui-rounded ui-border ui-border-zinc-300 ui-px-2 ui-text-sm ui-text-zinc-800 ui-outline-blue-500 ui-transition-colors hover:ui-border-blue-500 hover:ui-text-blue-500 data-[state=open]:ui-border-blue-500 data-[state=open]:ui-text-blue-500',
-        active &&
+        'ui-outline-offset-3 ui-inline-flex ui-h-7 ui-items-center ui-justify-center ui-gap-1 ui-rounded ui-border ui-px-2 ui-text-sm',
+        noHover && 'ui-cursor-default',
+        !noHover &&
+          'ui-outline-blue-500 ui-transition-colors hover:ui-border-blue-500 hover:ui-text-blue-500',
+        isActive &&
           'ui-border-blue-500 ui-text-blue-500 dark:ui-border-blue-500 dark:ui-text-blue-500',
-        !active &&
+        !isActive &&
           'dark:ui-border-slate-700 dark:ui-text-slate-500 dark:hover:ui-border-slate-500 dark:hover:ui-text-slate-500',
       )}
       onClick={onClick}

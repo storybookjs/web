@@ -1,6 +1,6 @@
-import { HomeWrapper } from '../../../components/home-wrapper';
-import { Preview } from '../../../components/preview';
-import { fetchTagDetailsData } from '../../../lib/fetch-tag-details-data';
+import { Preview } from '../../../../components/preview';
+import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
+import { notFound } from 'next/navigation';
 
 interface TagDetailsProps {
   params: {
@@ -19,18 +19,17 @@ interface TagDetailsProps {
 export default async function TagDetails({
   params: { name },
 }: TagDetailsProps) {
-  const { topIntegrations } = await fetchTagDetailsData(name) || {};
+  const data = (await fetchTagDetailsData(name)) || {};
 
-  /**
-   * TODO: Category template
-   * You can use `tag.isCategory` to render the correct template
-   */
+  if ('error' in data) return notFound();
 
   return (
-    <HomeWrapper>
-      <h3 className="mb-8 text-2xl font-bold">{name}</h3>
+    <>
+      <h3 className="mb-8 text-2xl font-bold">
+        {data.displayName} integrations
+      </h3>
       <div className="flex flex-col gap-6">
-        {topIntegrations?.addons?.map((addon) => (
+        {data.topIntegrations?.addons?.map((addon) => (
           <Preview
             key={addon.name}
             element={addon}
@@ -39,6 +38,6 @@ export default async function TagDetails({
           />
         ))}
       </div>
-    </HomeWrapper>
+    </>
   );
 }

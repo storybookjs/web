@@ -88,14 +88,15 @@ export async function fetchTagDetailsData(name: string) {
       (tag) => tag.name === name,
     );
 
-    if (!tag) throw new Error(`Tag not found: ${name}`);
+    // if (!tag) throw new Error(`Tag not found: ${name}`);
+
+    if (!tag) return { error: `Tag not found: ${name}` };
 
     return {
       ...tag,
       isCategory: categoriesData.find((category) => category.name === name),
     };
   } catch (error) {
-    // @ts-expect-error - Seems safe
-    throw new Error(`Failed to fetch tags data: ${error.message}`);
+    throw new Error(`Failed to fetch tags data: ${error}`);
   }
 }

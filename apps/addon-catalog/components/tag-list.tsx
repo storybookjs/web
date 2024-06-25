@@ -22,11 +22,15 @@ export const TagList = ({ tagLinks }: TagListProps) => {
   return (
     <div className="flex max-w-[800px] flex-row flex-wrap items-center gap-2">
       {primaryTags.map(({ name, link }) => (
-        <TagItem key={link} name={name} link={link} />
+        <Pill key={name} asChild>
+          <Link href={link}>{name}</Link>
+        </Pill>
       ))}
       {moreTagsVisible &&
         moreTags.map(({ name, link }) => (
-          <TagItem key={link} name={name} link={link} />
+          <Pill key={name} asChild>
+            <Link href={link}>{name}</Link>
+          </Pill>
         ))}
       {moreTags.length > 0 && !moreTagsVisible && (
         <button
@@ -42,9 +46,3 @@ export const TagList = ({ tagLinks }: TagListProps) => {
     </div>
   );
 };
-
-const TagItem = ({ name, link }: TagProps) => (
-  <Pill asChild>
-    <Link href={link}>{name}</Link>
-  </Pill>
-);
