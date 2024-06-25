@@ -1,10 +1,17 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { TagList } from './tag-list';
-import { BookIcon, EditIcon, PlusIcon, SearchIcon } from '@storybook/icons';
+import {
+  BookIcon,
+  CloseIcon,
+  EditIcon,
+  PlusIcon,
+  SearchIcon,
+} from '@storybook/icons';
 import Link from 'next/link';
 import { SearchResults } from './search-results';
+import { fetchSearchData } from '../lib/fetch-search-data';
 
 interface HomeProps {
   tagLinks?: TagLinkType[];
@@ -25,6 +32,22 @@ const categories = [
 
 export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [searchResults, setSearchResults] = useState<Addon[]>([]);
+
+  useEffect(() => {
+    setLoading(true);
+
+    const getData = setTimeout(async () => {
+      if (search.length > 1) {
+        const data = await fetchSearchData(search);
+        setLoading(false);
+        setSearchResults(data);
+      }
+    }, 600);
+
+    return () => clearTimeout(getData);
+  }, [search]);
 
   return (
     <>
@@ -54,10 +77,24 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
+            {search.length > 0 && (
+              <div
+                className="absolute right-2 top-1/2 flex h-7 w-7 -translate-y-1/2 cursor-pointer items-center justify-center"
+                onClick={() => setSearch('')}
+              >
+                <CloseIcon />
+              </div>
+            )}
           </div>
           {tagLinks && <TagList tagLinks={tagLinks} />}
         </div>
-        {search && <SearchResults search={search} />}
+        {search && (
+          <SearchResults
+            search={search}
+            loading={loading}
+            searchResults={searchResults}
+          />
+        )}
         {!search && (
           <div className="flex flex-col gap-12 md:flex-row">
             <div className="hidden flex-shrink-0 md:block md:w-[250px]">
