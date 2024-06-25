@@ -1,8 +1,23 @@
+'use client';
+
 import Image from 'next/image';
-import { CopyIcon, VerifiedIcon } from '@storybook/icons';
+import { CheckIcon, CopyIcon, VerifiedIcon } from '@storybook/icons';
 import humanFormat from 'human-format';
+import copy from 'copy-to-clipboard';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function AddonHero({ addon }: { addon: Addon }) {
+  const [state, setState] = useState(false);
+
+  const onClick = () => {
+    copy(`npx install ${addon.name}`);
+    setState(true);
+    setTimeout(() => {
+      setState(false);
+    }, 2000);
+  };
+
   return (
     <div className="mb-12 flex justify-between border-b border-zinc-300 pb-12 dark:border-b-slate-700">
       <div className="flex flex-col gap-8 md:flex-row">
@@ -21,8 +36,24 @@ export function AddonHero({ addon }: { addon: Addon }) {
               )}
           </div>
           <p className="mb-4">{addon.description}</p>
-          <button className="flex cursor-pointer items-center gap-4 rounded bg-zinc-100 px-4 py-2 dark:bg-slate-800 dark:text-slate-300">
+          <button
+            className="relative flex cursor-pointer items-center gap-4 rounded bg-zinc-100 px-4 py-2 dark:bg-slate-800 dark:text-slate-300"
+            onClick={onClick}
+          >
             npm install {addon.name} <CopyIcon />
+            <AnimatePresence>
+              {state ? (
+                <motion.div
+                  animate={{ opacity: 1 }}
+                  className="absolute left-0 top-0 flex h-full w-full items-center justify-center gap-2 bg-zinc-100 text-black dark:bg-slate-800 dark:text-slate-300"
+                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <CheckIcon /> Copied!
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
           </button>
         </div>
       </div>
