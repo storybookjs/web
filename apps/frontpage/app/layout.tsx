@@ -58,8 +58,8 @@ export default function RootLayout({
       <script
         defer
         data-domain="storybook.js.org"
-        data-api="/sb-event/api/event"
-        src="/sb-event/js/script.js"
+        data-api="/sb/api/event"
+        src="/sb/js/script.js"
       ></script>
     </html>
   );
