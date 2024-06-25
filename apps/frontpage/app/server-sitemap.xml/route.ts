@@ -105,15 +105,21 @@ export async function GET() {
   const tags = await fetchTagsData();
   const recipes = await fetchRecipesData();
 
-  const addonPaths = addons.map((name) => ({
-    loc: `https://storybook.js.org/addons/${name}`,
-  }));
-  const tagAndCategoryPaths = [...categories, ...tags].map((name) => ({
-    loc: `https://storybook.js.org/addons/tag/${name}`,
-  }));
-  const recipePaths = recipes.map((name) => ({
-    loc: `https://storybook.js.org/recipes/${name}`,
-  }));
+  console.log('sitemap foo');
+
+  const addonPaths = addons.map((name) => {
+    if (!name) throw new Error('Addon name is missing');
+    return { loc: `https://storybook.js.org/addons/${name}` };
+  });
+  const tagAndCategoryPaths = [...categories, ...tags].map((name, i) => {
+    if (!name) throw new Error('Tag name is missing');
+    // console.log(i, name)
+    return { loc: `https://storybook.js.org/addons/tag/${name}` };
+  });
+  const recipePaths = recipes.map((name) => {
+    if (!name) throw new Error('Recipe name is missing');
+    return { loc: `https://storybook.js.org/recipes/${name}` };
+  });
 
   // return getServerSideSitemap([
   //   ...addonPaths,
@@ -121,19 +127,32 @@ export async function GET() {
   //   ...recipePaths,
   // ]);
 
-  const urls = [
-    ...addonPaths,
-    ...tagAndCategoryPaths,
-    ...recipePaths,
-  ].map(({ loc }) => `
+  const urls = [...addonPaths, ...tagAndCategoryPaths, ...recipePaths]
+    .map(({ loc }, i) => {
+      const encoded = loc
+        .replace('&', '&amp;')
+        .replace('<', '&lt;')
+        .replace('>', '&gt;')
+        .replace("'", '&apos;')
+        .replace('"', '&quot;');
+      return `
   <url>
-    <loc>${loc}</loc>
+    <loc>${encoded}</loc>
   </url>
-`).join('');
+`;
+    })
+    .join('');
 
-  return new Response(`
+  return new Response(
+    `
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   ${urls}
 </urlset>
-  `)
+  `,
+    {
+      headers: {
+        'Content-Type': 'text/xml',
+      },
+    },
+  );
 }
