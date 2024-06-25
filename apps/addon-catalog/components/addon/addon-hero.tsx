@@ -11,6 +11,7 @@ import humanFormat from 'human-format';
 import copy from 'copy-to-clipboard';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { StorybookIcon } from '@repo/ui';
 
 export function AddonHero({ addon }: { addon: Addon }) {
   const [state, setState] = useState(false);
@@ -72,8 +73,8 @@ export function AddonHero({ addon }: { addon: Addon }) {
           </div>
         </div>
       </div>
-      <div className="hidden lg:block">
-        <div className="flex flex-col pr-8">
+      <div className="hidden flex-col pr-8 lg:flex">
+        <div className="mb-4 flex flex-col">
           <div className="text-3xl text-blue-400">
             {humanFormat(addon.weeklyDownloads || 0, {
               decimals: 1,
@@ -82,6 +83,14 @@ export function AddonHero({ addon }: { addon: Addon }) {
           </div>
           <div className="text-md">Downloads per week</div>
         </div>
+        {addon.verified && addon.verified === 'official' && (
+          <div className="flex items-center gap-2 rounded bg-blue-900 px-2 py-1.5">
+            <StorybookIcon size={16} />
+            <span className="text-xs font-bold text-white">
+              Made by Storybook
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { cn, latestVersion } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { GithubIcon } from '@storybook/icons';
-import { StorybookLogo } from '../logos/storybook';
+import { StorybookLogo } from '../logos/storybook-logo';
 import { Search } from '../search';
 import { MobileMenu } from './mobile-menu';
 import { Button } from './button';
