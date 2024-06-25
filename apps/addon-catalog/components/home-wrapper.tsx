@@ -12,15 +12,15 @@ interface HomeProps {
 }
 
 const categories = [
-  { name: 'Popular', href: '/addons' },
-  { name: 'Essential', href: '/addons/tag/essentials' },
-  { name: 'Code', href: '/addons/tag/code' },
-  { name: 'Data & State', href: '/addons/tag/data-state' },
-  { name: 'Test', href: '/addons/tag/test' },
-  { name: 'Style', href: '/addons/tag/style' },
-  { name: 'Design', href: '/addons/tag/design' },
-  { name: 'Appearance', href: '/addons/tag/appearance' },
-  { name: 'Organize', href: '/addons/tag/organize' },
+  { name: 'Popular', href: '/' },
+  { name: 'Essential', href: '/tag/essentials' },
+  { name: 'Code', href: '/tag/code' },
+  { name: 'Data & State', href: '/tag/data-state' },
+  { name: 'Test', href: '/tag/test' },
+  { name: 'Style', href: '/tag/style' },
+  { name: 'Design', href: '/tag/design' },
+  { name: 'Appearance', href: '/tag/appearance' },
+  { name: 'Organize', href: '/tag/organize' },
 ];
 
 export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
