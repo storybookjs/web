@@ -18,6 +18,8 @@
     "@repo/ui": "*",
     "@storybook/icons": "^1.2.9",
     "@types/mdx": "^2.0.13",
+    "copy-to-clipboard": "^3.3.3",
+    "framer-motion": "^11.2.12",
     "graphql-request": "^7.1.0",
     "human-format": "^1.2.0",
     "next": "^14.2.4",
