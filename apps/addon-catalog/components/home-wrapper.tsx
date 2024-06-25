@@ -12,6 +12,8 @@ import {
 import Link from 'next/link';
 import { SearchResults } from './search-results';
 import { fetchSearchData } from '../lib/fetch-search-data';
+import { usePathname } from 'next/navigation';
+import { cn } from '@repo/utils';
 
 interface HomeProps {
   tagLinks?: TagLinkType[];
@@ -34,6 +36,7 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
   const [searchResults, setSearchResults] = useState<Addon[]>([]);
+  const pathname = usePathname();
 
   useEffect(() => {
     setLoading(true);
@@ -106,7 +109,10 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
                   <li key={name}>
                     <Link
                       href={href}
-                      className="flex items-center px-2 py-[5px] text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
+                      className={cn(
+                        'flex items-center px-2 py-[5px] text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500',
+                        pathname === href && 'text-blue-500',
+                      )}
                     >
                       {name}
                     </Link>
