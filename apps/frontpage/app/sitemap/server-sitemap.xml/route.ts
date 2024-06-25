@@ -1,6 +1,6 @@
 import { validateResponse } from '@repo/utils';
-import { fetchAddonsQuery, gql } from '../../lib/fetch-addons-query';
-import { fetchRecipesData } from '../../lib/fetch-recipes-data';
+import { fetchAddonsQuery, gql } from '../../../lib/fetch-addons-query';
+import { fetchRecipesData } from '../../../lib/fetch-recipes-data';
 
 type AddonValue = string;
 
@@ -104,8 +104,6 @@ export async function GET() {
   const categories = await fetchTagsData({ isCategory: true });
   const tags = await fetchTagsData();
   const recipes = await fetchRecipesData();
-
-  console.log('sitemap foo');
 
   const addonPaths = addons.map((name) => {
     if (!name) throw new Error('Addon name is missing');
