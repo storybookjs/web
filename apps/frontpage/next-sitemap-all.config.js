@@ -23,6 +23,7 @@ module.exports = {
   },
   robotsTxtOptions: {
     additionalSitemaps: [
+      'https://storybook.js.org/sitemap/server-sitemap.xml',
       'https://storybook.js.org/sitemap/addons/sitemap.xml',
     ]
   },

@@ -1,6 +1,5 @@
 import { cn } from '@repo/utils';
 import type { FC } from 'react';
-import Link from 'next/link';
 import { StorybookLogo } from '../logos/storybook-logo';
 import { ChromaticLogo } from '../logos/chromatic';
 import { Container } from '../container';
@@ -49,7 +48,7 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
                     </a>
                   );
                 return (
-                  <Link
+                  <a
                     className={cn(
                       'hover:ui-text-blue-500 ui-transition-colors ui-text-md',
                       variant === 'home' && 'ui-text-slate-400',
@@ -60,7 +59,7 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
                     key={link.title}
                   >
                     {link.title}
-                  </Link>
+                  </a>
                 );
               })}
             </div>

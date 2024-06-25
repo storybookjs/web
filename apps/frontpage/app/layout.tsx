@@ -44,14 +44,6 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          defer
-          data-domain="storybook.js.org"
-          data-api="/sb-event/api/event"
-          src="/sb-event/js/script.js"
-        ></script>
-      </head>
       <body
         className={cn(
           'min-h-screen bg-white font-sans antialiased dark:bg-slate-950',
@@ -63,6 +55,12 @@ export default function RootLayout({
         <Analytics />
       </body>
       <GoogleAnalytics gaId="G-MN8NJ34M7T" />
+      <script
+        defer
+        data-domain="storybook.js.org"
+        data-api="/sb-event/api/event"
+        src="/sb-event/js/script.js"
+      ></script>
     </html>
   );
 }

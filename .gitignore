@@ -37,12 +37,14 @@ yarn-error.log*
 .DS_Store
 *.pem
 
-# Generated docs content
-apps/frontpage/generated-redirects.json
+# Generated content
+apps/addon-catalog/public/sitemap.xml
 apps/frontpage/content/docs
 apps/frontpage/content/snippets
+apps/frontpage/generated-redirects.json
 apps/frontpage/public/docs-assets
 apps/frontpage/public/sitemap
+robots.txt
 
 # ui
 dist/

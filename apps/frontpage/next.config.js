@@ -71,6 +71,17 @@ module.exports = {
       },
     ],
   },
+  async headers() {
+    return historicalVersions.map((v) => ({
+      source: `/docs/${v}/:path*`,
+      headers: [
+        {
+          key: 'X-Robots-Tag',
+          value: 'noindex',
+        },
+      ],
+    }))
+  },
   // This was added to fix the error with remarkExpressiveCode
   // https://stackoverflow.com/questions/77009138/module-has-no-exports-error-works-fine-on-stackblitz-but-fails-locally
   webpack: (config) => {
@@ -91,10 +102,29 @@ module.exports = {
     // Add the wild cards at the bottom of the list
     // to avoid conflicts with the more specific redirects
     return [
-      // TODO: Are we adding /docs/index.mdx to all versions?
       {
         source: '/docs/get-started',
         destination: '/docs',
+        permanent: true,
+      },
+      {
+        source: '/addons/addon-gallery',
+        destination: '/addons',
+        permanent: true,
+      },
+      {
+        source: '/integrations',
+        destination: '/addons',
+        permanent: true,
+      },
+      {
+        source: '/recipes',
+        destination: '/addons',
+        permanent: true,
+      },
+      {
+        source: '/integrations/tag/:tag',
+        destination: '/addons/tag/:tag',
         permanent: true,
       },
       {
@@ -310,27 +340,6 @@ module.exports = {
         destination: '/docs/addons/writing-presets',
         permanent: true,
       },
-      /* Addons (TODO) */
-      // {
-      //   source: '/addons/addon-gallery',
-      //   destination: '/integrations',
-      //   permanent: true,
-      // },
-      // {
-      //   source: '/addons',
-      //   destination: '/integrations',
-      //   permanent: true,
-      // },
-      // {
-      //   source: '/recipes',
-      //   destination: '/integrations',
-      //   permanent: true,
-      // },
-      // {
-      //   source: '/addons/tags/:tag',
-      //   destination: '/integrations/tag/:tag',
-      //   permanent: true,
-      // },
       ...renderers.map((r) => ({
         source: `/docs${r}/get-started/examples`,
         destination: '/showcase',

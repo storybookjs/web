@@ -2,8 +2,9 @@
   "name": "storybook-web",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build && npm run copy-other-sitemaps",
     "build-ui-only": "turbo run build --filter=@repo/ui",
+    "copy-other-sitemaps": "npm run copy-other-sitemaps -w apps/frontpage",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
