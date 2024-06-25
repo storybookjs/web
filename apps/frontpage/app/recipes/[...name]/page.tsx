@@ -39,8 +39,6 @@ export default async function RecipeDetails({ params }: RecipeDetailsProps) {
     'utf-8',
   );
 
-  console.log(metadata);
-
   return (
     <>
       <Header

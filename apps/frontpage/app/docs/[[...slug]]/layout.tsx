@@ -77,10 +77,8 @@ export default async function Layout({
   children,
   params: { slug },
 }: PageProps) {
-  console.log('docs layout, slug', slug);
   const { number: githubCount } = await fetchGithubCount();
   const activeVersion = getVersion(slug);
-  console.log('docs layout, activeVersion', JSON.stringify(activeVersion, null, 2));
   const path = `content/docs/${activeVersion.id}`;
   const tree = generateDocsTree(path);
   const isLatest = activeVersion.id === latestVersion.id;

@@ -111,7 +111,6 @@ export async function GET() {
   });
   const tagAndCategoryPaths = [...categories, ...tags].map((name, i) => {
     if (!name) throw new Error('Tag name is missing');
-    // console.log(i, name)
     return { loc: `https://storybook.js.org/addons/tag/${name}` };
   });
   const recipePaths = recipes.map((name) => {
