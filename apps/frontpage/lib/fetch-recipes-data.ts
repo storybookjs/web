@@ -4,7 +4,7 @@ import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
 type RecipesValue = Recipe['name'];
 
 type RecipesData = {
-  recipes: Pick<Recipe, 'name'>[];
+  recipes: Pick<Recipe, 'name' | 'authors'>[];
 };
 
 export async function fetchRecipesData() {
@@ -16,6 +16,9 @@ export async function fetchRecipesData() {
           query RecipeNames($skip: Int!) {
             recipes(limit: 30, skip: $skip) {
               name
+              authors {
+                username
+              }
             }
           }
         `,
@@ -28,7 +31,11 @@ export async function fetchRecipesData() {
 
       const { recipes } = data;
 
-      value = [...value, ...recipes.map(({ name }) => name)];
+      value = [
+        ...value,
+        // TODO: `authors` filter is a proxy for "real" recipes; clean up database
+        ...recipes.filter(({ authors }) => authors).map(({ name }) => name),
+      ];
 
       if (recipes.length > 0) await fetchPartialData(skip + recipes.length);
 

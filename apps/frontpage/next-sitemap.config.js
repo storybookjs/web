@@ -14,7 +14,7 @@ module.exports = {
   ],
   transform: async (config, path) => {
     // Filter out the versioned paths
-    if (/docs\/\d+\//.test(path)) return null;
+    if (/docs\/\d+/.test(path)) return null;
 
     return {
       loc: path, // => this will be exported as http(s)://<config.siteUrl>/<path>
@@ -24,8 +24,10 @@ module.exports = {
       // alternateRefs: config.alternateRefs ?? [],
     };
   },
+  generateRobotsTxt: true,
   robotsTxtOptions: {
     additionalSitemaps: [
+      'https://storybook.js.org/sitemap/server-sitemap.xml',
       'https://storybook.js.org/sitemap/addons/sitemap.xml',
       'https://storybook.js.org/sitemap/blog/sitemap.xml',
       'https://storybook.js.org/sitemap/showcase/sitemap.xml',
