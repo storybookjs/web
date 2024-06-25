@@ -57,7 +57,7 @@ export function AddonSidebar({ addon }: { addon: Addon }) {
           </div>
           <ul className="flex flex-wrap gap-2">
             {renderers.map((renderer) => (
-              <Pill>{renderer.displayName}</Pill>
+              <Pill noHover>{renderer.displayName}</Pill>
             ))}
           </ul>
         </>

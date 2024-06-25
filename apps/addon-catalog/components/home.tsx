@@ -1,23 +1,14 @@
-'use client';
-
 import { Preview } from '../components/preview';
-import { HomeWrapper } from './home-wrapper';
 
 interface HomeProps {
-  tagLinks: TagLinkType[];
   popularRecipes: Recipe[];
   popularAddons: Addon[];
   vta: Addon | undefined;
 }
 
-export const Home = ({
-  tagLinks,
-  popularRecipes,
-  popularAddons,
-  vta,
-}: HomeProps) => {
+export const Home = ({ popularRecipes, popularAddons, vta }: HomeProps) => {
   return (
-    <HomeWrapper tagLinks={tagLinks}>
+    <>
       <h3 className="mb-8 text-2xl font-bold">New to Storybook 8</h3>
       {vta && (
         <Preview
@@ -49,6 +40,6 @@ export const Home = ({
           />
         ))}
       </div>
-    </HomeWrapper>
+    </>
   );
 };

@@ -1,6 +1,5 @@
-import { HomeWrapper } from '../../../components/home-wrapper';
-import { Preview } from '../../../components/preview';
-import { fetchTagDetailsData } from '../../../lib/fetch-tag-details-data';
+import { Preview } from '../../../../components/preview';
+import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
 import { notFound } from 'next/navigation';
 
 interface TagDetailsProps {
@@ -25,7 +24,7 @@ export default async function TagDetails({
   if ('error' in data) return notFound();
 
   return (
-    <HomeWrapper>
+    <>
       <h3 className="mb-8 text-2xl font-bold">
         {data.displayName} integrations
       </h3>
@@ -39,6 +38,6 @@ export default async function TagDetails({
           />
         ))}
       </div>
-    </HomeWrapper>
+    </>
   );
 }
