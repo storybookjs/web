@@ -1,7 +1,6 @@
 import { HomeWrapper } from '../../../components/home-wrapper';
-import { fetchTagsData } from '../../../lib/fetch-tags-data';
-import { fetchSearchData } from '../../../lib/fetch-search-data';
 import { Preview } from '../../../components/preview';
+import { fetchTagDetailsData } from '../../../lib/fetch-tag-details-data';
 
 interface TagDetailsProps {
   params: {
@@ -9,20 +8,21 @@ interface TagDetailsProps {
   };
 }
 
-export async function generateStaticParams() {
-  const categories = (await fetchTagsData({ isCategory: true })) || [];
-  const tags = (await fetchTagsData()) || [];
-  return [...categories, ...tags].map((name) => ({
-    params: { name },
-  }));
-}
+// export async function generateStaticParams() {
+//   const categories = (await fetchTagsData({ isCategory: true })) || [];
+//   const tags = (await fetchTagsData()) || [];
+//   return [...categories, ...tags].map((name) => ({
+//     params: { name },
+//   }));
+// }
 
 export default async function TagDetails({
   params: { name },
 }: TagDetailsProps) {
-  const addons = await fetchSearchData(name);
+  const { topIntegrations } = await fetchTagDetailsData(name) || {};
 
   /**
+   * TODO: Category template
    * You can use `tag.isCategory` to render the correct template
    */
 
@@ -30,7 +30,7 @@ export default async function TagDetails({
     <HomeWrapper>
       <h3 className="mb-8 text-2xl font-bold">{name}</h3>
       <div className="flex flex-col gap-6">
-        {addons?.map((addon) => (
+        {topIntegrations?.addons?.map((addon) => (
           <Preview
             key={addon.name}
             element={addon}
