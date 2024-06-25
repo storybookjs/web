@@ -4,7 +4,6 @@ import type { FC, ReactNode } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { cn, latestVersion } from '@repo/utils';
 import { usePathname } from 'next/navigation';
-import Link from 'next/link';
 import { GithubIcon } from '@storybook/icons';
 import { StorybookLogo } from '../logos/storybook';
 import { Search } from '../search';
@@ -47,12 +46,13 @@ export const Header: FC<HeaderProps> = ({
           )}
         >
           <div className="ui-flex ui-items-center ui-gap-6">
-            <Link
+            {/* TODO: Contextual Link is possible */}
+            <a
               className="ui-pl-2 md:ui-px-3 ui-h-8 ui-flex ui-items-center"
               href="/"
             >
               <StorybookLogo color={variant === 'home' ? 'white' : 'system'} />
-            </Link>
+            </a>
             <NavigationMenu.Root className="max-[920px]:ui-hidden">
               <NavigationMenu.List className="ui-flex ui-gap-2">
                 {nav.map((item) => (

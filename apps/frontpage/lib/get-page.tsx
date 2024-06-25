@@ -3,6 +3,7 @@ import { compileMDX } from 'next-mdx-remote/rsc';
 import type { DocsVersion } from '@repo/utils';
 import { mdxComponents, MDXRemoteOptions } from '@repo/ui';
 import {
+  A,
   CodeSnippets,
   FeatureSnippets,
   HomeConcepts,
@@ -62,6 +63,7 @@ export const getPageData = async (
     options: MDXRemoteOptions,
     components: {
       ...mdxComponents,
+      a: A,
       img: (props) => <Img activeVersion={activeVersion.id} {...props} />,
       Video: (props) => <Video activeVersion={activeVersion.id} {...props} />,
       CodeSnippets: (props) => (

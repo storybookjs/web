@@ -3,7 +3,6 @@
 import type { FC } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { cn } from '@repo/utils';
-import Link from 'next/link';
 import { Arrow } from './arrow';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -21,7 +20,8 @@ export const Button: FC<ButtonProps> = ({
   href,
   title,
 }) => {
-  const Comp = external ? 'a' : Link;
+  // TODO We should be able to use Link for some of these, depending on where this is rendered
+  const Comp = external ? 'a' : 'a';
 
   return (
     <NavigationMenu.Item>

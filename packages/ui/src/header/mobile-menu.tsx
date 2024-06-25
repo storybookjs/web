@@ -2,7 +2,6 @@ import type { FC, ReactNode } from 'react';
 import { MenuIcon } from '@storybook/icons';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
-import Link from 'next/link';
 import { cn } from '@repo/utils';
 import { Search } from '../search';
 import { Arrow } from './arrow';
@@ -93,7 +92,8 @@ export const DropdownItem: FC<DropdownItemProps> = ({
   external,
   href,
 }) => {
-  const Comp = external ? 'a' : Link;
+  // TODO We should be able to use Link for some of these, depending on where this is rendered
+  const Comp = external ? 'a' : 'a';
 
   return (
     <DropdownMenu.Item
