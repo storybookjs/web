@@ -47,9 +47,9 @@ type AddonsHomeValue = {
   vta: Addon;
 };
 
-export async function fetchHomeData(): Promise<AddonsHomeValue | null> {
-  let value: AddonsHomeValue | null = null;
+export async function fetchHomeData() {
   try {
+    let value: AddonsHomeValue | null = null;
     const data = await fetchAddonsQuery<AddonsHomeData>(
       gql`
         query AddonsHome {
@@ -96,7 +96,7 @@ export async function fetchHomeData(): Promise<AddonsHomeValue | null> {
 
     const tagOccurrences = createTagOccurrenceHash(...popular.addons);
 
-    value = {
+    return {
       popularAddons: popular.addons,
       popularRecipes: popular.recipes,
       trendingTags: getNRandomTags(tagOccurrences, 20),
@@ -106,6 +106,4 @@ export async function fetchHomeData(): Promise<AddonsHomeValue | null> {
     // @ts-expect-error - Seems safe
     throw new Error(`Failed to fetch home data: ${error.message}`);
   }
-
-  return value;
 }

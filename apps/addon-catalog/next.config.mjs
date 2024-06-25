@@ -23,9 +23,10 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/recipes',
-        destination: '/',
-        permanent: true,
+        source: '/',
+        destination: '/addons',
+        basePath: false,
+        permanent: false,
       },
     ];
   },

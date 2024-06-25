@@ -2,10 +2,6 @@ import { buildTagLinks } from './build-tag-links';
 import { validateResponse, addonFragment, recipeFragment } from '@repo/utils';
 import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
 
-interface RecipesData {
-  recipes: Recipe[];
-}
-
 interface RecipeValue
   extends Pick<
     Recipe,
@@ -21,80 +17,46 @@ interface RecipeValue
     | 'updatedAt'
     | 'weeklyViews'
   > {}
-
-async function fetchRecipesData(): Promise<RecipeValue[] | null> {
-  let value: RecipeValue[] | null = null;
-  try {
-    async function fetchPartialData(skip: number = 0): Promise<RecipeValue[]> {
-      const data = await fetchAddonsQuery<RecipesData, { skip: number }>(
-        gql`
-          query Recipes($skip: Int!) {
-            recipes(limit: 30, skip: $skip) {
-              ${recipeFragment}
-              status
-              publishedAt
-              updatedAt
-              tags {
-                name
-                displayName
-                description
-                icon
-              }
-              addons {
-                ${addonFragment}
-              }
-            }
-          }
-        `,
-        {
-          variables: { skip },
-        },
-      );
-
-      validateResponse(() => data?.recipes);
-
-      const { recipes } = data!;
-
-      value = [...(value || []), ...recipes];
-
-      if (recipes.length > 0) {
-        await fetchPartialData(skip + recipes.length);
-      }
-
-      return value;
-    }
-
-    return await fetchPartialData();
-  } catch (error) {
-    // @ts-expect-error - Seems safe
-    throw new Error(`Failed to fetch recipes data: ${error.message}`);
-  }
+interface RecipeData {
+  recipe: RecipeValue;
 }
 
-export async function fetchRecipeDetailsData(
-  name: string,
-): Promise<Recipe | null> {
-  let recipe: (Omit<RecipeValue, 'tags'> & { tags: TagLinkType[] }) | undefined;
+export async function fetchRecipeDetailsData(name: string) {
   try {
-    // TODO: Cache this data
-    const recipes = (await fetchRecipesData()) || [];
+    const data = await fetchAddonsQuery<RecipeData, { name: string }>(
+      gql`
+        query Recipe($name: String!) {
+          recipe(name: $name) {
+            ${recipeFragment}
+            status
+            publishedAt
+            updatedAt
+            tags {
+              name
+              displayName
+              description
+              icon
+            }
+            addons {
+              ${addonFragment}
+            }
+          }
+        }
+      `,
+      {
+        variables: { name },
+      },
+    );
 
-    // @ts-expect-error - Temporary
-    recipe = recipes.find((recipe) => recipe.name === name);
+    validateResponse(() => data.recipe);
 
-    if (!recipe) {
-      throw new Error(`Recipe not found: ${name}`);
-    }
+    const { tags, ...restRecipe } = data.recipe;
+
+    return {
+      ...restRecipe,
+      tags: tags ? buildTagLinks(tags) : [],
+    };
   } catch (error) {
-    // @ts-expect-error - Seems safe
-    throw new Error(`Failed to fetch recipes data: ${error.message}`);
+    throw new Error(`Failed to fetch recipe details data: ${error}`);
   }
-
-  const { tags, ...restRecipe } = recipe;
-
-  // @ts-expect-error - Temporary
-  return {
-    ...restRecipe,
-    tags: tags ? buildTagLinks(tags) : [],
-  };
 }

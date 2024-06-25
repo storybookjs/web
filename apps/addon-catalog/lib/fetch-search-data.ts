@@ -1,18 +1,17 @@
-import { addonFragment } from '@repo/utils';
+import { addonFragment, validateResponse } from '@repo/utils';
 import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
 
-type TagsData = {
+interface SearchData {
   partialSearchIntegrations: {
     addons: Addon[];
   };
-};
+}
 
-export async function fetchSearchData(name: string): Promise<Addon[] | null> {
+export async function fetchSearchData(query: string) {
   try {
-    console.log('fetchTagDetailsData', name);
-    const data = await fetchAddonsQuery<TagsData, { query: string }>(
+    const data = await fetchAddonsQuery<SearchData, { query: string }>(
       gql`
-          query Tag($query: String!) {
+          query Search($query: String!) {
             partialSearchIntegrations(query: $query) {
               addons {
                 ${addonFragment}
@@ -21,13 +20,15 @@ export async function fetchSearchData(name: string): Promise<Addon[] | null> {
           }
         `,
       {
-        variables: { query: name },
+        variables: { query },
       },
     );
+
+    validateResponse(() => data.partialSearchIntegrations.addons);
 
     return data.partialSearchIntegrations.addons;
   } catch (error) {
     // @ts-expect-error - Seems safe
-    throw new Error(`Failed to fetch tag details data: ${error.message}`);
+    throw new Error(`Failed to fetch search data: ${error.message}`);
   }
 }

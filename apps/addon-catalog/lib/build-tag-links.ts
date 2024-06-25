@@ -3,6 +3,6 @@ export function buildTagLinks(tags: Tag[]): TagLinkType[] {
     name: tag.icon
       ? `${tag.icon} ${tag.displayName}`
       : tag.displayName || 'Unknown',
-    link: `/addons/tag/${tag.name}/`,
+    link: `/tag/${tag.name}/`,
   }));
 }
