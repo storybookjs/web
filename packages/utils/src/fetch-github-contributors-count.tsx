@@ -8,13 +8,6 @@ export const fetchGithubContributorCount = async (): Promise<{
     // The Github API doesn't give a contributor count
     const response = await fetch(
       `https://api.github.com/repos/storybookjs/storybook/contributors?per_page=1&anon=1`,
-      {
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-          Authorization: `token ${process.env.GITHUB_STORYBOOK_BOT_PAT}`,
-          'User-Agent': 'storybook-bot',
-        },
-      },
     );
 
     const headers = response.headers;
