@@ -3,6 +3,7 @@ import { cn, fetchGithubCount } from '@repo/utils';
 import { Nunito_Sans as nunitoSans } from 'next/font/google';
 import { Header, Footer, Container } from '@repo/ui';
 import { Providers } from './providers';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 import '@docsearch/css';
 import './globals.css';
@@ -34,6 +35,14 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <script
+          defer
+          data-domain="storybook.js.org"
+          data-api="/sb-event/api/event"
+          src="/sb-event/js/script.js"
+        ></script>
+      </head>
       <body
         className={cn(
           'min-h-screen bg-white font-sans antialiased dark:bg-slate-950',
@@ -49,6 +58,7 @@ export default async function RootLayout({
         </Providers>
         <Footer />
       </body>
+      <GoogleAnalytics gaId="G-MN8NJ34M7T" />
     </html>
   );
 }
