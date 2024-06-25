@@ -63,7 +63,9 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
                 <VerifiedIcon className="text-blue-500" />
               )}
           </div>
-          <div className="">{element.description}</div>
+          <div className="text-black dark:text-slate-400">
+            {element.description}
+          </div>
         </div>
       </div>
       <div className="flex flex-shrink-0 items-center justify-between gap-12">
@@ -80,7 +82,7 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
                 separator: '',
               })}
           </div>
-          <div className="text-xs text-zinc-600">
+          <div className="text-xs text-zinc-600 dark:text-slate-400">
             {isRecipe ? 'Views' : 'Downloads'}
           </div>
         </div>
@@ -102,7 +104,9 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
               </div>
             ))}
             {element.authors.length > 3 && (
-              <div className="ml-2">+ {element.authors.slice(3).length}</div>
+              <div className="ml-2 text-black dark:text-slate-400">
+                + {element.authors.slice(3).length}
+              </div>
             )}
           </div>
         )}
