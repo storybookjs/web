@@ -1,7 +1,7 @@
 import humanFormat from 'human-format';
 import { cn } from '@repo/utils';
 import Image from 'next/image';
-import { VerifiedIcon } from '@storybook/icons';
+import { StorybookIcon, VerifiedIcon } from '@storybook/icons';
 import Link from 'next/link';
 
 interface PreviewProps {
@@ -33,8 +33,14 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
         )}
       >
         {!isRecipe && (
-          <div className="relative h-16 w-16 flex-shrink-0">
-            {element.icon && <img src={element.icon} alt={element.name} />}
+          <div className="relative flex h-16 w-16 flex-shrink-0 items-center justify-center">
+            {element.icon ? (
+              <img src={element.icon} />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center rounded-md bg-zinc-50 dark:bg-slate-800">
+                <StorybookIcon className="h-10 w-10 text-[#FF4785]" />
+              </div>
+            )}
           </div>
         )}
         {'accentColor' in element && (
