@@ -1,16 +1,16 @@
 import { validateResponse } from '@repo/utils';
 import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
 
+type RecipesValue = Recipe['name'];
+
 type RecipesData = {
   recipes: Pick<Recipe, 'name'>[];
 };
 
-type RecipesValue = Recipe['name'][];
-
-export async function fetchRecipesData(): Promise<RecipesValue | null> {
-  let value: RecipesValue | null = null;
+export async function fetchRecipesData() {
+  let value: RecipesValue[] = [];
   try {
-    async function fetchPartialData(skip: number = 0): Promise<RecipesValue> {
+    async function fetchPartialData(skip: number = 0) {
       const data = await fetchAddonsQuery<RecipesData, { skip: number }>(
         gql`
           query RecipeNames($skip: Int!) {
@@ -24,15 +24,13 @@ export async function fetchRecipesData(): Promise<RecipesValue | null> {
         },
       );
 
-      validateResponse(() => data?.recipes);
+      validateResponse(() => data.recipes);
 
-      const { recipes } = data!;
+      const { recipes } = data;
 
-      value = [...(value || []), ...recipes.map(({ name }) => name)];
+      value = [...value, ...recipes.map(({ name }) => name)];
 
-      if (recipes.length > 0) {
-        await fetchPartialData(skip + recipes.length);
-      }
+      if (recipes.length > 0) await fetchPartialData(skip + recipes.length);
 
       return value;
     }
@@ -40,6 +38,6 @@ export async function fetchRecipesData(): Promise<RecipesValue | null> {
     return await fetchPartialData();
   } catch (error) {
     // @ts-expect-error - Seems safe
-    throw new Error(`Failed to fetch addons data: ${error.message}`);
+    throw new Error(`Failed to fetch recipes data: ${error.message}`);
   }
 }

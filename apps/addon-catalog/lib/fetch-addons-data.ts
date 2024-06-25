@@ -1,16 +1,16 @@
 import { validateResponse } from '@repo/utils';
 import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
 
-type AddonsData = {
+type AddonValue = Addon['name'];
+
+interface AddonsData {
   addons: Pick<Addon, 'name'>[];
-};
+}
 
-type AddonsValue = Addon['name'][];
-
-export async function fetchAddonsData(): Promise<AddonsValue | null> {
-  let value: AddonsValue | null = null;
+export async function fetchAddonsData() {
   try {
-    async function fetchPartialData(skip: number = 0): Promise<AddonsValue> {
+    let value: AddonValue[] = [];
+    async function fetchPartialData(skip: number = 0) {
       const data = await fetchAddonsQuery<AddonsData, { skip: number }>(
         gql`
           query Addons($skip: Int!) {
@@ -24,15 +24,13 @@ export async function fetchAddonsData(): Promise<AddonsValue | null> {
         },
       );
 
-      validateResponse(() => data?.addons);
+      validateResponse(() => data.addons);
 
-      const { addons } = data!;
+      const { addons } = data;
 
-      value = [...(value || []), ...addons.map(({ name }) => name)];
+      value = [...value, ...addons.map(({ name }) => name)];
 
-      if (addons.length > 0) {
-        await fetchPartialData(skip + addons.length);
-      }
+      if (addons.length > 0) await fetchPartialData(skip + addons.length);
 
       return value;
     }

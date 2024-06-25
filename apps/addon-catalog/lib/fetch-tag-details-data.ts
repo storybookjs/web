@@ -1,28 +1,29 @@
 import { addonFragment, recipeFragment, validateResponse } from '@repo/utils';
 import { fetchAddonsQuery, gql } from './fetch-addons-query';
 
-type TagsData = {
-  tags: Tag[];
-};
+interface TagValue
+  extends Pick<
+    Tag,
+    | 'name'
+    | 'displayName'
+    | 'description'
+    | 'icon'
+    | 'relatedTags'
+    | 'topIntegrations'
+  > {}
 
-type TagValue = Pick<
-  Tag,
-  | 'name'
-  | 'displayName'
-  | 'description'
-  | 'icon'
-  | 'relatedTags'
-  | 'topIntegrations'
->;
+interface TagsData {
+  tags: TagValue[];
+}
 
 async function fetchTagsData({
   isCategory,
 }: {
   isCategory?: boolean;
-} = {}): Promise<TagValue[] | null> {
-  let value: TagValue[] | null = null;
+} = {}) {
   try {
-    async function fetchPartialData(skip: number = 0): Promise<TagValue[]> {
+    let value: TagValue[] = [];
+    async function fetchPartialData(skip: number = 0) {
       const data = await fetchAddonsQuery<
         TagsData,
         { isCategory: boolean; skip: number }
@@ -59,15 +60,13 @@ async function fetchTagsData({
         },
       );
 
-      validateResponse(() => data?.tags);
+      validateResponse(() => data.tags);
 
-      const { tags } = data!;
+      const { tags } = data;
 
-      value = [...(value || []), ...tags];
+      value = [...value, ...tags];
 
-      if (tags.length > 0) {
-        await fetchPartialData(skip + tags.length);
-      }
+      if (tags.length > 0) await fetchPartialData(skip + tags.length);
 
       return value;
     }
@@ -79,23 +78,21 @@ async function fetchTagsData({
   }
 }
 
-export async function fetchTagDetailsData(
-  name: string,
-): Promise<(TagValue & { isCategory: boolean }) | null> {
+export async function fetchTagDetailsData(name: string) {
   try {
     // TODO: Cache this data
-    const categoriesData = (await fetchTagsData({ isCategory: true })) || [];
-    const tagsData = (await fetchTagsData()) || [];
+    const categoriesData = await fetchTagsData({ isCategory: true });
+    const tagsData = await fetchTagsData();
 
-    const tag = [...categoriesData, ...tagsData].find((tag) => tag.name === name);
+    const tag = [...categoriesData, ...tagsData].find(
+      (tag) => tag.name === name,
+    );
 
-    if (!tag) {
-      throw new Error(`Tag not found: ${name}`);
-    }
+    if (!tag) throw new Error(`Tag not found: ${name}`);
 
     return {
       ...tag,
-      isCategory: categoriesData!.map((category) => category.name).includes(name),
+      isCategory: categoriesData.find((category) => category.name === name),
     };
   } catch (error) {
     // @ts-expect-error - Seems safe
