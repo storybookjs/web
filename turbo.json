@@ -9,6 +9,9 @@
     "typecheck": {
       "dependsOn": ["^typecheck"]
     },
+    "copy-other-sitemaps": {
+      "dependsOn": ["^build"]
+    },
     "fetch-docs": {
       "dependsOn": ["^fetch-docs"]
     },

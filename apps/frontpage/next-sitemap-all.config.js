@@ -5,6 +5,7 @@ module.exports = {
   outDir: 'public',
   sitemapBaseFileName: 'sitemap/sitemap-all',
   exclude: [
+    '/server-sitemap.xml',
     '/docs-urls',
     '/releases', // TODO: Why is this a page instead of a redirect?
     '/releases/iframe/*',
@@ -23,6 +24,7 @@ module.exports = {
   },
   robotsTxtOptions: {
     additionalSitemaps: [
+      'https://storybook.js.org/server-sitemap.xml',
       'https://storybook.js.org/sitemap/addons/sitemap.xml',
     ]
   },

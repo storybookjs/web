@@ -11,7 +11,7 @@ async function getRemoteSitemapContent(p: string): Promise<string> {
 const OTHER_SITEMAPS = {
   addons: {
     async getContent() {
-      return getRemoteSitemapContent('/sitemap/sitemap-0.xml');
+      return await fs.readFile(path.join(__dirname, '../../..', 'apps/addon-catalog/public/sitemap.xml'), 'utf-8');
     },
   },
   blog: {
