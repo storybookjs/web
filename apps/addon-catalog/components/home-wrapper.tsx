@@ -38,7 +38,7 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
         </div>
         <a
           href="/docs/react/addons/integration-catalog"
-          className="text-md hidden h-10 flex-shrink-0 items-center gap-2 rounded-full bg-blue-500 px-5 text-white md:flex"
+          className="hidden h-10 flex-shrink-0 items-center gap-2 rounded-full bg-blue-500 px-5 text-sm font-bold text-white md:flex"
         >
           <PlusIcon />
           Add your integration

@@ -74,8 +74,15 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
                 decimals: 1,
                 separator: '',
               })}
+            {'weeklyViews' in element &&
+              humanFormat(element.weeklyViews || 0, {
+                decimals: 1,
+                separator: '',
+              })}
           </div>
-          <div className="text-xs text-zinc-600">Downloads</div>
+          <div className="text-xs text-zinc-600">
+            {isRecipe ? 'Views' : 'Downloads'}
+          </div>
         </div>
         {element.authors && (
           <div className="flex items-center">
