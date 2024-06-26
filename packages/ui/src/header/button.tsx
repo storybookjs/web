@@ -3,14 +3,12 @@
 import type { FC } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { cn } from '@repo/utils';
-import Link from 'next/link';
 import { Arrow } from './arrow';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'home' | 'system';
   active?: boolean;
   external?: boolean;
-  externalIcon?: boolean;
   href: string;
   title: string;
 }
@@ -18,12 +16,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button: FC<ButtonProps> = ({
   variant,
   external = false,
-  externalIcon = false,
   active = false,
   href,
   title,
 }) => {
-  const Comp = external ? 'a' : Link;
+  // TODO We should be able to use Link for some of these, depending on where this is rendered
+  const Comp = external ? 'a' : 'a';
 
   return (
     <NavigationMenu.Item>
@@ -44,7 +42,7 @@ export const Button: FC<ButtonProps> = ({
           target={external ? '_blank' : undefined}
         >
           {title}
-          {externalIcon ? (
+          {external ? (
             <div className="ui-h-full ui-flex ui-items-start ui-py-1.5">
               <Arrow />
             </div>

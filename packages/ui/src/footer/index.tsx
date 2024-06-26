@@ -1,7 +1,6 @@
 import { cn } from '@repo/utils';
 import type { FC } from 'react';
-import Link from 'next/link';
-import { StorybookLogo } from '../logos/storybook';
+import { StorybookLogo } from '../logos/storybook-logo';
 import { ChromaticLogo } from '../logos/chromatic';
 import { Container } from '../container';
 import { TopSection } from './top-section';
@@ -49,7 +48,7 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
                     </a>
                   );
                 return (
-                  <Link
+                  <a
                     className={cn(
                       'hover:ui-text-blue-500 ui-transition-colors ui-text-md',
                       variant === 'home' && 'ui-text-slate-400',
@@ -60,7 +59,7 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
                     key={link.title}
                   >
                     {link.title}
-                  </Link>
+                  </a>
                 );
               })}
             </div>
@@ -76,7 +75,7 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
             >
               <div
                 className={cn(
-                  'text-sm mb-2',
+                  'mb-2 text-sm',
                   variant === 'home' && 'ui-text-zinc-400',
                   variant !== 'home' &&
                     'ui-text-zinc-600 dark:ui-text-zinc-400',
@@ -89,7 +88,7 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
             <div>
               <div
                 className={cn(
-                  'text-sm mb-2',
+                  'mb-2 text-sm',
                   variant === 'home' && 'ui-text-zinc-400',
                   variant !== 'home' &&
                     'ui-text-zinc-600 dark:ui-text-zinc-400',

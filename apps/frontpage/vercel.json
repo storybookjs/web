@@ -1,6 +1,18 @@
 {
   "rewrites": [
     {
+      "source": "/addons",
+      "destination": "https://web-addon-catalog.vercel.app/addons"
+    },
+    {
+      "source": "/addons/:match*",
+      "destination": "https://web-addon-catalog.vercel.app/addons/:match*"
+    },
+    {
+      "source": "/blog/:match*",
+      "destination": "https://storybook-blog.netlify.app/blog/:match*"
+    },
+    {
       "source": "/day/:match*",
       "destination": "https://storybook-day-2023.netlify.app/day/:match*"
     },
@@ -19,6 +31,14 @@
     {
       "source": "/whats-new/v1/:match*",
       "destination": "https://storybook-dx.netlify.app/.netlify/functions/whats-new/:match*"
+    },
+    {
+      "source": "/sb/js/script.js",
+      "destination": "https://plausible.io/js/script.js"
+    },
+    {
+      "source": "/sb/api/event",
+      "destination": "https://plausible.io/api/event"
     }
   ]
 }

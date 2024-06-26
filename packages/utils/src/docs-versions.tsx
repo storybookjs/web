@@ -30,12 +30,12 @@ export const docsVersions: DocsVersion[] = [
   {
     label: 'Version 8.1',
     id: '8.1',
-    branch: 'charles-transform-docs-next',
+    branch: 'main',
   },
   // {
   //   label: '8.2 (beta)',
   //   id: '8.2',
-  //   branch: 'charles-transform-docs-next',
+  //   branch: 'next',
   //   preRelease: true,
   // },
   {

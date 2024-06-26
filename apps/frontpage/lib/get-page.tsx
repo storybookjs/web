@@ -1,41 +1,20 @@
 import fs from 'node:fs';
-import { rehypePrettyCode } from 'rehype-pretty-code';
-import remarkGfm from 'remark-gfm';
 import { compileMDX } from 'next-mdx-remote/rsc';
-import rehypeSlug from 'rehype-slug';
 import type { DocsVersion } from '@repo/utils';
-import { visit } from 'unist-util-visit';
+import { mdxComponents, MDXRemoteOptions } from '@repo/ui';
 import {
+  A,
   CodeSnippets,
-  Callout,
-  YouTubeCallout,
   FeatureSnippets,
   HomeConcepts,
-  HomeResources,
   HomeRenderers,
-  Video,
-  Pre,
-  List,
-  Img,
+  HomeResources,
   If,
-  UnorderedList,
-  Hr,
-  P,
-  A,
-  H4,
-  H3,
-  H2,
-  H1,
-  Table,
-  Th,
-  Tr,
-  Td,
-  OrderedList,
-  Figure,
-  Figcaption,
+  Img,
+  Video,
+  YouTubeCallout,
 } from '../components/docs/mdx';
 import { generateDocsTree } from './get-tree';
-import { rehypePrettyCodeOptions } from './rehype-pretty-code-options';
 
 export const getPageData = async (
   path: string[],
@@ -72,102 +51,32 @@ export const getPageData = async (
     'utf8',
   );
 
-  interface NodeProps {
-    type?: string;
-    tagName?: string;
-    properties: string[];
-    raw: string;
-    children: {
-      properties: {
-        raw: string;
-      };
-      tagName: string;
-      raw: string;
-      children: {
-        value: string;
-      }[];
-    }[];
-  }
-
+  /**
+   * TODO: Refactor this to use the MDXRemote component
+   *       Because then we can import MDXContent from @repo/ui
+   */
   const { content, frontmatter } = await compileMDX<{
     title?: string;
     hideRendererSelector?: boolean;
   }>({
     source: file,
-    options: {
-      parseFrontmatter: true,
-      mdxOptions: {
-        remarkPlugins: [remarkGfm],
-        rehypePlugins: [
-          rehypeSlug,
-          // Get the raw code from the pre tag
-          // This is used to get the raw code for the pre component
-          // Solution found here: https://claritydev.net/blog/copy-to-clipboard-button-nextjs-mdx-rehype
-          () => (tree) => {
-            visit(tree, (node: NodeProps) => {
-              if (node?.type === 'element' && node?.tagName === 'pre') {
-                const [codeEl] = node.children;
-
-                if (codeEl.tagName !== 'code') return;
-
-                node.raw = codeEl.children?.[0].value;
-              }
-            });
-          },
-          [rehypePrettyCode, rehypePrettyCodeOptions] as never,
-          // After the code is formatted, we need to get the raw code
-          // This is used to get the raw code for the pre component
-          () => (tree) => {
-            visit(tree, 'element', (node: NodeProps) => {
-              if (node?.type === 'element' && node?.tagName === 'figure') {
-                if (!('data-rehype-pretty-code-figure' in node.properties)) {
-                  return;
-                }
-
-                for (const child of node.children) {
-                  if (child.tagName === 'pre') {
-                    child.properties.raw = node.raw;
-                  }
-                }
-              }
-            });
-          },
-        ],
-        format: 'mdx',
-      },
-    },
+    options: MDXRemoteOptions,
     components: {
-      h1: H1,
-      h2: H2,
-      h3: H3,
-      h4: H4,
+      ...mdxComponents,
       a: A,
-      p: P,
-      hr: Hr,
-      ul: UnorderedList,
-      ol: OrderedList,
-      li: List,
-      pre: Pre,
-      table: Table,
-      th: Th,
-      tr: Tr,
-      td: Td,
-      figure: Figure,
-      figcaption: Figcaption,
       img: (props) => <Img activeVersion={activeVersion.id} {...props} />,
       Video: (props) => <Video activeVersion={activeVersion.id} {...props} />,
       CodeSnippets: (props) => (
         <CodeSnippets activeVersion={activeVersion} {...props} />
       ),
-      Callout,
+      FeatureSnippets,
+      FrameworkSupportTable: (props) => <div {...props}>{props.children}</div>,
+      HomeConcepts,
+      HomeRenderers,
+      HomeResources,
       If,
       IfRenderer: If,
       YouTubeCallout,
-      FeatureSnippets,
-      HomeRenderers,
-      HomeConcepts,
-      HomeResources,
-      FrameworkSupportTable: (props) => <div {...props}>{props.children}</div>,
     },
   });
 

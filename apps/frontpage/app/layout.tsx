@@ -6,7 +6,6 @@ import {
   GLOBAL_SEARCH_IMPORTANCE,
 } from '@repo/ui';
 import { cn } from '@repo/utils';
-import PlausibleProvider from 'next-plausible';
 import { Providers } from './providers';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GoogleAnalytics } from '@next/third-parties/google';
@@ -23,7 +22,7 @@ const fontSans = nunitoSans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://storybookjs.vercel.app'),
+  metadataBase: new URL('https://storybook.js.org'),
   title: 'Storybook: Frontend workshop for UI development',
   description:
     "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
@@ -46,7 +45,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <PlausibleProvider domain="storybook.js.org" />
+        <script
+          defer
+          data-domain="storybook.js.org"
+          data-api="/sb/api/event"
+          src="/sb/js/script.js"
+        ></script>
       </head>
       <body
         className={cn(

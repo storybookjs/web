@@ -38,6 +38,7 @@ export interface CodeSnippetsProps {
   language?: string;
   content?: React.ReactNode;
   raw?: string;
+  tabTitle?: string;
 }
 
 export interface CodeSnippetsFilter {

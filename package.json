@@ -2,7 +2,9 @@
   "name": "storybook-web",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build && npm run copy-other-sitemaps",
+    "build-ui-only": "turbo run build --filter=@repo/ui",
+    "copy-other-sitemaps": "npm run copy-other-sitemaps -w apps/frontpage",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
@@ -10,7 +12,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "clean": "turbo run clean && rm -rf node_modules && rm -rf .turbo",
     "sync-docs": "tsx --tsconfig tsconfig.json sync-docs.ts",
-    "test": "turbo test"
+    "test": "turbo test",
+    "turbo": "turbo"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",

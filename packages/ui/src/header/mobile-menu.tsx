@@ -2,7 +2,6 @@ import type { FC, ReactNode } from 'react';
 import { MenuIcon } from '@storybook/icons';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
-import Link from 'next/link';
 import { cn } from '@repo/utils';
 import { Search } from '../search';
 import { Arrow } from './arrow';
@@ -53,7 +52,6 @@ export const MobileMenu: FC<HeaderProps> = ({
               {nav.map((item) => (
                 <DropdownItem
                   external={item.external}
-                  externalIcon={item.externalIcon}
                   href={item.href}
                   key={item.title}
                   title={item.title}
@@ -87,16 +85,15 @@ interface DropdownItemProps {
   title: ReactNode;
   external?: boolean;
   href: string;
-  externalIcon?: boolean;
 }
 
 export const DropdownItem: FC<DropdownItemProps> = ({
   title,
   external,
-  externalIcon,
   href,
 }) => {
-  const Comp = external ? 'a' : Link;
+  // TODO We should be able to use Link for some of these, depending on where this is rendered
+  const Comp = external ? 'a' : 'a';
 
   return (
     <DropdownMenu.Item
@@ -105,7 +102,7 @@ export const DropdownItem: FC<DropdownItemProps> = ({
     >
       <Comp href={href} target={external ? '_blank' : undefined}>
         {title}
-        {externalIcon ? (
+        {external ? (
           <div className="ui-h-full ui-flex ui-items-start ui-py-1.5">
             <Arrow />
           </div>
