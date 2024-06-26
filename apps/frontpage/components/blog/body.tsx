@@ -51,28 +51,24 @@ const portableTextComponents: Partial<PortableTextReactComponents> = {
   },
   types: {
     code: async (props) => {
-      console.log(props);
-
-      const code = '// machine code\n' + 'import React from "react";';
-      const newCode = `
-        // machine code
-        
-        import React from "react";
-      `;
-
       const highlightedCode = await unified()
         .use(remarkParse)
         .use(remarkRehype)
         .use(rehypePrettyCode, rehypePrettyCodeOptions as never)
-        .use(rehypeStringify)
-        .process(newCode);
+        .use(rehypeStringify).process(`
+\`\`\`tsx
+${props.value.code}
+\`\`\`
+        `);
 
       return (
-        <section
-          dangerouslySetInnerHTML={{
-            __html: String(highlightedCode),
-          }}
-        />
+        <div className="rounded bg-slate-100 p-6 text-sm [&_code]:bg-transparent">
+          <section
+            dangerouslySetInnerHTML={{
+              __html: String(highlightedCode),
+            }}
+          />
+        </div>
       );
     },
   },

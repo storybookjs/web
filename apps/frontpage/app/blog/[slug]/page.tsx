@@ -3,9 +3,8 @@ import { client, urlFor } from '../../../lib/sanity/client';
 import { Post } from '../page';
 import Image from 'next/image';
 import { format, parseISO } from 'date-fns';
-import { ChevronSmallLeftIcon } from '@storybook/icons';
-import Link from 'next/link';
 import Body from '../../../components/blog/body';
+import { SubHeader } from '@repo/ui';
 
 interface PageProps {
   params: {
@@ -37,15 +36,11 @@ export default async function Page({ params: { slug } }: PageProps) {
 
   return (
     <>
-      <div className="mb-16 flex h-12 items-center justify-between border-b border-zinc-100">
-        <Link
-          href="/blog"
-          className="flex items-center gap-2 transition-colors hover:text-blue-500"
-        >
-          <ChevronSmallLeftIcon /> Blog
-        </Link>
-        <div>Join the community</div>
-      </div>
+      <SubHeader
+        leftLabel="Back to blog"
+        leftHref="/blog"
+        right={<div>Join the community</div>}
+      />
       <div className="mx-auto max-w-[1024px] pb-20">
         {post?.tags && post.tags.length > 0 && (
           <div className="mb-6 flex justify-center">
