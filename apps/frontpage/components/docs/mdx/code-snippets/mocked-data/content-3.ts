@@ -1,13 +1,13 @@
 export const content3 = [
   {
-    language: 'js',
+    language: 'ts',
     filename: 'Button.stories.ts',
     renderer: 'angular',
     raw: undefined,
     content: undefined,
   },
   {
-    language: 'ts',
+    language: 'js',
     filename: 'Button.stories.js',
     renderer: 'html',
     raw: undefined,

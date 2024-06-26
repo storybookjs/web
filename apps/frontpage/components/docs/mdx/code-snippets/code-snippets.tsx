@@ -185,6 +185,15 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
         </>
       }
       title={activeContent?.filename || ''}
+      iconLanguage={
+        activeContent?.packageManager
+          ? 'sh'
+          : activeContent?.language
+            ? ['ts', 'ts-4-9'].includes(activeContent?.language)
+              ? 'ts'
+              : 'js'
+            : null
+      }
     >
       {activeContent?.content ? (
         <>
