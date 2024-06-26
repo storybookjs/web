@@ -68,5 +68,17 @@ export default defineType({
       name: 'code',
       title: 'Code',
     }),
+    defineArrayMember({
+      type: 'object',
+      name: 'tweet',
+      title: 'Tweet',
+      fields: [
+        {
+          type: 'string',
+          name: 'tweetId',
+          title: 'Tweet ID',
+        },
+      ],
+    }),
   ],
 })

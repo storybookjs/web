@@ -65,6 +65,7 @@
     "react-dom": "^18.3.1",
     "react-lite-youtube-embed": "^2.4.0",
     "react-syntax-highlighter": "^15.5.0",
+    "react-tweet": "^3.2.1",
     "react-use-scroll-direction": "^0.1.0",
     "rehype-pretty-code": "^0.13.2",
     "rehype-stringify": "^10.0.0",

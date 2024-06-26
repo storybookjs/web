@@ -9,6 +9,16 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import remarkRehype from 'remark-rehype';
 import { rehypePrettyCodeOptions } from '@repo/ui';
 import rehypeStringify from 'rehype-stringify';
+import { Tweet } from 'react-tweet';
+import imageUrlBuilder from '@sanity/image-url';
+
+import { client } from '../../lib/sanity/client';
+
+const builder = imageUrlBuilder(client);
+
+function urlFor(source: any) {
+  return builder.image(source);
+}
 
 const portableTextComponents: Partial<PortableTextReactComponents> = {
   block: {
@@ -62,12 +72,24 @@ ${props.value.code}
         `);
 
       return (
-        <div className="rounded bg-slate-100 p-6 text-sm [&_code]:bg-transparent">
+        <div className="overflow-x-scroll rounded bg-slate-100 p-6 text-sm [&_code]:bg-transparent">
           <section
             dangerouslySetInnerHTML={{
               __html: String(highlightedCode),
             }}
           />
+        </div>
+      );
+    },
+    tweet: ({ value }) => (
+      <div className="flex items-center justify-center">
+        <Tweet id={value.tweetId} />
+      </div>
+    ),
+    image: ({ value }) => {
+      return (
+        <div>
+          <img src={urlFor(value).url()} />
         </div>
       );
     },
