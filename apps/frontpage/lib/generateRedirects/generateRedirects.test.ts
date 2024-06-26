@@ -126,12 +126,7 @@ test('generateRedirects, no pre-release', async () => {
       {
         "destination": "/docs/writing-tests/",
         "permanent": true,
-        "source": "/docs/react/workflows/testing-with-storybook/",
-      },
-      {
-        "destination": "/docs/writing-tests/",
-        "permanent": true,
-        "source": "/docs/vue/workflows/testing-with-storybook/",
+        "source": "/docs/:renderer(react|vue)/workflows/testing-with-storybook/",
       },
       {
         "destination": "/docs/writing-tests/stories-in-unit-tests/",
@@ -141,12 +136,7 @@ test('generateRedirects, no pre-release', async () => {
       {
         "destination": "/docs/writing-tests/stories-in-unit-tests/",
         "permanent": true,
-        "source": "/docs/react/workflows/unit-testing/",
-      },
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/vue/workflows/unit-testing/",
+        "source": "/docs/:renderer(react|vue)/workflows/unit-testing/",
       },
       {
         "destination": "/docs/writing-tests/stories-in-unit-tests/",
@@ -156,22 +146,12 @@ test('generateRedirects, no pre-release', async () => {
       {
         "destination": "/docs/writing-tests/stories-in-unit-tests/",
         "permanent": true,
-        "source": "/docs/react/writing-tests/importing-stories-in-tests/",
-      },
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/vue/writing-tests/importing-stories-in-tests/",
+        "source": "/docs/:renderer(react|vue)/writing-tests/importing-stories-in-tests/",
       },
       {
         "destination": "/docs/:path",
         "permanent": true,
-        "source": "/docs/react/:path*",
-      },
-      {
-        "destination": "/docs/:path",
-        "permanent": true,
-        "source": "/docs/vue/:path*",
+        "source": "/docs/:renderer(react|vue)/:path*",
       },
       {
         "destination": "/docs/:path",
@@ -206,12 +186,7 @@ test('generateRedirects, no pre-release', async () => {
       {
         "destination": "/docs/7/:path",
         "permanent": true,
-        "source": "/docs/7.0/react/:path*",
-      },
-      {
-        "destination": "/docs/7/:path",
-        "permanent": true,
-        "source": "/docs/7.0/vue/:path*",
+        "source": "/docs/7.0/:renderer(react|vue)/:path*",
       },
       {
         "destination": "/docs/8",
@@ -221,12 +196,7 @@ test('generateRedirects, no pre-release', async () => {
       {
         "destination": "/docs/8/:path",
         "permanent": false,
-        "source": "/docs/next/react/:path*",
-      },
-      {
-        "destination": "/docs/8/:path",
-        "permanent": false,
-        "source": "/docs/next/vue/:path*",
+        "source": "/docs/next/:renderer(react|vue)/:path*",
       },
       {
         "destination": "/docs/8/:path",
@@ -272,22 +242,12 @@ test('generateRedirects, minor pre-release', async () => {
       {
         "destination": "/docs/writing-tests/stories-in-unit-tests/",
         "permanent": true,
-        "source": "/docs/react/workflows/unit-testing/",
-      },
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/vue/workflows/unit-testing/",
+        "source": "/docs/:renderer(react|vue)/workflows/unit-testing/",
       },
       {
         "destination": "/docs/:path",
         "permanent": true,
-        "source": "/docs/react/:path*",
-      },
-      {
-        "destination": "/docs/:path",
-        "permanent": true,
-        "source": "/docs/vue/:path*",
+        "source": "/docs/:renderer(react|vue)/:path*",
       },
       {
         "destination": "/docs/:path",
@@ -322,12 +282,7 @@ test('generateRedirects, minor pre-release', async () => {
       {
         "destination": "/docs/7/:path",
         "permanent": true,
-        "source": "/docs/7.0/react/:path*",
-      },
-      {
-        "destination": "/docs/7/:path",
-        "permanent": true,
-        "source": "/docs/7.0/vue/:path*",
+        "source": "/docs/7.0/:renderer(react|vue)/:path*",
       },
       {
         "destination": "/docs/8.2",
@@ -337,12 +292,7 @@ test('generateRedirects, minor pre-release', async () => {
       {
         "destination": "/docs/8.2/:path",
         "permanent": false,
-        "source": "/docs/next/react/:path*",
-      },
-      {
-        "destination": "/docs/8.2/:path",
-        "permanent": false,
-        "source": "/docs/next/vue/:path*",
+        "source": "/docs/next/:renderer(react|vue)/:path*",
       },
       {
         "destination": "/docs/8.2/:path",
@@ -388,22 +338,12 @@ test('generateRedirects, major pre-release', async () => {
       {
         "destination": "/docs/writing-tests/stories-in-unit-tests/",
         "permanent": true,
-        "source": "/docs/react/workflows/unit-testing/",
-      },
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/vue/workflows/unit-testing/",
+        "source": "/docs/:renderer(react|vue)/workflows/unit-testing/",
       },
       {
         "destination": "/docs/:path",
         "permanent": true,
-        "source": "/docs/react/:path*",
-      },
-      {
-        "destination": "/docs/:path",
-        "permanent": true,
-        "source": "/docs/vue/:path*",
+        "source": "/docs/:renderer(react|vue)/:path*",
       },
       {
         "destination": "/docs/:path",
@@ -438,12 +378,7 @@ test('generateRedirects, major pre-release', async () => {
       {
         "destination": "/docs/7/:path",
         "permanent": true,
-        "source": "/docs/7.0/react/:path*",
-      },
-      {
-        "destination": "/docs/7/:path",
-        "permanent": true,
-        "source": "/docs/7.0/vue/:path*",
+        "source": "/docs/7.0/:renderer(react|vue)/:path*",
       },
       {
         "destination": "/docs/9",
@@ -463,12 +398,7 @@ test('generateRedirects, major pre-release', async () => {
       {
         "destination": "/docs/9/:path",
         "permanent": false,
-        "source": "/docs/next/react/:path*",
-      },
-      {
-        "destination": "/docs/9/:path",
-        "permanent": false,
-        "source": "/docs/next/vue/:path*",
+        "source": "/docs/next/:renderer(react|vue)/:path*",
       },
       {
         "destination": "/docs/9/:path",
