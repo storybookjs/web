@@ -49,7 +49,9 @@ export default async function Page({ params: { slug } }: PageProps) {
             </div>
           </div>
         )}
-        <h1 className="mb-4 text-center text-6xl font-bold">{post.title}</h1>
+        <h1 className="mb-4 text-center text-6xl font-bold leading-tight">
+          {post.title}
+        </h1>
         <div className="mb-6 text-center text-2xl text-zinc-500">
           {post.subtitle}
         </div>
