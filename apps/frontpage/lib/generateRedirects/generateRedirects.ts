@@ -106,6 +106,7 @@ export async function generateRedirects({
   versions?: Version[];
 }) {
   const renderers = renderersIn || (await getAllRenderers());
+  const renderersPathWildcardWithRegex = `:renderer(${renderers.join('|')})`;
 
   const parsedRedirects = parseRawRedirects(rawRedirects);
 
@@ -127,9 +128,14 @@ export async function generateRedirects({
         if (isLatest) {
           parsedRedirects.forEach(([from, to, code]) => {
             acc.push(getRedirect(from, to, code, 'a'));
-            renderers.forEach((r) => {
-              acc.push(getRedirect(fromWithRenderer(from, r), to, code, 'b'));
-            });
+            acc.push(
+              getRedirect(
+                fromWithRenderer(from, renderersPathWildcardWithRegex),
+                to,
+                code,
+                'b',
+              ),
+            );
           });
         } else {
           // acc.push({ debug: { includeRenderers, string, versionStringNormalized, versionSlugOverride, isLatest, isNext, shouldShortenToMajor: shouldShortenToMajor(versionStringNormalized, nextVersionString) } })
@@ -149,20 +155,25 @@ export async function generateRedirects({
         }
 
         if (includeRenderers || isLatest || isNext) {
-          renderers.forEach((r) => {
-            if (isLatest) {
-              acc.push(getRedirect(`/docs/${r}/:path*`, '/docs/:path', '308', 'd'));
-            } else {
-              acc.push(
-                getRedirect(
-                  `/docs/${string}/${r}/:path*`,
-                  `/docs${versionSlugOverride}/:path`,
-                  isNext ? '307' : '308',
-                  'e',
-                ),
-              );
-            }
-          });
+          if (isLatest) {
+            acc.push(
+              getRedirect(
+                `/docs/${renderersPathWildcardWithRegex}/:path*`,
+                '/docs/:path',
+                '308',
+                'd',
+              ),
+            );
+          } else {
+            acc.push(
+              getRedirect(
+                `/docs/${string}/${renderersPathWildcardWithRegex}/:path*`,
+                `/docs${versionSlugOverride}/:path`,
+                isNext ? '307' : '308',
+                'e',
+              ),
+            );
+          }
         }
 
         if (
@@ -203,7 +214,7 @@ https://nextjs.org/docs/app/building-your-application/routing/redirecting#redire
 
 At-scale approach:
 https://nextjs.org/docs/app/building-your-application/routing/redirecting#managing-redirects-at-scale-advanced
-`);
+  `);
   }
 
   return result;
