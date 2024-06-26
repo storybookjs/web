@@ -3,7 +3,6 @@ import {
   ChevronSmallRightIcon,
   DiscordIcon,
   TwitterIcon,
-  YoutubeIcon,
 } from '@storybook/icons';
 import type { FC } from 'react';
 import { useMemo } from 'react';

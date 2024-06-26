@@ -4,7 +4,8 @@ import { Post } from '../page';
 import Image from 'next/image';
 import { format, parseISO } from 'date-fns';
 import Body from '../../../components/blog/body';
-import { SubHeader } from '@repo/ui';
+import { NewsletterForm, SubHeader } from '@repo/ui';
+import { CopyIcon, XIcon } from '@storybook/icons';
 
 interface PageProps {
   params: {
@@ -103,8 +104,27 @@ export default async function Page({ params: { slug } }: PageProps) {
             />
           )}
         </div>
-        <div className="mx-auto max-w-[640px]">
+        <div className="relative mx-auto max-w-[640px]">
           {post.body && <Body value={post.body} />}
+          <div className="my-16 border-b border-zinc-200 pb-16">
+            <div className="text-md font-bold">
+              Join the Storybook mailing list
+            </div>
+            <div className="mb-4">
+              Get the latest news, updates and releases
+            </div>
+            <NewsletterForm />
+          </div>
+          <div className="sticky bottom-10 z-50 flex items-center justify-center gap-4">
+            <button className="flex h-10 cursor-pointer items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white/80 px-6 font-bold text-black backdrop-blur transition-colors hover:border-blue-500 hover:text-blue-500">
+              Share on
+              <XIcon />
+            </button>
+            <button className="cursor-pointertransition-colors flex h-10 items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white/80 px-6 font-bold text-black backdrop-blur hover:border-blue-500 hover:text-blue-500">
+              Copy link
+              <CopyIcon />
+            </button>
+          </div>
         </div>
       </div>
     </>
