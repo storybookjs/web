@@ -21,7 +21,9 @@ async function clean(): Promise<void> {
 
 async function fetchAndExtract(version: DocsVersion): Promise<void> {
   // eslint-disable-next-line no-console -- Showing off console.log
-  console.log(`  ♠︎ Fetching docs for ${version.id}...`);
+  console.log(
+    `  ♠︎ Fetching docs for ${version.id} from ${version.branch || version.tag || version.commit}...`,
+  );
 
   let url: string | null = null;
   if (version.branch)
