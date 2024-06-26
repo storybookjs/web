@@ -22,7 +22,7 @@
     },
     {
       "source": "/tutorials/:match*",
-      "destination": "https://storybook-tutorials.netlify.app/tutorials/:match*"
+      "destination": "https://web-tutorials.vercel.app/tutorials/:match*"
     },
     {
       "source": "/event-log",
