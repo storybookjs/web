@@ -7,7 +7,7 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkRehype from 'remark-rehype';
-import { rehypePrettyCodeOptions } from '../../lib/rehype-pretty-code-options';
+import { rehypePrettyCodeOptions } from '@repo/ui';
 import rehypeStringify from 'rehype-stringify';
 
 const portableTextComponents: Partial<PortableTextReactComponents> = {
