@@ -26,6 +26,7 @@ export default async function Layout({
   return (
     <>
       <Header
+        algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
         githubCount={githubCount}
         subMenu={<Submenu activeVersion={activeVersion} tree={tree} />}
         variant="system"
