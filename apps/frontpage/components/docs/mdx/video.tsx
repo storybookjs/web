@@ -9,12 +9,14 @@ type ImageProps = DetailedHTMLProps<
 type VideoProps = ImageProps & {
   activeVersion: string;
   src?: string;
-}
+};
 
 export const Video: FC<VideoProps> = ({ src, activeVersion }) => {
   const pathWithoutRoot = src?.replace('../_assets/', '');
-  const path = `/docs/${activeVersion}/${pathWithoutRoot}`;
+  const path = `/docs-assets/${activeVersion}/${pathWithoutRoot}`;
   const localPath = `public${path}`;
+
+  console.log('VIDEO', path, localPath);
 
   // Check if the file exists
   const fileExists = fs.existsSync(localPath);
