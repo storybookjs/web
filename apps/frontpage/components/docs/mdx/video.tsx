@@ -16,8 +16,6 @@ export const Video: FC<VideoProps> = ({ src, activeVersion }) => {
   const path = `/docs-assets/${activeVersion}/${pathWithoutRoot}`;
   const localPath = `public${path}`;
 
-  console.log('VIDEO', path, localPath);
-
   // Check if the file exists
   const fileExists = fs.existsSync(localPath);
   if (!fileExists) return null;
