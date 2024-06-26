@@ -86,10 +86,10 @@ ${props.value.code}
         <Tweet id={value.tweetId} />
       </div>
     ),
-    image: ({ value }) => {
+    'image-block': ({ value }) => {
       return (
         <div>
-          <img src={urlFor(value).url()} />
+          <img src={urlFor(value.image).url()} />
         </div>
       );
     },

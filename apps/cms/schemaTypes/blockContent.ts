@@ -60,13 +60,27 @@ export default defineType({
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.
     defineArrayMember({
-      type: 'image',
-      options: {hotspot: true},
-    }),
-    defineArrayMember({
       type: 'code',
       name: 'code',
       title: 'Code',
+    }),
+    defineArrayMember({
+      type: 'object',
+      name: 'image-block',
+      title: 'New Image',
+      fields: [
+        {
+          type: 'image',
+          name: 'image',
+          title: 'Image',
+        },
+        {
+          type: 'boolean',
+          name: 'large',
+          title: 'Is large?',
+          initialValue: false,
+        },
+      ],
     }),
     defineArrayMember({
       type: 'object',
