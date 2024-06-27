@@ -1,9 +1,11 @@
 import crypto from 'node:crypto';
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 import { headers } from 'next/headers';
 import type { NextRequest } from 'next/server';
 import { BigQuery } from '@google-cloud/bigquery';
-import fetch from 'node-fetch';
 import { parse as semverParse } from 'semver';
+import { latestVersion } from '@repo/utils';
 
 // eslint-disable-next-line no-useless-escape, prefer-named-capture-group -- Escape is absolutely necessary for regex?
 const SEP_REGEX = /([\.:])/;
@@ -12,6 +14,13 @@ const SEP_REGEX = /([\.:])/;
 const logger = { log: (..._msgs: unknown[]) => {} };
 
 const { GCP_CREDENTIALS, SKIP_IP_HASH } = process.env;
+
+const versionFilesDir = path.join(
+  process.cwd(),
+  'content/docs',
+  latestVersion.id,
+  'versions',
+);
 
 const md5 = (host: string) => {
   const hash = crypto.createHash('md5');
@@ -95,19 +104,15 @@ type DistTag = 'latest' | 'next';
 const versions = async () => {
   logger.log('fetching versions');
 
-  const versionsResponse = await fetch(
-    'https://api.github.com/repos/storybookjs/storybook/contents/docs/versions?ref=main',
-  );
-  const versionFiles = (await versionsResponse.json()) as {
-    name: string;
-    download_url: string;
-  }[];
-
   async function getVersionData(distTag: DistTag) {
-    const file = versionFiles.find(({ name }) => name === `${distTag}.json`);
-    const res = await fetch(file!.download_url);
+    const data = JSON.parse(
+      await readFile(
+        new URL(path.join(versionFilesDir, `${distTag}.json`), import.meta.url),
+        'utf8',
+      ),
+    );
     // Strip off no-longer-used `info` property
-    const { version } = (await res.json()) as { version: string };
+    const { version } = data as { version: string };
     return { version };
   }
 
