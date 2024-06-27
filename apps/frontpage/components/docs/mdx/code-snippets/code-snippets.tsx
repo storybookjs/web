@@ -133,6 +133,8 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
       !activeTab
     ) {
       setTab(tabs[0].id);
+    } else if (tabs && tabs.length === 0 && activeTab) {
+      setTab(null);
     }
   }, [
     activeTab,
