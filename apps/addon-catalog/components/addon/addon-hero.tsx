@@ -28,9 +28,10 @@ export function AddonHero({ addon }: { addon: Addon }) {
     <div className="mb-12 flex justify-between border-b border-zinc-300 pb-12 dark:border-b-slate-700">
       <div className="flex flex-col gap-8 md:flex-row">
         {addon.icon && (
-          <div className="relative h-20 w-20">
-            <Image src={addon.icon} alt={addon.displayName || ''} fill={true} />
-          </div>
+          <div
+            style={{ backgroundImage: `url('${addon.icon}')` }}
+            className="h-20 w-20 bg-contain bg-center bg-no-repeat"
+          />
         )}
         <div className="flex flex-col items-start">
           <div className="flex items-center gap-2">
