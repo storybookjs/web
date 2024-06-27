@@ -16,6 +16,7 @@ import { generateDocsTree } from '../../../lib/get-tree';
 import { DocsProvider } from '../provider';
 import { getVersion } from '../../../lib/get-version';
 import { Submenu } from '../../../components/docs/submenu';
+import { DocsMainNav } from '../../../components/docs/sidebar/docs-main-nav';
 
 interface PageProps {
   children: React.ReactNode;
@@ -106,6 +107,7 @@ export default async function Layout({
       <Container className="flex gap-4 md:pl-5 lg:gap-12 lg:pr-8">
         <>
           <Sidebar>
+            <DocsMainNav activeVersion={activeVersion} />
             <NavDocs activeVersion={activeVersion} tree={tree} />
           </Sidebar>
           {children}

@@ -16,6 +16,7 @@ import { Callout } from './callout';
 
 export const mdxComponents = {
   a: A,
+  A,
   code: Code,
   figcaption: Figcaption,
   figure: Figure,
@@ -27,9 +28,13 @@ export const mdxComponents = {
   p: P,
   pre: Pre,
   table: Table,
+  Table,
   td: Td,
+  Td,
   th: Th,
+  Th,
   tr: Tr,
+  Tr,
   ul: UnorderedList,
   li: ListItem,
   ol: OrderedList,

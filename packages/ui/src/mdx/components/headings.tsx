@@ -12,11 +12,11 @@ function Heading({ children, className, id, level }: HeadingProps) {
   const Component = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4';
   return (
     <Component
-      className={cn('ui-group ui-relative ui-font-bold', className)}
+      className={cn('ui-group ui-relative ui-font-bold target:ui-scroll-mt-40 md:target:ui-scroll-mt-24', className)}
       data-docs-heading
       id={id}
     >
-      <div className="ui-absolute -ui-translate-y-24" id={id} />
+      <div className="ui-absolute -ui-translate-y-24" />
       <a
         className="ui-text-black ui-transition-colors ui-duration-200 group-hover:ui-text-blue-500 dark:ui-text-white"
         href={`#${id}`}
