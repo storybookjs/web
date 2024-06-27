@@ -12,11 +12,13 @@ import {
   DropdownMenuTrigger,
 } from '@repo/ui';
 
+type Renderer = typeof renderers[number];
+
 export const Renderers: FC = () => {
   let { activeRenderer, setRenderer } = useDocs();
   const [isMobile] = useMediaQuery('(max-width: 480px)');
-  const [firstList, setFirstList] = useState(renderers.slice(0, 3));
-  const [lastRenderer, setLastRenderer] = useState(renderers[3]);
+  const [firstList, setFirstList] = useState<Renderer[]>(renderers.slice(0, 3));
+  const [lastRenderer, setLastRenderer] = useState<Renderer>(renderers[3]);
 
   useEffect(() => {
     // On mobile we only show the first two renderers

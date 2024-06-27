@@ -10,4 +10,4 @@ export const packageManagers = [
   { id: "npx", title: "npx" },
   { id: "yarn", title: "yarn" },
   { id: "pnpm", title: "pnpm" },
-];
+] as const;

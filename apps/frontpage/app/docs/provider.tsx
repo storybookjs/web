@@ -38,19 +38,22 @@ export function DocsProvider({ children }: { children: ReactNode }) {
     if (cookieRenderer) {
       setActiveRenderer(cookieRenderer);
     } else {
-      setActiveRenderer(renderers[0]?.id || '');
+      setActiveRenderer(renderers[0].id);
+      setCookie(cookieRenderId, renderers[0].id);
     }
 
     if (cookieLanguage) {
       setActiveLanguage(cookieLanguage);
     } else {
-      setActiveLanguage(languages[0]?.id || '');
+      setActiveLanguage(languages[0].id);
+      setCookie(cookieLanguageId, languages[0].id);
     }
 
     if (cookiePackageManager) {
       setActivePackageManager(cookiePackageManager);
     } else {
-      setActivePackageManager(packageManagers[0]?.id || '');
+      setActivePackageManager(packageManagers[0].id);
+      setCookie(cookiePackageManagerId, packageManagers[0].id);
     }
   }, []);
 
