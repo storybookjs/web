@@ -137,7 +137,6 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   }, [
     activeTab,
     tabs,
-    tabs?.length,
     activeLanguage,
     activePackageManager,
     activeRenderer,
