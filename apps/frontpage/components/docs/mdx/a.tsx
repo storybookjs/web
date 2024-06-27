@@ -34,6 +34,15 @@ export const A: FC<AProps> = ({
   activeVersion = latestVersion,
   ...rest
 }) => {
+  const isExternal = hrefIn?.startsWith('http');
+  if (isExternal || !hrefIn) {
+    return (
+      <a className="ui-text-blue-500" href={hrefIn} {...rest}>
+        {children}
+      </a>
+    );
+  }
+
   let href = hrefIn
     ?.replace(/^((?!http).*)\.mdx/, '$1')
     // ../../release-7-6/docs/migration-guide.mdx#major-breaking-changes -> ../../docs/7/migration-guide#major-breaking-changes
@@ -47,8 +56,8 @@ export const A: FC<AProps> = ({
   }
 
   return (
-    <a className="ui-text-blue-500" href={href} {...rest}>
+    <Link className="ui-text-blue-500" href={href} {...rest}>
       {children}
-    </a>
+    </Link>
   );
 };
