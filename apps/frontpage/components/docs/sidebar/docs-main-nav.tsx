@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
-import { cn } from '@repo/utils';
+import { cn, DocsVersion } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import {
   APIIcon,
@@ -12,7 +12,11 @@ import {
   TutorialsIcon,
 } from './icons';
 
-export const DocsMainNav: FC = () => {
+interface DocsMainNavProps {
+  activeVersion: DocsVersion;
+}
+
+export const DocsMainNav: FC<DocsMainNavProps> = ({ activeVersion }) => {
   const pathname = usePathname();
 
   return (
@@ -25,12 +29,14 @@ export const DocsMainNav: FC = () => {
         }
         label="Documentation"
       />
-      <Line
-        href="/docs/api"
-        icon={<APIIcon />}
-        isActive={pathname.startsWith('/docs/api')}
-        label="API"
-      />
+      {Number(activeVersion.id) >= 7 ? (
+        <Line
+          href="/docs/api"
+          icon={<APIIcon />}
+          isActive={pathname.startsWith('/docs/api')}
+          label="API"
+        />
+      ) : null}
       <Line
         href="/tutorials"
         icon={<TutorialsIcon />}
