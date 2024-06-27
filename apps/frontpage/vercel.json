@@ -39,6 +39,10 @@
     {
       "source": "/sb/api/event",
       "destination": "https://plausible.io/api/event"
+    },
+    {
+      "source": "/proxy/api/event",
+      "destination": "https://plausible.io/api/event"
     }
   ]
 }
