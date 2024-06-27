@@ -35,7 +35,10 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
         {!isRecipe && (
           <div className="relative flex h-16 w-16 flex-shrink-0 items-center justify-center">
             {element.icon ? (
-              <img src={element.icon} />
+              <div
+                style={{ backgroundImage: `url('${element.icon}')` }}
+                className="h-16 w-16 bg-contain bg-center bg-no-repeat"
+              />
             ) : (
               <div className="flex h-full w-full items-center justify-center rounded-md bg-zinc-50 dark:bg-slate-800">
                 <StorybookIcon className="h-10 w-10 text-[#FF4785]" />
