@@ -48,7 +48,7 @@ export const Submenu: FC<SubmenuProps> = ({ tree, activeVersion }) => {
               <ScrollArea.Viewport className="h-full w-full p-4 md:p-6 md:pt-5">
                 {activeVersion ? (
                   <>
-                    <DocsMainNav />
+                    <DocsMainNav activeVersion={activeVersion} />
                     <NavDocs activeVersion={activeVersion} tree={tree} />
                   </>
                 ) : null}
