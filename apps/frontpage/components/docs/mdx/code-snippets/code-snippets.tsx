@@ -121,7 +121,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
         id: item.tabTitle,
         title: tabTitle,
       };
-    }) as Tab[];
+    }) as Tab[] | undefined;
 
   useEffect(() => {
     if (
@@ -137,7 +137,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   }, [
     activeTab,
     tabs,
-    tabs.length,
+    tabs?.length,
     activeLanguage,
     activePackageManager,
     activeRenderer,
