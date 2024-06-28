@@ -62,6 +62,17 @@ export default async function Page({ params: { slug } }: PageProps) {
   return (
     <div className="w-full min-w-0 flex-1 py-12">
       <main className="mx-auto max-w-[720px]">
+        {!isLatest && (
+          <div className="mb-8 flex flex-col items-start gap-4 rounded-md bg-red-200 p-4 text-sm text-red-900 md:flex-row md:items-center md:justify-between md:gap-6 md:py-3 md:pl-5 md:pr-3">
+            You are viewing documentation for a previous version of Storybook
+            <Link
+              href="/docs"
+              className="shadow-b-red-300 relative flex h-8 flex-shrink-0 items-center justify-center rounded-md bg-white px-3 text-sm text-black transition-transform hover:-translate-y-0.5"
+            >
+              Switch to latest version
+            </Link>
+          </div>
+        )}
         <h1
           className="relative mb-6 mt-0 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
           data-docs-heading
