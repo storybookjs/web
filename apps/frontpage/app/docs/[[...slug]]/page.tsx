@@ -112,7 +112,7 @@ export default async function Page({ params: { slug } }: PageProps) {
         >
           {page.content}
         </div>
-        <DocsFooter />
+        <DocsFooter isIndexPage={page.isIndexPage} />
       </main>
     </div>
   );

@@ -101,6 +101,7 @@ export const getPageData = async (
 
   return {
     ...frontmatter,
+    isIndexPage: isIndexMDX || isIndexMD,
     tabs: index?.isTab ? parent : [],
     content,
   };
