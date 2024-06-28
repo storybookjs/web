@@ -45,6 +45,7 @@ export const A: FC<AProps> = ({
 
   let href = hrefIn
     ?.replace(/^((?!http).*)\.mdx/, '$1')
+    .replace(/\/index$/, '')
     // ../../release-7-6/docs/migration-guide.mdx#major-breaking-changes -> ../../docs/7/migration-guide#major-breaking-changes
     .replace(/^((?!http).*)(?:release-)(\d+)-\d+\/docs(.*)/, '$1docs/$2$3');
 
