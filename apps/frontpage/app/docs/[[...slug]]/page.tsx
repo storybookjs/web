@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import type { TreeProps } from '@repo/utils';
 import { GLOBAL_SEARCH_META_KEYS, GLOBAL_SEARCH_IMPORTANCE } from '@repo/ui';
@@ -12,7 +12,7 @@ import { Metadata } from 'next';
 
 interface PageProps {
   params: {
-    slug: string[];
+    slug?: string[];
   };
 }
 
@@ -75,6 +75,14 @@ export default async function Page({ params: { slug } }: PageProps) {
 
   const page = await getPageData(slugToFetch, activeVersion);
 
+  const isIndex = slug && slug[slug.length - 1] === 'index';
+  const pathWithoutIndex = `/docs/${slug?.slice(0, -1).join('/')}`;
+
+  console.log('HERE', isIndex);
+
+  // If the page is an index page, redirect to the parent page
+  if (isIndex) redirect(pathWithoutIndex);
+
   if (!page) notFound();
 
   return (
@@ -90,7 +98,7 @@ export default async function Page({ params: { slug } }: PageProps) {
         {page.tabs && page.tabs.length > 0 ? (
           <div className="flex items-center gap-8 border-b border-zinc-200">
             {page.tabs.map((tab) => {
-              const isActive = tab.slug === `/docs/${slug.join('/')}`;
+              const isActive = tab.slug === `/docs/${slug?.join('/')}`;
 
               return (
                 <Link
