@@ -102,7 +102,6 @@ export const Header: FC<HeaderProps> = ({
               algoliaApiKey={algoliaApiKey}
               className="max-[440px]:ui-hidden"
               variant={variant}
-              version={version}
             />
           </div>
           <MobileMenu
