@@ -5,16 +5,16 @@ import Link from 'next/link';
 export function HomeResources() {
   return (
     <>
-      <div className="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 mb-12 sm:grid-cols-2">
         <Card href="/docs/essentials" title="Essential addons" />
-        <Card href="/docs/integrations" title="Addon catalog" />
-        <Card external href="/integrations" title="Recipes" />
+        <Card external href="/addons" title="Addon catalog" />
+        <Card external href="/addons" title="Recipes" />
         <Card href="/docs/builders" title="Builders" />
-        <Card href="/docs/contribute" title="How to migrate" />
+        <Card href="/docs/migration-guide" title="How to migrate" />
         <Card href="/docs/migration-guide" title="Migrate to 8.0" />
         <Card href="/docs/faq" title="FAQ" />
       </div>
-      <div className="mb-6 grid grid-cols-1 gap-4 border-t border-slate-200 pt-12 sm:grid-cols-2 dark:border-slate-700">
+      <div className="grid grid-cols-1 gap-4 pt-12 mb-6 border-t border-slate-200 sm:grid-cols-2 dark:border-slate-700">
         <div>
           <p className="mb-2 text-xl font-bold">Need some help?</p>
           <a
