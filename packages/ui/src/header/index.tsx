@@ -2,8 +2,8 @@
 
 import type { FC, ReactNode } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import { cn, getVersion } from '@repo/utils';
-import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
+import { cn } from '@repo/utils';
+import { usePathname } from 'next/navigation';
 import { GithubIcon } from '@storybook/icons';
 import { StorybookLogo } from '../logos/storybook-logo';
 import { Search } from '../search';
@@ -25,9 +25,6 @@ export const Header: FC<HeaderProps> = ({
   variant = 'system',
 }) => {
   const pathname = usePathname();
-  const segment = useSelectedLayoutSegment();
-  const slug: string[] = segment ? segment.split('/') : [];
-  const version = getVersion(slug);
 
   return (
     <header
@@ -104,11 +101,7 @@ export const Header: FC<HeaderProps> = ({
               variant={variant}
             />
           </div>
-          <MobileMenu
-            algoliaApiKey={algoliaApiKey}
-            variant={variant}
-            version={version}
-          />
+          <MobileMenu algoliaApiKey={algoliaApiKey} variant={variant} />
         </div>
         {subMenu}
       </div>
