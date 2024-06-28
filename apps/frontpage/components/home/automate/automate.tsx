@@ -23,21 +23,21 @@ export const Automate: FC = () => {
       <Container>
         <FeatureStep
           description="Publish Storybook online to collaborate on UI implementation with developers, designers, and PMs. Your teammates can see work without needing to spin up a dev environment."
-          href="/docs/react/sharing/publish-storybook/"
+          href="/docs/sharing/publish-storybook/"
           linkLabel="Publish Storybook for your team"
           title="Publish Storybook"
         />
         <Publish />
         <FeatureStep
           description="Test every facet of your UI: interaction, visual, accessibility, and snapshot, in CI to detect UI bugs down to the component."
-          href="/docs/react/writing-tests/test-runner"
+          href="/docs/writing-tests/test-runner"
           linkLabel="Auto-detect UI bugs"
           title="UI Tests"
         />
         <UITests />
         <FeatureStep
           description="Request feedback from teammates to verify UI implementation. Discuss UI changes together then assign reviewers for sign off."
-          href="/docs/react/sharing/publish-storybook#review-with-your-team"
+          href="/docs/sharing/publish-storybook#review-with-your-team"
           linkLabel="Review with your team"
           title="UI Review"
         />

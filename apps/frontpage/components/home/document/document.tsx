@@ -47,7 +47,7 @@ const features = [
     description: 'QA unexpected bugs by going back in time.',
     link: {
       label: 'Learn about versioning',
-      href: '/docs/react/sharing/publish-storybook#versioning-and-history',
+      href: '/docs/sharing/publish-storybook#versioning-and-history',
     },
     media: '/home/document/homepage-component-history-lg.mp4',
     poster: '/home/document/homepage-component-history-poster-lg.jpg',
