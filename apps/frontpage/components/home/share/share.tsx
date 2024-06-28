@@ -34,7 +34,7 @@ export function Share() {
             </p>
             <Link
               className="flex items-center gap-2 font-bold text-blue-500"
-              href="/docs/react/sharing/publish-storybook"
+              href="/docs/sharing/publish-storybook"
             >
               Publish Storybook
               <ChevronSmallRightIcon />
@@ -53,7 +53,7 @@ export function Share() {
             </p>
             <Link
               className="flex items-center gap-2 font-bold text-blue-500"
-              href="/docs/react/sharing/embed"
+              href="/docs/sharing/embed"
             >
               Embed stories
               <ChevronSmallRightIcon />
@@ -75,7 +75,7 @@ export function Share() {
             </p>
             <Link
               className="flex items-center gap-2 font-bold text-blue-500"
-              href="/docs/react/writing-tests/stories-in-unit-tests"
+              href="/docs/writing-tests/stories-in-unit-tests"
             >
               Reuse stories in tests and libraries
               <ChevronSmallRightIcon />
