@@ -30,7 +30,7 @@ export const docsVersions: DocsVersion[] = [
   {
     label: 'Version 8.1',
     id: '8.1',
-    branch: 'revert-28355-revert-28351-transform-docs-latest',
+    branch: 'main',
   },
   // {
   //   label: '8.2 (beta)',
@@ -42,13 +42,13 @@ export const docsVersions: DocsVersion[] = [
     label: 'Version 7',
     id: '7.6',
     inSlug: '7',
-    branch: 'charles-docs-transform-7-6',
+    branch: 'release-7-6',
   },
   {
     label: 'Version 6',
     id: '6.5',
     inSlug: '6',
-    branch: 'charles-docs-transform-6.5',
+    branch: 'release-6-5',
   },
 ];
 
