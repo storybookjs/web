@@ -10,7 +10,7 @@ export function HomeResources() {
         <Card external href="/addons" title="Addon catalog" />
         <Card external href="/addons" title="Recipes" />
         <Card href="/docs/builders" title="Builders" />
-        <Card href="/docs/migration-guide" title="How to migrate" />
+        <Card href="/docs/contribute" title="How to contribute" />
         <Card href="/docs/migration-guide" title="Migrate to 8.0" />
         <Card href="/docs/faq" title="FAQ" />
       </div>
