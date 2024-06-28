@@ -78,8 +78,6 @@ export default async function Page({ params: { slug } }: PageProps) {
   const isIndex = slug && slug[slug.length - 1] === 'index';
   const pathWithoutIndex = `/docs/${slug?.slice(0, -1).join('/')}`;
 
-  console.log('HERE', isIndex);
-
   // If the page is an index page, redirect to the parent page
   if (isIndex) redirect(pathWithoutIndex);
 
