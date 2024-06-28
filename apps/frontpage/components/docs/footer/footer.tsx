@@ -10,7 +10,11 @@ import { Form } from './form';
 export type ReactionsProps = null | 'up' | 'down';
 const githubDocsBaseUrl = 'https://github.com/storybookjs/storybook/tree/next';
 
-export const DocsFooter = () => {
+interface FooterProps {
+  isIndexPage: boolean;
+}
+
+export const DocsFooter = ({ isIndexPage }: FooterProps) => {
   const [reaction, setReaction] = useState<ReactionsProps>(null);
   const pathname = usePathname();
 
@@ -71,7 +75,7 @@ export const DocsFooter = () => {
         </AnimatePresence>
       </motion.div>
       <a
-        href={`${githubDocsBaseUrl}${pathname}.mdx`}
+        href={`${githubDocsBaseUrl}${pathname}${isIndexPage ? '/index' : ''}.mdx`}
         target="_blank"
         className="textsm flex h-12 items-center rounded-full border border-zinc-200 px-5 text-sm transition-all hover:-translate-y-1 hover:border-zinc-400"
       >

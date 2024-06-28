@@ -80,12 +80,7 @@ export default async function Layout({
 }: PageProps) {
   const { number: githubCount } = await fetchGithubCount();
   const activeVersion = getVersion(slug);
-  const path = `content/docs/${activeVersion.id}`;
-  const tree = generateDocsTree(path);
-  const isLatest = activeVersion.id === latestVersion.id;
-  const slugToFetch = slug ? [...slug] : [];
-  if (!isLatest) slugToFetch.shift();
-  slugToFetch.unshift(activeVersion.id);
+  const tree = generateDocsTree(`content/docs/${activeVersion.id}`);
 
   return (
     <DocsProvider>
