@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
-import { cn, DocsVersion } from '@repo/utils';
-import { usePathname } from 'next/navigation';
+import { cn } from '@repo/utils';
+import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import {
   APIIcon,
   ChangelogIcon,
@@ -11,13 +11,13 @@ import {
   IntegrationsIcon,
   TutorialsIcon,
 } from './icons';
+import { getVersion } from '../../../lib/get-version';
 
-interface DocsMainNavProps {
-  activeVersion: DocsVersion;
-}
-
-export const DocsMainNav: FC<DocsMainNavProps> = ({ activeVersion }) => {
+export const DocsMainNav = () => {
   const pathname = usePathname();
+  const segment = useSelectedLayoutSegment();
+  const slug: string[] = segment ? segment.split('/') : [];
+  const activeVersion = getVersion(slug);
 
   return (
     <nav className="flex flex-col gap-1.5 text-sm font-medium">

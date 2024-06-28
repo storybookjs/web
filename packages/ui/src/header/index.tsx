@@ -2,8 +2,8 @@
 
 import type { FC, ReactNode } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import { cn, latestVersion } from '@repo/utils';
-import { usePathname } from 'next/navigation';
+import { cn, getVersion } from '@repo/utils';
+import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { GithubIcon } from '@storybook/icons';
 import { StorybookLogo } from '../logos/storybook-logo';
 import { Search } from '../search';
@@ -16,7 +16,6 @@ export interface HeaderProps {
   githubCount?: number;
   subMenu?: ReactNode;
   variant?: 'home' | 'system';
-  version?: string;
 }
 
 export const Header: FC<HeaderProps> = ({
@@ -24,9 +23,11 @@ export const Header: FC<HeaderProps> = ({
   githubCount = 0,
   subMenu,
   variant = 'system',
-  version = latestVersion.id,
 }) => {
   const pathname = usePathname();
+  const segment = useSelectedLayoutSegment();
+  const slug: string[] = segment ? segment.split('/') : [];
+  const version = getVersion(slug);
 
   return (
     <header

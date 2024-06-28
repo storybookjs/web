@@ -2,17 +2,22 @@ import type { FC, ReactNode } from 'react';
 import { MenuIcon } from '@storybook/icons';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
+import type { DocsVersion } from '@repo/utils';
 import { cn } from '@repo/utils';
 import { Search } from '../search';
 import { Arrow } from './arrow';
 import { nav } from './nav';
 import type { HeaderProps } from '.';
 
-export const MobileMenu: FC<HeaderProps> = ({
+export const MobileMenu = ({
   algoliaApiKey,
   variant,
   version,
-}) => {
+}: {
+  algoliaApiKey: string;
+  variant: HeaderProps['variant'];
+  version: DocsVersion;
+}): ReactNode => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>

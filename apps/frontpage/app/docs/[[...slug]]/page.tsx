@@ -1,16 +1,34 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { TreeProps } from '@repo/utils';
+import { GLOBAL_SEARCH_META_KEYS, GLOBAL_SEARCH_IMPORTANCE } from '@repo/ui';
 import { latestVersion, cn } from '@repo/utils';
 import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
 import { generateDocsTree } from '../../../lib/get-tree';
 import { DocsFooter } from '../../../components/docs/footer/footer';
+import { Metadata } from 'next';
 
 interface PageProps {
   params: {
     slug: string[];
+  };
+}
+
+export async function generateMetadata({
+  params: { slug },
+}: PageProps): Promise<Metadata> {
+  const activeVersion = getVersion(slug);
+
+  return {
+    title: 'Storybook',
+    description:
+      "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
+    other: {
+      [GLOBAL_SEARCH_META_KEYS.VERSION]: activeVersion.id,
+      [GLOBAL_SEARCH_META_KEYS.IMPORTANCE]: GLOBAL_SEARCH_IMPORTANCE.DOCS,
+    },
   };
 }
 
@@ -60,10 +78,10 @@ export default async function Page({ params: { slug } }: PageProps) {
   if (!page) notFound();
 
   return (
-    <div className="w-full min-w-0 flex-1 py-12">
+    <div className="flex-1 w-full min-w-0 py-12">
       <main className="mx-auto max-w-[720px]">
         <h1
-          className="relative mb-6 mt-0 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
+          className="relative mt-0 mb-6 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
           data-docs-heading
         >
           {page.title || 'Title is missing'}

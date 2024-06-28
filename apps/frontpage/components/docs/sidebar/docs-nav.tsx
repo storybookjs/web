@@ -5,14 +5,15 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { useEffect, useState, type FC } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import type { DocsVersion, TreeProps } from '@repo/utils';
-import { cn, docsVersions, latestVersion } from '@repo/utils';
+import { cn, latestVersion } from '@repo/utils';
 import { VersionSelector } from './version-selector';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { getVersion } from '../../../lib/get-version';
 
+type Tree = TreeProps[] | null | undefined;
+
 interface NavDocsProps {
-  tree: TreeProps[] | null | undefined;
-  activeVersion: DocsVersion;
+  listOfTrees: { version: string; tree: Tree }[];
 }
 
 const getUrl = (slug: string, activeVersion: DocsVersion) => {
@@ -28,17 +29,19 @@ const getUrl = (slug: string, activeVersion: DocsVersion) => {
   return slug;
 };
 
-export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
+export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
   const pathname = usePathname();
+  const segment = useSelectedLayoutSegment();
+  const slug: string[] = segment ? segment.split('/') : [];
+  const activeVersion = getVersion(slug);
+  const selectedTree = listOfTrees.find((t) => t.version === activeVersion.id);
+
   const [parentAccordion, setParentAccordion] = useState<string[] | null>(null);
 
   useEffect(() => {
     // Find the active item in the tree and set the parent accordion to open
     // This helps to understand what accordion item need to be open
-    const findActive = (
-      t: NavDocsProps['tree'],
-      parent: TreeProps | null,
-    ): any => {
+    const findActive = (t: Tree, parent: TreeProps | null): any => {
       if (t === null || t === undefined) return null;
 
       for (let i = 0; i < t.length; i++) {
@@ -54,7 +57,7 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
       }
     };
 
-    findActive(tree, null);
+    findActive(selectedTree?.tree, null);
   }, [pathname]);
 
   return (
@@ -65,8 +68,8 @@ export const NavDocs: FC<NavDocsProps> = ({ tree, activeVersion }) => {
     >
       <VersionSelector activeVersion={activeVersion} />
       <ul className="mt-7 md:mt-9">
-        {tree
-          ? tree.map((lvl1) => (
+        {selectedTree?.tree
+          ? selectedTree?.tree.map((lvl1) => (
               <Level1
                 key={lvl1.pathSegment}
                 lvl1={lvl1}
@@ -91,7 +94,7 @@ const Level1 = ({
   return (
     <li key={lvl1.pathSegment}>
       <Link
-        className="mt-6 flex items-center px-2 py-2 text-sm font-bold transition-colors hover:text-blue-500"
+        className="flex items-center px-2 py-2 mt-6 text-sm font-bold transition-colors hover:text-blue-500"
         href={getUrl(lvl1.slug, activeVersion)}
       >
         {lvl1.sidebar?.title || lvl1.title}
