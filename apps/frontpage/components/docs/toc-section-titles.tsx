@@ -1,6 +1,6 @@
 'use client';
 
-import { TreeProps, getVersion } from '@repo/utils';
+import { TreeProps, getVersion, latestVersion } from '@repo/utils';
 import { useSelectedLayoutSegment } from 'next/navigation';
 
 export function TOCSectionTitles({
@@ -30,7 +30,7 @@ export function TOCSectionTitles({
       }
     }
 
-    if (slug && tree) buildTitle(tree, 0);
+    if (slug && tree) buildTitle(tree, activeVersion.id === latestVersion.id ? 0 : 1);
 
     return title.join(' » ');
   }
