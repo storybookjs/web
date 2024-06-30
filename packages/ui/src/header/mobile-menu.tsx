@@ -8,11 +8,13 @@ import { Arrow } from './arrow';
 import { nav } from './nav';
 import type { HeaderProps } from '.';
 
-export const MobileMenu: FC<HeaderProps> = ({
+export const MobileMenu = ({
   algoliaApiKey,
   variant,
-  version,
-}) => {
+}: {
+  algoliaApiKey: string;
+  variant: HeaderProps['variant'];
+}): ReactNode => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -47,7 +49,6 @@ export const MobileMenu: FC<HeaderProps> = ({
                 className="ui-hidden max-[440px]:ui-block"
                 isMobile
                 variant={variant}
-                version={version}
               />
               {nav.map((item) => (
                 <DropdownItem

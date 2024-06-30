@@ -47,9 +47,9 @@ export default function RootLayout({
       <head>
         <script
           defer
+          src="/js/script.js"
+          data-api="/api/event"
           data-domain="storybook.js.org"
-          data-api="/sb/api/event"
-          src="/sb/js/script.js"
         ></script>
       </head>
       <body

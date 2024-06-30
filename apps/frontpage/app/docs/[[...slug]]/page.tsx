@@ -1,16 +1,34 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import type { TreeProps } from '@repo/utils';
+import { GLOBAL_SEARCH_META_KEYS, GLOBAL_SEARCH_IMPORTANCE } from '@repo/ui';
 import { latestVersion, cn } from '@repo/utils';
 import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
 import { generateDocsTree } from '../../../lib/get-tree';
 import { DocsFooter } from '../../../components/docs/footer/footer';
+import { Metadata } from 'next';
 
 interface PageProps {
   params: {
-    slug: string[];
+    slug?: string[];
+  };
+}
+
+export async function generateMetadata({
+  params: { slug },
+}: PageProps): Promise<Metadata> {
+  const activeVersion = getVersion(slug);
+
+  return {
+    title: 'Storybook',
+    description:
+      "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
+    other: {
+      [GLOBAL_SEARCH_META_KEYS.VERSION]: activeVersion.id,
+      [GLOBAL_SEARCH_META_KEYS.IMPORTANCE]: GLOBAL_SEARCH_IMPORTANCE.DOCS,
+    },
   };
 }
 
@@ -57,13 +75,30 @@ export default async function Page({ params: { slug } }: PageProps) {
 
   const page = await getPageData(slugToFetch, activeVersion);
 
+  const isIndex = slug && slug[slug.length - 1] === 'index';
+  const pathWithoutIndex = `/docs/${slug?.slice(0, -1).join('/')}`;
+
+  // If the page is an index page, redirect to the parent page
+  if (isIndex) redirect(pathWithoutIndex);
+
   if (!page) notFound();
 
   return (
-    <div className="w-full min-w-0 flex-1 py-12">
+    <div className="flex-1 w-full min-w-0 py-12">
       <main className="mx-auto max-w-[720px]">
+        {!isLatest && (
+          <div className="mb-8 flex flex-col items-start gap-4 rounded-md bg-red-200 p-4 text-sm text-red-900 md:flex-row md:items-center md:justify-between md:gap-6 md:py-3 md:pl-5 md:pr-3">
+            You are viewing documentation for a previous version of Storybook
+            <Link
+              href="/docs"
+              className="shadow-b-red-300 relative flex h-8 flex-shrink-0 items-center justify-center rounded-md bg-white px-3 text-sm text-black transition-transform hover:-translate-y-0.5"
+            >
+              Switch to latest version
+            </Link>
+          </div>
+        )}
         <h1
-          className="relative mb-6 mt-0 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
+          className="relative mt-0 mb-6 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
           data-docs-heading
         >
           {page.title || 'Title is missing'}
@@ -72,7 +107,7 @@ export default async function Page({ params: { slug } }: PageProps) {
         {page.tabs && page.tabs.length > 0 ? (
           <div className="flex items-center gap-8 border-b border-zinc-200">
             {page.tabs.map((tab) => {
-              const isActive = tab.slug === `/docs/${slug.join('/')}`;
+              const isActive = tab.slug === `/docs/${slug?.join('/')}`;
 
               return (
                 <Link
@@ -112,7 +147,7 @@ export default async function Page({ params: { slug } }: PageProps) {
         >
           {page.content}
         </div>
-        <DocsFooter />
+        <DocsFooter isIndexPage={page.isIndexPage} />
       </main>
     </div>
   );

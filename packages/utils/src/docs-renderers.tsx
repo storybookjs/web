@@ -16,4 +16,4 @@ export const renderers = [
   { id: "preact", title: "Preact" },
   { id: "qwik", title: "Qwik" },
   { id: "solid", title: "Solid" },
-];
+] as const;

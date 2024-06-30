@@ -14,7 +14,7 @@ export async function CodeSnippets({ path, activeVersion }: LocalProps) {
 
   // Get metadata for all files from the Code Snippets component
   // This happen on the server since we need to call the file system (fs)
-  const codeSnippetsContent: CodeSnippetsProps[] = await getMetadata({
+  const codeSnippetsContent: CodeSnippetsProps[] | null = await getMetadata({
     path,
     activeVersion,
   });

@@ -2,12 +2,12 @@
 
 import type { FC } from 'react';
 import { DocSearch } from '@docsearch/react';
-import { cn } from '@repo/utils';
+import { cn, getVersion } from '@repo/utils';
+import { useSelectedLayoutSegment } from 'next/navigation';
 import type { HeaderProps } from '../header';
 import { GLOBAL_SEARCH_AGNOSTIC } from '../constants';
 
-interface SearchProps
-  extends Pick<HeaderProps, 'algoliaApiKey' | 'variant' | 'version'> {
+interface SearchProps extends Pick<HeaderProps, 'algoliaApiKey' | 'variant'> {
   className?: string;
   isMobile?: boolean;
 }
@@ -22,9 +22,11 @@ export const Search: FC<SearchProps> = ({
   className,
   isMobile = false,
   variant = 'system',
-  version,
 }) => {
   const label = 'Search docs';
+  const segment = useSelectedLayoutSegment();
+  const slug: string[] = segment ? segment.split('/') : [];
+  const activeVersion = getVersion(slug);
 
   return (
     <div
@@ -111,7 +113,10 @@ export const Search: FC<SearchProps> = ({
              * between the containing values
              */
             [`tags:docs`, `tags:recipes`],
-            [`version:${version}`, `version:${GLOBAL_SEARCH_AGNOSTIC}`],
+            [
+              `version:${activeVersion.id}`,
+              `version:${GLOBAL_SEARCH_AGNOSTIC}`,
+            ],
           ],
         }}
         translations={{

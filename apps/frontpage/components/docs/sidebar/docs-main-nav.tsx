@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 import { cn } from '@repo/utils';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import {
   APIIcon,
   ChangelogIcon,
@@ -11,9 +11,13 @@ import {
   IntegrationsIcon,
   TutorialsIcon,
 } from './icons';
+import { getVersion } from '../../../lib/get-version';
 
-export const DocsMainNav: FC = () => {
+export const DocsMainNav = () => {
   const pathname = usePathname();
+  const segment = useSelectedLayoutSegment();
+  const slug: string[] = segment ? segment.split('/') : [];
+  const activeVersion = getVersion(slug);
 
   return (
     <nav className="flex flex-col gap-1.5 text-sm font-medium">
@@ -25,12 +29,14 @@ export const DocsMainNav: FC = () => {
         }
         label="Documentation"
       />
-      <Line
-        href="/docs/api"
-        icon={<APIIcon />}
-        isActive={pathname.startsWith('/docs/api')}
-        label="API"
-      />
+      {Number(activeVersion.id) >= 7 ? (
+        <Line
+          href="/docs/api"
+          icon={<APIIcon />}
+          isActive={pathname.startsWith('/docs/api')}
+          label="API"
+        />
+      ) : null}
       <Line
         href="/tutorials"
         icon={<TutorialsIcon />}

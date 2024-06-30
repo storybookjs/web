@@ -77,18 +77,18 @@ export function AddonSidebar({ addon }: { addon: Addon }) {
         </>
       )}
       <div className="mt-6 flex flex-col gap-4 border-t border-t-zinc-300 pt-6 dark:border-t-slate-700">
-        <Link
+        <a
           href="/docs/addons/install-addons"
           className="flex items-center gap-2 text-sm transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
         >
           <BookIcon /> How to install addons
-        </Link>
-        <Link
+        </a>
+        <a
           href="/docs/addons/writing-addons"
           className="flex items-center gap-2 text-sm transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
         >
           <EditIcon /> Create an addon
-        </Link>
+        </a>
       </div>
     </div>
   );

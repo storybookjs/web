@@ -10,4 +10,4 @@ export const languages = [
   { id: "ts-4-9", title: "Typescript 4.9" },
   { id: "js", title: "Javascript" },
   { id: "mdx", title: "MDX" },
-];
+] as const;

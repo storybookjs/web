@@ -63,7 +63,13 @@ export const getPageData = async (
     options: MDXRemoteOptions,
     components: {
       ...mdxComponents,
-      a: A,
+      a: (props) => (
+        <A
+          activeVersion={activeVersion}
+          indexPagePath={isIndexMDX || isIndexMD ? path : null}
+          {...props}
+        />
+      ),
       img: (props) => <Img activeVersion={activeVersion.id} {...props} />,
       Video: (props) => <Video activeVersion={activeVersion.id} {...props} />,
       CodeSnippets: (props) => (
@@ -95,6 +101,7 @@ export const getPageData = async (
 
   return {
     ...frontmatter,
+    isIndexPage: isIndexMDX || isIndexMD,
     tabs: index?.isTab ? parent : [],
     content,
   };

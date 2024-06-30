@@ -1,7 +1,6 @@
 import { Header, Footer, Container, NewsletterForm } from '@repo/ui';
 import {
   fetchDiscordMembers,
-  fetchGithubContributorCount,
   fetchGithubCount,
   fetchNpmDownloads,
   fetchYouTubeSubscribers,
@@ -22,7 +21,7 @@ import { CommunityProvider } from './provider';
 export default async function Page() {
   const { number: githubCount, formattedResult: githubCountFormatted } =
     await fetchGithubCount();
-  const { formattedResult: contributors } = await fetchGithubContributorCount();
+  // const { formattedResult: contributors } = await fetchGithubContributorCount();
   const { formattedResult: discordMembers } = await fetchDiscordMembers();
   const { formattedResult: npmDownloads } = await fetchNpmDownloads();
   const { formattedResult: youtubeSubscribers } =
@@ -37,7 +36,7 @@ export default async function Page() {
       <NavTop />
       <Container asChild className="mt-10 md:mt-20" variant="small">
         <main>
-          <div className="mb-10 justify-between gap-20 md:mb-16 md:flex lg:px-8">
+          <div className="justify-between gap-20 mb-10 md:mb-16 md:flex lg:px-8">
             <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
               Meet world-class frontend devs
             </h2>
@@ -55,12 +54,12 @@ export default async function Page() {
           <Community />
           <Numbers
             githubCount={githubCountFormatted}
-            contributorsCount={contributors}
+            contributorsCount={'2282'}
             discordMembersCount={discordMembers}
             npmDownloadsCount={npmDownloads}
             youtubeSubscribersCount={youtubeSubscribers}
           />
-          <div className="mb-20 flex gap-16 border-b border-b-zinc-300 pb-20 dark:border-b-slate-700">
+          <div className="flex gap-16 pb-20 mb-20 border-b border-b-zinc-300 dark:border-b-slate-700">
             <NavSide />
             <div className="flex-1">
               <Support />

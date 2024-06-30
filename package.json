@@ -2,10 +2,11 @@
   "name": "storybook-web",
   "private": true,
   "scripts": {
-    "build": "turbo run build && npm run copy-other-sitemaps",
+    "build": "turbo run build --filter=!./apps/cms --filter=!./apps/tutorials && npm run copy-other-sitemaps",
     "build-ui-only": "turbo run build --filter=@repo/ui",
     "copy-other-sitemaps": "npm run copy-other-sitemaps -w apps/frontpage",
     "dev": "turbo run dev",
+    "fetch-docs": "turbo run fetch-docs",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "storybook": "turbo run storybook",
@@ -22,7 +23,7 @@
     "prettier": "^3.3.0",
     "prettier-plugin-tailwindcss": "^0.6.1",
     "tsx": "^4.15.1",
-    "turbo": "^2.0.4"
+    "turbo": "^2.0.5"
   },
   "engines": {
     "node": ">=18"

@@ -24,11 +24,11 @@ export const DocsContext = createContext<DocsContextProps | undefined>(
 );
 
 export function DocsProvider({ children }: { children: ReactNode }) {
-  const [activeRenderer, setActiveRenderer] = useState<null | string>(null);
-  const [activeLanguage, setActiveLanguage] = useState<null | string>(null);
+  const [activeRenderer, setActiveRenderer] = useState<null | string>(renderers[0].id);
+  const [activeLanguage, setActiveLanguage] = useState<null | string>(languages[0].id);
   const [activePackageManager, setActivePackageManager] = useState<
     null | string
-  >(null);
+  >(packageManagers[0].id);
 
   useEffect(() => {
     const cookieRenderer = getCookie(cookieRenderId);
@@ -38,19 +38,19 @@ export function DocsProvider({ children }: { children: ReactNode }) {
     if (cookieRenderer) {
       setActiveRenderer(cookieRenderer);
     } else {
-      setActiveRenderer(renderers[0]?.id || '');
+      setCookie(cookieRenderId, renderers[0].id);
     }
 
     if (cookieLanguage) {
       setActiveLanguage(cookieLanguage);
     } else {
-      setActiveLanguage(languages[0]?.id || '');
+      setCookie(cookieLanguageId, languages[0].id);
     }
 
     if (cookiePackageManager) {
       setActivePackageManager(cookiePackageManager);
     } else {
-      setActivePackageManager(packageManagers[0]?.id || '');
+      setCookie(cookiePackageManagerId, packageManagers[0].id);
     }
   }, []);
 

@@ -10,6 +10,7 @@ export { fetchGithubContributorCount } from './fetch-github-contributors-count';
 export { fetchDiscordMembers } from './fetch-discord-members';
 export { fetchYouTubeSubscribers } from './fetch-youtube-subscribers';
 export { validateResponse } from './validate-response';
+export { getVersion } from './get-version';
 
 // Constants
 export { addonFragment, recipeFragment } from './constants';
