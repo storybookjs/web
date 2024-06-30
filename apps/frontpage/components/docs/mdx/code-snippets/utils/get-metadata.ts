@@ -14,11 +14,17 @@ interface MetadataProps {
 }
 
 export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
+  const pathToCheck = `${process.cwd()}/content/snippets/${activeVersion.id}/${path}`;
+
+  // Check first if the file exists
+  const doesFileExist = fs.existsSync(pathToCheck);
+
+  if (!doesFileExist) {
+    return null;
+  }
+
   // Read the content of the MD file
-  const source = await fs.promises.readFile(
-    `${process.cwd()}/content/snippets/${activeVersion.id}/${path}`,
-    'utf8',
-  );
+  const source = await fs.promises.readFile(pathToCheck, 'utf8');
 
   // Parse the content into a syntax tree
   const tree = unified().use(remarkParse).parse(source);
