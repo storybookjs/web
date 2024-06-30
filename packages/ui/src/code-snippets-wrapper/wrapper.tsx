@@ -6,7 +6,7 @@ import { Copy } from './copy';
 type CodeSnippetsWrapperProps = {
   children: ReactNode;
   copy?: ReactNode;
-  iconLanguage: 'js' | 'ts' | 'sh' | null;
+  iconLanguage?: 'js' | 'ts' | 'sh' | null;
   options?: ReactNode;
   title?: string;
   top?: ReactNode;
