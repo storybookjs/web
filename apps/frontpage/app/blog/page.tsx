@@ -48,7 +48,7 @@ export default async function Page() {
   const tags = await client.fetch<Tag[]>(`*[_type == "tag"]`);
 
   return (
-    <div className="w-full flex-1 py-12 pt-24">
+    <div className="flex-1 w-full py-12 pt-24">
       <h1 className="mb-16 text-4xl font-bold">
         News and updates from the team
       </h1>
@@ -60,11 +60,11 @@ export default async function Page() {
           const url = `/blog/${post?.slug?.current}`;
 
           return (
-            <div key={post._id} className="mb-12 w-full">
+            <div key={post._id} className="w-full mb-12">
               {imageUrl && blurUrl && (
                 <Link
                   href={url}
-                  className="relative mb-4 block h-96 w-full overflow-hidden rounded-xl"
+                  className="relative block w-full mb-4 overflow-hidden h-96 rounded-xl"
                 >
                   <Image
                     src={imageUrl}
@@ -79,7 +79,7 @@ export default async function Page() {
               <Link href={url} className="text-xl">
                 {post?.title}
               </Link>
-              <div className="mb-4 mt-1 text-zinc-500">{post?.subtitle}</div>
+              <div className="mt-1 mb-4 text-zinc-500">{post?.subtitle}</div>
               <div className="flex gap-8">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center">
@@ -87,7 +87,7 @@ export default async function Page() {
                       const img = author.image;
                       const imageUrl = img && urlFor(img).url();
                       return (
-                        <div className="relative -ml-2 h-8 w-8 overflow-hidden rounded-full bg-slate-100">
+                        <div className="relative w-8 h-8 -ml-2 overflow-hidden rounded-full bg-slate-100">
                           {imageUrl && (
                             <Image
                               src={imageUrl}
@@ -119,7 +119,7 @@ export default async function Page() {
           );
         })}
       </div>
-      <div className="mb-12 border-b border-t border-zinc-200 py-8">
+      <div className="py-8 mb-12 border-t border-b border-zinc-200">
         <div className="flex gap-2">
           <Link
             href="/blog"
@@ -135,7 +135,7 @@ export default async function Page() {
               <Link
                 key={tag._id}
                 href={`/blog/tag/${tag?.slug?.current}`}
-                className="flex h-8 items-center rounded border border-zinc-200 px-3 text-sm text-slate-800"
+                className="flex items-center h-8 px-3 text-sm border rounded border-zinc-200 text-slate-800"
               >
                 {tag.name}
               </Link>
@@ -155,9 +155,9 @@ export default async function Page() {
             key={post._id}
             className="relative mb-8 flex w-full before:absolute before:-left-4 before:-top-4 before:z-0 before:h-[calc(100%+32px)] before:w-[calc(100%+32px)] before:rounded-lg before:bg-zinc-100 before:opacity-0 hover:before:opacity-100"
           >
-            <div className="relative z-10 flex w-full items-center gap-8">
-              {imageUrl && blurUrl && (
-                <div className="relative block h-16 w-28 flex-shrink-0 overflow-hidden rounded-lg">
+            <div className="relative z-10 flex items-center w-full gap-8">
+              <div className="relative flex-shrink-0 block h-16 overflow-hidden rounded-lg w-28">
+                {imageUrl && blurUrl && (
                   <Image
                     src={imageUrl}
                     alt="My Image"
@@ -166,12 +166,10 @@ export default async function Page() {
                     blurDataURL={blurUrl}
                     className="object-cover"
                   />
-                </div>
-              )}
+                )}
+              </div>
               <div className="basis-3/4">
-                <Link href={url} className="text-xl">
-                  {post?.title}
-                </Link>
+                <div className="text-xl">{post?.title}</div>
                 <div className="mt-1 text-zinc-500">{post?.subtitle}</div>
               </div>
               <div className="basis-1/4 text-zinc-500">
@@ -181,12 +179,12 @@ export default async function Page() {
                 {post.publishedAt &&
                   format(parseISO(post.publishedAt), 'MMMM dd, yyyy')}
               </div>
-              <div className="flex w-20 flex-shrink-0 flex-row justify-end">
+              <div className="flex flex-row justify-end flex-shrink-0 w-20">
                 {post.authors?.map((author) => {
                   const img = author.image;
                   const imageUrl = img && urlFor(img).url();
                   return (
-                    <div className="relative -ml-2 h-6 w-6 overflow-hidden rounded-full bg-slate-100">
+                    <div className="relative w-6 h-6 -ml-2 overflow-hidden rounded-full bg-slate-100">
                       {imageUrl && (
                         <Image
                           src={imageUrl}

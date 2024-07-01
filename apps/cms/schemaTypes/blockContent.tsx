@@ -1,15 +1,11 @@
+import SanityImageUrlBuilder from '@sanity/image-url'
 import {defineType, defineArrayMember} from 'sanity'
 
-/**
- * This is the schema definition for the rich text fields used for
- * for this blog studio. When you import it in schemas.js it can be
- * reused in other parts of the studio with:
- *  {
- *    name: 'someName',
- *    title: 'Some title',
- *    type: 'blockContent'
- *  }
- */
+const imageUrlBuilder = SanityImageUrlBuilder({
+  projectId: '2fn86m3z',
+  dataset: 'production',
+})
+
 export default defineType({
   title: 'Block Content',
   name: 'blockContent',
@@ -68,6 +64,42 @@ export default defineType({
       type: 'object',
       name: 'image-block',
       title: 'New Image',
+      components: {
+        preview: (props: any) => {
+          const url = imageUrlBuilder.image(props.image).width(600).url()
+          return (
+            <div
+              style={{
+                width: 'calc(100% - 1.5rem)',
+                paddingLeft: '0.75rem',
+                paddingRight: '0.75rem',
+                paddingTop: '0.75rem',
+              }}
+            >
+              <img src={url} alt="" style={{width: '100%'}} />
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  textTransform: 'uppercase',
+                  fontFamily:
+                    'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue","Liberation Sans",system-ui,sans-serif',
+                  fontWeight: 600,
+                  fontSize: '0.675rem',
+                  letterSpacing: '0.03125rem',
+                  borderTop: '1px solid #e3e4e8',
+                  marginTop: '0.75rem',
+                  paddingTop: '1rem',
+                  paddingBottom: '0.75rem',
+                  color: '#6a6e7d',
+                }}
+              >
+                Position: {props.large ? 'Large' : 'Normal'}
+              </div>
+            </div>
+          )
+        },
+      },
       fields: [
         {
           type: 'image',
@@ -81,6 +113,12 @@ export default defineType({
           initialValue: false,
         },
       ],
+      preview: {
+        select: {
+          image: 'image',
+          large: 'large',
+        },
+      },
     }),
     defineArrayMember({
       type: 'object',
