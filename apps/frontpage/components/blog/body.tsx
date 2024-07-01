@@ -95,7 +95,6 @@ ${props.value.code}
       </div>
     ),
     'image-block': ({ value }) => {
-      console.log(value);
       return (
         <div className="flex justify-center my-8">
           <img

@@ -28,7 +28,9 @@ export default async function Page({ params: { slug } }: PageProps) {
     `*[_type == "post" && slug.current == $slug][0]{
       ...,
       authors[]->,
-      tags[]->
+      tags[]->,
+      'prev': *[_type == 'post' && !(_id in path('drafts.**')) && _createdAt < ^._createdAt]._id | order(_createdAt desc)[0],
+      'next': *[_type == 'post' && !(_id in path('drafts.**')) && _createdAt > ^._createdAt]._id | order(_createdAt desc)[0]
     }`,
     { slug },
   );
@@ -38,6 +40,8 @@ export default async function Page({ params: { slug } }: PageProps) {
   const img = post.mainImage;
   const imageUrl = img && urlFor(img).url();
   const blurUrl = img && urlFor(img).width(20).quality(20).url();
+
+  console.log(post);
 
   return (
     <>
@@ -130,6 +134,7 @@ export default async function Page({ params: { slug } }: PageProps) {
             </button>
           </div>
         </div>
+        <div className="mt-16 border-t border-zinc-200">Hello</div>
       </div>
     </>
   );
