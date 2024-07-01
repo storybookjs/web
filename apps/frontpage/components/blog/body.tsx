@@ -13,6 +13,7 @@ import { Tweet } from 'react-tweet';
 import imageUrlBuilder from '@sanity/image-url';
 
 import { client } from '../../lib/sanity/client';
+import { cn } from '@repo/utils';
 
 const builder = imageUrlBuilder(client);
 
@@ -24,10 +25,10 @@ const portableTextComponents: Partial<PortableTextReactComponents> = {
   block: {
     h1: ({ children }) => <h1 className="text-2xl">{children}</h1>,
     h2: ({ children }) => (
-      <h2 className="mb-4 mt-10 text-2xl font-bold">{children}</h2>
+      <h2 className="mt-10 mb-4 text-2xl font-bold">{children}</h2>
     ),
     h3: ({ children }) => (
-      <h3 className="mb-4 mt-10 text-xl font-bold">{children}</h3>
+      <h3 className="mt-10 mb-4 text-xl font-bold">{children}</h3>
     ),
     blockquote: ({ children }) => (
       <blockquote className="border-l-purple-500">{children}</blockquote>
@@ -38,14 +39,14 @@ const portableTextComponents: Partial<PortableTextReactComponents> = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="my-5 ml-10 list-outside list-disc">{children}</ul>
+      <ul className="my-5 ml-10 list-disc list-outside">{children}</ul>
     ),
     number: ({ children }) => (
-      <ol className="my-5 ml-10 list-outside list-decimal">{children}</ol>
+      <ol className="my-5 ml-10 list-decimal list-outside">{children}</ol>
     ),
   },
   listItem: {
-    bullet: ({ children }) => <li className="my-2 pl-2">{children}</li>,
+    bullet: ({ children }) => <li className="pl-2 my-2">{children}</li>,
   },
   marks: {
     link: ({ children, value }) => {
@@ -87,9 +88,17 @@ ${props.value.code}
       </div>
     ),
     'image-block': ({ value }) => {
+      console.log(value);
       return (
-        <div>
-          <img src={urlFor(value.image).url()} />
+        <div className="flex justify-center my-8">
+          <img
+            className={cn(
+              'rounded-lg',
+              value.large &&
+                'md:w-[720px] md:max-w-[720px] lg:w-[960px] lg:max-w-[960px]',
+            )}
+            src={urlFor(value.image).url()}
+          />
         </div>
       );
     },
