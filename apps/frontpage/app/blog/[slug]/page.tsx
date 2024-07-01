@@ -13,10 +13,14 @@ interface PageProps {
   };
 }
 
-export const generateStaticParams = () => {
-  const result: { slug: string[] }[] = [];
+export const generateStaticParams = async () => {
+  const posts = await client.fetch<Post[]>(`*[_type == "post"] { slug }`);
 
-  return result;
+  const paths = posts.map((post) => ({
+    slug: post.slug?.current || '',
+  }));
+
+  return paths;
 };
 
 export default async function Page({ params: { slug } }: PageProps) {
@@ -44,26 +48,26 @@ export default async function Page({ params: { slug } }: PageProps) {
       />
       <div className="mx-auto max-w-[1024px] pb-20">
         {post?.tags && post.tags.length > 0 && (
-          <div className="mb-6 flex justify-center">
-            <div className="flex h-8 items-center justify-center rounded-full border border-blue-500 px-4 text-center text-sm font-bold uppercase text-blue-500">
+          <div className="flex justify-center mb-6">
+            <div className="flex items-center justify-center h-8 px-4 text-sm font-bold text-center text-blue-500 uppercase border border-blue-500 rounded-full">
               {post.tags?.[0].name}
             </div>
           </div>
         )}
-        <h1 className="mb-4 text-center text-6xl font-bold leading-tight">
+        <h1 className="mb-4 text-6xl font-bold leading-tight text-center">
           {post.title}
         </h1>
-        <div className="mb-6 text-center text-2xl text-zinc-500">
+        <div className="mb-6 text-2xl text-center text-zinc-500">
           {post.subtitle}
         </div>
-        <div className="mb-12 flex w-full items-center justify-center gap-6">
+        <div className="flex items-center justify-center w-full gap-6 mb-12">
           <div className="flex items-center gap-4">
             <div className="flex items-center">
               {post.authors?.map((author) => {
                 const img = author.image;
                 const imageUrl = img && urlFor(img).url();
                 return (
-                  <div className="relative -ml-2 h-8 w-8 overflow-hidden rounded-full bg-slate-100">
+                  <div className="relative w-8 h-8 -ml-2 overflow-hidden rounded-full bg-slate-100">
                     {imageUrl && (
                       <Image
                         src={imageUrl}
@@ -106,8 +110,8 @@ export default async function Page({ params: { slug } }: PageProps) {
         </div>
         <div className="relative mx-auto max-w-[640px]">
           {post.body && <Body value={post.body} />}
-          <div className="my-16 border-b border-zinc-200 pb-16">
-            <div className="text-md font-bold">
+          <div className="pb-16 my-16 border-b border-zinc-200">
+            <div className="font-bold text-md">
               Join the Storybook mailing list
             </div>
             <div className="mb-4">
@@ -115,12 +119,12 @@ export default async function Page({ params: { slug } }: PageProps) {
             </div>
             <NewsletterForm />
           </div>
-          <div className="sticky bottom-10 z-50 flex items-center justify-center gap-4">
-            <button className="flex h-10 cursor-pointer items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white/80 px-6 font-bold text-black backdrop-blur transition-colors hover:border-blue-500 hover:text-blue-500">
+          <div className="sticky z-50 flex items-center justify-center gap-4 bottom-10">
+            <button className="flex items-center justify-center h-10 gap-2 px-6 font-bold text-black transition-colors border rounded-full cursor-pointer border-zinc-200 bg-white/80 backdrop-blur hover:border-blue-500 hover:text-blue-500">
               Share on
               <XIcon />
             </button>
-            <button className="cursor-pointertransition-colors flex h-10 items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white/80 px-6 font-bold text-black backdrop-blur hover:border-blue-500 hover:text-blue-500">
+            <button className="flex items-center justify-center h-10 gap-2 px-6 font-bold text-black border rounded-full cursor-pointertransition-colors border-zinc-200 bg-white/80 backdrop-blur hover:border-blue-500 hover:text-blue-500">
               Copy link
               <CopyIcon />
             </button>
