@@ -8,6 +8,7 @@ import { PortableTextBlock } from 'next-sanity';
 
 export type Post = {
   _id: string;
+  _updatedAt: string;
   title?: string;
   subtitle?: string;
   slug?: {
@@ -17,8 +18,10 @@ export type Post = {
   authors?: {
     name: string;
     image?: SanityImageSource;
+    twitter?: string;
   }[];
   tags?: {
+    _id: string;
     name: string;
     slug?: {
       current: string;
