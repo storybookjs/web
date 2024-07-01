@@ -159,7 +159,7 @@ export default async function Page({ params: { slug } }: PageProps) {
           </div>
         </div>
       </article>
-      <div className="flex w-full gap-8 my-16">
+      <div className="flex flex-col w-full gap-8 my-16 md:flex-row">
         <div className="flex flex-col justify-between flex-1 w-full p-6 border rounded-lg border-zinc-200">
           <div className="flex flex-col gap-1">
             <div className="text-lg font-bold">
@@ -189,7 +189,7 @@ export default async function Page({ params: { slug } }: PageProps) {
       </div>
       <div className="pb-16 mt-16">
         <div className="mb-8 text-3xl font-bold">Keep reading</div>
-        <div className="flex gap-8">
+        <div className="flex flex-col gap-8 md:flex-row">
           {keepReadingPosts &&
             keepReadingPosts.slice(0, 3).map((post) => {
               const img = post.mainImage;
@@ -198,7 +198,10 @@ export default async function Page({ params: { slug } }: PageProps) {
               const url = `/blog/${post?.slug?.current}`;
 
               return (
-                <div className="flex-1">
+                <div
+                  key={post._id}
+                  className="flex-1 last:hidden lg:last:block"
+                >
                   {imageUrl && blurUrl && (
                     <Link
                       href={url}
