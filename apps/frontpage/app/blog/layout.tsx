@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { Header, Footer, Container } from '@repo/ui';
 import { fetchGithubCount } from '@repo/utils';
 import { generateDocsTree } from '../../lib/get-tree';
-import { getVersion } from '../../lib/get-version';
 import { Submenu } from '../../components/docs/submenu';
+import { docsVersions } from '@repo/utils';
 
 export const metadata: Metadata = {
   title: 'Storybook',
@@ -13,22 +13,25 @@ export const metadata: Metadata = {
 
 export default async function Layout({
   children,
-  params: { slug },
 }: {
   children: React.ReactNode;
   params: { slug: string[] };
 }) {
   const { number: githubCount } = await fetchGithubCount();
-  const activeVersion = getVersion(slug);
-  const path = `content/docs/${activeVersion.id}`;
-  const tree = generateDocsTree(path);
+
+  const listofTrees = docsVersions.map((version) => {
+    return {
+      version: version.id,
+      tree: generateDocsTree(`content/docs/${version.id}`),
+    };
+  });
 
   return (
     <>
       <Header
         algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
         githubCount={githubCount}
-        subMenu={<Submenu activeVersion={activeVersion} tree={tree} />}
+        subMenu={<Submenu listOfTrees={listofTrees} />}
         variant="system"
       />
       <Container>{children}</Container>
