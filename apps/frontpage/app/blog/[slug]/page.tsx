@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { format, parseISO } from 'date-fns';
 import Body from '../../../components/blog/body';
 import { NewsletterForm, Pill, SubHeader } from '@repo/ui';
-import { XIcon } from '@storybook/icons';
+import { DiscordIcon, GithubIcon, XIcon, YoutubeIcon } from '@storybook/icons';
 import Link from 'next/link';
 import CopyButton from '../../../components/blog/copy-button';
 
@@ -55,7 +55,23 @@ export default async function Page({ params: { slug } }: PageProps) {
       <SubHeader
         leftLabel="Back to blog"
         leftHref="/blog"
-        right={<div>Join the community</div>}
+        right={
+          <div className="flex items-center gap-4">
+            <span>Join the community</span>
+            <div>
+              <GithubIcon />
+            </div>
+            <div>
+              <DiscordIcon />
+            </div>
+            <div>
+              <XIcon />
+            </div>
+            <div>
+              <YoutubeIcon />
+            </div>
+          </div>
+        }
       />
       <article className="mx-auto max-w-[1024px]">
         {post?.tags && post.tags.length > 0 && (
