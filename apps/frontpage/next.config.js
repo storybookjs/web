@@ -1,4 +1,5 @@
 const generatedRedirects = require('./generated-redirects.json');
+const { withPlausibleProxy } = require('next-plausible');
 
 const historicalVersions = [
   '8.1',
@@ -80,7 +81,7 @@ module.exports = withPlausibleProxy()({
           value: 'noindex',
         },
       ],
-    }))
+    }));
   },
   // This was added to fix the error with remarkExpressiveCode
   // https://stackoverflow.com/questions/77009138/module-has-no-exports-error-works-fine-on-stackblitz-but-fails-locally
