@@ -34,7 +34,9 @@ const portableTextComponents: Partial<PortableTextReactComponents> = {
       <blockquote className="border-l-purple-500">{children}</blockquote>
     ),
     normal: ({ children }) => (
-      <p className="my-5 text-base leading-7 text-black">{children}</p>
+      <p className="my-5 text-base leading-7 text-black dark:text-white">
+        {children}
+      </p>
     ),
   },
   list: {
@@ -54,11 +56,16 @@ const portableTextComponents: Partial<PortableTextReactComponents> = {
         ? 'noreferrer noopener'
         : undefined;
       return (
-        <a href={value.href} rel={rel}>
+        <a href={value.href} rel={rel} className="text-blue-500">
           {children}
         </a>
       );
     },
+    code: ({ children }) => (
+      <code className="rounded border border-slate-200 bg-slate-100 px-1.5 py-0.5 text-sm dark:border-slate-700 dark:bg-slate-800 dark:text-white">
+        {children}
+      </code>
+    ),
   },
   types: {
     code: async (props) => {
@@ -73,7 +80,7 @@ ${props.value.code}
         `);
 
       return (
-        <div className="overflow-x-scroll rounded bg-slate-100 p-6 text-sm [&_code]:bg-transparent">
+        <div className="overflow-x-scroll rounded bg-slate-100 p-6 text-sm dark:bg-slate-800 [&_code]:bg-transparent">
           <section
             dangerouslySetInnerHTML={{
               __html: String(highlightedCode),
