@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes';
 import type { FC, ReactNode } from 'react';
 import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';
+import PlausibleProvider from 'next-plausible';
 
 interface ProvidersProps {
   children: ReactNode;
@@ -18,8 +19,10 @@ if (typeof window !== 'undefined') {
 
 export const Providers: FC<ProvidersProps> = ({ children }) => {
   return (
-    <PostHogProvider client={posthog}>
-      <ThemeProvider attribute="class">{children}</ThemeProvider>
-    </PostHogProvider>
+    <PlausibleProvider domain="storybook.js.org">
+      <PostHogProvider client={posthog}>
+        <ThemeProvider attribute="class">{children}</ThemeProvider>
+      </PostHogProvider>
+    </PlausibleProvider>
   );
 };

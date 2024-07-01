@@ -34,7 +34,7 @@ const renderers = [
 ];
 
 /** @type {import('next').NextConfig} */
-module.exports = {
+module.exports = withPlausibleProxy()({
   images: {
     remotePatterns: [
       {
@@ -427,4 +427,4 @@ module.exports = {
     ];
   },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
-};
+});
