@@ -3,11 +3,15 @@ import type { NextRequest } from 'next/server';
 import { cookieRenderId } from './constants';
 import { docsVersionsRedirects } from './redirects/docs-versions-redirects';
 import { RedirectData } from './redirects/types';
+import { docsRenderersRedirects } from './redirects/docs-renderers-redirects';
 
 export async function middleware(request: NextRequest) {
   let searchParam = request.nextUrl.searchParams.get('renderer');
   const pathname: string = request.nextUrl.pathname;
-  const redirectList: RedirectData[] = [...docsVersionsRedirects];
+  const redirectList: RedirectData[] = [
+    ...docsVersionsRedirects,
+    ...docsRenderersRedirects,
+  ];
   const redirectData = redirectList.find((r) => r.source === pathname);
 
   if (
