@@ -6,7 +6,7 @@
     "build-ui-only": "turbo run build --filter=@repo/ui",
     "copy-other-sitemaps": "npm run copy-other-sitemaps -w apps/frontpage",
     "dev": "turbo run dev",
-    "fetch-docs": "turbo run fetch-docs",
+    "fetch-docs": "turbo run fetch-docs --force",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "storybook": "turbo run storybook",

@@ -11,6 +11,7 @@ import { rehypePrettyCodeOptions } from '@repo/ui';
 import rehypeStringify from 'rehype-stringify';
 import { Tweet } from 'react-tweet';
 import imageUrlBuilder from '@sanity/image-url';
+import { SanityProjectDetails, getFile } from '@sanity/asset-utils';
 
 import { client } from '../../lib/sanity/client';
 import { cn } from '@repo/utils';
@@ -31,7 +32,9 @@ const portableTextComponents: Partial<PortableTextReactComponents> = {
       <h3 className="mt-10 mb-4 text-xl font-bold">{children}</h3>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="border-l-purple-500">{children}</blockquote>
+      <blockquote className="p-8 rounded bg-slate-100 dark:bg-slate-800 dark:text-white">
+        {children}
+      </blockquote>
     ),
     normal: ({ children }) => (
       <p className="my-5 text-base leading-7 text-black dark:text-white">
@@ -105,6 +108,30 @@ ${props.value.code}
             )}
             src={urlFor(value.image).url()}
           />
+        </div>
+      );
+    },
+    video: ({ value }) => {
+      const url = getFile(
+        value.videoFile,
+        client.config() as SanityProjectDetails,
+      );
+
+      return (
+        <div className="flex flex-col items-center gap-4 my-8">
+          <video
+            className={cn(
+              'rounded-lg',
+              value.large &&
+                'md:w-[720px] md:max-w-[720px] lg:w-[960px] lg:max-w-[960px]',
+            )}
+            src={url.asset.url}
+            loop
+            autoPlay
+            muted
+            playsInline
+          />
+          {value.caption && <div>{value.caption}</div>}
         </div>
       );
     },

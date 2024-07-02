@@ -136,5 +136,22 @@ export default defineType({
         },
       ],
     }),
+    defineArrayMember({
+      type: 'object',
+      name: 'video',
+      title: 'Video',
+      fields: [
+        {
+          type: 'file',
+          name: 'videoFile',
+          title: 'Video File',
+        },
+        {
+          type: 'string',
+          name: 'caption',
+          title: 'Caption',
+        },
+      ],
+    }),
   ],
 })

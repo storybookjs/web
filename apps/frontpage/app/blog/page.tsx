@@ -5,6 +5,8 @@ import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { cn } from '@repo/utils';
 import { format, parseISO } from 'date-fns';
 import { PortableTextBlock } from 'next-sanity';
+import { SearchIcon } from '@storybook/icons';
+import { List } from '../../components/blog/list';
 
 export type Post = {
   _id: string;
@@ -122,88 +124,7 @@ export default async function Page() {
           );
         })}
       </div>
-      <div className="py-8 mb-12 border-t border-b border-zinc-200">
-        <div className="flex gap-2">
-          <Link
-            href="/blog"
-            className={cn(
-              'flex h-8 items-center rounded border border-zinc-200 px-3 text-sm text-slate-800',
-              true && 'border-blue-500 bg-blue-100 font-bold text-blue-500',
-            )}
-          >
-            All
-          </Link>
-          {tags.slice(0, 6).map((tag) => {
-            return (
-              <Link
-                key={tag._id}
-                href={`/blog/tag/${tag?.slug?.current}`}
-                className="flex items-center h-8 px-3 text-sm border rounded border-zinc-200 text-slate-800"
-              >
-                {tag.name}
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-      {posts.slice(2).map((post) => {
-        const img = post.mainImage;
-        const imageUrl = img && urlFor(img).url();
-        const blurUrl = img && urlFor(img).width(20).quality(20).url();
-        const url = `/blog/${post?.slug?.current}`;
-
-        return (
-          <Link
-            href={url}
-            key={post._id}
-            className="relative mb-8 flex w-full before:absolute before:-left-4 before:-top-4 before:z-0 before:h-[calc(100%+32px)] before:w-[calc(100%+32px)] before:rounded-lg before:bg-zinc-100 before:opacity-0 hover:before:opacity-100"
-          >
-            <div className="relative z-10 flex items-center w-full gap-8">
-              <div className="relative flex-shrink-0 block h-16 overflow-hidden rounded-lg w-28">
-                {imageUrl && blurUrl && (
-                  <Image
-                    src={imageUrl}
-                    alt="My Image"
-                    fill={true}
-                    placeholder="blur"
-                    blurDataURL={blurUrl}
-                    className="object-cover"
-                  />
-                )}
-              </div>
-              <div className="basis-3/4">
-                <div className="text-xl">{post?.title}</div>
-                <div className="mt-1 text-zinc-500">{post?.subtitle}</div>
-              </div>
-              <div className="basis-1/4 text-zinc-500">
-                {post?.tags?.[0].name}
-              </div>
-              <div className="basis-1/4 text-zinc-500">
-                {post.publishedAt &&
-                  format(parseISO(post.publishedAt), 'MMMM dd, yyyy')}
-              </div>
-              <div className="flex flex-row justify-end flex-shrink-0 w-20">
-                {post.authors?.map((author) => {
-                  const img = author.image;
-                  const imageUrl = img && urlFor(img).url();
-                  return (
-                    <div className="relative w-6 h-6 -ml-2 overflow-hidden rounded-full bg-slate-100">
-                      {imageUrl && (
-                        <Image
-                          src={imageUrl}
-                          alt="My Image"
-                          fill={true}
-                          className="object-cover"
-                        />
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </Link>
-        );
-      })}
+      <List posts={posts} tags={tags} />
     </div>
   );
 }
