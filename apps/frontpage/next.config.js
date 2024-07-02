@@ -1,4 +1,5 @@
 const generatedRedirects = require('./generated-redirects.json');
+const { withPlausibleProxy } = require('next-plausible');
 
 const historicalVersions = [
   '8.1',
@@ -18,23 +19,8 @@ const historicalVersions = [
   '6.0',
 ];
 
-const renderers = [
-  'react',
-  'vue',
-  'angular',
-  'web-components',
-  'ember',
-  'html',
-  'mithril',
-  'marko',
-  'svelte',
-  'riot',
-  'preact',
-  'rax',
-];
-
 /** @type {import('next').NextConfig} */
-module.exports = {
+module.exports = withPlausibleProxy()({
   images: {
     remotePatterns: [
       {
@@ -80,7 +66,7 @@ module.exports = {
           value: 'noindex',
         },
       ],
-    }))
+    }));
   },
   // This was added to fix the error with remarkExpressiveCode
   // https://stackoverflow.com/questions/77009138/module-has-no-exports-error-works-fine-on-stackblitz-but-fails-locally
@@ -344,29 +330,6 @@ module.exports = {
         destination: '/docs/addons/writing-presets',
         permanent: true,
       },
-      ...renderers.map((r) => ({
-        source: `/docs${r}/get-started/examples`,
-        destination: '/showcase',
-        permanent: true,
-      })),
-      ...historicalVersions.map((v) => ({
-        source: `/docs/${v}`,
-        destination: `/docs/${v.split('.')[0]}/get-started/install`,
-        permanent: true,
-      })),
-      // The `/get-started` route is only valid for 8.0+
-      ...historicalVersions.reduce((acc, v) => {
-        if (Number(v) < 8) {
-          renderers.forEach((r) => {
-            acc.push({
-              source: `/docs/${v}/${r}/get-started`,
-              destination: `/docs/${v.split('.')[0]}/get-started/install`,
-              permanent: true,
-            });
-          });
-        }
-        return acc;
-      }, []),
       ...generatedRedirects,
       /* 🐺 Wild Cards */
       {
@@ -427,4 +390,4 @@ module.exports = {
     ];
   },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
-};
+});
