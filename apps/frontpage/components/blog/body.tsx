@@ -15,6 +15,7 @@ import { SanityProjectDetails, getFile } from '@sanity/asset-utils';
 
 import { client } from '../../lib/sanity/client';
 import { cn } from '@repo/utils';
+import { YoutubePlayer } from './youtube-player';
 
 const builder = imageUrlBuilder(client);
 
@@ -134,6 +135,13 @@ ${props.value.code}
             playsInline
           />
           {value.caption && <div>{value.caption}</div>}
+        </div>
+      );
+    },
+    youtube: ({ value }) => {
+      return (
+        <div className="my-8">
+          <YoutubePlayer url={value.url} />
         </div>
       );
     },
