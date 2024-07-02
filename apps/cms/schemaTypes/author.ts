@@ -40,6 +40,11 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: 'twitter',
+      title: 'Twitter',
+      type: 'string',
+    }),
   ],
   preview: {
     select: {

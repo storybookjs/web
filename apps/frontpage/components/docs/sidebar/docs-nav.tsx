@@ -13,7 +13,7 @@ import { getVersion } from '../../../lib/get-version';
 type Tree = TreeProps[] | null | undefined;
 
 interface NavDocsProps {
-  listOfTrees: { version: string; tree: Tree }[];
+  listOfTrees?: { version: string; tree: Tree }[];
 }
 
 const getUrl = (slug: string, activeVersion: DocsVersion) => {
@@ -34,7 +34,7 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
   const segment = useSelectedLayoutSegment();
   const slug: string[] = segment ? segment.split('/') : [];
   const activeVersion = getVersion(slug);
-  const selectedTree = listOfTrees.find((t) => t.version === activeVersion.id);
+  const selectedTree = listOfTrees?.find((t) => t.version === activeVersion.id);
 
   const [parentAccordion, setParentAccordion] = useState<string[] | null>(null);
 

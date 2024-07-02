@@ -11,6 +11,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'subtitle',
+      title: 'Subtitle',
+      type: 'string',
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -20,10 +25,10 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: {type: 'author'},
+      name: 'authors',
+      title: 'Authors',
+      type: 'array',
+      of: [{type: 'reference', to: {type: 'author'}}],
     }),
     defineField({
       name: 'mainImage',
@@ -34,10 +39,18 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'categories',
-      title: 'Categories',
+      name: 'tags',
+      title: 'Tags',
       type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
+      of: [{type: 'reference', to: {type: 'tag'}}],
+    }),
+    defineField({
+      name: 'whatsNew',
+      title: "What's new",
+      description:
+        'If this is set to true, this post will appear in the "What\'s new" section in Storybook?',
+      type: 'boolean',
+      initialValue: false,
     }),
     defineField({
       name: 'publishedAt',
@@ -54,7 +67,7 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      author: 'author.name',
+      author: 'authors.0.name',
       media: 'mainImage',
     },
     prepare(selection) {

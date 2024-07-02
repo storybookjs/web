@@ -14,7 +14,7 @@ import { getVersion } from '../../lib/get-version';
 type Tree = TreeProps[] | null | undefined;
 
 interface SubmenuProps {
-  listOfTrees: { version: string; tree: Tree }[];
+  listOfTrees?: { version: string; tree: Tree }[];
   activeVersion?: DocsVersion;
 }
 
@@ -23,7 +23,7 @@ export const Submenu: FC<SubmenuProps> = ({ listOfTrees }) => {
   const segment = useSelectedLayoutSegment();
   const slug: string[] = segment ? segment.split('/') : [];
   const activeVersion = getVersion(slug);
-  const selectedTree = listOfTrees.find((t) => t.version === activeVersion.id);
+  const selectedTree = listOfTrees?.find((t) => t.version === activeVersion.id);
   const activeSection = selectedTree
     ? selectedTree.tree?.find((node) => node.slug.startsWith(pathname))
     : null;
