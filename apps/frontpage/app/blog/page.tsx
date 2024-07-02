@@ -11,6 +11,7 @@ import { List } from '../../components/blog/list';
 export type Post = {
   _id: string;
   _updatedAt: string;
+  _createdAt: string;
   title?: string;
   subtitle?: string;
   slug?: {

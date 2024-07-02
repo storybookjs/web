@@ -1,24 +1,30 @@
 import RSS from 'rss';
-// import { SITE_FEED, SITE_NAME, SITE_URL } from "@/lib/constants";
-// import { getPosts } from "@/lib/blog/api";
+import { client } from '../../../lib/sanity/client';
+import { Post } from '../page';
 
 export async function GET() {
-  const posts = [];
+  const posts = await client.fetch<
+    Post[]
+  >(`*[_type == "post"] | order(publishedAt desc) {
+    ...,
+    authors[]->,
+    tags[]->
+  }`);
 
   const feedOptions = {
-    title: 'storybook',
-    site_url: 'storybook.js.org',
-    feed_url: 'storybook.js.org/rss',
+    title: 'Storybook RSS feed',
+    site_url: 'https://storybook.js.org',
+    feed_url: 'https://storybook.js.org/blog/rss',
     pubDate: new Date(),
   };
   const feed = new RSS(feedOptions);
 
   posts.forEach((post) => {
     feed.item({
-      title: post.title,
-      url: `https//storybook.js.org/${post.slug}`,
-      date: post.createdAt,
-      description: post?.description,
+      title: post.title || 'Untitled',
+      url: `https//storybook.js.org/blog/${post.slug}`,
+      date: post._createdAt,
+      description: post?.subtitle || 'No description',
     });
   });
 
