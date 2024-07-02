@@ -100,7 +100,7 @@ ${props.value.code}
     ),
     'image-block': ({ value }) => {
       return (
-        <div className="flex justify-center my-8">
+        <div className="flex flex-col items-center gap-4 my-8">
           <img
             className={cn(
               'rounded-lg',
@@ -109,6 +109,7 @@ ${props.value.code}
             )}
             src={urlFor(value.image).url()}
           />
+          {value.caption && <div>{value.caption}</div>}
         </div>
       );
     },

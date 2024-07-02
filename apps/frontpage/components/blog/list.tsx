@@ -14,7 +14,7 @@ export const List = ({
   tags,
 }: {
   posts: Post[];
-  tags: Tag[];
+  tags?: Tag[];
 }): ReactNode => {
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState<Post[]>(posts.slice(2));
@@ -36,47 +36,49 @@ export const List = ({
 
   return (
     <>
-      <div className="flex items-center justify-between py-8 mb-12 border-t border-b border-zinc-200">
-        <div className="flex gap-2">
-          <Link
-            href="/blog"
-            className={cn(
-              'flex h-8 items-center rounded border border-zinc-200 px-3 text-sm text-slate-800',
-              true && 'border-blue-500 bg-blue-100 font-bold text-blue-500',
-            )}
-          >
-            Most recent
-          </Link>
-          {tags.slice(0, 6).map((tag) => {
-            return (
-              <Link
-                key={tag._id}
-                href={`/blog/tag/${tag?.slug?.current}`}
-                className="flex items-center h-8 px-3 text-sm border rounded border-zinc-200 text-slate-800"
-              >
-                {tag.name}
-              </Link>
-            );
-          })}
-        </div>
-        <div className="relative flex h-10 w-full flex-shrink-0 items-center rounded-full border border-zinc-300 md:w-[250px] dark:border-slate-700">
-          <SearchIcon className="absolute left-4 dark:text-slate-500" />
-          <input
-            className="w-full h-full pl-10 bg-transparent rounded-full placeholder:text-slate-500 dark:placeholder:text-slate-400"
-            placeholder="Search blog"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          {search.length > 0 && (
-            <div
-              className="absolute flex items-center justify-center -translate-y-1/2 cursor-pointer right-2 top-1/2 h-7 w-7"
-              onClick={() => setSearch('')}
+      {tags && (
+        <div className="flex items-center justify-between py-8 mb-12 border-t border-b border-zinc-200">
+          <div className="flex gap-2">
+            <Link
+              href="/blog"
+              className={cn(
+                'flex h-8 items-center rounded border border-zinc-200 px-3 text-sm text-slate-800',
+                true && 'border-blue-500 bg-blue-100 font-bold text-blue-500',
+              )}
             >
-              <CloseIcon />
-            </div>
-          )}
+              Most recent
+            </Link>
+            {tags.slice(0, 6).map((tag) => {
+              return (
+                <Link
+                  key={tag._id}
+                  href={`/blog/tag/${tag?.slug?.current}`}
+                  className="flex items-center h-8 px-3 text-sm border rounded border-zinc-200 text-slate-800"
+                >
+                  {tag.name}
+                </Link>
+              );
+            })}
+          </div>
+          <div className="relative flex h-10 w-full flex-shrink-0 items-center rounded-full border border-zinc-300 md:w-[250px] dark:border-slate-700">
+            <SearchIcon className="absolute left-4 dark:text-slate-500" />
+            <input
+              className="w-full h-full pl-10 bg-transparent rounded-full placeholder:text-slate-500 dark:placeholder:text-slate-400"
+              placeholder="Search blog"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            {search.length > 0 && (
+              <div
+                className="absolute flex items-center justify-center -translate-y-1/2 cursor-pointer right-2 top-1/2 h-7 w-7"
+                onClick={() => setSearch('')}
+              >
+                <CloseIcon />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
       {searchResults.map((post) => {
         const img = post.mainImage;
         const imageUrl = img && urlFor(img).url();

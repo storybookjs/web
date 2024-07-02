@@ -2,10 +2,8 @@ import Link from 'next/link';
 import { client, urlFor } from '../../lib/sanity/client';
 import Image from 'next/image';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
-import { cn } from '@repo/utils';
-import { format, parseISO } from 'date-fns';
 import { PortableTextBlock } from 'next-sanity';
-import { RSSIcon, SearchIcon } from '@storybook/icons';
+import { RSSIcon } from '@storybook/icons';
 import { List } from '../../components/blog/list';
 
 export type Post = {
