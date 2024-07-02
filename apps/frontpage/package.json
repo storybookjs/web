@@ -57,6 +57,7 @@
     "next": "^14.2.4",
     "next-mdx-remote": "^5.0.0",
     "next-sanity": "^9.4.2",
+    "next-plausible": "^3.12.0",
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.3.0",
     "node-fetch": "^3.3.2",

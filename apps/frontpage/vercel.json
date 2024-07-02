@@ -33,14 +33,6 @@
       "destination": "https://storybook-dx.netlify.app/.netlify/functions/whats-new/:match*"
     },
     {
-      "source": "/js/script.js",
-      "destination": "https://plausible.io/js/script.js"
-    },
-    {
-      "source": "/api/event",
-      "destination": "https://plausible.io/api/event"
-    },
-    {
       "source": "/proxy/api/event",
       "destination": "https://plausible.io/api/event"
     }
