@@ -1,8 +1,10 @@
 import RSS from 'rss';
 import { client } from '../../../lib/sanity/client';
 import { Post } from '../page';
+import { NextRequest } from 'next/server';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const url = new URL(req.url);
   const posts = await client.fetch<
     Post[]
   >(`*[_type == "post"] | order(publishedAt desc) {
@@ -13,8 +15,8 @@ export async function GET() {
 
   const feedOptions = {
     title: 'Storybook RSS feed',
-    site_url: 'https://storybook.js.org',
-    feed_url: 'https://storybook.js.org/blog/rss',
+    site_url: url.origin,
+    feed_url: url.href,
     pubDate: new Date(),
   };
   const feed = new RSS(feedOptions);
@@ -22,9 +24,10 @@ export async function GET() {
   posts.forEach((post) => {
     feed.item({
       title: post.title || 'Untitled',
-      url: `https//storybook.js.org/blog/${post.slug}`,
+      url: `${url.origin}/blog/${post.slug}`,
       date: post._createdAt,
       description: post?.subtitle || 'No description',
+      author: post.authors?.map((author) => author.name).join(', '),
     });
   });
 
