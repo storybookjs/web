@@ -116,6 +116,11 @@ export default defineType({
           title: 'Is large?',
           initialValue: false,
         },
+        {
+          type: 'string',
+          name: 'caption',
+          title: 'Caption',
+        },
       ],
       preview: {
         select: {

@@ -5,7 +5,7 @@ import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { cn } from '@repo/utils';
 import { format, parseISO } from 'date-fns';
 import { PortableTextBlock } from 'next-sanity';
-import { SearchIcon } from '@storybook/icons';
+import { RSSIcon, SearchIcon } from '@storybook/icons';
 import { List } from '../../components/blog/list';
 
 export type Post = {
@@ -55,9 +55,17 @@ export default async function Page() {
 
   return (
     <div className="flex-1 w-full py-12 pt-24">
-      <h1 className="mb-16 text-4xl font-bold">
-        News and updates from the team
-      </h1>
+      <div className="flex justify-between mb-16">
+        <h1 className="text-4xl font-bold">News and updates from the team</h1>
+        <a
+          className="items-center justify-center hidden w-12 h-12 transition-all bg-white border rounded-full border-zinc-200 hover:-translate-y-1 hover:border-zinc-400 md:flex dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-500"
+          href="/blog/rss"
+          rel="noreferrer"
+          target="_blank"
+        >
+          <RSSIcon size={18} />
+        </a>
+      </div>
       <div className="flex gap-8">
         {posts.slice(0, 2).map((post) => {
           const img = post.mainImage;
