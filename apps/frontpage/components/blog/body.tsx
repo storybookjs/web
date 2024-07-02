@@ -52,6 +52,7 @@ const portableTextComponents: Partial<PortableTextReactComponents> = {
   },
   listItem: {
     bullet: ({ children }) => <li className="pl-2 my-2">{children}</li>,
+    number: ({ children }) => <li className="pl-2 my-2">{children}</li>,
   },
   marks: {
     link: ({ children, value }) => {
