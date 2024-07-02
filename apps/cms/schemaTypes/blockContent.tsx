@@ -1,10 +1,23 @@
 import SanityImageUrlBuilder from '@sanity/image-url'
-import {defineType, defineArrayMember} from 'sanity'
+import {defineType, defineArrayMember, defineField, PreviewProps} from 'sanity'
+import {PlayIcon} from '@sanity/icons'
+import {Flex, Text} from '@sanity/ui'
+import YouTubePlayer from 'react-player/youtube'
 
 const imageUrlBuilder = SanityImageUrlBuilder({
   projectId: '2fn86m3z',
   dataset: 'production',
 })
+
+export function YouTubePreview(props: PreviewProps) {
+  const {title: url} = props
+
+  return (
+    <Flex padding={3} align="center" justify="center">
+      {typeof url === 'string' ? <YouTubePlayer url={url} /> : <Text>Add a YouTube URL</Text>}
+    </Flex>
+  )
+}
 
 export default defineType({
   title: 'Block Content',
@@ -157,6 +170,25 @@ export default defineType({
           title: 'Caption',
         },
       ],
+    }),
+    defineArrayMember({
+      name: 'youtube',
+      type: 'object',
+      title: 'YouTube Embed',
+      icon: PlayIcon,
+      fields: [
+        defineField({
+          name: 'url',
+          type: 'url',
+          title: 'YouTube video URL',
+        }),
+      ],
+      preview: {
+        select: {title: 'url'},
+      },
+      components: {
+        preview: YouTubePreview,
+      },
     }),
   ],
 })
