@@ -36,6 +36,13 @@ export default async function Page({ params: { slug } }: PageProps) {
       ...,
       authors[]->,
       tags[]->,
+      body[]{..., post-> {
+        mainImage,
+        title,
+        slug,
+        subtitle,
+        authors[]->
+      }},
       'prev': *[_type == 'post' && !(_id in path('drafts.**')) && _createdAt < ^._createdAt]{..., authors[]->} | order(_createdAt desc)[0..2],
       'next': *[_type == 'post' && !(_id in path('drafts.**')) && _createdAt > ^._createdAt]{..., authors[]->} | order(_createdAt desc)[0..2]
     }`,

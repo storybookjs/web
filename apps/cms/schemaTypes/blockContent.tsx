@@ -1,6 +1,6 @@
 import SanityImageUrlBuilder from '@sanity/image-url'
 import {defineType, defineArrayMember, defineField, PreviewProps} from 'sanity'
-import {PlayIcon, TwitterIcon, ImageIcon} from '@sanity/icons'
+import {PlayIcon, TwitterIcon, ImageIcon, DocumentIcon, LinkIcon} from '@sanity/icons'
 import {Flex, Text, Box} from '@sanity/ui'
 import YouTubePlayer from 'react-player/youtube'
 
@@ -21,7 +21,6 @@ export function YouTubePreview(props: PreviewProps) {
 
 export function ImagePreview({image, large, caption}: any) {
   const url = image ? imageUrlBuilder.image(image).width(600).url() : ''
-  console.log(caption)
 
   return (
     <Flex padding={3} direction="column">
@@ -192,6 +191,51 @@ export default defineType({
       },
       components: {
         preview: YouTubePreview,
+      },
+    }),
+    defineArrayMember({
+      name: 'post-block',
+      type: 'object',
+      title: 'Post',
+      icon: DocumentIcon,
+      fields: [
+        defineField({
+          name: 'post',
+          type: 'reference',
+          title: 'Post',
+          to: [{type: 'post'}],
+        }),
+      ],
+      preview: {
+        select: {
+          title: 'post.title',
+          subtitle: 'post.subtitle',
+          media: 'post.mainImage',
+        },
+      },
+    }),
+    defineArrayMember({
+      name: 'link-block',
+      type: 'object',
+      title: 'Link',
+      icon: LinkIcon,
+      fields: [
+        defineField({
+          name: 'url',
+          type: 'url',
+          title: 'Url',
+        }),
+      ],
+      preview: {
+        select: {
+          title: 'url',
+        },
+        prepare({title}) {
+          return {
+            title,
+            subtitle: 'We will show a preview of the link in the blog post.',
+          }
+        },
       },
     }),
   ],

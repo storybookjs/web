@@ -16,6 +16,9 @@ import { SanityProjectDetails, getFile } from '@sanity/asset-utils';
 import { client } from '../../lib/sanity/client';
 import { cn } from '@repo/utils';
 import { YoutubePlayer } from './youtube-player';
+import Link from 'next/link';
+import Image from 'next/image';
+import { ArrowRightIcon } from '@storybook/icons';
 
 const builder = imageUrlBuilder(client);
 
@@ -143,6 +146,37 @@ ${props.value.code}
         <div className="my-8">
           <YoutubePlayer url={value.url} />
         </div>
+      );
+    },
+    'post-block': ({ value }) => {
+      const { post } = value;
+      const img = post.mainImage;
+      const imageUrl = img && urlFor(img).url();
+      const url = `/blog/${post.slug.current}`;
+
+      return (
+        <Link
+          href={url}
+          className="flex items-stretch w-full gap-8 p-4 my-8 transition-colors border rounded border-zinc-300 hover:border-blue-500 dark:border-slate-700"
+        >
+          <div className="w-full">
+            <Link href={url} className="font-bold text-md">
+              {post?.title}
+            </Link>
+            <div className="mt-1 mb-4 text-zinc-500">{post?.subtitle}</div>
+            <Link href={url} className="flex items-center gap-2 text-blue-500">
+              Read more <ArrowRightIcon className="text-blue-500" />
+            </Link>
+          </div>
+          <div className="relative flex-grow flex-shrink-0 min-h-full w-52">
+            <Image
+              fill
+              alt={post.title}
+              src={imageUrl}
+              className="object-cover rounded"
+            />
+          </div>
+        </Link>
       );
     },
   },
