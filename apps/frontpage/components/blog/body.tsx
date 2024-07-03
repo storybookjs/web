@@ -19,6 +19,7 @@ import { YoutubePlayer } from './youtube-player';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRightIcon } from '@storybook/icons';
+import urlMetadata from 'url-metadata';
 
 const builder = imageUrlBuilder(client);
 
@@ -177,6 +178,36 @@ ${props.value.code}
             />
           </div>
         </Link>
+      );
+    },
+    'link-block': async ({ value }) => {
+      const url = value.url;
+      const metadata = await urlMetadata(url);
+
+      return (
+        <a
+          href={url}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="flex items-stretch w-full gap-8 p-4 my-8 transition-colors border rounded border-zinc-300 hover:border-blue-500 dark:border-slate-700"
+        >
+          <div className="w-full">
+            <Link href={url} className="block mb-4 font-bold text-md">
+              {metadata?.title}
+            </Link>
+            <div className="flex items-center gap-2 text-blue-500">
+              Read more <ArrowRightIcon className="text-blue-500" />
+            </div>
+          </div>
+          <div className="relative flex-grow flex-shrink-0 min-h-full w-52 bg-slate-100">
+            {metadata?.['og:image'] && (
+              <img
+                src={metadata['og:image']}
+                className="object-cover w-full h-full rounded"
+              />
+            )}
+          </div>
+        </a>
       );
     },
   },
