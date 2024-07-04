@@ -45,7 +45,6 @@ export default async function Layout({ children }: { children: ReactNode }) {
             <NavDocs listOfTrees={listofTrees} />
           </Sidebar>
           {children}
-          <TableOfContent />
         </>
       </Container>
       <Footer />
