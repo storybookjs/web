@@ -3,12 +3,17 @@ import type { FC } from 'react';
 
 interface ChromaticLogoProps {
   color?: 'white' | 'system';
+  height?: number;
 }
 
-export const ChromaticLogo: FC<ChromaticLogoProps> = ({ color = 'system' }) => {
+export const ChromaticLogo: FC<ChromaticLogoProps> = ({
+  color = 'system',
+  height,
+}) => {
   return (
     <svg
       fill="none"
+      height={height || 29}
       role="img"
       viewBox="0 0 149 29"
       xmlns="http://www.w3.org/2000/svg"

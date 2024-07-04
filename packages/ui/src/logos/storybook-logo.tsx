@@ -3,14 +3,17 @@ import type { FC } from 'react';
 
 interface StorybookLogoProps {
   color?: 'white' | 'system';
+  height?: number;
 }
 
-export const StorybookLogo: FC<StorybookLogoProps> = ({ color = 'system' }) => (
+export const StorybookLogo: FC<StorybookLogoProps> = ({
+  color = 'system',
+  height,
+}) => (
   <svg
     fill="none"
-    height="20"
+    height={height || 20}
     viewBox="0 0 100 20"
-    width="100"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
