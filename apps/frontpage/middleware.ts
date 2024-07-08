@@ -4,7 +4,7 @@ import { cookieRenderId } from './constants';
 import { docsVersionsRedirects } from './redirects/docs-versions-redirects';
 import { RedirectData } from './redirects/types';
 import { docsRenderersRedirects } from './redirects/docs-renderers-redirects';
-import { docsGenericRedirects } from './redirects/docs-generic';
+import { docsCommonRedirects } from './redirects/docs-common-redirects';
 
 export async function middleware(request: NextRequest) {
   let searchParam = request.nextUrl.searchParams.get('renderer');
@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
   const redirectList: RedirectData[] = [
     ...docsVersionsRedirects,
     ...docsRenderersRedirects,
-    ...docsGenericRedirects,
+    ...docsCommonRedirects,
   ];
 
   for (const redirectData of redirectList) {
