@@ -111,7 +111,19 @@ dotenv.config();
   console.log(`\n✳︎ 👀 http://localhost:3000/docs/${slugVersion}\n`);
 
   fs.rmSync(pathToLocalDocs, { recursive: true });
-  fs.cpSync(pathToStorybookDocs, pathToLocalDocs, { recursive: true });
+  fs.cpSync(pathToStorybookDocs, pathToLocalDocs, {
+    recursive: true,
+    filter: (src) => {
+      if (
+        src.includes('.prettierignore') ||
+        src.includes('.prettierrc') ||
+        src.includes('_assets') ||
+        src.includes('_snippets')
+      )
+        return false;
+      return true;
+    },
+  });
 
   fs.watch(pathToStorybookDocs, { recursive: true }, (_, filename) => {
     const srcFilePath = path.join(pathToStorybookDocs, filename);
