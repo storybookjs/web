@@ -22,8 +22,8 @@ export const docsCommonRedirects: RedirectData[] = [
     permanent: true,
   },
   {
-    source: '/integrations/tag/:tag',
-    destination: '/addons/tag/:tag',
+    source: '/integrations/tag/:path',
+    destination: '/addons/tag/:path',
     permanent: true,
   },
   {
