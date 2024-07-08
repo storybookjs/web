@@ -89,77 +89,7 @@ module.exports = withPlausibleProxy()({
     },
   },
   async redirects() {
-    // Add the wild cards at the bottom of the list
-    // to avoid conflicts with the more specific redirects
-    return [
-      {
-        source: '/integrations/tag/:tag',
-        destination: '/addons/tag/:tag',
-        permanent: true,
-      },
-      {
-        source: '/versions.json',
-        destination: '/versions',
-        permanent: true,
-      },
-      ...generatedRedirects,
-      /* 🐺 Wild Cards */
-      // {
-      //   source: '/basics/:path*',
-      //   destination: '/docs',
-      //   permanent: true,
-      // },
-      // {
-      //   source: '/docs/basics/:path*',
-      //   destination: '/docs',
-      //   permanent: true,
-      // },
-      {
-        source: '/configurations/:path*',
-        destination: '/docs/configure',
-        permanent: true,
-      },
-      {
-        source: '/docs/configurations/:path*',
-        destination: '/docs/configure',
-        permanent: true,
-      },
-      {
-        source: '/examples/:path*',
-        destination: '/docs',
-        permanent: true,
-      },
-      {
-        source: '/docs/examples/:path*',
-        destination: '/docs',
-        permanent: true,
-      },
-      {
-        source: '/logos/:path*',
-        destination: '/docs',
-        permanent: true,
-      },
-      {
-        source: '/docs/logos/:path*',
-        destination: '/docs',
-        permanent: true,
-      },
-      {
-        source: '/testing/:path*',
-        destination: '/docs',
-        permanent: true,
-      },
-      {
-        source: '/docs/testing/:path*',
-        destination: '/docs/writing-tests',
-        permanent: true,
-      },
-      {
-        source: '/docs/guides/:path*',
-        destination: '/docs',
-        permanent: true,
-      },
-    ];
+    return [...generatedRedirects];
   },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
 });

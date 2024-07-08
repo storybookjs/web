@@ -2,6 +2,11 @@ import { RedirectData } from './types';
 
 export const docsCommonRedirects: RedirectData[] = [
   {
+    source: '/versions.json',
+    destination: '/versions',
+    permanent: true,
+  },
+  {
     source: '/docs/get-started',
     destination: '/docs',
     permanent: true,
@@ -14,6 +19,11 @@ export const docsCommonRedirects: RedirectData[] = [
   {
     source: '/integrations',
     destination: '/addons',
+    permanent: true,
+  },
+  {
+    source: '/integrations/tag/:tag',
+    destination: '/addons/tag/:tag',
     permanent: true,
   },
   {
@@ -231,8 +241,58 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   /* 🐺 Wild Cards */
   {
-    source: '/basics/:path/coco',
-    destination: '/docs/:path/coco',
+    source: '/basics/:path*',
+    destination: '/docs',
+    permanent: true,
+  },
+  {
+    source: '/docs/basics/:path*',
+    destination: '/docs',
+    permanent: true,
+  },
+  {
+    source: '/configurations/:path*',
+    destination: '/docs/configure',
+    permanent: true,
+  },
+  {
+    source: '/docs/configurations/:path*',
+    destination: '/docs/configure',
+    permanent: true,
+  },
+  {
+    source: '/examples/:path*',
+    destination: '/docs',
+    permanent: true,
+  },
+  {
+    source: '/docs/examples/:path*',
+    destination: '/docs',
+    permanent: true,
+  },
+  {
+    source: '/logos/:path*',
+    destination: '/docs',
+    permanent: true,
+  },
+  {
+    source: '/docs/logos/:path*',
+    destination: '/docs',
+    permanent: true,
+  },
+  {
+    source: '/testing/:path*',
+    destination: '/docs',
+    permanent: true,
+  },
+  {
+    source: '/docs/testing/:path*',
+    destination: '/docs/writing-tests',
+    permanent: true,
+  },
+  {
+    source: '/docs/guides/:path*',
+    destination: '/docs',
     permanent: true,
   },
 ];
