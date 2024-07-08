@@ -20,19 +20,19 @@ export const docsVersionsRedirects: RedirectData[] = [
   })),
   // TODO: Not sure about this one - Verify with Kyle
   // The `/get-started` route is only valid for 8.0+
-  // ...historicalVersions.reduce<RedirectData[]>((acc, v) => {
-  //   // Explicitly type the accumulator
-  //   if (Number(v) < 8) {
-  //     renderers.forEach((r) => {
-  //       acc.push({
-  //         source: `/docs/${v}/${r}/get-started`,
-  //         destination: `/docs/${v.split('.')[0]}/get-started/install`,
-  //         permanent: true,
-  //       });
-  //     });
-  //   }
-  //   return acc;
-  // }, []),
+  ...historicalVersions.reduce<RedirectData[]>((acc, v) => {
+    // Explicitly type the accumulator
+    if (Number(v) < 8) {
+      renderers.forEach((r) => {
+        acc.push({
+          source: `/docs/${v}/${r}/get-started`,
+          destination: `/docs/${v.split('.')[0]}/get-started/install`,
+          permanent: true,
+        });
+      });
+    }
+    return acc;
+  }, []),
   {
     source: '/docs/6/get-started',
     destination: '/docs/6',
