@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     [GLOBAL_SEARCH_META_KEYS.IMPORTANCE]: GLOBAL_SEARCH_IMPORTANCE.AGNOSTIC,
   },
   verification: {
-    google: '-w_VUF7WOagl6GeEjf5pVMsu8hJpvoMO84RYkZOmvJA',
+    google: 'HCBwa2qa52ztaOfGjt3FQGzTUCM3kT8IOjTSY6diI88',
   },
 };
 
