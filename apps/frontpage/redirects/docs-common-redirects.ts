@@ -48,12 +48,13 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/migration-guides/7.0',
-    destination: '/docs/7.0/migration-guide',
+    destination: '/docs/7/migration-guide',
     permanent: true,
   },
+  // TODO: Make sure this one works after 9.0
   {
     source: '/migration-guides/8.0',
-    destination: '/docs/8.0/migration-guide',
+    destination: '/docs/migration-guide',
     permanent: true,
   },
   /* Supporting old docs URLs */
@@ -105,6 +106,7 @@ export const docsCommonRedirects: RedirectData[] = [
     destination: '/docs/faq',
     permanent: true,
   },
+  // TODO: Fix - This is a 404
   {
     source: '/docs/basics/live-examples',
     destination:
