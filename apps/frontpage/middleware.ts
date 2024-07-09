@@ -5,6 +5,9 @@ import { docsVersionsRedirects } from './redirects/docs-versions-redirects';
 import { RedirectData } from './redirects/types';
 import { docsRenderersRedirects } from './redirects/docs-renderers-redirects';
 import { docsCommonRedirects } from './redirects/docs-common-redirects';
+import { docsVersion8Redirects } from './redirects/docs-version-8-redirects';
+import { docsVersion6Redirects } from './redirects/docs-version-6-redirects';
+import { docsVersion7Redirects } from './redirects/docs-version-7-redirects';
 
 export async function middleware(request: NextRequest) {
   let searchParam = request.nextUrl.searchParams.get('renderer');

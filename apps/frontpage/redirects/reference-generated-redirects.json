@@ -1,0 +1,1272 @@
+[
+  {
+    "source": "/docs/workflows/testing-with-storybook/",
+    "destination": "/docs/writing-tests",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/workflows/testing-with-storybook/",
+    "destination": "/docs/writing-tests",
+    "permanent": true
+  },
+  {
+    "source": "/docs/workflows/unit-testing/",
+    "destination": "/docs/writing-tests/import-stories-in-tests/stories-in-unit-tests/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/workflows/unit-testing/",
+    "destination": "/docs/writing-tests/import-stories-in-tests/stories-in-unit-tests/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/workflows/visual-testing/",
+    "destination": "/docs/writing-tests/visual-testing/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/workflows/visual-testing/",
+    "destination": "/docs/writing-tests/visual-testing/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/workflows/interaction-testing/",
+    "destination": "/docs/writing-tests/interaction-testing/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/workflows/interaction-testing/",
+    "destination": "/docs/writing-tests/interaction-testing/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/workflows/snapshot-testing/",
+    "destination": "/docs/writing-tests/snapshot-testing/snapshot-testing",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/workflows/snapshot-testing/",
+    "destination": "/docs/writing-tests/snapshot-testing/snapshot-testing",
+    "permanent": true
+  },
+  {
+    "source": "/docs/workflows/build-pages-with-storybook/",
+    "destination": "/docs/writing-stories/build-pages-with-storybook/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/workflows/build-pages-with-storybook/",
+    "destination": "/docs/writing-stories/build-pages-with-storybook/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/workflows/stories-for-multiple-components/",
+    "destination": "/docs/writing-stories/stories-for-multiple-components/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/workflows/stories-for-multiple-components/",
+    "destination": "/docs/writing-stories/stories-for-multiple-components/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/workflows/publish-storybook/",
+    "destination": "/docs/sharing/publish-storybook/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/workflows/publish-storybook/",
+    "destination": "/docs/sharing/publish-storybook/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/workflows/storybook-composition/",
+    "destination": "/docs/sharing/storybook-composition/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/workflows/storybook-composition/",
+    "destination": "/docs/sharing/storybook-composition/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/workflows/package-composition/",
+    "destination": "/docs/sharing/package-composition/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/workflows/package-composition/",
+    "destination": "/docs/sharing/package-composition/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/workflows/faq/",
+    "destination": "/docs/faq/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/workflows/faq/",
+    "destination": "/docs/faq/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/configure/webpack",
+    "destination": "/docs/builders/webpack",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/configure/webpack",
+    "destination": "/docs/builders/webpack",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/addons",
+    "destination": "/docs/addons",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/addons",
+    "destination": "/docs/addons",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/addons-api",
+    "destination": "/docs/addons/addons-api",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/addons-api",
+    "destination": "/docs/addons/addons-api",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/presets",
+    "destination": "/docs/addons/writing-presets",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/presets",
+    "destination": "/docs/addons/writing-presets",
+    "permanent": true
+  },
+  {
+    "source": "/docs/addons/addon-catalog",
+    "destination": "/docs/addons/integration-catalog",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/addons/addon-catalog",
+    "destination": "/docs/addons/integration-catalog",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/mdx",
+    "destination": "/docs/writing-docs/mdx",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/mdx",
+    "destination": "/docs/writing-docs/mdx",
+    "permanent": true
+  },
+  {
+    "source": "/docs/why-storybook/",
+    "destination": "/docs/get-started/why-storybook",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/why-storybook/",
+    "destination": "/docs/get-started/why-storybook",
+    "permanent": true
+  },
+  {
+    "source": "/docs/get-started/introduction",
+    "destination": "/docs/get-started/install",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/get-started/introduction",
+    "destination": "/docs/get-started/install",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-docs/docs-page",
+    "destination": "/docs/writing-docs/autodocs",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-docs/docs-page",
+    "destination": "/docs/writing-docs/autodocs",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-docs/doc-block-argstable",
+    "destination": "/docs/api/doc-blocks/doc-block-controls",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-docs/doc-block-argstable",
+    "destination": "/docs/api/doc-blocks/doc-block-controls",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-docs/doc-block-canvas",
+    "destination": "/docs/api/doc-blocks/doc-block-canvas",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-docs/doc-block-canvas",
+    "destination": "/docs/api/doc-blocks/doc-block-canvas",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-docs/doc-block-colorpalette",
+    "destination": "/docs/api/doc-blocks/doc-block-colorpalette",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-docs/doc-block-colorpalette",
+    "destination": "/docs/api/doc-blocks/doc-block-colorpalette",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-docs/doc-block-description",
+    "destination": "/docs/api/doc-blocks/doc-block-description",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-docs/doc-block-description",
+    "destination": "/docs/api/doc-blocks/doc-block-description",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-docs/doc-block-icongallery",
+    "destination": "/docs/api/doc-blocks/doc-block-icongallery",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-docs/doc-block-icongallery",
+    "destination": "/docs/api/doc-blocks/doc-block-icongallery",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-docs/doc-block-source",
+    "destination": "/docs/api/doc-blocks/doc-block-source",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-docs/doc-block-source",
+    "destination": "/docs/api/doc-blocks/doc-block-source",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-docs/doc-block-story",
+    "destination": "/docs/api/doc-blocks/doc-block-story",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-docs/doc-block-story",
+    "destination": "/docs/api/doc-blocks/doc-block-story",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-docs/doc-block-typeset",
+    "destination": "/docs/api/doc-blocks/doc-block-typeset",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-docs/doc-block-typeset",
+    "destination": "/docs/api/doc-blocks/doc-block-typeset",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/frameworks-feature-support",
+    "destination": "/docs/configure/integration/frameworks-feature-support",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/frameworks-feature-support",
+    "destination": "/docs/configure/integration/frameworks-feature-support",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/argtypes",
+    "destination": "/docs/api/arg-types",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/argtypes",
+    "destination": "/docs/api/arg-types",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-tests/importing-stories-in-tests/",
+    "destination": "/docs/writing-tests/stories-in-unit-tests/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-tests/importing-stories-in-tests/",
+    "destination": "/docs/writing-tests/stories-in-unit-tests/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-stories/introduction",
+    "destination": "/docs/writing-stories",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-stories/introduction",
+    "destination": "/docs/writing-stories",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-docs/introduction",
+    "destination": "/docs/writing-docs",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-docs/introduction",
+    "destination": "/docs/writing-docs",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-tests/introduction",
+    "destination": "/docs/writing-tests/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-tests/introduction",
+    "destination": "/docs/writing-tests/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/essentials/introduction",
+    "destination": "/docs/essentials",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/essentials/introduction",
+    "destination": "/docs/essentials",
+    "permanent": true
+  },
+  {
+    "source": "/docs/addons/introduction",
+    "destination": "/docs/addons",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/addons/introduction",
+    "destination": "/docs/addons",
+    "permanent": true
+  },
+  {
+    "source": "/docs/configure/overview",
+    "destination": "/docs/configure",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/configure/overview",
+    "destination": "/docs/configure",
+    "permanent": true
+  },
+  {
+    "source": "/docs/builders/overview",
+    "destination": "/docs/builders",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/builders/overview",
+    "destination": "/docs/builders",
+    "permanent": true
+  },
+  {
+    "source": "/docs/contribute/how-to-contribute",
+    "destination": "/docs/contribute",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/contribute/how-to-contribute",
+    "destination": "/docs/contribute",
+    "permanent": true
+  },
+  {
+    "source": "/docs/configure/babel",
+    "destination": "/docs/configure/integration/compilers",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/configure/babel",
+    "destination": "/docs/configure/integration/compilers",
+    "permanent": true
+  },
+  {
+    "source": "/docs/get-started/angular",
+    "destination": "/docs/get-started/frameworks/angular",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/get-started/angular",
+    "destination": "/docs/get-started/frameworks/angular",
+    "permanent": true
+  },
+  {
+    "source": "/docs/get-started/nextjs",
+    "destination": "/docs/get-started/frameworks/nextjs",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/get-started/nextjs",
+    "destination": "/docs/get-started/frameworks/nextjs",
+    "permanent": true
+  },
+  {
+    "source": "/docs/get-started/react-vite",
+    "destination": "/docs/get-started/frameworks/react-vite",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/get-started/react-vite",
+    "destination": "/docs/get-started/frameworks/react-vite",
+    "permanent": true
+  },
+  {
+    "source": "/docs/get-started/react-webpack5",
+    "destination": "/docs/get-started/frameworks/react-webpack5",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/get-started/react-webpack5",
+    "destination": "/docs/get-started/frameworks/react-webpack5",
+    "permanent": true
+  },
+  {
+    "source": "/docs/get-started/sveltekit",
+    "destination": "/docs/get-started/frameworks/sveltekit",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/get-started/sveltekit",
+    "destination": "/docs/get-started/frameworks/sveltekit",
+    "permanent": true
+  },
+  {
+    "source": "/docs/get-started/svelte-vite",
+    "destination": "/docs/get-started/frameworks/svelte-vite",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/get-started/svelte-vite",
+    "destination": "/docs/get-started/frameworks/svelte-vite",
+    "permanent": true
+  },
+  {
+    "source": "/docs/get-started/svelte-webpack5",
+    "destination": "/docs/get-started/frameworks/svelte-webpack5",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/get-started/svelte-webpack5",
+    "destination": "/docs/get-started/frameworks/svelte-webpack5",
+    "permanent": true
+  },
+  {
+    "source": "/docs/get-started/vue3-vite",
+    "destination": "/docs/get-started/frameworks/vue3-vite",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/get-started/vue3-vite",
+    "destination": "/docs/get-started/frameworks/vue3-vite",
+    "permanent": true
+  },
+  {
+    "source": "/docs/get-started/vue3-webpack5",
+    "destination": "/docs/get-started/frameworks/vue3-webpack5",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/get-started/vue3-webpack5",
+    "destination": "/docs/get-started/frameworks/vue3-webpack5",
+    "permanent": true
+  },
+  {
+    "source": "/docs/get-started/web-components-vite",
+    "destination": "/docs/get-started/frameworks/web-components-vite",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/get-started/web-components-vite",
+    "destination": "/docs/get-started/frameworks/web-components-vite",
+    "permanent": true
+  },
+  {
+    "source": "/docs/get-started/web-components-webpack5",
+    "destination": "/docs/get-started/frameworks/web-components-webpack5",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/get-started/web-components-webpack5",
+    "destination": "/docs/get-started/frameworks/web-components-webpack5",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-stories/mocking-modules",
+    "destination": "/docs/writing-stories/mocking-data-and-modules/mocking-modules",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-stories/mocking-modules",
+    "destination": "/docs/writing-stories/mocking-data-and-modules/mocking-modules",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-stories/mocking-network-requests",
+    "destination": "/docs/writing-stories/mocking-data-and-modules/mocking-network-requests",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-stories/mocking-network-requests",
+    "destination": "/docs/writing-stories/mocking-data-and-modules/mocking-network-requests",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-stories/mocking-providers",
+    "destination": "/docs/writing-stories/mocking-data-and-modules/mocking-providers",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-stories/mocking-providers",
+    "destination": "/docs/writing-stories/mocking-data-and-modules/mocking-providers",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-tests/snapshot-testing",
+    "destination": "/docs/writing-tests/snapshot-testing/snapshot-testing",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-tests/snapshot-testing",
+    "destination": "/docs/writing-tests/snapshot-testing/snapshot-testing",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-tests/storyshots-migration-guide",
+    "destination": "/docs/writing-tests/snapshot-testing/storyshots-migration-guide",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-tests/storyshots-migration-guide",
+    "destination": "/docs/writing-tests/snapshot-testing/storyshots-migration-guide",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-tests/stories-in-end-to-end-tests",
+    "destination": "/docs/writing-tests/import-stories-in-tests/stories-in-end-to-end-tests",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-tests/stories-in-end-to-end-tests",
+    "destination": "/docs/writing-tests/import-stories-in-tests/stories-in-end-to-end-tests",
+    "permanent": true
+  },
+  {
+    "source": "/docs/writing-tests/stories-in-unit-tests",
+    "destination": "/docs/writing-tests/import-stories-in-tests/stories-in-unit-tests",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/writing-tests/stories-in-unit-tests",
+    "destination": "/docs/writing-tests/import-stories-in-tests/stories-in-unit-tests",
+    "permanent": true
+  },
+  {
+    "source": "/docs/configure/frameworks",
+    "destination": "/docs/configure/integration/frameworks",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/configure/frameworks",
+    "destination": "/docs/configure/integration/frameworks",
+    "permanent": true
+  },
+  {
+    "source": "/docs/configure/frameworks-feature-support",
+    "destination": "/docs/configure/integration/frameworks-feature-support",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/configure/frameworks-feature-support",
+    "destination": "/docs/configure/integration/frameworks-feature-support",
+    "permanent": true
+  },
+  {
+    "source": "/docs/configure/compilers",
+    "destination": "/docs/configure/integration/compilers",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/configure/compilers",
+    "destination": "/docs/configure/integration/compilers",
+    "permanent": true
+  },
+  {
+    "source": "/docs/configure/typescript",
+    "destination": "/docs/configure/integration/typescript",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/configure/typescript",
+    "destination": "/docs/configure/integration/typescript",
+    "permanent": true
+  },
+  {
+    "source": "/docs/configure/images-and-assets",
+    "destination": "/docs/configure/integration/images-and-assets",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/configure/images-and-assets",
+    "destination": "/docs/configure/integration/images-and-assets",
+    "permanent": true
+  },
+  {
+    "source": "/docs/configure/features-and-behavior",
+    "destination": "/docs/configure/user-interface/features-and-behavior",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/configure/features-and-behavior",
+    "destination": "/docs/configure/user-interface/features-and-behavior",
+    "permanent": true
+  },
+  {
+    "source": "/docs/configure/theming",
+    "destination": "/docs/configure/user-interface/theming",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/configure/theming",
+    "destination": "/docs/configure/user-interface/theming",
+    "permanent": true
+  },
+  {
+    "source": "/docs/configure/sidebar-and-urls",
+    "destination": "/docs/configure/user-interface/sidebar-and-urls",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/configure/sidebar-and-urls",
+    "destination": "/docs/configure/user-interface/sidebar-and-urls",
+    "permanent": true
+  },
+  {
+    "source": "/docs/configure/storybook-addons",
+    "destination": "/docs/configure/user-interface/storybook-addons",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/configure/storybook-addons",
+    "destination": "/docs/configure/user-interface/storybook-addons",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config",
+    "destination": "/docs/api/main-config/main-config",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config",
+    "destination": "/docs/api/main-config/main-config",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-framework",
+    "destination": "/docs/api/main-config/main-config-framework",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-framework",
+    "destination": "/docs/api/main-config/main-config-framework",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-stories",
+    "destination": "/docs/api/main-config/main-config-stories",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-stories",
+    "destination": "/docs/api/main-config/main-config-stories",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-addons",
+    "destination": "/docs/api/main-config/main-config-addons",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-addons",
+    "destination": "/docs/api/main-config/main-config-addons",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-babel",
+    "destination": "/docs/api/main-config/main-config-babel",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-babel",
+    "destination": "/docs/api/main-config/main-config-babel",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-babel-default",
+    "destination": "/docs/api/main-config/main-config-babel-default",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-babel-default",
+    "destination": "/docs/api/main-config/main-config-babel-default",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-build",
+    "destination": "/docs/api/main-config/main-config-build",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-build",
+    "destination": "/docs/api/main-config/main-config-build",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-core",
+    "destination": "/docs/api/main-config/main-config-core",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-core",
+    "destination": "/docs/api/main-config/main-config-core",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-docs",
+    "destination": "/docs/api/main-config/main-config-docs",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-docs",
+    "destination": "/docs/api/main-config/main-config-docs",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-env",
+    "destination": "/docs/api/main-config/main-config-env",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-env",
+    "destination": "/docs/api/main-config/main-config-env",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-features",
+    "destination": "/docs/api/main-config/main-config-features",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-features",
+    "destination": "/docs/api/main-config/main-config-features",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-indexers",
+    "destination": "/docs/api/main-config/main-config-indexers",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-indexers",
+    "destination": "/docs/api/main-config/main-config-indexers",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-logLevel",
+    "destination": "/docs/api/main-config/main-config-logLevel",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-logLevel",
+    "destination": "/docs/api/main-config/main-config-logLevel",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-manager-head",
+    "destination": "/docs/api/main-config/main-config-manager-head",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-manager-head",
+    "destination": "/docs/api/main-config/main-config-manager-head",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-preview-annotations",
+    "destination": "/docs/api/main-config/main-config-preview-annotations",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-preview-annotations",
+    "destination": "/docs/api/main-config/main-config-preview-annotations",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-preview-body",
+    "destination": "/docs/api/main-config/main-config-preview-body",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-preview-body",
+    "destination": "/docs/api/main-config/main-config-preview-body",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-preview-head",
+    "destination": "/docs/api/main-config/main-config-preview-head",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-preview-head",
+    "destination": "/docs/api/main-config/main-config-preview-head",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-refs",
+    "destination": "/docs/api/main-config/main-config-refs",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-refs",
+    "destination": "/docs/api/main-config/main-config-refs",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-static-dirs",
+    "destination": "/docs/api/main-config/main-config-static-dirs",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-static-dirs",
+    "destination": "/docs/api/main-config/main-config-static-dirs",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-swc",
+    "destination": "/docs/api/main-config/main-config-swc",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-swc",
+    "destination": "/docs/api/main-config/main-config-swc",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-typescript",
+    "destination": "/docs/api/main-config/main-config-typescript",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-typescript",
+    "destination": "/docs/api/main-config/main-config-typescript",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-vite-final",
+    "destination": "/docs/api/main-config/main-config-vite-final",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-vite-final",
+    "destination": "/docs/api/main-config/main-config-vite-final",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/main-config-webpack-final",
+    "destination": "/docs/api/main-config/main-config-webpack-final",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/main-config-webpack-final",
+    "destination": "/docs/api/main-config/main-config-webpack-final",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-argtypes",
+    "destination": "/docs/api/doc-blocks/doc-block-argtypes",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-argtypes",
+    "destination": "/docs/api/doc-blocks/doc-block-argtypes",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-canvas",
+    "destination": "/docs/api/doc-blocks/doc-block-canvas",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-canvas",
+    "destination": "/docs/api/doc-blocks/doc-block-canvas",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-colorpalette",
+    "destination": "/docs/api/doc-blocks/doc-block-colorpalette",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-colorpalette",
+    "destination": "/docs/api/doc-blocks/doc-block-colorpalette",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-controls",
+    "destination": "/docs/api/doc-blocks/doc-block-controls",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-controls",
+    "destination": "/docs/api/doc-blocks/doc-block-controls",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-description",
+    "destination": "/docs/api/doc-blocks/doc-block-description",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-description",
+    "destination": "/docs/api/doc-blocks/doc-block-description",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-icongallery",
+    "destination": "/docs/api/doc-blocks/doc-block-icongallery",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-icongallery",
+    "destination": "/docs/api/doc-blocks/doc-block-icongallery",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-markdown",
+    "destination": "/docs/api/doc-blocks/doc-block-markdown",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-markdown",
+    "destination": "/docs/api/doc-blocks/doc-block-markdown",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-meta",
+    "destination": "/docs/api/doc-blocks/doc-block-meta",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-meta",
+    "destination": "/docs/api/doc-blocks/doc-block-meta",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-primary",
+    "destination": "/docs/api/doc-blocks/doc-block-primary",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-primary",
+    "destination": "/docs/api/doc-blocks/doc-block-primary",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-source",
+    "destination": "/docs/api/doc-blocks/doc-block-source",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-source",
+    "destination": "/docs/api/doc-blocks/doc-block-source",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-stories",
+    "destination": "/docs/api/doc-blocks/doc-block-stories",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-stories",
+    "destination": "/docs/api/doc-blocks/doc-block-stories",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-story",
+    "destination": "/docs/api/doc-blocks/doc-block-story",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-story",
+    "destination": "/docs/api/doc-blocks/doc-block-story",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-subtitle",
+    "destination": "/docs/api/doc-blocks/doc-block-subtitle",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-subtitle",
+    "destination": "/docs/api/doc-blocks/doc-block-subtitle",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-title",
+    "destination": "/docs/api/doc-blocks/doc-block-title",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-title",
+    "destination": "/docs/api/doc-blocks/doc-block-title",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-typeset",
+    "destination": "/docs/api/doc-blocks/doc-block-typeset",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-typeset",
+    "destination": "/docs/api/doc-blocks/doc-block-typeset",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-unstyled",
+    "destination": "/docs/api/doc-blocks/doc-block-unstyled",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-unstyled",
+    "destination": "/docs/api/doc-blocks/doc-block-unstyled",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/doc-block-useof",
+    "destination": "/docs/api/doc-blocks/doc-block-useof",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/doc-block-useof",
+    "destination": "/docs/api/doc-blocks/doc-block-useof",
+    "permanent": true
+  },
+  {
+    "source": "/docs/api/portable-stories-playwright",
+    "destination": "/docs/api/portable-stories/portable-stories-playwright",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/api/portable-stories-playwright",
+    "destination": "/docs/api/portable-stories/portable-stories-playwright",
+    "permanent": true
+  },
+  {
+    "source": "/docs/contribute/documentation-updates",
+    "destination": "/docs/contribute/documentation/documentation-updates",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/contribute/documentation-updates",
+    "destination": "/docs/contribute/documentation/documentation-updates",
+    "permanent": true
+  },
+  {
+    "source": "/docs/contribute/new-snippets",
+    "destination": "/docs/contribute/documentation/new-snippets",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/contribute/new-snippets",
+    "destination": "/docs/contribute/documentation/new-snippets",
+    "permanent": true
+  },
+  {
+    "source": "/docs/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/8.1/:path*",
+    "destination": "/docs/:path",
+    "permanent": false
+  },
+  {
+    "source": "/docs/8.0",
+    "destination": "/docs/8",
+    "permanent": true
+  },
+  {
+    "source": "/docs/8.0/:path*",
+    "destination": "/docs/8/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.6",
+    "destination": "/docs/7/get-started/install/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.6/:path*",
+    "destination": "/docs/7/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.5",
+    "destination": "/docs/7/get-started/install/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.5/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/7/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.4",
+    "destination": "/docs/7/get-started/install/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.4/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/7/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.3",
+    "destination": "/docs/7/get-started/install/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.3/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/7/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.2",
+    "destination": "/docs/7/get-started/install/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.2/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/7/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.1",
+    "destination": "/docs/7/get-started/install/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.1/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/7/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.0",
+    "destination": "/docs/7/get-started/install/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/7.0/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/7/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/6.5",
+    "destination": "/docs/6/get-started/install/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/6.5/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/6/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/6.4",
+    "destination": "/docs/6/get-started/install/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/6.4/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/6/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/6.3",
+    "destination": "/docs/6/get-started/install/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/6.3/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/6/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/6.2",
+    "destination": "/docs/6/get-started/install/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/6.2/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/6/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/6.1",
+    "destination": "/docs/6/get-started/install/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/6.1/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/6/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/6.0",
+    "destination": "/docs/6/get-started/install/",
+    "permanent": true
+  },
+  {
+    "source": "/docs/6.0/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/6/:path",
+    "permanent": true
+  },
+  {
+    "source": "/docs/next",
+    "destination": "/docs/8",
+    "permanent": false
+  },
+  {
+    "source": "/docs/next/:renderer(react|vue|angular|web-components|ember|html|svelte|preact|qwik|solid)/:path*",
+    "destination": "/docs/8/:path",
+    "permanent": false
+  },
+  {
+    "source": "/docs/next/:path*",
+    "destination": "/docs/8/:path",
+    "permanent": false
+  },
+  {
+    "source": "/releases",
+    "destination": "/releases/8.1",
+    "permanent": false
+  }
+]
