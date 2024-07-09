@@ -106,11 +106,9 @@ export const docsCommonRedirects: RedirectData[] = [
     destination: '/docs/faq',
     permanent: true,
   },
-  // TODO: Fix - This is a 404
   {
     source: '/docs/basics/live-examples',
-    destination:
-      'https://github.com/storybookjs/storybook/blob/next/examples/README.md',
+    destination: 'https://github.com/storybookjs/sandboxes',
     permanent: true,
   },
   {
