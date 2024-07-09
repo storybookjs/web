@@ -1,9 +1,10 @@
 import { renderers } from './constants';
+import { RedirectData } from './types';
 
-export default [
+export const docsRenderersRedirects: RedirectData[] = [
   ...renderers.map((r) => ({
     source: `/docs/${r}/get-started/examples`,
     destination: '/showcase',
     permanent: true,
   })),
-] as RedirectData[];
+];

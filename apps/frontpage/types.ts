@@ -79,16 +79,3 @@ interface TagLinkType {
   link: string;
   name: string;
 }
-
-interface RedirectList {
-  [key: string]: {
-    destination: string;
-    permanent: boolean;
-  };
-}
-
-type RedirectData = {
-  source: string;
-  destination: string;
-  permanent: boolean;
-};
