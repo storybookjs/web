@@ -1,0 +1,20 @@
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://storybook.js.org/sitemap/docs/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://storybook.js.org/sitemap/addons/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://storybook.js.org/sitemap/recipes/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://storybook.js.org/sitemap/blog/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://storybook.js.org/sitemap/showcase/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://storybook.js.org/sitemap/tutorials/sitemap.xml</loc>
+  </sitemap>
+</sitemapindex>
