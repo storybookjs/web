@@ -31,5 +31,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ),
   }));
 
-  return [...docs];
+  return [
+    { url: 'https://storybook.js.org' },
+    { url: 'https://storybook.js.org/community' },
+    { url: 'https://storybook.js.org/docs' },
+    ...docs,
+  ];
 }
