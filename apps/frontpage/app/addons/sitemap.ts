@@ -100,5 +100,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  return [];
+  const addons = await fetchAddonsData();
+  const categories = await fetchTagsData({ isCategory: true });
+  const tags = await fetchTagsData();
+
+  const addonPaths = addons.map((name) => {
+    if (!name) throw new Error('Addon name is missing');
+    return { loc: `https://storybook.js.org/addons/${name}` };
+  });
+  const tagAndCategoryPaths = [...categories, ...tags].map((name, i) => {
+    if (!name) throw new Error('Tag name is missing');
+    return { loc: `https://storybook.js.org/addons/tag/${name}` };
+  });
+
+  const urls = [...addonPaths, ...tagAndCategoryPaths].map(({ loc }, i) => {
+    const encoded = loc
+      .replace('&', '&amp;')
+      .replace('<', '&lt;')
+      .replace('>', '&gt;')
+      .replace("'", '&apos;')
+      .replace('"', '&quot;');
+    return { url: encoded };
+  });
+
+  console.log(urls);
+
+  return [...urls];
 }
