@@ -1,3 +1,4 @@
+const generatedRedirects = require('./generated-redirects.json');
 const { withPlausibleProxy } = require('next-plausible');
 
 const historicalVersions = [
@@ -86,6 +87,9 @@ module.exports = withPlausibleProxy()({
     outputFileTracingIncludes: {
       '/docs/**': ['./content/docs/**', './content/snippets/**'],
     },
+  },
+  async redirects() {
+    return [...generatedRedirects];
   },
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
 });
