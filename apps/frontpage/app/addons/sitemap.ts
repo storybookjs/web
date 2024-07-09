@@ -123,5 +123,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return { url: encoded };
   });
 
-  return [...urls];
+  return [{ url: 'https://storybook.js.org/addons' }, ...urls];
 }
