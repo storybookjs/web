@@ -65,8 +65,8 @@ export const docsVersion7Redirects: RedirectData[] = [
 
   //Version7.1
   {
-    source: '/docs/writing-tests/importing-stories-in-tests/',
-    destination: '/docs/writing-tests/stories-in-unit-tests/',
+    source: '/docs/writing-tests/importing-stories-in-tests',
+    destination: '/docs/writing-tests/stories-in-unit-tests',
     permanent: true,
   },
 
@@ -83,7 +83,7 @@ export const docsVersion7Redirects: RedirectData[] = [
   },
   {
     source: '/docs/writing-tests/introduction',
-    destination: '/docs/writing-tests/',
+    destination: '/docs/writing-tests',
     permanent: true,
   },
   {

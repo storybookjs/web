@@ -8,59 +8,59 @@ export const docsVersion6Redirects: RedirectData[] = [
   },
   // Version 6.4
   {
-    source: '/docs/workflows/testing-with-storybook/',
+    source: '/docs/workflows/testing-with-storybook',
     destination: '/docs/writing-tests',
     permanent: true,
   },
   {
-    source: '/docs/workflows/unit-testing/',
+    source: '/docs/workflows/unit-testing',
     destination:
-      '/docs/writing-tests/import-stories-in-tests/stories-in-unit-tests/',
+      '/docs/writing-tests/import-stories-in-tests/stories-in-unit-tests',
     permanent: true,
   },
   {
-    source: '/docs/workflows/visual-testing/',
-    destination: '/docs/writing-tests/visual-testing/',
+    source: '/docs/workflows/visual-testing',
+    destination: '/docs/writing-tests/visual-testing',
     permanent: true,
   },
   {
-    source: '/docs/workflows/interaction-testing/',
-    destination: '/docs/writing-tests/interaction-testing/',
+    source: '/docs/workflows/interaction-testing',
+    destination: '/docs/writing-tests/interaction-testing',
     permanent: true,
   },
   {
-    source: '/docs/workflows/snapshot-testing/',
+    source: '/docs/workflows/snapshot-testing',
     destination: '/docs/writing-tests/snapshot-testing/snapshot-testing',
     permanent: true,
   },
   {
-    source: '/docs/workflows/build-pages-with-storybook/',
-    destination: '/docs/writing-stories/build-pages-with-storybook/',
+    source: '/docs/workflows/build-pages-with-storybook',
+    destination: '/docs/writing-stories/build-pages-with-storybook',
     permanent: true,
   },
   {
-    source: '/docs/workflows/stories-for-multiple-components/',
-    destination: '/docs/writing-stories/stories-for-multiple-components/',
+    source: '/docs/workflows/stories-for-multiple-components',
+    destination: '/docs/writing-stories/stories-for-multiple-components',
     permanent: true,
   },
   {
-    source: '/docs/workflows/publish-storybook/',
-    destination: '/docs/sharing/publish-storybook/',
+    source: '/docs/workflows/publish-storybook',
+    destination: '/docs/sharing/publish-storybook',
     permanent: true,
   },
   {
-    source: '/docs/workflows/storybook-composition/',
-    destination: '/docs/sharing/storybook-composition/',
+    source: '/docs/workflows/storybook-composition',
+    destination: '/docs/sharing/storybook-composition',
     permanent: true,
   },
   {
-    source: '/docs/workflows/package-composition/',
-    destination: '/docs/sharing/package-composition/',
+    source: '/docs/workflows/package-composition',
+    destination: '/docs/sharing/package-composition',
     permanent: true,
   },
   {
-    source: '/docs/workflows/faq/',
-    destination: '/docs/faq/',
+    source: '/docs/workflows/faq',
+    destination: '/docs/faq',
     permanent: true,
   },
   // Version 6.5
@@ -91,7 +91,7 @@ export const docsVersion6Redirects: RedirectData[] = [
     permanent: true,
   },
   {
-    source: '/docs/why-storybook/',
+    source: '/docs/why-storybook',
     destination: '/docs/get-started/why-storybook',
     permanent: true,
   },
