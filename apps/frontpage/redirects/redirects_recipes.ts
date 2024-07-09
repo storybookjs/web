@@ -1,7 +1,7 @@
 export default [
   {
-    source: '/tag/:path',
-    destination: '/addons/tag/:path',
+    source: '/recipes',
+    destination: '/addons',
     permanent: true,
   },
 ] as RedirectData[];

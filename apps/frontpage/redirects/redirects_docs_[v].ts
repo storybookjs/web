@@ -5,15 +5,18 @@ import {
   versions7,
   versions8,
 } from './constants';
-import { RedirectData } from './types';
-import { docsVersion6Redirects } from './docs-version-6-redirects';
-import { docsVersion7Redirects } from './docs-version-7-redirects';
-import { docsVersion8Redirects } from './docs-version-8-redirects';
 
-export const docsVersionsRedirects: RedirectData[] = [
-  ...docsVersion6Redirects,
-  ...docsVersion7Redirects,
-  ...docsVersion8Redirects,
+export default [
+  {
+    source: '/docs/6/get-started',
+    destination: '/docs/6',
+    permanent: true,
+  },
+  {
+    source: '/docs/7/get-started',
+    destination: '/docs/7',
+    permanent: true,
+  },
   ...[...versions6, ...versions7].map((v) => ({
     source: `/docs/${v}`,
     destination: `/docs/${v.split('.')[0]}`,
@@ -39,4 +42,4 @@ export const docsVersionsRedirects: RedirectData[] = [
     }
     return acc;
   }, []),
-];
+] as RedirectData[];

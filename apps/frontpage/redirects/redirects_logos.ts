@@ -1,7 +1,7 @@
 export default [
   {
-    source: '/tag/:path',
-    destination: '/addons/tag/:path',
+    source: '/logos/:path*',
+    destination: '/docs',
     permanent: true,
   },
 ] as RedirectData[];
