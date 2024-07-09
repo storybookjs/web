@@ -123,7 +123,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return { url: encoded };
   });
 
-  console.log(urls);
-
   return [...urls];
 }

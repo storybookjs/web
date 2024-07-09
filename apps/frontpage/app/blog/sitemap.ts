@@ -14,7 +14,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       return { url };
     });
   } catch (error) {
-    console.log(error);
     return [];
   }
 }
