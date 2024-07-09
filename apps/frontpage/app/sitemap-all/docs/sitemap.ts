@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { generateDocsTree } from '../../lib/get-tree';
+import { generateDocsTree } from '../../../lib/get-tree';
 import { TreeProps, docsVersions } from '@repo/utils';
 
 export default function sitemap(): MetadataRoute.Sitemap {
