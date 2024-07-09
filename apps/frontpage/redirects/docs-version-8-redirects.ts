@@ -1,28 +1,146 @@
-export default [
-  { source: '/docs/api/addons', destination: '/docs/addons', permanent: true },
+import { RedirectData } from './types';
+
+export const docsVersion8Redirects: RedirectData[] = [
+  // Version 8.1
   {
-    source: '/docs/api/addons-api',
-    destination: '/docs/addons/addons-api',
+    source: '/docs/get-started/angular',
+    destination: '/docs/get-started/frameworks/angular',
     permanent: true,
   },
   {
-    source: '/docs/api/presets',
-    destination: '/docs/addons/writing-presets',
+    source: '/docs/get-started/nextjs',
+    destination: '/docs/get-started/frameworks/nextjs',
     permanent: true,
   },
   {
-    source: '/docs/api/mdx',
-    destination: '/docs/writing-docs/mdx',
+    source: '/docs/get-started/react-vite',
+    destination: '/docs/get-started/frameworks/react-vite',
     permanent: true,
   },
   {
-    source: '/docs/api/frameworks-feature-support',
+    source: '/docs/get-started/react-webpack5',
+    destination: '/docs/get-started/frameworks/react-webpack5',
+    permanent: true,
+  },
+  {
+    source: '/docs/get-started/sveltekit',
+    destination: '/docs/get-started/frameworks/sveltekit',
+    permanent: true,
+  },
+  {
+    source: '/docs/get-started/svelte-vite',
+    destination: '/docs/get-started/frameworks/svelte-vite',
+    permanent: true,
+  },
+  {
+    source: '/docs/get-started/svelte-webpack5',
+    destination: '/docs/get-started/frameworks/svelte-webpack5',
+    permanent: true,
+  },
+  {
+    source: '/docs/get-started/vue3-vite',
+    destination: '/docs/get-started/frameworks/vue3-vite',
+    permanent: true,
+  },
+  {
+    source: '/docs/get-started/vue3-webpack5',
+    destination: '/docs/get-started/frameworks/vue3-webpack5',
+    permanent: true,
+  },
+  {
+    source: '/docs/get-started/web-components-vite',
+    destination: '/docs/get-started/frameworks/web-components-vite',
+    permanent: true,
+  },
+  {
+    source: '/docs/get-started/web-components-webpack5',
+    destination: '/docs/get-started/frameworks/web-components-webpack5',
+    permanent: true,
+  },
+  {
+    source: '/docs/writing-stories/mocking-modules',
+    destination:
+      '/docs/writing-stories/mocking-data-and-modules/mocking-modules',
+    permanent: true,
+  },
+  {
+    source: '/docs/writing-stories/mocking-network-requests',
+    destination:
+      '/docs/writing-stories/mocking-data-and-modules/mocking-network-requests',
+    permanent: true,
+  },
+  {
+    source: '/docs/writing-stories/mocking-providers',
+    destination:
+      '/docs/writing-stories/mocking-data-and-modules/mocking-providers',
+    permanent: true,
+  },
+  {
+    source: '/docs/writing-tests/snapshot-testing',
+    destination: '/docs/writing-tests/snapshot-testing/snapshot-testing',
+    permanent: true,
+  },
+  {
+    source: '/docs/writing-tests/storyshots-migration-guide',
+    destination:
+      '/docs/writing-tests/snapshot-testing/storyshots-migration-guide',
+    permanent: true,
+  },
+  {
+    source: '/docs/writing-tests/stories-in-end-to-end-tests',
+    destination:
+      '/docs/writing-tests/import-stories-in-tests/stories-in-end-to-end-tests',
+    permanent: true,
+  },
+  {
+    source: '/docs/writing-tests/stories-in-unit-tests',
+    destination:
+      '/docs/writing-tests/import-stories-in-tests/stories-in-unit-tests',
+    permanent: true,
+  },
+  {
+    source: '/docs/configure/frameworks',
+    destination: '/docs/configure/integration/frameworks',
+    permanent: true,
+  },
+  {
+    source: '/docs/configure/frameworks-feature-support',
     destination: '/docs/configure/integration/frameworks-feature-support',
     permanent: true,
   },
   {
-    source: '/docs/api/argtypes',
-    destination: '/docs/api/arg-types',
+    source: '/docs/configure/compilers',
+    destination: '/docs/configure/integration/compilers',
+    permanent: true,
+  },
+  {
+    source: '/docs/configure/typescript',
+    destination: '/docs/configure/integration/typescript',
+    permanent: true,
+  },
+  {
+    source: '/docs/configure/images-and-assets',
+    destination: '/docs/configure/integration/images-and-assets',
+    permanent: true,
+  },
+  {
+    source: '/docs/configure/features-and-behavior',
+    destination: '/docs/configure/user-interface/features-and-behavior',
+    permanent: true,
+  },
+  {
+    source: '/docs/configure/theming',
+    destination: '/docs/configure/user-interface/theming',
+    permanent: true,
+  },
+  {
+    source: '/docs/configure/sidebar-and-urls',
+    destination: '/docs/configure/user-interface/sidebar-and-urls',
+    permanent: true,
+  },
+  {
+    source: '/docs/configure/storybook-addons',
+    destination: '/docs/configure/user-interface/storybook-addons',
     permanent: true,
   },
   {
@@ -230,4 +348,14 @@ export default [
     destination: '/docs/api/portable-stories/portable-stories-playwright',
     permanent: true,
   },
-] as RedirectData[];
+  {
+    source: '/docs/contribute/documentation-updates',
+    destination: '/docs/contribute/documentation/documentation-updates',
+    permanent: true,
+  },
+  {
+    source: '/docs/contribute/new-snippets',
+    destination: '/docs/contribute/documentation/new-snippets',
+    permanent: true,
+  },
+];

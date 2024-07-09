@@ -1,4 +1,12 @@
-export default [
+import { RedirectData } from './types';
+
+export const docsVersion6Redirects: RedirectData[] = [
+  {
+    source: '/docs/6/get-started',
+    destination: '/docs/6',
+    permanent: true,
+  },
+  // Version 6.4
   {
     source: '/docs/workflows/testing-with-storybook',
     destination: '/docs/writing-tests',
@@ -55,4 +63,41 @@ export default [
     destination: '/docs/faq',
     permanent: true,
   },
-] as RedirectData[];
+  // Version 6.5
+  {
+    source: '/docs/configure/webpack',
+    destination: '/docs/builders/webpack',
+    permanent: true,
+  },
+  { source: '/docs/api/addons', destination: '/docs/addons', permanent: true },
+  {
+    source: '/docs/api/addons-api',
+    destination: '/docs/addons/addons-api',
+    permanent: true,
+  },
+  {
+    source: '/docs/api/presets',
+    destination: '/docs/addons/writing-presets',
+    permanent: true,
+  },
+  {
+    source: '/docs/addons/addon-catalog',
+    destination: '/docs/addons/integration-catalog',
+    permanent: true,
+  },
+  {
+    source: '/docs/api/mdx',
+    destination: '/docs/writing-docs/mdx',
+    permanent: true,
+  },
+  {
+    source: '/docs/why-storybook',
+    destination: '/docs/get-started/why-storybook',
+    permanent: true,
+  },
+  {
+    source: '/docs/get-started/introduction',
+    destination: '/docs/get-started/install',
+    permanent: true,
+  },
+];
