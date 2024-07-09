@@ -43,9 +43,18 @@ apps/frontpage/content/docs
 apps/frontpage/content/snippets
 apps/frontpage/generated-redirects.json
 apps/frontpage/public/docs-assets
-apps/frontpage/public/sitemap
+
 apps/tutorials/public/sitemap.xml
 robots.txt
+
+# Sitemaps
+apps/frontpage/public/sitemap/sitemap.xml
+apps/frontpage/public/sitemap/sitemap-all.xml
+apps/frontpage/public/sitemap/sitemap-all-0.xml
+apps/frontpage/public/sitemap/sitemap-0.xml
+apps/frontpage/public/sitemap/tutorials/sitemap.xml
+apps/frontpage/public/sitemap/blog/sitemap.xml
+apps/frontpage/public/sitemap/showcase/sitemap.xml
 
 # ui
 dist/
