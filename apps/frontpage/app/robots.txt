@@ -1,0 +1,15 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://storybook.js.org
+
+# Sitemaps
+Sitemap: https://storybook.js.org/addons/sitemap.xml
+Sitemap: https://storybook.js.org/blog/sitemap.xml
+Sitemap: https://storybook.js.org/docs/sitemap.xml
+Sitemap: https://storybook.js.org/recipes/sitemap.xml
+Sitemap: https://storybook.js.org/releases/sitemap.xml
+Sitemap: https://storybook.js.org/showcase/sitemap.xml
+Sitemap: https://storybook.js.org/tutorials/sitemap.xml
