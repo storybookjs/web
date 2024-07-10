@@ -1,19 +1,17 @@
 import { MetadataRoute } from 'next';
-import Sitemapper from 'sitemapper';
+import { fetchExternalSitemap } from '../../lib/fetch-external-sitemap';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const blogXml = new Sitemapper({
-    url: 'https://storybook.js.org/blog/sitemap/sitemap-0.xml',
-    timeout: 15000, // 15 seconds
-  });
-
   try {
-    const { sites } = await blogXml.fetch();
-    return sites.map((site) => {
-      const url = site.replace(/\/$/, '');
-      return { url };
-    });
-  } catch (error) {
-    return [];
+    const { sites, error } = await fetchExternalSitemap(
+      'https://storybook.js.org/blog/sitemap/sitemap-0.xml',
+    );
+
+    if (error) throw new Error(error);
+
+    return sites;
+  } catch (error: any) {
+    console.log(error.message || 'Error fetching sitemap');
+    throw error;
   }
 }
