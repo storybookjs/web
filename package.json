@@ -2,9 +2,8 @@
   "name": "storybook-web",
   "private": true,
   "scripts": {
-    "build": "turbo run build --filter=!./apps/cms --filter=!./apps/tutorials && npm run copy-other-sitemaps",
+    "build": "turbo run build --filter=!./apps/cms --filter=!./apps/tutorials",
     "build-ui-only": "turbo run build --filter=@repo/ui",
-    "copy-other-sitemaps": "npm run copy-other-sitemaps -w apps/frontpage",
     "dev": "turbo run dev",
     "fetch-docs": "turbo run fetch-docs",
     "lint": "turbo run lint",
