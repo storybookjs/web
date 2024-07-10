@@ -48,7 +48,19 @@ dotenv.config();
     __dirname,
     `${monorepoRelativePath}/docs`,
   );
-  const exists = fs.existsSync(pathToStorybookDocs);
+  const pathToStorybookSnippets = path.join(
+    __dirname,
+    `${monorepoRelativePath}/docs/_snippets`,
+  );
+  const pathToStorybookAssets = path.join(
+    __dirname,
+    `${monorepoRelativePath}/docs/_assets`,
+  );
+
+  const exists =
+    fs.existsSync(pathToStorybookDocs) ||
+    fs.existsSync(pathToStorybookSnippets) ||
+    fs.existsSync(pathToStorybookAssets);
 
   if (!exists) {
     console.log(`✳︎ ${chalk.cyan(pathToStorybookDocs)} does not exist.`);
@@ -95,47 +107,63 @@ dotenv.config();
     './apps/frontpage/content/docs',
     versionPrompt.version.id,
   );
+  const pathToLocalSnippets = path.join(
+    './apps/frontpage/content/snippets',
+    versionPrompt.version.id,
+  );
+  const pathToLocalAssets = path.join(
+    './apps/frontpage/public/docs-assets',
+    versionPrompt.version.id,
+  );
 
   if (!fs.existsSync(pathToLocalDocs)) {
     fs.mkdirSync(pathToLocalDocs);
   }
+  if (!fs.existsSync(pathToLocalSnippets)) {
+    fs.mkdirSync(pathToLocalSnippets);
+  }
+  if (!fs.existsSync(pathToLocalAssets)) {
+    fs.mkdirSync(pathToLocalAssets);
+  }
 
   console.log(
-    `✳︎ Syncing the docs from Storybook to your local ${versionPrompt.version.label} docs`,
+    `\n✳︎ Syncing the docs from Storybook to your local ${versionPrompt.version.label} docs`,
   );
-  console.log(`✳︎ ${pathToStorybookDocs} → ./${pathToLocalDocs}`);
-
-  const slugVersion = !isLatest(versionPrompt.version)
-    ? versionPrompt.version.inSlug || versionPrompt.version.id
-    : '';
-  console.log(`\n✳︎ 👀 http://localhost:3000/docs/${slugVersion}\n`);
-
-  fs.rmSync(pathToLocalDocs, { recursive: true });
-  fs.cpSync(pathToStorybookDocs, pathToLocalDocs, { recursive: true });
+  console.log(`✳︎ Storybook path: ${pathToStorybookDocs}`);
+  console.log(`✳︎ Docs path: ./${pathToLocalDocs}`);
+  console.log(`\n✳︎ Now watching ...\n`);
 
   fs.watch(pathToStorybookDocs, { recursive: true }, (_, filename) => {
-    const srcFilePath = path.join(pathToStorybookDocs, filename);
-    const targetFilePath = path.join(pathToLocalDocs, filename);
-    const targetDir = targetFilePath.split('/').slice(0, -1).join('/');
+    console.log(`✳︎ ${filename} has been updated.`);
 
-    // Syncs create file
-    if (!fs.existsSync(targetFilePath)) {
-      fs.mkdirSync(targetDir, { recursive: true });
-      fs.closeSync(fs.openSync(targetFilePath, 'w'));
-      console.log(`Created ${filename}`);
-    }
+    // Remove all files in the local directories
+    fs.rmSync(pathToLocalDocs, { recursive: true });
+    fs.rmSync(pathToLocalSnippets, { recursive: true });
+    fs.rmSync(pathToLocalAssets, { recursive: true });
 
-    // Syncs remove file
-    if (!fs.existsSync(srcFilePath)) {
-      fs.unlinkSync(targetFilePath);
-      console.log(`Removed ${filename}`);
-      return;
-    }
+    // Copy the docs files only to the local directories
+    fs.cpSync(pathToStorybookDocs, pathToLocalDocs, {
+      recursive: true,
+      filter: (src) => {
+        if (
+          src.includes('.prettierignore') ||
+          src.includes('.prettierrc') ||
+          src.includes('_assets') ||
+          src.includes('_snippets')
+        )
+          return false;
+        return true;
+      },
+    });
 
-    // Syncs update file
-    fs.copyFile(srcFilePath, targetFilePath, (err) => {
-      console.log(`Updated ${filename}`);
-      if (err) throw err;
+    // Copy all snippets to the local snippets directory
+    fs.cpSync(pathToStorybookSnippets, pathToLocalSnippets, {
+      recursive: true,
+    });
+
+    // Copy all assets to the local assets directory
+    fs.cpSync(pathToStorybookAssets, pathToLocalAssets, {
+      recursive: true,
     });
   });
 })();
