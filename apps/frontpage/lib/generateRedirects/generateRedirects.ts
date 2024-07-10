@@ -125,6 +125,11 @@ export async function generateRedirects({
           : getShortedVersionString(versionStringNormalized, nextVersionString);
         const versionSlugOverride = isLatest ? '' : `/${versionStringOverride}`;
 
+        const [stringMajor, stringMinor] = string.split('.');
+        const isMajorOfLatestMinor =
+          stringMinor === '0' &&
+          stringMajor === latestVersionString.split('.')[0];
+
         if (isLatest) {
           parsedRedirects.forEach(([from, to, code]) => {
             acc.push(getRedirect(from, to, code, 'a'));
@@ -138,15 +143,31 @@ export async function generateRedirects({
             );
           });
         } else {
-          // acc.push({ debug: { includeRenderers, string, versionStringNormalized, versionSlugOverride, isLatest, isNext, shouldShortenToMajor: shouldShortenToMajor(versionStringNormalized, nextVersionString) } })
+          // acc.push({
+          //   debug: {
+          //     includeRenderers,
+          //     string,
+          //     versionStringNormalized,
+          //     versionSlugOverride,
+          //     isLatest,
+          //     isNext,
+          //     isMajorOfLatestMinor,
+          //     shouldShortenToMajor: shouldShortenToMajor(
+          //       versionStringNormalized,
+          //       nextVersionString,
+          //     ),
+          //   },
+          // });
           if (versionSlug !== `/${versionStringOverride}`) {
             acc.push(
               getRedirect(
                 `/docs${versionSlug}`,
-                buildPathWithVersion(
-                  installDocsPageSlug(string),
-                  versionStringOverride,
-                ),
+                isMajorOfLatestMinor || (isNext && !nextVersionString)
+                  ? installDocsPageSlug(string)
+                  : buildPathWithVersion(
+                      installDocsPageSlug(string),
+                      versionStringOverride,
+                    ),
                 isNext ? '307' : '308',
                 'c',
               ),
@@ -168,7 +189,7 @@ export async function generateRedirects({
             acc.push(
               getRedirect(
                 `/docs/${string}/${renderersPathWildcardWithRegex}/:path*`,
-                `/docs${versionSlugOverride}/:path`,
+                isMajorOfLatestMinor || (isNext && !nextVersionString) ? `/docs/:path` : `/docs${versionSlugOverride}/:path`,
                 isNext ? '307' : '308',
                 'e',
               ),
@@ -185,7 +206,9 @@ export async function generateRedirects({
           acc.push(
             getRedirect(
               `/docs/${string}/:path*`,
-              `/docs${versionSlugOverride}/:path`,
+              isMajorOfLatestMinor || (isNext && !nextVersionString)
+                ? `/docs/:path`
+                : `/docs${versionSlugOverride}/:path`,
               isLatest || isNext ? '307' : '308',
               'f',
             ),
