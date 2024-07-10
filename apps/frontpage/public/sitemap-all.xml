@@ -1,0 +1,11 @@
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://storybook.js.org/addons/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://storybook.js.org/docs-all/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://storybook.js.org/recipes/sitemap.xml</loc>
+  </sitemap>
+</sitemapindex>
