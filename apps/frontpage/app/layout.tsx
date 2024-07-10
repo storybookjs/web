@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     [GLOBAL_SEARCH_META_KEYS.VERSION]: GLOBAL_SEARCH_AGNOSTIC,
     [GLOBAL_SEARCH_META_KEYS.IMPORTANCE]: GLOBAL_SEARCH_IMPORTANCE.AGNOSTIC,
   },
+  verification: {
+    google: 'HCBwa2qa52ztaOfGjt3FQGzTUCM3kT8IOjTSY6diI88',
+  },
 };
 
 export default function RootLayout({

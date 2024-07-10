@@ -38,14 +38,10 @@ yarn-error.log*
 *.pem
 
 # Generated content
-apps/addon-catalog/public/sitemap.xml
 apps/frontpage/content/docs
 apps/frontpage/content/snippets
 apps/frontpage/generated-redirects.json
 apps/frontpage/public/docs-assets
-apps/frontpage/public/sitemap
-apps/tutorials/public/sitemap.xml
-robots.txt
 
 # ui
 dist/
