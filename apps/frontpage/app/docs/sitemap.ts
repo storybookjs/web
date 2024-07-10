@@ -1,40 +1,29 @@
 import { MetadataRoute } from 'next';
 import { generateDocsTree } from '../../lib/get-tree';
-import { TreeProps, docsVersions } from '@repo/utils';
+import { docsVersions } from '@repo/utils';
+import { getUrl } from '../../lib/get-url';
+import { flattenTree } from '../../lib/get-flat-tree';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const latestVersion = docsVersions[0];
+
+  // Generate docs tree for the latest version only
   const tree = generateDocsTree(`content/docs/${latestVersion.id}`);
 
-  const flattenedTree: TreeProps[] = [];
+  // We flatten the tree
+  const flatTree = flattenTree(tree);
 
-  const flattenTree = (tree: TreeProps[]) => {
-    tree.forEach((node) => {
-      if (node.children) {
-        flattenedTree.push(node);
-        flattenTree(node.children);
-      }
-      flattenedTree.push(node);
-    });
-  };
+  // Filter out draft nodes
+  const filteredTree = flatTree.filter((node) => node.draft !== true);
 
-  flattenTree(tree);
-
-  const filteredTree = flattenedTree
-    .filter((node) => node.type !== 'directory')
-    .filter((node) => node.draft !== true);
-
-  const docs = filteredTree.map((node) => ({
-    url: `https://storybook.js.org${node.slug}`.replace(
-      `${latestVersion.id}/`,
-      '',
-    ),
+  // Generate URLs for each node - The getUrl function will remove the version from the URL
+  const docsUrls = filteredTree.map((node) => ({
+    url: getUrl(`https://storybook.js.org${node.slug}`, latestVersion),
   }));
 
   return [
     { url: 'https://storybook.js.org' },
     { url: 'https://storybook.js.org/community' },
-    { url: 'https://storybook.js.org/docs' },
-    ...docs,
+    ...docsUrls,
   ];
 }

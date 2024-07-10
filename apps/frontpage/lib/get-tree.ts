@@ -35,7 +35,8 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
       const filePath = path.join(newPath, file);
       const slug = filePath
         .replace('content/', '/')
-        .replace(/\.mdx?$|\.md$/, '');
+        .replace(/\.mdx?$|\.md$/, '')
+        .replace(/\/index$/, '');
       const isDirectory = fs.lstatSync(filePath).isDirectory();
 
       if (isDirectory) {
@@ -78,11 +79,9 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
       } else if (file.endsWith('.mdx') || file.endsWith('.md')) {
         const metaData = getMetadata(filePath);
 
-        const isTab = metaData.isTab || false;
-
         tree.push({
           name: file,
-          slug: isTab ? slug.replace(/\/index$/, '') : slug,
+          slug,
           pathSegment: filePath,
           type: 'link',
           ...metaData,

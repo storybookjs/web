@@ -5,29 +5,17 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { useEffect, useState, type FC } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import type { DocsVersion, TreeProps } from '@repo/utils';
-import { cn, latestVersion } from '@repo/utils';
+import { cn } from '@repo/utils';
 import { VersionSelector } from './version-selector';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { getVersion } from '../../../lib/get-version';
+import { getUrl } from '../../../lib/get-url';
 
 type Tree = TreeProps[] | null | undefined;
 
 interface NavDocsProps {
   listOfTrees: { version: string; tree: Tree }[];
 }
-
-const getUrl = (slug: string, activeVersion: DocsVersion) => {
-  if (activeVersion.id === latestVersion.id) {
-    return slug.replace(`/docs/${activeVersion.id}`, '/docs');
-  } else if (activeVersion.id !== latestVersion.id && activeVersion.inSlug) {
-    return slug.replace(
-      `/docs/${activeVersion.id}`,
-      `/docs/${activeVersion.inSlug}`,
-    );
-  }
-
-  return slug;
-};
 
 export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
   const pathname = usePathname();
