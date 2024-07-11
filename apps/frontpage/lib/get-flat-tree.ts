@@ -10,9 +10,9 @@ export interface FlatTreeNode {
 
 export const getFlatTree = ({
   tree,
-  level = 0,
-  filterDrafts,
-  filterSecondLevelDirectories,
+  level = 1,
+  filterDrafts = true,
+  filterSecondLevelDirectories = true,
 }: {
   tree: TreeProps[];
   level?: number;
@@ -39,7 +39,9 @@ export const getFlatTree = ({
   }
 
   if (filterSecondLevelDirectories) {
-    flatTree = flatTree.filter((node) => node.level !== 2);
+    flatTree = flatTree.filter((node) =>
+      node.type === 'directory' ? (node.level === 2 ? false : true) : true,
+    );
   }
 
   return flatTree;
