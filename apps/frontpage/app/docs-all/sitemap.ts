@@ -3,7 +3,6 @@ import {
   FlatTreeNode,
   getFlatTreeSitemap,
 } from '../../lib/get-flat-tree-sitemap';
-import { getUrl } from '../../lib/get-url';
 import { getAllTrees } from '../../lib/get-all-trees';
 import { docsVersions } from '@repo/utils';
 
@@ -23,9 +22,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     flatTree.push(...treeWithVersion);
   });
 
-  // Generate URLs for each node - The getUrl function will remove the version from the URL
+  // Generate URLs for each node
   const docsUrls = flatTree.map((node) => ({
-    url: getUrl(`https://storybook.js.org${node.slug}`, node.version),
+    url: `https://storybook.js.org${node.slug}`,
   }));
 
   return [

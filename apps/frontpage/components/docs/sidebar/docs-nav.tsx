@@ -9,7 +9,6 @@ import { cn } from '@repo/utils';
 import { VersionSelector } from './version-selector';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { getVersion } from '../../../lib/get-version';
-import { getUrl } from '../../../lib/get-url';
 
 type Tree = TreeProps[] | null | undefined;
 
@@ -34,7 +33,7 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
 
       for (let i = 0; i < t.length; i++) {
         const current = t[i];
-        if (getUrl(current.slug, activeVersion) === pathname) {
+        if (current.slug === pathname) {
           parent?.pathSegment && setParentAccordion([parent?.pathSegment]);
           return current;
         }
@@ -83,7 +82,7 @@ const Level1 = ({
     <li key={lvl1.pathSegment}>
       <Link
         className="mt-6 flex items-center px-2 py-2 text-sm font-bold transition-colors hover:text-blue-500"
-        href={getUrl(lvl1.slug, activeVersion)}
+        href={lvl1.slug}
       >
         {lvl1.sidebar?.title || lvl1.title}
       </Link>
@@ -114,7 +113,7 @@ const Level2 = ({
   const pathname = usePathname();
   const isDraft = lvl2.draft === true ? true : false;
   const hasChildren = lvl2.children && lvl2.children.length > 0;
-  const slug = getUrl(lvl2.slug, activeVersion);
+  const slug = lvl2.slug;
 
   if (isDraft) return null;
 
@@ -172,7 +171,7 @@ const Level3 = ({
   activeVersion: DocsVersion;
 }) => {
   const isDraft = lvl3.draft === true ? true : false;
-  const slug = getUrl(lvl3.slug, activeVersion);
+  const slug = lvl3.slug;
   const pathname = usePathname();
 
   if (isDraft) return null;
