@@ -1,15 +1,18 @@
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
-import type { TreeProps } from '@repo/utils';
 import { globalSearchMetaKeys, globalSearchImportance } from '@repo/ui';
-import { latestVersion, cn } from '@repo/utils';
+import { latestVersion, cn, docsVersions } from '@repo/utils';
 import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
-import { getDocsTreeFromPath } from '../../../lib/get-docs-tree-from-path';
 import { DocsFooter } from '../../../components/docs/footer/footer';
 import { Metadata } from 'next';
 import { TableOfContent } from '../../../components/docs/table-of-content';
+import { getAllTrees } from '../../../lib/get-all-trees';
+import {
+  FlatTreeNode,
+  getFlatTreeSitemap,
+} from '../../../lib/get-flat-tree-sitemap';
 
 interface PageProps {
   params: {
@@ -33,38 +36,25 @@ export async function generateMetadata({
   };
 }
 
-const latestVersionId = latestVersion.id;
-
 export const generateStaticParams = () => {
-  const result: { slug: string[] }[] = [];
-  const tree = getDocsTreeFromPath();
+  const listofTrees = getAllTrees();
 
-  const getSlugs = (data: TreeProps[]) => {
-    data.forEach((item) => {
-      if ('slug' in item) {
-        const newSlug = item.slug.replace('/docs/', '').split('/');
-        const { id: versionId, inSlug: versionInSlug } = getVersion(newSlug);
-
-        const isLatest = versionId === latestVersionId;
-
-        if (isLatest) {
-          // Remove the version
-          newSlug.shift();
-        } else if (versionInSlug) {
-          newSlug[0] = versionInSlug;
-        }
-        result.push({
-          slug: newSlug,
-        });
-      }
-      if (item.children) {
-        getSlugs(item.children);
-      }
+  const flatTree: FlatTreeNode[] = [];
+  listofTrees.forEach((list) => {
+    const newTree = list.children ? getFlatTreeSitemap(list.children) : [];
+    const treeWithVersion = newTree.map((node) => {
+      node.version = docsVersions.find((version) => version.id === list.name);
+      return node;
     });
-  };
-  getSlugs(tree);
 
-  return result;
+    flatTree.push(...treeWithVersion);
+  });
+
+  const listOfSlugs: { slug: string[] }[] = flatTree.map((node) => ({
+    slug: node.slug.replace('/docs/', '').split('/'),
+  }));
+
+  return listOfSlugs;
 };
 
 export default async function Page({ params: { slug } }: PageProps) {
@@ -106,7 +96,8 @@ export default async function Page({ params: { slug } }: PageProps) {
             {page.title || 'Title is missing'}
           </h1>
           {!page.hideRendererSelector && <Renderers />}
-          {page.tabs && page.tabs.length > 0 ? (
+          {/* TODO: Bring back tabs */}
+          {/* {page.tabs && page.tabs.length > 0 ? (
             <div className="flex items-center gap-8 border-b border-zinc-200">
               {page.tabs.map((tab) => {
                 const isActive = tab.slug === `/docs/${slug?.join('/')}`;
@@ -125,7 +116,7 @@ export default async function Page({ params: { slug } }: PageProps) {
                 );
               })}
             </div>
-          ) : null}
+          ) : null} */}
           <div
             className={cn(
               '[&>details]:my-6',
