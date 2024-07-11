@@ -11,10 +11,10 @@ const getSlug = (pathSegment: string) => {
 };
 
 const addSlugToNode = (node: RawTreeProps): TreeProps => {
-  const newNode: TreeProps = {
+  const newNode = {
     ...node,
     slug: node.pathSegment ? getSlug(node.pathSegment) : '',
-  };
+  } as TreeProps;
 
   if (newNode.children) {
     newNode.children = newNode.children.map(addSlugToNode);
