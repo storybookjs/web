@@ -1,6 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs';
-import type { TreeProps } from '@repo/utils';
+import type { RawTreeProps } from '@repo/utils';
 import matter from 'gray-matter';
 
 interface Metadata {
@@ -28,15 +28,11 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
   const newDocsRoot = docsRoot || newPath;
 
   const files = fs.readdirSync(path.join(process.cwd(), newPath));
-  const tree: TreeProps[] = [];
+  const tree: RawTreeProps[] = [];
 
   if (shouldParse(newPath)) {
     files.forEach((file) => {
       const filePath = path.join(newPath, file);
-      const slug = filePath
-        .replace('content/', '/')
-        .replace(/\.mdx?$|\.md$/, '')
-        .replace(/\/index$/, '');
       const isDirectory = fs.lstatSync(filePath).isDirectory();
 
       if (isDirectory) {
@@ -60,7 +56,6 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
             tree.push({
               ...indexFile,
               name: file,
-              slug,
               pathSegment: filePath,
               type: 'directory',
               children: isTab ? [] : children,
@@ -69,7 +64,6 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
             tree.push({
               title: 'No title',
               name: file,
-              slug,
               pathSegment: filePath,
               type: 'directory',
               children,
@@ -81,7 +75,6 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
 
         tree.push({
           name: file,
-          slug,
           pathSegment: filePath,
           type: 'link',
           ...metaData,
@@ -90,16 +83,16 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
     });
   }
 
-  return tree
-    .sort((a, b) =>
-      a.sidebar?.order && b.sidebar?.order
-        ? a.sidebar.order - b.sidebar.order
-        : 0,
-    )
-    .filter((item) => {
-      // Here we are removing the index page from the tree
-      const slug = item.slug.split('/');
-      if (slug.length !== 3) return true;
-      return slug[2] !== 'index';
-    });
+  return tree.sort((a, b) =>
+    a.sidebar?.order && b.sidebar?.order
+      ? a.sidebar.order - b.sidebar.order
+      : 0,
+  );
+  // TODO: Remove the index page from the tree, probably from pathSegment instead of slug
+  // .filter((item) => {
+  //   // Here we are removing the index page from the tree
+  //   const slug = item.slug.split('/');
+  //   if (slug.length !== 3) return true;
+  //   return slug[2] !== 'index';
+  // });
 };

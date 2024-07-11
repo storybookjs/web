@@ -14,7 +14,7 @@ import { getUrl } from '../../../lib/get-url';
 type Tree = TreeProps[] | null | undefined;
 
 interface NavDocsProps {
-  listOfTrees: { version: string; tree: Tree }[];
+  listOfTrees: TreeProps[];
 }
 
 export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
@@ -22,7 +22,7 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
   const segment = useSelectedLayoutSegment();
   const slug: string[] = segment ? segment.split('/') : [];
   const activeVersion = getVersion(slug);
-  const selectedTree = listOfTrees.find((t) => t.version === activeVersion.id);
+  const selectedTree = listOfTrees.find((t) => t.name === activeVersion.id);
 
   const [parentAccordion, setParentAccordion] = useState<string[] | null>(null);
 
@@ -45,7 +45,7 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
       }
     };
 
-    findActive(selectedTree?.tree, null);
+    findActive(selectedTree?.children, null);
   }, [pathname]);
 
   return (
@@ -56,8 +56,8 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
     >
       <VersionSelector activeVersion={activeVersion} />
       <ul className="mt-7 md:mt-9">
-        {selectedTree?.tree
-          ? selectedTree?.tree.map((lvl1) => (
+        {selectedTree?.children
+          ? selectedTree?.children.map((lvl1) => (
               <Level1
                 key={lvl1.pathSegment}
                 lvl1={lvl1}
@@ -82,7 +82,7 @@ const Level1 = ({
   return (
     <li key={lvl1.pathSegment}>
       <Link
-        className="flex items-center px-2 py-2 mt-6 text-sm font-bold transition-colors hover:text-blue-500"
+        className="mt-6 flex items-center px-2 py-2 text-sm font-bold transition-colors hover:text-blue-500"
         href={getUrl(lvl1.slug, activeVersion)}
       >
         {lvl1.sidebar?.title || lvl1.title}

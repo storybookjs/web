@@ -11,16 +11,18 @@ import { DocsMainNav } from '../../components/docs/sidebar/docs-main-nav';
 import { docsVersions } from '@repo/utils';
 import { ReactNode } from 'react';
 import { TOCSectionTitles } from '../../components/docs/toc-section-titles';
+import { getAllTrees } from '../../lib/get-all-trees';
 
 export default async function Layout({ children }: { children: ReactNode }) {
   const { number: githubCount } = await fetchGithubCount();
+  const listofTrees = getAllTrees();
 
-  const listofTrees = docsVersions.map((version) => {
-    return {
-      version: version.id,
-      tree: generateDocsTree(`content/docs/${version.id}`),
-    };
-  });
+  // const listofTrees = docsVersions.map((version) => {
+  //   return {
+  //     version: version.id,
+  //     tree: getDocsTreeFromPath(`content/docs/${version.id}`),
+  //   };
+  // });
 
   return (
     <DocsProvider>
@@ -31,7 +33,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
       />
       <Image
         alt="Storybook Docs"
-        className="absolute top-0 left-0 w-full -z-10"
+        className="absolute left-0 top-0 -z-10 w-full"
         height={339}
         priority
         src="/bubbles.png"
