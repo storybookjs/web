@@ -14,7 +14,7 @@ import {
   Video,
   YouTubeCallout,
 } from '../components/docs/mdx';
-import { generateDocsTree } from './get-tree';
+import { getDocsTreeFromPath } from './get-docs-tree-from-path';
 
 export const getPageData = async (
   path: string[],
@@ -91,7 +91,7 @@ export const getPageData = async (
     ? `${rootPath}/${pathString}`.split('/').slice(0, -1).join('/')
     : `${rootPath}/${pathString}`;
 
-  const parent = generateDocsTree(pathToFiles);
+  const parent = getDocsTreeFromPath(pathToFiles);
 
   const sorted = parent.sort((a, b) =>
     a.tab?.order && b.tab?.order ? a.tab.order - b.tab.order : 0,

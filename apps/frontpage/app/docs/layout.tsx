@@ -2,9 +2,8 @@ import { Header, Footer, Container } from '@repo/ui';
 import Image from 'next/image';
 import { fetchGithubCount } from '@repo/utils';
 import { Sidebar } from '../../components/docs/sidebar/sidebar';
-import { TableOfContent } from '../../components/docs/table-of-content';
 import { NavDocs } from '../../components/docs/sidebar/docs-nav';
-import { generateDocsTree } from '../../lib/get-tree';
+import { getDocsTreeFromPath } from '../../lib/get-docs-tree-from-path';
 import { DocsProvider } from './provider';
 import { Submenu } from '../../components/docs/submenu';
 import { DocsMainNav } from '../../components/docs/sidebar/docs-main-nav';
@@ -16,13 +15,6 @@ import { getAllTrees } from '../../lib/get-all-trees';
 export default async function Layout({ children }: { children: ReactNode }) {
   const { number: githubCount } = await fetchGithubCount();
   const listofTrees = getAllTrees();
-
-  // const listofTrees = docsVersions.map((version) => {
-  //   return {
-  //     version: version.id,
-  //     tree: getDocsTreeFromPath(`content/docs/${version.id}`),
-  //   };
-  // });
 
   return (
     <DocsProvider>

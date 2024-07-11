@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { generateDocsTree } from '../../lib/get-tree';
+import { getDocsTreeFromPath } from '../../lib/get-docs-tree-from-path';
 import { docsVersions } from '@repo/utils';
 import {
   FlatTreeNode,
@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const listofTrees = docsVersions.map((version) => {
     return {
       version: version,
-      tree: generateDocsTree(`content/docs/${version.id}`),
+      tree: getDocsTreeFromPath(`content/docs/${version.id}`),
     };
   });
 
