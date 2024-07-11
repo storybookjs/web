@@ -20,6 +20,7 @@ export const getFlatTree = ({
   filterSecondLevelDirectories?: boolean;
 }): FlatTreeNode[] => {
   let flatTree: FlatTreeNode[] = [];
+
   tree.forEach((node) => {
     flatTree.push({
       slug: node.slug,
@@ -29,7 +30,12 @@ export const getFlatTree = ({
     });
     if (node.children) {
       flatTree = flatTree.concat(
-        getFlatTree({ tree: node.children, level: level + 1 }),
+        getFlatTree({
+          tree: node.children,
+          level: level + 1,
+          filterDrafts,
+          filterSecondLevelDirectories,
+        }),
       );
     }
   });
