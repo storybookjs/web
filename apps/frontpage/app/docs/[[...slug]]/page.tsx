@@ -9,10 +9,7 @@ import { DocsFooter } from '../../../components/docs/footer/footer';
 import { Metadata } from 'next';
 import { TableOfContent } from '../../../components/docs/table-of-content';
 import { getAllTrees } from '../../../lib/get-all-trees';
-import {
-  FlatTreeNode,
-  getFlatTreeSitemap,
-} from '../../../lib/get-flat-tree-sitemap';
+import { getFlatTree } from '../../../lib/get-flat-tree';
 
 interface PageProps {
   params: {
@@ -39,20 +36,17 @@ export async function generateMetadata({
 export const generateStaticParams = () => {
   const listofTrees = getAllTrees();
 
-  const flatTree: FlatTreeNode[] = [];
-  listofTrees.forEach((list) => {
-    const newTree = list.children ? getFlatTreeSitemap(list.children) : [];
-    const treeWithVersion = newTree.map((node) => {
-      node.version = docsVersions.find((version) => version.id === list.name);
-      return node;
-    });
-
-    flatTree.push(...treeWithVersion);
+  const flatTree = getFlatTree({
+    tree: listofTrees,
+    filterDrafts: false,
+    filterSecondLevelDirectories: false,
   });
 
-  const listOfSlugs: { slug: string[] }[] = flatTree.map((node) => ({
-    slug: node.slug.replace('/docs/', '').split('/'),
-  }));
+  const listOfSlugs = flatTree
+    .filter((node) => node.slug !== '/docs')
+    .map((node) => ({
+      slug: node.slug.replace('/docs/', '').split('/'),
+    }));
 
   return listOfSlugs;
 };
