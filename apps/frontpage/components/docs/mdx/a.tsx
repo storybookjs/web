@@ -54,6 +54,8 @@ export const A: FC<AProps> = ({
       './',
       `./${getParentPartOfPath(indexPagePath, activeVersion)}/`,
     );
+  } else if (indexPagePath && href?.startsWith('../')) {
+    href = href.replace('../', './');
   }
 
   return (
