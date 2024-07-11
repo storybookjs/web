@@ -5,7 +5,6 @@ import {
 } from '../../lib/get-flat-tree-sitemap';
 import { getAllTrees } from '../../lib/get-all-trees';
 import { docsVersions, latestVersion } from '@repo/utils';
-import { list } from 'tar';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Generate docs tree for each version
