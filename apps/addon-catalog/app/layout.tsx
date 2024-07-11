@@ -12,6 +12,7 @@ import '@repo/ui/styles.css';
 const fontSans = nunitoSans({
   subsets: ['latin'],
   display: 'swap',
+  adjustFontFallback: false,
   variable: '--font-sans',
 });
 
