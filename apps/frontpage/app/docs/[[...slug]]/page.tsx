@@ -1,12 +1,12 @@
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import type { TreeProps } from '@repo/utils';
-import { GLOBAL_SEARCH_META_KEYS, GLOBAL_SEARCH_IMPORTANCE } from '@repo/ui';
+import { globalSearchMetaKeys, globalSearchImportance } from '@repo/ui';
 import { latestVersion, cn } from '@repo/utils';
 import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
-import { generateDocsTree } from '../../../lib/get-tree';
+import { getDocsTreeFromPath } from '../../../lib/get-docs-tree-from-path';
 import { DocsFooter } from '../../../components/docs/footer/footer';
 import { Metadata } from 'next';
 import { TableOfContent } from '../../../components/docs/table-of-content';
@@ -27,8 +27,8 @@ export async function generateMetadata({
     description:
       "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
     other: {
-      [GLOBAL_SEARCH_META_KEYS.VERSION]: activeVersion.id,
-      [GLOBAL_SEARCH_META_KEYS.IMPORTANCE]: GLOBAL_SEARCH_IMPORTANCE.DOCS,
+      [globalSearchMetaKeys.version]: activeVersion.id,
+      [globalSearchMetaKeys.importance]: globalSearchImportance.docs,
     },
   };
 }
@@ -37,7 +37,7 @@ const latestVersionId = latestVersion.id;
 
 export const generateStaticParams = () => {
   const result: { slug: string[] }[] = [];
-  const tree = generateDocsTree();
+  const tree = getDocsTreeFromPath();
 
   const getSlugs = (data: TreeProps[]) => {
     data.forEach((item) => {
@@ -86,10 +86,10 @@ export default async function Page({ params: { slug } }: PageProps) {
 
   return (
     <>
-      <div className="flex-1 w-full min-w-0 py-12">
+      <div className="w-full min-w-0 flex-1 py-12">
         <main className="mx-auto max-w-[720px]">
           {!isLatest && (
-            <div className="flex flex-col items-start gap-4 p-4 mb-8 text-sm text-red-900 bg-red-200 rounded-md md:flex-row md:items-center md:justify-between md:gap-6 md:py-3 md:pl-5 md:pr-3">
+            <div className="mb-8 flex flex-col items-start gap-4 rounded-md bg-red-200 p-4 text-sm text-red-900 md:flex-row md:items-center md:justify-between md:gap-6 md:py-3 md:pl-5 md:pr-3">
               You are viewing documentation for a previous version of Storybook
               <Link
                 href="/docs"
@@ -100,7 +100,7 @@ export default async function Page({ params: { slug } }: PageProps) {
             </div>
           )}
           <h1
-            className="relative mt-0 mb-6 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
+            className="relative mb-6 mt-0 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
             data-docs-heading
           >
             {page.title || 'Title is missing'}

@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { Nunito_Sans as nunitoSans } from 'next/font/google';
 import {
-  GLOBAL_SEARCH_META_KEYS,
-  GLOBAL_SEARCH_AGNOSTIC,
-  GLOBAL_SEARCH_IMPORTANCE,
+  globalSearchMetaKeys,
+  globalSearchAgnostic,
+  globalSearchImportance,
 } from '@repo/ui';
 import { cn } from '@repo/utils';
 import { Providers } from './providers';
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
   },
   other: {
     // Set the docsearch index facets defaults
-    [GLOBAL_SEARCH_META_KEYS.VERSION]: GLOBAL_SEARCH_AGNOSTIC,
-    [GLOBAL_SEARCH_META_KEYS.IMPORTANCE]: GLOBAL_SEARCH_IMPORTANCE.AGNOSTIC,
+    [globalSearchMetaKeys.version]: globalSearchAgnostic,
+    [globalSearchMetaKeys.importance]: globalSearchImportance.agnostic,
   },
   verification: {
     google: 'HCBwa2qa52ztaOfGjt3FQGzTUCM3kT8IOjTSY6diI88',

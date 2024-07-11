@@ -1,11 +1,11 @@
-export const GLOBAL_SEARCH_META_KEYS = {
-  VERSION: 'docsearch:version',
-  IMPORTANCE: 'docsearch:importance',
+export const globalSearchMetaKeys = {
+  version: 'docsearch:version',
+  importance: 'docsearch:importance',
 };
 
-export const GLOBAL_SEARCH_AGNOSTIC = 'agnostic';
+export const globalSearchAgnostic = 'agnostic';
 
-export const GLOBAL_SEARCH_IMPORTANCE = {
-  DOCS: 0,
-  AGNOSTIC: 1,
+export const globalSearchImportance = {
+  docs: 0,
+  agnostic: 1,
 };
