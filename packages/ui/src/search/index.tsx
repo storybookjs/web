@@ -5,7 +5,7 @@ import { DocSearch } from '@docsearch/react';
 import { cn, getVersion } from '@repo/utils';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import type { HeaderProps } from '../header';
-import { GLOBAL_SEARCH_AGNOSTIC } from '../constants';
+import { globalSearchAgnostic } from '../constants';
 
 interface SearchProps extends Pick<HeaderProps, 'algoliaApiKey' | 'variant'> {
   className?: string;
@@ -113,10 +113,7 @@ export const Search: FC<SearchProps> = ({
              * between the containing values
              */
             [`tags:docs`, `tags:recipes`],
-            [
-              `version:${activeVersion.id}`,
-              `version:${GLOBAL_SEARCH_AGNOSTIC}`,
-            ],
+            [`version:${activeVersion.id}`, `version:${globalSearchAgnostic}`],
           ],
         }}
         translations={{

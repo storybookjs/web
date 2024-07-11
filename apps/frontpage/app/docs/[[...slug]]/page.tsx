@@ -1,7 +1,7 @@
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import type { TreeProps } from '@repo/utils';
-import { GLOBAL_SEARCH_META_KEYS, GLOBAL_SEARCH_IMPORTANCE } from '@repo/ui';
+import { globalSearchMetaKeys, globalSearchImportance } from '@repo/ui';
 import { latestVersion, cn } from '@repo/utils';
 import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
@@ -27,8 +27,8 @@ export async function generateMetadata({
     description:
       "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
     other: {
-      [GLOBAL_SEARCH_META_KEYS.VERSION]: activeVersion.id,
-      [GLOBAL_SEARCH_META_KEYS.IMPORTANCE]: GLOBAL_SEARCH_IMPORTANCE.DOCS,
+      [globalSearchMetaKeys.version]: activeVersion.id,
+      [globalSearchMetaKeys.importance]: globalSearchImportance.docs,
     },
   };
 }
