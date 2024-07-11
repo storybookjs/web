@@ -2,9 +2,8 @@ import { Header, Footer, Container } from '@repo/ui';
 import Image from 'next/image';
 import { fetchGithubCount } from '@repo/utils';
 import { Sidebar } from '../../components/docs/sidebar/sidebar';
-import { TableOfContent } from '../../components/docs/table-of-content';
 import { NavDocs } from '../../components/docs/sidebar/docs-nav';
-import { generateDocsTree } from '../../lib/get-tree';
+import { getDocsTreeFromPath } from '../../lib/get-docs-tree-from-path';
 import { DocsProvider } from './provider';
 import { Submenu } from '../../components/docs/submenu';
 import { DocsMainNav } from '../../components/docs/sidebar/docs-main-nav';
@@ -18,7 +17,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
   const listofTrees = docsVersions.map((version) => {
     return {
       version: version.id,
-      tree: generateDocsTree(`content/docs/${version.id}`),
+      tree: getDocsTreeFromPath(`content/docs/${version.id}`),
     };
   });
 
@@ -31,7 +30,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
       />
       <Image
         alt="Storybook Docs"
-        className="absolute top-0 left-0 w-full -z-10"
+        className="absolute left-0 top-0 -z-10 w-full"
         height={339}
         priority
         src="/bubbles.png"

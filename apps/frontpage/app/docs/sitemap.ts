@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { generateDocsTree } from '../../lib/get-tree';
+import { getDocsTreeFromPath } from '../../lib/get-docs-tree-from-path';
 import { docsVersions } from '@repo/utils';
 import { getUrl } from '../../lib/get-url';
 import { getFlatTreeSitemap } from '../../lib/get-flat-tree-sitemap';
@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const latestVersion = docsVersions[0];
 
   // Generate docs tree for the latest version only
-  const tree = generateDocsTree(`content/docs/${latestVersion.id}`);
+  const tree = getDocsTreeFromPath(`content/docs/${latestVersion.id}`);
 
   // We flatten the tree
   const flatTree = getFlatTreeSitemap(tree);

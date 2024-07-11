@@ -8,7 +8,7 @@ import { z } from 'zod';
 import type { TreeProps } from '@repo/utils';
 import { docsVersions } from '@repo/utils';
 import { buildPathWithVersion } from '../../../lib/build-path-with-version';
-import { generateDocsTree } from '../../../lib/get-tree';
+import { getDocsTreeFromPath } from '../../../lib/get-docs-tree-from-path';
 
 const siteUrl = process.env.VERCEL_ENV === 'production';
 
@@ -37,7 +37,7 @@ function addSlugs(tree: TreeProps[]) {
 }
 
 versions.forEach((v) => {
-  const tree = generateDocsTree(`content/docs/${v}`);
+  const tree = getDocsTreeFromPath(`content/docs/${v}`);
   addSlugs(tree);
 });
 

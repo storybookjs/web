@@ -23,7 +23,10 @@ function shouldParse(fileOrPath: string) {
   return !fileOrPath.endsWith('/versions');
 }
 
-export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
+export const getDocsTreeFromPath = (
+  pathToFiles?: string,
+  docsRoot?: string,
+) => {
   const newPath = pathToFiles || 'content/docs';
   const newDocsRoot = docsRoot || newPath;
 
@@ -40,7 +43,7 @@ export const generateDocsTree = (pathToFiles?: string, docsRoot?: string) => {
       const isDirectory = fs.lstatSync(filePath).isDirectory();
 
       if (isDirectory) {
-        const childItems = generateDocsTree(filePath, newDocsRoot);
+        const childItems = getDocsTreeFromPath(filePath, newDocsRoot);
 
         if (childItems) {
           const indexFile = childItems.find(
