@@ -19,10 +19,6 @@ function getMetadata(filePath: string): Metadata {
   };
 }
 
-function shouldParse(fileOrPath: string) {
-  return !fileOrPath.endsWith('/versions');
-}
-
 export const getDocsTreeFromPath = (
   pathToFiles?: string,
   docsRoot?: string,
@@ -33,58 +29,56 @@ export const getDocsTreeFromPath = (
   const files = fs.readdirSync(path.join(process.cwd(), newPath));
   const tree: RawTreeProps[] = [];
 
-  if (shouldParse(newPath)) {
-    files.forEach((file) => {
-      const filePath = path.join(newPath, file);
-      const isDirectory = fs.lstatSync(filePath).isDirectory();
+  files.forEach((file) => {
+    const filePath = path.join(newPath, file);
+    const isDirectory = fs.lstatSync(filePath).isDirectory();
 
-      if (isDirectory) {
-        const childItems = getDocsTreeFromPath(filePath, newDocsRoot);
+    if (isDirectory) {
+      const childItems = getDocsTreeFromPath(filePath, newDocsRoot);
 
-        if (childItems) {
-          const indexFile = childItems.find(
-            (item) => item.name === 'index.mdx' || item.name === 'index.md',
-          );
-          const children = childItems
-            .sort((a, b) =>
-              a.sidebar?.order && b.sidebar?.order
-                ? a.sidebar.order - b.sidebar.order
-                : 0,
-            )
-            .filter((item) => item.name !== 'index.mdx')
-            .filter((item) => item.name !== 'index.md');
-          const isTab = indexFile?.isTab || false;
+      if (childItems) {
+        const indexFile = childItems.find(
+          (item) => item.name === 'index.mdx' || item.name === 'index.md',
+        );
+        const children = childItems
+          .sort((a, b) =>
+            a.sidebar?.order && b.sidebar?.order
+              ? a.sidebar.order - b.sidebar.order
+              : 0,
+          )
+          .filter((item) => item.name !== 'index.mdx')
+          .filter((item) => item.name !== 'index.md');
+        const isTab = indexFile?.isTab || false;
 
-          if (indexFile) {
-            tree.push({
-              ...indexFile,
-              name: file,
-              pathSegment: filePath,
-              type: 'directory',
-              children: isTab ? [] : children,
-            });
-          } else {
-            tree.push({
-              title: 'No title',
-              name: file,
-              pathSegment: filePath,
-              type: 'directory',
-              children,
-            });
-          }
+        if (indexFile) {
+          tree.push({
+            ...indexFile,
+            name: file,
+            pathSegment: filePath,
+            type: 'directory',
+            children: isTab ? [] : children,
+          });
+        } else {
+          tree.push({
+            title: 'No title',
+            name: file,
+            pathSegment: filePath,
+            type: 'directory',
+            children,
+          });
         }
-      } else if (file.endsWith('.mdx') || file.endsWith('.md')) {
-        const metaData = getMetadata(filePath);
-
-        tree.push({
-          name: file,
-          pathSegment: filePath,
-          type: 'link',
-          ...metaData,
-        });
       }
-    });
-  }
+    } else if (file.endsWith('.mdx') || file.endsWith('.md')) {
+      const metaData = getMetadata(filePath);
+
+      tree.push({
+        name: file,
+        pathSegment: filePath,
+        type: 'link',
+        ...metaData,
+      });
+    }
+  });
 
   return tree.sort((a, b) =>
     a.sidebar?.order && b.sidebar?.order

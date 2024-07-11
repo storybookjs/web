@@ -48,7 +48,18 @@ const addSlugToNode = (node: RawTreeProps): TreeProps => {
 
 export const getAllTrees = () => {
   const rawTree = getDocsTreeFromPath();
-  const transformedTree = rawTree.map(addSlugToNode);
+
+  // Remove versions from all trees
+  // This is a temporary solution until we have a better way to handle versions.
+  // Ideally the versions folder should not be part of the docs.
+  const treewithoutVersion = rawTree.map((tree) => {
+    const treeChildren = tree.children?.filter(
+      (child) => child.name !== 'versions',
+    );
+    return { ...tree, children: treeChildren };
+  });
+
+  const transformedTree = treewithoutVersion.map(addSlugToNode);
 
   return transformedTree;
 };

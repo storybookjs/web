@@ -4,7 +4,8 @@ import {
   getFlatTreeSitemap,
 } from '../../lib/get-flat-tree-sitemap';
 import { getAllTrees } from '../../lib/get-all-trees';
-import { docsVersions } from '@repo/utils';
+import { docsVersions, latestVersion } from '@repo/utils';
+import { list } from 'tar';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Generate docs tree for each version
@@ -27,9 +28,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `https://storybook.js.org${node.slug}`,
   }));
 
+  // Remove https://storybook.js.org/docs/get-started as we are redirecting to https://storybook.js.org/docs
+  const filteredDocsUrls = docsUrls.filter(
+    (node) => node.url !== 'https://storybook.js.org/docs/get-started',
+  );
+
+  const docsHomeUrls = docsVersions.map((version) => ({
+    url:
+      version.id === latestVersion.id
+        ? 'https://storybook.js.org/docs'
+        : `https://storybook.js.org/docs/${version.inSlug || version.id}`,
+  }));
+
   return [
     { url: 'https://storybook.js.org' },
     { url: 'https://storybook.js.org/community' },
-    ...docsUrls,
+    ...docsHomeUrls,
+    ...filteredDocsUrls,
   ];
 }

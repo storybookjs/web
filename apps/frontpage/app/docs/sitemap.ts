@@ -20,9 +20,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       }))
     : [];
 
+  // Remove https://storybook.js.org/docs/get-started as we are redirecting to https://storybook.js.org/docs
+  const filteredDocsUrls = docsUrls.filter(
+    (node) => node.url !== 'https://storybook.js.org/docs/get-started',
+  );
+
   return [
     { url: 'https://storybook.js.org' },
     { url: 'https://storybook.js.org/community' },
-    ...docsUrls,
+    { url: 'https://storybook.js.org/docs' },
+    ...filteredDocsUrls,
   ];
 }
