@@ -1,7 +1,7 @@
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import { globalSearchMetaKeys, globalSearchImportance } from '@repo/ui';
-import { latestVersion, cn, docsVersions } from '@repo/utils';
+import { latestVersion, cn } from '@repo/utils';
 import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
 import { Renderers } from '../../../components/docs/renderers';
@@ -21,11 +21,23 @@ export async function generateMetadata({
   params: { slug },
 }: PageProps): Promise<Metadata> {
   const activeVersion = getVersion(slug);
+  const listofTrees = getAllTrees();
+  const flatTree = getFlatTree({
+    tree: listofTrees,
+    filterDrafts: false,
+    filterSecondLevelDirectories: false,
+  });
+  const findPage = flatTree.find(
+    (node) => node.slug === `/docs/${slug?.join('/')}`,
+  );
 
   return {
     title: 'Storybook',
     description:
       "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
+    alternates: {
+      canonical: findPage?.canonical,
+    },
     other: {
       [globalSearchMetaKeys.version]: activeVersion.id,
       [globalSearchMetaKeys.importance]: globalSearchImportance.docs,
@@ -35,7 +47,6 @@ export async function generateMetadata({
 
 export const generateStaticParams = () => {
   const listofTrees = getAllTrees();
-
   const flatTree = getFlatTree({
     tree: listofTrees,
     filterDrafts: false,

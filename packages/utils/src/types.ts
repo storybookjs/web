@@ -31,6 +31,7 @@ export interface RawTreeProps extends TreeMetaProps {
 
 export interface TreeProps extends RawTreeProps {
   slug: string;
+  canonical: string;
   children?: TreeProps[];
 }
 

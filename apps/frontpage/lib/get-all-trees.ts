@@ -5,6 +5,7 @@ import {
   docsVersions,
 } from '@repo/utils';
 import { getDocsTreeFromPath } from './get-docs-tree-from-path';
+import { FlatTreeNode, getFlatTree } from './get-flat-tree';
 
 const getSlug = (pathSegment: string) => {
   // We first split the pathSegment into an array
@@ -46,6 +47,40 @@ const addSlugToNode = (node: RawTreeProps): TreeProps => {
   return newNode;
 };
 
+const addCanonicalToNode = (
+  node: TreeProps,
+  flatTree: FlatTreeNode[],
+): TreeProps => {
+  // Remove the version from the slug
+  const segment = node.slug.slice(1).split('/');
+  const isVersion = docsVersions.find((v) => v.inSlug === segment[1]);
+  const segmentWithoutVersion = isVersion ? segment.slice(2) : segment.slice(1);
+  const slugWithoutVersion = `/docs/${segmentWithoutVersion.join('/')}`;
+
+  // Find the node in the flat tree
+  const findInFlatTree = flatTree.find((n) => n.slug === slugWithoutVersion);
+  const canonical = findInFlatTree ? findInFlatTree.slug : node.slug;
+
+  // console.log('original          ', node.slug);
+  // console.log('without version   ', slugWithoutVersion);
+  // console.log('find in flat tree ', findInFlatTree?.slug);
+  // console.log('canonical         ', canonical);
+  // console.log('-------');
+
+  const newNode = {
+    ...node,
+    canonical,
+  } as TreeProps;
+
+  if (newNode.children) {
+    newNode.children = newNode.children.map((node) =>
+      addCanonicalToNode(node, flatTree),
+    );
+  }
+
+  return newNode;
+};
+
 export const getAllTrees = () => {
   const rawTree = getDocsTreeFromPath();
 
@@ -59,7 +94,15 @@ export const getAllTrees = () => {
     return { ...tree, children: treeChildren };
   });
 
-  const transformedTree = treewithoutVersion.map(addSlugToNode);
+  const treeWithSlug = treewithoutVersion.map(addSlugToNode);
+  const flatTree = getFlatTree({
+    tree: treeWithSlug,
+    filterDrafts: false,
+    filterSecondLevelDirectories: false,
+  });
+  const treeWithCanonical = treeWithSlug.map((node) =>
+    addCanonicalToNode(node, flatTree),
+  );
 
-  return transformedTree;
+  return treeWithCanonical;
 };
