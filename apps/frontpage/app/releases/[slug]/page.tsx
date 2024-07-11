@@ -6,6 +6,7 @@ import { ReleaseNewsletter } from '../../../components/release-newsletter';
 import { Sidebar } from '../../../components/docs/sidebar/sidebar';
 import { getRelease } from '../../../lib/get-release';
 import { getReleases } from '../../../lib/get-releases';
+import { DocsMainNav } from '../../../components/docs/sidebar/docs-main-nav';
 
 interface PageProps {
   params: {
@@ -37,6 +38,7 @@ export default async function Page({ params: { slug } }: PageProps) {
       <Container asChild className="flex gap-4 lg:pl-5 lg:pr-8">
         <main>
           <Sidebar>
+            <DocsMainNav />
             <div className="mt-4 flex flex-col border-t border-zinc-200 pt-4">
               {releases
                 .sort((a, b) => b.localeCompare(a))
