@@ -21,13 +21,17 @@ export interface TreeMetaProps {
   isTab?: boolean;
 }
 
-export interface TreeProps extends TreeMetaProps {
+export interface RawTreeProps extends TreeMetaProps {
   name: string;
-  slug: string;
   pathSegment: string;
   type: 'directory' | 'link' | 'tab';
-  children?: TreeProps[];
+  children?: RawTreeProps[];
   draft?: boolean;
+}
+
+export interface TreeProps extends RawTreeProps {
+  slug: string;
+  children?: TreeProps[];
 }
 
 export interface CodeSnippetsProps {

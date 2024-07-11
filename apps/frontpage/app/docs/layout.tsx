@@ -3,23 +3,16 @@ import Image from 'next/image';
 import { fetchGithubCount } from '@repo/utils';
 import { Sidebar } from '../../components/docs/sidebar/sidebar';
 import { NavDocs } from '../../components/docs/sidebar/docs-nav';
-import { getDocsTreeFromPath } from '../../lib/get-docs-tree-from-path';
 import { DocsProvider } from './provider';
 import { Submenu } from '../../components/docs/submenu';
 import { DocsMainNav } from '../../components/docs/sidebar/docs-main-nav';
-import { docsVersions } from '@repo/utils';
 import { ReactNode } from 'react';
 import { TOCSectionTitles } from '../../components/docs/toc-section-titles';
+import { getAllTrees } from '../../lib/get-all-trees';
 
 export default async function Layout({ children }: { children: ReactNode }) {
   const { number: githubCount } = await fetchGithubCount();
-
-  const listofTrees = docsVersions.map((version) => {
-    return {
-      version: version.id,
-      tree: getDocsTreeFromPath(`content/docs/${version.id}`),
-    };
-  });
+  const listofTrees = getAllTrees();
 
   return (
     <DocsProvider>

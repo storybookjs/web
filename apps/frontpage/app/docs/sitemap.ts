@@ -1,26 +1,34 @@
 import { MetadataRoute } from 'next';
-import { getDocsTreeFromPath } from '../../lib/get-docs-tree-from-path';
 import { docsVersions } from '@repo/utils';
-import { getUrl } from '../../lib/get-url';
-import { getFlatTreeSitemap } from '../../lib/get-flat-tree-sitemap';
+import { getFlatTree } from '../../lib/get-flat-tree';
+import { getAllTrees } from '../../lib/get-all-trees';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const latestVersion = docsVersions[0];
 
   // Generate docs tree for the latest version only
-  const tree = getDocsTreeFromPath(`content/docs/${latestVersion.id}`);
+  const listOfTrees = getAllTrees();
+  const tree = listOfTrees.find((tree) => tree.name === latestVersion.id);
 
   // We flatten the tree
-  const flatTree = getFlatTreeSitemap(tree);
+  const flatTree = tree?.children && getFlatTree({ tree: tree?.children });
 
-  // Generate URLs for each node - The getUrl function will remove the version from the URL
-  const docsUrls = flatTree.map((node) => ({
-    url: getUrl(`https://storybook.js.org${node.slug}`, latestVersion),
-  }));
+  // Generate URLs for each node
+  const docsUrls = flatTree
+    ? flatTree.map((node) => ({
+        url: `https://storybook.js.org${node.slug}`,
+      }))
+    : [];
+
+  // Remove https://storybook.js.org/docs/get-started as we are redirecting to https://storybook.js.org/docs
+  const filteredDocsUrls = docsUrls.filter(
+    (node) => node.url !== 'https://storybook.js.org/docs/get-started',
+  );
 
   return [
     { url: 'https://storybook.js.org' },
     { url: 'https://storybook.js.org/community' },
-    ...docsUrls,
+    { url: 'https://storybook.js.org/docs' },
+    ...filteredDocsUrls,
   ];
 }

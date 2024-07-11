@@ -7,8 +7,7 @@ import { z } from 'zod';
 
 import type { TreeProps } from '@repo/utils';
 import { docsVersions } from '@repo/utils';
-import { buildPathWithVersion } from '../../../lib/build-path-with-version';
-import { getDocsTreeFromPath } from '../../../lib/get-docs-tree-from-path';
+import { getAllTrees } from '../../../lib/get-all-trees';
 
 const siteUrl = process.env.VERCEL_ENV === 'production';
 
@@ -36,9 +35,10 @@ function addSlugs(tree: TreeProps[]) {
   });
 }
 
-versions.forEach((v) => {
-  const tree = getDocsTreeFromPath(`content/docs/${v}`);
-  addSlugs(tree);
+const listOfTrees = getAllTrees();
+
+listOfTrees.forEach((tree) => {
+  addSlugs(tree.children!);
 });
 
 const repositoryOwner = 'storybookjs';
@@ -85,8 +85,7 @@ function createCommentBody({
   rating: Rating;
   comment?: string;
 }) {
-  const path = buildPathWithVersion(slug, version);
-  const link = `**[${path}](https://storybook.js.org${path})**`;
+  const link = `**[${slug}](https://storybook.js.org${slug})**`;
 
   const meta = [
     `| ${ratingSymbols[rating]} | v${version} | ${renderer} | ${codeLanguage} |`,

@@ -4,17 +4,16 @@ import Link from 'next/link';
 import * as Accordion from '@radix-ui/react-accordion';
 import { useEffect, useState, type FC } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
-import type { DocsVersion, TreeProps } from '@repo/utils';
+import type { TreeProps } from '@repo/utils';
 import { cn } from '@repo/utils';
 import { VersionSelector } from './version-selector';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { getVersion } from '../../../lib/get-version';
-import { getUrl } from '../../../lib/get-url';
 
 type Tree = TreeProps[] | null | undefined;
 
 interface NavDocsProps {
-  listOfTrees: { version: string; tree: Tree }[];
+  listOfTrees: TreeProps[];
 }
 
 export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
@@ -22,7 +21,7 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
   const segment = useSelectedLayoutSegment();
   const slug: string[] = segment ? segment.split('/') : [];
   const activeVersion = getVersion(slug);
-  const selectedTree = listOfTrees.find((t) => t.version === activeVersion.id);
+  const selectedTree = listOfTrees.find((t) => t.name === activeVersion.id);
 
   const [parentAccordion, setParentAccordion] = useState<string[] | null>(null);
 
@@ -34,7 +33,7 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
 
       for (let i = 0; i < t.length; i++) {
         const current = t[i];
-        if (getUrl(current.slug, activeVersion) === pathname) {
+        if (current.slug === pathname) {
           parent?.pathSegment && setParentAccordion([parent?.pathSegment]);
           return current;
         }
@@ -45,7 +44,7 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
       }
     };
 
-    findActive(selectedTree?.tree, null);
+    findActive(selectedTree?.children, null);
   }, [pathname]);
 
   return (
@@ -56,13 +55,9 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
     >
       <VersionSelector activeVersion={activeVersion} />
       <ul className="mt-7 md:mt-9">
-        {selectedTree?.tree
-          ? selectedTree?.tree.map((lvl1) => (
-              <Level1
-                key={lvl1.pathSegment}
-                lvl1={lvl1}
-                activeVersion={activeVersion}
-              />
+        {selectedTree?.children
+          ? selectedTree?.children.map((lvl1) => (
+              <Level1 key={lvl1.pathSegment} lvl1={lvl1} />
             ))
           : []}
       </ul>
@@ -70,33 +65,21 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
   );
 };
 
-const Level1 = ({
-  lvl1,
-  activeVersion,
-}: {
-  lvl1: TreeProps;
-  activeVersion: DocsVersion;
-}) => {
+const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
   if (lvl1.name === 'versions' || lvl1.name === 'index.mdx') return null;
 
   return (
     <li key={lvl1.pathSegment}>
       <Link
-        className="flex items-center px-2 py-2 mt-6 text-sm font-bold transition-colors hover:text-blue-500"
-        href={getUrl(lvl1.slug, activeVersion)}
+        className="mt-6 flex items-center px-2 py-2 text-sm font-bold transition-colors hover:text-blue-500"
+        href={lvl1.slug}
       >
         {lvl1.sidebar?.title || lvl1.title}
       </Link>
       {lvl1.children && lvl1.children.length > 0 ? (
         <ul>
           {lvl1.children.map((lvl2) => {
-            return (
-              <Level2
-                key={lvl2.pathSegment}
-                lvl2={lvl2}
-                activeVersion={activeVersion}
-              />
-            );
+            return <Level2 key={lvl2.pathSegment} lvl2={lvl2} />;
           })}
         </ul>
       ) : null}
@@ -104,17 +87,11 @@ const Level1 = ({
   );
 };
 
-const Level2 = ({
-  lvl2,
-  activeVersion,
-}: {
-  lvl2: TreeProps;
-  activeVersion: DocsVersion;
-}) => {
+const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
   const pathname = usePathname();
   const isDraft = lvl2.draft === true ? true : false;
   const hasChildren = lvl2.children && lvl2.children.length > 0;
-  const slug = getUrl(lvl2.slug, activeVersion);
+  const slug = lvl2.slug;
 
   if (isDraft) return null;
 
@@ -148,13 +125,7 @@ const Level2 = ({
           <Accordion.Content>
             <ul>
               {lvl2.children?.map((lvl3) => {
-                return (
-                  <Level3
-                    key={lvl3.pathSegment}
-                    lvl3={lvl3}
-                    activeVersion={activeVersion}
-                  />
-                );
+                return <Level3 key={lvl3.pathSegment} lvl3={lvl3} />;
               })}
             </ul>
           </Accordion.Content>
@@ -164,15 +135,9 @@ const Level2 = ({
   );
 };
 
-const Level3 = ({
-  lvl3,
-  activeVersion,
-}: {
-  lvl3: TreeProps;
-  activeVersion: DocsVersion;
-}) => {
+const Level3 = ({ lvl3 }: { lvl3: TreeProps }) => {
   const isDraft = lvl3.draft === true ? true : false;
-  const slug = getUrl(lvl3.slug, activeVersion);
+  const slug = lvl3.slug;
   const pathname = usePathname();
 
   if (isDraft) return null;

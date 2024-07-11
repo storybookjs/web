@@ -6,13 +6,13 @@ import { useSelectedLayoutSegment } from 'next/navigation';
 export function TOCSectionTitles({
   listOfTrees,
 }: {
-  listOfTrees: { version: string; tree: TreeProps[] }[];
+  listOfTrees: TreeProps[];
 }) {
   const segment = useSelectedLayoutSegment();
   const slug: string[] = segment ? segment.split('/') : [];
   const activeVersion = getVersion(slug);
-  const selectedTree = listOfTrees.find((t) => t.version === activeVersion.id);
-  const tree = selectedTree?.tree;
+  const selectedTree = listOfTrees.find((t) => t.name === activeVersion.id);
+  const tree = selectedTree?.children;
 
   function getTocSectionTitles() {
     const title: string[] = [];
@@ -30,7 +30,8 @@ export function TOCSectionTitles({
       }
     }
 
-    if (slug && tree) buildTitle(tree, activeVersion.id === latestVersion.id ? 0 : 1);
+    if (slug && tree)
+      buildTitle(tree, activeVersion.id === latestVersion.id ? 0 : 1);
 
     return title.join(' » ');
   }
