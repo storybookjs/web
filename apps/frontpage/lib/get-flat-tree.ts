@@ -6,6 +6,7 @@ export interface FlatTreeNode {
   level: number;
   type: TreeProps['type'];
   version?: DocsVersion;
+  canonical: string;
 }
 
 export const getFlatTree = ({
@@ -26,6 +27,7 @@ export const getFlatTree = ({
       slug: node.slug,
       type: node.type,
       draft: node.draft || false,
+      canonical: node.canonical,
       level: level,
     });
     if (node.children) {
