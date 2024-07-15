@@ -7,7 +7,6 @@ export { ChromaticLogo } from './logos/chromatic';
 export { StorybookLogo } from './logos/storybook-logo';
 export { StorybookIcon } from './logos/storybook-icon';
 export { mdxComponents } from './mdx/components';
-export { MDXContent } from './mdx/content';
 export * from './mdx/options';
 export { CodeSnippetsWrapper } from './code-snippets-wrapper/wrapper';
 export { NewsletterForm } from './newsletter-form';

@@ -4,16 +4,17 @@ import {
   Container,
   Footer,
   Header,
-  MDXContent,
+  mdxComponents,
+  MDXRemoteOptions,
   Pill,
   SubHeader,
 } from '@repo/ui';
 import { fetchRecipeDetailsData } from '../../../lib/fetch-recipe-details-data';
 import { fetchRecipesData } from '../../../lib/fetch-recipes-data';
 import { fetchGithubCount } from '@repo/utils';
-import Link from 'next/link';
-import { ChevronSmallLeftIcon } from '@storybook/icons';
 import Image from 'next/image';
+import { EmbeddedExample } from '../../../components/recipes/embedded-example';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 
 interface RecipeDetailsProps {
   params: {
@@ -86,7 +87,11 @@ export default async function RecipeDetails({ params }: RecipeDetailsProps) {
         </div>
         <div className="flex flex-col gap-12 lg:flex-row">
           <div className="flex-1">
-            <MDXContent source={mdx} />
+            <MDXRemote
+              components={{ ...mdxComponents, EmbeddedExample }}
+              options={MDXRemoteOptions}
+              source={mdx}
+            />
           </div>
           <div className="w-[250px] flex-shrink-0">
             <div className="mb-6 flex items-center text-sm font-bold">Tags</div>
