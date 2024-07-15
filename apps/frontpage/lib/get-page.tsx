@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import { compileMDX } from 'next-mdx-remote/rsc';
-import type { DocsVersion } from '@repo/utils';
+import type { DocsVersion, RawTreeProps } from '@repo/utils';
 import { mdxComponents, MDXRemoteOptions } from '@repo/ui';
 import {
   A,
@@ -15,6 +15,15 @@ import {
   YouTubeCallout,
 } from '../components/docs/mdx';
 import { getDocsTreeFromPath } from './get-docs-tree-from-path';
+import { ReactElement } from 'react';
+
+export interface PageDataProps {
+  title?: string;
+  hideRendererSelector?: boolean;
+  isIndexPage: boolean;
+  tabs: RawTreeProps[];
+  content: ReactElement;
+}
 
 export const getPageData = async (
   path: string[],
