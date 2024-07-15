@@ -27,7 +27,7 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
   top,
 }) => {
   return (
-    <div className="ui-mb-6 ui-w-full ui-overflow-hidden ui-rounded ui-border ui-border-zinc-300 dark:ui-border-slate-700">
+    <div className="ui-my-6 ui-w-full ui-overflow-hidden ui-rounded ui-border ui-border-zinc-300 dark:ui-border-slate-700">
       <div className="ui-bg-slate-50 dark:ui-bg-slate-950">
         {top ? <div className="ui-px-3 ui-pb-1 ui-pt-3">{top}</div> : null}
         <div className="ui-flex ui-h-12 ui-items-center ui-justify-between ui-border-b ui-border-b-zinc-300 ui-py-2 ui-pl-5 ui-pr-4 dark:ui-border-slate-700">
@@ -40,7 +40,7 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
           </div>
         </div>
       </div>
-      <div className="ui-max-w-full ui-overflow-auto ui-p-4 ui-text-sm dark:ui-bg-slate-900">
+      <div className="ui-max-w-full ui-overflow-auto ui-p-4 ui-text-sm ui-bg-white dark:ui-bg-slate-900">
         {children}
       </div>
     </div>
