@@ -36,14 +36,6 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <head>
-        <script
-          defer
-          data-domain="storybook.js.org"
-          data-api="/api/event"
-          src="/js/script.js"
-        ></script>
-      </head>
       <body
         className={cn(
           'min-h-screen bg-white font-sans antialiased dark:bg-slate-950',

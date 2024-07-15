@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+import { withPlausibleProxy } from 'next-plausible';
+
+const nextConfig = withPlausibleProxy()({
   basePath: '/addons',
   images: {
     remotePatterns: [
@@ -30,6 +32,6 @@ const nextConfig = {
       },
     ];
   },
-};
+});
 
 export default nextConfig;
