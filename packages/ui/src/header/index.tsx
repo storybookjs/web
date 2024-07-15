@@ -53,16 +53,27 @@ export const Header: FC<HeaderProps> = ({
             </a>
             <NavigationMenu.Root className="max-[920px]:ui-hidden">
               <NavigationMenu.List className="ui-flex ui-gap-2">
-                {nav.map((item) => (
-                  <Button
-                    active={pathname === item.href}
-                    external={item.external}
-                    href={item.href}
-                    key={item.title}
-                    title={item.title}
-                    variant={variant}
-                  />
-                ))}
+                {nav.map((item) => {
+                  let active = false;
+                  if (item.href === '/docs') {
+                    active = pathname.startsWith('/docs');
+                  } else if (item.href === '/addons') {
+                    active = pathname.startsWith('/addons');
+                  } else {
+                    active = pathname === item.href;
+                  }
+
+                  return (
+                    <Button
+                      active={active}
+                      external={item.external}
+                      href={item.href}
+                      key={item.title}
+                      title={item.title}
+                      variant={variant}
+                    />
+                  );
+                })}
               </NavigationMenu.List>
             </NavigationMenu.Root>
           </div>
