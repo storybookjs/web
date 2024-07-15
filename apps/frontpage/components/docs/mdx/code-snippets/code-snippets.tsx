@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, type FC } from 'react';
-import { cn, type CodeSnippetsProps } from '@repo/utils';
+import { type CodeSnippetsProps } from '@repo/utils';
 import { CodeSnippetsWrapper } from '@repo/ui';
 import { useDocs } from '../../../../app/docs/provider';
 import { getFilters } from './utils/get-filters';
@@ -152,7 +152,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
       {activeContent?.content ? (
         <>
           {error && (
-            <div className="flex items-center gap-2 px-4 py-3 mb-4 text-orange-900 bg-orange-100 border border-orange-300 rounded dark:border-orange-800 dark:bg-orange-950 dark:text-orange-400">
+            <div className="mb-4 flex items-center gap-2 rounded border border-orange-300 bg-orange-100 px-4 py-3 text-orange-900 dark:border-orange-800 dark:bg-orange-950 dark:text-orange-400">
               <InfoIcon />
               {error}
             </div>
