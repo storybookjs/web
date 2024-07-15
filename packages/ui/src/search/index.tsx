@@ -38,6 +38,7 @@ export const Search: FC<SearchProps> = ({
         '[&_.DocSearch-Button_.DocSearch-Search-Icon]:ui-w-[14px]',
         '[&_.DocSearch-Button_.DocSearch-Search-Icon]:ui-h-[14px]',
         '[&_.DocSearch-Button-Placeholder]:ui-text-sm',
+        'max-[768px]:[&_.DocSearch-Button-Placeholder]:ui-flex',
         '[&_.DocSearch-Button-Keys]:ui-bg-red-500',
         '[&_.DocSearch-Button-Keys]:ui-min-w-0',
         '[&_.DocSearch-Button-Keys]:ui-flex',
