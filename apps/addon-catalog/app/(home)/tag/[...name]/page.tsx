@@ -21,7 +21,11 @@ export default async function TagDetails({
 }: TagDetailsProps) {
   const data = (await fetchTagDetailsData(name)) || {};
 
+  console.log(data);
+
   if ('error' in data) return notFound();
+
+  return <div>Hello</div>;
 
   return (
     <>
