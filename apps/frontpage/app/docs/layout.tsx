@@ -9,6 +9,13 @@ import { DocsMainNav } from '../../components/docs/sidebar/docs-main-nav';
 import { ReactNode } from 'react';
 import { TOCSectionTitles } from '../../components/docs/toc-section-titles';
 import { getAllTrees } from '../../lib/get-all-trees';
+import { Metadata } from 'next';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Docs | Storybook',
+  };
+}
 
 export default async function Layout({ children }: { children: ReactNode }) {
   const { number: githubCount } = await fetchGithubCount();
