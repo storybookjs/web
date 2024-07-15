@@ -11,15 +11,12 @@
     },
     "generate-redirects": {
       "dependsOn": [],
+      "inputs": ["./apps/frontpage/scripts/raw-redirects"],
       "outputs": ["./apps/frontpage/generated-redirects.json"]
     },
     "fetch-docs": {
       "dependsOn": [],
-      "outputs": [
-        "./apps/frontpage/content/docs/**",
-        "./apps/frontpage/content/snippets/**",
-        "./apps/frontpage/public/docs-assets/**"
-      ]
+      "cache": false
     },
     "storybook": {
       "dependsOn": ["^storybook"]
@@ -37,7 +34,13 @@
         "!.next/cache/**",
         "storybook-static/**"
       ],
-      "inputs": ["$TURBO_DEFAULT$", ".env"]
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env",
+        "./apps/frontpage/content/docs/**",
+        "./apps/frontpage/content/snippets/**",
+        "./apps/frontpage/public/docs-assets/**"
+      ]
     },
     "clean": {
       "cache": false
