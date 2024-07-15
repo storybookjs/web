@@ -4,22 +4,18 @@ import { notFound } from 'next/navigation';
 
 interface TagDetailsProps {
   params: {
-    name: string;
+    name: string[];
   };
 }
-
-// export async function generateStaticParams() {
-//   const categories = (await fetchTagsData({ isCategory: true })) || [];
-//   const tags = (await fetchTagsData()) || [];
-//   return [...categories, ...tags].map((name) => ({
-//     params: { name },
-//   }));
-// }
 
 export default async function TagDetails({
   params: { name },
 }: TagDetailsProps) {
-  const data = (await fetchTagDetailsData(name)) || {};
+  const tagName = name.join('/');
+
+  if (!tagName) return notFound();
+
+  const data = (await fetchTagDetailsData(tagName)) || {};
 
   if ('error' in data) return notFound();
 

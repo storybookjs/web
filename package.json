@@ -2,7 +2,7 @@
   "name": "storybook-web",
   "private": true,
   "scripts": {
-    "build-frontpage": "turbo run build --filter=!./apps/addon-catalog --filter=!./apps/tutorials",
+    "build-frontpage": "turbo run build --filter=frontpage",
     "build-ui-only": "turbo run build --filter=@repo/ui",
     "dev": "turbo run dev",
     "fetch-docs": "turbo run fetch-docs",
