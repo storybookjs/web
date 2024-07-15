@@ -78,7 +78,7 @@ export function AddonHero({ addon }: { addon: Addon }) {
         <div className="mb-4 flex flex-col">
           <div className="text-3xl text-blue-400">
             {humanFormat(addon.weeklyDownloads || 0, {
-              decimals: 1,
+              decimals: 0,
               separator: '',
             })}
           </div>
