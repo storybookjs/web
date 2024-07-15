@@ -82,12 +82,12 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
           <div className="font-bold">
             {'weeklyDownloads' in element &&
               humanFormat(element.weeklyDownloads || 0, {
-                decimals: 1,
+                decimals: 0,
                 separator: '',
               })}
             {'weeklyViews' in element &&
               humanFormat(element.weeklyViews || 0, {
-                decimals: 1,
+                decimals: 0,
                 separator: '',
               })}
           </div>
