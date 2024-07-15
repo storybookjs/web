@@ -60,10 +60,6 @@ export const getPageData = async (
     'utf8',
   );
 
-  /**
-   * TODO: Refactor this to use the MDXRemote component
-   *       Because then we can import MDXContent from @repo/ui
-   */
   const { content, frontmatter } = await compileMDX<{
     title?: string;
     hideRendererSelector?: boolean;
