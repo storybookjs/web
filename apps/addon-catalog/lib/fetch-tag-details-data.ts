@@ -88,6 +88,8 @@ export async function fetchTagDetailsData(name: string) {
       (tag) => tag.name === name,
     );
 
+    // if (!tag) throw new Error(`Tag not found: ${name}`);
+
     if (!tag) return { error: `Tag not found: ${name}` };
 
     return {
