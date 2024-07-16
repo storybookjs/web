@@ -5,7 +5,7 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { useEffect, useState, type FC } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import type { TreeProps } from '@repo/utils';
-import { cn } from '@repo/utils';
+import { cn, docsVersions } from '@repo/utils';
 import { VersionSelector } from './version-selector';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { getVersion } from '../../../lib/get-version';
@@ -66,12 +66,25 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
 };
 
 const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
-  if (lvl1.name === 'versions' || lvl1.name === 'index.mdx') return null;
+  const pathname = usePathname();
+  let slug = lvl1.slug;
+  docsVersions.forEach((version) => {
+    if (lvl1.slug === `/docs/${version.inSlug}/get-started`) {
+      slug = `/docs/${version.inSlug}`;
+    } else if (lvl1.slug === `/docs/get-started`) {
+      slug = `/docs`;
+    }
+  });
+
+  const isActive = slug === pathname;
 
   return (
     <li key={lvl1.pathSegment}>
       <Link
-        className="mt-6 flex items-center px-2 py-2 text-sm font-bold transition-colors hover:text-blue-500"
+        className={cn(
+          'mt-6 flex items-center px-2 py-2 text-sm font-bold transition-colors hover:text-blue-500',
+          isActive && 'text-blue-500',
+        )}
         href={lvl1.slug}
       >
         {lvl1.sidebar?.title || lvl1.title}
