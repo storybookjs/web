@@ -6,7 +6,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export function AddonSidebar({ addon }: { addon: Addon }) {
+
+
+export function AddonSidebar({ addon }: { addon: AddonWithTagLinks }) {
   const [moreAuthorsVisible, setMoreAuthorsVisible] = useState(false);
   const authors = addon?.authors || [];
   const listOfAuthors = moreAuthorsVisible ? authors : authors.slice(0, 6);
@@ -68,9 +70,9 @@ export function AddonSidebar({ addon }: { addon: Addon }) {
             Tags
           </div>
           <ul className="mb-6 flex flex-wrap gap-2">
-            {tags.map((tag) => (
+            {tags.map(({ link, name }) => (
               <Pill>
-                <Link href={`/tag/${tag.name.toLowerCase()}`}>{tag.name}</Link>
+                <Link href={link}>{name}</Link>
               </Pill>
             ))}
           </ul>
