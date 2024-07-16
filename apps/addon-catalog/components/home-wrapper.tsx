@@ -101,9 +101,7 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
         {!search && (
           <div className="flex flex-col gap-12 md:flex-row">
             <div className="hidden flex-shrink-0 md:block md:w-[250px]">
-              <div className="flex items-center py-2 text-sm font-bold">
-                Categories
-              </div>
+              <h3 className="mb-6 text-2xl font-bold">Categories</h3>
               <ul className="-ml-2 border-b border-b-zinc-300 pb-6 dark:border-b-slate-700">
                 {categories.map(({ name, href }) => (
                   <li key={name}>
