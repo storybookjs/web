@@ -67,20 +67,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // If the renderer query param is set, set the cookie
-  const response = NextResponse.next();
-
-  if (searchParam) {
-    const findRenderer = renderers.find(
-      (renderer) => renderer.id === searchParam,
-    );
-
-    if (findRenderer) {
-      response.cookies.set(cookieRenderId, searchParam);
-    }
-  }
-
-  return response;
+  return NextResponse.next();
 }
 
 export const config = {
