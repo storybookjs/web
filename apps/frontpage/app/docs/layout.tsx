@@ -6,10 +6,11 @@ import { NavDocs } from '../../components/docs/sidebar/docs-nav';
 import { DocsProvider } from './provider';
 import { Submenu } from '../../components/docs/submenu';
 import { DocsMainNav } from '../../components/docs/sidebar/docs-main-nav';
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { TOCSectionTitles } from '../../components/docs/toc-section-titles';
 import { getAllTrees } from '../../lib/get-all-trees';
 import { Metadata } from 'next';
+import { RendererCookie } from './renderer-cookie';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -23,6 +24,13 @@ export default async function Layout({ children }: { children: ReactNode }) {
 
   return (
     <DocsProvider>
+      {/*
+        We have to wrap it with suspense to use useSearchParams() while still make the rest statically generated.
+        https://nextjs.org/docs/app/api-reference/functions/use-search-params#static-rendering
+      */}
+      <Suspense fallback={null}>
+        <RendererCookie />
+      </Suspense>
       <Header
         algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
         githubCount={githubCount}

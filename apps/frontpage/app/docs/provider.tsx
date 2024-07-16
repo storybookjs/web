@@ -9,6 +9,7 @@ import {
   cookiePackageManagerId,
   cookieRenderId,
 } from '../../constants';
+import { useSearchParams } from 'next/navigation';
 
 export interface DocsContextProps {
   activeRenderer: null | string;
@@ -24,8 +25,12 @@ export const DocsContext = createContext<DocsContextProps | undefined>(
 );
 
 export function DocsProvider({ children }: { children: ReactNode }) {
-  const [activeRenderer, setActiveRenderer] = useState<null | string>(renderers[0].id);
-  const [activeLanguage, setActiveLanguage] = useState<null | string>(languages[0].id);
+  const [activeRenderer, setActiveRenderer] = useState<null | string>(
+    renderers[0].id,
+  );
+  const [activeLanguage, setActiveLanguage] = useState<null | string>(
+    languages[0].id,
+  );
   const [activePackageManager, setActivePackageManager] = useState<
     null | string
   >(packageManagers[0].id);
