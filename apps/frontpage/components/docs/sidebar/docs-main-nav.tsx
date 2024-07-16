@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
-import { cn } from '@repo/utils';
+import { cn, latestVersion } from '@repo/utils';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import {
   APIIcon,
@@ -18,11 +18,15 @@ export const DocsMainNav = () => {
   const segment = useSelectedLayoutSegment();
   const slug: string[] = segment ? segment.split('/') : [];
   const activeVersion = getVersion(slug);
+  const docsLink =
+    activeVersion.id === latestVersion.id
+      ? '/docs'
+      : `/docs/${activeVersion.inSlug}`;
 
   return (
     <nav className="flex flex-col gap-1.5 text-sm font-medium">
       <Line
-        href="/docs"
+        href={docsLink}
         icon={<DocsIcon />}
         isActive={
           pathname.startsWith('/docs') && !pathname.startsWith('/docs/api')
