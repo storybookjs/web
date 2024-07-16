@@ -10,13 +10,10 @@
       "dependsOn": ["^typecheck"]
     },
     "generate-redirects": {
-      "dependsOn": [],
       "inputs": ["./apps/frontpage/scripts/raw-redirects"],
-      "outputs": ["./apps/frontpage/generated-redirects.json"],
-      "cache": false
+      "outputs": ["./apps/frontpage/generated-redirects.json"]
     },
     "fetch-docs": {
-      "dependsOn": [],
       "cache": false
     },
     "storybook": {
@@ -26,6 +23,22 @@
       "cache": false,
       "persistent": true,
       "inputs": ["$TURBO_DEFAULT$", ".env"]
+    },
+    "prebuild": {
+      "dependsOn": ["fetch-docs", "generate-redirects", "^build"],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "!.next/cache/**",
+        "storybook-static/**"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env",
+        "./apps/frontpage/content/docs/**",
+        "./apps/frontpage/content/snippets/**",
+        "./apps/frontpage/public/docs-assets/**"
+      ]
     },
     "build": {
       "dependsOn": ["fetch-docs", "generate-redirects", "^build"],
