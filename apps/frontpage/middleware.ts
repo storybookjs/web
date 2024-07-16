@@ -5,6 +5,7 @@ import { docsVersionsRedirects } from './redirects/docs-versions-redirects';
 import { RedirectData } from './redirects/types';
 import { docsRenderersRedirects } from './redirects/docs-renderers-redirects';
 import { docsCommonRedirects } from './redirects/docs-common-redirects';
+import { renderers } from '@repo/utils';
 
 export async function middleware(request: NextRequest) {
   let searchParam = request.nextUrl.searchParams.get('renderer');
@@ -68,8 +69,15 @@ export async function middleware(request: NextRequest) {
 
   // If the renderer query param is set, set the cookie
   const response = NextResponse.next();
+
   if (searchParam) {
-    response.cookies.set(cookieRenderId, searchParam);
+    const findRenderer = renderers.find(
+      (renderer) => renderer.id === searchParam,
+    );
+
+    if (findRenderer) {
+      response.cookies.set(cookieRenderId, searchParam);
+    }
   }
 
   return response;
