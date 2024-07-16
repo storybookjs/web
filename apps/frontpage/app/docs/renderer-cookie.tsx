@@ -3,6 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useDocs } from './provider';
+import { renderers } from '@repo/utils';
 
 export const RendererCookie = () => {
   const { setRenderer } = useDocs();
@@ -10,7 +11,14 @@ export const RendererCookie = () => {
   const rendererParam = searchParams.get('renderer');
 
   useEffect(() => {
-    if (rendererParam) setRenderer(rendererParam);
+    if (rendererParam) {
+      const findRenderer = renderers.find(
+        (renderer) => renderer.id === rendererParam,
+      );
+      if (findRenderer) {
+        setRenderer(rendererParam);
+      }
+    }
   }, [rendererParam]);
   return null;
 };
