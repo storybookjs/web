@@ -9,6 +9,7 @@ import { cn } from '@repo/utils';
 import { VersionSelector } from './version-selector';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { getVersion } from '../../../lib/get-version';
+import { getFlatTree } from '../../../lib/get-flat-tree';
 
 type Tree = TreeProps[] | null | undefined;
 
@@ -22,8 +23,12 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
   const slug: string[] = segment ? segment.split('/') : [];
   const activeVersion = getVersion(slug);
   const selectedTree = listOfTrees.find((t) => t.name === activeVersion.id);
-
   const [parentAccordion, setParentAccordion] = useState<string[] | null>(null);
+  // const flatTree = getFlatTree({
+  //   tree: listOfTrees,
+  // });
+
+  // console.log(flatTree);
 
   useEffect(() => {
     // Find the active item in the tree and set the parent accordion to open
@@ -122,7 +127,7 @@ const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
               />
             </button>
           </Accordion.Trigger>
-          <Accordion.Content>
+          <Accordion.Content className="data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden">
             <ul>
               {lvl2.children?.map((lvl3) => {
                 return <Level3 key={lvl3.pathSegment} lvl3={lvl3} />;
