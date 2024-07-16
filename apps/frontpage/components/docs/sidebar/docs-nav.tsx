@@ -5,11 +5,10 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { useEffect, useState, type FC } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import type { TreeProps } from '@repo/utils';
-import { cn } from '@repo/utils';
+import { cn, docsVersions } from '@repo/utils';
 import { VersionSelector } from './version-selector';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { getVersion } from '../../../lib/get-version';
-import { getFlatTree } from '../../../lib/get-flat-tree';
 
 type Tree = TreeProps[] | null | undefined;
 
@@ -23,12 +22,8 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
   const slug: string[] = segment ? segment.split('/') : [];
   const activeVersion = getVersion(slug);
   const selectedTree = listOfTrees.find((t) => t.name === activeVersion.id);
-  const [parentAccordion, setParentAccordion] = useState<string[] | null>(null);
-  // const flatTree = getFlatTree({
-  //   tree: listOfTrees,
-  // });
 
-  // console.log(flatTree);
+  const [parentAccordion, setParentAccordion] = useState<string[] | null>(null);
 
   useEffect(() => {
     // Find the active item in the tree and set the parent accordion to open
@@ -71,12 +66,25 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
 };
 
 const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
-  if (lvl1.name === 'versions' || lvl1.name === 'index.mdx') return null;
+  const pathname = usePathname();
+  let slug = lvl1.slug;
+  docsVersions.forEach((version) => {
+    if (lvl1.slug === `/docs/${version.inSlug}/get-started`) {
+      slug = `/docs/${version.inSlug}`;
+    } else if (lvl1.slug === `/docs/get-started`) {
+      slug = `/docs`;
+    }
+  });
+
+  const isActive = slug === pathname;
 
   return (
     <li key={lvl1.pathSegment}>
       <Link
-        className="mt-6 flex items-center px-2 py-2 text-sm font-bold transition-colors hover:text-blue-500"
+        className={cn(
+          'mt-6 flex items-center px-2 py-2 text-sm font-bold transition-colors hover:text-blue-500',
+          isActive && 'text-blue-500',
+        )}
         href={lvl1.slug}
       >
         {lvl1.sidebar?.title || lvl1.title}
@@ -127,7 +135,7 @@ const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
               />
             </button>
           </Accordion.Trigger>
-          <Accordion.Content className="data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up overflow-hidden">
+          <Accordion.Content>
             <ul>
               {lvl2.children?.map((lvl3) => {
                 return <Level3 key={lvl3.pathSegment} lvl3={lvl3} />;
