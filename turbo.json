@@ -24,22 +24,6 @@
       "persistent": true,
       "inputs": ["$TURBO_DEFAULT$", ".env"]
     },
-    "prebuild": {
-      "dependsOn": ["fetch-docs", "generate-redirects", "^build"],
-      "outputs": [
-        "dist/**",
-        ".next/**",
-        "!.next/cache/**",
-        "storybook-static/**"
-      ],
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        ".env",
-        "./apps/frontpage/content/docs/**",
-        "./apps/frontpage/content/snippets/**",
-        "./apps/frontpage/public/docs-assets/**"
-      ]
-    },
     "build": {
       "dependsOn": ["fetch-docs", "generate-redirects", "^build"],
       "outputs": [
