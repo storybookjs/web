@@ -25,9 +25,6 @@ export const DocsContext = createContext<DocsContextProps | undefined>(
 );
 
 export function DocsProvider({ children }: { children: ReactNode }) {
-  const searchParams = useSearchParams();
-  const rendererParam = searchParams.get('renderer');
-
   const [activeRenderer, setActiveRenderer] = useState<null | string>(
     renderers[0].id,
   );
@@ -61,13 +58,6 @@ export function DocsProvider({ children }: { children: ReactNode }) {
       setCookie(cookiePackageManagerId, packageManagers[0].id);
     }
   }, []);
-
-  useEffect(() => {
-    if (rendererParam) {
-      setActiveRenderer(rendererParam);
-      setCookie(cookieRenderId, rendererParam);
-    }
-  }, [rendererParam]);
 
   const setRenderer = (id: string) => {
     setActiveRenderer(id);
