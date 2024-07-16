@@ -10,13 +10,10 @@
       "dependsOn": ["^typecheck"]
     },
     "generate-redirects": {
-      "dependsOn": [],
       "inputs": ["./apps/frontpage/scripts/raw-redirects"],
-      "outputs": ["./apps/frontpage/generated-redirects.json"],
-      "cache": false
+      "outputs": ["./apps/frontpage/generated-redirects.json"]
     },
     "fetch-docs": {
-      "dependsOn": [],
       "cache": false
     },
     "storybook": {
