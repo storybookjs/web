@@ -12,8 +12,7 @@
     "generate-redirects": {
       "dependsOn": [],
       "inputs": ["./apps/frontpage/scripts/raw-redirects"],
-      "outputs": ["./apps/frontpage/generated-redirects.json"],
-      "cache": false
+      "outputs": ["./apps/frontpage/generated-redirects.json"]
     },
     "fetch-docs": {
       "dependsOn": [],
@@ -27,8 +26,11 @@
       "persistent": true,
       "inputs": ["$TURBO_DEFAULT$", ".env"]
     },
+    "pre-build": {
+      "dependsOn": ["fetch-docs", "generate-redirects"]
+    },
     "build": {
-      "dependsOn": ["fetch-docs", "generate-redirects", "^build"],
+      "dependsOn": ["^build"],
       "outputs": [
         "dist/**",
         ".next/**",
