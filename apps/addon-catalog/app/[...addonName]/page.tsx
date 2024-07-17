@@ -35,7 +35,7 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
             <Highlight withHTMLChildren={false}>
               <div
                 /**
-                 * These are copied from @repo/ui/src/components/mdx/...
+                 * These are copied from \@repo/ui/src/components/mdx/...
                  *
                  * TODO: Tweak these styles
                  */

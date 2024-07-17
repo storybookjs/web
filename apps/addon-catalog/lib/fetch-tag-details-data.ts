@@ -1,15 +1,16 @@
 import { addonFragment, recipeFragment, validateResponse } from '@repo/utils';
+import { type Tag } from '../types';
 import { fetchAddonsQuery, gql } from './fetch-addons-query';
 
 type TagValue = Pick<
-    Tag,
-    | 'name'
-    | 'displayName'
-    | 'description'
-    | 'icon'
-    | 'relatedTags'
-    | 'topIntegrations'
-  >
+  Tag,
+  | 'name'
+  | 'displayName'
+  | 'description'
+  | 'icon'
+  | 'relatedTags'
+  | 'topIntegrations'
+>;
 
 interface TagsData {
   tags: TagValue[];
@@ -20,14 +21,13 @@ async function fetchTagsData({
 }: {
   isCategory?: boolean;
 } = {}) {
-  try {
-    let value: TagValue[] = [];
-    async function fetchPartialData(skip = 0) {
-      const data = await fetchAddonsQuery<
-        TagsData,
-        { isCategory: boolean; skip: number }
-      >(
-        gql`
+  let value: TagValue[] = [];
+  async function fetchPartialData(skip = 0) {
+    const data = await fetchAddonsQuery<
+      TagsData,
+      { isCategory: boolean; skip: number }
+    >(
+      gql`
           query Tags($isCategory: Boolean!, $skip: Int!) {
             tags(isCategory: $isCategory, limit: 30, skip: $skip) {
               name
@@ -54,26 +54,26 @@ async function fetchTagsData({
             }
           }
         `,
-        {
-          variables: { isCategory: Boolean(isCategory), skip },
-        },
-      );
+      {
+        variables: { isCategory: Boolean(isCategory), skip },
+      },
+    );
 
-      validateResponse(() => data.tags);
+    validateResponse(() => data.tags);
 
-      const { tags } = data;
+    const { tags } = data;
 
-      value = [...value, ...tags];
+    value = [...value, ...tags];
 
-      if (tags.length > 0) await fetchPartialData(skip + tags.length);
+    if (tags.length > 0) await fetchPartialData(skip + tags.length);
 
-      return value;
-    }
+    return value;
+  }
 
+  try {
     return await fetchPartialData();
   } catch (error) {
-    // @ts-expect-error - Seems safe
-    throw new Error(`Failed to fetch tags data: ${error.message}`);
+    throw new Error(`Failed to fetch tags data: ${(error as Error).message}`);
   }
 }
 
@@ -83,9 +83,7 @@ export async function fetchTagDetailsData(name: string) {
     const categoriesData = await fetchTagsData({ isCategory: true });
     const tagsData = await fetchTagsData();
 
-    const tag = [...categoriesData, ...tagsData].find(
-      (tag) => tag.name === name,
-    );
+    const tag = [...categoriesData, ...tagsData].find((t) => t.name === name);
 
     // if (!tag) throw new Error(`Tag not found: ${name}`);
 
@@ -96,6 +94,6 @@ export async function fetchTagDetailsData(name: string) {
       isCategory: categoriesData.find((category) => category.name === name),
     };
   } catch (error) {
-    throw new Error(`Failed to fetch tags data: ${error}`);
+    throw new Error(`Failed to fetch tags data: ${(error as Error).message}`);
   }
 }

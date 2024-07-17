@@ -1,23 +1,23 @@
 'use client';
 
-import Image from 'next/image';
 import {
   CheckIcon,
   CopyIcon,
   GithubIcon,
   VerifiedIcon,
 } from '@storybook/icons';
-import humanFormat from 'human-format';
+import { humanFormat } from 'human-format';
 import copy from 'copy-to-clipboard';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { StorybookIcon } from '@repo/ui';
+import { type Addon } from '../../types';
 
 export function AddonHero({ addon }: { addon: Addon }) {
   const [state, setState] = useState(false);
 
   const onClick = () => {
-    copy(`npx install ${addon.name}`);
+    copy(`npx install ${addon.name ?? ''}`);
     setState(true);
     setTimeout(() => {
       setState(false);
@@ -27,22 +27,27 @@ export function AddonHero({ addon }: { addon: Addon }) {
   return (
     <div className="mb-12 flex justify-between border-b border-zinc-300 pb-12 dark:border-b-slate-700">
       <div className="flex flex-col gap-8 md:flex-row">
-        {addon.icon ? <div
+        {addon.icon ? (
+          <div
             style={{ backgroundImage: `url('${addon.icon}')` }}
             className="h-20 w-20 bg-contain bg-center bg-no-repeat"
-          /> : null}
+          />
+        ) : null}
         <div className="flex flex-col items-start">
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold">{addon.displayName}</h1>
             {addon.verified &&
-              ['official', 'integrators'].includes(addon.verified) &&
-              addon.status !== 'deprecated' ? <VerifiedIcon className="text-blue-500" /> : null}
+            ['official', 'integrators'].includes(addon.verified) &&
+            addon.status !== 'deprecated' ? (
+              <VerifiedIcon className="text-blue-500" />
+            ) : null}
           </div>
           <p className="mb-4">{addon.description}</p>
           <div className="flex flex-col gap-6 md:flex-row md:items-center">
             <button
               className="relative flex cursor-pointer items-center gap-4 rounded bg-zinc-100 px-4 py-2 dark:bg-slate-800 dark:text-slate-300"
               onClick={onClick}
+              type="button"
             >
               npm install {addon.name} <CopyIcon />
               <AnimatePresence>
@@ -60,9 +65,10 @@ export function AddonHero({ addon }: { addon: Addon }) {
               </AnimatePresence>
             </button>
             <a
-              href={addon.repositoryUrl || ''}
+              href={addon.repositoryUrl ?? ''}
               target="_blank"
-              className="flex items-center gap-2 text-sm text-black transition-colors hover:text-blue-500 dark:text-slate-400" rel="noopener"
+              className="flex items-center gap-2 text-sm text-black transition-colors hover:text-blue-500 dark:text-slate-400"
+              rel="noopener"
             >
               <GithubIcon />
               View on Github
@@ -73,19 +79,21 @@ export function AddonHero({ addon }: { addon: Addon }) {
       <div className="hidden flex-col pr-8 lg:flex">
         <div className="mb-4 flex flex-col">
           <div className="text-3xl text-blue-400">
-            {humanFormat(addon.weeklyDownloads || 0, {
+            {humanFormat(addon.weeklyDownloads ?? 0, {
               decimals: 0,
               separator: '',
             })}
           </div>
           <div className="text-md">Downloads per week</div>
         </div>
-        {addon.verified && addon.verified === 'official' ? <div className="flex items-center gap-2 rounded bg-blue-900 px-2 py-1.5">
+        {addon.verified && addon.verified === 'official' ? (
+          <div className="flex items-center gap-2 rounded bg-blue-900 px-2 py-1.5">
             <StorybookIcon size={16} />
             <span className="text-xs font-bold text-white">
               Made by Storybook
             </span>
-          </div> : null}
+          </div>
+        ) : null}
       </div>
     </div>
   );

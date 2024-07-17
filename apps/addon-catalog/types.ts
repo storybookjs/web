@@ -1,8 +1,9 @@
+// @ts-expect-error - TypeScript is unable to resolve the module
 declare module 'rehype-urls';
 
-type Appearance = 'official' | 'integrator' | 'community';
+export type Appearance = 'official' | 'integrator' | 'community';
 
-interface Addon {
+export interface Addon {
   type?: 'Addon';
   name?: string;
   authors?: User[] | null;
@@ -26,11 +27,13 @@ interface Addon {
   yearlyDownloads?: number | null;
 }
 
-interface AddonWithTagLinks extends Omit<Addon, 'tags'> { tags: TagLinkType[] }
+export interface AddonWithTagLinks extends Omit<Addon, 'tags'> {
+  tags: TagLinkType[];
+}
 
-interface Framework extends Pick<Tag, 'displayName' | 'icon' | 'name'> {}
+export type Framework = Pick<Tag, 'displayName' | 'icon' | 'name'>;
 
-interface Recipe {
+export interface Recipe {
   type: 'Recipe';
   name: string;
   accentColor: string | null;
@@ -50,9 +53,9 @@ interface Recipe {
   yearlyViews: number | null;
 }
 
-type Status = 'default' | 'essential' | 'deprecated';
+export type Status = 'default' | 'essential' | 'deprecated';
 
-interface Tag {
+export interface Tag {
   type?: 'Tag';
   // displayName is nullable in the GraphQL schema, but buildTagLinks implies it's always available
   displayName?: string;
@@ -68,16 +71,16 @@ interface Tag {
   link?: string;
 }
 
-interface User {
+export interface User {
   type?: 'User';
   username: string;
   email?: string | null;
   gravatarUrl: string | null;
 }
 
-type Verified = 'integrators' | 'official';
+export type Verified = 'integrators' | 'official';
 
-interface TagLinkType {
+export interface TagLinkType {
   link: string;
   name: string;
 }

@@ -58,7 +58,7 @@ export function AddonSidebar({ addon }: { addon: AddonWithTagLinks }) {
             ))}
           </ul>
         </> : null}
-      {tags && tags.length ? <>
+      {tags?.length ? <>
           <div className="mb-2 mt-6 flex items-center py-2 text-sm font-bold">
             Tags
           </div>
