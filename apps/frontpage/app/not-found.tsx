@@ -14,7 +14,7 @@ export default async function NotFound() {
   return (
     <div>
       <Header
-        algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
+        algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!}
         githubCount={githubCount}
       />
       <div className="m-auto mb-24 flex max-w-[960px] flex-col items-center px-8 pt-24">
@@ -36,7 +36,7 @@ export default async function NotFound() {
               </p>
             </div>
             <Search
-              algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
+              algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!}
             />
           </div>
         </div>

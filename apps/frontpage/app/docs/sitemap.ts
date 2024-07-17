@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next';
+import { type MetadataRoute } from 'next';
 import { docsVersions } from '@repo/utils';
 import { getFlatTree } from '../../lib/get-flat-tree';
 import { getAllTrees } from '../../lib/get-all-trees';

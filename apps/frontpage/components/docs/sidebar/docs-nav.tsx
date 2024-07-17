@@ -6,9 +6,9 @@ import { useEffect, useState, type FC } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import type { TreeProps } from '@repo/utils';
 import { cn, docsVersions } from '@repo/utils';
-import { VersionSelector } from './version-selector';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { getVersion } from '../../../lib/get-version';
+import { VersionSelector } from './version-selector';
 
 type Tree = TreeProps[] | null | undefined;
 
@@ -102,7 +102,7 @@ const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
 
 const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
   const pathname = usePathname();
-  const isDraft = lvl2.draft === true ? true : false;
+  const isDraft = lvl2.draft === true;
   const hasChildren = lvl2.children && lvl2.children.length > 0;
   const slug = lvl2.slug;
 
@@ -149,7 +149,7 @@ const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
 };
 
 const Level3 = ({ lvl3 }: { lvl3: TreeProps }) => {
-  const isDraft = lvl3.draft === true ? true : false;
+  const isDraft = lvl3.draft === true;
   const slug = lvl3.slug;
   const pathname = usePathname();
 

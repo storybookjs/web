@@ -1,13 +1,12 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { motion } from 'framer-motion';
 import { useParams, usePathname } from 'next/navigation';
-
 import { useDocs } from '../../../app/docs/provider';
 import { getVersion } from '../../../lib/get-version';
 import { Button } from '../../ui/button';
-import { sendFeedback, FeedbackState } from './actions';
-import { ReactionsProps } from './footer';
+import { sendFeedback, type FeedbackState } from './actions';
+import { type ReactionsProps } from './footer';
 
 const initialState: FeedbackState = {};
 
@@ -66,15 +65,9 @@ export const Form = ({
         <>
           <input type="hidden" name="reaction" value={reaction} />
           <input type="hidden" name="slug" value={pathname} />
-          {activeRenderer && (
-            <input type="hidden" name="renderer" value={activeRenderer} />
-          )}
-          {activeLanguage && (
-            <input type="hidden" name="language" value={activeLanguage} />
-          )}
-          {activeVersion && (
-            <input type="hidden" name="version" value={activeVersion.id} />
-          )}
+          {activeRenderer ? <input type="hidden" name="renderer" value={activeRenderer} /> : null}
+          {activeLanguage ? <input type="hidden" name="language" value={activeLanguage} /> : null}
+          {activeVersion ? <input type="hidden" name="version" value={activeVersion.id} /> : null}
           <label htmlFor="feedback" className="sr-only">
             Optional feedback
           </label>
@@ -104,11 +97,11 @@ export const Form = ({
           className="flex flex-1 flex-col items-center justify-center gap-1 bg-white text-sm"
         >
           <div>Your feedback has been received!</div>
-          {!!state.url ? (
+          {state.url ? (
             <a
               className="text-blue-500 underline underline-offset-4"
               target="_blank"
-              href={state.url}
+              href={state.url} rel="noopener"
             >
               View on Github
             </a>

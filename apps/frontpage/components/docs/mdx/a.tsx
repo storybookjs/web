@@ -1,4 +1,4 @@
-import { DocsVersion, latestVersion } from '@repo/utils';
+import { type DocsVersion, latestVersion } from '@repo/utils';
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 

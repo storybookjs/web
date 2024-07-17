@@ -1,5 +1,4 @@
 import { expect, test } from 'vitest'
-
 import { generateSequence, parseRawRedirects, generateRedirects } from './generateRedirects';
 
 const inputString = `

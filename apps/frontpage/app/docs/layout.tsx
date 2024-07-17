@@ -1,15 +1,15 @@
 import { Header, Footer, Container } from '@repo/ui';
 import Image from 'next/image';
 import { fetchGithubCount } from '@repo/utils';
+import { type ReactNode, Suspense } from 'react';
+import { type Metadata } from 'next';
 import { Sidebar } from '../../components/docs/sidebar/sidebar';
 import { NavDocs } from '../../components/docs/sidebar/docs-nav';
-import { DocsProvider } from './provider';
 import { Submenu } from '../../components/docs/submenu';
 import { DocsMainNav } from '../../components/docs/sidebar/docs-main-nav';
-import { ReactNode, Suspense } from 'react';
 import { TOCSectionTitles } from '../../components/docs/toc-section-titles';
 import { getAllTrees } from '../../lib/get-all-trees';
-import { Metadata } from 'next';
+import { DocsProvider } from './provider';
 import { RendererCookie } from './renderer-cookie';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -32,7 +32,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
         <RendererCookie />
       </Suspense>
       <Header
-        algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
+        algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!}
         githubCount={githubCount}
         subMenu={<Submenu listOfTrees={listofTrees} />}
       />

@@ -9,8 +9,8 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import { zonedTimeToUtc, format } from 'date-fns-tz';
 import { isPast } from 'date-fns';
-import { Section } from './section';
 import { Youtube } from '../logos/youtube';
+import { Section } from './section';
 
 const rezoneDate = (date: Date) => zonedTimeToUtc(date, 'America/Los_Angeles');
 

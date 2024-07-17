@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next';
+import { type MetadataRoute } from 'next';
 import { getReleases } from '../../lib/get-releases';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

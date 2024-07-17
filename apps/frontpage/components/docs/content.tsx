@@ -1,9 +1,9 @@
 import { cn } from '@repo/utils';
-import { PageDataProps } from '../../lib/get-page';
+import { type FC } from 'react';
+import { type PageDataProps } from '../../lib/get-page';
 import { Renderers } from './renderers';
 import { DocsFooter } from './footer/footer';
 import { TableOfContent } from './table-of-content';
-import { FC } from 'react';
 
 export const Content: FC<{ page: PageDataProps }> = ({ page }) => {
   return (

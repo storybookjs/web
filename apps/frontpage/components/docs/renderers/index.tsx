@@ -1,21 +1,21 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
-import { useMediaQuery } from '../../../hooks/use-media-query';
+import { type FC, useEffect, useState } from 'react';
 import { renderers } from '@repo/utils';
-import { Button } from './button';
-import { useDocs } from '../../../app/docs/provider';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@repo/ui';
+import { useMediaQuery } from '../../../hooks/use-media-query';
+import { useDocs } from '../../../app/docs/provider';
+import { Button } from './button';
 
 type Renderer = typeof renderers[number];
 
 export const Renderers: FC = () => {
-  let { activeRenderer, setRenderer } = useDocs();
+  const { activeRenderer, setRenderer } = useDocs();
   const [isMobile] = useMediaQuery('(max-width: 480px)');
   const [firstList, setFirstList] = useState<Renderer[]>(renderers.slice(0, 3));
   const [lastRenderer, setLastRenderer] = useState<Renderer>(renderers[3]);

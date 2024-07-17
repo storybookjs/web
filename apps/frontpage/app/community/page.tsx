@@ -30,7 +30,7 @@ export default async function Page() {
   return (
     <CommunityProvider>
       <Header
-        algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
+        algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!}
         githubCount={githubCount}
       />
       <NavTop />
@@ -54,7 +54,7 @@ export default async function Page() {
           <Community />
           <Numbers
             githubCount={githubCountFormatted}
-            contributorsCount={'2282'}
+            contributorsCount="2282"
             discordMembersCount={discordMembers}
             npmDownloadsCount={npmDownloads}
             youtubeSubscribersCount={youtubeSubscribers}

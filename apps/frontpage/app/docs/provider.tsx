@@ -4,12 +4,12 @@ import { languages, packageManagers, renderers } from '@repo/utils';
 import { getCookie, setCookie } from 'cookies-next';
 import type { ReactNode } from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import {
   cookieLanguageId,
   cookiePackageManagerId,
   cookieRenderId,
 } from '../../constants';
-import { useSearchParams } from 'next/navigation';
 
 export interface DocsContextProps {
   activeRenderer: null | string;

@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-
 import { cn } from '@repo/utils';
 import { Form } from './form';
 
@@ -55,7 +54,7 @@ export const DocsFooter = ({ isIndexPage }: FooterProps) => {
                 'h-8 w-8 rounded-full hover:bg-blue-100',
                 reaction === 'up' && 'bg-blue-100',
               )}
-              onClick={() => selectReaction('up')}
+              onClick={() => { selectReaction('up'); }}
             >
               👍
             </button>
@@ -64,20 +63,20 @@ export const DocsFooter = ({ isIndexPage }: FooterProps) => {
                 'h-8 w-8 rounded-full hover:bg-blue-100',
                 reaction === 'down' && 'bg-blue-100',
               )}
-              onClick={() => selectReaction('down')}
+              onClick={() => { selectReaction('down'); }}
             >
               👎
             </button>
           </div>
         </div>
         <AnimatePresence>
-          {reaction && <Form reaction={reaction} setReaction={setReaction} />}
+          {reaction ? <Form reaction={reaction} setReaction={setReaction} /> : null}
         </AnimatePresence>
       </motion.div>
       <a
         href={`${githubDocsBaseUrl}${pathname}${isIndexPage ? '/index' : ''}.mdx`}
         target="_blank"
-        className="textsm flex h-12 items-center rounded-full border border-zinc-200 px-5 text-sm transition-all hover:-translate-y-1 hover:border-zinc-400"
+        className="textsm flex h-12 items-center rounded-full border border-zinc-200 px-5 text-sm transition-all hover:-translate-y-1 hover:border-zinc-400" rel="noopener"
       >
         ✍️ Edit on Github
       </a>

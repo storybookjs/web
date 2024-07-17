@@ -7,9 +7,9 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import type { DocsVersion, TreeProps } from '@repo/utils';
 import { cn } from '@repo/utils';
+import { getVersion } from '../../lib/get-version';
 import { NavDocs } from './sidebar/docs-nav';
 import { DocsMainNav } from './sidebar/docs-main-nav';
-import { getVersion } from '../../lib/get-version';
 
 type Tree = TreeProps[] | null | undefined;
 

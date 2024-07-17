@@ -1,9 +1,8 @@
-import { buildTagLinks } from './build-tag-links';
 import { validateResponse, addonFragment, recipeFragment } from '@repo/utils';
-import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
+import { fetchAddonsQuery, gql } from "./fetch-addons-query";
+import { buildTagLinks } from './build-tag-links';
 
-interface RecipeValue
-  extends Pick<
+type RecipeValue = Pick<
     Recipe,
     | 'accentColor'
     | 'addons'
@@ -16,7 +15,7 @@ interface RecipeValue
     | 'tags'
     | 'updatedAt'
     | 'weeklyViews'
-  > {}
+  >
 interface RecipeData {
   recipe: RecipeValue;
 }

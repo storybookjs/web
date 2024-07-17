@@ -25,7 +25,7 @@ type Lines = [string, string, string][];
 
 export function parseRawRedirects(rawRedirects: string) {
   const lines = rawRedirects.split('\n');
-  let parsed: Lines = [];
+  const parsed: Lines = [];
 
   lines.forEach((line) => {
     if (!line.startsWith('#') && line.trim() !== '') {

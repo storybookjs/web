@@ -1,4 +1,4 @@
-import { CodeSnippetsProps } from '@repo/utils';
+import { type CodeSnippetsProps } from '@repo/utils';
 
 export function transformVueTabTitle(
   tabTitle: string,

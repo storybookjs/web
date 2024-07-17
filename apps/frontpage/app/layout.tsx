@@ -6,10 +6,10 @@ import {
   globalSearchImportance,
 } from '@repo/ui';
 import { cn } from '@repo/utils';
-import { Providers } from './providers';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/react';
+import { Providers } from './providers';
 
 import '@docsearch/css';
 import './globals.css';

@@ -3,6 +3,7 @@
 import { useEffect, useState, type FC } from 'react';
 import { type CodeSnippetsProps } from '@repo/utils';
 import { CodeSnippetsWrapper } from '@repo/ui';
+import { InfoIcon } from '@storybook/icons';
 import { useDocs } from '../../../../app/docs/provider';
 import { getFilters } from './utils/get-filters';
 import {
@@ -10,9 +11,8 @@ import {
   getActiveContent,
 } from './utils/get-active-content';
 import { Dropdown } from './dropdown';
-import { InfoIcon } from '@storybook/icons';
 import { transformVueTabTitle } from './utils/transform-vue-tab-title';
-import { Tab, Tabs } from './tabs';
+import { type Tab, Tabs } from './tabs';
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[] | null;
@@ -151,12 +151,10 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     >
       {activeContent?.content ? (
         <>
-          {error && (
-            <div className="mb-4 flex items-center gap-2 rounded border border-orange-300 bg-orange-100 px-4 py-3 text-orange-900 dark:border-orange-800 dark:bg-orange-950 dark:text-orange-400">
+          {error ? <div className="mb-4 flex items-center gap-2 rounded border border-orange-300 bg-orange-100 px-4 py-3 text-orange-900 dark:border-orange-800 dark:bg-orange-950 dark:text-orange-400">
               <InfoIcon />
               {error}
-            </div>
-          )}
+            </div> : null}
           <section
             dangerouslySetInnerHTML={{
               __html: activeContent.content,

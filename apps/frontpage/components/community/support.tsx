@@ -22,7 +22,7 @@ export const Support: FC = () => {
             </p>
           </div>
           <Search
-            algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
+            algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!}
           />
         </div>
       </div>

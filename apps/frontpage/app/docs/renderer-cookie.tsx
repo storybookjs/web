@@ -2,8 +2,8 @@
 
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
-import { useDocs } from './provider';
 import { renderers } from '@repo/utils';
+import { useDocs } from './provider';
 
 export const RendererCookie = () => {
   const { setRenderer } = useDocs();

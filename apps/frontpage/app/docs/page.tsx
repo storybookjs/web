@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 import { globalSearchMetaKeys, globalSearchImportance } from '@repo/ui';
 import { latestVersion } from '@repo/utils';
+import { type Metadata } from 'next';
 import { getPageData } from '../../lib/get-page';
-import { Metadata } from 'next';
 import { Content } from '../../components/docs/content';
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -1,9 +1,9 @@
 import { notFound, redirect } from 'next/navigation';
 import { globalSearchMetaKeys, globalSearchImportance } from '@repo/ui';
 import { latestVersion } from '@repo/utils';
+import { type Metadata } from 'next';
 import { getVersion } from '../../../lib/get-version';
 import { getPageData } from '../../../lib/get-page';
-import { Metadata } from 'next';
 import { getAllTrees } from '../../../lib/get-all-trees';
 import { getFlatTree } from '../../../lib/get-flat-tree';
 import { Content } from '../../../components/docs/content';

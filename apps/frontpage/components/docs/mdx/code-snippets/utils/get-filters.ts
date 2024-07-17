@@ -17,7 +17,7 @@ export const getFilters = ({ content, activeRenderer }: GetFiltersProps) => {
 
   const listOfLanguages = [
     ...new Set(filterByRenderer.map((obj) => obj.language)),
-  ].filter((r) => r !== null && r !== undefined) as string[];
+  ].filter((r) => r !== null && r !== undefined);
 
   const languagesWithData = listOfLanguages
     .map((obj) => languages.find((r) => r.id === obj))
@@ -32,7 +32,7 @@ export const getFilters = ({ content, activeRenderer }: GetFiltersProps) => {
   // Removing duplicates, null and undefined values
   const listOfPm = [...new Set(transformPackageManager)].filter(
     (r) => r !== null && r !== undefined,
-  ) as string[];
+  );
 
   // Add the right data for each package manager
   const PmWithData = listOfPm.map((obj) =>

@@ -14,7 +14,7 @@ export default async function Page() {
 
   return (
     <Home
-      contributorCount={'2282'}
+      contributorCount="2282"
       discordMembers={discordMembers}
       githubCount={githubCount}
       npmDownloads={npmDownloads}

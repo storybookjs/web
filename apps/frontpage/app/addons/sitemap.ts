@@ -1,6 +1,6 @@
-import { MetadataRoute } from 'next';
-import { fetchAddonsQuery, gql } from '../../lib/fetch-addons-query';
+import { type MetadataRoute } from 'next';
 import { validateResponse } from '@repo/utils';
+import { fetchAddonsQuery, gql } from '../../lib/fetch-addons-query';
 
 type AddonValue = string;
 
@@ -16,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   async function fetchAddonsData() {
     try {
       let value: AddonValue[] = [];
-      async function fetchPartialData(skip: number = 0) {
+      async function fetchPartialData(skip = 0) {
         const data = await fetchAddonsQuery<AddonsData, { skip: number }>(
           gql`
             query Addons($skip: Int!) {
@@ -65,7 +65,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   } = {}) {
     try {
       let value: TagValue[] = [];
-      async function fetchPartialData(skip: number = 0) {
+      async function fetchPartialData(skip = 0) {
         const data = await fetchAddonsQuery<
           TagsData,
           { isCategory: boolean; skip: number }

@@ -2,8 +2,8 @@
 
 import { ChevronSmallDownIcon, YoutubeIcon } from '@storybook/icons';
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
-import styles from './styles.module.css';
 import { Youtube } from '../../../logos/youtube';
+import styles from './styles.module.css';
 
 interface YouTubeCalloutProps {
   id: string;

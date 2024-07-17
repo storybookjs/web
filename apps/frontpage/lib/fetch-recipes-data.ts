@@ -1,16 +1,16 @@
 import { validateResponse } from '@repo/utils';
-import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
+import { fetchAddonsQuery, gql } from "./fetch-addons-query";
 
 type RecipesValue = Recipe['name'];
 
-type RecipesData = {
+interface RecipesData {
   recipes: Pick<Recipe, 'name' | 'authors'>[];
-};
+}
 
 export async function fetchRecipesData() {
   let value: RecipesValue[] = [];
   try {
-    async function fetchPartialData(skip: number = 0) {
+    async function fetchPartialData(skip = 0) {
       const data = await fetchAddonsQuery<RecipesData, { skip: number }>(
         gql`
           query RecipeNames($skip: Int!) {

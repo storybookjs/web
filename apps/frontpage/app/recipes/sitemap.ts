@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next';
+import { type MetadataRoute } from 'next';
 import { fetchRecipesData } from '../../lib/fetch-recipes-data';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

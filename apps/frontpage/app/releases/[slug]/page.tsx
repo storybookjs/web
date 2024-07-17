@@ -32,7 +32,7 @@ export default async function Page({ params: { slug } }: PageProps) {
   return (
     <>
       <Header
-        algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
+        algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!}
         githubCount={githubCount}
       />
       <Container asChild className="flex gap-4 lg:pl-5 lg:pr-8">

@@ -4,7 +4,6 @@ import dedent from 'dedent';
 import { headers } from 'next/headers';
 import fetch from 'node-fetch';
 import { z } from 'zod';
-
 import type { TreeProps } from '@repo/utils';
 import { docsVersions } from '@repo/utils';
 import { getAllTrees } from '../../../lib/get-all-trees';
@@ -184,7 +183,7 @@ async function getDiscussion(title: string) {
           pageInfo: { hasNextPage, endCursor },
         },
       },
-      // eslint-disable-next-line no-await-in-loop -- This is node; we can deal with it
+       
     } = await queryGitHub<{
       repository: {
         discussions: {
