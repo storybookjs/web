@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- We can't know where the images are from */
-import { humanFormat } from 'human-format';
+import humanFormat from 'human-format';
 import { cn } from '@repo/utils';
 import Image from 'next/image';
 import { StorybookIcon, VerifiedIcon } from '@storybook/icons';
