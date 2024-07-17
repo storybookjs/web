@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { cn, fetchGithubCount } from '@repo/utils';
 import { Nunito_Sans as nunitoSans } from 'next/font/google';
 import { Header, Footer, Container } from '@repo/ui';
-import { Providers } from './providers';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { Providers } from './providers';
 
 import '@docsearch/css';
 import './globals.css';
@@ -43,7 +43,7 @@ export default async function RootLayout({
         )}
       >
         <Header
-          algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
+          algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!}
           githubCount={githubCount}
         />
         <Providers>

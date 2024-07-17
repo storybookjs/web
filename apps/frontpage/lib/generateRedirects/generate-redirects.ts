@@ -12,6 +12,7 @@ export function generateSequence(inputVersions: string[]) {
     const [major, maxMinor] = version.split('.');
 
     for (let minor = Number(maxMinor) - 1; minor >= 0; minor--) {
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions -- TODO: Fix this
       result.add(`${major}.${minor}`);
     }
   }
@@ -25,7 +26,7 @@ type Lines = [string, string, string][];
 
 export function parseRawRedirects(rawRedirects: string) {
   const lines = rawRedirects.split('\n');
-  let parsed: Lines = [];
+  const parsed: Lines = [];
 
   lines.forEach((line) => {
     if (!line.startsWith('#') && line.trim() !== '') {
@@ -49,8 +50,8 @@ interface Redirect {
   permanent: boolean;
 }
 
-async function getAllRenderers() {
-  const { coreFrameworks, communityFrameworks } = await getFrameworks();
+function getAllRenderers() {
+  const { coreFrameworks, communityFrameworks } = getFrameworks();
   return [...coreFrameworks, ...communityFrameworks];
 }
 
@@ -68,6 +69,7 @@ function getRedirect(
   source: string,
   destination: string,
   code: string,
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars -- TODO: Fix this
   debugType?: string,
 ) {
   return {
@@ -89,7 +91,7 @@ const installDocsPageSlug = (string: string) =>
     ? '/docs'
     : '/docs/get-started/install/';
 
-export async function generateRedirects({
+export function generateRedirects({
   latestVersionString = latestVersion.id,
   nextVersionString = docsVersions.find((v) => v.preRelease)?.id,
   rawRedirects,
@@ -105,7 +107,7 @@ export async function generateRedirects({
   renderers?: string[];
   versions?: Version[];
 }) {
-  const renderers = renderersIn || (await getAllRenderers());
+  const renderers = renderersIn ?? getAllRenderers();
   const renderersPathWildcardWithRegex = `:renderer(${renderers.join('|')})`;
 
   const parsedRedirects = parseRawRedirects(rawRedirects);
@@ -118,7 +120,7 @@ export async function generateRedirects({
         const isLatest = string === latestVersionString;
         const versionSlug = isLatest ? '' : `/${string}`;
         const versionStringNormalized = isNext
-          ? nextVersionString || latestVersionString
+          ? nextVersionString ?? latestVersionString
           : string;
         const versionStringOverride = isLatest
           ? ''
@@ -158,6 +160,7 @@ export async function generateRedirects({
           //     ),
           //   },
           // });
+          // eslint-disable-next-line no-lonely-if -- TODO: Fix this
           if (versionSlug !== `/${versionStringOverride}`) {
             acc.push(
               getRedirect(
@@ -189,7 +192,9 @@ export async function generateRedirects({
             acc.push(
               getRedirect(
                 `/docs/${string}/${renderersPathWildcardWithRegex}/:path*`,
-                isMajorOfLatestMinor || (isNext && !nextVersionString) ? `/docs/:path` : `/docs${versionSlugOverride}/:path`,
+                isMajorOfLatestMinor || (isNext && !nextVersionString)
+                  ? `/docs/:path`
+                  : `/docs${versionSlugOverride}/:path`,
                 isNext ? '307' : '308',
                 'e',
               ),
@@ -227,7 +232,8 @@ export async function generateRedirects({
       },
     ]);
 
-  console.log(`Generated ${result.length} redirects`);
+  // eslint-disable-next-line no-console -- OK
+  console.log(`Generated ${result.length.toString()} redirects`);
   if (result.length > 900) {
     throw new Error(`
 That's too many redirects.

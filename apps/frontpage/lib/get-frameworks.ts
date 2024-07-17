@@ -1,11 +1,8 @@
-import path from 'node:path';
-import { latestVersion } from '@repo/utils';
-
-export async function getFrameworks() {
+export function getFrameworks() {
   /**
    * TODO:
    * This works in Vitest, but not when ran as a script (generate-redirects.ts).
-   * 
+   *
    * For now, the return value is copy/pasted from ../content/docs/8.1/frameworks.js
    */
   // const { coreFrameworks, communityFrameworks, featureGroups } = await import(
@@ -13,7 +10,7 @@ export async function getFrameworks() {
   // );
   // // console.log({ coreFrameworks, communityFrameworks });
   // return { coreFrameworks, communityFrameworks, featureGroups };
-  
+
   return {
     coreFrameworks: ['react', 'vue', 'angular', 'web-components'],
     communityFrameworks: ['ember', 'html', 'svelte', 'preact', 'qwik', 'solid'],
@@ -209,13 +206,13 @@ export async function getFrameworks() {
           },
           {
             name: 'Doc Blocks - Meta',
-  
+
             unsupported: [''],
             path: 'api/doc-block-meta',
           },
           {
             name: 'Doc Blocks - Primary',
-  
+
             unsupported: [''],
             path: 'api/doc-block-primary',
           },
@@ -279,7 +276,14 @@ export async function getFrameworks() {
           },
           {
             name: 'Inline stories',
-            supported: ['react', 'vue', 'web-components', 'html', 'svelte', 'angular'],
+            supported: [
+              'react',
+              'vue',
+              'web-components',
+              'html',
+              'svelte',
+              'angular',
+            ],
           },
         ],
       },

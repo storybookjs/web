@@ -147,14 +147,14 @@ export const AngularNoLanguage: Story = {
   },
 };
 
-export const multipleTabs: Story = {
+export const MultipleTabs: Story = {
   args: {
     content: contentMultiTab,
     activeLanguage: 'js',
   },
 };
 
-export const multipleTabsVue3Only: Story = {
+export const MultipleTabsVue3Only: Story = {
   args: {
     content: contentMultiTabVue3Only,
     activeRenderer: 'vue',
@@ -162,7 +162,7 @@ export const multipleTabsVue3Only: Story = {
   },
 };
 
-export const multipleTabsVue3OnlySuffix: Story = {
+export const MultipleTabsVue3OnlySuffix: Story = {
   args: {
     content: contentMultiTabVue3OnlySuffix,
     activeRenderer: 'vue',
@@ -170,7 +170,7 @@ export const multipleTabsVue3OnlySuffix: Story = {
   },
 };
 
-export const multipleTabsVue2And3: Story = {
+export const MultipleTabsVue2And3: Story = {
   args: {
     content: contentMultiTabVue2And3,
     activeRenderer: 'vue',
@@ -178,7 +178,7 @@ export const multipleTabsVue2And3: Story = {
   },
 };
 
-export const multipleTabsVue2And3Suffix: Story = {
+export const MultipleTabsVue2And3Suffix: Story = {
   args: {
     content: contentMultiTabVue2And3Suffix,
     activeRenderer: 'vue',

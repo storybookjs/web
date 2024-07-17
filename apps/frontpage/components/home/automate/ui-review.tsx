@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- TODO */
 import { Container } from '@repo/ui';
 
 const reviewComments = [
@@ -10,14 +11,14 @@ export function UIReview() {
   return (
     <Container>
       <figure>
-        <div className="relative mt-12 mx-auto mb-[22%] md:mb-[160px] max-w-[715px] sm:mt-16">
+        <div className="relative mx-auto mb-[22%] mt-12 max-w-[715px] sm:mt-16 md:mb-[160px]">
           <img
             alt=""
             className="block w-[55%]"
             src="/home/automate/datepicker-compact-week.svg"
           />
           <div
-            className="flex-none w-[52%] h-[132%] absolute right-0 top-0 flex flex-col justify-end gap-[2.5%]"
+            className="absolute right-0 top-0 flex h-[132%] w-[52%] flex-none flex-col justify-end gap-[2.5%]"
             style={{ transform: 'translate3d(0%, 8.5%, 0)' }}
           >
             {reviewComments.map(({ id, image }) => (

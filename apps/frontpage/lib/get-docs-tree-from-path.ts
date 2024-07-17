@@ -23,8 +23,8 @@ export const getDocsTreeFromPath = (
   pathToFiles?: string,
   docsRoot?: string,
 ) => {
-  const newPath = pathToFiles || 'content/docs';
-  const newDocsRoot = docsRoot || newPath;
+  const newPath = pathToFiles ?? 'content/docs';
+  const newDocsRoot = docsRoot ?? newPath;
 
   const files = fs.readdirSync(path.join(process.cwd(), newPath));
   const tree: RawTreeProps[] = [];
@@ -48,7 +48,7 @@ export const getDocsTreeFromPath = (
           )
           .filter((item) => item.name !== 'index.mdx')
           .filter((item) => item.name !== 'index.md');
-        const isTab = indexFile?.isTab || false;
+        const isTab = indexFile?.isTab ?? false;
 
         if (indexFile) {
           tree.push({

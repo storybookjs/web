@@ -1,7 +1,7 @@
-import { MetadataRoute } from 'next';
-import { FlatTreeNode, getFlatTree } from '../../lib/get-flat-tree';
-import { getAllTrees } from '../../lib/get-all-trees';
+import { type MetadataRoute } from 'next';
 import { docsVersions, latestVersion } from '@repo/utils';
+import { type FlatTreeNode, getFlatTree } from '../../lib/get-flat-tree';
+import { getAllTrees } from '../../lib/get-all-trees';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Generate docs tree for each version
@@ -33,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url:
       version.id === latestVersion.id
         ? 'https://storybook.js.org/docs'
-        : `https://storybook.js.org/docs/${version.inSlug || version.id}`,
+        : `https://storybook.js.org/docs/${version.inSlug ?? version.id}`,
   }));
 
   return [

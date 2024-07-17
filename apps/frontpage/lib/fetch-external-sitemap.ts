@@ -1,4 +1,4 @@
-import Sitemapper, { SitemapperErrorData } from 'sitemapper';
+import Sitemapper, { type SitemapperErrorData } from 'sitemapper';
 
 interface ExtendedSitemapperErrorData extends SitemapperErrorData {
   message: string;

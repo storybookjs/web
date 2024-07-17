@@ -1,12 +1,14 @@
-import type { DetailedHTMLProps, HTMLAttributes } from 'react';
+import type { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 
 type TableProps = DetailedHTMLProps<
   HTMLAttributes<HTMLElement>,
   HTMLHeadingElement
 >;
-export function Td({ children }: TableProps) {
+export const Td: FC<TableProps> = ({ children }) => {
   return (
     // TODO: Check prefix placement in ones like `[&>code]:ui-text-slate-500`
-    <td className="ui-py-4 ui-pr-6 ui-align-top [&>code]:ui-text-slate-500">{children}</td>
+    <td className="ui-py-4 ui-pr-6 ui-align-top [&>code]:ui-text-slate-500">
+      {children}
+    </td>
   );
-}
+};

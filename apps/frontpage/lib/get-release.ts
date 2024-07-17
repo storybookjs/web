@@ -1,6 +1,5 @@
 import fs from 'node:fs';
 import { compileMDX } from 'next-mdx-remote/rsc';
-
 import { mdxComponents } from '@repo/ui';
 
 export async function getRelease(version: string) {

@@ -1,7 +1,7 @@
 import path from 'node:path';
 import fs from 'fs-extra';
 
-import { generateRedirects } from '../lib/generateRedirects/generateRedirects';
+import { generateRedirects } from '../lib/generateRedirects/generate-redirects';
 
 async function generate(): Promise<void> {
   const rawRedirects = await fs.readFile(

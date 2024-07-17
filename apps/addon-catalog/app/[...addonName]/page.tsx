@@ -1,6 +1,6 @@
-import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 import { SubHeader } from '@repo/ui';
 import { cn } from '@repo/utils';
+import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 import { AddonHero } from '../../components/addon/addon-hero';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
 import { Highlight } from '../../components/highlight';
@@ -35,7 +35,7 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
             <Highlight withHTMLChildren={false}>
               <div
                 /**
-                 * These are copied from @repo/ui/src/components/mdx/...
+                 * These are copied from \@repo/ui/src/components/mdx/...
                  *
                  * TODO: Tweak these styles
                  */

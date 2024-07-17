@@ -1,4 +1,4 @@
-import { resolve, format } from 'url';
+import { resolve, format } from 'node:url';
 import { rehype } from 'rehype';
 import rehypeUrls from 'rehype-urls';
 import rehypeStringify from 'rehype-stringify';
@@ -12,10 +12,10 @@ interface Options {
 function assetUrl(repositoryUrl: string | null) {
   if (!repositoryUrl) return repositoryUrl;
 
-  const repositoryRegex = /github\.com\/(.+\/.+)\//;
-  const parseResult = repositoryUrl.match(repositoryRegex);
+  const repositoryRegex = /github\.com\/(?:.+\/.+)\//;
+  const parseResult = repositoryRegex.exec(repositoryUrl);
 
-  if (parseResult && parseResult[1]) {
+  if (parseResult?.[1]) {
     const repository = parseResult[1];
     return `https://raw.githubusercontent.com/${repository}/HEAD/`;
   }
@@ -26,11 +26,7 @@ function assetUrl(repositoryUrl: string | null) {
 function absoluteLink(
   link: string,
   // @ts-expect-error - TODO: Fix types
-  {
-    base,
-    assetBase,
-    isAsset,
-  }: Options & { isAsset?: boolean } = {},
+  { base, assetBase, isAsset }: Options & { isAsset?: boolean } = {},
 ) {
   if (link.startsWith('#')) {
     return link;
@@ -42,9 +38,11 @@ function absoluteLink(
 function absoluteLinksHtml(html: string, opts: Options) {
   const buf = rehype()
     // @ts-expect-error - TODO: Fix types
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- TODO: Fix types
     .use(rehypeUrls, (url, node) => {
-      return absoluteLink(format(url), {
+      return absoluteLink(format(url as string), {
         ...opts,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- TODO: Fix types
         isAsset: node.properties.src,
       });
     })
@@ -57,7 +55,6 @@ function absoluteLinksHtml(html: string, opts: Options) {
 }
 
 export function absoluteLinks(opts: Options) {
-  // eslint-disable-next-line
   opts.assetBase = assetUrl(opts.base);
 
   return transform;
@@ -71,19 +68,20 @@ export function absoluteLinks(opts: Options) {
     function visitor(node) {
       if (!node) return;
 
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- TODO: Fix types
       switch (node.type) {
         case 'link': {
-          // eslint-disable-next-line
+          // eslint-disable-next-line -- TODO: Fix types
           node.url = absoluteLink(node.url, opts);
           return;
         }
         case 'html': {
-          // eslint-disable-next-line
+          // eslint-disable-next-line -- TODO: Fix types
           node.value = absoluteLinksHtml(node.value, opts);
           return;
         }
         case 'image': {
-          // eslint-disable-next-line
+          // eslint-disable-next-line -- TODO: Fix types
           node.url = absoluteLink(node.url, {
             ...opts,
             isAsset: true,
@@ -91,6 +89,7 @@ export function absoluteLinks(opts: Options) {
           return;
         }
         default:
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-unsafe-member-access -- TODO: Fix types
           throw new Error(`Unexpected: ${node.type}`);
       }
     }

@@ -36,9 +36,11 @@ export const fetchNpmDownloads = async (): Promise<{
     const result = results.reduce((a, b) => a + b, 0);
 
     let npmDownloadsFixed = parseInt((result / 1000).toFixed(0), 10);
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions -- false positive
     let npmDownloadsDisplay = `${npmDownloadsFixed}k`;
     if (npmDownloadsFixed >= 1000) {
       npmDownloadsFixed = parseFloat((npmDownloadsFixed / 1000).toFixed(2));
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions -- false positive
       npmDownloadsDisplay = `${npmDownloadsFixed}m`;
     }
 

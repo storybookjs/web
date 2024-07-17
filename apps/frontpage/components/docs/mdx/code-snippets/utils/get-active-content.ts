@@ -41,11 +41,11 @@ export const getActiveContentTabs = ({
     if (reactContent.length === 0) {
       // If there's no react content, we need to return the first content
       filteredContent = content;
-      error = `This snippet doesn't exist for ${activeRenderer}.`;
+      error = `This snippet doesn't exist for ${activeRenderer ?? ''}.`;
     } else {
       // If there's react content, we need to show that
       filteredContent = reactContent;
-      error = `This snippet doesn't exist for ${activeRenderer}. In the meantime, here's the React snippet.`;
+      error = `This snippet doesn't exist for ${activeRenderer ?? ''}. In the meantime, here's the React snippet.`;
     }
   }
 
@@ -155,13 +155,13 @@ export const getActiveContent = ({
     });
 
     return {
-      activeContent: filterByTab?.[0] || null,
+      activeContent: filterByTab?.[0] ?? null,
       error: null,
     };
   }
 
   return {
-    activeContent: tabs?.[0] || null,
+    activeContent: tabs?.[0] ?? null,
     error,
   };
 };

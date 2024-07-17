@@ -1,5 +1,6 @@
 import { addonFragment, validateResponse } from '@repo/utils';
-import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
+import { type Addon } from '../types';
+import { fetchAddonsQuery, gql } from './fetch-addons-query';
 
 interface SearchData {
   partialSearchIntegrations: {
@@ -28,7 +29,6 @@ export async function fetchSearchData(query: string) {
 
     return data.partialSearchIntegrations.addons;
   } catch (error) {
-    // @ts-expect-error - Seems safe
-    throw new Error(`Failed to fetch search data: ${error.message}`);
+    throw new Error(`Failed to fetch search data: ${(error as Error).message}`);
   }
 }

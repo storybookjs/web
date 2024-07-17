@@ -1,8 +1,7 @@
-// eslint-disable-next-line
+ 
 import { remark } from 'remark';
 import remarkGFM from 'remark-gfm';
 import remarkHTML from 'remark-html';
-
 import { absoluteLinks } from './absolute-links';
 
 export function createMarkdownProcessor(absoluteLinkBase: string) {

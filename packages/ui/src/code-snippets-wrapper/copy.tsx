@@ -2,15 +2,15 @@
 
 import { CheckIcon, CopyIcon } from '@storybook/icons';
 import { renderToStaticMarkup } from 'react-dom/server';
-import type { ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 import { useState } from 'react';
 import copy from 'copy-to-clipboard';
 import { decode } from 'he';
 
-export const Copy = ({ content }: { content: ReactNode }) => {
+export const Copy: FC<{ content: ReactNode }> = ({ content }) => {
   const [state, setState] = useState<'idle' | 'copied'>('idle');
 
-  const onClick = () => {
+  const onClick = (): void => {
     const textToConvertIntoString = renderToStaticMarkup(content);
     const decodedText = decode(textToConvertIntoString);
     copy(decodedText);

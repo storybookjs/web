@@ -1,4 +1,4 @@
-import { DocsVersion, TreeProps } from '@repo/utils';
+import { type DocsVersion, type TreeProps } from '@repo/utils';
 
 export interface FlatTreeNode {
   slug: string;
@@ -26,9 +26,9 @@ export const getFlatTree = ({
     flatTree.push({
       slug: node.slug,
       type: node.type,
-      draft: node.draft || false,
+      draft: node.draft ?? false,
       canonical: node.canonical,
-      level: level,
+      level,
     });
     if (node.children) {
       flatTree = flatTree.concat(
@@ -48,7 +48,7 @@ export const getFlatTree = ({
 
   if (filterSecondLevelDirectories) {
     flatTree = flatTree.filter((node) =>
-      node.type === 'directory' ? (node.level === 2 ? false : true) : true,
+      node.type === 'directory' ? node.level !== 2 : true,
     );
   }
 

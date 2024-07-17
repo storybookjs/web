@@ -7,11 +7,9 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import type { DocsVersion, TreeProps } from '@repo/utils';
 import { cn } from '@repo/utils';
+import { getVersion } from '../../lib/get-version';
 import { NavDocs } from './sidebar/docs-nav';
 import { DocsMainNav } from './sidebar/docs-main-nav';
-import { getVersion } from '../../lib/get-version';
-
-type Tree = TreeProps[] | null | undefined;
 
 interface SubmenuProps {
   listOfTrees: TreeProps[];
@@ -36,7 +34,7 @@ export const Submenu: FC<SubmenuProps> = ({ listOfTrees }) => {
   }
 
   return (
-    <div className="flex items-center gap-3 border-b border-zinc-200 p-4 text-sm sm:px-8 md:hidden dark:border-slate-800">
+    <div className="flex items-center gap-3 p-4 text-sm border-b border-zinc-200 sm:px-8 md:hidden dark:border-slate-800">
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
           <button
@@ -53,8 +51,8 @@ export const Submenu: FC<SubmenuProps> = ({ listOfTrees }) => {
             align="end"
             className="data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade mt-[17px] h-[74vh] w-screen rounded-b-lg bg-white shadow-xl md:mt-2 md:h-[50vh] md:w-64 md:rounded-lg dark:bg-slate-950"
           >
-            <ScrollArea.Root className="h-full w-full">
-              <ScrollArea.Viewport className="h-full w-full p-4 md:p-6 md:pt-5">
+            <ScrollArea.Root className="w-full h-full">
+              <ScrollArea.Viewport className="w-full h-full p-4 md:p-6 md:pt-5">
                 {activeVersion ? (
                   <>
                     <DocsMainNav />
@@ -72,7 +70,7 @@ export const Submenu: FC<SubmenuProps> = ({ listOfTrees }) => {
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
-      <div className="text-md flex items-center gap-1 font-bold text-slate-500 dark:text-white">
+      <div className="flex items-center gap-1 font-bold text-md text-slate-500 dark:text-white">
         Docs <ChevronSmallRightIcon />
         <span className="text-black dark:text-white">{title}</span>
       </div>

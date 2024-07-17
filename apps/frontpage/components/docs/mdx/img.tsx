@@ -18,7 +18,7 @@ export function Img({ src, alt, activeVersion }: ImgProps) {
   const pathWithoutRoot = src
     ?.replace('../../_assets/', '')
     .replace('../_assets/', '');
-  const path = `/docs-assets/${activeVersion}/${pathWithoutRoot}`;
+  const path = `/docs-assets/${activeVersion}/${pathWithoutRoot ?? ''}`;
   const localPath = `public${path}`;
 
   // Check if the file exists
@@ -32,7 +32,7 @@ export function Img({ src, alt, activeVersion }: ImgProps) {
 
   return (
     <Image
-      alt={alt || ''}
+      alt={alt ?? ''}
       height={dimensions.height}
       src={path}
       width={dimensions.width}

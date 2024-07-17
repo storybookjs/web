@@ -1,5 +1,6 @@
 import { validateResponse } from '@repo/utils';
-import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
+import { type Tag } from '../types';
+import { fetchAddonsQuery, gql } from './fetch-addons-query';
 
 type TagValue = Tag['name'];
 
@@ -12,39 +13,40 @@ export async function fetchTagsData({
 }: {
   isCategory?: boolean;
 } = {}) {
-  try {
-    let value: TagValue[] = [];
-    async function fetchPartialData(skip: number = 0) {
-      const data = await fetchAddonsQuery<
-        TagsData,
-        { isCategory: boolean; skip: number }
-      >(
-        gql`
-          query TagNames($isCategory: Boolean!, $skip: Int!) {
-            tags(isCategory: $isCategory, limit: 30, skip: $skip) {
-              name
-            }
+  let value: TagValue[] = []; // Moved outside to be accessible by fetchPartialData
+
+  // Define fetchPartialData at the root of fetchTagsData function body
+  async function fetchPartialData(skip = 0): Promise<TagValue[]> {
+    const data = await fetchAddonsQuery<
+      TagsData,
+      { isCategory: boolean; skip: number }
+    >(
+      gql`
+        query TagNames($isCategory: Boolean!, $skip: Int!) {
+          tags(isCategory: $isCategory, limit: 30, skip: $skip) {
+            name
           }
-        `,
-        {
-          variables: { isCategory: Boolean(isCategory), skip },
-        },
-      );
+        }
+      `,
+      {
+        variables: { isCategory: Boolean(isCategory), skip },
+      },
+    );
 
-      validateResponse(() => data?.tags);
+    validateResponse(() => data?.tags);
 
-      const { tags } = data;
+    const { tags } = data;
 
-      value = [...value, ...tags.map(({ name }) => name)];
+    value = [...value, ...tags.map(({ name }) => name)];
 
-      if (tags.length > 0) await fetchPartialData(skip + tags.length);
+    if (tags.length > 0) await fetchPartialData(skip + tags.length);
 
-      return value;
-    }
+    return value;
+  }
 
-    return await fetchPartialData();
+  try {
+    return await fetchPartialData(); // Call fetchPartialData at the end of fetchTagsData
   } catch (error) {
-    // @ts-expect-error - Seems safe
-    throw new Error(`Failed to fetch addons data: ${error.message}`);
+    throw new Error(`Failed to fetch addons data: ${(error as Error).message}`);
   }
 }

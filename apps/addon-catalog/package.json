@@ -16,6 +16,7 @@
     "@next/third-parties": "^14.2.4",
     "@radix-ui/react-slot": "^1.1.0",
     "@repo/ui": "*",
+    "@repo/utils": "*",
     "@storybook/icons": "^1.2.9",
     "@types/mdx": "^2.0.13",
     "copy-to-clipboard": "^3.3.3",
@@ -23,6 +24,8 @@
     "graphql-request": "^7.1.0",
     "human-format": "^1.2.0",
     "next": "^14.2.4",
+    "next-plausible": "^3.12.0",
+    "next-themes": "^0.3.0",
     "prismjs": "^1.29.0",
     "react": "^18",
     "react-dom": "^18",
@@ -43,6 +46,6 @@
     "eslint-config-next": "14.2.4",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5.3.3"
   }
 }

@@ -1,21 +1,21 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
-import { useMediaQuery } from '../../../hooks/use-media-query';
+import { type FC, useEffect, useState } from 'react';
 import { renderers } from '@repo/utils';
-import { Button } from './button';
-import { useDocs } from '../../../app/docs/provider';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@repo/ui';
+import { useMediaQuery } from '../../../hooks/use-media-query';
+import { useDocs } from '../../../app/docs/provider';
+import { Button } from './button';
 
-type Renderer = typeof renderers[number];
+type Renderer = (typeof renderers)[number];
 
 export const Renderers: FC = () => {
-  let { activeRenderer, setRenderer } = useDocs();
+  const { activeRenderer, setRenderer } = useDocs();
   const [isMobile] = useMediaQuery('(max-width: 480px)');
   const [firstList, setFirstList] = useState<Renderer[]>(renderers.slice(0, 3));
   const [lastRenderer, setLastRenderer] = useState<Renderer>(renderers[3]);
@@ -41,14 +41,14 @@ export const Renderers: FC = () => {
     if (!isInFirstList && activeRendererObj) {
       setLastRenderer(activeRendererObj);
     }
-  }, [isMobile, activeRenderer]);
+  }, [isMobile, activeRenderer, firstList]);
 
   const restRenderers = renderers.filter((r) => {
     return !firstList.includes(r) && r !== lastRenderer;
   });
 
   return (
-    <div className="mb-8 flex gap-2">
+    <div className="flex gap-2 mb-8">
       {firstList.map((renderer) => (
         <Button
           active={renderer.id === activeRenderer}

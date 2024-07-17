@@ -1,6 +1,9 @@
-import { expect, test } from 'vitest'
-
-import { generateSequence, parseRawRedirects, generateRedirects } from './generateRedirects';
+import { expect, test } from 'vitest';
+import {
+  generateSequence,
+  parseRawRedirects,
+  generateRedirects,
+} from './generate-redirects';
 
 const inputString = `
 # Multi-line preamble
@@ -99,15 +102,12 @@ test('parseRawRedirects', () => {
   `);
 });
 
-test('generateRedirects, no pre-release', async () => {
-  const result = await generateRedirects({
+test('generateRedirects, no pre-release', () => {
+  const result = generateRedirects({
     rawRedirects: inputString,
     latestVersionString: '8.1',
     nextVersionString: null,
-    renderers: [
-      'react',
-      'vue',
-    ],
+    renderers: ['react', 'vue'],
     versions: [
       { version: 8.1, string: '8.1', label: 'latest' },
       { version: 8.0, string: '8.0' },
@@ -212,17 +212,14 @@ test('generateRedirects, no pre-release', async () => {
   `);
 });
 
-test('generateRedirects, minor pre-release', async () => {
-  const result = await generateRedirects({
+test('generateRedirects, minor pre-release', () => {
+  const result = generateRedirects({
     rawRedirects: `
 /docs/workflows/unit-testing/ /docs/writing-tests/stories-in-unit-tests/ 308
     `,
     latestVersionString: '8.1',
     nextVersionString: '8.2',
-    renderers: [
-      'react',
-      'vue',
-    ],
+    renderers: ['react', 'vue'],
     versions: [
       { version: 8.1, string: '8.1', label: 'latest' },
       { version: 8.0, string: '8.0' },
@@ -308,17 +305,14 @@ test('generateRedirects, minor pre-release', async () => {
   `);
 });
 
-test('generateRedirects, major pre-release', async () => {
-  const result = await generateRedirects({
+test('generateRedirects, major pre-release', () => {
+  const result = generateRedirects({
     rawRedirects: `
 /docs/workflows/unit-testing/ /docs/writing-tests/stories-in-unit-tests/ 308
     `,
     latestVersionString: '8.1',
     nextVersionString: '9.0',
-    renderers: [
-      'react',
-      'vue',
-    ],
+    renderers: ['react', 'vue'],
     versions: [
       { version: 8.1, string: '8.1', label: 'latest' },
       { version: 8.0, string: '8.0' },

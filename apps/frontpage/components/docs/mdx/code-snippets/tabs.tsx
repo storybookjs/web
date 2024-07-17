@@ -15,9 +15,10 @@ export const Tabs = ({
   tabs: Tab[];
 }) => (
   <div className="flex gap-2">
-    {tabs.map((tab, index) => (
+    {tabs.map((tab) => (
       <button
-        key={index}
+        key={tab.id}
+        type="button"
         className={cn(
           'flex h-7 items-center justify-center rounded border px-2 text-sm transition-colors',
           activeTab === tab.id &&

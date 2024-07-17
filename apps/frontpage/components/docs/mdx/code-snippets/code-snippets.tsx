@@ -1,8 +1,10 @@
+/* eslint-disable no-nested-ternary -- TODO: Refactor */
 'use client';
 
 import { useEffect, useState, type FC } from 'react';
 import { type CodeSnippetsProps } from '@repo/utils';
 import { CodeSnippetsWrapper } from '@repo/ui';
+import { InfoIcon } from '@storybook/icons';
 import { useDocs } from '../../../../app/docs/provider';
 import { getFilters } from './utils/get-filters';
 import {
@@ -10,9 +12,8 @@ import {
   getActiveContent,
 } from './utils/get-active-content';
 import { Dropdown } from './dropdown';
-import { InfoIcon } from '@storybook/icons';
 import { transformVueTabTitle } from './utils/transform-vue-tab-title';
-import { Tab, Tabs } from './tabs';
+import { type Tab, Tabs } from './tabs';
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[] | null;
@@ -40,17 +41,10 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     setLanguage,
     setPackageManager,
   } = useDocs();
-  const [activeTab, setTab] = useState<Tab['id'] | null>(null);
-
-  if (!content)
-    return (
-      <CodeSnippetsWrapper>
-        <Error />
-      </CodeSnippetsWrapper>
-    );
+  const [activeTab, setActiveTab] = useState<Tab['id'] | null>(null);
 
   // Get filters - If preformatted text, we don't need filters
-  const filters = getFilters({ content, activeRenderer });
+  const filters = getFilters({ content: content ?? [], activeRenderer });
 
   const handleLanguage = (id: string) => {
     setLanguage(id);
@@ -62,7 +56,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
 
   // Get possible tabs and their content
   const { activeContentTabs, error: errorTabs } = getActiveContentTabs({
-    content,
+    content: content ?? [],
     filters,
     activeLanguage,
     activePackageManager,
@@ -91,11 +85,18 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
       tabs.length > 0 &&
       !activeTab
     ) {
-      setTab(tabs[0].id);
+      setActiveTab(tabs[0].id);
     } else if (tabs && tabs.length === 0 && activeTab) {
-      setTab(null);
+      setActiveTab(null);
     }
   }, [activeTab, tabs, activeLanguage, activePackageManager, activeRenderer]);
+
+  if (!content)
+    return (
+      <CodeSnippetsWrapper>
+        <Error />
+      </CodeSnippetsWrapper>
+    );
 
   // Get active snippet content
   const { activeContent, error: errorActiveContent } = getActiveContent({
@@ -108,14 +109,14 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     activeTab,
   });
 
-  const error = errorTabs || errorActiveContent;
+  const error = errorTabs ?? errorActiveContent;
 
   return (
     <CodeSnippetsWrapper
-      copy={activeContent?.raw || ''}
+      copy={activeContent?.raw ?? ''}
       top={
         tabs && tabs.length > 1 ? (
-          <Tabs activeTab={activeTab} onTabChange={setTab} tabs={tabs} />
+          <Tabs activeTab={activeTab} onTabChange={setActiveTab} tabs={tabs} />
         ) : null
       }
       options={
@@ -123,7 +124,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
           {filters && filters.languages.length > 1 ? (
             <Dropdown
               action={handleLanguage}
-              activeId={activeContent?.language || ''}
+              activeId={activeContent?.language ?? ''}
               list={filters.languages}
               type="language"
             />
@@ -131,14 +132,14 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
           {filters && filters.packageManagers.length > 1 ? (
             <Dropdown
               action={handlePackageManager}
-              activeId={activeContent?.packageManager || ''}
+              activeId={activeContent?.packageManager ?? ''}
               list={filters.packageManagers}
               type="packageManager"
             />
           ) : null}
         </>
       }
-      title={activeContent?.filename || ''}
+      title={activeContent?.filename ?? ''}
       iconLanguage={
         activeContent?.packageManager
           ? 'sh'
@@ -151,12 +152,12 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     >
       {activeContent?.content ? (
         <>
-          {error && (
-            <div className="mb-4 flex items-center gap-2 rounded border border-orange-300 bg-orange-100 px-4 py-3 text-orange-900 dark:border-orange-800 dark:bg-orange-950 dark:text-orange-400">
+          {error ? (
+            <div className="flex items-center gap-2 px-4 py-3 mb-4 text-orange-900 bg-orange-100 border border-orange-300 rounded dark:border-orange-800 dark:bg-orange-950 dark:text-orange-400">
               <InfoIcon />
               {error}
             </div>
-          )}
+          ) : null}
           <section
             dangerouslySetInnerHTML={{
               __html: activeContent.content,

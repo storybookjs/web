@@ -32,7 +32,7 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
         {top ? <div className="ui-px-3 ui-pb-1 ui-pt-3">{top}</div> : null}
         <div className="ui-flex ui-h-12 ui-items-center ui-justify-between ui-border-b ui-border-b-zinc-300 ui-py-2 ui-pl-5 ui-pr-4 dark:ui-border-slate-700">
           <div className="ui-flex ui-items-center ui-gap-2 ui-text-sm ui-text-black dark:ui-text-slate-400">
-            {iconLanguage ? languageIcons[iconLanguage] : null} {title || ''}
+            {iconLanguage ? languageIcons[iconLanguage] : null} {title ?? ''}
           </div>
           <div className="ui-flex ui-items-center ui-gap-2">
             {options}

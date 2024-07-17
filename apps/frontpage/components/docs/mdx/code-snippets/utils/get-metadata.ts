@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import type { CodeSnippetsProps, DocsVersion } from '@repo/utils';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
-// eslint-disable-next-line import/no-named-as-default -- TODO: Check if this is a bug
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
@@ -14,7 +13,7 @@ interface MetadataProps {
 }
 
 export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
-  const pathToCheck = `${process.cwd()}/content/snippets/${activeVersion.id}/${path}`;
+  const pathToCheck = `${process.cwd()}/content/snippets/${activeVersion.id}/${path ?? ''}`;
 
   // Check first if the file exists
   const doesFileExist = fs.existsSync(pathToCheck);
@@ -42,7 +41,7 @@ export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
   const content: CodeSnippetsProps[] = await Promise.all(
     codeBlocks.map(async (block) => {
       // We are bringing back the necessary values to render the code block
-      const valueWithBackticks = `\`\`\`${block.lang}\n${block.value}\n\`\`\``;
+      const valueWithBackticks = `\`\`\`${block.lang ?? 'unknown'}\n${block.value}\n\`\`\``;
       const result = await unified()
         .use(remarkParse)
         .use(remarkRehype)
@@ -50,7 +49,7 @@ export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
         .use(rehypeStringify)
         .process(valueWithBackticks);
 
-      const matches = block.meta?.match(/(\w+)="([^"]*)"/g);
+      const matches = block.meta?.match(/(?:\w+)="(?:[^"]*)"/g);
 
       // console.log(path, 'matches', matches);
       // -> init-command.md matches [ 'renderer="common"', 'language="js"', 'packageManager="npx"' ]
@@ -68,7 +67,7 @@ export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
       }
 
       return {
-        language: block.lang || undefined,
+        language: block.lang ?? undefined,
         ...metadata,
         raw: block.value,
         content: result.value,

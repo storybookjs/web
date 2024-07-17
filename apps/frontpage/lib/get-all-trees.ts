@@ -1,11 +1,11 @@
 import {
-  RawTreeProps,
-  TreeProps,
+  type RawTreeProps,
+  type TreeProps,
   latestVersion,
   docsVersions,
 } from '@repo/utils';
 import { getDocsTreeFromPath } from './get-docs-tree-from-path';
-import { FlatTreeNode, getFlatTree } from './get-flat-tree';
+import { type FlatTreeNode, getFlatTree } from './get-flat-tree';
 
 const getSlug = (pathSegment: string) => {
   // We first split the pathSegment into an array
@@ -73,8 +73,8 @@ const addCanonicalToNode = (
   } as TreeProps;
 
   if (newNode.children) {
-    newNode.children = newNode.children.map((node) =>
-      addCanonicalToNode(node, flatTree),
+    newNode.children = newNode.children.map((n) =>
+      addCanonicalToNode(n, flatTree),
     );
   }
 

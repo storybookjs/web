@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next';
+import { type MetadataRoute } from 'next';
 import { docsVersions } from '@repo/utils';
 import { getFlatTree } from '../../lib/get-flat-tree';
 import { getAllTrees } from '../../lib/get-all-trees';
@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Generate docs tree for the latest version only
   const listOfTrees = getAllTrees();
-  const tree = listOfTrees.find((tree) => tree.name === latestVersion.id);
+  const tree = listOfTrees.find((t) => t.name === latestVersion.id);
 
   // We flatten the tree
   const flatTree = tree?.children && getFlatTree({ tree: tree?.children });

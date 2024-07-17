@@ -1,6 +1,6 @@
 'use client';
 
-import { TreeProps, getVersion, latestVersion } from '@repo/utils';
+import { type TreeProps, getVersion, latestVersion } from '@repo/utils';
 import { useSelectedLayoutSegment } from 'next/navigation';
 
 export function TOCSectionTitles({
@@ -19,11 +19,10 @@ export function TOCSectionTitles({
 
     function buildTitle(items: TreeProps[], pathPartIndex: number) {
       const item = items.find(
-        (item) =>
-          item.name.replace('.mdx', '') === (slug as string[])[pathPartIndex],
+        (it) => it.name.replace('.mdx', '') === slug[pathPartIndex],
       );
       if (item) {
-        title.push(item.sidebar?.title || item.title);
+        title.push(item.sidebar?.title ?? item.title);
         if (item.children) {
           buildTitle(item.children, pathPartIndex + 1);
         }

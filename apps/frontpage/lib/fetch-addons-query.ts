@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type -- TODO Fix this */
+ 
 
 import { GraphQLClient } from 'graphql-request';
 
@@ -13,7 +13,7 @@ export async function fetchAddonsQuery<
   V extends Record<string, unknown> = Record<string, never>,
 >(query: string, { variables }: { variables?: V } = {}) {
   async function main() {
-    // eslint-disable-next-line no-return-await -- TODO Fix this
+     
     return await client.request<D>(query, variables);
   }
 

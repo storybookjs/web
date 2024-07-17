@@ -10,8 +10,9 @@ export const fetchYouTubeSubscribers = async (): Promise<{
   number: number;
   formattedResult: string;
 }> => {
+  const youtubeApiKey = process.env.YOUTUBE_API_KEY ?? '';
   const response = await fetch(
-    `https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=UCr7Quur3eIyA_oe8FNYexfg&key=${process.env.YOUTUBE_API_KEY}`,
+    `https://youtube.googleapis.com/youtube/v3/channels?part=statistics&id=UCr7Quur3eIyA_oe8FNYexfg&key=${youtubeApiKey}`,
   );
 
   const data = (await response.json()) as YoutubeData;

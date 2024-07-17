@@ -9,7 +9,6 @@ import {
   cookiePackageManagerId,
   cookieRenderId,
 } from '../../constants';
-import { useSearchParams } from 'next/navigation';
 
 export interface DocsContextProps {
   activeRenderer: null | string;

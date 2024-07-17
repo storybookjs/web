@@ -64,7 +64,7 @@ export function Home({
     <div className="bg-homeBackground relative" id="page-top">
       <div className="relative z-10">
         <Header
-          algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY as string}
+          algoliaApiKey={process.env.NEXT_PUBLIC_ALGOLIA_API_KEY!}
           githubCount={githubCount}
           variant="home"
         />

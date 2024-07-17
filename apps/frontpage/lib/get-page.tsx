@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import type { DocsVersion, RawTreeProps } from '@repo/utils';
 import { mdxComponents, MDXRemoteOptions } from '@repo/ui';
+import type { ReactNode, ReactElement } from 'react';
 import {
   A,
   CodeSnippets,
@@ -15,7 +16,6 @@ import {
   YouTubeCallout,
 } from '../components/docs/mdx';
 import { getDocsTreeFromPath } from './get-docs-tree-from-path';
-import { ReactElement } from 'react';
 
 export interface PageDataProps {
   title?: string;
@@ -81,7 +81,9 @@ export const getPageData = async (
         <CodeSnippets activeVersion={activeVersion} {...props} />
       ),
       FeatureSnippets,
-      FrameworkSupportTable: (props) => <div {...props}>{props.children}</div>,
+      FrameworkSupportTable: (props: { children: ReactNode }) => (
+        <div {...props}>{props.children}</div>
+      ),
       HomeConcepts,
       HomeRenderers,
       HomeResources,

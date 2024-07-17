@@ -13,7 +13,7 @@ export const ChromaticLogo: FC<ChromaticLogoProps> = ({
   return (
     <svg
       fill="none"
-      height={height || 29}
+      height={height ?? 29}
       role="img"
       viewBox="0 0 149 29"
       xmlns="http://www.w3.org/2000/svg"

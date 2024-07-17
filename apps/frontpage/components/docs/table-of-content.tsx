@@ -6,9 +6,9 @@ import { inView } from 'framer-motion';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import { useScrollDirection } from 'react-use-scroll-direction';
+import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 import { ScrollBar } from '../ui/scroll-area';
 import { useDocs } from '../../app/docs/provider';
-import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 
 interface Heading {
   id: string;
@@ -28,12 +28,11 @@ export const TableOfContent: FC = () => {
   const [headings, setHeadings] = useState<Heading[]>([]);
 
   useEffect(() => {
-    const selectors = document.querySelectorAll(
-      'h2, h3, h4',
-    ) as NodeListOf<HTMLHeadingElement>;
+    const selectors = document.querySelectorAll('h2, h3, h4');
 
     const elements = Array.from(selectors).map((elem) => ({
       id: elem.id,
+      // @ts-expect-error -- TODO: Fix this
       title: elem.innerText,
       level: Number(elem.nodeName.charAt(1)),
     }));
@@ -60,7 +59,7 @@ export const TableOfContent: FC = () => {
             </ul>
           </div>
         </ScrollAreaPrimitive.Viewport>
-        <ScrollBar className="pb-6 pt-12" />
+        <ScrollBar className="pt-12 pb-6" />
       </ScrollAreaPrimitive.Root>
     </nav>
   );

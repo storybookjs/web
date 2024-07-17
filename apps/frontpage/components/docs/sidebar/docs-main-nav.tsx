@@ -4,6 +4,7 @@ import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 import { cn, latestVersion } from '@repo/utils';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
+import { getVersion } from '../../../lib/get-version';
 import {
   APIIcon,
   ChangelogIcon,
@@ -11,7 +12,6 @@ import {
   IntegrationsIcon,
   TutorialsIcon,
 } from './icons';
-import { getVersion } from '../../../lib/get-version';
 
 export const DocsMainNav = () => {
   const pathname = usePathname();
@@ -21,7 +21,7 @@ export const DocsMainNav = () => {
   const docsLink =
     activeVersion.id === latestVersion.id
       ? '/docs'
-      : `/docs/${activeVersion.inSlug}`;
+      : `/docs/${activeVersion.inSlug ?? ''}`;
 
   return (
     <nav className="flex flex-col gap-1.5 text-sm font-medium">
