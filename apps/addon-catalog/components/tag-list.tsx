@@ -4,13 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Pill } from '@repo/ui';
 
-interface TagProps {
-  name: string;
-  link: string;
-}
-
 interface TagListProps {
-  tagLinks: TagProps[];
+  tagLinks: TagLinkType[];
 }
 
 export const TagList = ({ tagLinks }: TagListProps) => {

@@ -26,6 +26,8 @@ interface Addon {
   yearlyDownloads?: number | null;
 }
 
+interface AddonWithTagLinks extends Omit<Addon, 'tags'> { tags: TagLinkType[] }
+
 interface Framework extends Pick<Tag, 'displayName' | 'icon' | 'name'> {}
 
 interface Recipe {
