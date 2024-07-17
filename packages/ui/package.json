@@ -6,7 +6,7 @@
     "**/*.css"
   ],
   "exports": {
-    "./styles.css": "./dist/index.css",
+    "./styles.css": "./src/styles.css",
     ".": "./src/main.ts"
   },
   "scripts": {
