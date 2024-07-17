@@ -35,6 +35,7 @@ export const Search: FC<SearchProps> = ({
         '[&_.DocSearch-Button]:ui-rounded-full',
         '[&_.DocSearch-Button]:ui-h-8',
         '[&_.DocSearch-Button]:ui-px-3',
+        '[&_.DocSearch-Button]:ui-m-0',
         '[&_.DocSearch-Button_.DocSearch-Search-Icon]:ui-w-[14px]',
         '[&_.DocSearch-Button_.DocSearch-Search-Icon]:ui-h-[14px]',
         '[&_.DocSearch-Button-Placeholder]:ui-text-sm',

@@ -20,7 +20,7 @@ export const MobileMenu = ({
       <DropdownMenu.Trigger asChild>
         <button
           className={cn(
-            'ui-group ui-flex ui-items-center ui-gap-2 ui-justify-center ui-h-9 ui-w-9 ui-rounded min-[920px]:ui-hidden focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 dark:ui-focus-visible:ring-slate-300 ui-duration-300',
+            'ui-group ui-flex ui-items-center ui-gap-2 ui-justify-center ui-h-8 ui-w-8 ui-rounded min-[940px]:ui-hidden focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 dark:ui-focus-visible:ring-slate-300 ui-duration-300 ui-ml-4',
             variant === 'home' &&
               'ui-text-white ui-font-bold hover:ui-bg-white/10 hover:ui-text-white',
             variant === 'system' &&
