@@ -1,15 +1,17 @@
-import type { FC, ReactNode } from 'react';
+'use client';
+
+import { type FC, type ReactNode } from 'react';
 import { MenuIcon } from '@storybook/icons';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { cn } from '@repo/utils';
-import { Search } from '../search';
+// import { Search } from '../search';
 import { Arrow } from './arrow';
 import { nav } from './nav';
 import type { HeaderProps } from '.';
 
 export const MobileMenu = ({
-  algoliaApiKey,
+  // algoliaApiKey,
   variant,
 }: {
   algoliaApiKey: string;
@@ -44,12 +46,16 @@ export const MobileMenu = ({
         >
           <ScrollArea.Root className="ui-w-full ui-h-full" type="always">
             <ScrollArea.Viewport className="ui-w-full ui-h-full ui-p-4 md:ui-p-2 md:ui-py-3">
-              <Search
+              {/* 
+                TODO: Bring back search on mobile. For some reason
+                the menu is getting over it and we can't type.
+              */}
+              {/* <Search
                 algoliaApiKey={algoliaApiKey}
                 className="ui-hidden max-[440px]:ui-block"
                 isMobile
                 variant={variant}
-              />
+              /> */}
               {nav.map((item) => (
                 <DropdownItem
                   external={item.external}
