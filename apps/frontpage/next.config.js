@@ -55,6 +55,10 @@ module.exports = withPlausibleProxy()({
         protocol: 'https',
         hostname: '*.gravatar.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+      },
     ],
   },
   async headers() {
