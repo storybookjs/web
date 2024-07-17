@@ -49,9 +49,12 @@ export const Header: FC<HeaderProps> = ({
               className="ui-pl-2 md:ui-px-3 ui-h-8 ui-flex ui-items-center"
               href="/"
             >
-              <StorybookLogo color={variant === 'home' ? 'white' : 'system'} />
+              <StorybookLogo
+                color={variant === 'home' ? 'white' : 'system'}
+                height={24}
+              />
             </a>
-            <NavigationMenu.Root className="max-[920px]:ui-hidden">
+            <NavigationMenu.Root className="min-[940px]:ui-block hidden">
               <NavigationMenu.List className="ui-flex ui-gap-2">
                 {nav.map((item) => {
                   let active = false;
@@ -77,11 +80,11 @@ export const Header: FC<HeaderProps> = ({
               </NavigationMenu.List>
             </NavigationMenu.Root>
           </div>
-          <div className="ui-flex ui-gap-4">
+          <div className="ui-flex">
             <a
               aria-label="Star Storybook on GitHub"
               className={cn(
-                'ui-h-8 ui-flex ui-items-center ui-justify-center ui-border ui-rounded-full ui-transition-colors max-[992px]:ui-hidden ui-px-3 ui-gap-2',
+                'ui-h-8 ui-flex ui-items-center ui-justify-center ui-border ui-rounded-full ui-transition-colors max-[1040px]:ui-hidden ui-px-3 ui-gap-2 ui-mr-4',
                 githubCount === 0 && 'w-8 px-0',
                 variant === 'home' &&
                   'ui-border-white/30 hover:ui-border-white ui-text-white',
@@ -111,8 +114,8 @@ export const Header: FC<HeaderProps> = ({
               className="max-[440px]:ui-hidden"
               variant={variant}
             />
+            <MobileMenu algoliaApiKey={algoliaApiKey} variant={variant} />
           </div>
-          <MobileMenu algoliaApiKey={algoliaApiKey} variant={variant} />
         </div>
         {subMenu}
       </div>
