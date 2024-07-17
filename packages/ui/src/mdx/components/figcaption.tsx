@@ -10,11 +10,11 @@ type FigcaptionProps = {
 
 export const Figcaption: FC<FigcaptionProps> = (props) => {
   const context = useContext(FigureContext);
-  const { setTitle } = context || {};
+  const { setTitle } = context ?? {};
 
   useEffect(() => {
     setTitle && setTitle(props.children as string);
-  }, []);
+  }, [props.children, setTitle]);
 
   return (
     <figcaption {...props} className="ui-hidden">

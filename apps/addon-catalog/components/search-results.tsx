@@ -14,7 +14,7 @@ export const SearchResults = ({
   return (
     <div>
       <h3 className="mb-8 text-2xl font-bold">Search Results for {search}</h3>
-      {loading && <div>Loading...</div>}
+      {loading ? <div>Loading...</div> : null}
       {!loading && searchResults.length === 0 && <div>No results found</div>}
       {!loading && searchResults.length > 0 && (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">

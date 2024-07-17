@@ -11,14 +11,12 @@ export default async function Page() {
   return (
     <>
       <h3 className="mb-8 text-2xl font-bold">New to Storybook 8</h3>
-      {vta && (
-        <Preview
+      {vta ? <Preview
           key={vta.name}
           orientation="horizontal"
           element={vta}
           type="addon"
-        />
-      )}
+        /> : null}
       <h3 className="mb-8 mt-12 text-2xl font-bold">Popular addons</h3>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
         {popularAddons.map((addon) => (

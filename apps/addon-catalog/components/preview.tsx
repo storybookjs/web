@@ -51,13 +51,11 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
             className="relative flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-md"
             style={{ backgroundColor: element.accentColor || 'transparent' }}
           >
-            {element.icon && (
-              <img
+            {element.icon ? <img
                 src={element.icon}
                 alt={element.name}
                 className="h-10 w-10"
-              />
-            )}
+              /> : null}
           </div>
         )}
         <div>
@@ -68,9 +66,7 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
             {'verified' in element &&
               element.verified &&
               ['official', 'integrators'].includes(element.verified) &&
-              element.status !== 'deprecated' && (
-                <VerifiedIcon className="text-blue-500" />
-              )}
+              element.status !== 'deprecated' ? <VerifiedIcon className="text-blue-500" /> : null}
           </div>
           <div className="text-black dark:text-slate-400">
             {element.description}
@@ -95,21 +91,18 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
             {isRecipe ? 'Views' : 'Downloads'}
           </div>
         </div>
-        {element.authors && (
-          <div className="flex items-center">
+        {element.authors ? <div className="flex items-center">
             {element.authors.slice(0, 3).map((author) => (
               <div
                 key={author.username}
                 className="relative -ml-2 h-8 w-8 overflow-hidden rounded-full"
               >
-                {author.gravatarUrl && (
-                  <Image
+                {author.gravatarUrl ? <Image
                     src={`https:${author.gravatarUrl}`}
                     alt={author.username || ''}
-                    fill={true}
+                    fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                )}
+                  /> : null}
               </div>
             ))}
             {element.authors.length > 3 && (
@@ -117,8 +110,7 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
                 + {element.authors.slice(3).length}
               </div>
             )}
-          </div>
-        )}
+          </div> : null}
       </div>
     </Comp>
   );

@@ -1,5 +1,5 @@
 import { addonFragment, validateResponse } from '@repo/utils';
-import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
+import { fetchAddonsQuery, gql } from "./fetch-addons-query";
 
 interface SearchData {
   partialSearchIntegrations: {

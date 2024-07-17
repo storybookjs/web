@@ -27,20 +27,16 @@ export function AddonHero({ addon }: { addon: Addon }) {
   return (
     <div className="mb-12 flex justify-between border-b border-zinc-300 pb-12 dark:border-b-slate-700">
       <div className="flex flex-col gap-8 md:flex-row">
-        {addon.icon && (
-          <div
+        {addon.icon ? <div
             style={{ backgroundImage: `url('${addon.icon}')` }}
             className="h-20 w-20 bg-contain bg-center bg-no-repeat"
-          />
-        )}
+          /> : null}
         <div className="flex flex-col items-start">
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold">{addon.displayName}</h1>
             {addon.verified &&
               ['official', 'integrators'].includes(addon.verified) &&
-              addon.status !== 'deprecated' && (
-                <VerifiedIcon className="text-blue-500" />
-              )}
+              addon.status !== 'deprecated' ? <VerifiedIcon className="text-blue-500" /> : null}
           </div>
           <p className="mb-4">{addon.description}</p>
           <div className="flex flex-col gap-6 md:flex-row md:items-center">
@@ -66,7 +62,7 @@ export function AddonHero({ addon }: { addon: Addon }) {
             <a
               href={addon.repositoryUrl || ''}
               target="_blank"
-              className="flex items-center gap-2 text-sm text-black transition-colors hover:text-blue-500 dark:text-slate-400"
+              className="flex items-center gap-2 text-sm text-black transition-colors hover:text-blue-500 dark:text-slate-400" rel="noopener"
             >
               <GithubIcon />
               View on Github
@@ -84,14 +80,12 @@ export function AddonHero({ addon }: { addon: Addon }) {
           </div>
           <div className="text-md">Downloads per week</div>
         </div>
-        {addon.verified && addon.verified === 'official' && (
-          <div className="flex items-center gap-2 rounded bg-blue-900 px-2 py-1.5">
+        {addon.verified && addon.verified === 'official' ? <div className="flex items-center gap-2 rounded bg-blue-900 px-2 py-1.5">
             <StorybookIcon size={16} />
             <span className="text-xs font-bold text-white">
               Made by Storybook
             </span>
-          </div>
-        )}
+          </div> : null}
       </div>
     </div>
   );

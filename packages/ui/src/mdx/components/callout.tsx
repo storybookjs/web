@@ -1,4 +1,5 @@
 import { cn } from '@repo/utils';
+import { type FC } from 'react';
 import snarkdown from 'snarkdown';
 
 type Variant = 'neutral' | 'positive' | 'info' | 'warning';
@@ -15,13 +16,13 @@ interface CalloutProps {
   children: string;
 }
 
-export function Callout({
+export const Callout: FC<CalloutProps> = ({
   title,
   icon,
   children,
   variant = 'neutral',
   ...props
-}: CalloutProps) {
+}) => {
   const appliedIcon = icon ?? VARIANT_DEFAULT_ICON[variant];
 
   return (
@@ -53,4 +54,4 @@ export function Callout({
       </div>
     </div>
   );
-}
+};

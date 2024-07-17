@@ -1,5 +1,5 @@
 import { validateResponse } from '@repo/utils';
-import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
+import { fetchAddonsQuery, gql } from "./fetch-addons-query";
 
 type TagValue = Tag['name'];
 
@@ -14,7 +14,7 @@ export async function fetchTagsData({
 } = {}) {
   try {
     let value: TagValue[] = [];
-    async function fetchPartialData(skip: number = 0) {
+    async function fetchPartialData(skip = 0) {
       const data = await fetchAddonsQuery<
         TagsData,
         { isCategory: boolean; skip: number }

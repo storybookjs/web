@@ -1,7 +1,6 @@
 'use client';
 
-import { ReactNode, useEffect, useState } from 'react';
-import { TagList } from './tag-list';
+import { type ReactNode, useEffect, useState } from 'react';
 import {
   BookIcon,
   CloseIcon,
@@ -10,10 +9,11 @@ import {
   SearchIcon,
 } from '@storybook/icons';
 import Link from 'next/link';
-import { SearchResults } from './search-results';
-import { fetchSearchData } from '../lib/fetch-search-data';
 import { usePathname } from 'next/navigation';
 import { cn } from '@repo/utils';
+import { fetchSearchData } from '../lib/fetch-search-data';
+import { SearchResults } from './search-results';
+import { TagList } from './tag-list';
 
 interface HomeProps {
   tagLinks?: TagLinkType[];
@@ -49,7 +49,7 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
       }
     }, 600);
 
-    return () => clearTimeout(getData);
+    return () => { clearTimeout(getData); };
   }, [search]);
 
   return (
@@ -78,26 +78,24 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
               className="h-full w-full rounded-full bg-transparent pl-10 placeholder:text-slate-500 dark:placeholder:text-slate-400"
               placeholder="Search integrations"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => { setSearch(e.target.value); }}
             />
             {search.length > 0 && (
               <div
                 className="absolute right-2 top-1/2 flex h-7 w-7 -translate-y-1/2 cursor-pointer items-center justify-center"
-                onClick={() => setSearch('')}
+                onClick={() => { setSearch(''); }}
               >
                 <CloseIcon />
               </div>
             )}
           </div>
-          {tagLinks && <TagList tagLinks={tagLinks} />}
+          {tagLinks ? <TagList tagLinks={tagLinks} /> : null}
         </div>
-        {search && (
-          <SearchResults
+        {search ? <SearchResults
             search={search}
             loading={loading}
             searchResults={searchResults}
-          />
-        )}
+          /> : null}
         {!search && (
           <div className="flex flex-col gap-12 md:flex-row">
             <div className="hidden flex-shrink-0 md:block md:w-[250px]">

@@ -21,12 +21,11 @@ export const TagList = ({ tagLinks }: TagListProps) => {
           <Link href={link}>{name}</Link>
         </Pill>
       ))}
-      {moreTagsVisible &&
-        moreTags.map(({ name, link }) => (
+      {moreTagsVisible ? moreTags.map(({ name, link }) => (
           <Pill key={name} asChild>
             <Link href={link}>{name}</Link>
           </Pill>
-        ))}
+        )) : null}
       {moreTags.length > 0 && !moreTagsVisible && (
         <button
           onClick={() => {

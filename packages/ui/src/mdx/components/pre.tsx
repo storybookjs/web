@@ -31,19 +31,19 @@ const languageMap = {
 
 export const Pre: FC<PreProps> = ({ children, raw, ...restProps }) => {
   const context = useContext(FigureContext);
-  const { title } = context || {};
+  const { title } = context ?? {};
 
   const language = restProps['data-language'];
   const iconLanguage = language
-    // @ts-expect-error - This is fine, it falls back to null if nothing is found
-    ? (languageMap[language] as (typeof languageMap)[keyof typeof languageMap])
+    ? // @ts-expect-error - This is fine, it falls back to null if nothing is found
+      (languageMap[language] as (typeof languageMap)[keyof typeof languageMap])
     : null;
 
   return (
     <CodeSnippetsWrapper
       copy={raw}
       iconLanguage={iconLanguage}
-      title={title || ''}
+      title={title ?? ''}
     >
       <pre>{children}</pre>
     </CodeSnippetsWrapper>

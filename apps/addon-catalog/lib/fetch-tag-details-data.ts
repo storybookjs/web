@@ -1,8 +1,7 @@
 import { addonFragment, recipeFragment, validateResponse } from '@repo/utils';
 import { fetchAddonsQuery, gql } from './fetch-addons-query';
 
-interface TagValue
-  extends Pick<
+type TagValue = Pick<
     Tag,
     | 'name'
     | 'displayName'
@@ -10,7 +9,7 @@ interface TagValue
     | 'icon'
     | 'relatedTags'
     | 'topIntegrations'
-  > {}
+  >
 
 interface TagsData {
   tags: TagValue[];
@@ -23,7 +22,7 @@ async function fetchTagsData({
 } = {}) {
   try {
     let value: TagValue[] = [];
-    async function fetchPartialData(skip: number = 0) {
+    async function fetchPartialData(skip = 0) {
       const data = await fetchAddonsQuery<
         TagsData,
         { isCategory: boolean; skip: number }

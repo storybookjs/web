@@ -1,4 +1,4 @@
-import { resolve, format } from 'url';
+import { resolve, format } from 'node:url';
 import { rehype } from 'rehype';
 import rehypeUrls from 'rehype-urls';
 import rehypeStringify from 'rehype-stringify';
@@ -13,7 +13,7 @@ function assetUrl(repositoryUrl: string | null) {
   if (!repositoryUrl) return repositoryUrl;
 
   const repositoryRegex = /github\.com\/(.+\/.+)\//;
-  const parseResult = repositoryUrl.match(repositoryRegex);
+  const parseResult = repositoryRegex.exec(repositoryUrl);
 
   if (parseResult && parseResult[1]) {
     const repository = parseResult[1];
@@ -57,7 +57,7 @@ function absoluteLinksHtml(html: string, opts: Options) {
 }
 
 export function absoluteLinks(opts: Options) {
-  // eslint-disable-next-line
+   
   opts.assetBase = assetUrl(opts.base);
 
   return transform;

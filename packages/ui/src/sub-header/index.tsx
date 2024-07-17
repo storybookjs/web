@@ -25,9 +25,9 @@ export const SubHeader = ({
     >
       <Link
         className="ui-flex ui-items-center ui-gap-3 ui-transition-colors hover:ui-text-blue-500"
-        href={leftHref || '/'}
+        href={leftHref ?? '/'}
       >
-        <ArrowLeftIcon /> {leftLabel || 'Back'}
+        <ArrowLeftIcon /> {leftLabel ?? 'Back'}
       </Link>
       {right}
     </div>

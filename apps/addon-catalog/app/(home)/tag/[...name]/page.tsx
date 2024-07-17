@@ -1,6 +1,6 @@
+import { notFound } from 'next/navigation';
 import { Preview } from '../../../../components/preview';
 import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
-import { notFound } from 'next/navigation';
 
 interface TagDetailsProps {
   params: {

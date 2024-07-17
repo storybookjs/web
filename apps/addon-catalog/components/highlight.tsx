@@ -1,9 +1,9 @@
 'use client';
 
 import React, {
-  ComponentProps,
+  type ComponentProps,
   forwardRef,
-  FunctionComponent,
+  type FunctionComponent,
   useEffect,
   useRef,
 } from 'react';

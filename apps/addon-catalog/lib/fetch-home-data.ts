@@ -1,6 +1,5 @@
-import { addonFragment, recipeFragment } from '@repo/utils';
-import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
-import { validateResponse } from '@repo/utils';
+import { addonFragment, recipeFragment , validateResponse } from '@repo/utils';
+import { fetchAddonsQuery, gql } from "./fetch-addons-query";
 
 interface AddonsHomeData {
   popular: {
@@ -40,16 +39,16 @@ function getNRandomTags(
     .map(({ occurrence, ...tag }) => tag);
 }
 
-type AddonsHomeValue = {
+interface AddonsHomeValue {
   popularAddons: Addon[];
   popularRecipes: Recipe[];
   trendingTags: Tag[];
   vta: Addon;
-};
+}
 
 export async function fetchHomeData() {
   try {
-    let value: AddonsHomeValue | null = null;
+    const value: AddonsHomeValue | null = null;
     const data = await fetchAddonsQuery<AddonsHomeData>(
       gql`
         query AddonsHome {
@@ -92,7 +91,7 @@ export async function fetchHomeData() {
 
     validateResponse(() => data?.popular && data?.vta);
 
-    const { popular, vta } = data!;
+    const { popular, vta } = data;
 
     const tagOccurrences = createTagOccurrenceHash(...popular.addons);
 

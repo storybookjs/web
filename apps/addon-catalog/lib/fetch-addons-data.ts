@@ -1,5 +1,5 @@
 import { validateResponse } from '@repo/utils';
-import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
+import { fetchAddonsQuery, gql } from "./fetch-addons-query";
 
 type AddonValue = Addon['name'];
 
@@ -10,7 +10,7 @@ interface AddonsData {
 export async function fetchAddonsData() {
   try {
     let value: AddonValue[] = [];
-    async function fetchPartialData(skip: number = 0) {
+    async function fetchPartialData(skip = 0) {
       const data = await fetchAddonsQuery<AddonsData, { skip: number }>(
         gql`
           query Addons($skip: Int!) {

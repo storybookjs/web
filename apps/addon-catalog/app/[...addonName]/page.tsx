@@ -1,6 +1,6 @@
-import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 import { SubHeader } from '@repo/ui';
 import { cn } from '@repo/utils';
+import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 import { AddonHero } from '../../components/addon/addon-hero';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
 import { Highlight } from '../../components/highlight';

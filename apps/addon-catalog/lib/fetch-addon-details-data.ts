@@ -1,10 +1,9 @@
 import { addonFragment, validateResponse } from '@repo/utils';
-import { fetchAddonsQuery, gql } from '../lib/fetch-addons-query';
+import { fetchAddonsQuery, gql } from "./fetch-addons-query";
 import { buildTagLinks } from './build-tag-links';
 import { createMarkdownProcessor } from './create-markdown-processor';
 
-interface AddonValue
-  extends Pick<
+type AddonValue = Pick<
     Addon,
     | 'name'
     | 'displayName'
@@ -22,7 +21,7 @@ interface AddonValue
     | 'repositoryUrl'
     | 'homepageUrl'
     | 'npmUrl'
-  > {}
+  >
 interface AddonData {
   addon: AddonValue;
 }

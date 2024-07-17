@@ -18,23 +18,20 @@ export function AddonSidebar({ addon }: { addon: AddonWithTagLinks }) {
 
   return (
     <div className="flex-shrink-0 md:w-[250px]">
-      {listOfAuthors && listOfAuthors.length > 0 && (
-        <>
+      {listOfAuthors && listOfAuthors.length > 0 ? <>
           <div className="mb-4 flex items-center py-2 text-sm font-bold">
             Made by
           </div>
           <ul className="mb-6 flex flex-col gap-4">
             {listOfAuthors.map((author) => (
               <li className="flex items-center gap-2" key={author.username}>
-                {author.gravatarUrl && (
-                  <div className="relative h-7 w-7 overflow-hidden rounded-full">
+                {author.gravatarUrl ? <div className="relative h-7 w-7 overflow-hidden rounded-full">
                     <Image
                       src={`https:${author.gravatarUrl}`}
                       alt={author.username}
-                      fill={true}
+                      fill
                     />
-                  </div>
-                )}
+                  </div> : null}
                 {author.username}
               </li>
             ))}
@@ -50,10 +47,8 @@ export function AddonSidebar({ addon }: { addon: AddonWithTagLinks }) {
               {`+ ${moreAuthors.length} more`}
             </button>
           )}
-        </>
-      )}
-      {renderers && renderers.length > 0 && (
-        <>
+        </> : null}
+      {renderers && renderers.length > 0 ? <>
           <div className="mb-2 mt-6 flex items-center py-2 text-sm font-bold">
             Work with
           </div>
@@ -62,10 +57,8 @@ export function AddonSidebar({ addon }: { addon: AddonWithTagLinks }) {
               <Pill noHover>{renderer.displayName}</Pill>
             ))}
           </ul>
-        </>
-      )}
-      {tags && tags.length && (
-        <>
+        </> : null}
+      {tags && tags.length ? <>
           <div className="mb-2 mt-6 flex items-center py-2 text-sm font-bold">
             Tags
           </div>
@@ -76,8 +69,7 @@ export function AddonSidebar({ addon }: { addon: AddonWithTagLinks }) {
               </Pill>
             ))}
           </ul>
-        </>
-      )}
+        </> : null}
       <div className="mt-6 flex flex-col gap-4 border-t border-t-zinc-300 pt-6 dark:border-t-slate-700">
         <a
           href="/docs/addons/install-addons"
