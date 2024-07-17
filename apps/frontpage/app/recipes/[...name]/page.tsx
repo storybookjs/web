@@ -24,9 +24,11 @@ interface RecipeDetailsProps {
 
 export async function generateStaticParams() {
   const recipes = (await fetchRecipesData()) || [];
-  return recipes.map((name) => ({
-    params: { name },
+  const listOfNames = recipes.map((recipe) => ({
+    name: [...recipe.split('/')],
   }));
+
+  return listOfNames;
 }
 
 export default async function RecipeDetails({ params }: RecipeDetailsProps) {
