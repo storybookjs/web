@@ -32,6 +32,8 @@ export const Search: FC<SearchProps> = ({
     <div
       className={cn(
         '[&_.DocSearch-Button]:ui-bg-transparent',
+        '[&_.DocSearch-Button]:max-[440px]:ui-bg-slate-100',
+        '[&_.DocSearch-Button]:max-[440px]:ui-w-full',
         '[&_.DocSearch-Button]:ui-rounded-full',
         '[&_.DocSearch-Button]:ui-h-8',
         '[&_.DocSearch-Button]:ui-px-3',
