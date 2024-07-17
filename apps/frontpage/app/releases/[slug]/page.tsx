@@ -39,7 +39,7 @@ export default async function Page({ params: { slug } }: PageProps) {
         <main>
           <Sidebar>
             <DocsMainNav />
-            <div className="mt-4 flex flex-col border-t border-zinc-200 pt-4">
+            <div className="flex flex-col pt-4 mt-4 border-t border-zinc-200">
               {releases
                 .sort((a, b) => b.localeCompare(a))
                 .map((release) => (
@@ -56,9 +56,9 @@ export default async function Page({ params: { slug } }: PageProps) {
                 ))}
             </div>
           </Sidebar>
-          <article className="w-full max-w-3xl flex-1 py-12">
-            <h1 className="mb-6 mt-0 text-4xl font-bold">
-              {page?.frontmatter.title || 'Page Not Found'}
+          <article className="flex-1 w-full max-w-3xl py-12">
+            <h1 className="mt-0 mb-6 text-4xl font-bold">
+              {page?.frontmatter.title ?? 'Page Not Found'}
             </h1>
             {page?.content}
             <ReleaseNewsletter />

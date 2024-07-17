@@ -25,11 +25,14 @@ function Star({ x = 0, y = 0, w = 14, delay = 0 }) {
   return (
     <motion.svg
       animate={{ rotate: 360, opacity: 1, scale: 1 }}
-      className="absolute left-0 top-0"
+      className="absolute top-0 left-0"
       fill="none"
       height={w}
       initial={{ x, y, opacity: 0, scale: 0.5 }}
-      style={{ originX: `${w / 2}px`, originY: `${w / 2}px` }}
+      style={{
+        originX: `${(w / 2).toString()}px`,
+        originY: `${(w / 2).toString()}px`,
+      }}
       transition={{ duration: 2, repeat: Infinity, delay }}
       viewBox="0 0 14 14"
       width={w}
@@ -93,11 +96,11 @@ export function Hero({
   };
 
   return (
-    <Container className="relative z-20 justify-between gap-20 overflow-hidden pt-12 text-white md:pt-24 lg:px-8">
+    <Container className="relative z-20 justify-between gap-20 pt-12 overflow-hidden text-white md:pt-24 lg:px-8">
       <h1 className="flex-1 text-4xl font-bold max-sm:max-w-80 md:text-[56px]/[70px]">
         Build UIs without the grunt work
       </h1>
-      <div className="mb-8 flex-1 pt-4 md:mb-20">
+      <div className="flex-1 pt-4 mb-8 md:mb-20">
         <p className="mb-8 max-w-[500px] leading-7 sm:mb-12">
           Storybook is a frontend workshop for building UI components and pages
           in isolation. Thousands of teams use it for UI development, testing,
@@ -107,7 +110,7 @@ export function Hero({
           <div className="flex flex-col gap-8 sm:flex-row">
             <div className="flex gap-4">
               <Link
-                className="text-md flex h-12 items-center justify-center rounded-full bg-white px-6 font-bold text-black"
+                className="flex items-center justify-center h-12 px-6 font-bold text-black bg-white rounded-full text-md"
                 href="/docs"
               >
                 Get Started
@@ -119,21 +122,21 @@ export function Hero({
                 className="md:hidden"
                 href="https://github.com/storybookjs/storybook/releases"
               >
-                <div className="text-md text-white">v8</div>
+                <div className="text-white text-md">v8</div>
                 <div className="text-sm text-white/60">Latest version</div>
               </a>
               <div>
-                <div className="text-md text-white">{npmDownloads}</div>
+                <div className="text-white text-md">{npmDownloads}</div>
                 <div className="text-sm text-white/60">Installs per month</div>
               </div>
               <div>
-                <div className="text-md text-white">{contributorCount}</div>
+                <div className="text-white text-md">{contributorCount}</div>
                 <div className="text-sm text-white/60">Contributors</div>
               </div>
             </div>
           </div>
           <a
-            className="hidden text-sm text-white/60 transition-colors hover:text-white md:flex md:items-end"
+            className="hidden text-sm transition-colors text-white/60 hover:text-white md:flex md:items-end"
             href="https://github.com/storybookjs/storybook/releases"
             rel="noreferrer"
             target="_blank"
@@ -154,10 +157,10 @@ export function Hero({
           </a>
         </div>
       </div>
-      <div className="flex select-none justify-between border-t border-t-white/20 md:justify-center">
-        <div className="flex h-20 w-full items-center justify-between md:hidden">
+      <div className="flex justify-between border-t select-none border-t-white/20 md:justify-center">
+        <div className="flex items-center justify-between w-full h-20 md:hidden">
           <div
-            className="flex h-10 w-10 items-center justify-center rounded-full text-white"
+            className="flex items-center justify-center w-10 h-10 text-white rounded-full"
             onClick={() => {
               handleSlideChange(slide === 1 ? 4 : slide - 1);
             }}
@@ -166,7 +169,7 @@ export function Hero({
           </div>
           <div className="text-md">{features[slide - 1]}</div>
           <div
-            className="flex h-10 w-10 items-center justify-center rounded-full text-white"
+            className="flex items-center justify-center w-10 h-10 text-white rounded-full"
             onClick={() => {
               handleSlideChange(slide === 4 ? 1 : slide + 1);
             }}

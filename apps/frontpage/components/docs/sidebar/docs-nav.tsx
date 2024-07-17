@@ -28,11 +28,10 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
   useEffect(() => {
     // Find the active item in the tree and set the parent accordion to open
     // This helps to understand what accordion item need to be open
-    const findActive = (t: Tree, parent: TreeProps | null): any => {
+    const findActive = (t: Tree, parent: TreeProps | null) => {
       if (t === null || t === undefined) return null;
 
-      for (let i = 0; i < t.length; i++) {
-        const current = t[i];
+      for (const current of t) {
         if (current.slug === pathname) {
           parent?.pathSegment && setParentAccordion([parent?.pathSegment]);
           return current;
@@ -45,12 +44,12 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
     };
 
     findActive(selectedTree?.children, null);
-  }, [pathname]);
+  }, [pathname, selectedTree?.children]);
 
   return (
     <Accordion.Root
       type="multiple"
-      value={parentAccordion || []}
+      value={parentAccordion ?? []}
       onValueChange={setParentAccordion}
     >
       <VersionSelector activeVersion={activeVersion} />
@@ -69,8 +68,10 @@ const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
   const pathname = usePathname();
   let slug = lvl1.slug;
   docsVersions.forEach((version) => {
-    if (lvl1.slug === `/docs/${version.inSlug}/get-started`) {
-      slug = `/docs/${version.inSlug}`;
+    if (
+      lvl1.slug === `/docs/${(version.inSlug ?? '').toString()}/get-started`
+    ) {
+      slug = `/docs/${(version.inSlug ?? '').toString()}`;
     } else if (lvl1.slug === `/docs/get-started`) {
       slug = `/docs`;
     }
@@ -87,7 +88,7 @@ const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
         )}
         href={lvl1.slug}
       >
-        {lvl1.sidebar?.title || lvl1.title}
+        {lvl1.sidebar?.title ?? lvl1.title}
       </Link>
       {lvl1.children && lvl1.children.length > 0 ? (
         <ul>
@@ -118,7 +119,7 @@ const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
           )}
           href={slug}
         >
-          {lvl2.sidebar?.title || lvl2.title}
+          {lvl2.sidebar?.title ?? lvl2.title}
         </Link>
       )}
       {hasChildren ? (
@@ -128,7 +129,7 @@ const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
               className="group flex w-full items-center justify-between px-2 py-[5px] text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
               type="button"
             >
-              {lvl2.sidebar?.title || lvl2.title}
+              {lvl2.sidebar?.title ?? lvl2.title}
               <ChevronSmallRightIcon
                 aria-hidden
                 className="transition-transform duration-300 ease-in-out group-data-[state=open]:rotate-90"
@@ -164,7 +165,7 @@ const Level3 = ({ lvl3 }: { lvl3: TreeProps }) => {
         )}
         href={slug}
       >
-        {lvl3.sidebar?.title || lvl3.title}
+        {lvl3.sidebar?.title ?? lvl3.title}
       </Link>
     </li>
   );

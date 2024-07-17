@@ -98,14 +98,14 @@ export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
       />
       <Line
         control={
-          <div className="border border-[#D9E0E6] rounded w-full h-7 flex items-center px-2 justify-between">
+          <div className="flex h-7 w-full items-center justify-between rounded border border-[#D9E0E6] px-2">
             <div className="flex items-center gap-2">
               <motion.div
                 animate={{
                   backgroundColor:
                     isAnimated && !isMobile ? '#485353' : '#D8DDDD',
                 }}
-                className="w-4 h-4 rounded border border-[#D9E0E6]"
+                className="h-4 w-4 rounded border border-[#D9E0E6]"
                 initial={{ backgroundColor: '#D8DDDD' }}
                 transition={{ duration: 0.2, delay: 2.7 }}
               />
@@ -134,7 +134,7 @@ export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
       />
       <Line
         control={
-          <div className="relative flex items-center h-8 px-0.5 rounded-full bg-slate-200">
+          <div className="relative flex h-8 items-center rounded-full bg-slate-200 px-0.5">
             <div className="relative z-10 flex items-center justify-center h-full w-14">
               False
             </div>
@@ -143,7 +143,7 @@ export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
             </div>
             <motion.div
               animate={{ x: isAnimated && !isMobile && isPanel ? 56 : 0 }}
-              className="absolute bg-white rounded-full w-14 h-7"
+              className="absolute bg-white rounded-full h-7 w-14"
               initial={{ x: 0 }}
               transition={{ duration: 0.2, delay: 1.2 }}
             />
@@ -184,7 +184,7 @@ const Line = ({
     <div className="flex border-b border-b-[#D9E0E6] py-3">
       <div
         className={cn(
-          'text-[13px] pl-4 flex-shrink-0 flex items-center',
+          'flex flex-shrink-0 items-center pl-4 text-[13px]',
           isPanel && 'w-1/2',
           !isPanel && 'w-1/2 md:w-1/4',
         )}
@@ -194,12 +194,12 @@ const Line = ({
       </div>
       {!isPanel && (
         <>
-          <div className="text-[13px] w-[38%] md:w-1/4 hidden md:block py-2">
+          <div className="hidden w-[38%] py-2 text-[13px] md:block md:w-1/4">
             {description}
           </div>
-          <div className="text-[13px] w-1/4 hidden lg:flex py-2">
+          <div className="hidden w-1/4 py-2 text-[13px] lg:flex">
             {defaultValue ? (
-              <div className="bg-[#F6F9FC] border border-[#D9E0E6] h-5 px-1.5 rounded flex items-center">
+              <div className="flex h-5 items-center rounded border border-[#D9E0E6] bg-[#F6F9FC] px-1.5">
                 {defaultValue}
               </div>
             ) : (
@@ -210,7 +210,7 @@ const Line = ({
       )}
       <div
         className={cn(
-          'text-[13px] w-1/2 md:w-1/2 flex pr-4',
+          'flex w-1/2 pr-4 text-[13px] md:w-1/2',
           isPanel && 'w-1/2',
           !isPanel && 'w-1/2 md:w-1/4',
         )}
@@ -231,7 +231,7 @@ const Input = ({
   return (
     <div
       className={cn(
-        'border border-[#D9E0E6] rounded w-full h-7 flex items-center px-2',
+        'flex h-7 w-full items-center rounded border border-[#D9E0E6] px-2',
         muted && 'text-[#73828C]',
       )}
     >
@@ -242,16 +242,16 @@ const Input = ({
 
 const Range = ({ value }: { value: number }) => {
   return (
-    <div className={cn('w-full flex items-center gap-2')}>
+    <div className={cn('flex w-full items-center gap-2')}>
       <div>0</div>
-      <div className="relative flex items-center w-full h-1.5 px-2 bg-white border rounded border-[#D9E0E6]">
+      <div className="relative flex h-1.5 w-full items-center rounded border border-[#D9E0E6] bg-white px-2">
         <div
-          className="absolute z-20 w-4 h-4 -ml-2 bg-white border rounded-full shadow-md border-[#D9E0E6]"
-          style={{ left: `${value * 100}%` }}
+          className="absolute z-20 -ml-2 h-4 w-4 rounded-full border border-[#D9E0E6] bg-white shadow-md"
+          style={{ left: `${(value * 100).toString()}%` }}
         />
         <div
           className="absolute left-0 z-10 h-full bg-blue-500 rounded-full"
-          style={{ width: `${value * 100}%` }}
+          style={{ width: `${(value * 100).toString()}%` }}
         />
       </div>
       <div>40</div>
@@ -261,12 +261,12 @@ const Range = ({ value }: { value: number }) => {
 
 const Radio = () => {
   return (
-    <div className={cn('w-full flex flex-col gap-2')}>
+    <div className={cn('flex w-full flex-col gap-2')}>
       {['White', 'Space Grey', 'Yellow'].map((item) => (
         <div className="flex items-center gap-2" key={item}>
           <div
             className={cn(
-              'w-4 h-4 border rounded-full border-[#D9E0E6] flex items-center justify-center',
+              'flex h-4 w-4 items-center justify-center rounded-full border border-[#D9E0E6]',
               item === 'White' && 'border border-blue-500',
             )}
           >

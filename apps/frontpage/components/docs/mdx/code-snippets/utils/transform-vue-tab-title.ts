@@ -10,14 +10,14 @@ export function transformVueTabTitle(
   // Only do the transformation if both Vue 2 and Vue 3 tabs are present
   if (
     tabs.find(
-      ({ tabTitle }) =>
-        tabTitle?.match(createVersionRegex('2')) ||
-        tabTitle?.match(createVersionSuffixRegex('2')),
+      (tab) =>
+        tab.tabTitle?.match(createVersionRegex('2')) ??
+        tab.tabTitle?.match(createVersionSuffixRegex('2')),
     ) &&
     tabs.find(
-      ({ tabTitle }) =>
-        tabTitle?.match(createVersionRegex('3')) ||
-        tabTitle?.match(createVersionSuffixRegex('3')),
+      (tab) =>
+        tab.tabTitle?.match(createVersionRegex('3')) ??
+        tab.tabTitle?.match(createVersionSuffixRegex('3')),
     )
   ) {
     return tabTitle

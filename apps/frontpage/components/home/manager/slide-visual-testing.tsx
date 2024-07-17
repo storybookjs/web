@@ -63,14 +63,14 @@ export const SlideVisualTesting = () => {
     >
       <div
         className={cn(
-          'absolute w-full top-10 h-[calc(45%-40px)] flex items-center justify-center text-black bg-white transition-all p-4 sm:p-8 sm:h-[calc(60%-40px)] lg:w-[calc(100%-400px)] lg:h-[calc(100%-40px)]',
+          'absolute top-10 flex h-[calc(45%-40px)] w-full items-center justify-center bg-white p-4 text-black transition-all sm:h-[calc(60%-40px)] sm:p-8 lg:h-[calc(100%-40px)] lg:w-[calc(100%-400px)]',
         )}
       >
         <ComponentVTA />
         <ComponentSmall className="max-h-full sm:hidden" />
       </div>
       <Toolbar slide={1} />
-      <div className="absolute bottom-0 left-0 w-full h-[55%] sm:h-[40%] lg:bottom-auto lg:left-auto lg:top-0 lg:right-0 lg:h-full lg:w-[400px] border-t border-t-[#D9E0E6] lg:border-t-0 lg:border-l lg:border-l-[#D9E0E6] flex flex-col">
+      <div className="absolute bottom-0 left-0 flex h-[55%] w-full flex-col border-t border-t-[#D9E0E6] sm:h-[40%] lg:bottom-auto lg:left-auto lg:right-0 lg:top-0 lg:h-full lg:w-[400px] lg:border-l lg:border-t-0 lg:border-l-[#D9E0E6]">
         <Tabs active={1} slide={4} />
         <motion.div
           animate={{
@@ -81,21 +81,21 @@ export const SlideVisualTesting = () => {
           initial={{ height: 0, borderBottomColor: 'transparent' }}
           transition={{ delay: DELAY, duration: 3, times: [0, 0.1, 0.9, 1] }}
         >
-          <div className="relative flex text-black text-sm h-10 items-center justify-between flex-shrink-0 px-4 bg-[#F6F9FC]">
+          <div className="relative flex h-10 flex-shrink-0 items-center justify-between bg-[#F6F9FC] px-4 text-sm text-black">
             <span className="relative z-10">
               👀 Running visual test {Math.floor(counter * 1.24)}/124...
             </span>
             <ExpandAltIcon className="relative z-10 text-slate-500" />
             <div
-              className="absolute top-0 left-0 bg-[#E3F3FF] h-full"
-              style={{ width: `${counter}%` }}
+              className="absolute left-0 top-0 h-full bg-[#E3F3FF]"
+              style={{ width: `${counter.toString()}%` }}
             />
           </div>
         </motion.div>
-        <div className="border-b border-b-[#D9E0E6] text-black text-sm px-4 py-3">
+        <div className="border-b border-b-[#D9E0E6] px-4 py-3 text-sm text-black">
           <div className="flex items-center gap-2 mb-1 font-bold">
             {changeTitle}
-            <div className="relative w-[14px] h-[14px]">
+            <div className="relative h-[14px] w-[14px]">
               <motion.div
                 animate={{ opacity: 0 }}
                 className="absolute top-0 left-0 text-green-500"
@@ -106,7 +106,7 @@ export const SlideVisualTesting = () => {
               </motion.div>
               <motion.div
                 animate={{ opacity: 1 }}
-                className="absolute top-0 left-0 text-[#e69d00]"
+                className="absolute left-0 top-0 text-[#e69d00]"
                 initial={{ opacity: 0 }}
                 transition={{ delay: DURATION + DELAY }}
               >
@@ -122,7 +122,7 @@ export const SlideVisualTesting = () => {
           {counter !== 100 && <ComponentDiff1 />}
           {counter === 100 && <ComponentDiff2 />}
         </div>
-        <div className="border-t border-t-[#D9E0E6] text-[#73828C] h-10 text-sm px-4 flex items-center gap-5">
+        <div className="flex h-10 items-center gap-5 border-t border-t-[#D9E0E6] px-4 text-sm text-[#73828C]">
           <div className="flex items-center gap-1.5">
             <DiamondIcon />
             Mobile Light <ChevronSmallDownIcon />

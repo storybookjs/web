@@ -39,9 +39,9 @@ const splitVersion = (version: string) => {
   const parsed = semverParse(version);
   if (!parsed) return {};
 
-  let shortVersion = `${parsed.major}.${parsed.minor}`;
+  let shortVersion = `${parsed.major.toString()}.${parsed.minor.toString()}`;
   if (parsed.prerelease.length > 0) {
-    shortVersion = `${shortVersion}-${parsed.prerelease[0]}`;
+    shortVersion = `${shortVersion}-${parsed.prerelease[0].toString()}`;
   }
 
   return {
@@ -78,7 +78,7 @@ const log = async (searchParams: URLSearchParams) => {
   // x-forwarded-for can contain a list of comma-separated proxies
   // @ts-expect-error - One will always exist
   let remotehost = (
-    headersList.get('x-forwarded-for') || headersList.get('host')
+    headersList.get('x-forwarded-for') ?? headersList.get('host')
   ).split(',')[0];
   const truncatedHost = truncate(remotehost);
   logger.log({ SKIP_IP_HASH });
@@ -94,7 +94,7 @@ const log = async (searchParams: URLSearchParams) => {
     version,
     userAgent,
     ...splitVersion(version),
-    cli: userAgent && userAgent.startsWith('node-fetch'),
+    cli: userAgent?.startsWith('node-fetch'),
   };
   await table.insert([row]);
 };

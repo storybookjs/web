@@ -8,13 +8,13 @@ import { TableOfContent } from './table-of-content';
 export const Content: FC<{ page: PageDataProps }> = ({ page }) => {
   return (
     <>
-      <div className="w-full min-w-0 flex-1 py-12">
+      <div className="flex-1 w-full min-w-0 py-12">
         <main className="mx-auto max-w-[720px]">
           <h1
-            className="relative mb-6 mt-0 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
+            className="relative mt-0 mb-6 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
             data-docs-heading
           >
-            {page.title || 'Title is missing'}
+            {page.title ?? 'Title is missing'}
           </h1>
           {!page.hideRendererSelector && <Renderers />}
           {/* TODO: Bring back tabs */}

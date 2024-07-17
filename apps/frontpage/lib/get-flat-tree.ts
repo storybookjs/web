@@ -26,7 +26,7 @@ export const getFlatTree = ({
     flatTree.push({
       slug: node.slug,
       type: node.type,
-      draft: node.draft || false,
+      draft: node.draft ?? false,
       canonical: node.canonical,
       level,
     });
@@ -48,7 +48,7 @@ export const getFlatTree = ({
 
   if (filterSecondLevelDirectories) {
     flatTree = flatTree.filter((node) =>
-      node.type === 'directory' ? (node.level !== 2) : true,
+      node.type === 'directory' ? node.level !== 2 : true,
     );
   }
 

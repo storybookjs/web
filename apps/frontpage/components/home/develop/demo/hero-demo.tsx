@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- We can't know the source */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression -- TODO: Fix this */
 import type { FC } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
@@ -180,13 +181,13 @@ export const HeroDemo: FC = () => {
 
   return (
     <motion.div
-      className="relative w-full h-0 pb-[69.10907577%] sm:mt-[-12.625rem] after:content-[''] after:absolute after:top-0 after:right-0 after:left-0 after:bottom-0 after:rounded-lg after:shadow-lg"
+      className="relative h-0 w-full pb-[69.10907577%] after:absolute after:bottom-0 after:left-0 after:right-0 after:top-0 after:rounded-lg after:shadow-lg after:content-[''] sm:mt-[-12.625rem]"
       data-chromatic="ignore"
       ref={ref}
     >
       <motion.img
         alt=""
-        className="block h-auto absolute top-0 left-0 w-full"
+        className="absolute top-0 left-0 block w-full h-auto"
         height="830"
         src="/home/develop/storybook-frame.svg"
         width="1201"
@@ -199,7 +200,7 @@ export const HeroDemo: FC = () => {
       <TimeFrame activeStory={activeStory} />
       <img
         alt=""
-        className="block absolute w-[5.66%] h-auto top-[100%] left-[50%]"
+        className="absolute left-[50%] top-[100%] block h-auto w-[5.66%]"
         data-chromatic="ignore"
         ref={scopePointerControls}
         src="/home/develop/pointer.svg"

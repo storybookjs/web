@@ -12,7 +12,7 @@ import { getAllTrees } from '../../lib/get-all-trees';
 import { DocsProvider } from './provider';
 import { RendererCookie } from './renderer-cookie';
 
-export async function generateMetadata(): Promise<Metadata> {
+export function generateMetadata(): Metadata {
   return {
     title: 'Docs | Storybook',
   };
@@ -38,7 +38,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
       />
       <Image
         alt="Storybook Docs"
-        className="absolute left-0 top-0 -z-10 w-full"
+        className="absolute top-0 left-0 w-full -z-10"
         height={339}
         priority
         src="/bubbles.png"

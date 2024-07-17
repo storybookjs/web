@@ -5,7 +5,7 @@ import { type Metadata } from 'next';
 import { getPageData } from '../../lib/get-page';
 import { Content } from '../../components/docs/content';
 
-export async function generateMetadata(): Promise<Metadata> {
+export function generateMetadata(): Metadata {
   return {
     alternates: {
       canonical: '/docs',

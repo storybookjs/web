@@ -24,15 +24,16 @@ export async function generateMetadata({
     filterDrafts: false,
     filterSecondLevelDirectories: false,
   });
+  const newSlug = slug ?? [];
   const findPage = flatTree.find(
-    (node) => node.slug === `/docs/${slug?.join('/')}`,
+    (node) => node.slug === `/docs/${newSlug.join('/')}`,
   );
 
   const slugToFetch = slug ? [...slug] : [];
   const page = await getPageData(slugToFetch, activeVersion);
 
   return {
-    title: `${page?.title || 'Docs'} | Storybook`,
+    title: `${page?.title ?? 'Docs'} | Storybook`,
     alternates: {
       canonical: findPage?.canonical,
     },
@@ -66,11 +67,12 @@ export default async function Page({ params: { slug } }: PageProps) {
   const slugToFetch = slug ? [...slug] : [];
   if (!isLatest) slugToFetch.shift();
   slugToFetch.unshift(activeVersion.id);
+  const newSlug = slug ?? [];
 
   const page = await getPageData(slugToFetch, activeVersion);
 
   const isIndex = slug && slug[slug.length - 1] === 'index';
-  const pathWithoutIndex = `/docs/${slug?.slice(0, -1).join('/')}`;
+  const pathWithoutIndex = `/docs/${newSlug.slice(0, -1).join('/')}`;
 
   // If the page is an index page, redirect to the parent page
   if (isIndex) redirect(pathWithoutIndex);

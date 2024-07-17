@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronSmallDownIcon, YoutubeIcon } from '@storybook/icons';
+import { ChevronSmallDownIcon } from '@storybook/icons';
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import { Youtube } from '../../../logos/youtube';
 import styles from './styles.module.css';
@@ -24,7 +24,7 @@ export function YouTubeCallout({
 }: YouTubeCalloutProps) {
   return (
     <details className="group cursor-pointer overflow-hidden rounded border border-zinc-300 dark:border-slate-700 [&[open]>summary]:!mb-0 [&[open]]:before:hidden">
-      <summary className="flex h-12 items-center gap-2 px-4 marker:hidden">
+      <summary className="flex items-center h-12 gap-2 px-4 marker:hidden">
         <Youtube size={24} className="mr-2" />
         {summary}
         <ChevronSmallDownIcon className="group-[&[open]]:rotate-180" />

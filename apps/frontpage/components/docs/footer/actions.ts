@@ -1,3 +1,4 @@
+/* eslint-disable no-console -- OK */
 'use server';
 
 import dedent from 'dedent';
@@ -53,7 +54,7 @@ function createTitle(path: string) {
 }
 
 function createRating(upOrDown: Rating, value: number | string) {
-  return `<!--start-${upOrDown}-->${value}<!--end-${upOrDown}-->`;
+  return `<!--start-${upOrDown}-->${value.toString()}<!--end-${upOrDown}-->`;
 }
 
 const ratingSymbols = {
@@ -183,7 +184,6 @@ async function getDiscussion(title: string) {
           pageInfo: { hasNextPage, endCursor },
         },
       },
-       
     } = await queryGitHub<{
       repository: {
         discussions: {
@@ -498,8 +498,8 @@ export async function sendFeedback(
 
   try {
     const ip =
-      headersList.get('x-real-ip') ||
-      headersList.get('x-forwarded-for') ||
+      headersList.get('x-real-ip') ??
+      headersList.get('x-forwarded-for') ??
       'unknown';
     if (requestsCache[ip] && now - requestsCache[ip] < 1000) {
       throw new Error(`Too many requests from ${ip}, ignoring`);

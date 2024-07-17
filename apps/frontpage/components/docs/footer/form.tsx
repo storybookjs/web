@@ -1,4 +1,6 @@
+/* eslint-disable no-nested-ternary -- TODO */
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
+// eslint-disable-next-line import/named -- This should be solved in React 19
 import { useFormState, useFormStatus } from 'react-dom';
 import { motion } from 'framer-motion';
 import { useParams, usePathname } from 'next/navigation';
@@ -39,7 +41,7 @@ export const Form = ({
         setReaction(null);
       }, 4000);
     }
-  }, [state.status]);
+  }, [setReaction, state.status]);
 
   const duration = 0.2;
   const ease = 'easeInOut';
@@ -58,23 +60,29 @@ export const Form = ({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration, ease }}
-      className="flex flex-1 flex-col gap-3 px-3 pb-3"
+      className="flex flex-col flex-1 gap-3 px-3 pb-3"
       action={formAction}
     >
       {!state.status ? (
         <>
           <input type="hidden" name="reaction" value={reaction} />
           <input type="hidden" name="slug" value={pathname} />
-          {activeRenderer ? <input type="hidden" name="renderer" value={activeRenderer} /> : null}
-          {activeLanguage ? <input type="hidden" name="language" value={activeLanguage} /> : null}
-          {activeVersion ? <input type="hidden" name="version" value={activeVersion.id} /> : null}
+          {activeRenderer ? (
+            <input type="hidden" name="renderer" value={activeRenderer} />
+          ) : null}
+          {activeLanguage ? (
+            <input type="hidden" name="language" value={activeLanguage} />
+          ) : null}
+          {activeVersion ? (
+            <input type="hidden" name="version" value={activeVersion.id} />
+          ) : null}
           <label htmlFor="feedback" className="sr-only">
             Optional feedback
           </label>
           <textarea
             id="feedback"
             name="feedback"
-            className="h-24 w-full rounded-md border border-zinc-200 p-2 text-sm"
+            className="w-full h-24 p-2 text-sm border rounded-md border-zinc-200"
             placeholder={`What ${reaction === 'up' ? 'was' : 'wasn’t'} helpful?`}
           />
           <label htmlFor="comment" style={inaccessiblyVisuallyHiddenStyles}>
@@ -94,14 +102,15 @@ export const Form = ({
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="flex flex-1 flex-col items-center justify-center gap-1 bg-white text-sm"
+          className="flex flex-col items-center justify-center flex-1 gap-1 text-sm bg-white"
         >
           <div>Your feedback has been received!</div>
           {state.url ? (
             <a
               className="text-blue-500 underline underline-offset-4"
               target="_blank"
-              href={state.url} rel="noopener"
+              href={state.url}
+              rel="noopener"
             >
               View on Github
             </a>
@@ -113,7 +122,7 @@ export const Form = ({
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="flex flex-1 flex-col items-center justify-center gap-1 bg-white text-sm"
+          className="flex flex-col items-center justify-center flex-1 gap-1 text-sm bg-white"
         >
           <div>{state?.message}</div>
         </motion.div>

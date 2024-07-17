@@ -69,12 +69,12 @@ const PureUITests: FC<PureUITestsProps> = ({
 
               return (
                 <div
-                  className="absolute flex justify-center transition-transform ease-in-out left-1/2 duration-350 will-change-transform"
+                  className="absolute flex justify-center transition-transform ease-in-out duration-350 left-1/2 will-change-transform"
                   key={workflow.src}
                   style={{
                     transform: `translateX(${getWorkflowTranslateValue(
                       index - activeIndex,
-                    )}px)`,
+                    ).toString()}px)`,
                     marginLeft: -workflowWidth / 2,
                     width: workflowWidth,
                     height: workflowWidth,
@@ -83,9 +83,10 @@ const PureUITests: FC<PureUITestsProps> = ({
                   <div
                     className="w-full h-full transition bg-white rounded"
                     style={{
-                      transform: `scale(${isActive ? 1 : 0.76}) translateY(${
-                        isActive ? 0 : 33
-                      }px)`,
+                      transform: `scale(${(isActive ? 1 : 0.76).toString()}) translateY(${(isActive
+                        ? 0
+                        : 33
+                      ).toString()}px)`,
                       opacity: done ? 1 : 0.5,
                       boxShadow: isActive
                         ? `
@@ -115,11 +116,11 @@ const PureUITests: FC<PureUITestsProps> = ({
                       width={180}
                     />
                   </div>
-                  <div className="absolute overflow-hidden left-[-15px] w-[240px] h-[240px] top-[-15px]">
+                  <div className="absolute left-[-15px] top-[-15px] h-[240px] w-[240px] overflow-hidden">
                     <div
                       className={cn(
-                        'rounded-[1rem] absolute bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform',
-                        'top-3 left-0',
+                        'absolute rounded-[1rem] bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform',
+                        'left-0 top-3',
                         isActive ? 'visible' : 'hidden',
                       )}
                       style={{
@@ -127,14 +128,14 @@ const PureUITests: FC<PureUITestsProps> = ({
                         height: lineSize,
                         animation:
                           isActive && isAnimatingLoop
-                            ? `homeAutomateHorizontal ${lineAnimationLength}ms ${easing} ${lineAnimationDelay}ms`
+                            ? `homeAutomateHorizontal ${lineAnimationLength.toString()}ms ${easing} ${lineAnimationDelay.toString()}ms`
                             : undefined,
                       }}
                     />
                     <div
                       className={cn(
-                        'rounded-[1rem] absolute bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform',
-                        'top-0 left-3',
+                        'absolute rounded-[1rem] bg-[rgba(255,_68,_0,_0.8)] opacity-0 will-change-transform',
+                        'left-3 top-0',
                         isActive ? 'visible' : 'hidden',
                       )}
                       style={{
@@ -142,7 +143,7 @@ const PureUITests: FC<PureUITestsProps> = ({
                         height: 240,
                         animation:
                           isActive && isAnimatingLoop
-                            ? `homeAutomateVertical ${lineAnimationLength}ms ${easing} ${lineAnimationDelay}ms`
+                            ? `homeAutomateVertical ${lineAnimationLength.toString()}ms ${easing} ${lineAnimationDelay.toString()}ms`
                             : undefined,
                       }}
                     />
@@ -188,7 +189,7 @@ export function UITests() {
   const { workflows, isAnimatingLoop } = animationState;
 
   useEffect(() => {
-    if (isPaused || !isInView) return;
+    if (isPaused ?? !isInView) return;
 
     setAnimationState({
       // The entire purpose of didQueueTimer is to sync up the initial

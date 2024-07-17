@@ -5,7 +5,10 @@
     "GCP_CREDENTIALS",
     "SKIP_IP_HASH",
     "ALGOLIA_API_KEY",
-    "NEXT_PUBLIC_ALGOLIA_API_KEY"
+    "NEXT_PUBLIC_ALGOLIA_API_KEY",
+    "VERCEL_ENV",
+    "VERCEL_URL",
+    "GITHUB_STORYBOOK_BOT_PAT"
   ],
   "tasks": {
     "lint": {

@@ -73,8 +73,8 @@ const addCanonicalToNode = (
   } as TreeProps;
 
   if (newNode.children) {
-    newNode.children = newNode.children.map((node) =>
-      addCanonicalToNode(node, flatTree),
+    newNode.children = newNode.children.map((n) =>
+      addCanonicalToNode(n, flatTree),
     );
   }
 

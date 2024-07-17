@@ -24,9 +24,9 @@ export default async function Home({ params: { slug } }: HomeProps) {
   const page = await getRelease(slug);
 
   return (
-    <article className="w-full max-w-4xl mx-auto px-4 lg:px-8 my-10">
-      <h1 className="text-4xl mt-0 mb-6 font-bold">
-        {page?.frontmatter.title || 'Page Not Found'}
+    <article className="w-full max-w-4xl px-4 mx-auto my-10 lg:px-8">
+      <h1 className="mt-0 mb-6 text-4xl font-bold">
+        {page?.frontmatter.title ?? 'Page Not Found'}
       </h1>
       {page?.content}
       <ReleaseNewsletter />

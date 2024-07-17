@@ -21,7 +21,7 @@ export const DocsMainNav = () => {
   const docsLink =
     activeVersion.id === latestVersion.id
       ? '/docs'
-      : `/docs/${activeVersion.inSlug}`;
+      : `/docs/${activeVersion.inSlug ?? ''}`;
 
   return (
     <nav className="flex flex-col gap-1.5 text-sm font-medium">

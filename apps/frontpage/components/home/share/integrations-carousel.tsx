@@ -33,9 +33,9 @@ export const IntegrationsCarousel: FC<IntegrationsCarouselProps> = ({
         {integrations.map(({ name, image, ...integration }, index) => (
           <button
             className={cn(
-              'rounded w-10 h-10 flex items-center justify-center p-2 opacity-50 hover:opacity-100 transition-all duration-200 border border-transparent hover:border-blue-500',
+              'flex h-10 w-10 items-center justify-center rounded border border-transparent p-2 opacity-50 transition-all duration-200 hover:border-blue-500 hover:opacity-100',
               name === activeIntegration.name &&
-                'opacity-100 border border-blue-500',
+                'border border-blue-500 opacity-100',
             )}
             key={name}
             onClick={() => {
@@ -45,10 +45,10 @@ export const IntegrationsCarousel: FC<IntegrationsCarouselProps> = ({
             type="button"
             {...integration}
           >
-            <Image alt={name || ''} src={image} />
+            <Image alt={name ?? ''} src={image} />
           </button>
         ))}
-        <div className="text-slate-500 ml-2">+ and more</div>
+        <div className="ml-2 text-slate-500">+ and more</div>
       </div>
     </div>
   );

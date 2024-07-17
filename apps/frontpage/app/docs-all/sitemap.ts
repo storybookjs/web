@@ -33,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url:
       version.id === latestVersion.id
         ? 'https://storybook.js.org/docs'
-        : `https://storybook.js.org/docs/${version.inSlug || version.id}`,
+        : `https://storybook.js.org/docs/${version.inSlug ?? version.id}`,
   }));
 
   return [

@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Generate docs tree for the latest version only
   const listOfTrees = getAllTrees();
-  const tree = listOfTrees.find((tree) => tree.name === latestVersion.id);
+  const tree = listOfTrees.find((t) => t.name === latestVersion.id);
 
   // We flatten the tree
   const flatTree = tree?.children && getFlatTree({ tree: tree?.children });

@@ -19,6 +19,7 @@ export const RendererCookie = () => {
         setRenderer(rendererParam);
       }
     }
-  }, [rendererParam]);
+  }, [rendererParam, setRenderer]);
+
   return null;
 };

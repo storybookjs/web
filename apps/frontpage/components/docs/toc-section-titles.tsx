@@ -19,11 +19,10 @@ export function TOCSectionTitles({
 
     function buildTitle(items: TreeProps[], pathPartIndex: number) {
       const item = items.find(
-        (item) =>
-          item.name.replace('.mdx', '') === (slug)[pathPartIndex],
+        (it) => it.name.replace('.mdx', '') === slug[pathPartIndex],
       );
       if (item) {
-        title.push(item.sidebar?.title || item.title);
+        title.push(item.sidebar?.title ?? item.title);
         if (item.children) {
           buildTitle(item.children, pathPartIndex + 1);
         }

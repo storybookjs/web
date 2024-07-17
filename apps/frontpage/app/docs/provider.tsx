@@ -4,7 +4,6 @@ import { languages, packageManagers, renderers } from '@repo/utils';
 import { getCookie, setCookie } from 'cookies-next';
 import type { ReactNode } from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import {
   cookieLanguageId,
   cookiePackageManagerId,
