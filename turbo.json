@@ -11,7 +11,8 @@
     },
     "generate-redirects": {
       "inputs": ["./apps/frontpage/scripts/raw-redirects"],
-      "outputs": ["./apps/frontpage/generated-redirects.json"]
+      "outputs": ["./apps/frontpage/generated-redirects.json"],
+      "cache": false
     },
     "fetch-docs": {
       "cache": false
