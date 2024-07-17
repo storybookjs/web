@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import type { CodeSnippetsProps, DocsVersion } from '@repo/utils';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
-// eslint-disable-next-line import/no-named-as-default -- TODO: Check if this is a bug
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';

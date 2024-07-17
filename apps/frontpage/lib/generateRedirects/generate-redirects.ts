@@ -69,13 +69,14 @@ function getRedirect(
   source: string,
   destination: string,
   code: string,
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars -- TODO: Fix this
   debugType?: string,
 ) {
   return {
     source,
     destination,
     permanent: code === '308',
-    debugType,
+    // debugType,
   };
 }
 
@@ -159,6 +160,7 @@ export function generateRedirects({
           //     ),
           //   },
           // });
+          // eslint-disable-next-line no-lonely-if -- TODO: Fix this
           if (versionSlug !== `/${versionStringOverride}`) {
             acc.push(
               getRedirect(

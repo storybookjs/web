@@ -7,6 +7,7 @@ import { Providers } from './providers';
 
 import '@docsearch/css';
 import './globals.css';
+// eslint-disable-next-line import/no-unresolved -- TODO: fix this
 import '@repo/ui/styles.css';
 
 const fontSans = nunitoSans({

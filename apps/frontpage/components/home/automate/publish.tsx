@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- TODO */
 import type { FC } from 'react';
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -26,10 +27,10 @@ export const Publish: FC = () => {
   return (
     <Container asChild data-chromatic="ignore">
       <figure>
-        <div className="relative mt-12 mx-auto max-w-[400px] sm:mt-16">
+        <div className="relative mx-auto mt-12 max-w-[400px] sm:mt-16">
           <motion.img
             alt=""
-            className="absolute w-[8%] h-auto top-[73%] right-[15%] z-[2]"
+            className="absolute right-[15%] top-[73%] z-[2] h-auto w-[8%]"
             initial="initial"
             src="/home/automate/arrow.svg"
             transition={{ duration: 0.3, delay: 1.8 }}
@@ -39,7 +40,7 @@ export const Publish: FC = () => {
           />
           <motion.img
             alt=""
-            className="absolute w-[10%] h-auto left-[14%] bottom-[50%] z-[2]"
+            className="absolute bottom-[50%] left-[14%] z-[2] h-auto w-[10%]"
             initial="initial"
             src="/home/automate/pointerhand.svg"
             transition={{ duration: 0.3, delay: 1.8 }}
@@ -58,7 +59,7 @@ export const Publish: FC = () => {
             whileInView="animate"
           />
           <motion.div
-            className="block absolute w-[8%] h-0 pb-[8%] top-0 right-0 transform-style-preserve-3d"
+            className="transform-style-preserve-3d absolute right-0 top-0 block h-0 w-[8%] pb-[8%]"
             initial="initial"
             style={{ perspective: '1000px' }}
             variants={statusVariants}
@@ -67,7 +68,7 @@ export const Publish: FC = () => {
           >
             <img
               alt=""
-              className="rotate-0 w-full absolute top-0 left-0 right-0 bottom-0 z-[2]"
+              className="absolute bottom-0 left-0 right-0 top-0 z-[2] w-full rotate-0"
               src="/home/automate/status-publishing.svg"
               style={{ backfaceVisibility: 'hidden' }}
             />

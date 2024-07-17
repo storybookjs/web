@@ -35,7 +35,7 @@ export const DocsFooter = ({ isIndexPage }: FooterProps) => {
   }, [reaction]);
 
   return (
-    <div className="page-footer flex flex-wrap justify-between gap-4 pb-6 pt-12">
+    <div className="flex flex-wrap justify-between gap-4 pt-12 pb-6 page-footer">
       <motion.div
         initial={{ width: 'auto', height: 48, borderRadius: 24 }}
         animate={{
@@ -44,39 +44,48 @@ export const DocsFooter = ({ isIndexPage }: FooterProps) => {
           borderRadius: reaction ? 4 : 24,
         }}
         transition={{ duration, ease }}
-        className="flex flex-col overflow-hidden rounded-3xl border border-zinc-200"
+        className="flex flex-col overflow-hidden border rounded-3xl border-zinc-200"
       >
-        <div className="flex flex-shrink-0 h-12 items-center gap-2 pl-5 pr-3 text-sm">
+        <div className="flex items-center flex-shrink-0 h-12 gap-2 pl-5 pr-3 text-sm">
           Was this page useful?
           <div className="flex items-center gap-1">
             <button
+              type="button"
               className={cn(
                 'h-8 w-8 rounded-full hover:bg-blue-100',
                 reaction === 'up' && 'bg-blue-100',
               )}
-              onClick={() => { selectReaction('up'); }}
+              onClick={() => {
+                selectReaction('up');
+              }}
             >
               👍
             </button>
             <button
+              type="button"
               className={cn(
                 'h-8 w-8 rounded-full hover:bg-blue-100',
                 reaction === 'down' && 'bg-blue-100',
               )}
-              onClick={() => { selectReaction('down'); }}
+              onClick={() => {
+                selectReaction('down');
+              }}
             >
               👎
             </button>
           </div>
         </div>
         <AnimatePresence>
-          {reaction ? <Form reaction={reaction} setReaction={setReaction} /> : null}
+          {reaction ? (
+            <Form reaction={reaction} setReaction={setReaction} />
+          ) : null}
         </AnimatePresence>
       </motion.div>
       <a
         href={`${githubDocsBaseUrl}${pathname}${isIndexPage ? '/index' : ''}.mdx`}
         target="_blank"
-        className="textsm flex h-12 items-center rounded-full border border-zinc-200 px-5 text-sm transition-all hover:-translate-y-1 hover:border-zinc-400" rel="noopener"
+        className="flex items-center h-12 px-5 text-sm transition-all border rounded-full textsm border-zinc-200 hover:-translate-y-1 hover:border-zinc-400"
+        rel="noopener"
       >
         ✍️ Edit on Github
       </a>
