@@ -1,3 +1,4 @@
+import type { Addon } from '../types';
 import { Preview } from './preview';
 
 interface SearchResultsProps {

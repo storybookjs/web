@@ -1,8 +1,10 @@
-import humanFormat from 'human-format';
+/* eslint-disable @next/next/no-img-element -- We can't know where the images are from */
+import { humanFormat } from 'human-format';
 import { cn } from '@repo/utils';
 import Image from 'next/image';
 import { StorybookIcon, VerifiedIcon } from '@storybook/icons';
 import Link from 'next/link';
+import type { Addon, Recipe } from '../types';
 
 interface PreviewProps {
   element: Addon | Recipe;
@@ -16,7 +18,7 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
 
   return (
     <Comp
-      href={`${isRecipe ? '/recipes' : ''}/${element.name}`}
+      href={`${isRecipe ? '/recipes' : ''}/${element.name ?? ''}`}
       className={cn(
         'flex justify-between rounded border border-zinc-300 p-6 transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:border-blue-500 dark:border-slate-800 dark:hover:border-blue-500',
         orientation === 'horizontal'
@@ -33,14 +35,14 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
         )}
       >
         {!isRecipe && (
-          <div className="relative flex h-16 w-16 flex-shrink-0 items-center justify-center">
+          <div className="relative flex items-center justify-center flex-shrink-0 w-16 h-16">
             {element.icon ? (
               <div
                 style={{ backgroundImage: `url('${element.icon}')` }}
-                className="h-16 w-16 bg-contain bg-center bg-no-repeat"
+                className="w-16 h-16 bg-center bg-no-repeat bg-contain"
               />
             ) : (
-              <div className="flex h-full w-full items-center justify-center rounded-md bg-zinc-50 dark:bg-slate-800">
+              <div className="flex items-center justify-center w-full h-full rounded-md bg-zinc-50 dark:bg-slate-800">
                 <StorybookIcon className="h-10 w-10 text-[#FF4785]" />
               </div>
             )}
@@ -48,14 +50,16 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
         )}
         {'accentColor' in element && (
           <div
-            className="relative flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-md"
-            style={{ backgroundColor: element.accentColor || 'transparent' }}
+            className="relative flex items-center justify-center flex-shrink-0 w-16 h-16 rounded-md"
+            style={{ backgroundColor: element.accentColor ?? 'transparent' }}
           >
-            {element.icon ? <img
+            {element.icon ? (
+              <img
                 src={element.icon}
                 alt={element.name}
-                className="h-10 w-10"
-              /> : null}
+                className="w-10 h-10"
+              />
+            ) : null}
           </div>
         )}
         <div>
@@ -64,25 +68,27 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
               {element.displayName ?? element.name}
             </div>
             {'verified' in element &&
-              element.verified &&
-              ['official', 'integrators'].includes(element.verified) &&
-              element.status !== 'deprecated' ? <VerifiedIcon className="text-blue-500" /> : null}
+            element.verified &&
+            ['official', 'integrators'].includes(element.verified) &&
+            element.status !== 'deprecated' ? (
+              <VerifiedIcon className="text-blue-500" />
+            ) : null}
           </div>
           <div className="text-black dark:text-slate-400">
             {element.description}
           </div>
         </div>
       </div>
-      <div className="flex flex-shrink-0 items-center justify-between gap-12">
+      <div className="flex items-center justify-between flex-shrink-0 gap-12">
         <div className="flex flex-col">
           <div className="font-bold">
             {'weeklyDownloads' in element &&
-              humanFormat(element.weeklyDownloads || 0, {
+              humanFormat(element.weeklyDownloads ?? 0, {
                 decimals: 0,
                 separator: '',
               })}
             {'weeklyViews' in element &&
-              humanFormat(element.weeklyViews || 0, {
+              humanFormat(element.weeklyViews ?? 0, {
                 decimals: 0,
                 separator: '',
               })}
@@ -91,18 +97,21 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
             {isRecipe ? 'Views' : 'Downloads'}
           </div>
         </div>
-        {element.authors ? <div className="flex items-center">
+        {element.authors ? (
+          <div className="flex items-center">
             {element.authors.slice(0, 3).map((author) => (
               <div
                 key={author.username}
-                className="relative -ml-2 h-8 w-8 overflow-hidden rounded-full"
+                className="relative w-8 h-8 -ml-2 overflow-hidden rounded-full"
               >
-                {author.gravatarUrl ? <Image
+                {author.gravatarUrl ? (
+                  <Image
                     src={`https:${author.gravatarUrl}`}
                     alt={author.username || ''}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  /> : null}
+                  />
+                ) : null}
               </div>
             ))}
             {element.authors.length > 3 && (
@@ -110,7 +119,8 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
                 + {element.authors.slice(3).length}
               </div>
             )}
-          </div> : null}
+          </div>
+        ) : null}
       </div>
     </Comp>
   );

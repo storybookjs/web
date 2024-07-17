@@ -1,5 +1,6 @@
-import { addonFragment, recipeFragment , validateResponse } from '@repo/utils';
-import { fetchAddonsQuery, gql } from "./fetch-addons-query";
+import { addonFragment, recipeFragment, validateResponse } from '@repo/utils';
+import type { Tag, Addon, Recipe } from '../types';
+import { fetchAddonsQuery, gql } from './fetch-addons-query';
 
 interface AddonsHomeData {
   popular: {
@@ -15,7 +16,7 @@ interface TagWithOccurrence extends Tag {
 
 function createTagOccurrenceHash(...addons: Addon[]) {
   return addons
-    .reduce<Tag[]>((allTags, { tags }) => [...allTags, ...(tags || [])], [])
+    .reduce<Tag[]>((allTags, { tags }) => [...allTags, ...(tags ?? [])], [])
     .filter(({ icon }) => icon === null)
     .reduce<Record<string, TagWithOccurrence>>(
       (hash, tag) => ({
@@ -36,19 +37,11 @@ function getNRandomTags(
     .map((tag) => ({ ...tag, occurrence: tag.occurrence * Math.random() }))
     .sort((a, b) => b.occurrence - a.occurrence)
     .slice(0, numberOfTags)
-    .map(({ occurrence, ...tag }) => tag);
-}
-
-interface AddonsHomeValue {
-  popularAddons: Addon[];
-  popularRecipes: Recipe[];
-  trendingTags: Tag[];
-  vta: Addon;
+    .map(({ ...tag }) => tag);
 }
 
 export async function fetchHomeData() {
   try {
-    const value: AddonsHomeValue | null = null;
     const data = await fetchAddonsQuery<AddonsHomeData>(
       gql`
         query AddonsHome {
@@ -102,7 +95,6 @@ export async function fetchHomeData() {
       vta,
     };
   } catch (error) {
-    // @ts-expect-error - Seems safe
-    throw new Error(`Failed to fetch home data: ${error.message}`);
+    throw new Error(`Failed to fetch home data: ${(error as Error).message}`);
   }
 }

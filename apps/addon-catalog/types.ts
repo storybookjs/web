@@ -1,6 +1,3 @@
-// @ts-expect-error - TypeScript is unable to resolve the module
-declare module 'rehype-urls';
-
 export type Appearance = 'official' | 'integrator' | 'community';
 
 export interface Addon {

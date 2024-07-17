@@ -7,28 +7,18 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
-import Prism from 'prismjs';
+import Prism, { highlightAllUnder } from 'prismjs';
 
 if (typeof document !== 'undefined') {
-  // @ts-ignore
   global.Prism = Prism;
-  // @ts-ignore
   require('prismjs/components/prism-bash');
-  // @ts-ignore
   require('prismjs/components/prism-javascript');
-  // @ts-ignore
   require('prismjs/components/prism-typescript');
-  // @ts-ignore
   require('prismjs/components/prism-json');
-  // @ts-ignore
   require('prismjs/components/prism-css');
-  // @ts-ignore
   require('prismjs/components/prism-yaml');
-  // @ts-ignore
   require('prismjs/components/prism-markdown');
-  // @ts-ignore
   require('prismjs/components/prism-jsx');
-  // @ts-ignore
   require('prismjs/components/prism-tsx');
 }
 
@@ -36,6 +26,8 @@ const HighlightBlock = forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >((props, ref) => <div ref={ref} {...props} />);
+
+HighlightBlock.displayName = 'HighlightBlock';
 
 /**
  * TODO: This is how the Highlight component applies the theme.
@@ -102,13 +94,13 @@ const languageMap = {
   tsx: 'tsx',
 } as const;
 
-interface Props {
+interface HighlightProps {
   language?: keyof typeof languageMap;
   withHTMLChildren?: boolean;
 }
 
 export const Highlight: FunctionComponent<
-  Props & ComponentProps<typeof HighlightBlock>
+  HighlightProps & ComponentProps<typeof HighlightBlock>
 > = ({
   children,
   language: inputLanguage,
@@ -116,7 +108,7 @@ export const Highlight: FunctionComponent<
   ...rest
 }) => {
   const language =
-    (inputLanguage && languageMap[inputLanguage]) || inputLanguage;
+    (inputLanguage && languageMap[inputLanguage]) ?? inputLanguage;
   const codeBlock = withHTMLChildren ? (
     <div dangerouslySetInnerHTML={{ __html: children as string }} />
   ) : (
@@ -126,7 +118,7 @@ export const Highlight: FunctionComponent<
 
   useEffect(() => {
     if (domNode.current) {
-      Prism.highlightAllUnder(domNode.current);
+      highlightAllUnder(domNode.current);
     }
   });
 
