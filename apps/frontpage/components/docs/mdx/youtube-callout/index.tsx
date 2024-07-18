@@ -18,7 +18,7 @@ interface YouTubeCalloutProps {
 
 export function YouTubeCallout({
   id,
-  summary = 'Watch a video tutorial on the Storybook channel',
+  summary = 'Watch a video tutorial',
   title,
   params,
 }: YouTubeCalloutProps) {
