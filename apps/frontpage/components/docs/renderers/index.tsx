@@ -21,15 +21,6 @@ export const Renderers: FC = () => {
   const [lastRenderer, setLastRenderer] = useState<Renderer>(renderers[3]);
 
   useEffect(() => {
-    // On mobile we only show the first two renderers
-    if (isMobile) {
-      setFirstList(renderers.slice(0, 2));
-      setLastRenderer(renderers[2]);
-    } else {
-      setFirstList(renderers.slice(0, 3));
-      setLastRenderer(renderers[3]);
-    }
-
     const isInFirstList = firstList.some(
       (renderer) => renderer.id === activeRenderer,
     );
@@ -42,6 +33,17 @@ export const Renderers: FC = () => {
       setLastRenderer(activeRendererObj);
     }
   }, [isMobile, activeRenderer, firstList]);
+
+  useEffect(() => {
+    // On mobile we only show the first two renderers
+    if (isMobile) {
+      setFirstList(renderers.slice(0, 2));
+      setLastRenderer(renderers[2]);
+    } else {
+      setFirstList(renderers.slice(0, 3));
+      setLastRenderer(renderers[3]);
+    }
+  }, [isMobile, activeRenderer]);
 
   const restRenderers = renderers.filter((r) => {
     return !firstList.includes(r) && r !== lastRenderer;
