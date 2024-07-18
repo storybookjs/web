@@ -29,7 +29,9 @@ export const Renderers: FC = () => {
       setFirstList(renderers.slice(0, 3));
       setLastRenderer(renderers[3]);
     }
+  }, [isMobile]);
 
+  useEffect(() => {
     const isInFirstList = firstList.some(
       (renderer) => renderer.id === activeRenderer,
     );
@@ -41,7 +43,7 @@ export const Renderers: FC = () => {
     if (!isInFirstList && activeRendererObj) {
       setLastRenderer(activeRendererObj);
     }
-  }, [isMobile, activeRenderer, firstList]);
+  }, [activeRenderer, firstList]);
 
   const restRenderers = renderers.filter((r) => {
     return !firstList.includes(r) && r !== lastRenderer;
