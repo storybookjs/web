@@ -1,10 +1,11 @@
-import { addonFragment, validateResponse } from '@repo/utils';
-import { type Addon } from '../types';
+import { addonFragment, recipeFragment, validateResponse } from '@repo/utils';
+import type { Addon, Recipe } from '../types';
 import { fetchAddonsQuery, gql } from './fetch-addons-query';
 
 interface SearchData {
   partialSearchIntegrations: {
     addons: Addon[];
+    recipes: Recipe[];
   };
 }
 
@@ -17,6 +18,9 @@ export async function fetchSearchData(query: string) {
               addons {
                 ${addonFragment}
               }
+              recipes {
+                ${recipeFragment}
+              }
             }
           }
         `,
@@ -25,9 +29,13 @@ export async function fetchSearchData(query: string) {
       },
     );
 
-    validateResponse(() => data.partialSearchIntegrations.addons);
+    validateResponse(
+      () =>
+        data.partialSearchIntegrations.addons &&
+        data.partialSearchIntegrations.recipes,
+    );
 
-    return data.partialSearchIntegrations.addons;
+    return data.partialSearchIntegrations;
   } catch (error) {
     throw new Error(`Failed to fetch search data: ${(error as Error).message}`);
   }
