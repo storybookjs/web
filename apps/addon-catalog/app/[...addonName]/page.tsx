@@ -4,6 +4,7 @@ import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 import { AddonHero } from '../../components/addon/addon-hero';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
 import { Highlight } from '../../components/highlight';
+import { fetchAddonsData } from '../../lib/fetch-addons-data';
 
 interface AddonDetailsProps {
   params: {
@@ -11,10 +12,10 @@ interface AddonDetailsProps {
   };
 }
 
-// export async function generateStaticParams() {
-//   const addons = (await fetchAddonsData()) || [];
-//   return addons.map((name) => ({ params: { addonName: name?.split('/') } }));
-// }
+export async function generateStaticParams() {
+  const addons = (await fetchAddonsData()) || [];
+  return addons.map((name) => ({ addonName: name?.split('/') }));
+}
 
 export default async function AddonDetails({ params }: AddonDetailsProps) {
   // TODO: Better decoding?
@@ -30,7 +31,7 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
       <SubHeader leftLabel="Back to integrations" leftHref="/" />
       <AddonHero addon={addon} />
       <div className="flex flex-col gap-12 lg:flex-row">
-        <div className="min-w-0 flex-1">
+        <div className="flex-1 min-w-0">
           {addon.readme ? (
             <Highlight withHTMLChildren={false}>
               <div
