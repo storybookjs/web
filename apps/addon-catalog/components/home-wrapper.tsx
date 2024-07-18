@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@repo/utils';
 import { fetchSearchData } from '../lib/fetch-search-data';
-import type { Addon, TagLinkType } from '../types';
+import type { Addon, Recipe, TagLinkType } from '../types';
 import { SearchResults } from './search-results';
 import { TagList } from './tag-list';
 
@@ -36,7 +36,10 @@ const categories = [
 export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
-  const [searchResults, setSearchResults] = useState<Addon[]>([]);
+  const [searchResults, setSearchResults] = useState<{
+    addons: Addon[];
+    recipes: Recipe[];
+  }>({ addons: [], recipes: [] });
   const pathname = usePathname();
 
   useEffect(() => {
@@ -58,7 +61,7 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
 
   return (
     <>
-      <div className="flex items-start justify-between mt-12 mb-8">
+      <div className="mb-8 mt-12 flex items-start justify-between">
         <div>
           <h1 className="mb-4 text-4xl font-bold">Integrations</h1>
           <p className="text-black dark:text-slate-400">
@@ -68,18 +71,18 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
         </div>
         <a
           href="/docs/addons/integration-catalog"
-          className="items-center flex-shrink-0 hidden h-10 gap-2 px-5 text-sm font-bold text-white bg-blue-500 rounded-full md:flex"
+          className="hidden h-10 flex-shrink-0 items-center gap-2 rounded-full bg-blue-500 px-5 text-sm font-bold text-white md:flex"
         >
           <PlusIcon />
           Add your integration
         </a>
       </div>
       <div className="mb-24">
-        <div className="flex flex-col gap-8 mb-12 md:flex-row md:items-center md:gap-12">
+        <div className="mb-12 flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
           <div className="relative flex h-10 w-full flex-shrink-0 items-center rounded-full border border-zinc-300 md:w-[250px] dark:border-slate-700">
             <SearchIcon className="absolute left-4 dark:text-slate-500" />
             <input
-              className="w-full h-full pl-10 bg-transparent rounded-full placeholder:text-slate-500 dark:placeholder:text-slate-400"
+              className="h-full w-full rounded-full bg-transparent pl-10 placeholder:text-slate-500 dark:placeholder:text-slate-400"
               placeholder="Search integrations"
               value={search}
               onChange={(e) => {
@@ -88,7 +91,7 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
             />
             {search.length > 0 && (
               <div
-                className="absolute flex items-center justify-center -translate-y-1/2 cursor-pointer right-2 top-1/2 h-7 w-7"
+                className="absolute right-2 top-1/2 flex h-7 w-7 -translate-y-1/2 cursor-pointer items-center justify-center"
                 onClick={() => {
                   setSearch('');
                 }}
@@ -118,7 +121,7 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
           <div className="flex flex-col gap-12 md:flex-row">
             <div className="hidden flex-shrink-0 md:block md:w-[250px]">
               <h3 className="mb-6 text-2xl font-bold">Categories</h3>
-              <ul className="pb-6 -ml-2 border-b border-b-zinc-300 dark:border-b-slate-700">
+              <ul className="-ml-2 border-b border-b-zinc-300 pb-6 dark:border-b-slate-700">
                 {categories.map(({ name, href }) => (
                   <li key={name}>
                     <Link
@@ -133,7 +136,7 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
                   </li>
                 ))}
               </ul>
-              <div className="flex flex-col gap-4 mt-6">
+              <div className="mt-6 flex flex-col gap-4">
                 <a
                   href="/docs/addons/install-addons"
                   className="flex items-center gap-2 text-sm transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
