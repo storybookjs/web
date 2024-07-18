@@ -24,7 +24,7 @@ function getParentPartOfPath(
   return indexPagePath.length === 1
     ? activeVersion.id === latestVersion.id
       ? 'docs'
-      : activeVersion.inSlug ?? activeVersion.id
+      : (activeVersion.inSlug ?? activeVersion.id)
     : indexPagePath[indexPagePath.length - 1];
 }
 
@@ -45,13 +45,12 @@ export const A: FC<AProps> = ({
   }
 
   let href = hrefIn
-    ?.replace(/^(?:(?!http).*)\.mdx/, '$1')
+    // eslint-disable-next-line prefer-named-capture-group -- TODO: Fix regex with new eslint rules
+    ?.replace(/^((?!http).*)\.mdx/, '$1')
     .replace(/\/index$/, '')
     // ../../release-7-6/docs/migration-guide.mdx#major-breaking-changes -> ../../docs/7/migration-guide#major-breaking-changes
-    .replace(
-      /^(?:(?!http).*)(?:release-)(?:\d+)-\d+\/docs(?:.*)/,
-      '$1docs/$2$3',
-    );
+    // eslint-disable-next-line prefer-named-capture-group -- TODO: Fix regex with new eslint rules
+    .replace(/^((?!http).*)(?:release-)(\d+)-\d+\/docs(.*)/, '$1docs/$2$3');
 
   if (indexPagePath && href?.startsWith('./')) {
     href = href.replace(
