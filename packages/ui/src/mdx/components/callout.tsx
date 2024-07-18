@@ -41,11 +41,14 @@ export const Callout: FC<CalloutProps> = ({
       {...props}
     >
       {appliedIcon ? (
-        <span aria-hidden className="ui-hidden ui-text-2xl md:ui-flex">
+        <span
+          aria-hidden
+          className="ui-hidden ui-text-2xl md:ui-flex ui-flex-none"
+        >
           {appliedIcon}
         </span>
       ) : null}
-      <div>
+      <div className="ui-min-w-0">
         {title ? (
           <div dangerouslySetInnerHTML={{ __html: snarkdown(title) }} />
         ) : null}
