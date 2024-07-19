@@ -48,6 +48,42 @@ export type Database = {
           },
         ]
       }
+      addon_tag: {
+        Row: {
+          addon: number | null
+          created_at: string
+          id: number
+          tag: number | null
+        }
+        Insert: {
+          addon?: number | null
+          created_at?: string
+          id?: number
+          tag?: number | null
+        }
+        Update: {
+          addon?: number | null
+          created_at?: string
+          id?: number
+          tag?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "addon_tag_addon_fkey"
+            columns: ["addon"]
+            isOneToOne: false
+            referencedRelation: "addons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "addon_tag_tag_fkey"
+            columns: ["tag"]
+            isOneToOne: false
+            referencedRelation: "tags"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       addons: {
         Row: {
           created_at: string
@@ -59,6 +95,7 @@ export type Database = {
           name: string
           npm_url: string | null
           readme: string | null
+          renderers: string[] | null
           repository_url: string | null
           status: string | null
           verified: string | null
@@ -74,6 +111,7 @@ export type Database = {
           name: string
           npm_url?: string | null
           readme?: string | null
+          renderers?: string[] | null
           repository_url?: string | null
           status?: string | null
           verified?: string | null
@@ -89,6 +127,7 @@ export type Database = {
           name?: string
           npm_url?: string | null
           readme?: string | null
+          renderers?: string[] | null
           repository_url?: string | null
           status?: string | null
           verified?: string | null
@@ -113,6 +152,39 @@ export type Database = {
           created_at?: string
           email?: string | null
           id?: number
+          name?: string
+        }
+        Relationships: []
+      }
+      tags: {
+        Row: {
+          aliases: string[] | null
+          created_at: string
+          description: string | null
+          disabled: boolean
+          display_name: string | null
+          id: number
+          is_category: boolean | null
+          name: string
+        }
+        Insert: {
+          aliases?: string[] | null
+          created_at?: string
+          description?: string | null
+          disabled?: boolean
+          display_name?: string | null
+          id?: number
+          is_category?: boolean | null
+          name: string
+        }
+        Update: {
+          aliases?: string[] | null
+          created_at?: string
+          description?: string | null
+          disabled?: boolean
+          display_name?: string | null
+          id?: number
+          is_category?: boolean | null
           name?: string
         }
         Relationships: []

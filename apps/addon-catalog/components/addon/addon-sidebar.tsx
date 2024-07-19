@@ -1,19 +1,22 @@
 'use client';
 
-// import { Pill } from '@repo/ui';
+import { Pill } from '@repo/ui';
 import { BookIcon, EditIcon } from '@storybook/icons';
 import Image from 'next/image';
-// import Link from 'next/link';
+import Link from 'next/link';
 import { useState } from 'react';
 import { url } from 'gravatar';
-import type { Author } from '../../types/types';
+import { renderers } from '@repo/utils';
+import type { Addon, Author, Tag } from '../../types/types';
 
 export function AddonSidebar({
-  // addon,
+  addon,
   authors,
+  tags,
 }: {
-  // addon: Addon;
+  addon: Addon;
   authors: Author[];
+  tags: Tag[];
 }) {
   const [moreAuthorsVisible, setMoreAuthorsVisible] = useState(false);
   const listOfAuthors = moreAuthorsVisible ? authors : authors.slice(0, 6);
@@ -61,34 +64,38 @@ export function AddonSidebar({
           )}
         </>
       ) : null}
-      {/* {renderers && renderers.length > 0 ? (
+      {addon.renderers && addon.renderers.length > 0 ? (
         <>
           <div className="flex items-center py-2 mt-6 mb-2 text-sm font-bold">
             Work with
           </div>
           <ul className="flex flex-wrap gap-2">
-            {renderers.map((renderer) => (
-              <Pill key={renderer.name} noHover>
-                {renderer.displayName}
-              </Pill>
-            ))}
+            {addon.renderers.sort().map((renderer) => {
+              return (
+                <Pill key={renderer} noHover>
+                  {renderers.find((r) => r.id === renderer)?.title ?? renderer}
+                </Pill>
+              );
+            })}
           </ul>
         </>
-      ) : null} */}
-      {/* {tags?.length ? (
+      ) : null}
+      {tags?.length ? (
         <>
           <div className="flex items-center py-2 mt-6 mb-2 text-sm font-bold">
             Tags
           </div>
           <ul className="flex flex-wrap gap-2 mb-6">
-            {tags.map(({ link, name }) => (
-              <Pill key={name}>
-                <Link href={link}>{name}</Link>
+            {tags.map((tag) => (
+              <Pill key={tag.name}>
+                <Link href={`/tag/${tag.name}`}>
+                  {tag.display_name ?? tag.name}
+                </Link>
               </Pill>
             ))}
           </ul>
         </>
-      ) : null} */}
+      ) : null}
       <div className="flex flex-col gap-4 pt-6 mt-6 border-t border-t-zinc-300 dark:border-t-slate-700">
         <a
           href="/docs/addons/install-addons"

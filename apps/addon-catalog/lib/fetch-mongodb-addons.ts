@@ -14,6 +14,8 @@ interface Addon {
   weeklyDownloads?: number;
   readme?: string;
   npmUrl?: string;
+  supportedFrameworks?: string[];
+  tags?: string[];
 }
 
 async function fetchData(name: string) {
