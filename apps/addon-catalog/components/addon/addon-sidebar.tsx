@@ -1,18 +1,18 @@
 'use client';
 
-import { Pill } from '@repo/ui';
+// import { Pill } from '@repo/ui';
 import { BookIcon, EditIcon } from '@storybook/icons';
 import Image from 'next/image';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { useState } from 'react';
 import { url } from 'gravatar';
-import type { Addon, Author } from '../../types/types';
+import type { Author } from '../../types/types';
 
 export function AddonSidebar({
-  addon,
+  // addon,
   authors,
 }: {
-  addon: Addon;
+  // addon: Addon;
   authors: Author[];
 }) {
   const [moreAuthorsVisible, setMoreAuthorsVisible] = useState(false);

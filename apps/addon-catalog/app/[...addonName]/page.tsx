@@ -8,6 +8,7 @@ import { Highlight } from '../../components/highlight';
 import { type Database } from '../../types/database.types';
 import { createMarkdownProcessor } from '../../lib/create-markdown-processor';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
+import type { Author } from '../../types/types';
 
 interface AddonDetailsProps {
   params: {
@@ -48,7 +49,7 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
     .select('*, author (*)')
     .eq('addon', addon.id);
 
-  const authors = addonAuthors ? addonAuthors.map((a) => a.author) : [];
+  const authors = addonAuthors?.map((a) => a.author) as unknown as Author[];
 
   const baseLink = `${addon.repository_url ?? addon.npm_url ?? ''}/`;
   const processor = createMarkdownProcessor(baseLink);
@@ -134,7 +135,7 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
             </Highlight>
           ) : null}
         </div>
-        <AddonSidebar addon={addon} authors={authors} />
+        <AddonSidebar authors={authors} />
       </div>
     </main>
   );
