@@ -5,31 +5,30 @@ interface Addon {
   disabled?: boolean;
 }
 
+async function fetchData(name: string) {
+  const movies = database.collection<Addon>(name);
+  const query = {};
+
+  const allCuratedAddons: Addon[] = [];
+
+  const cursor = movies.find<Addon>(query, {
+    sort: { name: 1 },
+    projection: { _id: 0, name: 1, disabled: 1 },
+  });
+  for await (const doc of cursor) {
+    allCuratedAddons.push(doc);
+  }
+
+  return allCuratedAddons;
+}
+
 export const fetchAllAddons = async () => {
   try {
-    const query = {};
-    const crawledAddonsCollection = database.collection<Addon>('crawledAddons');
-    const crawledAddons = crawledAddonsCollection.find<Addon>(query, {});
-    const curatedAddonsCollection = database.collection<Addon>('curatedAddons');
-    const curatedAddons = curatedAddonsCollection.find<Addon>(query, {});
+    const crawledAddons = await fetchData('crawledAddons');
+    const curatedAddons = await fetchData('curatedAddons');
 
-    const allCuratedAddons: Addon[] = [];
-    const allAddons: Addon[] = [];
-
-    const count = await crawledAddonsCollection.countDocuments(query);
-
-    console.log(count);
-
-    for await (const doc of curatedAddons) {
-      allCuratedAddons.push(doc);
-    }
-
-    for await (const doc of crawledAddons) {
-      allAddons.push(doc);
-    }
-
-    const allAddonsWithCurated = allAddons.map((addon) => {
-      const curatedAddon = allCuratedAddons.find((c) => c.name === addon.name);
+    const allAddonsWithCurated = crawledAddons.map((addon) => {
+      const curatedAddon = curatedAddons.find((c) => c.name === addon.name);
       if (curatedAddon) {
         return {
           ...addon,
@@ -44,7 +43,6 @@ export const fetchAllAddons = async () => {
         .filter((addon) => !addon.disabled)
         .map((addon) => ({
           name: addon.name,
-          disabled: addon.disabled,
         })),
       error: null,
     };

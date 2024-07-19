@@ -4,7 +4,7 @@ import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 import { AddonHero } from '../../components/addon/addon-hero';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
 import { Highlight } from '../../components/highlight';
-import { fetchAddonsData } from '../../lib/fetch-addons-data';
+import { fetchAllAddons } from '../../lib/fetch-all-addons';
 
 interface AddonDetailsProps {
   params: {
@@ -13,8 +13,8 @@ interface AddonDetailsProps {
 }
 
 export async function generateStaticParams() {
-  const addons = (await fetchAddonsData()) || [];
-  return addons.map((name) => ({ addonName: name?.split('/') }));
+  const { addons } = await fetchAllAddons();
+  return addons.map((addon) => ({ addonName: addon.name?.split('/') }));
 }
 
 export default async function AddonDetails({ params }: AddonDetailsProps) {
