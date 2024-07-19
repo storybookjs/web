@@ -9,7 +9,9 @@
     "VERCEL_ENV",
     "VERCEL_URL",
     "GITHUB_STORYBOOK_BOT_PAT",
-    "MONGODB_URI"
+    "MONGODB_URI",
+    "NEXT_PUBLIC_SUPABASE_URL",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY"
   ],
   "tasks": {
     "lint": {

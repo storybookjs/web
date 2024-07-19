@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { fetchAllAddons } from '../../../lib/fetch-all-addons';
+import { fetchAllAddons } from '../../../lib/fetch-mongodb-addons';
 
 export async function GET() {
   try {

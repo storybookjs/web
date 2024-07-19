@@ -18,6 +18,8 @@
     "@repo/ui": "*",
     "@repo/utils": "*",
     "@storybook/icons": "^1.2.9",
+    "@supabase/ssr": "^0.4.0",
+    "@supabase/supabase-js": "^2.44.4",
     "@types/mdx": "^2.0.13",
     "copy-to-clipboard": "^3.3.3",
     "framer-motion": "^11.2.12",
