@@ -24,6 +24,28 @@ export interface Addon {
   yearlyDownloads?: number | null;
 }
 
+export interface AddonSupabase {
+  name: string;
+  // compatibility?: Framework[] | null;
+  description: string | null;
+  // disabled: boolean | null;
+  display_name: string | null;
+  // downloadsAcceleration?: number | null;
+  homepage_url: string | null;
+  icon: string | null;
+  // monthlyDownloads: number | null;
+  // npmUrl?: string | null;
+  // published_at: number | null;
+  // readme: string | null;
+  repository_url: string | null;
+  status: Status | null;
+  // tags?: Tag[] | null;
+  verified: Verified | null;
+  // verifiedCreator: string | null;
+  weekly_downloads: number | null;
+  // yearlyDownloads: number | null;
+}
+
 export interface AddonWithTagLinks extends Omit<Addon, 'tags'> {
   tags: TagLinkType[];
 }

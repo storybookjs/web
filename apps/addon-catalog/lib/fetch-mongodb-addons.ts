@@ -3,7 +3,17 @@ import { database } from './mongodb-client';
 interface Addon {
   name: string;
   disabled?: boolean;
+  description?: string;
   authors: { name: string; email: string }[];
+  repositoryUrl?: string;
+  homepageUrl?: string;
+  displayName?: string;
+  icon?: string;
+  verified?: string;
+  status?: string;
+  weeklyDownloads?: number;
+  readme?: string;
+  npmUrl?: string;
 }
 
 async function fetchData(name: string) {
@@ -51,7 +61,7 @@ export const fetchMongodbAddons = async () => {
       (name) => {
         return authors.find((a) => a.name === name);
       },
-    );
+    ) as { name: string; email: string }[];
 
     return {
       addons: allAddonsWithCurated,

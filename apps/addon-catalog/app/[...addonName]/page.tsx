@@ -1,10 +1,12 @@
 import { SubHeader } from '@repo/ui';
 import { cn } from '@repo/utils';
 import { createClient } from '@supabase/supabase-js';
-import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
+import { cookies } from 'next/headers';
+import { createClient as createSupabaseClient } from '../../utils/supabase/server';
 import { AddonHero } from '../../components/addon/addon-hero';
-import { AddonSidebar } from '../../components/addon/addon-sidebar';
 import { Highlight } from '../../components/highlight';
+import { type Database } from '../../types/database.types';
+import { createMarkdownProcessor } from '../../lib/create-markdown-processor';
 
 interface AddonDetailsProps {
   params: {
@@ -13,7 +15,7 @@ interface AddonDetailsProps {
 }
 
 export async function generateStaticParams() {
-  const supabase = createClient(
+  const supabase = createClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   );
@@ -21,18 +23,32 @@ export async function generateStaticParams() {
 
   if (!addons) return [];
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- TODO
   return addons.map((addon) => ({ addonName: addon.name?.split('/') }));
 }
 
 export default async function AddonDetails({ params }: AddonDetailsProps) {
+  const cookieStore = cookies();
+  const supabase = createSupabaseClient(cookieStore);
+
   // TODO: Better decoding?
   const name = params.addonName.join('/').replace('%40', '@');
-  const addon = await fetchAddonDetailsData(name);
+  // const addon = await fetchAddonDetailsData(name);
 
-  if (!addon) {
-    return <div>Not found.</div>;
-  }
+  const { data: addon } = await supabase
+    .from('addons')
+    .select()
+    .eq('name', name)
+    .maybeSingle();
+
+  if (!addon) return <div>Not found.</div>;
+
+  const baseLink = `${addon.repository_url ?? addon.npm_url ?? ''}/`;
+  const processor = createMarkdownProcessor(baseLink);
+  const processedReadme = addon.readme
+    ? processor.processSync(addon.readme).toString()
+    : null;
+
+  // console.log(processedReadme);
 
   return (
     <main className="mb-20">
@@ -40,7 +56,7 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
       <AddonHero addon={addon} />
       <div className="flex flex-col gap-12 lg:flex-row">
         <div className="flex-1 min-w-0">
-          {addon.readme ? (
+          {processedReadme ? (
             <Highlight withHTMLChildren={false}>
               <div
                 /**
@@ -107,12 +123,12 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
                   '[&_tr]:border-b',
                   '[&_tr]:border-b-zinc-200',
                 )}
-                dangerouslySetInnerHTML={{ __html: addon.readme }}
+                dangerouslySetInnerHTML={{ __html: processedReadme }}
               />
             </Highlight>
           ) : null}
         </div>
-        <AddonSidebar addon={addon} />
+        {/* <AddonSidebar addon={addon} /> */}
       </div>
     </main>
   );

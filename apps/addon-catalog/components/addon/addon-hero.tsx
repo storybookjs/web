@@ -11,13 +11,17 @@ import copy from 'copy-to-clipboard';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { StorybookIcon } from '@repo/ui';
-import { type Addon } from '../../types';
+import { type Database } from '../../types/database.types';
 
-export function AddonHero({ addon }: { addon: Addon }) {
+export function AddonHero({
+  addon,
+}: {
+  addon: Database['public']['Tables']['addons']['Row'];
+}) {
   const [state, setState] = useState(false);
 
   const onClick = () => {
-    copy(`npx install ${addon.name ?? ''}`);
+    copy(`npx install ${addon?.name ?? ''}`);
     setState(true);
     setTimeout(() => {
       setState(false);
@@ -27,15 +31,15 @@ export function AddonHero({ addon }: { addon: Addon }) {
   return (
     <div className="flex justify-between pb-12 mb-12 border-b border-zinc-300 dark:border-b-slate-700">
       <div className="flex flex-col gap-8 md:flex-row">
-        {addon.icon ? (
+        {addon?.icon ? (
           <div
-            style={{ backgroundImage: `url('${addon.icon}')` }}
+            style={{ backgroundImage: `url('${addon?.icon}')` }}
             className="w-20 h-20 bg-center bg-no-repeat bg-contain"
           />
         ) : null}
         <div className="flex flex-col items-start">
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold">{addon.displayName}</h1>
+            <h1 className="text-2xl font-bold">{addon?.display_name}</h1>
             {addon.verified &&
             ['official', 'integrators'].includes(addon.verified) &&
             addon.status !== 'deprecated' ? (
@@ -65,7 +69,7 @@ export function AddonHero({ addon }: { addon: Addon }) {
               </AnimatePresence>
             </button>
             <a
-              href={addon.repositoryUrl ?? ''}
+              href={addon.repository_url ?? ''}
               target="_blank"
               className="flex items-center gap-2 text-sm text-black transition-colors hover:text-blue-500 dark:text-slate-400"
               rel="noopener"
@@ -79,7 +83,7 @@ export function AddonHero({ addon }: { addon: Addon }) {
       <div className="flex-col hidden pr-8 lg:flex">
         <div className="flex flex-col mb-4">
           <div className="text-3xl text-blue-400">
-            {humanFormat(addon.weeklyDownloads ?? 0, {
+            {humanFormat(addon.weekly_downloads ?? 0, {
               decimals: 0,
               separator: '',
             })}

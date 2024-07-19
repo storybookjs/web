@@ -5,9 +5,13 @@ import { BookIcon, EditIcon } from '@storybook/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { type AddonWithTagLinks } from '../../types';
+import { type Database } from '../../types/database.types';
 
-export function AddonSidebar({ addon }: { addon: AddonWithTagLinks }) {
+export function AddonSidebar({
+  addon,
+}: {
+  addon: Database['public']['Tables']['addons']['Row'];
+}) {
   const [moreAuthorsVisible, setMoreAuthorsVisible] = useState(false);
   const authors = addon?.authors ?? [];
   const listOfAuthors = moreAuthorsVisible ? authors : authors.slice(0, 6);
