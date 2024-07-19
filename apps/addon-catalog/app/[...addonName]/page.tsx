@@ -1,10 +1,10 @@
 import { SubHeader } from '@repo/ui';
 import { cn } from '@repo/utils';
+import { createClient } from '@supabase/supabase-js';
 import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 import { AddonHero } from '../../components/addon/addon-hero';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
 import { Highlight } from '../../components/highlight';
-import { fetchMongodbAddons } from '../../lib/fetch-mongodb-addons';
 
 interface AddonDetailsProps {
   params: {
@@ -13,7 +13,15 @@ interface AddonDetailsProps {
 }
 
 export async function generateStaticParams() {
-  const { addons } = await fetchMongodbAddons();
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  );
+  const { data: addons } = await supabase.from('addons').select();
+
+  if (!addons) return [];
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- TODO
   return addons.map((addon) => ({ addonName: addon.name?.split('/') }));
 }
 
