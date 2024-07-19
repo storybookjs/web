@@ -1,8 +1,6 @@
 import { SubHeader } from '@repo/ui';
 import { cn } from '@repo/utils';
 import { createClient } from '@supabase/supabase-js';
-import { cookies } from 'next/headers';
-import { createClient as createSupabaseClient } from '../../utils/supabase/server';
 import { AddonHero } from '../../components/addon/addon-hero';
 import { Highlight } from '../../components/highlight';
 import { type Database } from '../../types/database.types';
@@ -16,11 +14,12 @@ interface AddonDetailsProps {
   };
 }
 
+const supabase = createClient<Database>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+);
+
 export async function generateStaticParams() {
-  const supabase = createClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
   const { data: addons } = await supabase.from('addons').select();
 
   if (!addons) return [];
@@ -29,9 +28,6 @@ export async function generateStaticParams() {
 }
 
 export default async function AddonDetails({ params }: AddonDetailsProps) {
-  const cookieStore = cookies();
-  const supabase = createSupabaseClient(cookieStore);
-
   // TODO: Better decoding?
   const name = params.addonName.join('/').replace('%40', '@');
   // const addon = await fetchAddonDetailsData(name);
