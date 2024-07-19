@@ -11,13 +11,9 @@ import copy from 'copy-to-clipboard';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { StorybookIcon } from '@repo/ui';
-import { type Database } from '../../types/database.types';
+import { type Addon } from '../../types/types';
 
-export function AddonHero({
-  addon,
-}: {
-  addon: Database['public']['Tables']['addons']['Row'];
-}) {
+export function AddonHero({ addon }: { addon: Addon }) {
   const [state, setState] = useState(false);
 
   const onClick = () => {

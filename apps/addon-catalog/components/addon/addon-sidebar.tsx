@@ -5,19 +5,21 @@ import { BookIcon, EditIcon } from '@storybook/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { type Database } from '../../types/database.types';
+import { url } from 'gravatar';
+import type { Addon, Author } from '../../types/types';
 
 export function AddonSidebar({
   addon,
+  authors,
 }: {
-  addon: Database['public']['Tables']['addons']['Row'];
+  addon: Addon;
+  authors: Author[];
 }) {
   const [moreAuthorsVisible, setMoreAuthorsVisible] = useState(false);
-  const authors = addon?.authors ?? [];
   const listOfAuthors = moreAuthorsVisible ? authors : authors.slice(0, 6);
   const moreAuthors = authors.slice(6);
-  const renderers = addon?.compatibility ?? [];
-  const tags = addon?.tags || [];
+  // const renderers = addon?.compatibility ?? [];
+  // const tags = addon?.tags || [];
 
   return (
     <div className="flex-shrink-0 md:w-[250px]">
@@ -27,20 +29,24 @@ export function AddonSidebar({
             Made by
           </div>
           <ul className="flex flex-col gap-4 mb-6">
-            {listOfAuthors.map((author) => (
-              <li className="flex items-center gap-2" key={author.username}>
-                {author.gravatarUrl ? (
-                  <div className="relative overflow-hidden rounded-full h-7 w-7">
-                    <Image
-                      src={`https:${author.gravatarUrl}`}
-                      alt={author.username}
-                      fill
-                    />
-                  </div>
-                ) : null}
-                {author.username}
-              </li>
-            ))}
+            {listOfAuthors.map((author) => {
+              const gravatarUrl = url(author.email ?? '', { s: '200' });
+
+              return (
+                <li className="flex items-center gap-2" key={author.name}>
+                  {author.email ? (
+                    <div className="relative overflow-hidden rounded-full h-7 w-7">
+                      <Image
+                        src={`https:${gravatarUrl}`}
+                        alt={author.name}
+                        fill
+                      />
+                    </div>
+                  ) : null}
+                  {author.name}
+                </li>
+              );
+            })}
           </ul>
           {moreAuthors.length > 0 && !moreAuthorsVisible && (
             <button
@@ -55,7 +61,7 @@ export function AddonSidebar({
           )}
         </>
       ) : null}
-      {renderers && renderers.length > 0 ? (
+      {/* {renderers && renderers.length > 0 ? (
         <>
           <div className="flex items-center py-2 mt-6 mb-2 text-sm font-bold">
             Work with
@@ -68,8 +74,8 @@ export function AddonSidebar({
             ))}
           </ul>
         </>
-      ) : null}
-      {tags?.length ? (
+      ) : null} */}
+      {/* {tags?.length ? (
         <>
           <div className="flex items-center py-2 mt-6 mb-2 text-sm font-bold">
             Tags
@@ -82,7 +88,7 @@ export function AddonSidebar({
             ))}
           </ul>
         </>
-      ) : null}
+      ) : null} */}
       <div className="flex flex-col gap-4 pt-6 mt-6 border-t border-t-zinc-300 dark:border-t-slate-700">
         <a
           href="/docs/addons/install-addons"

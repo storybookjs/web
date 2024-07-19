@@ -7,6 +7,7 @@ import { AddonHero } from '../../components/addon/addon-hero';
 import { Highlight } from '../../components/highlight';
 import { type Database } from '../../types/database.types';
 import { createMarkdownProcessor } from '../../lib/create-markdown-processor';
+import { AddonSidebar } from '../../components/addon/addon-sidebar';
 
 interface AddonDetailsProps {
   params: {
@@ -42,13 +43,18 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
 
   if (!addon) return <div>Not found.</div>;
 
+  const { data: addonAuthors } = await supabase
+    .from('addon_author')
+    .select('*, author (*)')
+    .eq('addon', addon.id);
+
+  const authors = addonAuthors ? addonAuthors.map((a) => a.author) : [];
+
   const baseLink = `${addon.repository_url ?? addon.npm_url ?? ''}/`;
   const processor = createMarkdownProcessor(baseLink);
   const processedReadme = addon.readme
     ? processor.processSync(addon.readme).toString()
     : null;
-
-  // console.log(processedReadme);
 
   return (
     <main className="mb-20">
@@ -128,7 +134,7 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
             </Highlight>
           ) : null}
         </div>
-        {/* <AddonSidebar addon={addon} /> */}
+        <AddonSidebar addon={addon} authors={authors} />
       </div>
     </main>
   );

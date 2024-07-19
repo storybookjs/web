@@ -25,6 +25,7 @@
     "copy-to-clipboard": "^3.3.3",
     "framer-motion": "^11.2.12",
     "graphql-request": "^7.1.0",
+    "gravatar": "^1.8.2",
     "human-format": "^1.2.0",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.1",
@@ -43,6 +44,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
+    "@types/gravatar": "^1.8.6",
     "@types/node": "^20",
     "@types/prismjs": "^1.26.4",
     "@types/react": "^18",
