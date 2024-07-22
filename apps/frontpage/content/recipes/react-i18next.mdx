@@ -39,6 +39,7 @@ To expose this instance to Storybook, we can import it into the `./.storybook/pr
 
 ```js
 // .storybook/preview.jsx
+
 import i18n from '../src/i18n';
 ```
 
@@ -48,6 +49,7 @@ Now that Storybook has access to i18next, we need to share that with our stories
 
 ```jsx
 // .storybook/preview.jsx
+
 import React, { Suspense } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../src/i18n';
@@ -71,7 +73,7 @@ export const decorators = [withI18next];
 
 Sweet! Our stories officially have access to our translations. If we change the `lng` defined in `./src/i18n.js` you’ll see your stories reload in the new language.
 
-![Manually changing the locale from English to French](https://storybookblog.ghost.io/content/images/2022/09/manual-change.gif)
+![Manually changing the locale from English to French](/recipes-assets/storybook-i18n-language-selector.gif)
 
 ## 3. Add a locale switcher
 
@@ -104,7 +106,7 @@ export const globalTypes = {
 
 Looking back at Storybook, we can now see that we have a “Locale” switcher added to the toolbar with the options we just set.
 
-![The locale switcher in the Storybook toolbar](https://storybookblog.ghost.io/content/images/2022/09/Screen-Shot-2022-09-08-at-3.01.14-PM.png)
+![The locale switcher in the Storybook toolbar](/recipes-assets/storybook-locale-switcher.png)
 
 Now let’s update our decorator to change our locale when we select a new language.
 
@@ -134,7 +136,7 @@ const withI18next = (Story, context) => {
 
 Voila— a fully functioning locale switcher for your stories powered by react-i18next!
 
-![Switching between English and German using the locale switcher](https://storybookblog.ghost.io/content/images/2022/09/en-to-de.gif)
+![Switching between English and German using the locale switcher](/recipes-assets/storybook-locale-en-to-de-switcher.gif)
 
 ## 4. Set document direction
 
@@ -182,4 +184,4 @@ i18n.on('languageChanged', (locale) => {
 
 Now when we set our storybook to Arabic, the document direction gets set to `”rtl”` 🎉
 
-![Switching between English, German, and Arabic with the locale switcher](https://storybookblog.ghost.io/content/images/2022/09/finished-switcher-1.gif)
+![Switching between English, German, and Arabic with the locale switcher](/recipes-assets/storybook-locale-rtl-locale-switcher.gif)

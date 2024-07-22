@@ -1,6 +1,6 @@
 <Callout variant="neutral" icon="ℹ️" title="Prerequisites">
 
-This recipe assumes that you already have a React app using `@mui/material` and have just set up **Storybook >= 7.0** using the [getting started guide](/docs/react/get-started/install). Don't have this? Follow MUI's [setup instructions](https://mui.com/material-ui/getting-started/installation/) then run:
+This recipe assumes that you already have a React app using `@mui/material` and have just set up **Storybook >= 7.0** using the [getting started guide](https://storybook.js.org/docs/get-started/install?renderer=react). Don't have this? Follow MUI's [setup instructions](https://mui.com/material-ui/getting-started/installation/) then run:
 
 ```shell
 # Add Storybook:
@@ -21,21 +21,7 @@ npx storybook@latest add @storybook/addon-themes
 
 <details>
   <summary>Did the configuration script fail?</summary>
-  <p>
-    Under the hood, this runs <code>npx @storybook/auto-config themes</code>,
-    which should read your project and try to configure your Storybook with the
-    correct decorator. If running that command directly does not solve your
-    problem, please file a bug on the{' '}
-    <a
-      href="https://github.com/storybookjs/auto-config/issues/new?assignees=&labels=bug&projects=&template=bug_report.md&title=%5BBug%5D"
-      target="_blank"
-    >
-      @storybook/auto-config
-    </a>{' '}
-    repository so that we can further improve it. To manually add this addon,
-    install it, and then add it to the addons array in your{' '}
-    <code>.storybook/main.ts</code>.
-  </p>
+  <p>Under the hood, this runs <code>npx @storybook/auto-config themes</code>, which should read your project and try to configure your Storybook with the correct decorator. If running that command directly does not solve your problem, please file a bug on the <a href="https://github.com/storybookjs/auto-config/issues/new?assignees=&labels=bug&projects=&template=bug_report.md&title=%5BBug%5D" target="_blank">@storybook/auto-config</a> repository so that we can further improve it. To manually add this addon, install it, and then add it to the addons array in your <code>.storybook/main.ts</code>.</p>
 </details>
 
 ### 2. Bundle fonts and icons for better perf
@@ -70,6 +56,7 @@ Inside of `.storybook/preview.js`, import `<CssBaseline />`, `<ThemeProvider />`
 
 ```js
 // .storybook/preview.js
+
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 import { lightTheme, darkTheme } from '../src/themes.js';

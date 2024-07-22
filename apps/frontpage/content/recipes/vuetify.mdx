@@ -1,6 +1,6 @@
 <Callout variant="neutral" icon="ℹ️" title="Prerequisites">
 
-This recipe assumes that you have a Vue 3 app using Vuetify v3 and have just set up Storybook 7.0 using the [getting started guide](/docs/7.0/vue/get-started/install). Don’t have this? Follow Vuetify’s [installation instructions](https://next.vuetifyjs.com/en/getting-started/installation/#installation) then run:
+This recipe assumes that you have a Vue 3 app using Vuetify v3 and have just set up Storybook 7.0 or higher using the [getting started guide](https://storybook.js.org/docs/get-started/install?renderer=vue). Don’t have this? Follow Vuetify’s [installation instructions](https://next.vuetifyjs.com/en/getting-started/installation/#installation) then run:
 
 ```shell
 # Add Storybook:
@@ -11,8 +11,7 @@ npx storybook@latest init
 
 ## 1. Register Vuetify in Storybook
 
-To get started, you'll need to add Vuetify’s fontloader and plugin to your Storybook configuration.
-To do this, add the following to your `.storybook/preview.js` file:
+To get started, you'll need to add Vuetify’s fontloader and plugin to your Storybook configuration. To do this, add the following to your `.storybook/preview.js` file:
 
 ```js
 // .storybook/preview.js
@@ -26,16 +25,15 @@ setup((app) => {
 });
 ```
 
-Here `registerPlugins` loads Vuetify’s fonts and registers all of its components with Storybook’s Vue app.
+Here, `registerPlugins` loads Vuetify’s fonts and registers all of its components with Storybook’s Vue app.
 
 ## 2. Create a story wrapper component
 
-Next, you will need to wrap your stories in Vuetify's `v-app` component in order to use some of its larger layout components like `v-app-bar`.
-
-To do this, create a component in `.storybook/` called `StoryWrapper.vue`
+Next, you will need to wrap your stories in Vuetify's `v-app` component in order to use some of its larger layout components like `v-app-bar`. To do this, create a component in `.storybook/` called `StoryWrapper.vue`
 
 ```vue
 <!-- .storybook/StoryWrapper.vue -->
+
 <template>
   <v-app>
     <v-main>
@@ -48,12 +46,14 @@ To do this, create a component in `.storybook/` called `StoryWrapper.vue`
 ```
 
 ## 3. Create a `withVuetifyTheme` decorator
-Now create a storybook [decorator](/docs/vue/writing-stories/decorators) to wrap your stories in your StoryWrapper component.
+
+Now create a Storybook [decorator](https://storybook.js.org/docs/writing-stories/decorators?renderer=vue) to wrap your stories in your StoryWrapper component.
 
 Below I created a new file in `.storybook` called `withVuetifyTheme.decorator.js`.
 
 ```js
 // .storybook/withVeutifyTheme.decorator.js
+
 import { h } from 'vue';
 import StoryWrapper from './StoryWrapper.vue';
 
@@ -96,7 +96,7 @@ export const decorators = [withVuetifyTheme];
 
 Vuetify comes out of the box with a light and dark theme that you can override or add to. To get the most out of your stories, you should have a way to toggle between all of your themes.
 
-To add our switcher, declare a [global type](/docs/vue/essentials/toolbars-and-globals) named `theme` in `.storybook/preview.js` and give it a list of supported themes to choose from.
+To add our switcher, declare a [global type](https://storybook.js.org/docs/essentials/toolbars-and-globals?renderer=vue) named `theme` in `.storybook/preview.js` and give it a list of supported themes to choose from.
 
 ```js
 // .storybook/preview.js
@@ -123,8 +123,7 @@ This code will create a new toolbar menu to select your desired theme for your s
 
 ## 5. Add a theme provider
 
-There needs to be a way to tell Vuetify to use the theme selected in the toolbar.
-This can be done by updating our `StoryWrapper` component and `withVuetifyTheme` decorator
+There needs to be a way to tell Vuetify to use the theme selected in the toolbar. This can be done by updating our `StoryWrapper` component and `withVuetifyTheme` decorator
 
 Firstly, give `StoryWrapper` a `themeName` prop that it can give to `v-app`
 
@@ -150,6 +149,7 @@ Now pass our global `theme` variable to our `StoryWrapper` component as a prop w
 
 ```js
 // .storybook/withVeutifyTheme.decorator.js
+
 import { h } from 'vue';
 import StoryWrapper from './StoryWrapper.vue';
 
