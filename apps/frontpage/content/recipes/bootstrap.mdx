@@ -1,6 +1,6 @@
 <Callout variant="neutral" icon="ℹ️" title="Prerequisites">
 
-This recipe assumes that you are using Storybook >=7.0 using the [getting started guide](/docs/react/get-started/install). Don’t have this? Then run:
+This recipe assumes that you are using Storybook >=7.0 using the [getting started guide](https://storybook.js.org/docs/get-started/install?renderer=react). Don’t have this? Then run:
 
 ```shell
 # Add Storybook:
@@ -15,6 +15,7 @@ Import the Bootstrap files in your `.storybook/preview.js` file.
 
 ```js
 // .storybook/preview.js
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Only import this if you want to use Bootstrap's
@@ -60,6 +61,8 @@ npx storybook@latest add @storybook/addon-themes
 Then, to enable switching between these modes in a click for your stories, use our `withThemeByDataAttribute` decorator by adding the following code to your `.storybook/preview.js` file.
 
 ```js
+// .storybook/preview.js
+
 import { withThemeByDataAttribute } from '@storybook/addon-themes';
 
 // snipped for brevity

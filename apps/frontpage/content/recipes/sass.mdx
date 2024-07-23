@@ -1,6 +1,6 @@
 <Callout variant="neutral" icon="ℹ️" title="Prerequisites">
 
-This recipe assumes that you have an app using Sass and have just set up **Storybook >=7.0** using the [getting started guide](/docs/react/get-started/install). Don’t have this? Then run:
+This recipe assumes that you have an app using Sass and have just set up **Storybook >=7.0** using the [getting started guide](https://storybook.js.org/docs/get-started/install?renderer=react). Don’t have this? Then run:
 
 ```shell
 # Add Storybook:
@@ -41,6 +41,7 @@ If you have any global styles you would like to expose for your stories, you can
 
 ```js
 // .storybook/preview.js
+
 import '../src/index.scss';
 ```
 
@@ -48,7 +49,7 @@ import '../src/index.scss';
 
 If you are using Angular, you will need to add your global scss file(s) to your `angular.json` file instead. This will make sure your styles are processed by Angular's Webpack and injected into the preview iframe where your stories are rendered.
 
-```json
+```jsonc
 // angular.json
 {
  "storybook": {

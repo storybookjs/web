@@ -1,7 +1,6 @@
 <Callout variant="neutral" icon="ℹ️" title="Prerequisites">
 
-This recipe assumes that you already have an Angular app using `@angular/material` and have just set up **Storybook >= 7.0** using the [getting started guide](/docs/get-started/install).
-Don't have this? Follow the Angular material [setup instructions](https://material.angular.io/guide/getting-started) then run:
+This recipe assumes that you already have an Angular app using `@angular/material` and have just set up **Storybook >= 7.0** using the [getting started guide](https://storybook.js.org/docs/get-started/install?renderer=angular). Don't have this? Follow the Angular material [setup instructions](https://material.angular.io/guide/getting-started) then run:
 
 
 ```shell
@@ -21,13 +20,13 @@ npx storybook@latest init
 
 To get started, install the fonts as dependencies.
 
-```bash
+```shell
 yarn add @fontsource/roboto @fontsource/material-icons
 ```
 
 Then include the fonts in your `angular.json` file.
 
-```json
+```jsonc
 // angular.json
 {
   // Snipped for brevity
@@ -72,12 +71,14 @@ Then include the fonts in your `angular.json` file.
 }
 ```
 ## 2. Add Storybook stories
+
 ### Standalone component
-Now that you have Storybook set up, you can start writing stories for your components. Let's start with a `NavBarComponent`.
-For **Standalone components**, any Material components that you import through the `@Component` decorator will be available to your component in Storybook.
+
+Now that you have Storybook set up, you can start writing stories for your components. Let's start with a `NavBarComponent`. For **Standalone components**, any Material components that you import through the `@Component` decorator will be available to your component in Storybook.
 
 ```ts
 // src/app/nav-bar/nav-bar.component.ts
+
 import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -104,6 +105,7 @@ This means that you can just supply the `NavBarComponent` to the `component` pro
 
 ```ts
 // src/app/nav-bar/nav-bar.component.stories.ts
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { NavBarComponent } from './nav-bar.component';
 
@@ -123,10 +125,12 @@ export const Default: Story = {
 ```
 
 ### Module component
+
 For **Module components**, you will need to import the Material components that you want to use in your stories file. You can supply them to Storybook using the **`moduleMetadata`** decorator in the `Meta` object of the stories file.
 
 ```ts
 // src/app/nav-bar/nav-bar.component.stories.ts
+
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -162,6 +166,7 @@ export const Default: Story = {
 };
 ```
 ## Live example
+
 <EmbeddedExample
   title="Storybook 7 & Angular Material Example"
   embeddedUrl="https://stackblitz.com/edit/github-rkffss?ctl=1&embed=1&file=src%2Fapp%2Fnav-bar%2Fnav-bar.component.stories.ts&hideNavigation=1&theme=light"

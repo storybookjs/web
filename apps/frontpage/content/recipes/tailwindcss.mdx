@@ -1,6 +1,6 @@
 <Callout variant="neutral" icon="ℹ️" title="Prerequisites">
 
-This recipe assumes that you have a React app using Tailwind CSS and have just set up **Storybook >=7.0** using the [getting started guide](/docs/react/get-started/install). Don’t have this? Follow Tailwind's [setup instructions](https://tailwindcss.com/docs/installation) then run:
+This recipe assumes that you have a React app using Tailwind CSS and have just set up **Storybook >=7.0** using the [getting started guide](https://storybook.js.org/docs/get-started/install?renderer=react). Don’t have this? Follow Tailwind's [setup instructions](https://tailwindcss.com/docs/installation) then run:
 
 ```shell
 # Add Storybook:
@@ -55,7 +55,7 @@ import '../src/tailwind.css'; // replace with the name of your tailwind css file
 
 If you are using Angular, you will need to add the `tailwind.css` file to your `angular.json` file instead. This will make sure your styles are processed with PostCSS and are injected into the preview iframe where your stories are rendered.
 
-```json
+```jsonc
 // angular.json
 {
  "storybook": {
@@ -72,7 +72,7 @@ If you are using Angular, you will need to add the `tailwind.css` file to your `
 
 Tailwind comes out of the box with a light and dark theme. You can override those themes and add more. To get the most out of your stories, you should have a way to toggle between all of your themes.
 
-![Finished example of Tailwind CSS in Storybook with a theme switcher](https://user-images.githubusercontent.com/18172605/208201389-1f448dbb-978c-442e-9d6b-7bf3fea63e64.gif)
+![Finished example of Tailwind CSS in Storybook with a theme switcher](/recipes-assets/tailwind-mode-switcher.gif)
 
 First of all, update your `tailwind.config.js` file to [change themes based on a class or data-attribute](https://tailwindcss.com/docs/dark-mode#customizing-the-class-name). This example uses a data-attribute.
 
@@ -107,7 +107,7 @@ This will run a configuration script that will walk you through setting up the a
 
 ### 3.1. Toggle themes by class name
 
-Add the [`withThemeByClassName`](https://github.com/storybookjs/addon-themes/blob/main/code/addons/themes/docs/api.md#withthemebyclassname) decorator to your Storybook from `@storybook/addon-themes`
+Add the [`withThemeByClassName`](https://github.com/storybookjs/storybook/blob/next/code/addons/themes/docs/api.md#withthemebyclassname) decorator to your Storybook from `@storybook/addon-themes`.
 
 ```js
 // .storybook/preview.js
@@ -128,7 +128,7 @@ export const decorators = [
 
 ### 3.2. Toggle themes by data-attribute
 
-Add the [`withThemeByDataAttribute`](https://github.com/storybookjs/addon-themes/blob/main/code/addons/themes/docs/api.md#withthemebydataattribute) decorator to your Storybook from `@storybook/addon-themes`
+Add the [`withThemeByDataAttribute`](https://github.com/storybookjs/storybook/blob/next/code/addons/themes/docs/api.md#withthemebydataattribute) decorator to your Storybook from `@storybook/addon-themes`.
 
 ```js
 // .storybook/preview.js

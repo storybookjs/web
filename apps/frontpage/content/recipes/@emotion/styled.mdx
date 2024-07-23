@@ -1,6 +1,6 @@
 <Callout variant="neutral" icon="ℹ️" title="Prerequisites">
 
-This recipe assumes that you have a React app using Emotion and have just set up Storybook >=7.0 using the [getting started guide](/docs/react/get-started/install). Don’t have this? Follow Emotion's [installation instructions](https://emotion.sh/docs/introduction#react) then run:
+This recipe assumes that you have a React app using Emotion and have just set up **Storybook >=7.0** using the [getting started guide](https://storybook.js.org/docs/get-started/install?renderer=react). Don’t have this? Follow Emotion's [installation instructions](https://emotion.sh/docs/introduction#react) then run:
 
 ```shell
 # Add Storybook:
@@ -15,7 +15,7 @@ To get started, you'll need to install [`@storybook/addon-themes`](https://story
 
 Run the following script to install and register the addon:
 
-```bash
+```shell
 npx storybook@latest add @storybook/addon-themes
 ```
 
@@ -30,6 +30,7 @@ Inside of `.storybook/preview.js`, create a `<GlobalStyles />` component that in
 
 ```js
 // .storybook/preview.jsx
+
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 import { Global, css } from '@emotion/react';
 
@@ -62,6 +63,7 @@ To share your theme(s) with the components in Storybook, you'll need to provide 
 
 ```js
 // .storybook/preview.jsx
+
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 import { Global, css, ThemeProvider } from '@emotion/react';
 
@@ -97,7 +99,7 @@ When you provide more than one theme, a toolbar menu will appear in the Storyboo
 
 </Callout>
 
-![Completed Emotion example with theme switcher](https://user-images.githubusercontent.com/18172605/208312563-875ca3b0-e7bc-4401-a445-4553b48068ed.gif)
+![Completed Emotion example with theme switcher](/recipes-assets/emotion-theme-changer.gif)
 
 ## Get involved
 

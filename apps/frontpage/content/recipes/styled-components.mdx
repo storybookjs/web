@@ -1,6 +1,6 @@
 <Callout variant="neutral" icon="ℹ️" title="Prerequisites">
 
-This recipe assumes that you have a React app using styled-components and have just set up Storybook >=7.0 using the [getting started guide](/docs/react/get-started/install). Don’t have this? Follow styled-components' [installation instructions](https://styled-components.com/docs/basics#installation) then run:
+This recipe assumes that you have a React app using styled-components and have just set up Storybook >=7.0 using the [getting started guide](https://storybook.js.org/docs/get-started/install?renderer=react). Don’t have this? Follow styled-components' [installation instructions](https://styled-components.com/docs/basics#installation) then run:
 
 ```shell
 # Add Storybook:
@@ -13,7 +13,7 @@ npx storybook@latest init
 
 Run the following script to install and register the addon:
 
-```bash
+```shell
 npx storybook@latest add @storybook/addon-themes
 ```
 
@@ -30,6 +30,7 @@ In `.storybook/preview.js`, create a `<GlobalStyles /`> component that includes 
 
 ```js
 // .storybook/preview.jsx
+
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 import { createGlobalStyle } from 'styled-components';
 
@@ -54,10 +55,12 @@ If you already have `<GlobalStyles />` in your app, you can import it into `.sto
 
 
 ## 3. Provide your theme(s)
+
 To share your theme(s) with the components in Storybook, you'll need to provide them to the `withThemeFromJSXProvider` decorator along with `styled-components` `<ThemeProvider />` component.
 
 ```js
 // .storybook/preview.jsx
+
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 
