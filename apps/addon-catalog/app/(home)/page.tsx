@@ -1,6 +1,9 @@
 import { fetchHomeData } from '../../lib/fetch-home-data';
 import { Preview } from '../../components/preview';
 
+// 60*60*24 = 24 hrs
+export const revalidate = 86400;
+
 export default async function Page() {
   const {
     popularAddons = [],

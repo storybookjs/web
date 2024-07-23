@@ -2,6 +2,9 @@ import { notFound } from 'next/navigation';
 import { Preview } from '../../../../components/preview';
 import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
 
+// 60*60*24 = 24 hrs
+export const revalidate = 86400;
+
 interface TagDetailsProps {
   params: {
     name: string[];
