@@ -5,16 +5,14 @@ import { AddonHero } from '../../components/addon/addon-hero';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
 import { Highlight } from '../../components/highlight';
 
+// 60*60*24 = 24 hrs
+export const revalidate = 86400;
+
 interface AddonDetailsProps {
   params: {
     addonName: string[];
   };
 }
-
-// export async function generateStaticParams() {
-//   const addons = (await fetchAddonsData()) || [];
-//   return addons.map((name) => ({ params: { addonName: name?.split('/') } }));
-// }
 
 export default async function AddonDetails({ params }: AddonDetailsProps) {
   // TODO: Better decoding?
