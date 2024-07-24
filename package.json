@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build:frontpage": "turbo run build --filter=frontpage",
+    "build:frontpage:analyze": "ANALYZE=true turbo run build --filter=frontpage",
     "build:ui": "turbo run build --filter=@repo/ui",
     "dev": "turbo run dev",
     "fetch-docs": "turbo run fetch-docs",
