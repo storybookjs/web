@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build-with-analyze": "ANALYZE=true npm run build:frontpage",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
