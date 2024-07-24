@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "fetch-docs": "tsx --tsconfig tsconfig.json scripts/get-local-docs.ts",
+    "fetch-docs": "tsx --tsconfig tsconfig.json scripts/get-local-docs.ts && tsx --tsconfig tsconfig.json scripts/append-package-tags-in-snippets.ts",
     "generate-redirects": "tsx --tsconfig tsconfig.json scripts/generate-redirects.ts",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next",
     "storybook": "storybook dev -p 6006",
