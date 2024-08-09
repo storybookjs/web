@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef } from 'react';
-import type { MotionValue } from 'framer-motion';
 import { useScroll, useTransform, useSpring, motion } from 'framer-motion';
 import Link from 'next/link';
 import { ChevronSmallRightIcon } from '@storybook/icons';
@@ -22,7 +21,7 @@ export function Develop() {
   const smoothAppearProgress = useSpring(appearProgress, {
     stiffness: 1000,
     damping: 100,
-  }) as MotionValue<number>;
+  });
 
   // Step 1
   const { scrollYProgress: isolationProgress } = useScroll({

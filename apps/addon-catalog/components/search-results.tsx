@@ -22,18 +22,16 @@ export const SearchResults = ({
       {loading ? <div>Loading...</div> : null}
       {!loading && searchResults.length === 0 && <div>No results found</div>}
       {!loading && searchResults.length > 0 && (
-        <>
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
-            {searchResults.map((item) => (
-              <Preview
-                key={item.name}
-                orientation="vertical"
-                element={item}
-                type={item.type === 'Recipe' ? 'recipe' : 'addon'}
-              />
-            ))}
-          </div>
-        </>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
+          {searchResults.map((item) => (
+            <Preview
+              key={item.name}
+              orientation="vertical"
+              element={item}
+              type={item.type === 'Recipe' ? 'recipe' : 'addon'}
+            />
+          ))}
+        </div>
       )}
     </div>
   );
