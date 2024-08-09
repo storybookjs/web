@@ -129,6 +129,10 @@ export async function GET(request: NextRequest) {
 
   return new Response(res[0], {
     status: 200,
-    headers: { 'Access-Control-Allow-Origin': '*' },
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      // Cache for 10 minutes
+      'Cache-Control': 'public s-max-age=36000',
+    },
   });
 }
