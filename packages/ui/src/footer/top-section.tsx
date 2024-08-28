@@ -74,7 +74,7 @@ const Circle: FC<CircleProps> = ({ children, href, variant, name }) => {
       href={href}
       rel="noreferrer"
       target="_blank"
-      aria-label={`Got to ${name}`}
+      aria-label={name}
     >
       {children}
     </a>
