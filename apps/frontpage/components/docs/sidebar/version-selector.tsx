@@ -54,10 +54,13 @@ export const VersionSelector: FC<VersionSelectorProps> = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex items-center justify-between w-full h-10 px-2 mt-6 text-sm transition-all border-b cursor-pointer select-none border-zinc-200 text-zinc-600 hover:border-zinc-300 hover:text-zinc-900 dark:border-slate-700 dark:text-white">
+        <button
+          type="button"
+          className="mt-6 flex h-10 w-full cursor-pointer select-none items-center justify-between border-b border-zinc-200 px-2 text-sm text-zinc-600 transition-all hover:border-zinc-300 hover:text-zinc-900 dark:border-slate-700 dark:text-white"
+        >
           {activeVersion.label}
           <ChevronSmallDownIcon />
-        </div>
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="min-w-40">
         {docsVersions.map((version) => (

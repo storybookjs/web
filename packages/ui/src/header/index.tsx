@@ -48,6 +48,7 @@ export const Header: FC<HeaderProps> = ({
             <a
               className="ui-pl-2 md:ui-px-3 ui-h-8 ui-flex ui-items-center"
               href="/"
+              aria-label="Go to Storybook home"
             >
               <StorybookLogo
                 color={variant === 'home' ? 'white' : 'system'}

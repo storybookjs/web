@@ -20,18 +20,31 @@ export function TopSection({ variant }: TopSectionProps): JSX.Element {
           </div>
         </div>
         <div className="ui-flex ui-items-center ui-gap-4">
-          <Circle href="http://github.com/storybookjs" variant={variant}>
+          <Circle
+            href="http://github.com/storybookjs"
+            variant={variant}
+            name="GitHub"
+          >
             <GithubIcon size={18} />
           </Circle>
-          <Circle href="https://twitter.com/storybookjs" variant={variant}>
+          <Circle
+            href="https://twitter.com/storybookjs"
+            variant={variant}
+            name="Twitter"
+          >
             <XIcon size={18} />
           </Circle>
-          <Circle href="https://discord.gg/storybook" variant={variant}>
+          <Circle
+            href="https://discord.gg/storybook"
+            variant={variant}
+            name="Storybook"
+          >
             <DiscordIcon size={18} />
           </Circle>
           <Circle
             href="https://www.youtube.com/channel/UCr7Quur3eIyA_oe8FNYexfg"
             variant={variant}
+            name="Youtube"
           >
             <YoutubeIcon size={18} />
           </Circle>
@@ -45,9 +58,10 @@ interface CircleProps {
   children: ReactNode;
   href: string;
   variant?: FooterProps['variant'];
+  name: string;
 }
 
-const Circle: FC<CircleProps> = ({ children, href, variant }) => {
+const Circle: FC<CircleProps> = ({ children, href, variant, name }) => {
   return (
     <a
       className={cn(
@@ -60,6 +74,7 @@ const Circle: FC<CircleProps> = ({ children, href, variant }) => {
       href={href}
       rel="noreferrer"
       target="_blank"
+      aria-label={`Got to ${name}`}
     >
       {children}
     </a>
