@@ -132,3 +132,5 @@
 /docs/contribute/documentation-updates           /docs/contribute/documentation/documentation-updates                    308
 /docs/contribute/new-snippets                    /docs/contribute/documentation/new-snippets                             308
 
+# 8.2
+/docs/writing-tests/interaction-testing          /docs/writing-tests/component-testing/                                  308
