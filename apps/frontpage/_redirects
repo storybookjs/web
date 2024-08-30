@@ -1,5 +1,5 @@
-/addons                https://web-addon-catalog.vercel.app/addons                                                            301
-/addons/*              https://web-addon-catalog.vercel.app/addons/:splat                                                     301
+/addons                https://storybook-addon-catalog.netlify.app/addons                                                     301
+/addons/*              https://storybook-addon-catalog.netlify.app/addons/:splat                                              301
 /blog/*                https://storybook-blog.netlify.app/blog/:splat                                                         301
 /day/*                 https://storybook-day-2023.netlify.app/day/:splat                                                      301
 /showcase/*            https://storybook-component-catalog.netlify.app/showcase/:splat                                        301
