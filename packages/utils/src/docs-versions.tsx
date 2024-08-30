@@ -33,7 +33,7 @@ export const docsVersions: DocsVersion[] = [
     branch: 'main',
   },
   {
-    label: '8.3 (beta)',
+    label: 'Version 8.3 (beta)',
     id: '8.3',
     branch: 'next',
     preRelease: true,
@@ -49,6 +49,16 @@ export const docsVersions: DocsVersion[] = [
     id: '6.5',
     inSlug: '6',
     branch: 'release-6-5',
+  },
+  {
+    label: 'Version 8.4 (dupe of 8.2)',
+    id: '8.4',
+    branch: 'main',
+  },
+  {
+    label: 'Version 8.5 (dupe of 8.2)',
+    id: '8.5',
+    branch: 'main',
   },
 ];
 
