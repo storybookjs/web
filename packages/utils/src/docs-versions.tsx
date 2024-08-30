@@ -50,6 +50,28 @@ export const docsVersions: DocsVersion[] = [
     inSlug: '6',
     branch: 'release-6-5',
   },
+  {
+    label: 'Version 8.2',
+    id: '8.2',
+    branch: 'main',
+  },
+  {
+    label: 'Version 8.2',
+    id: '8.2',
+    branch: 'main',
+  },
+  {
+    label: 'Version 7',
+    id: '7.6',
+    inSlug: '7',
+    branch: 'release-7-6',
+  },
+  {
+    label: 'Version 6',
+    id: '6.5',
+    inSlug: '6',
+    branch: 'release-6-5',
+  },
 ];
 
 export const latestVersion = docsVersions[0];
