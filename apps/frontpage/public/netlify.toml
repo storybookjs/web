@@ -1,0 +1,49 @@
+[[redirects]]
+  from = "/addons"
+  to = "https://storybook-addon-catalog.netlify.app/addons"
+  status = 200
+
+[[redirects]]
+  from = "/addons/sitemap.xml"
+  to = "https://storybook-frontpage.netlify.app/addons/sitemap.xml"
+  status = 200
+
+[[redirects]]
+  from = "/addons/*"
+  to = "https://storybook-addon-catalog.netlify.app/addons/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/blog/*"
+  to = "https://storybook-blog.netlify.app/blog/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/day/*"
+  to = "https://storybook-day-2023.netlify.app/day/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/showcase/*"
+  to = "https://storybook-component-catalog.netlify.app/showcase/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/tutorials/*"
+  to = "https://storybook-tutorials.netlify.app/tutorials/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/event-log"
+  to = "https://us-central1-storybook-warehouse.cloudfunctions.net/storybook-event-log-production-event-log"
+  status = 200
+
+[[redirects]]
+  from = "/whats-new/v1/*"
+  to = "https://storybook-dx.netlify.app/.netlify/functions/whats-new/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/proxy/api/event"
+  to = "https://plausible.io/api/event"
+  status = 200
