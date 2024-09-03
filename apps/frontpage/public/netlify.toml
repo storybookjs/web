@@ -14,6 +14,11 @@
   status = 200
 
 [[redirects]]
+  from = "/blog/sitemap.xml"
+  to = "https://storybook-frontpage.netlify.app/blog/sitemap.xml"
+  status = 200
+
+[[redirects]]
   from = "/blog/*"
   to = "https://storybook-blog.netlify.app/blog/:splat"
   status = 200
@@ -26,6 +31,11 @@
 [[redirects]]
   from = "/showcase/*"
   to = "https://storybook-component-catalog.netlify.app/showcase/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/tutorials/sitemap.xml"
+  to = "https://storybook-frontpage.netlify.app/tutorials/sitemap.xml"
   status = 200
 
 [[redirects]]
