@@ -29,6 +29,11 @@
   status = 200
 
 [[redirects]]
+  from = "/showcase/sitemap.xml"
+  to = "https://storybook-frontpage.netlify.app/showcase/sitemap.xml"
+  status = 200
+
+[[redirects]]
   from = "/showcase/*"
   to = "https://storybook-component-catalog.netlify.app/showcase/:splat"
   status = 200
