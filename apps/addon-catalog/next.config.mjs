@@ -4,6 +4,7 @@ import { withPlausibleProxy } from 'next-plausible';
 const nextConfig = withPlausibleProxy()({
   basePath: '/addons',
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
