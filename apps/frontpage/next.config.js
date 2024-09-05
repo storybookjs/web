@@ -1,6 +1,5 @@
 const generatedRedirects = require('./generated-redirects.json');
 const { withPlausibleProxy } = require('next-plausible');
-
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -27,6 +26,7 @@ const historicalVersions = [
 module.exports = withBundleAnalyzer(
   withPlausibleProxy()({
     images: {
+      unoptimized: true,
       remotePatterns: [
         {
           protocol: 'https',
