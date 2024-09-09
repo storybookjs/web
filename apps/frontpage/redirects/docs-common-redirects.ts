@@ -1,4 +1,4 @@
-import { RedirectData } from './types';
+import { type RedirectData } from './types';
 
 export const docsCommonRedirects: RedirectData[] = [
   {
@@ -198,7 +198,7 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/docs/testing/interaction-testing',
-    destination: '/docs/writing-tests/interaction-testing',
+    destination: '/docs/writing-tests/component-testing',
     permanent: true,
   },
   {
