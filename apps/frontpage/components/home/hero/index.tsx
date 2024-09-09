@@ -16,8 +16,8 @@ import SocialProof from './social-proof';
 
 const features = [
   'Development',
-  'Interaction Testing',
-  'Visual Testing',
+  'Component testing',
+  'Visual testing',
   'Documentation',
 ];
 

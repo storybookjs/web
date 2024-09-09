@@ -29,7 +29,7 @@ export const Automate: FC = () => {
         />
         <Publish />
         <FeatureStep
-          description="Test every facet of your UI: interaction, visual, accessibility, and snapshot, in CI to detect UI bugs down to the component."
+          description="Test every facet of your UI: visual, functional, accessibility, and snapshot, in CI to detect UI bugs down to the component."
           href="/docs/writing-tests/test-runner"
           linkLabel="Auto-detect UI bugs"
           title="UI Tests"
