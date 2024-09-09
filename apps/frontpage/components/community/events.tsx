@@ -175,7 +175,7 @@ export const Events: FC = () => {
               Strategies for organizing your stories and auto-generating docs.
             </li>
             <li>
-              Use stories to test components for visual, interaction, and
+              Use stories to test components for visual, functional, and
               accessibility purposes.
             </li>
             <li>
