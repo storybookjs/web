@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/.well-known/acme-challenge/IZ3li86N6QQwPnmH5MnoZVaxesJ8qT8Q8s1AcvN6IIg",
-      "destination": "/well-known/acme-challenge/IZ3li86N6QQwPnmH5MnoZVaxesJ8qT8Q8s1AcvN6IIg"
+      "source": "/.well-known/acme-challenge/fJt4hNRCqyyKslQv8LYZ4A6u8wqBiBtI1-Ykk_TwVW0",
+      "destination": "http://validation.dev-chromatic.com/.well-known/acme-challenge/fJt4hNRCqyyKslQv8LYZ4A6u8wqBiBtI1-Ykk_TwVW0"
     },
     {
       "source": "/addons",
