@@ -134,3 +134,6 @@
 
 # 8.2
 /docs/writing-tests/interaction-testing          /docs/writing-tests/component-testing/                                  308
+
+# 8.4
+/docs/writing-tests/vitest-plugin                /docs/writing-tests/test-addon/                                         308
