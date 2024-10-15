@@ -119,9 +119,9 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
                 variant === 'home' && 'ui-text-white',
                 variant !== 'home' && 'ui-text-zinc-600 dark:ui-text-white',
               )}
-              href="https://vercel.com"
+              href="https://netlify.com"
             >
-              Vercel
+              Netlify
             </a>{' '}
             and{' '}
             <a
@@ -130,9 +130,9 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
                 variant === 'home' && 'ui-text-white',
                 variant !== 'home' && 'ui-text-zinc-600 dark:ui-text-white',
               )}
-              href="https://sanity.io"
+              href="https://circleci.com"
             >
-              Sanity
+              CircleCI
             </a>
           </div>
         </div>
