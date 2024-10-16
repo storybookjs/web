@@ -9,7 +9,7 @@ import type { TreeProps } from '@repo/utils';
 import { docsVersions } from '@repo/utils';
 import { getAllTrees } from '../../../lib/get-all-trees';
 
-const siteUrl = process.env.VERCEL_ENV === 'production';
+const siteUrl = process.env.CONTEXT === 'production';
 
 const schema = z.object({
   comment: z.string().optional(),
@@ -509,7 +509,7 @@ export async function sendFeedback(
     const path = slug.replace('/docs', '');
 
     const hasValidOrigin = siteUrl
-      ? headersList.get('origin') === process.env.VERCEL_URL
+      ? headersList.get('origin') === process.env.URL
       : true;
     const hasValidReferer = headersList.get('referer')?.endsWith(path);
 

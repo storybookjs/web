@@ -6,9 +6,7 @@ import {
   globalSearchImportance,
 } from '@repo/ui';
 import { cn } from '@repo/utils';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GoogleAnalytics } from '@next/third-parties/google';
-import { Analytics } from '@vercel/analytics/react';
 import { Providers } from './providers';
 
 import '@docsearch/css';
@@ -62,8 +60,6 @@ export default function RootLayout({
         )}
       >
         <Providers>{children}</Providers>
-        <SpeedInsights />
-        <Analytics />
       </body>
       <GoogleAnalytics gaId="G-MN8NJ34M7T" />
     </html>

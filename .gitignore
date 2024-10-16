@@ -18,9 +18,6 @@ coverage
 # Turbo
 .turbo
 
-# Vercel
-.vercel
-
 # next.js
 .next/
 out/

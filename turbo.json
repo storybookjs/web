@@ -2,14 +2,15 @@
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
   "globalEnv": [
-    "GCP_CREDENTIALS",
-    "SKIP_IP_HASH",
     "ALGOLIA_API_KEY",
-    "NEXT_PUBLIC_ALGOLIA_API_KEY",
-    "VERCEL_ENV",
-    "VERCEL_URL",
+    "ANALYZE",
+    "CONTEXT",
+    "GCP_CREDENTIALS",
     "GITHUB_STORYBOOK_BOT_PAT",
-    "ANALYZE"
+    "NEXT_PUBLIC_ALGOLIA_API_KEY",
+    "NEXT_PUBLIC_BASE_PATH",
+    "SKIP_IP_HASH",
+    "URL"
   ],
   "tasks": {
     "lint": {
