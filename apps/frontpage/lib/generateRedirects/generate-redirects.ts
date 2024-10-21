@@ -183,7 +183,7 @@ export function generateRedirects({
             acc.push(
               getRedirect(
                 `/docs/${renderersPathWildcardWithRegex}/:path*`,
-                '/docs/:path',
+                '/docs/:path*',
                 '308',
                 'd',
               ),
@@ -193,8 +193,8 @@ export function generateRedirects({
               getRedirect(
                 `/docs/${string}/${renderersPathWildcardWithRegex}/:path*`,
                 isMajorOfLatestMinor || (isNext && !nextVersionString)
-                  ? `/docs/:path`
-                  : `/docs${versionSlugOverride}/:path`,
+                  ? `/docs/:path*`
+                  : `/docs${versionSlugOverride}/:path*`,
                 isNext ? '307' : '308',
                 'e',
               ),
@@ -212,8 +212,8 @@ export function generateRedirects({
             getRedirect(
               `/docs/${string}/:path*`,
               isMajorOfLatestMinor || (isNext && !nextVersionString)
-                ? `/docs/:path`
-                : `/docs${versionSlugOverride}/:path`,
+                ? `/docs/:path*`
+                : `/docs${versionSlugOverride}/:path*`,
               isLatest || isNext ? '307' : '308',
               'f',
             ),

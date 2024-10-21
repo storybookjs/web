@@ -299,7 +299,7 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/tag/:path*',
-    destination: '/addons/tag/:path',
+    destination: '/addons/tag/:path*',
     permanent: true,
   },
 ];
