@@ -14,10 +14,11 @@ import { StorybookIcon } from '@repo/ui';
 import { type Addon } from '../../types';
 
 export function AddonHero({ addon }: { addon: Addon }) {
+  const installCommand = `npm install -D ${addon.name ?? ''}`;
   const [state, setState] = useState(false);
 
   const onClick = () => {
-    copy(`npx install ${addon.name ?? ''}`);
+    copy(installCommand);
     setState(true);
     setTimeout(() => {
       setState(false);
@@ -49,7 +50,7 @@ export function AddonHero({ addon }: { addon: Addon }) {
               onClick={onClick}
               type="button"
             >
-              npm install {addon.name} <CopyIcon />
+              {installCommand} <CopyIcon />
               <AnimatePresence>
                 {state ? (
                   <motion.div
