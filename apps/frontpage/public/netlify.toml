@@ -62,3 +62,8 @@
   from = "/proxy/api/event"
   to = "https://plausible.io/api/event"
   status = 200
+
+[[redirects]]
+  from = "/sb-test-eap"
+  to = "https://forms.gle/zVeNrM7QiedZVv7K9"
+  status = 200
