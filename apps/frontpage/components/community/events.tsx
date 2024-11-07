@@ -1,5 +1,4 @@
 import {
-  CalendarIcon,
   ChevronSmallRightIcon,
   DiscordIcon,
   TwitterIcon,
@@ -97,8 +96,8 @@ export const Events: FC = () => {
         Storybook&apos;s thriving community can help answer your questions.
         Developers of all skill levels welcome.
       </p>
-      <div className="flex flex-col gap-8 mb-8 md:flex-row">
-        <div className="flex flex-1 gap-4 p-6 border rounded border-zinc-300 md:gap-6 md:p-8 dark:border-slate-700">
+      <div className="mb-8 flex flex-col gap-8 md:flex-row">
+        <div className="flex flex-1 gap-4 rounded border border-zinc-300 p-6 md:gap-6 md:p-8 dark:border-slate-700">
           <Youtube size={40} />
           <div className="flex-1">
             <h2 className="text-lg font-bold">Subscribe to YouTube channel</h2>
@@ -114,7 +113,7 @@ export const Events: FC = () => {
             </a>
           </div>
         </div>
-        <div className="flex flex-1 gap-4 p-6 border rounded border-zinc-300 md:gap-6 md:p-8 dark:border-slate-700">
+        <div className="flex flex-1 gap-4 rounded border border-zinc-300 p-6 md:gap-6 md:p-8 dark:border-slate-700">
           <TwitterIcon className="h-10 w-10 text-[#4999e9]" />
           <div className="flex-1">
             <h2 className="text-lg font-bold">Twitter</h2>
@@ -131,8 +130,8 @@ export const Events: FC = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-8 mb-8 md:flex-row">
-        <div className="flex flex-1 gap-4 p-6 border rounded border-zinc-300 md:gap-6 md:p-8 dark:border-slate-700">
+      <div className="mb-8 flex flex-col gap-8 md:flex-row">
+        <div className="flex flex-1 gap-4 rounded border border-zinc-300 p-6 md:gap-6 md:p-8 dark:border-slate-700">
           <DiscordIcon className="h-10 w-10 text-[#5a65ea]" />
           <div className="flex-1">
             <h2 className="text-lg font-bold">Follow #announcements chat</h2>
@@ -149,91 +148,6 @@ export const Events: FC = () => {
           </div>
         </div>
         <div className="flex-1 px-6 md:px-8" />
-      </div>
-      <div>
-        <h3 className="mb-3 text-lg font-bold">Storybook Sessions</h3>
-        <div>
-          <p>
-            Join us for these 1-hour sessions, hosted by the{' '}
-            <a href="https://www.chromatic.com/">
-              <span>Chromatic</span>
-            </a>{' '}
-            team. We&apos;ll explore the component-driven approach to building,
-            testing, and documenting UIs using Storybook. You&apos;ll learn how
-            to:
-          </p>
-          <ul className="pl-4 my-4 list-disc list-inside">
-            <li>
-              Utilize addons to debug CSS, verify event handlers, and mock API
-              requests.
-            </li>
-            <li>
-              Publish your Storybook to gather feedback and embed stories into
-              other tools.
-            </li>
-            <li>
-              Strategies for organizing your stories and auto-generating docs.
-            </li>
-            <li>
-              Use stories to test components for visual, functional, and
-              accessibility purposes.
-            </li>
-            <li>
-              Facilitate better designer-developer collaboration using the
-              designs addon and the Storybook Connect plugin.
-            </li>
-          </ul>
-        </div>
-        <h3 className="mt-6 mb-3 text-lg font-bold">Upcoming</h3>
-        <ul>
-          {localizedSessions.upcoming.map((session) => (
-            <li
-              className="flex items-center justify-between border-b h-11 border-b-zinc-300 dark:border-b-slate-700"
-              key={session.id}
-            >
-              <div className="flex items-center gap-4">
-                <CalendarIcon className="w-4 h-4 text-zinc-500 dark:text-slate-400" />
-                <div className="font-bold text-md">{session.title}</div>
-                <div> — </div>
-                <div className="text-md text-zinc-500 dark:text-slate-400">
-                  {session.dateShort}
-                </div>
-              </div>
-              <a
-                className="flex items-center gap-2 text-blue-500"
-                href={session.registrationLink}
-                rel="noreferrer"
-                target="_blank"
-              >
-                Register <ChevronSmallRightIcon />
-              </a>
-            </li>
-          ))}
-        </ul>
-        {localizedSessions.upcoming.length === 0 && (
-          <div className="p-6 border border-dashed rounded border-zinc-300 dark:border-slate-700">
-            No upcoming sessions scheduled at the moment. To stay informed about
-            new sessions, please sign up for our newsletter.
-          </div>
-        )}
-        <h3 className="mt-6 mb-3 text-lg font-bold">Past</h3>
-        <ul>
-          {localizedSessions.past.map((session) => (
-            <li
-              className="flex items-center border-b h-11 border-b-zinc-300 dark:border-slate-700"
-              key={session.id}
-            >
-              <div className="flex items-center gap-4">
-                <CalendarIcon className="w-4 h-4 text-zinc-500 dark:text-slate-400" />
-                <div className="font-bold text-md">{session.title}</div>
-                <div> — </div>
-                <div className="text-md text-zinc-500 dark:text-slate-400">
-                  {session.dateShort}
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
       </div>
     </Section>
   );
