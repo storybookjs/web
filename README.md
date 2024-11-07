@@ -17,15 +17,19 @@ This project is structured around [Turborepo](https://turbo.build/repo). This do
 
 > Install all dependencies
 
-#### `turbo fetch-docs`
+#### `npx turbo fetch-docs`
 
 > Fetch docs from the monorepo
 
-#### `turbo dev`
+#### `npx turbo generate-redirects`
+
+> Generate redirects file
+
+#### `npx turbo dev`
 
 > Run all apps locally
 
-#### `turbo build`
+#### `npx turbo build`
 
 > Build all apps locally
 

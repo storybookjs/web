@@ -99,10 +99,15 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
               >
                 Maintained by
               </div>
-              <ChromaticLogo
-                color={variant === 'home' ? 'white' : 'system'}
-                height={24}
-              />
+              <a
+                className="text-inherit no-underline"
+                href="https://www.chromatic.com/storybook?utm_source=storybook_website&utm_medium=footer&utm_campaign=storybook"
+              >
+                <ChromaticLogo
+                  color={variant === 'home' ? 'white' : 'system'}
+                  height={24}
+                />
+              </a>
             </div>
           </div>
           <div
