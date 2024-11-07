@@ -38,8 +38,6 @@
     "class-variance-authority": "^0.7.0",
     "cookies-next": "^4.1.1",
     "copy-to-clipboard": "^3.3.3",
-    "date-fns": "^2.0.0",
-    "date-fns-tz": "^2.0.0",
     "dedent": "^1.5.3",
     "framer-motion": "^11.3.2",
     "fs-extra": "^11.2.0",

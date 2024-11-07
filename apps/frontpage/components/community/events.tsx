@@ -4,91 +4,10 @@ import {
   TwitterIcon,
 } from '@storybook/icons';
 import type { FC } from 'react';
-import { useMemo } from 'react';
-import { zonedTimeToUtc, format } from 'date-fns-tz';
-import { isPast } from 'date-fns';
 import { Youtube } from '../logos/youtube';
 import { Section } from './section';
 
-const rezoneDate = (date: Date) => zonedTimeToUtc(date, 'America/Los_Angeles');
-
-const formatDate = (date: Date) => {
-  // https://github.com/date-fns/date-fns/issues/946
-  return {
-    date: format(date, 'd LLLL, y, h:mmaaa (zzzz)'),
-    dateShort: format(date, 'd LLL, y, haaa (zzz)'),
-  };
-};
-
-interface Session {
-  id: number;
-  title: string;
-  date: string;
-  dateShort?: string;
-  registrationLink: string;
-}
-
-const sessionsData: Session[] = [
-  {
-    id: 0,
-    title: 'Storybook for Developers',
-    date: 'July 20, 2023 8:30 AM',
-    registrationLink:
-      'https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=July+20,+2023',
-  },
-  {
-    id: 1,
-    title: 'Storybook for Developers',
-    date: 'Aug 29, 2023 7:00 AM',
-    registrationLink:
-      'https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Aug+29,+2023',
-  },
-  {
-    id: 2,
-    title: 'Chromatic & Storybook for Designers',
-    date: 'Oct 12, 2023 8:30 AM',
-    registrationLink:
-      'https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Oct+12,+2023',
-  },
-  {
-    id: 3,
-    title: 'Storybook Workflows for Frontend Teams',
-    date: 'Nov 7, 2023 9:00 AM',
-    registrationLink:
-      'https://docs.google.com/forms/d/e/1FAIpQLSeLAB8aoLNRiW5M5Jpn78qxVnnCETDJYpTAph5732tRFXoFDw/viewform?usp=pp_url&entry.146778204=Nov+7,+2023',
-  },
-];
-
 export const Events: FC = () => {
-  const localizedSessions = useMemo(() => {
-    return sessionsData
-      .map((session) => {
-        const date = rezoneDate(new Date(session.date));
-        const info = formatDate(date);
-        return {
-          ...session,
-          isPast: isPast(date),
-          date: info.date,
-          dateShort: info.dateShort,
-          rawDate: new Date(session.date),
-        };
-      })
-      .sort(
-        (a, b) => new Date(a.rawDate).valueOf() - new Date(b.rawDate).valueOf(),
-      )
-      .reduce<{ upcoming: Session[]; past: Session[] }>(
-        (acc, session) => {
-          if (session.isPast) {
-            acc.past.push(session);
-          } else {
-            acc.upcoming.push(session);
-          }
-          return acc;
-        },
-        { upcoming: [], past: [] },
-      );
-  }, []);
-
   return (
     <Section className="relative mb-8 md:mb-16" id="events-streams">
       <h2 className="mb-2 text-2xl font-bold">Join live events & streams</h2>
