@@ -38,8 +38,8 @@ export default async function Layout({ children }: { children: ReactNode }) {
       />
       <Image
         alt="Storybook Docs"
-        // TODO: 44px is height of eyebrow. Find way to not hard-code this.
-        className="absolute top-[44px] left-0 w-full -z-10"
+        // TODO: 40px is height of eyebrow. Find way to not hard-code this.
+        className="absolute top-[40px] left-0 w-full -z-10"
         height={339}
         priority
         src="/bubbles.png"
