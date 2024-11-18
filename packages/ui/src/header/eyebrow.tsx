@@ -16,9 +16,11 @@ export const Eyebrow: FC<EyebrowProps> = ({ href, title }) => {
         href={href}
         className="ui-flex ui-justify-center ui-items-center ui-gap-2"
       >
-        <Video />
+        {/* @ts-expect-error - Not only is it typed, but it also functions correctly */}
+        <Video className="ui-flex-none" />
         {title}
-        <SimpleArrow />
+        {/* @ts-expect-error - Not only is it typed, but it also functions correctly */}
+        <SimpleArrow className="ui-flex-none ui-hidden sm:ui-inline" />
       </a>
     </div>
   );
