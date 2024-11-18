@@ -2,13 +2,16 @@
 
 import type { FC } from 'react';
 
-export const Video: FC = () => (
+type VideoProps = React.SVGProps<SVGSVGElement>;
+
+export const Video: FC = (props: VideoProps) => (
   <svg
     width="14"
     height="14"
     viewBox="0 0 14 14"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    {...props}
   >
     <path
       d="M2.5 10C2.77614 10 3 9.77614 3 9.5C3 9.22386 2.77614 9 2.5 9C2.22386 9 2 9.22386 2 9.5C2 9.77614 2.22386 10 2.5 10Z"
