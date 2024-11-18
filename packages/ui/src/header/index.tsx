@@ -31,7 +31,7 @@ export const Header: FC<HeaderProps> = ({
     <>
       <Eyebrow
         href="https://us02web.zoom.us/webinar/register/WN_XP4uv862TIS1T3SR8voC5Q"
-        title="Join a live session: Top 8 Storybook Myths Holding Your Team Back"
+        title="Join live session: Top 8 Storybook myths holding your team back"
       />
       <header
         className={cn(
