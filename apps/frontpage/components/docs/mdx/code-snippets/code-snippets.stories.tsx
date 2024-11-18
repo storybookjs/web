@@ -25,6 +25,7 @@ const meta = {
         'vue',
         'angular',
         'web-components',
+        'react-native-web',
         'ember',
         'html',
         'svelte',
@@ -144,6 +145,13 @@ export const AngularNoLanguage: Story = {
   args: {
     content: content2,
     activeRenderer: 'angular',
+  },
+};
+
+export const ReactNativeWebFallbackToReact: Story = {
+  args: {
+    content: content2,
+    activeRenderer: 'react-native-web',
   },
 };
 
