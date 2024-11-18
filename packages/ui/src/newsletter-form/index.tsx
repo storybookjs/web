@@ -62,9 +62,9 @@ export const NewsletterForm = ({
           >
             Subscribe
           </button>
-          {hasSubmitted ? (
+          {!hasSubmitted ? (
             <div
-              className="ui-absolute ui-top-0 ui-left-0 ui-w-full ui-h-full ui-z-10 ui-rounded-md ui-flex ui-items-center ui-justify-between ui-px-4 ui-bg-green-300"
+              className="ui-absolute ui-top-0 ui-left-0 ui-w-full ui-h-full ui-z-10 ui-rounded-md ui-flex ui-items-center ui-justify-between ui-px-4 ui-bg-green-600"
               role="alert"
             >
               <b>
