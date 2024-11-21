@@ -1,7 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import type { DocsVersion } from '@repo/utils';
 
-export function HomeRenderers() {
+interface HomeRenderersProps {
+  activeVersion: DocsVersion;
+}
+
+export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
   return (
     <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
       <Card
@@ -21,10 +26,19 @@ export function HomeRenderers() {
         subtitle="with Webpack"
         title="React"
       />
+      {Number(activeVersion.id) >= 8.5 ? (
+        <Card
+          href="/docs/get-started/frameworks/react-native-web-vite/?renderer=react-native-web"
+          logo="logo-react.svg"
+          subtitle="with Vite (in browser)"
+          title="React Native Web"
+        />
+      ) : null}
       <Card
         href="https://github.com/storybookjs/react-native"
         logo="logo-react.svg"
         title="React Native"
+        subtitle="on device"
       />
       <Card
         href="/docs/get-started/frameworks/vue3-vite/?renderer=vue"
