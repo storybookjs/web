@@ -24,7 +24,7 @@ export function HomeRenderers() {
       <Card
         href="/docs/get-started/frameworks/react-native-web-vite/?renderer=react-native-web"
         logo="logo-react.svg"
-        subtitle="in browser"
+        subtitle="with Vite (in browser)"
         title="React Native Web"
       />
       <Card
