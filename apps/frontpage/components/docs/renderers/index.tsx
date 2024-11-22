@@ -1,7 +1,8 @@
 'use client';
 
 import { type FC, useEffect, useState } from 'react';
-import { renderers } from '@repo/utils';
+import { usePathname } from 'next/navigation';
+import { getVersion, renderers as fullRenderers } from '@repo/utils';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,10 +13,17 @@ import { useMediaQuery } from '../../../hooks/use-media-query';
 import { useDocs } from '../../../app/docs/provider';
 import { Button } from './button';
 
-type Renderer = (typeof renderers)[number];
-
 export const Renderers: FC = () => {
+  const pathname = usePathname();
+  const activeVersion = getVersion(pathname.replace('/docs/', '').split('/'));
   const { activeRenderer, setRenderer } = useDocs();
+  const renderers =
+    Number(activeVersion.id) < 8.5
+      ? fullRenderers.filter((r) => r.id !== 'react-native-web')
+      : fullRenderers;
+
+  type Renderer = (typeof renderers)[number];
+
   const [isMobile] = useMediaQuery('(max-width: 480px)');
   const [firstList, setFirstList] = useState<Renderer[]>(renderers.slice(0, 3));
   const [lastRenderer, setLastRenderer] = useState<Renderer>(renderers[3]);
@@ -32,7 +40,7 @@ export const Renderers: FC = () => {
     if (!isInFirstList && activeRendererObj) {
       setLastRenderer(activeRendererObj);
     }
-  }, [isMobile, activeRenderer, firstList]);
+  }, [activeRenderer, firstList, isMobile, renderers]);
 
   useEffect(() => {
     // On mobile we only show the first two renderers
@@ -43,14 +51,16 @@ export const Renderers: FC = () => {
       setFirstList(renderers.slice(0, 3));
       setLastRenderer(renderers[3]);
     }
-  }, [isMobile, activeRenderer]);
+  // TODO: Are we somehow mutating `renderers` in this hook callback?
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- Adding `renderers` throws `Maximum update depth exceeded` errors
+  }, [activeRenderer, isMobile]);
 
   const restRenderers = renderers.filter((r) => {
     return !firstList.includes(r) && r !== lastRenderer;
   });
 
   return (
-    <div className="flex gap-2 mb-8">
+    <div className="mb-8 flex gap-2">
       {firstList.map((renderer) => (
         <Button
           active={renderer.id === activeRenderer}
