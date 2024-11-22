@@ -14,7 +14,9 @@
     "lint": "eslint src/",
     "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@docsearch/react": "^3.6.0",
@@ -38,9 +40,16 @@
     "zod": "^3.23.6"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.2",
     "@repo/eslint-config": "*",
     "@repo/tailwind-config": "*",
     "@repo/typescript-config": "*",
+    "@storybook/addon-essentials": "^8.4.5",
+    "@storybook/addon-interactions": "^8.4.5",
+    "@storybook/addon-themes": "^8.4.5",
+    "@storybook/nextjs": "^8.4.5",
+    "@storybook/react": "^8.4.5",
+    "@storybook/test": "^8.4.5",
     "@turbo/gen": "^1.12.4",
     "@types/eslint": "^8.56.5",
     "@types/he": "^1.2.3",
@@ -49,8 +58,10 @@
     "@types/react-dom": "^18.2.19",
     "autoprefixer": "^10.4.18",
     "eslint": "^8.57.0",
+    "eslint-plugin-storybook": "^0.11.1",
     "postcss": "^8.4.35",
     "react": "^18.2.0",
+    "storybook": "^8.4.5",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   }
