@@ -14,6 +14,7 @@ import { nav } from './nav';
 
 export interface HeaderProps {
   algoliaApiKey: string;
+  eyebrow?: ReactNode;
   githubCount?: number;
   subMenu?: ReactNode;
   variant?: 'home' | 'system';
@@ -21,6 +22,13 @@ export interface HeaderProps {
 
 export const Header: FC<HeaderProps> = ({
   algoliaApiKey,
+  // eyebrow,
+  eyebrow = (
+    <Eyebrow
+      href="https://storybook.js.org/sb-test-eap"
+      title="Join live session: Test your components in browser with Storybook Test"
+    />
+  ),
   githubCount = 0,
   subMenu,
   variant = 'system',
@@ -29,10 +37,7 @@ export const Header: FC<HeaderProps> = ({
 
   return (
     <>
-      <Eyebrow
-        href="https://us02web.zoom.us/webinar/register/WN_XP4uv862TIS1T3SR8voC5Q"
-        title="Join live session: Top 8 Storybook myths holding your team back"
-      />
+      {eyebrow}
       <header
         className={cn(
           'ui-w-full ui-relative ui-z-50',
@@ -61,7 +66,7 @@ export const Header: FC<HeaderProps> = ({
                   height={24}
                 />
               </a>
-              <NavigationMenu.Root className="min-[940px]:ui-block hidden">
+              <NavigationMenu.Root className="min-[940px]:ui-block ui-hidden">
                 <NavigationMenu.List className="ui-flex ui-gap-2">
                   {nav.map((item) => {
                     let active = false;
