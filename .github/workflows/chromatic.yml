@@ -17,8 +17,14 @@ jobs:
       - name: Build packages
         run: npm run build:ui
 
-      - name: Run Chromatic
+      - name: Run Chromatic (frontpage)
         uses: chromaui/action@latest
         with:
           workingDir: apps/frontpage
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN_FRONTPAGE }}
+
+      - name: Run Chromatic (ui)
+        uses: chromaui/action@latest
+        with:
+          workingDir: packages/ui
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN_UI }}
