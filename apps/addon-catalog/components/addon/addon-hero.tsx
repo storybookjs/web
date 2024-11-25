@@ -17,7 +17,7 @@ export function AddonHero({ addon }: { addon: Addon }) {
   const [state, setState] = useState(false);
 
   const onClick = () => {
-    copy(`npx install ${addon.name ?? ''}`);
+    copy(`npm install ${addon.name ?? ''}`);
     setState(true);
     setTimeout(() => {
       setState(false);
