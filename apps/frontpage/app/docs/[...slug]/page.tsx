@@ -50,7 +50,7 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
   );
 
   return {
-    title: `${page?.title ?? 'Docs'} | Storybook`,
+    title: page?.title ? `${page.title} | Storybook docs` : undefined,
     alternates: {
       canonical: findPage?.canonical,
     },

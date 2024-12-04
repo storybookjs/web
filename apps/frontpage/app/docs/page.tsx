@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = await getPageData([latestVersion.id], latestVersion);
 
   return {
-    title: `${page?.title ?? 'Docs'} | Storybook`,
+    title: page?.title ? `${page.title} | Storybook docs` : undefined,
     alternates: {
       canonical: '/docs',
     },

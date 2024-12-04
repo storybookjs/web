@@ -57,7 +57,7 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
 
   return {
     title: recipe?.displayName
-      ? `${recipe.displayName} recipe | Storybook`
+      ? `${recipe.displayName} | Storybook recipes`
       : undefined,
   };
 };

@@ -37,7 +37,7 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
 
   return {
     title: addon?.displayName
-      ? `${addon.displayName} integration | Storybook`
+      ? `${addon.displayName} | Storybook integrations`
       : undefined,
   };
 };

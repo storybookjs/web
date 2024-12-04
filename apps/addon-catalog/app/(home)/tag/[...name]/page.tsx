@@ -34,7 +34,7 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
   const { displayName } = data;
 
   return {
-    title: displayName ? `${displayName} integrations | Storybook` : undefined,
+    title: displayName ? `${displayName} tag | Storybook integrations` : undefined,
   };
 };
 
