@@ -1,27 +1,51 @@
+import { type Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { SubHeader } from '@repo/ui';
 import { cn } from '@repo/utils';
 import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 import { AddonHero } from '../../components/addon/addon-hero';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
 import { Highlight } from '../../components/highlight';
+import type { AddonWithTagLinks } from '../../types';
 
 // 60*60*24 = 24 hrs
 export const revalidate = 86400;
 
-interface AddonDetailsProps {
-  params: {
-    addonName: string[];
-  };
+interface Params {
+  addonName: string[];
 }
 
-export default async function AddonDetails({ params }: AddonDetailsProps) {
-  // TODO: Better decoding?
-  const name = params.addonName.join('/').replace('%40', '@');
-  const addon = await fetchAddonDetailsData(name);
+type GenerateMetaData = (props: {
+  params: Promise<Params>;
+}) => Promise<Metadata>;
 
-  if (!addon) {
-    return <div>Not found.</div>;
-  }
+interface AddonDetailsProps {
+  params: Params;
+}
+
+async function getAddonFromName(
+  addonName: string[],
+): Promise<AddonWithTagLinks | undefined> {
+  // TODO: Better decoding?
+  const name = addonName.join('/').replace('%40', '@');
+  return await fetchAddonDetailsData(name);
+}
+
+export const generateMetadata: GenerateMetaData = async ({ params }) => {
+  const name = (await params).addonName;
+  const addon = await getAddonFromName(name);
+
+  return {
+    title: addon?.displayName
+      ? `${addon.displayName} integration | Storybook`
+      : undefined,
+  };
+};
+
+export default async function AddonDetails({ params }: AddonDetailsProps) {
+  const addon = await getAddonFromName(params.addonName);
+
+  if (!addon) notFound();
 
   return (
     <main className="mb-20">

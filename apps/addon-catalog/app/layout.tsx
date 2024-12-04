@@ -18,7 +18,7 @@ const fontSans = nunitoSans({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://storybook.js.org/integrations'),
-  title: 'Integrations | Storybook: Frontend workshop for UI development',
+  title: 'Integrations | Storybook',
   description:
     'Integrations enable advanced functionality and unlock new workflows. Contributed by core maintainers and the amazing developer community.',
   openGraph: {
