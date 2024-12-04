@@ -5,8 +5,11 @@ import { type Metadata } from 'next';
 import { getPageData } from '../../lib/get-page';
 import { Content } from '../../components/docs/content';
 
-export function generateMetadata(): Metadata {
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPageData([latestVersion.id], latestVersion);
+
   return {
+    title: page?.title ? `${page.title} | Storybook docs` : undefined,
     alternates: {
       canonical: '/docs',
     },

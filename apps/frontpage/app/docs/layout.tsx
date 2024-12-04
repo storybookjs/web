@@ -2,7 +2,6 @@ import { Header, Footer, Container } from '@repo/ui';
 import Image from 'next/image';
 import { fetchGithubCount } from '@repo/utils';
 import { type ReactNode, Suspense } from 'react';
-import { type Metadata } from 'next';
 import { Sidebar } from '../../components/docs/sidebar/sidebar';
 import { NavDocs } from '../../components/docs/sidebar/docs-nav';
 import { Submenu } from '../../components/docs/submenu';
@@ -11,12 +10,6 @@ import { TOCSectionTitles } from '../../components/docs/toc-section-titles';
 import { getAllTrees } from '../../lib/get-all-trees';
 import { DocsProvider } from './provider';
 import { RendererCookie } from './renderer-cookie';
-
-export function generateMetadata(): Metadata {
-  return {
-    title: 'Docs | Storybook',
-  };
-}
 
 export default async function Layout({ children }: { children: ReactNode }) {
   const { number: githubCount } = await fetchGithubCount();
@@ -39,7 +32,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
       <Image
         alt="Storybook Docs"
         // TODO: 40px is height of eyebrow. Find way to not hard-code this.
-        className="absolute top-[40px] left-0 w-full -z-10"
+        className="absolute left-0 top-[40px] -z-10 w-full"
         height={339}
         priority
         src="/bubbles.png"

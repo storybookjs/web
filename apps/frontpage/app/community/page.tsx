@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Header, Footer, Container, NewsletterForm } from '@repo/ui';
 import {
   fetchDiscordMembers,
@@ -17,6 +18,12 @@ import { Contribute } from '../../components/community/contribute';
 import { Sponsor } from '../../components/community/sponsor';
 import { Testimonials } from '../../components/community/testimonials';
 import { CommunityProvider } from './provider';
+
+export function generateMetadata(): Metadata {
+  return {
+    title: 'Community | Storybook',
+  };
+}
 
 export default async function Page() {
   const { number: githubCount, formattedResult: githubCountFormatted } =
