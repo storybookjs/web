@@ -35,10 +35,14 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
   const name = (await params).addonName;
   const addon = await getAddonFromName(name);
 
+  const title = addon?.displayName ?? addon?.name;
+
   return {
-    title: addon?.displayName
-      ? `${addon.displayName} | Storybook integrations`
-      : undefined,
+    ...(title
+      ? {
+          title: `${title} | Storybook integrations`,
+        }
+      : undefined),
   };
 };
 
