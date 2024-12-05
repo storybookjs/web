@@ -31,10 +31,15 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
   const data = (await fetchTagDetailsData(tagName)) || {};
 
   if ('error' in data) return {};
-  const { displayName } = data;
+
+  const title = data.displayName ?? data.name;
 
   return {
-    title: displayName ? `${displayName} tag | Storybook integrations` : undefined,
+    ...(title
+      ? {
+          title: `${title} tag | Storybook integrations`,
+        }
+      : undefined),
   };
 };
 

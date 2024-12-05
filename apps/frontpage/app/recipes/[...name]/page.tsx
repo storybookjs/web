@@ -31,9 +31,7 @@ interface RecipeDetailsProps {
   params: Params;
 }
 
-async function getRecipeFromName(
-  addonName: string[],
-): Promise<
+async function getRecipeFromName(addonName: string[]): Promise<
   // TODO: More precise typing to avoid these omits
   | Omit<
       RecipeWithTagLinks,
@@ -55,10 +53,10 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
   const name = (await params).name;
   const recipe = await getRecipeFromName(name);
 
+  const title = recipe?.displayName ?? recipe?.name;
+
   return {
-    title: recipe?.displayName
-      ? `${recipe.displayName} | Storybook recipes`
-      : undefined,
+    title: title ? `${title} | Storybook recipes` : 'Storybook recipes',
   };
 };
 
