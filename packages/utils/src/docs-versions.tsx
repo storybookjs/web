@@ -35,7 +35,7 @@ export const docsVersions: DocsVersion[] = [
   {
     label: 'Version 8.5 (alpha)',
     id: '8.5',
-    branch: 'next',
+    branch: 'docs-sb-test-2',
     preRelease: true,
   },
   {
