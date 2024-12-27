@@ -38,13 +38,13 @@ const projects = [
     projectUrl: 'https://storybook.js.org/showcase/audi-ui-react',
   },
   {
-    name: 'Fluent UI React',
+    name: 'Fluent UI Web Compnents',
     bgColor: '#0078d4',
     width: 40,
     height: 70,
-    logoAlt: 'Fluent UI React',
+    logoAlt: 'Fluent UI Web Compnents',
     logoUrl: '/home/community/logos/fluent.svg',
-    projectUrl: 'https://storybook.js.org/showcase/microsoft-fluent-ui-react',
+    projectUrl: 'https://storybook.js.org/showcase/microsoft-fluent-ui-web-components',
   },
   {
     name: 'Gutenberg',
