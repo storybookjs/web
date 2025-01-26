@@ -149,12 +149,12 @@ test('generateRedirects, no pre-release', () => {
         "source": "/docs/:renderer(react|vue)/writing-tests/importing-stories-in-tests/",
       },
       {
-        "destination": "/docs/:path",
+        "destination": "/docs/:path*",
         "permanent": true,
         "source": "/docs/:renderer(react|vue)/:path*",
       },
       {
-        "destination": "/docs/:path",
+        "destination": "/docs/:path*",
         "permanent": false,
         "source": "/docs/8.1/:path*",
       },
@@ -164,7 +164,7 @@ test('generateRedirects, no pre-release', () => {
         "source": "/docs/8.0",
       },
       {
-        "destination": "/docs/:path",
+        "destination": "/docs/:path*",
         "permanent": true,
         "source": "/docs/8.0/:path*",
       },
@@ -174,7 +174,7 @@ test('generateRedirects, no pre-release', () => {
         "source": "/docs/7.6",
       },
       {
-        "destination": "/docs/7/:path",
+        "destination": "/docs/7/:path*",
         "permanent": true,
         "source": "/docs/7.6/:path*",
       },
@@ -184,7 +184,7 @@ test('generateRedirects, no pre-release', () => {
         "source": "/docs/7.0",
       },
       {
-        "destination": "/docs/7/:path",
+        "destination": "/docs/7/:path*",
         "permanent": true,
         "source": "/docs/7.0/:renderer(react|vue)/:path*",
       },
@@ -194,12 +194,12 @@ test('generateRedirects, no pre-release', () => {
         "source": "/docs/next",
       },
       {
-        "destination": "/docs/:path",
+        "destination": "/docs/:path*",
         "permanent": false,
         "source": "/docs/next/:renderer(react|vue)/:path*",
       },
       {
-        "destination": "/docs/:path",
+        "destination": "/docs/:path*",
         "permanent": false,
         "source": "/docs/next/:path*",
       },
@@ -242,12 +242,12 @@ test('generateRedirects, minor pre-release', () => {
         "source": "/docs/:renderer(react|vue)/workflows/unit-testing/",
       },
       {
-        "destination": "/docs/:path",
+        "destination": "/docs/:path*",
         "permanent": true,
         "source": "/docs/:renderer(react|vue)/:path*",
       },
       {
-        "destination": "/docs/:path",
+        "destination": "/docs/:path*",
         "permanent": false,
         "source": "/docs/8.1/:path*",
       },
@@ -257,7 +257,7 @@ test('generateRedirects, minor pre-release', () => {
         "source": "/docs/8.0",
       },
       {
-        "destination": "/docs/:path",
+        "destination": "/docs/:path*",
         "permanent": true,
         "source": "/docs/8.0/:path*",
       },
@@ -267,7 +267,7 @@ test('generateRedirects, minor pre-release', () => {
         "source": "/docs/7.6",
       },
       {
-        "destination": "/docs/7/:path",
+        "destination": "/docs/7/:path*",
         "permanent": true,
         "source": "/docs/7.6/:path*",
       },
@@ -277,7 +277,7 @@ test('generateRedirects, minor pre-release', () => {
         "source": "/docs/7.0",
       },
       {
-        "destination": "/docs/7/:path",
+        "destination": "/docs/7/:path*",
         "permanent": true,
         "source": "/docs/7.0/:renderer(react|vue)/:path*",
       },
@@ -287,12 +287,12 @@ test('generateRedirects, minor pre-release', () => {
         "source": "/docs/next",
       },
       {
-        "destination": "/docs/8.2/:path",
+        "destination": "/docs/8.2/:path*",
         "permanent": false,
         "source": "/docs/next/:renderer(react|vue)/:path*",
       },
       {
-        "destination": "/docs/8.2/:path",
+        "destination": "/docs/8.2/:path*",
         "permanent": false,
         "source": "/docs/next/:path*",
       },
@@ -335,12 +335,12 @@ test('generateRedirects, major pre-release', () => {
         "source": "/docs/:renderer(react|vue)/workflows/unit-testing/",
       },
       {
-        "destination": "/docs/:path",
+        "destination": "/docs/:path*",
         "permanent": true,
         "source": "/docs/:renderer(react|vue)/:path*",
       },
       {
-        "destination": "/docs/:path",
+        "destination": "/docs/:path*",
         "permanent": false,
         "source": "/docs/8.1/:path*",
       },
@@ -350,7 +350,7 @@ test('generateRedirects, major pre-release', () => {
         "source": "/docs/8.0",
       },
       {
-        "destination": "/docs/:path",
+        "destination": "/docs/:path*",
         "permanent": true,
         "source": "/docs/8.0/:path*",
       },
@@ -360,7 +360,7 @@ test('generateRedirects, major pre-release', () => {
         "source": "/docs/7.6",
       },
       {
-        "destination": "/docs/7/:path",
+        "destination": "/docs/7/:path*",
         "permanent": true,
         "source": "/docs/7.6/:path*",
       },
@@ -370,7 +370,7 @@ test('generateRedirects, major pre-release', () => {
         "source": "/docs/7.0",
       },
       {
-        "destination": "/docs/7/:path",
+        "destination": "/docs/7/:path*",
         "permanent": true,
         "source": "/docs/7.0/:renderer(react|vue)/:path*",
       },
@@ -380,7 +380,7 @@ test('generateRedirects, major pre-release', () => {
         "source": "/docs/9.0",
       },
       {
-        "destination": "/docs/9/:path",
+        "destination": "/docs/9/:path*",
         "permanent": true,
         "source": "/docs/9.0/:path*",
       },
@@ -390,12 +390,12 @@ test('generateRedirects, major pre-release', () => {
         "source": "/docs/next",
       },
       {
-        "destination": "/docs/9/:path",
+        "destination": "/docs/9/:path*",
         "permanent": false,
         "source": "/docs/next/:renderer(react|vue)/:path*",
       },
       {
-        "destination": "/docs/9/:path",
+        "destination": "/docs/9/:path*",
         "permanent": false,
         "source": "/docs/next/:path*",
       },

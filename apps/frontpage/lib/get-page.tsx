@@ -85,7 +85,7 @@ export const getPageData = async (
         <div {...props}>{props.children}</div>
       ),
       HomeConcepts,
-      HomeRenderers,
+      HomeRenderers: () => <HomeRenderers activeVersion={activeVersion} />,
       HomeResources,
       If,
       IfRenderer: If,

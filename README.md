@@ -1,7 +1,7 @@
 ![Storybook Web Light](github-light.png#gh-light-mode-only)
 ![Storybook Web Dark](github-dark.png#gh-dark-mode-only)
 
-Welcome to the new home for Storybook's main website and documentation. This project is still in progress but will soon replace the existing platform. It is mainly built around Next.js, Tailwind, Turborepo and obviously Storybook ✌️
+Welcome to the new home for Storybook's main website and documentation. It is mainly built around Next.js, Tailwind, Turborepo and obviously Storybook ✌️
 
 ## Monorepo
 
@@ -17,15 +17,19 @@ This project is structured around [Turborepo](https://turbo.build/repo). This do
 
 > Install all dependencies
 
-#### `turbo fetch-docs`
+#### `npx turbo fetch-docs`
 
 > Fetch docs from the monorepo
 
-#### `turbo dev`
+#### `npx turbo generate-redirects`
+
+> Generate redirects file
+
+#### `npx turbo dev`
 
 > Run all apps locally
 
-#### `turbo build`
+#### `npx turbo build`
 
 > Build all apps locally
 

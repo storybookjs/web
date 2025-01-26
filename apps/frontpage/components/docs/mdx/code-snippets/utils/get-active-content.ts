@@ -45,7 +45,10 @@ export const getActiveContentTabs = ({
     } else {
       // If there's react content, we need to show that
       filteredContent = reactContent;
-      error = `This snippet doesn't exist for ${activeRenderer ?? ''}. In the meantime, here's the React snippet.`;
+      // RNW snippets fallback to React snippets with no warning
+      if (activeRenderer !== 'react-native-web') {
+        error = `This snippet doesn't exist for ${activeRenderer ?? ''}. In the meantime, here's the React snippet.`;
+      }
     }
   }
 

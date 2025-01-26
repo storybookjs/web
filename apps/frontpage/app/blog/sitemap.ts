@@ -8,5 +8,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   if (error) throw new Error(error);
 
+  if (sites.length === 0) {
+    throw new Error('Failed to fetch blog data');
+  }
+
   return sites;
 }

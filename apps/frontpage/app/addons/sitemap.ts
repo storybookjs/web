@@ -104,6 +104,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const categories = await fetchTagsData({ isCategory: true });
   const tags = await fetchTagsData();
 
+  if (addons.length === 0 || categories.length === 0 || tags.length === 0) {
+    throw new Error('Failed to fetch addons data');
+  }
+
   const addonPaths = addons.map((name) => {
     if (!name) throw new Error('Addon name is missing');
     return { loc: `https://storybook.js.org/addons/${name}` };

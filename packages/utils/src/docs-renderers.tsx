@@ -10,6 +10,7 @@ export const renderers = [
   { id: "vue", title: "Vue" },
   { id: "angular", title: "Angular" },
   { id: "web-components", title: "Web Components" },
+  { id: "react-native-web", title: "React Native Web" },
   { id: "ember", title: "Ember" },
   { id: "html", title: "HTML" },
   { id: "svelte", title: "Svelte" },

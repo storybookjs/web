@@ -5,7 +5,7 @@
 /docs/workflows/testing-with-storybook/          /docs/writing-tests                                                     308
 /docs/workflows/unit-testing/                    /docs/writing-tests/import-stories-in-tests/stories-in-unit-tests/      308
 /docs/workflows/visual-testing/                  /docs/writing-tests/visual-testing/                                     308
-/docs/workflows/interaction-testing/             /docs/writing-tests/interaction-testing/                                308
+/docs/workflows/interaction-testing/             /docs/writing-tests/component-testing/                                308
 /docs/workflows/snapshot-testing/                /docs/writing-tests/snapshot-testing/snapshot-testing                   308
 /docs/workflows/build-pages-with-storybook/      /docs/writing-stories/build-pages-with-storybook/                       308
 /docs/workflows/stories-for-multiple-components/ /docs/writing-stories/stories-for-multiple-components/                  308
@@ -134,3 +134,6 @@
 
 # 8.2
 /docs/writing-tests/interaction-testing          /docs/writing-tests/component-testing/                                  308
+
+# 8.4
+/docs/writing-tests/vitest-plugin                /docs/writing-tests/test-addon/                                         308

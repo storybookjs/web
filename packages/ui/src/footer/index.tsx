@@ -99,10 +99,15 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
               >
                 Maintained by
               </div>
-              <ChromaticLogo
-                color={variant === 'home' ? 'white' : 'system'}
-                height={24}
-              />
+              <a
+                className="text-inherit no-underline"
+                href="https://www.chromatic.com/storybook?utm_source=storybook_website&utm_medium=footer&utm_campaign=storybook"
+              >
+                <ChromaticLogo
+                  color={variant === 'home' ? 'white' : 'system'}
+                  height={24}
+                />
+              </a>
             </div>
           </div>
           <div
@@ -119,9 +124,9 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
                 variant === 'home' && 'ui-text-white',
                 variant !== 'home' && 'ui-text-zinc-600 dark:ui-text-white',
               )}
-              href="https://vercel.com"
+              href="https://netlify.com"
             >
-              Vercel
+              Netlify
             </a>{' '}
             and{' '}
             <a
@@ -130,9 +135,9 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
                 variant === 'home' && 'ui-text-white',
                 variant !== 'home' && 'ui-text-zinc-600 dark:ui-text-white',
               )}
-              href="https://sanity.io"
+              href="https://circleci.com"
             >
-              Sanity
+              CircleCI
             </a>
           </div>
         </div>
