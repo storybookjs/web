@@ -32,6 +32,12 @@ export const docsVersions: DocsVersion[] = [
     id: '8.5',
     branch: 'main',
   },
+  {
+    label: 'Page tabs (preview)',
+    id: '8.6',
+    commit: 'e1c2cdc22e79bc375c0c4c8eef05ce5643cb9ad5',
+    preRelease: true,
+  },
   // {
   //   label: 'Version 8.6 (alpha)',
   //   id: '8.6',
