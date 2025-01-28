@@ -23,6 +23,7 @@ export interface PageDataProps {
   isIndexPage: boolean;
   tabs: RawTreeProps[];
   content: ReactElement;
+  path: string;
 }
 
 export const getPageData = async (
@@ -109,6 +110,7 @@ export const getPageData = async (
   return {
     ...frontmatter,
     isIndexPage: isIndexMDX || isIndexMD,
+    path: newPath,
     tabs: index?.isTab ? parent : [],
     content,
   };
