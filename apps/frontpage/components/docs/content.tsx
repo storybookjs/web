@@ -19,7 +19,7 @@ export const Content: FC<{ page: PageDataProps }> = ({ page }) => {
           </h1>
           {!page.hideRendererSelector && <Renderers />}
           {page.tabs && page.tabs.length > 0 ? (
-            <div className="flex items-center gap-8 border-b border-zinc-200">
+            <div className="mb-8 flex items-center gap-8 border-b border-zinc-200">
               {page.tabs.map((tab) => {
                 const tabTitle = tab.tab?.title ?? tab.title;
                 const isActive = tab.pathSegment === page.path;
