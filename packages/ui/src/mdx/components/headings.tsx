@@ -66,5 +66,5 @@ export const H3: FC<Omit<HeadingProps, 'level'>> = (props) => {
 };
 
 export const H4: FC<Omit<HeadingProps, 'level'>> = (props) => {
-  return <Heading className="ui-mb-4 ui-text-xl" level={4} {...props} />;
+  return <Heading className="ui-mb-4 ui-text-lg" level={4} {...props} />;
 };
