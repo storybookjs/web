@@ -1,5 +1,6 @@
-import { cn } from '@repo/utils';
 import { type FC } from 'react';
+import Link from 'next/link';
+import { cn } from '@repo/utils';
 import { type PageDataProps } from '../../lib/get-page';
 import { Renderers } from './renderers';
 import { DocsFooter } from './footer/footer';
@@ -8,36 +9,56 @@ import { TableOfContent } from './table-of-content';
 export const Content: FC<{ page: PageDataProps }> = ({ page }) => {
   return (
     <>
-      <div className="flex-1 w-full min-w-0 py-12">
+      <div className="w-full min-w-0 flex-1 py-12">
         <main className="mx-auto max-w-[720px]">
           <h1
-            className="relative mt-0 mb-6 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
+            className="relative mb-6 mt-0 text-4xl font-bold text-black transition-colors duration-200 group-hover:text-blue-500 dark:text-white"
             data-docs-heading
           >
             {page.title ?? 'Title is missing'}
           </h1>
           {!page.hideRendererSelector && <Renderers />}
-          {/* TODO: Bring back tabs */}
-          {/* {page.tabs && page.tabs.length > 0 ? (
-        <div className="flex items-center gap-8 border-b border-zinc-200">
-          {page.tabs.map((tab) => {
-            const isActive = tab.slug === `/docs/${slug?.join('/')}`;
-
-            return (
-              <Link
-                className={cn(
+          {page.tabs && page.tabs.length > 0 ? (
+            <div className="flex items-center gap-8 border-b border-zinc-200">
+              {page.tabs.map((tab) => {
+                const tabTitle = tab.tab?.title ?? tab.title;
+                const isActive = tab.pathSegment === page.path;
+                const className = cn(
                   '-mb-px border-b px-2 pb-2 text-sm capitalize transition-colors hover:text-blue-500',
                   isActive && 'border-b border-blue-500 text-blue-500',
-                )}
-                href={tab.slug}
-                key={tab.name}
-              >
-                {tab.tab?.title || tab.title}
-              </Link>
-            );
-          })}
-        </div>
-      ) : null} */}
+                );
+
+                if (isActive) {
+                  return (
+                    <span className={className} key={tab.name}>
+                      {tabTitle}
+                    </span>
+                  );
+                }
+
+                const relevantPathSegments = (
+                  tab.name === 'index.mdx'
+                    ? tab.pathSegment.split('/').slice(-2, -1)
+                    : tab.pathSegment.split('/').slice(-2)
+                )
+                  .join('/')
+                  .replace('.mdx', '');
+                const href = page.isIndexPage
+                  ? `./${relevantPathSegments}`
+                  : `../${relevantPathSegments}`;
+
+                return (
+                  <Link
+                    className={className}
+                    href={href}
+                    key={tab.name}
+                  >
+                    {tabTitle}
+                  </Link>
+                );
+              })}
+            </div>
+          ) : null}
           <div
             className={cn(
               '[&>details]:my-6',

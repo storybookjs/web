@@ -84,6 +84,10 @@ export const getDocsTreeFromPath = (
     a.sidebar?.order && b.sidebar?.order
       ? a.sidebar.order - b.sidebar.order
       : 0,
+  ).sort((a, b) =>
+    a.tab?.order && b.tab?.order
+      ? a.tab.order - b.tab.order
+      : 0,
   );
   // TODO: Remove the index page from the tree, probably from pathSegment instead of slug
   // .filter((item) => {
