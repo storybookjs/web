@@ -86,6 +86,14 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         subtitle="with Webpack"
         title="Web Components"
       />
+      {Number(activeVersion.id) >= 8.5 ? (
+        <Card
+          href="/docs/get-started/frameworks/preact-vite/?renderer=preact"
+          logo="logo-preact.svg"
+          subtitle="with Vite"
+          title="Preact"
+        />
+      ) : null}
     </div>
   );
 }
