@@ -523,7 +523,7 @@ export const firefoxThemeLight = {
     {
       scope: "markup.inserted",
       settings: {
-        foreground: "#86DE74",
+        foreground: "#2f8800",
       },
     },
     {
