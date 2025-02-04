@@ -46,6 +46,10 @@ export interface Recipe {
   yearlyViews: number | null;
 }
 
+export interface RecipeWithTagLinks extends Omit<Recipe, 'tags'> {
+  tags: TagLinkType[];
+}
+
 export type Status = 'default' | 'essential' | 'deprecated';
 
 export interface Tag {

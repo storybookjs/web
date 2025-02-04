@@ -1,5 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { type Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import {
   Container,
   Footer,
@@ -15,12 +17,48 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { fetchRecipeDetailsData } from '../../../lib/fetch-recipe-details-data';
 import { fetchRecipesData } from '../../../lib/fetch-recipes-data';
 import { EmbeddedExample } from '../../../components/recipes/embedded-example';
+import type { RecipeWithTagLinks } from '../../../types';
+
+interface Params {
+  name: string[];
+}
+
+type GenerateMetaData = (props: {
+  params: Promise<Params>;
+}) => Promise<Metadata>;
 
 interface RecipeDetailsProps {
-  params: {
-    name: string[];
-  };
+  params: Params;
 }
+
+async function getRecipeFromName(addonName: string[]): Promise<
+  // TODO: More precise typing to avoid these omits
+  | Omit<
+      RecipeWithTagLinks,
+      | 'disabled'
+      | 'monthlyViews'
+      | 'publisher'
+      | 'status'
+      | 'type'
+      | 'yearlyViews'
+    >
+  | undefined
+> {
+  // TODO: Better decoding?
+  const name = addonName.join('/').replace('%40', '@');
+  return await fetchRecipeDetailsData(name);
+}
+
+export const generateMetadata: GenerateMetaData = async ({ params }) => {
+  const name = (await params).name;
+  const recipe = await getRecipeFromName(name);
+
+  const title = recipe?.displayName ?? recipe?.name;
+
+  return {
+    title: title ? `${title} | Storybook recipes` : 'Storybook recipes',
+  };
+};
 
 export async function generateStaticParams() {
   const recipes = (await fetchRecipesData()) || [];
@@ -33,12 +71,12 @@ export async function generateStaticParams() {
 
 export default async function RecipeDetails({ params }: RecipeDetailsProps) {
   const { number: githubCount } = await fetchGithubCount();
-  // TODO: Better decoding?
-  const name = params.name.join('/').replace('%40', '@');
-  const metadata = await fetchRecipeDetailsData(name);
+  const recipe = await getRecipeFromName(params.name);
+
+  if (!recipe) notFound();
 
   const mdx = await fs.promises.readFile(
-    path.join(process.cwd(), 'content/recipes', `${name}.mdx`),
+    path.join(process.cwd(), 'content/recipes', `${recipe.name}.mdx`),
     'utf-8',
   );
 
@@ -51,7 +89,7 @@ export default async function RecipeDetails({ params }: RecipeDetailsProps) {
       <Container className="mb-16">
         <SubHeader leftLabel="Back to integrations" leftHref="/addons" />
         <div className="mx-auto flex max-w-[1024px] flex-col items-center justify-center pb-20">
-          <div className="flex gap-10 mb-8">
+          <div className="mb-8 flex gap-10">
             <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-[#ff4785]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -69,22 +107,22 @@ export default async function RecipeDetails({ params }: RecipeDetailsProps) {
               </svg>
             </div>
             <div
-              className="flex items-center justify-center w-20 h-20 rounded-lg"
-              style={{ backgroundColor: metadata?.accentColor ?? '#ff4785' }}
+              className="flex h-20 w-20 items-center justify-center rounded-lg"
+              style={{ backgroundColor: recipe.accentColor ?? '#ff4785' }}
             >
               <Image
-                src={metadata?.icon ?? ''}
-                alt={metadata?.name ?? ''}
+                src={recipe.icon ?? ''}
+                alt={recipe.name ?? ''}
                 width={48}
                 height={48}
               />
             </div>
           </div>
-          <h1 className="mb-4 text-4xl font-bold text-center">
-            Integrate {metadata?.displayName} with Storybook
+          <h1 className="mb-4 text-center text-4xl font-bold">
+            Integrate {recipe.displayName} with Storybook
           </h1>
           <div className="mb-6 max-w-[640px] text-center text-2xl text-zinc-500">
-            {metadata?.description}
+            {recipe.description}
           </div>
         </div>
         <div className="flex flex-col gap-12 lg:flex-row">
@@ -96,20 +134,20 @@ export default async function RecipeDetails({ params }: RecipeDetailsProps) {
             />
           </div>
           <div className="w-[250px] flex-shrink-0">
-            <div className="flex items-center mb-6 text-sm font-bold">Tags</div>
-            <ul className="flex flex-wrap gap-2 mb-6">
-              {metadata?.tags?.map((tag) => (
+            <div className="mb-6 flex items-center text-sm font-bold">Tags</div>
+            <ul className="mb-6 flex flex-wrap gap-2">
+              {recipe.tags?.map((tag) => (
                 <Pill key={tag.name}>{tag.name}</Pill>
               ))}
             </ul>
-            <div className="flex items-center py-2 mb-4 text-sm font-bold">
+            <div className="mb-4 flex items-center py-2 text-sm font-bold">
               Contributors
             </div>
-            <ul className="flex flex-col gap-4 mb-6">
-              {metadata?.authors?.map((author) => (
+            <ul className="mb-6 flex flex-col gap-4">
+              {recipe.authors?.map((author) => (
                 <li className="flex items-center gap-2" key={author.username}>
                   {author.gravatarUrl ? (
-                    <div className="relative overflow-hidden rounded-full h-7 w-7">
+                    <div className="relative h-7 w-7 overflow-hidden rounded-full">
                       <Image
                         src={`https:${author.gravatarUrl}`}
                         alt={author.username}

@@ -1,26 +1,54 @@
+import { type Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Preview } from '../../../../components/preview';
 import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
+import type { Tag } from '../../../../types';
 
 // 60*60*24 = 24 hrs
 export const revalidate = 86400;
 
-interface TagDetailsProps {
-  params: {
-    name: string[];
-  };
+interface Params {
+  name: string[];
 }
+
+type GenerateMetaData = (props: {
+  params: Promise<Params>;
+}) => Promise<Metadata>;
+
+interface TagDetailsProps {
+  params: Params;
+}
+
+async function getTagFromName(
+  tagName: string[],
+): Promise<Tag | { error: string }> {
+  const name = tagName.join('/');
+  return (await fetchTagDetailsData(name)) || {};
+}
+
+export const generateMetadata: GenerateMetaData = async ({ params }) => {
+  const tagName = (await params).name.join('/');
+  const data = (await fetchTagDetailsData(tagName)) || {};
+
+  if ('error' in data) return {};
+
+  const title = data.displayName ?? data.name;
+
+  return {
+    ...(title
+      ? {
+          title: `${title} tag | Storybook integrations`,
+        }
+      : undefined),
+  };
+};
 
 export default async function TagDetails({
   params: { name },
 }: TagDetailsProps) {
-  const tagName = name.join('/');
+  const data = await getTagFromName(name);
 
-  if (!tagName) return notFound();
-
-  const data = (await fetchTagDetailsData(tagName)) || {};
-
-  if ('error' in data) return notFound();
+  if (!data || 'error' in data) return notFound();
 
   return (
     <>

@@ -5,7 +5,7 @@
 
 [[redirects]]
   from = "/addons/sitemap.xml"
-  to = "https://storybook-frontpage.netlify.app/addons/sitemap.xml"
+  to = "/addons/sitemap.xml"
   status = 200
 
 [[redirects]]
@@ -15,7 +15,7 @@
 
 [[redirects]]
   from = "/blog/sitemap.xml"
-  to = "https://storybook-frontpage.netlify.app/blog/sitemap.xml"
+  to = "/blog/sitemap.xml"
   status = 200
 
 [[redirects]]
@@ -30,7 +30,7 @@
 
 [[redirects]]
   from = "/showcase/sitemap.xml"
-  to = "https://storybook-frontpage.netlify.app/showcase/sitemap.xml"
+  to = "/showcase/sitemap.xml"
   status = 200
 
 [[redirects]]
@@ -40,7 +40,7 @@
 
 [[redirects]]
   from = "/tutorials/sitemap.xml"
-  to = "https://storybook-frontpage.netlify.app/tutorials/sitemap.xml"
+  to = "/tutorials/sitemap.xml"
   status = 200
 
 [[redirects]]
@@ -61,4 +61,9 @@
 [[redirects]]
   from = "/proxy/api/event"
   to = "https://plausible.io/api/event"
+  status = 200
+
+[[redirects]]
+  from = "/sb-test-eap"
+  to = "https://forms.gle/zVeNrM7QiedZVv7K9"
   status = 200
