@@ -57,6 +57,11 @@ export const docsCommonRedirects: RedirectData[] = [
     destination: '/docs/migration-guide',
     permanent: true,
   },
+  {
+    source: '/rn-vs-rnw',
+    destination: '/docs/get-started/frameworks/react-native-web-vite?renderer=react-native-web#react-native-vs-react-native-web',
+    permanent: true,
+  },
   /* Supporting old docs URLs */
   {
     source: '/basics/slow-start-guide',
