@@ -8,7 +8,7 @@ export const InitCommand: FC = () => {
   const [state, setState] = useState(false);
 
   const onClick = () => {
-    copy('npx storybook@latest init');
+    copy('npm create storybook@latest');
     setState(true);
     setTimeout(() => {
       setState(false);
@@ -21,7 +21,7 @@ export const InitCommand: FC = () => {
       onClick={onClick}
       type="button"
     >
-      npx storybook@latest init
+      npm create storybook@latest
       <CopyIcon />
       <AnimatePresence>
         {state ? (
