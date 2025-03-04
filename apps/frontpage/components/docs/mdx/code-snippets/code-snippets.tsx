@@ -2,6 +2,7 @@
 'use client';
 
 import { useEffect, useState, type FC } from 'react';
+import { usePathname } from 'next/navigation';
 import { type CodeSnippetsProps } from '@repo/utils';
 import { CodeSnippetsWrapper } from '@repo/ui';
 import { InfoIcon } from '@storybook/icons';
@@ -31,17 +32,43 @@ const Error = () => {
   );
 };
 
+/**
+ * For the framework docs pages, we coerce the active renderer to the relevant one for that framework.
+ * We do this _without_ affecting the actual activeRenderer value.
+ */
+const getActiveRenderer = (activeRendererIn: string | null, pathname: string) => {
+  // eslint-disable-next-line prefer-named-capture-group -- TODO: Enable via TS config changes
+  const matches = /\/docs\/get-started\/frameworks\/(.*)/.exec(pathname);
+  
+  if (!matches) return activeRendererIn;
+
+  const framework = matches[1];
+  const frameworkOrRendererPortion = framework.replace(/-(?:vite|webpack5)/, '') as keyof typeof map;
+  
+  const map = {
+    'nextjs': 'react',
+    'react-native-web': 'react',
+    'sveltekit': 'svelte',
+    'vue3': 'vue',
+  };
+
+  return  map[frameworkOrRendererPortion] ?? frameworkOrRendererPortion;
+}
+
 export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   content,
 }) => {
   const {
-    activeRenderer,
+    activeRenderer: activeRendererIn,
     activeLanguage,
     activePackageManager,
     setLanguage,
     setPackageManager,
   } = useDocs();
   const [activeTab, setActiveTab] = useState<Tab['id'] | null>(null);
+
+  const pathname = usePathname();
+  const activeRenderer = getActiveRenderer(activeRendererIn, pathname);
 
   // Get filters - If preformatted text, we don't need filters
   const filters = getFilters({ content: content ?? [], activeRenderer });

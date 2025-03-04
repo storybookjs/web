@@ -36,7 +36,7 @@ const meta = {
     },
     activeLanguage: {
       control: 'radio',
-      options: ['js', 'ts', 'ts-4.9'],
+      options: ['js', 'ts', 'ts-4-9'],
     },
     activePackageManager: {
       control: 'radio',
@@ -193,6 +193,14 @@ export const MultipleTabsVue2And3Suffix: Story = {
     activeLanguage: 'js',
   },
 };
+
+export const CoerceTS49ToTS: Story = {
+  name: 'Coerce TS 4.9 language to TS snippet',
+  args: {
+    content: content2.filter((tab) => tab.language !== 'ts-4-9'),
+    activeLanguage: 'ts-4-9',
+  },
+}
 
 export const NoRenderer: Story = {
   args: {
