@@ -9,7 +9,7 @@ import { StorybookLogo } from '../logos/storybook-logo';
 import { Search } from '../search';
 import { MobileMenu } from './mobile-menu';
 import { Button } from './button';
-// import { Eyebrow } from './eyebrow';
+import { Eyebrow } from './eyebrow';
 import { nav } from './nav';
 
 export interface HeaderProps {
@@ -22,13 +22,13 @@ export interface HeaderProps {
 
 export const Header: FC<HeaderProps> = ({
   algoliaApiKey,
-  eyebrow,
-  // eyebrow = (
-  //   <Eyebrow
-  //     href="https://storybook.js.org/sb-test-eap"
-  //     title="Join live session: Test your components in browser with Storybook Test"
-  //   />
-  // ),
+  // eyebrow,
+  eyebrow = (
+    <Eyebrow
+      href="https://us02web.zoom.us/webinar/register/WN_7Kz8K-YuQEum4IWnmhnUyQ"
+      title="Join live session: Wed, 1pm EDT, Test mocking for bulletproof UIs"
+    />
+  ),
   githubCount = 0,
   subMenu,
   variant = 'system',
