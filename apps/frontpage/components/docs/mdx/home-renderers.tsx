@@ -26,6 +26,12 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         subtitle="with Webpack"
         title="React"
       />
+      <Card
+        href="https://storybook.rsbuild.dev/guide/framework/react.html"
+        logo="logo-react.svg"
+        title="React"
+        subtitle="with Rspack / Rsbuild"
+      />
       {Number(activeVersion.id) >= 8.5 ? (
         <Card
           href="/docs/get-started/frameworks/react-native-web-vite/?renderer=react-native-web"
@@ -59,6 +65,12 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         title="Vue"
       />
       <Card
+        href="https://storybook.rsbuild.dev/guide/framework/vue.html"
+        logo="logo-vue.svg"
+        title="Vue"
+        subtitle="with Rspack / Rsbuild"
+      />
+      <Card
         href="/docs/get-started/frameworks/angular/?renderer=angular"
         logo="logo-angular.svg"
         title="Angular"
@@ -90,6 +102,12 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         href="/docs/get-started/frameworks/web-components-webpack5/?renderer=web-components"
         logo="logo-web-components.svg"
         subtitle="with Webpack"
+        title="Web Components"
+      />
+      <Card
+        href="https://storybook.rsbuild.dev/guide/framework/web-components.html"
+        logo="logo-web-components.svg"
+        subtitle="with Rspack / Rsbuild"
         title="Web Components"
       />
     </div>
