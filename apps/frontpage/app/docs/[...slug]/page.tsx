@@ -1,5 +1,5 @@
 import { type Metadata } from 'next';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { globalSearchMetaKeys, globalSearchImportance } from '@repo/ui';
 import { type DocsVersion, latestVersion } from '@repo/utils';
 import { getVersion } from '../../../lib/get-version';
@@ -51,13 +51,21 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
 
   return {
     title: page?.title ? `${page.title} | Storybook docs` : 'Storybook docs',
-    alternates: {
-      canonical: findPage?.canonical,
-    },
-    other: {
-      [globalSearchMetaKeys.version]: activeVersion.id,
-      [globalSearchMetaKeys.importance]: globalSearchImportance.docs,
-    },
+    ...(page?.isIndexPage && !page?.isHeading
+      ? {
+          robots: {
+            index: false,
+          },
+        }
+      : {
+          alternates: {
+            canonical: findPage?.canonical,
+          },
+          other: {
+            [globalSearchMetaKeys.version]: activeVersion.id,
+            [globalSearchMetaKeys.importance]: globalSearchImportance.docs,
+          },
+        }),
   };
 };
 
@@ -79,14 +87,6 @@ export const generateStaticParams = () => {
 };
 
 export default async function Page({ params: { slug } }: PageProps) {
-  // If the page is an index page, redirect to the parent page
-  const isIndex = slug && slug[slug.length - 1] === 'index';
-  if (isIndex) {
-    const newSlug = slug ?? [];
-    const pathWithoutIndex = `/docs/${newSlug.slice(0, -1).join('/')}`;
-    redirect(pathWithoutIndex);
-  }
-
   const { page } = await getPageFromSlug(slug);
   if (!page) notFound();
 

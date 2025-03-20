@@ -21,6 +21,7 @@ export interface PageDataProps {
   title?: string;
   hideRendererSelector?: boolean;
   isIndexPage: boolean;
+  isHeading: boolean;
   tabs: RawTreeProps[];
   content: ReactElement;
   path: string;
@@ -47,6 +48,7 @@ export const getPageData = async (
 
   const isIndexMDX = fs.existsSync(indexPathMDX);
   const isIndexMD = fs.existsSync(indexPathMD);
+  const isIndexPage = isIndexMDX || isIndexMD;
   const isLink = linkPath ? fs.existsSync(linkPath) : false;
 
   let newPath = null;
@@ -99,9 +101,9 @@ export const getPageData = async (
     ? `${rootPath}/${pathString}`.split('/').slice(0, -1).join('/')
     : `${rootPath}/${pathString}`;
 
-  const parent = getDocsTreeFromPath(pathToFiles);
+  const children = getDocsTreeFromPath(pathToFiles);
 
-  const sorted = parent.sort((a, b) =>
+  const sorted = children.sort((a, b) =>
     a.tab?.order && b.tab?.order ? a.tab.order - b.tab.order : 0,
   );
 
@@ -109,9 +111,10 @@ export const getPageData = async (
 
   return {
     ...frontmatter,
-    isIndexPage: isIndexMDX || isIndexMD,
+    isIndexPage,
+    isHeading: isIndexPage && path.length < 3,
     path: newPath,
-    tabs: index?.isTab ? parent : [],
+    tabs: index?.isTab ? children : [],
     content,
   };
 };
