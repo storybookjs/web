@@ -35,6 +35,7 @@ export const docsVersions: DocsVersion[] = [
   {
     label: 'Version 9.0 (alpha)',
     id: '9.0',
+    inSlug: '9',
     branch: 'next',
     preRelease: true,
   },
