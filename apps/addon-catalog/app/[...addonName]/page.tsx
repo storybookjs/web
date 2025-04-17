@@ -2,6 +2,7 @@ import { type Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SubHeader } from '@repo/ui';
 import { cn } from '@repo/utils';
+import { fetchAddonsData } from '../../lib/fetch-addons-data';
 import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 import { AddonHero } from '../../components/addon/addon-hero';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
@@ -133,4 +134,18 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
       </div>
     </main>
   );
+}
+
+export async function generateStaticParams() {
+  const addons = (await fetchAddonsData()) || [];
+  const listOfNames = addons
+    // TODO: Better encoding?
+    .map((addon) => addon ? { name: [...addon.replace('@', '%40').split('/')] } : null)
+    .filter(Boolean);
+  
+  if (listOfNames.length === 0) {
+    throw new Error('No addons found');
+  }
+
+  return listOfNames;
 }
