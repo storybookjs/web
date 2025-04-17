@@ -1,6 +1,7 @@
 import { type Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Preview } from '../../../../components/preview';
+import { fetchTagsData } from '../../../../lib/fetch-tags-data';
 import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
 import type { Tag } from '../../../../types';
 
@@ -67,4 +68,15 @@ export default async function TagDetails({
       </div>
     </>
   );
+}
+
+export async function generateStaticParams() {
+  const tags = (await fetchTagsData()) || [];
+  const listOfNames = tags.map((tag) => ({ name: [...tag.split('/')] }));
+
+  if (listOfNames.length === 0) {
+    throw new Error('No tags found');
+  }
+
+  return listOfNames;
 }
