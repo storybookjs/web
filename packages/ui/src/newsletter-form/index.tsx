@@ -44,7 +44,7 @@ export const NewsletterForm = ({
         <form
           className={cn(
             'ui-relative ui-w-full',
-            inEyebrow ? 'ui-max-w-[250px] ui-h-[34px]' : 'ui-min-w-[360px] ui-h-12',
+            inEyebrow ? 'ui-max-w-[240px] ui-h-[28px] -ui-mt-[2px] ui-mb-[2px] sm:-ui-my-3 ' : 'ui-min-w-[360px] ui-h-12',
           )}
           ref={formRef}
           onSubmit={handleSubmit}
@@ -52,7 +52,7 @@ export const NewsletterForm = ({
           <input
             className={cn(
               'ui-rounded-md ui-w-full ui-h-full ui-transition-color ui-text-zinc-800 ui-border dark:ui-text-white',
-              inEyebrow ? 'ui-bg-slate-900 ui-border-slate-700 ui-pl-2 ui-pr-[90px]' : 'ui-bg-white dark:ui-bg-slate-900 ui-border-zinc-200 dark:ui-border-slate-700 ui-pl-4 ui-pr-[100px]',
+              inEyebrow ? 'ui-bg-slate-900 ui-border-slate-700 ui-pl-2 ui-pr-[90px] ui-text-[13px]' : 'ui-bg-white dark:ui-bg-slate-900 ui-border-zinc-200 dark:ui-border-slate-700 ui-pl-4 ui-pr-[100px]',
             )}
             id="email"
             type="email"
@@ -66,8 +66,8 @@ export const NewsletterForm = ({
           />
           <button
             className={cn(
-              'ui-absolute ui-flex ui-items-center ui-justify-center ui-gap-2 ui-px-2 ui-text-sm ui-font-bold ui-text-white ui-transition-all ui-duration-300 -ui-translate-y-1/2 ui-bg-blue-500 ui-rounded-md ui-whitespace-nowrap ui-ring-offset-white focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 focus-visible:ui-ring-offset-2 disabled:ui-pointer-events-none disabled:ui-opacity-50 dark:ui-ring-offset-slate-950 dark:focus-visible:ui-ring-slate-300 hover:ui-bg-blue-600 ui-right-2 ui-top-1/2 group',
-              inEyebrow ? 'ui-h-7 ui-right-[3px]' : 'ui-h-8 ui-right-2',
+              'ui-absolute ui-flex ui-items-center ui-justify-center ui-gap-2 ui-px-2 ui-font-bold ui-text-white ui-transition-all ui-duration-300 -ui-translate-y-1/2 ui-bg-blue-500 ui-whitespace-nowrap ui-ring-offset-white focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 focus-visible:ui-ring-offset-2 disabled:ui-pointer-events-none disabled:ui-opacity-50 dark:ui-ring-offset-slate-950 dark:focus-visible:ui-ring-slate-300 hover:ui-bg-blue-600 ui-right-2 ui-top-1/2 group',
+              inEyebrow ? 'ui-h-[22px] ui-right-[3px] ui-text-xs ui-rounded-[3px]' : 'ui-h-8 ui-right-2 ui-text-sm ui-rounded-md',
             )}
             type="submit"
             aria-disabled={isSubmitting}

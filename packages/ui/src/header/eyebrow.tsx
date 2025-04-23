@@ -25,7 +25,7 @@ export const Eyebrow: React.FC<EyebrowProps> = ({ href, title }) => {
         </a>
       ) : (
         <span
-          className="ui-flex ui-flex-wrap ui-justify-start ui-items-center ui-gap-2"
+          className="ui-flex ui-flex-row ui-flex-wrap ui-justify-start ui-items-center ui-gap-3"
         >
           {title}
         </span>
