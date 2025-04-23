@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { NewsletterForm } from '../newsletter-form';
 import { Eyebrow } from './eyebrow';
 import { Header } from './index';
 
@@ -6,6 +7,12 @@ const eyebrow = (
   <Eyebrow
     href="https://us02web.zoom.us/webinar/register/WN_XP4uv862TIS1T3SR8voC5Q"
     title="Join live session: Top 8 Storybook myths holding your team back"
+  />
+);
+
+const eyebrowWithNewsletterForm = (
+  <Eyebrow
+  title={<>Storybook 9 is coming! Join the newsletter to get it first. <NewsletterForm inEyebrow /></>}
   />
 );
 
@@ -99,6 +106,12 @@ export const DesktopWithEyebrow: Story = {
   },
 };
 
+export const DesktopWithEyebrowWithNewsletterForm: Story = {
+  args: {
+    eyebrow: eyebrowWithNewsletterForm,
+  },
+};
+
 export const MobileWithEyebrow: Story = {
   args: {
     eyebrow,
@@ -112,5 +125,12 @@ export const MobileWithEyebrow: Story = {
     chromatic: {
       viewports: [320],
     },
+  },
+};
+
+export const MobileWithEyebrowWithNewsletterForm: Story = {
+  ...MobileWithEyebrow,
+  args: {
+    eyebrow: eyebrowWithNewsletterForm,
   },
 };
