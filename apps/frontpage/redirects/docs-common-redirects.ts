@@ -251,11 +251,7 @@ export const docsCommonRedirects: RedirectData[] = [
     destination: '/docs/addons/writing-presets',
     permanent: true,
   },
-  {
-    source: '/docs/essentials/interactions',
-    destination: '/docs/writing-tests/component-testing',
-    permanent: true,
-  },
+  // TODO: Redirects for removed ____-webpack5 pages
   /* 🐺 Wild Cards */
   {
     source: '/basics/:path*',
