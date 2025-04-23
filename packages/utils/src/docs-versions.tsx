@@ -33,7 +33,7 @@ export const docsVersions: DocsVersion[] = [
     branch: 'main',
   },
   {
-    label: 'Version 9.0 (alpha)',
+    label: 'Version 9.0 (beta)',
     id: '9.0',
     inSlug: '9',
     branch: 'next',
