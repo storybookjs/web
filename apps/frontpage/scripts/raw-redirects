@@ -2,138 +2,140 @@
 # They are broken down by the version at which the `to` (second path in the line) was added
 
 # 6.4
-/docs/workflows/testing-with-storybook/          /docs/writing-tests                                                     308
-/docs/workflows/unit-testing/                    /docs/writing-tests/import-stories-in-tests/stories-in-unit-tests/      308
-/docs/workflows/visual-testing/                  /docs/writing-tests/visual-testing/                                     308
-/docs/workflows/interaction-testing/             /docs/writing-tests/component-testing/                                308
-/docs/workflows/snapshot-testing/                /docs/writing-tests/snapshot-testing/snapshot-testing                   308
-/docs/workflows/build-pages-with-storybook/      /docs/writing-stories/build-pages-with-storybook/                       308
-/docs/workflows/stories-for-multiple-components/ /docs/writing-stories/stories-for-multiple-components/                  308
-/docs/workflows/publish-storybook/               /docs/sharing/publish-storybook/                                        308
-/docs/workflows/storybook-composition/           /docs/sharing/storybook-composition/                                    308
-/docs/workflows/package-composition/             /docs/sharing/package-composition/                                      308
-/docs/workflows/faq/                             /docs/faq/                                                              308
+/docs/workflows/testing-with-storybook/                         /docs/writing-tests                                                     308
+/docs/workflows/unit-testing/                                   /docs/writing-tests/import-stories-in-tests/stories-in-unit-tests/      308
+/docs/workflows/visual-testing/                                 /docs/writing-tests/visual-testing/                                     308
+/docs/workflows/interaction-testing/                            /docs/writing-tests/interaction-testing/                                308
+/docs/workflows/snapshot-testing/                               /docs/writing-tests/snapshot-testing/snapshot-testing                   308
+/docs/workflows/build-pages-with-storybook/                     /docs/writing-stories/build-pages-with-storybook/                       308
+/docs/workflows/stories-for-multiple-components/                /docs/writing-stories/stories-for-multiple-components/                  308
+/docs/workflows/publish-storybook/                              /docs/sharing/publish-storybook/                                        308
+/docs/workflows/storybook-composition/                          /docs/sharing/storybook-composition/                                    308
+/docs/workflows/package-composition/                            /docs/sharing/package-composition/                                      308
+/docs/workflows/faq/                                            /docs/faq/                                                              308
 
 # 6.5
-/docs/configure/webpack                          /docs/builders/webpack                                                  308
-/docs/api/addons                                 /docs/addons                                                            308
-/docs/api/addons-api                             /docs/addons/addons-api                                                 308
-/docs/api/presets                                /docs/addons/writing-presets                                            308
-/docs/addons/addon-catalog                       /docs/addons/integration-catalog                                        308
-/docs/api/mdx                                    /docs/writing-docs/mdx                                                  308
-/docs/why-storybook/                             /docs/get-started/why-storybook                                         308
-/docs/get-started/introduction                   /docs/get-started/install                                               308
+/docs/configure/webpack                                         /docs/builders/webpack                                                  308
+/docs/api/addons                                                /docs/addons                                                            308
+/docs/api/addons-api                                            /docs/addons/addons-api                                                 308
+/docs/api/presets                                               /docs/addons/writing-presets                                            308
+/docs/addons/addon-catalog                                      /docs/addons/integration-catalog                                        308
+/docs/api/mdx                                                   /docs/writing-docs/mdx                                                  308
+/docs/why-storybook/                                            /docs/get-started/why-storybook                                         308
+/docs/get-started/introduction                                  /docs/get-started/install                                               308
 
 # 7.0
-/docs/writing-docs/docs-page                     /docs/writing-docs/autodocs                                             308
-/docs/writing-docs/doc-block-argstable           /docs/api/doc-blocks/doc-block-controls                                 308
-/docs/writing-docs/doc-block-canvas              /docs/api/doc-blocks/doc-block-canvas                                   308
-/docs/writing-docs/doc-block-colorpalette        /docs/api/doc-blocks/doc-block-colorpalette                             308
-/docs/writing-docs/doc-block-description         /docs/api/doc-blocks/doc-block-description                              308
-/docs/writing-docs/doc-block-icongallery         /docs/api/doc-blocks/doc-block-icongallery                              308
-/docs/writing-docs/doc-block-source              /docs/api/doc-blocks/doc-block-source                                   308
-/docs/writing-docs/doc-block-story               /docs/api/doc-blocks/doc-block-story                                    308
-/docs/writing-docs/doc-block-typeset             /docs/api/doc-blocks/doc-block-typeset                                  308
-/docs/api/frameworks-feature-support             /docs/configure/integration/frameworks-feature-support                  308
-/docs/api/argtypes                               /docs/api/arg-types                                                     308
+/docs/writing-docs/docs-page                                    /docs/writing-docs/autodocs                                             308
+/docs/writing-docs/doc-block-argstable                          /docs/api/doc-blocks/doc-block-controls                                 308
+/docs/writing-docs/doc-block-canvas                             /docs/api/doc-blocks/doc-block-canvas                                   308
+/docs/writing-docs/doc-block-colorpalette                       /docs/api/doc-blocks/doc-block-colorpalette                             308
+/docs/writing-docs/doc-block-description                        /docs/api/doc-blocks/doc-block-description                              308
+/docs/writing-docs/doc-block-icongallery                        /docs/api/doc-blocks/doc-block-icongallery                              308
+/docs/writing-docs/doc-block-source                             /docs/api/doc-blocks/doc-block-source                                   308
+/docs/writing-docs/doc-block-story                              /docs/api/doc-blocks/doc-block-story                                    308
+/docs/writing-docs/doc-block-typeset                            /docs/api/doc-blocks/doc-block-typeset                                  308
+/docs/api/frameworks-feature-support                            /docs/configure/integration/frameworks-feature-support                  308
+/docs/api/argtypes                                              /docs/api/arg-types                                                     308
 
 # 7.1
-/docs/writing-tests/importing-stories-in-tests/  /docs/writing-tests/stories-in-unit-tests/                              308
+/docs/writing-tests/importing-stories-in-tests/                 /docs/writing-tests/stories-in-unit-tests/                              308
 
 # 7.6
-/docs/writing-stories/introduction               /docs/writing-stories                                                   308
-/docs/writing-docs/introduction                  /docs/writing-docs                                                      308
-/docs/writing-tests/introduction                 /docs/writing-tests/                                                    308
-/docs/essentials/introduction                    /docs/essentials                                                        308
-/docs/addons/introduction                        /docs/addons                                                            308
-/docs/configure/overview                         /docs/configure                                                         308
-/docs/builders/overview                          /docs/builders                                                          308
-/docs/contribute/how-to-contribute               /docs/contribute                                                        308
-/docs/configure/babel                            /docs/configure/integration/compilers                                   308
+/docs/writing-stories/introduction                              /docs/writing-stories                                                   308
+/docs/writing-docs/introduction                                 /docs/writing-docs                                                      308
+/docs/writing-tests/introduction                                /docs/writing-tests/                                                    308
+/docs/essentials/introduction                                   /docs/essentials                                                        308
+/docs/addons/introduction                                       /docs/addons                                                            308
+/docs/configure/overview                                        /docs/configure                                                         308
+/docs/builders/overview                                         /docs/builders                                                          308
+/docs/contribute/how-to-contribute                              /docs/contribute                                                        308
+/docs/configure/babel                                           /docs/configure/integration/compilers                                   308
 
 # 8.1
-/docs/get-started/angular                        /docs/get-started/frameworks/angular                                    308
-/docs/get-started/nextjs                         /docs/get-started/frameworks/nextjs                                     308
-/docs/get-started/react-vite                     /docs/get-started/frameworks/react-vite                                 308
-/docs/get-started/react-webpack5                 /docs/get-started/frameworks/react-webpack5                             308
-/docs/get-started/sveltekit                      /docs/get-started/frameworks/sveltekit                                  308
-/docs/get-started/svelte-vite                    /docs/get-started/frameworks/svelte-vite                                308
-/docs/get-started/svelte-webpack5                /docs/get-started/frameworks/svelte-webpack5                            308
-/docs/get-started/vue3-vite                      /docs/get-started/frameworks/vue3-vite                                  308
-/docs/get-started/vue3-webpack5                  /docs/get-started/frameworks/vue3-webpack5                              308
-/docs/get-started/web-components-vite            /docs/get-started/frameworks/web-components-vite                        308
-/docs/get-started/web-components-webpack5        /docs/get-started/frameworks/web-components-webpack5                    308
+/docs/get-started/angular                                       /docs/get-started/frameworks/angular                                    308
+/docs/get-started/nextjs                                        /docs/get-started/frameworks/nextjs                                     308
+/docs/get-started/react-vite                                    /docs/get-started/frameworks/react-vite                                 308
+/docs/get-started/react-webpack5                                /docs/get-started/frameworks/react-webpack5                             308
+/docs/get-started/sveltekit                                     /docs/get-started/frameworks/sveltekit                                  308
+/docs/get-started/svelte-vite                                   /docs/get-started/frameworks/svelte-vite                                308
+/docs/get-started/svelte-webpack5                               /docs/get-started/frameworks/svelte-webpack5                            308
+/docs/get-started/vue3-vite                                     /docs/get-started/frameworks/vue3-vite                                  308
+/docs/get-started/vue3-webpack5                                 /docs/get-started/frameworks/vue3-webpack5                              308
+/docs/get-started/web-components-vite                           /docs/get-started/frameworks/web-components-vite                        308
+/docs/get-started/web-components-webpack5                       /docs/get-started/frameworks/web-components-webpack5                    308
 
-/docs/writing-stories/mocking-modules            /docs/writing-stories/mocking-data-and-modules/mocking-modules          308
-/docs/writing-stories/mocking-network-requests   /docs/writing-stories/mocking-data-and-modules/mocking-network-requests 308
-/docs/writing-stories/mocking-providers          /docs/writing-stories/mocking-data-and-modules/mocking-providers        308
+/docs/writing-stories/mocking-modules                           /docs/writing-stories/mocking-data-and-modules/mocking-modules          308
+/docs/writing-stories/mocking-network-requests                  /docs/writing-stories/mocking-data-and-modules/mocking-network-requests 308
+/docs/writing-stories/mocking-providers                         /docs/writing-stories/mocking-data-and-modules/mocking-providers        308
 
-/docs/writing-tests/snapshot-testing             /docs/writing-tests/snapshot-testing/snapshot-testing                   308
-/docs/writing-tests/storyshots-migration-guide   /docs/writing-tests/snapshot-testing/storyshots-migration-guide         308
+/docs/writing-tests/storyshots-migration-guide                  /docs/8/writing-tests/snapshot-testing/storyshots-migration-guide       308
 
-/docs/writing-tests/stories-in-end-to-end-tests  /docs/writing-tests/import-stories-in-tests/stories-in-end-to-end-tests 308
-/docs/writing-tests/stories-in-unit-tests        /docs/writing-tests/import-stories-in-tests/stories-in-unit-tests       308
+/docs/writing-tests/stories-in-end-to-end-tests                 /docs/writing-tests/import-stories-in-tests/stories-in-end-to-end-tests 308
+/docs/writing-tests/stories-in-unit-tests                       /docs/writing-tests/import-stories-in-tests/stories-in-unit-tests       308
 
-/docs/configure/frameworks                       /docs/configure/integration/frameworks                                  308
-/docs/configure/frameworks-feature-support       /docs/configure/integration/frameworks-feature-support                  308
-/docs/configure/compilers                        /docs/configure/integration/compilers                                   308
-/docs/configure/typescript                       /docs/configure/integration/typescript                                  308
-/docs/configure/images-and-assets                /docs/configure/integration/images-and-assets                           308
+/docs/configure/frameworks                                      /docs/configure/integration/frameworks                                  308
+/docs/configure/frameworks-feature-support                      /docs/configure/integration/frameworks-feature-support                  308
+/docs/configure/compilers                                       /docs/configure/integration/compilers                                   308
+/docs/configure/typescript                                      /docs/configure/integration/typescript                                  308
+/docs/configure/images-and-assets                               /docs/configure/integration/images-and-assets                           308
 
-/docs/configure/features-and-behavior            /docs/configure/user-interface/features-and-behavior                    308
-/docs/configure/theming                          /docs/configure/user-interface/theming                                  308
-/docs/configure/sidebar-and-urls                 /docs/configure/user-interface/sidebar-and-urls                         308
-/docs/configure/storybook-addons                 /docs/configure/user-interface/storybook-addons                         308
+/docs/configure/features-and-behavior                           /docs/configure/user-interface/features-and-behavior                    308
+/docs/configure/theming                                         /docs/configure/user-interface/theming                                  308
+/docs/configure/sidebar-and-urls                                /docs/configure/user-interface/sidebar-and-urls                         308
+/docs/configure/storybook-addons                                /docs/configure/user-interface/storybook-addons                         308
 
-/docs/api/main-config                            /docs/api/main-config/main-config                                       308
-/docs/api/main-config-framework                  /docs/api/main-config/main-config-framework                             308
-/docs/api/main-config-stories                    /docs/api/main-config/main-config-stories                               308
-/docs/api/main-config-addons                     /docs/api/main-config/main-config-addons                                308
-/docs/api/main-config-babel                      /docs/api/main-config/main-config-babel                                 308
-/docs/api/main-config-babel-default              /docs/api/main-config/main-config-babel-default                         308
-/docs/api/main-config-build                      /docs/api/main-config/main-config-build                                 308
-/docs/api/main-config-core                       /docs/api/main-config/main-config-core                                  308
-/docs/api/main-config-docs                       /docs/api/main-config/main-config-docs                                  308
-/docs/api/main-config-env                        /docs/api/main-config/main-config-env                                   308
-/docs/api/main-config-features                   /docs/api/main-config/main-config-features                              308
-/docs/api/main-config-indexers                   /docs/api/main-config/main-config-indexers                              308
-/docs/api/main-config-logLevel                   /docs/api/main-config/main-config-logLevel                              308
-/docs/api/main-config-manager-head               /docs/api/main-config/main-config-manager-head                          308
-/docs/api/main-config-preview-annotations        /docs/api/main-config/main-config-preview-annotations                   308
-/docs/api/main-config-preview-body               /docs/api/main-config/main-config-preview-body                          308
-/docs/api/main-config-preview-head               /docs/api/main-config/main-config-preview-head                          308
-/docs/api/main-config-refs                       /docs/api/main-config/main-config-refs                                  308
-/docs/api/main-config-static-dirs                /docs/api/main-config/main-config-static-dirs                           308
-/docs/api/main-config-swc                        /docs/api/main-config/main-config-swc                                   308
-/docs/api/main-config-typescript                 /docs/api/main-config/main-config-typescript                            308
-/docs/api/main-config-vite-final                 /docs/api/main-config/main-config-vite-final                            308
-/docs/api/main-config-webpack-final              /docs/api/main-config/main-config-webpack-final                         308
+/docs/api/main-config                                           /docs/api/main-config/main-config                                       308
+/docs/api/main-config-framework                                 /docs/api/main-config/main-config-framework                             308
+/docs/api/main-config-stories                                   /docs/api/main-config/main-config-stories                               308
+/docs/api/main-config-addons                                    /docs/api/main-config/main-config-addons                                308
+/docs/api/main-config-babel                                     /docs/api/main-config/main-config-babel                                 308
+/docs/api/main-config-babel-default                             /docs/api/main-config/main-config-babel-default                         308
+/docs/api/main-config-build                                     /docs/api/main-config/main-config-build                                 308
+/docs/api/main-config-core                                      /docs/api/main-config/main-config-core                                  308
+/docs/api/main-config-docs                                      /docs/api/main-config/main-config-docs                                  308
+/docs/api/main-config-env                                       /docs/api/main-config/main-config-env                                   308
+/docs/api/main-config-features                                  /docs/api/main-config/main-config-features                              308
+/docs/api/main-config-indexers                                  /docs/api/main-config/main-config-indexers                              308
+/docs/api/main-config-logLevel                                  /docs/api/main-config/main-config-logLevel                              308
+/docs/api/main-config-manager-head                              /docs/api/main-config/main-config-manager-head                          308
+/docs/api/main-config-preview-annotations                       /docs/api/main-config/main-config-preview-annotations                   308
+/docs/api/main-config-preview-body                              /docs/api/main-config/main-config-preview-body                          308
+/docs/api/main-config-preview-head                              /docs/api/main-config/main-config-preview-head                          308
+/docs/api/main-config-refs                                      /docs/api/main-config/main-config-refs                                  308
+/docs/api/main-config-static-dirs                               /docs/api/main-config/main-config-static-dirs                           308
+/docs/api/main-config-swc                                       /docs/api/main-config/main-config-swc                                   308
+/docs/api/main-config-typescript                                /docs/api/main-config/main-config-typescript                            308
+/docs/api/main-config-vite-final                                /docs/api/main-config/main-config-vite-final                            308
+/docs/api/main-config-webpack-final                             /docs/api/main-config/main-config-webpack-final                         308
 
-/docs/api/doc-block-argtypes                     /docs/api/doc-blocks/doc-block-argtypes                                 308
-/docs/api/doc-block-canvas                       /docs/api/doc-blocks/doc-block-canvas                                   308
-/docs/api/doc-block-colorpalette                 /docs/api/doc-blocks/doc-block-colorpalette                             308
-/docs/api/doc-block-controls                     /docs/api/doc-blocks/doc-block-controls                                 308
-/docs/api/doc-block-description                  /docs/api/doc-blocks/doc-block-description                              308
-/docs/api/doc-block-icongallery                  /docs/api/doc-blocks/doc-block-icongallery                              308
-/docs/api/doc-block-markdown                     /docs/api/doc-blocks/doc-block-markdown                                 308
-/docs/api/doc-block-meta                         /docs/api/doc-blocks/doc-block-meta                                     308
-/docs/api/doc-block-primary                      /docs/api/doc-blocks/doc-block-primary                                  308
-/docs/api/doc-block-source                       /docs/api/doc-blocks/doc-block-source                                   308
-/docs/api/doc-block-stories                      /docs/api/doc-blocks/doc-block-stories                                  308
-/docs/api/doc-block-story                        /docs/api/doc-blocks/doc-block-story                                    308
-/docs/api/doc-block-subtitle                     /docs/api/doc-blocks/doc-block-subtitle                                 308
-/docs/api/doc-block-title                        /docs/api/doc-blocks/doc-block-title                                    308
-/docs/api/doc-block-typeset                      /docs/api/doc-blocks/doc-block-typeset                                  308
-/docs/api/doc-block-unstyled                     /docs/api/doc-blocks/doc-block-unstyled                                 308
-/docs/api/doc-block-useof                        /docs/api/doc-blocks/doc-block-useof                                    308
+/docs/api/doc-block-argtypes                                    /docs/api/doc-blocks/doc-block-argtypes                                 308
+/docs/api/doc-block-canvas                                      /docs/api/doc-blocks/doc-block-canvas                                   308
+/docs/api/doc-block-colorpalette                                /docs/api/doc-blocks/doc-block-colorpalette                             308
+/docs/api/doc-block-controls                                    /docs/api/doc-blocks/doc-block-controls                                 308
+/docs/api/doc-block-description                                 /docs/api/doc-blocks/doc-block-description                              308
+/docs/api/doc-block-icongallery                                 /docs/api/doc-blocks/doc-block-icongallery                              308
+/docs/api/doc-block-markdown                                    /docs/api/doc-blocks/doc-block-markdown                                 308
+/docs/api/doc-block-meta                                        /docs/api/doc-blocks/doc-block-meta                                     308
+/docs/api/doc-block-primary                                     /docs/api/doc-blocks/doc-block-primary                                  308
+/docs/api/doc-block-source                                      /docs/api/doc-blocks/doc-block-source                                   308
+/docs/api/doc-block-stories                                     /docs/api/doc-blocks/doc-block-stories                                  308
+/docs/api/doc-block-story                                       /docs/api/doc-blocks/doc-block-story                                    308
+/docs/api/doc-block-subtitle                                    /docs/api/doc-blocks/doc-block-subtitle                                 308
+/docs/api/doc-block-title                                       /docs/api/doc-blocks/doc-block-title                                    308
+/docs/api/doc-block-typeset                                     /docs/api/doc-blocks/doc-block-typeset                                  308
+/docs/api/doc-block-unstyled                                    /docs/api/doc-blocks/doc-block-unstyled                                 308
+/docs/api/doc-block-useof                                       /docs/api/doc-blocks/doc-block-useof                                    308
 
-/docs/api/portable-stories-playwright            /docs/api/portable-stories/portable-stories-playwright                  308
+/docs/api/portable-stories-playwright                           /docs/api/portable-stories/portable-stories-playwright                  308
 
-/docs/contribute/documentation-updates           /docs/contribute/documentation/documentation-updates                    308
-/docs/contribute/new-snippets                    /docs/contribute/documentation/new-snippets                             308
-
-# 8.2
-/docs/writing-tests/interaction-testing          /docs/writing-tests/component-testing/                                  308
+/docs/contribute/documentation-updates                          /docs/contribute/documentation/documentation-updates                    308
+/docs/contribute/new-snippets                                   /docs/contribute/documentation/new-snippets                             308
 
 # 8.4
-/docs/writing-tests/vitest-plugin                /docs/writing-tests/test-addon/                                         308
+/docs/writing-tests/vitest-plugin                               /docs/writing-tests/vitest-addon                                        308
+
+# 9.0
+/docs/writing-tests/component-testing                           /docs/writing-tests/interaction-testing/                                308
+/docs/writing-tests/snapshot-testing/snapshot-testing           /docs/writing-tests/snapshot-testing                                    308
+/docs/writing-tests/snapshot-testing/storyshots-migration-guide /docs/8/writing-tests/snapshot-testing/storyshots-migration-guide       308
+/docs/writing-tests/test-addon                                  /docs/writing-tests/vitest-addon                                        308

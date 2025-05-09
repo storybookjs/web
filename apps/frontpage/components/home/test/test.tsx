@@ -31,11 +31,11 @@ const features = [
   },
   {
     icon: <Interact />,
-    title: 'Component test behavior',
+    title: 'Interaction test behavior',
     description: 'Simulate user behavior and assert in the browser.',
     link: {
-      label: 'Learn about component tests',
-      href: '/docs/writing-tests/component-testing',
+      label: 'Learn about interaction tests',
+      href: '/docs/writing-tests/interaction-testing',
     },
     media: '/home/test/homepage-component-testing-lg.mp4',
     poster: '/home/test/homepage-component-testing-poster-lg.jpg',

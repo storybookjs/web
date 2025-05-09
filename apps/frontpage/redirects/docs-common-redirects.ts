@@ -208,7 +208,7 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/docs/testing/interaction-testing',
-    destination: '/docs/writing-tests/component-testing',
+    destination: '/docs/writing-tests/interaction-testing',
     permanent: true,
   },
   {
