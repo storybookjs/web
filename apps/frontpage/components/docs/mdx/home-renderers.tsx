@@ -53,12 +53,6 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         title="Vue"
       />
       <Card
-        href="/docs/get-started/frameworks/vue3-webpack5/?renderer=vue"
-        logo="logo-vue.svg"
-        subtitle="with Webpack"
-        title="Vue"
-      />
-      <Card
         href="/docs/get-started/frameworks/angular/?renderer=angular"
         logo="logo-angular.svg"
         title="Angular"
@@ -75,21 +69,9 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         title="Svelte"
       />
       <Card
-        href="/docs/get-started/frameworks/svelte-webpack5/?renderer=svelte"
-        logo="logo-svelte.svg"
-        subtitle="with Webpack"
-        title="Svelte"
-      />
-      <Card
         href="/docs/get-started/frameworks/web-components-vite/?renderer=web-components"
         logo="logo-web-components.svg"
         subtitle="with Vite"
-        title="Web Components"
-      />
-      <Card
-        href="/docs/get-started/frameworks/web-components-webpack5/?renderer=web-components"
-        logo="logo-web-components.svg"
-        subtitle="with Webpack"
         title="Web Components"
       />
     </div>

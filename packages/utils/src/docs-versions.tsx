@@ -36,20 +36,20 @@ export const docsVersions: DocsVersion[] = [
     label: 'Version 9.0 (beta)',
     id: '9.0',
     inSlug: '9',
-    branch: 'next',
+    branch: 'docs-update-testing-section',
     preRelease: true,
   },
+  // {
+  //   label: 'Version 8',
+  //   id: '8.6',
+  //   inSlug: '8',
+  //   branch: 'release-8-6',
+  // },
   {
     label: 'Version 7',
     id: '7.6',
     inSlug: '7',
     branch: 'release-7-6',
-  },
-  {
-    label: 'Version 6',
-    id: '6.5',
-    inSlug: '6',
-    branch: 'release-6-5',
   },
 ];
 
