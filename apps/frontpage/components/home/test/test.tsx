@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
-import { Accessibility, Code, Eye, Interact, Pixel } from './icons';
+import { Accessibility, Code, Eye, Interact, Pixel, Document } from './icons';
 import { LogoAirbnb } from './logo-airbnb';
 
 const features = [
@@ -52,6 +52,17 @@ const features = [
     poster: '/home/test/homepage-accessibility-testing-poster-lg.jpg',
   },
   {
+    icon: <Document />,
+    title: 'Coverage Reports',
+    description: 'Track how much of your frontend code is tested.',
+    link: {
+      label: 'Learn about coverage reports',
+      href: '/docs/writing-tests/test-coverage',
+    },
+    media: '/home/test/homepage-test-coverage-lg.mp4',
+    poster: '/home/test/homepage-test-coverage-poster-lg.jpg',
+  },
+  {
     icon: <Code />,
     title: 'Snapshot test markup',
     description: 'Detect regressions in DOM markup.',
@@ -83,7 +94,7 @@ export const Test: FC = () => {
           <p className="mb-6 leading-7">
             Stories capture the “known good” states of UI components.
             They&apos;re a pragmatic, reproducible way to keep track of UI edge
-            cases. Reuse stories to power automated tests
+            cases. Storybook uses them to power automated tests.
           </p>
         </div>
       </Container>
