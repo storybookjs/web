@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
-import { Accessibility, Code, Eye, Interact, Pixel, Projects } from './icons';
+import { Accessibility, Code, Eye, Interact, Pixel } from './icons';
 import { LogoAirbnb } from './logo-airbnb';
 
 const features = [
@@ -62,22 +62,11 @@ const features = [
     media: '/home/test/homepage-snapshot-testing-lg.mp4',
     poster: '/home/test/homepage-snapshot-testing-poster-lg.jpg',
   },
-  {
-    icon: <Projects />,
-    title: 'Reuse tests in other test tools',
-    description: 'Write stories once to reuse across your test suite.',
-    link: {
-      label: 'Learn about importing stories in tests',
-      href: '/docs/writing-tests/stories-in-unit-tests',
-    },
-    media: '/home/test/homepage-reuse-testing-lg.mp4',
-    poster: '/home/test/homepage-reuse-testing-poster-lg.jpg',
-  },
 ];
 
 export const Test: FC = () => {
   return (
-    <div className="pt-12 border-b border-zinc-600 sm:pt-20 md:pt-28">
+    <div className="border-b border-zinc-600 pt-12 sm:pt-20 md:pt-28">
       {features.map((feature) => (
         <Link
           as="video"
@@ -86,8 +75,8 @@ export const Test: FC = () => {
           rel="preload"
         />
       ))}
-      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
-        <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
+      <Container className="justify-between gap-20 text-white md:flex lg:px-8">
+        <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
           Test UIs with less effort and no flake
         </h2>
         <div className="flex-1 pt-4">
