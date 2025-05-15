@@ -1,4 +1,3 @@
-import { GithubIcon, TwitterIcon } from '@storybook/icons';
 import Image from 'next/image';
 import type { FC } from 'react';
 import { Button } from '../ui/button';
@@ -7,58 +6,18 @@ import { Section } from './section';
 export const Team: FC = () => {
   return (
     <Section className="relative mb-8 md:mb-16" id="maintainer-team">
-      <h2 className="font-bold text-2xl mb-2">Maintainer team</h2>
+      <h2 className="mb-2 text-2xl font-bold">Maintainer team</h2>
       <p className="mb-8">
         Storybook is maintained by thousands of contributors worldwide and
         guided by a steering committee of top maintainers.
       </p>
-      <h3 className="font-bold text-lg mb-6 mt-6">Steering committee</h3>
-      <ul className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {steeringCommittee.map((member) => (
-          <li className="flex gap-3" key={member.name}>
-            <Image
-              alt={member.name}
-              className="rounded-full flex-shrink-0 w-12 h-12"
-              height={48}
-              src={member.avatarUrl}
-              width={48}
-            />
-            <div>
-              <div className="font-bold">{member.name}</div>
-              <div className="text-zinc-500 mb-2">
-                {member.title} at{' '}
-                <span className="font-bold">{member.company}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <a
-                  className="text-zinc-500 hover:text-blue-500 transition"
-                  href={member.gitHubUrl}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <GithubIcon />
-                </a>
-                <a
-                  className="text-zinc-500 hover:text-blue-500 transition"
-                  href={member.twitterUrl}
-                  rel="noreferrer"
-                  target="_blank"
-                >
-                  <TwitterIcon />
-                </a>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <h3 className="font-bold text-lg mb-6 mt-6">Contributors</h3>
-      <ul className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-12 gap-4 mb-8">
+      <ul className="mb-8 grid grid-cols-5 gap-4 sm:grid-cols-8 md:grid-cols-12">
         {contributors.map((contributor) => (
-          <li className="w-10 h-10 flex-shrink-0" key={contributor.name}>
+          <li className="h-10 w-10 flex-shrink-0" key={contributor.name}>
             <a href={contributor.url} rel="noreferrer" target="_blank">
               <Image
                 alt={contributor.name}
-                className="rounded-full w-10 h-10"
+                className="h-10 w-10 rounded-full"
                 height={40}
                 src={contributor.avatar}
                 width={40}
@@ -82,60 +41,32 @@ export const Team: FC = () => {
   );
 };
 
-const steeringCommittee = [
+const contributors = [
   {
     name: 'Norbert de Langen',
-    title: 'Open source',
-    company: 'Chromatic',
-    companyUrl: 'https://www.chromatic.com/',
-    location: 'Zwolle, Netherlands',
-    avatarUrl: 'https://avatars2.githubusercontent.com/u/3070389?s=200&v=4',
-    gitHubUrl: 'https://github.com/ndelangen',
-    twitterUrl: 'https://twitter.com/NorbertdeLangen',
+    avatar: 'https://avatars2.githubusercontent.com/u/3070389?s=200&v=4',
+    url: 'https://github.com/ndelangen',
   },
   {
     name: 'Filipp Riabchun',
-    title: 'Engineering',
-    company: 'Jetbrains',
-    companyUrl: 'https://www.jetbrains.com',
-    location: 'Bayern, Germany',
-    avatarUrl: 'https://avatars0.githubusercontent.com/u/6651625?s=200&v=4',
-    gitHubUrl: 'https://github.com/Hypnosphi',
-    twitterUrl: 'https://twitter.com/hypnos_phi',
+    avatar: 'https://avatars0.githubusercontent.com/u/6651625?s=200&v=4',
+    url: 'https://github.com/Hypnosphi',
   },
   {
     name: 'Michael Shilman',
-    title: 'Engineering',
-    company: 'Chromatic',
-    companyUrl: 'https://www.chromatic.com/',
-    location: 'Taipei, Taiwan',
-    avatarUrl: 'https://avatars0.githubusercontent.com/u/488689?s=200&v=4',
-    gitHubUrl: 'https://github.com/shilman',
-    twitterUrl: 'https://twitter.com/mshilman',
+    avatar: 'https://avatars0.githubusercontent.com/u/488689?s=200&v=4',
+    url: 'https://github.com/shilman',
   },
   {
     name: 'Igor Davydkin',
-    title: 'Engineering',
-    company: 'ClimaCell',
-    companyUrl: 'https://www.climacell.co/',
-    location: 'Tel Aviv, Israel',
-    avatarUrl: 'https://avatars1.githubusercontent.com/u/7867954?s=200&v=4',
-    gitHubUrl: 'https://github.com/igor-dv',
-    twitterUrl: 'https://twitter.com/IgorDavydkin',
+    avatar: 'https://avatars1.githubusercontent.com/u/7867954?s=200&v=4',
+    url: 'https://github.com/igor-dv',
   },
   {
     name: 'Tom Coleman',
-    title: 'Engineering',
-    company: 'Chromatic',
-    companyUrl: 'https://www.chromatic.com/',
-    location: 'Melbourne, Australia',
-    avatarUrl: 'https://avatars0.githubusercontent.com/u/132554?s=200&v=4',
-    gitHubUrl: 'https://github.com/tmeasday',
-    twitterUrl: 'https://twitter.com/tmeasday',
+    avatar: 'https://avatars0.githubusercontent.com/u/132554?s=200&v=4',
+    url: 'https://github.com/tmeasday',
   },
-];
-
-const contributors = [
   {
     name: 'arunoda',
     avatar: 'https://avatars.githubusercontent.com/u/50838?v=4',
