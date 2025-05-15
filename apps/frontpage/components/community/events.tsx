@@ -1,11 +1,8 @@
-import {
-  ChevronSmallRightIcon,
-  DiscordIcon,
-  TwitterIcon,
-} from '@storybook/icons';
+import { ChevronSmallRightIcon, DiscordIcon, XIcon } from '@storybook/icons';
 import type { FC } from 'react';
 import { Youtube } from '../logos/youtube';
 import { Section } from './section';
+import { BlueSkyIcon } from '@repo/ui';
 
 export const Events: FC = () => {
   return (
@@ -33,24 +30,6 @@ export const Events: FC = () => {
           </div>
         </div>
         <div className="flex flex-1 gap-4 rounded border border-zinc-300 p-6 md:gap-6 md:p-8 dark:border-slate-700">
-          <TwitterIcon className="h-10 w-10 text-[#4999e9]" />
-          <div className="flex-1">
-            <h2 className="text-lg font-bold">Twitter</h2>
-            <p className="mb-3 text-zinc-500">
-              Get the latest event updates from Storybook maintainers.
-            </p>
-            <a
-              className="flex items-center gap-2 text-blue-500"
-              href="https://twitter.com/storybookjs"
-            >
-              Follow now
-              <ChevronSmallRightIcon />
-            </a>
-          </div>
-        </div>
-      </div>
-      <div className="mb-8 flex flex-col gap-8 md:flex-row">
-        <div className="flex flex-1 gap-4 rounded border border-zinc-300 p-6 md:gap-6 md:p-8 dark:border-slate-700">
           <DiscordIcon className="h-10 w-10 text-[#5a65ea]" />
           <div className="flex-1">
             <h2 className="text-lg font-bold">Follow #announcements chat</h2>
@@ -66,7 +45,40 @@ export const Events: FC = () => {
             </a>
           </div>
         </div>
-        <div className="flex-1 px-6 md:px-8" />
+      </div>
+      <div className="mb-8 flex flex-col gap-8 md:flex-row">
+        <div className="flex flex-1 gap-4 rounded border border-zinc-300 p-6 md:gap-6 md:p-8 dark:border-slate-700">
+          <BlueSkyIcon className="h-10 w-10" color="#0085ff" />
+          <div className="flex-1">
+            <h2 className="text-lg font-bold">Follow on BlueSky</h2>
+            <p className="mb-3 text-zinc-500">
+              Get the latest event updates from Storybook maintainers.
+            </p>
+            <a
+              className="flex items-center gap-2 text-blue-500"
+              href="https://twitter.com/storybookjs"
+            >
+              Follow now
+              <ChevronSmallRightIcon />
+            </a>
+          </div>
+        </div>
+        <div className="flex flex-1 gap-4 rounded border border-zinc-300 p-6 md:gap-6 md:p-8 dark:border-slate-700">
+          <XIcon className="h-10 w-10 text-[#000]" />
+          <div className="flex-1">
+            <h2 className="text-lg font-bold">Follow on X</h2>
+            <p className="mb-3 text-zinc-500">
+              Get the latest event updates from Storybook maintainers.
+            </p>
+            <a
+              className="flex items-center gap-2 text-blue-500"
+              href="https://twitter.com/storybookjs"
+            >
+              Follow now
+              <ChevronSmallRightIcon />
+            </a>
+          </div>
+        </div>
       </div>
     </Section>
   );
