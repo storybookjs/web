@@ -1,8 +1,8 @@
 import { ChevronSmallRightIcon, DiscordIcon, XIcon } from '@storybook/icons';
 import type { FC } from 'react';
+import { BlueSkyIcon } from '@repo/ui';
 import { Youtube } from '../logos/youtube';
 import { Section } from './section';
-import { BlueSkyIcon } from '@repo/ui';
 
 export const Events: FC = () => {
   return (
@@ -64,7 +64,7 @@ export const Events: FC = () => {
           </div>
         </div>
         <div className="flex flex-1 gap-4 rounded border border-zinc-300 p-6 md:gap-6 md:p-8 dark:border-slate-700">
-          <XIcon className="h-10 w-10 text-[#000]" />
+          <XIcon className="h-10 w-10" />
           <div className="flex-1">
             <h2 className="text-lg font-bold">Follow on X</h2>
             <p className="mb-3 text-zinc-500">
