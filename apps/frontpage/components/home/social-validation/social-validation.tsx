@@ -3,7 +3,7 @@ import { cn } from '@repo/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { DiscordIcon, GithubIcon } from '@storybook/icons';
-import { Container } from '@repo/ui';
+import { BlueSkyIcon, Container } from '@repo/ui';
 import { Button } from '../../ui/button';
 import { AspectRatio } from '../../ui/aspect-ratio';
 import { Community } from '../../community';
@@ -44,7 +44,8 @@ const projects = [
     height: 70,
     logoAlt: 'Fluent UI Web Compnents',
     logoUrl: '/home/community/logos/fluent.svg',
-    projectUrl: 'https://storybook.js.org/showcase/microsoft-fluent-ui-web-components',
+    projectUrl:
+      'https://storybook.js.org/showcase/microsoft-fluent-ui-web-components',
   },
   {
     name: 'Gutenberg',
@@ -313,33 +314,6 @@ export function SocialValidation({
         </div>
         <div className={cn(socialCard)}>
           <div className="flex h-12 w-12 items-center justify-center">
-            <svg
-              aria-label="Twitter"
-              fill="none"
-              height="40"
-              viewBox="0 0 14 14"
-              width="40"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M11.02.446h2.137L8.49 5.816l5.51 7.28H9.67L6.298 8.683l-3.88 4.413H.282l5.004-5.735L0 .446h4.442l3.064 4.048L11.02.446zm-.759 11.357h1.18L3.796 1.655H2.502l7.759 10.148z"
-                fill="#fff"
-              />
-            </svg>
-          </div>
-          <div className="text-md text-white">
-            Get the latest news and updates from Storybook maintainers.
-          </div>
-          <Button asChild jumpOnHover rounded="full" variant="outlineHome">
-            <a href="https://twitter.com/storybookjs">Follow on X</a>
-          </Button>
-          <div>
-            <div className="text-sm text-white">24,200+</div>
-            <div className="text-sm text-zinc-500">Followers</div>
-          </div>
-        </div>
-        <div className={cn(socialCard)}>
-          <div className="flex h-12 w-12 items-center justify-center">
             <Youtube />
           </div>
           <div className="text-md text-white">
@@ -353,6 +327,48 @@ export function SocialValidation({
           <div>
             <div className="text-sm text-white">7,020+</div>
             <div className="text-sm text-zinc-500">Subscribers</div>
+          </div>
+        </div>
+        <div className={cn(socialCard)}>
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 items-center justify-center">
+              <BlueSkyIcon
+                aria-label="BlueSky"
+                color="white"
+                width="100%"
+                height="auto"
+              />
+            </div>
+            <div className="flex h-10 w-10 items-center justify-center">
+              <svg
+                aria-label="Twitter"
+                fill="none"
+                viewBox="0 0 14 14"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.02.446h2.137L8.49 5.816l5.51 7.28H9.67L6.298 8.683l-3.88 4.413H.282l5.004-5.735L0 .446h4.442l3.064 4.048L11.02.446zm-.759 11.357h1.18L3.796 1.655H2.502l7.759 10.148z"
+                  fill="#fff"
+                />
+              </svg>
+            </div>
+          </div>
+          <div className="text-md text-white">
+            Get the latest news and updates from Storybook maintainers.
+          </div>
+          <div className="flex gap-2">
+            <Button asChild jumpOnHover rounded="full" variant="outlineHome">
+              <a href="https://bsky.app/profile/storybook.js.org">
+                Follow on BlueSky
+              </a>
+            </Button>
+            <Button asChild jumpOnHover rounded="full" variant="outlineHome">
+              <a href="https://twitter.com/storybookjs">And X</a>
+            </Button>
+          </div>
+          <div>
+            <div className="text-sm text-white">24,200+</div>
+            <div className="text-sm text-zinc-500">Followers</div>
           </div>
         </div>
       </Container>
