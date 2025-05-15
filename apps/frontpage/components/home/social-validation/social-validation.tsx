@@ -325,7 +325,7 @@ export function SocialValidation({
             </a>
           </Button>
           <div>
-            <div className="text-sm text-white">7,020+</div>
+            <div className="text-sm text-white">8,320+</div>
             <div className="text-sm text-zinc-500">Subscribers</div>
           </div>
         </div>
