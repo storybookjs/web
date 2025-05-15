@@ -3,11 +3,13 @@ import { cn } from '@repo/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { DiscordIcon, GithubIcon } from '@storybook/icons';
-import { BlueSkyIcon, Container } from '@repo/ui';
+import { Container } from '@repo/ui';
 import { Button } from '../../ui/button';
 import { AspectRatio } from '../../ui/aspect-ratio';
 import { Community } from '../../community';
 import { Youtube } from '../../logos/youtube';
+import BlueskySvg from '../share/images/bluesky.svg';
+import XSvg from '../share/images/x.svg';
 
 const projects = [
   {
@@ -332,25 +334,10 @@ export function SocialValidation({
         <div className={cn(socialCard)}>
           <div className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center">
-              <BlueSkyIcon
-                aria-label="BlueSky"
-                color="white"
-                width="100%"
-                height="auto"
-              />
+              <Image src={BlueskySvg} alt="BlueSky" className="h-full w-full" />
             </div>
-            <div className="flex h-10 w-10 items-center justify-center">
-              <svg
-                aria-label="Twitter"
-                fill="none"
-                viewBox="0 0 14 14"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M11.02.446h2.137L8.49 5.816l5.51 7.28H9.67L6.298 8.683l-3.88 4.413H.282l5.004-5.735L0 .446h4.442l3.064 4.048L11.02.446zm-.759 11.357h1.18L3.796 1.655H2.502l7.759 10.148z"
-                  fill="#fff"
-                />
-              </svg>
+            <div className="flex h-12 w-12 items-center justify-center rounded-md outline outline-[rgba(255,255,255,0.1)]">
+              <Image src={XSvg} alt="X" className="h-full w-full" />
             </div>
           </div>
           <div className="text-md text-white">
