@@ -1,5 +1,7 @@
 import { type Metadata } from 'next';
 import { notFound } from 'next/navigation';
+// eslint-disable-next-line -- the variable is camelCase
+import { unstable_cache } from 'next/cache';
 import { Preview } from '../../../../components/preview';
 import { fetchTagsData } from '../../../../lib/fetch-tags-data';
 import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
@@ -27,9 +29,14 @@ async function getTagFromName(
   return (await fetchTagDetailsData(name)) || {};
 }
 
+const getCachedTagFromName = unstable_cache(
+  async (tagName: string[]) => getTagFromName(tagName),
+  ['tag-details'],
+);
+
 export const generateMetadata: GenerateMetaData = async ({ params }) => {
   const tagName = (await params).name.join('/');
-  const data = (await fetchTagDetailsData(tagName)) || {};
+  const data = await getCachedTagFromName([tagName]);
 
   if ('error' in data) return {};
 
@@ -47,7 +54,7 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
 export default async function TagDetails({
   params: { name },
 }: TagDetailsProps) {
-  const data = await getTagFromName(name);
+  const data = await getCachedTagFromName(name);
 
   if (!data || 'error' in data) return notFound();
 
@@ -72,7 +79,9 @@ export default async function TagDetails({
 
 export async function generateStaticParams() {
   const tags = (await fetchTagsData()) || [];
-  const listOfNames = tags.map((tag) => ({ name: [...tag.split('/')] }));
+  // Take only the first 20 tags for static generation
+  const limitedTags = tags.slice(0, 20);
+  const listOfNames = limitedTags.map((tag) => ({ name: [...tag.split('/')] }));
 
   if (listOfNames.length === 0) {
     throw new Error('No tags found');

@@ -43,7 +43,7 @@ async function fetchTagsData({
                 addons {
                   ${addonFragment}
                 }
-  
+
                 recipes {
                   ${recipeFragment}
                   addons {
