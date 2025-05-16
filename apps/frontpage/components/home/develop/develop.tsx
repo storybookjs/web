@@ -43,31 +43,6 @@ export function Develop() {
     Math.floor(value * 3),
   );
 
-  // Step 3
-  const addonsRef = useRef(null);
-  const { scrollYProgress: addonsProgress } = useScroll({
-    target: addonsRef,
-    offset: ['0 0.4', '.75 1'],
-  });
-  const activePanel = useTransform(addonsProgress, (value) =>
-    Math.floor(value * 4),
-  );
-  const smoothAddonsProgress = useSpring(addonsProgress, {
-    stiffness: 1000,
-    damping: 100,
-  });
-
-  // Step 4
-  const dropInRef = useRef(null);
-  const { scrollYProgress: dropInProgress } = useScroll({
-    target: dropInRef,
-    offset: ['0 0.5', '0 0.25'],
-  });
-  const smoothDropInProgress = useSpring(dropInProgress, {
-    stiffness: 1000,
-    damping: 100,
-  });
-
   const y = useTransform(
     smoothAppearProgress,
     [0, 1],
@@ -75,9 +50,9 @@ export function Develop() {
   );
 
   return (
-    <section className="pt-[calc(3rem-40px)] border-b border-zinc-700 sm:pt-[calc(5rem-40px)] md:pt-[calc(7rem-72px)]">
-      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
-        <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
+    <section className="border-b border-zinc-700 pt-[calc(3rem-40px)] sm:pt-[calc(5rem-40px)] md:pt-[calc(7rem-72px)]">
+      <Container className="justify-between gap-20 text-white md:flex lg:px-8">
+        <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
           Develop durable user interfaces
         </h2>
         <div className="flex-1 pt-4">
@@ -87,14 +62,14 @@ export function Develop() {
             run the whole app.
           </p>
           <div className="flex flex-col gap-4">
-            <div className="text-xs font-bold tracking-widest uppercase text-zinc-300">
+            <div className="text-xs font-bold uppercase tracking-widest text-zinc-300">
               Made for
             </div>
             <div className="flex items-center gap-4">
               {['react', 'vue', 'angular', 'web-components', 'html'].map(
                 (i) => (
                   <Link
-                    className="flex items-center justify-center w-10 h-10 transition-all border rounded hover:-translate-y-1 border-zinc-700 hover:border-zinc-400"
+                    className="flex h-10 w-10 items-center justify-center rounded border border-zinc-700 transition-all hover:-translate-y-1 hover:border-zinc-400"
                     href={`/docs/get-started/install/?renderer=${i}`}
                     key={i}
                   >
@@ -111,27 +86,24 @@ export function Develop() {
           </div>
         </div>
       </Container>
-      <Container className="pt-28 grid justify-items-center gap-24 grid-flow-dense md:pt-[27rem] md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr]">
+      <Container className="grid grid-flow-dense justify-items-center gap-24 pt-28 md:grid-cols-[minmax(max-content,_320px)_1fr] md:justify-items-start md:pt-[27rem]">
         <motion.figure
-          className="sticky w-full -order-1 z-[999] m-0 self-start top-[34%] translate-y-[var(--mobile-y)] md:w-[150%] md:max-w-[920px] md:col-[2/3] md:top-[50vh] md:translate-y-[calc(-50%+36px)]"
+          className="sticky top-[34%] z-[999] -order-1 m-0 w-full translate-y-[var(--mobile-y)] self-start md:top-[50vh] md:col-[2/3] md:w-[150%] md:max-w-[920px] md:translate-y-[calc(-50%+36px)]"
           style={{ '--mobile-y': y } as React.CSSProperties}
         >
           <ScrollDemo
-            addonsProgress={smoothAddonsProgress}
             appearProgress={smoothAppearProgress}
-            dropInProgress={smoothDropInProgress}
             isolationProgress={smoothIsolationProgress}
-            panelIndex={activePanel}
             storyIndex={activeStory}
           />
         </motion.figure>
         <div className="col-[1/2] w-full" ref={isolationRef}>
           <div className="h-[64rem] md:hidden" />
-          <div className="sticky bottom-8 md:max-w-[320px] md:bottom-0 md:top-[50vh] md:translate-y-[-50%] text-white flex flex-col gap-6">
+          <div className="sticky bottom-8 flex flex-col gap-6 text-white md:bottom-0 md:top-[50vh] md:max-w-[320px] md:translate-y-[-50%]">
             <h3 className="text-2xl font-bold">
               Build UI components and pages in isolation
             </h3>
-            <p className="leading-7 text-md">
+            <p className="text-md leading-7">
               Implement components and pages without needing to fuss with data,
               APIs, or business logic.
             </p>
@@ -143,15 +115,15 @@ export function Develop() {
               <ChevronSmallRightIcon />
             </Link>
           </div>
-          <div className="h-[64rem] hidden md:block" />
+          <div className="hidden h-[64rem] md:block" />
         </div>
         <div className="col-[1/2] w-full" ref={storiesRef}>
           <div className="h-[64rem] md:hidden" />
-          <div className="sticky bottom-8 md:max-w-[320px] md:bottom-0 md:top-[50vh] md:translate-y-[-50%] text-white flex flex-col gap-6">
+          <div className="sticky bottom-8 flex flex-col gap-6 text-white md:bottom-0 md:top-[50vh] md:max-w-[320px] md:translate-y-[-50%]">
             <h3 className="text-2xl font-bold">
               Mock hard-to-reach edge cases as stories
             </h3>
-            <p className="leading-7 text-md">
+            <p className="text-md leading-7">
               Render components in key states that are tricky to reproduce in an
               app. Then save those states as stories to revisit during
               development, testing, and QA.
@@ -164,61 +136,15 @@ export function Develop() {
               <ChevronSmallRightIcon />
             </Link>
           </div>
-          <div className="h-[96rem] hidden md:block" />
-        </div>
-        <div className="col-[1/2] w-full" ref={addonsRef}>
-          <div className="h-[64rem] md:hidden" />
-          <div className="sticky bottom-8 md:max-w-[320px] md:bottom-0 md:top-[50vh] md:translate-y-[-50%] text-white flex flex-col gap-6">
-            <h3 className="text-2xl font-bold">
-              Supercharge your workflow with addons
-            </h3>
-            <p className="leading-7 text-md">
-              Addons extend and customize your UI development workflow. There
-              are hundreds of addons that help you build UI faster, document
-              component libraries, and integrate with other tools.
-            </p>
-            <div>
-              <Link
-                className="flex items-center gap-2 font-bold text-blue-500"
-                href="/docs/addons/introduction"
-              >
-                Learn about addons
-                <ChevronSmallRightIcon />
-              </Link>
-            </div>
-          </div>
-          <div className="h-[96rem] hidden md:block" />
-        </div>
-        <div className="col-[1/2] w-full" ref={dropInRef}>
-          <div className="h-[64rem] md:hidden" />
-          <div className="sticky bottom-8 md:max-w-[320px] md:bottom-0 md:top-[50vh] md:translate-y-[-50%] text-white flex flex-col gap-6">
-            <h3 className="text-2xl font-bold">
-              Drop the finished UI components into your app
-            </h3>
-            <p className="leading-7 text-md">
-              Once you finish developing UI components in isolation, drop them
-              into your app. You&apos;ll have confidence that the components are
-              hardened to support every possible edge case.
-            </p>
-            <div>
-              <Link
-                className="flex items-center gap-2 font-bold text-blue-500"
-                href="/docs/get-started/why-storybook"
-              >
-                Why build UIs in isolation?
-                <ChevronSmallRightIcon />
-              </Link>
-            </div>
-          </div>
-          <div className="h-[56rem] hidden md:block" />
+          <div className="hidden h-[96rem] md:block" />
         </div>
       </Container>
-      <Container className="pt-28 grid grid-cols-1 justify-items-center items-center gap-12 grid-flow-dense md:justify-items-start md:grid-cols-[minmax(max-content,_320px)_1fr] md:gap-24">
-        <div className="md:max-w-[320px] self-center flex flex-col gap-6 text-white">
+      <Container className="grid grid-flow-dense grid-cols-1 items-center justify-items-center gap-12 pt-28 md:grid-cols-[minmax(max-content,_320px)_1fr] md:justify-items-start md:gap-24">
+        <div className="flex flex-col gap-6 self-center text-white md:max-w-[320px]">
           <h3 className="text-2xl font-bold">
             Integrate with the tools you already use
           </h3>
-          <p className="leading-7 text-md">
+          <p className="text-md leading-7">
             Storybook is incrementally adoptable and integrates with
             industry-standard tools. That means your team doesn&apos;t have to
             change their workflow.
