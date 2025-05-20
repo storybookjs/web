@@ -56,7 +56,7 @@ export const Events: FC = () => {
             </p>
             <a
               className="flex items-center gap-2 text-blue-500"
-              href="https://twitter.com/storybookjs"
+              href="https://bsky.app/profile/storybook.js.org"
             >
               Follow now
               <ChevronSmallRightIcon />
