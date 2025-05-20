@@ -336,7 +336,7 @@ export function SocialValidation({
             <div className="flex h-12 w-12 items-center justify-center">
               <Image src={BlueskySvg} alt="BlueSky" className="h-full w-full" />
             </div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-md outline outline-[rgba(255,255,255,0.1)]">
+            <div className="flex h-12 w-12 items-center justify-center rounded-md">
               <Image src={XSvg} alt="X" className="h-full w-full" />
             </div>
           </div>
