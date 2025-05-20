@@ -78,10 +78,8 @@ export default async function TagDetails({
 }
 
 export async function generateStaticParams() {
-  const tags = (await fetchTagsData()) || [];
-  // Take only the first 20 tags for static generation
-  const limitedTags = tags.slice(0, 20);
-  const listOfNames = limitedTags.map((tag) => ({ name: [...tag.split('/')] }));
+  const tags = (await fetchTagsData({ isCategory: true })) || [];
+  const listOfNames = tags.map((tag) => ({ name: [...tag.split('/')] }));
 
   if (listOfNames.length === 0) {
     throw new Error('No tags found');
