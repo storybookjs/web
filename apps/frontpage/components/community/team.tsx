@@ -6,7 +6,7 @@ import { Section } from './section';
 export const Team: FC = () => {
   return (
     <Section className="relative mb-8 md:mb-16" id="maintainer-team">
-      <h2 className="mb-2 text-2xl font-bold">Maintainer team</h2>
+      <h2 className="mb-2 text-2xl font-bold">Contributors</h2>
       <p className="mb-8">
         Storybook is maintained by thousands of contributors worldwide and
         guided by a steering committee of top maintainers.
