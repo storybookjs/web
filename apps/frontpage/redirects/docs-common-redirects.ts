@@ -51,9 +51,14 @@ export const docsCommonRedirects: RedirectData[] = [
     destination: '/docs/7/migration-guide',
     permanent: true,
   },
-  // TODO: Make sure this one works after 9.0
   {
     source: '/migration-guides/8.0',
+    destination: '/docs/8/migration-guide',
+    permanent: true,
+  },
+  // TODO: Make sure this one works after 9.0
+  {
+    source: '/migration-guides/9.0',
     destination: '/docs/migration-guide',
     permanent: true,
   },
@@ -203,7 +208,7 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/docs/testing/interaction-testing',
-    destination: '/docs/writing-tests/component-testing',
+    destination: '/docs/writing-tests/interaction-testing',
     permanent: true,
   },
   {
@@ -246,6 +251,7 @@ export const docsCommonRedirects: RedirectData[] = [
     destination: '/docs/addons/writing-presets',
     permanent: true,
   },
+  // TODO: Redirects for removed ____-webpack5 pages
   /* 🐺 Wild Cards */
   {
     source: '/basics/:path*',
