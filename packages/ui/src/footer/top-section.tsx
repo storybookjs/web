@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import { DiscordIcon, GithubIcon, XIcon, YoutubeIcon } from '@storybook/icons';
 import { cn } from '@repo/utils';
+import { BlueSkyIcon } from '../logos/bluesky';
 import { NewsletterForm } from '../newsletter-form';
 import type { FooterProps } from '.';
 
@@ -16,7 +17,7 @@ export function TopSection({ variant }: TopSectionProps): JSX.Element {
         <div className="ui-flex ui-flex-col ui-w-full sm:ui-w-auto ui-gap-4 sm:ui-flex-row sm:ui-items-center sm:ui-gap-6">
           <NewsletterForm />
           <div className="ui-text-slate-400 w-full">
-            6,378 developers and counting
+            7,044 developers and counting
           </div>
         </div>
         <div className="ui-flex ui-items-center ui-gap-4">
@@ -26,6 +27,13 @@ export function TopSection({ variant }: TopSectionProps): JSX.Element {
             name="GitHub"
           >
             <GithubIcon size={18} />
+          </Circle>
+          <Circle
+            href="https://bsky.app/profile/storybook.js.org"
+            variant={variant}
+            name="BlueSky"
+          >
+            <BlueSkyIcon size={18} />
           </Circle>
           <Circle
             href="https://twitter.com/storybookjs"
