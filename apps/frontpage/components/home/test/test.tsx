@@ -13,7 +13,7 @@ const features = [
     description: 'Stories are tests you can debug in dev and QA.',
     link: {
       label: 'Learn about UI tests',
-      href: '/docs/writing-tests/introduction',
+      href: '/docs/writing-tests',
     },
     media: '/home/test/homepage-spot-testing-lg.mp4',
     poster: '/home/test/homepage-spot-testing-poster-lg.jpg',
