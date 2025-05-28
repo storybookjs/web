@@ -6,7 +6,7 @@ import { cn } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import { GithubIcon } from '@storybook/icons';
 import { StorybookLogo } from '../logos/storybook-logo';
-import { NewsletterForm } from '../newsletter-form';
+// import { NewsletterForm } from '../newsletter-form';
 import { Search } from '../search';
 import { MobileMenu } from './mobile-menu';
 import { Button } from './button';
@@ -26,7 +26,8 @@ export const Header: FC<HeaderProps> = ({
   // eyebrow,
   eyebrow = (
     <Eyebrow
-      title={<>Storybook 9 is coming! Join the newsletter to get it first. <NewsletterForm inEyebrow /></>}
+      href="https://us02web.zoom.us/webinar/register/3017448185931/WN_J2z8s5IRQTaaVPxizz2uhg"
+      title="Join live session: Thu, 11am EDT, Storybook 9 release & AMA"
     />
   ),
   githubCount = 0,
