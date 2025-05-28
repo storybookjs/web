@@ -30,7 +30,7 @@ export const docsVersions: DocsVersion[] = [
   {
     label: 'Version 9.0',
     id: '9.0',
-    branch: 'main',
+    commit: 'b0469b12717980d63f6192e6fa116f9c83ac67b4',
   },
   // {
   //   label: 'Version 9.1 (alpha)',
