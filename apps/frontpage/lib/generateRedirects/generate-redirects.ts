@@ -144,6 +144,24 @@ export function generateRedirects({
               ),
             );
           });
+          acc.push(
+            getRedirect(
+              `/docs/${string}/:path*`,
+              `/docs/:path*`,
+              '308',
+              'b',
+            )
+          );
+          if (string.includes('.0')) {
+            acc.push(
+              getRedirect(
+                `/docs/${string.replace('.0', '')}/:path*`,
+                `/docs/:path*`,
+                '308',
+                'b',
+              )
+            );
+          }
         } else {
           // acc.push({
           //   debug: {
