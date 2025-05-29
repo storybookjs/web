@@ -1,46 +1,53 @@
-import { renderers } from '@repo/utils';
-import {
-  historicalVersions,
-  versions6,
-  versions7,
-  versions8,
-} from './constants';
-import { RedirectData } from './types';
+import type { RedirectData } from './types';
 
-export const docsVersionsRedirects: RedirectData[] = [
-  ...[...versions6, ...versions7].map((v) => ({
-    source: `/docs/${v}`,
-    destination: `/docs/${v.split('.')[0]}`,
-    permanent: true,
-  })),
-  ...versions8.map((v) => ({
-    source: `/docs/${v}`,
-    destination: `/docs`,
-    permanent: true,
-  })),
-  // TODO: Not sure about this one - Verify with Kyle
-  // The `/get-started` route is only valid for 8.0+
-  ...historicalVersions.reduce<RedirectData[]>((acc, v) => {
-    // Explicitly type the accumulator
-    if (Number(v) < 8) {
-      renderers.forEach((r) => {
-        acc.push({
-          source: `/docs/${v}/${r}/get-started`,
-          destination: `/docs/${v.split('.')[0]}/get-started/install`,
-          permanent: true,
-        });
+/*
+ * TODO: Make this more dynamic. Both HISTORICAL_VERSIONS and
+ *       OLDEST_DOCUMENTED_VERSION should not be hardcoded.
+ *       Instead, extend docs-versions to include non-documented
+ *       versions, and then generate from there.
+ * 
+ *       Consider a less-drastic destination.
+ */
+
+const HISTORICAL_VERSIONS = [
+  '8.6',
+  '8.5',
+  '8.4',
+  '8.3',
+  '8.2',
+  '8.1',
+  '8.0',
+  '7.6',
+  '7.5',
+  '7.4',
+  '7.3',
+  '7.2',
+  '7.1',
+  '7.0',
+  '6.5',
+  '6.4',
+  '6.3',
+  '6.2',
+  '6.1',
+  '6.0',
+];
+
+const OLDEST_DOCUMENTED_VERSION = 7;
+
+export const docsVersionsRedirects = [
+  ...HISTORICAL_VERSIONS
+    .filter((v) => Number(v.split('.')[0]) < OLDEST_DOCUMENTED_VERSION)
+    .reduce<RedirectData[]>((acc, v) => {
+      acc.push({
+        source: `/docs/${v}`,
+        destination: `/docs`,
+        permanent: false,
       });
-    }
-    return acc;
-  }, []),
-  {
-    source: '/docs/6/get-started',
-    destination: '/docs/6',
-    permanent: true,
-  },
-  {
-    source: '/docs/7/get-started',
-    destination: '/docs/7',
-    permanent: true,
-  },
+      acc.push({
+        source: `/docs/${v}/:path*`,
+        destination: `/docs`,
+        permanent: false,
+      });
+      return acc;
+    }, []),
 ];
