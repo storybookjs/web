@@ -1,10 +1,12 @@
-import { renderers } from './constants';
-import { RedirectData } from './types';
+import { renderers } from '@repo/utils';
+import type { RedirectData } from './types';
+
+const renderersPathWildcardWithRegex = `:renderer(${renderers.join('|')})`;
 
 export const docsRenderersRedirects: RedirectData[] = [
-  ...renderers.map((r) => ({
-    source: `/docs/${r}/get-started/examples`,
+  {
+    source: `/docs/${renderersPathWildcardWithRegex}/get-started/examples`,
     destination: '/showcase',
     permanent: true,
-  })),
+  },
 ];
