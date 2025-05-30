@@ -6,13 +6,13 @@ import { Section } from './section';
 export const Sponsor: FC = () => {
   return (
     <Section className="relative" id="sponsor">
-      <h2 className="font-bold text-2xl mb-2">Sponsor the community</h2>
+      <h2 className="mb-2 text-2xl font-bold">Sponsor the community</h2>
       <p className="mb-8">
         Donations help the community keep going. They are used for web hosting,
         continuous integration, contributor swag, learning materials, and event
         production.
       </p>
-      <div className="flex mb-12">
+      <div className="mb-12 flex">
         <Button asChild rounded="full" variant="solid">
           <a
             href="https://opencollective.com/storybook"
@@ -23,11 +23,11 @@ export const Sponsor: FC = () => {
           </a>
         </Button>
       </div>
-      <ul className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-8 gap-4">
+      <ul className="grid grid-cols-3 gap-4 sm:grid-cols-6 md:grid-cols-8">
         {sponsors.map((sponsor) => (
-          <li className="w-12 h-12 flex-shrink-0" key={sponsor.name}>
+          <li className="h-12 w-12 flex-shrink-0" key={sponsor.name}>
             <a
-              className="w-12 h-12 block relative"
+              className="relative block h-12 w-12"
               href={sponsor.url}
               rel="noreferrer"
               target="_blank"
@@ -59,24 +59,9 @@ const sponsors = [
     url: 'https://opencollective.com/indeed',
   },
   {
-    name: 'AMP Project',
-    image: 'https://images.opencollective.com/amp/c8a3b25/logo.png',
-    url: 'https://opencollective.com/amp',
-  },
-  {
     name: 'Applitools: AI-powered Visual Testing and Monitoring',
     image: 'https://images.opencollective.com/applitoolseyes/de8a61f/logo.png',
     url: 'https://opencollective.com/applitoolseyes',
-  },
-  {
-    name: 'Frontend Masters',
-    image: 'https://images.opencollective.com/frontendmasters/0b9cda4/logo.png',
-    url: 'https://opencollective.com/frontendmasters',
-  },
-  {
-    name: 'Chromatic',
-    image: 'https://images.opencollective.com/chromatic/c8c8f0d/logo.png',
-    url: 'https://opencollective.com/chromatic',
   },
   {
     name: 'Nx (by Nrwl)',
@@ -84,8 +69,28 @@ const sponsors = [
     url: 'https://opencollective.com/nx',
   },
   {
+    name: 'Chromatic',
+    image: 'https://images.opencollective.com/chromatic/f73f7dd/logo.png',
+    url: 'https://opencollective.com/chromatic',
+  },
+  {
+    name: 'AMP Project',
+    image: 'https://images.opencollective.com/amp/9f109bb/logo.png',
+    url: 'https://opencollective.com/amp',
+  },
+  {
+    name: 'GitGuardian',
+    image: 'https://images.opencollective.com/gitguardian/b428eaa/logo.png',
+    url: 'https://opencollective.com/gitguardian',
+  },
+  {
+    name: 'Frontend Masters',
+    image: 'https://images.opencollective.com/frontendmasters/0b9cda4/logo.png',
+    url: 'https://opencollective.com/frontendmasters',
+  },
+  {
     name: 'Retool',
-    image: 'https://images.opencollective.com/retoolapp1/3e6fdbf/logo.png',
+    image: 'https://images.opencollective.com/retoolapp1/1c20e97/logo.png',
     url: 'https://opencollective.com/retoolapp1',
   },
   {
@@ -104,23 +109,43 @@ const sponsors = [
     url: 'https://opencollective.com/inovexgmbh',
   },
   {
-    name: 'GitGuardian',
-    image: 'https://images.opencollective.com/gitguardian/b428eaa/logo.png',
-    url: 'https://opencollective.com/gitguardian',
+    name: 'Sanity',
+    image: 'https://images.opencollective.com/sanity_io/558f87f/logo.png',
+    url: 'https://opencollective.com/sanity_io',
   },
   {
-    name: 'Facebook Open Source',
-    image: 'https://images.opencollective.com/fbopensource/fbb8a5b/logo.png',
+    name: 'Meta Open Source',
+    image: 'https://images.opencollective.com/fbopensource/e10726f/logo.png',
     url: 'https://opencollective.com/fbopensource',
   },
   {
+    name: 'GitBook',
+    image: 'https://images.opencollective.com/gitbook/820419f/logo.png',
+    url: 'https://opencollective.com/gitbook',
+  },
+  {
+    name: 'Principal Financial Group',
+    image: 'https://images.opencollective.com/principal/431e690/logo.png',
+    url: 'https://opencollective.com/principal',
+  },
+  {
+    name: 'Sentry',
+    image: 'https://images.opencollective.com/sentry/9620d33/logo.png',
+    url: 'https://opencollective.com/sentry',
+  },
+  {
     name: 'Xebia',
-    image: 'https://images.opencollective.com/xebia/0bd8e4d/logo.png',
+    image: 'https://images.opencollective.com/xebia/924d2e1/logo.png',
     url: 'https://opencollective.com/xebia',
   },
   {
+    name: 'Work & Co',
+    image: 'https://images.opencollective.com/work-and-co/e15f72b/avatar.png',
+    url: 'https://opencollective.com/work-and-co',
+  },
+  {
     name: 'Tipe',
-    image: 'https://images.opencollective.com/tipe/e51f24e/logo.png',
+    image: 'https://images.opencollective.com/tipe/b424501/logo.png',
     url: 'https://opencollective.com/tipe',
   },
   {
@@ -130,13 +155,18 @@ const sponsors = [
   },
   {
     name: 'Marfeel',
-    image: 'https://images.opencollective.com/marfeel/4b88e30/logo.png',
+    image: 'https://images.opencollective.com/marfeel/c894dad/logo.png',
     url: 'https://opencollective.com/marfeel',
   },
   {
     name: 'Percy',
-    image: 'https://images.opencollective.com/percy_io/5e87867/logo.png',
+    image: 'https://images.opencollective.com/percy_io/80d9595/logo.png',
     url: 'https://opencollective.com/percy_io',
+  },
+  {
+    name: 'Gusto',
+    image: 'https://images.opencollective.com/gusto/483a29b/logo.png',
+    url: 'https://opencollective.com/gusto',
   },
   {
     name: 'VisWiz.io - Visual Regression Testing',
@@ -145,23 +175,23 @@ const sponsors = [
   },
   {
     name: 'Algolia',
-    image: 'https://images.opencollective.com/algolia/d69b553/logo.png',
+    image: 'https://images.opencollective.com/algolia/d8c48b7/logo.png',
     url: 'https://opencollective.com/algolia',
   },
   {
-    name: 'Principal Financial Group',
-    image: 'https://images.opencollective.com/principal/431e690/logo.png',
-    url: 'https://opencollective.com/principal',
+    name: 'Canva',
+    image: 'https://images.opencollective.com/canvaofficial/7217c4d/logo.png',
+    url: 'https://opencollective.com/canvaofficial',
+  },
+  {
+    name: 'Cybozu',
+    image: 'https://images.opencollective.com/cybozu/933e46d/logo.png',
+    url: 'https://opencollective.com/cybozu',
   },
   {
     name: 'Slalom Build',
-    image: 'https://images.opencollective.com/slalombuild/ad377b6/logo.png',
+    image: 'https://images.opencollective.com/slalombuild/cb148c4/logo.png',
     url: 'https://opencollective.com/slalombuild',
-  },
-  {
-    name: 'GitBook',
-    image: 'https://images.opencollective.com/gitbook/d35a8e7/logo.png',
-    url: 'https://opencollective.com/gitbook',
   },
   {
     name: 'Intuit Open Source',
@@ -170,29 +200,15 @@ const sponsors = [
     url: 'https://opencollective.com/intuit-open-source',
   },
   {
+    name: 'Buy Google Reviews',
+    image:
+      'https://images.opencollective.com/buy-google-reviews-usa/78797fd/logo.png',
+    url: 'https://opencollective.com/buy-google-reviews-usa',
+  },
+  {
     name: 'Skyscanner',
     image: 'https://images.opencollective.com/skyscanner/dcc6fe7/logo.png',
     url: 'https://opencollective.com/skyscanner',
-  },
-  {
-    name: 'EY Doberman',
-    image: 'https://images.opencollective.com/ey-doberman/b269462/logo.png',
-    url: 'https://opencollective.com/ey-doberman',
-  },
-  {
-    name: 'Sebastian Software GmbH',
-    image: 'https://images.opencollective.com/sebastiansoft/74395cd/logo.png',
-    url: 'https://opencollective.com/sebastiansoft',
-  },
-  {
-    name: 'Sentry',
-    image: 'https://images.opencollective.com/sentry/9620d33/logo.png',
-    url: 'https://opencollective.com/sentry',
-  },
-  {
-    name: 'Triplebyte',
-    image: 'https://images.opencollective.com/triplebyte/3f80e63/logo.png',
-    url: 'https://opencollective.com/triplebyte',
   },
   {
     name: 'Sendcloud',
@@ -200,45 +216,24 @@ const sponsors = [
     url: 'https://opencollective.com/sendcloud',
   },
   {
-    name: 'Fusonic GmbH',
-    image: 'https://images.opencollective.com/fusonic/02ed1e5/logo.png',
-    url: 'https://opencollective.com/fusonic',
+    name: 'CodeRabbit',
+    image: 'https://images.opencollective.com/coderabbit/c0d1370/logo.png',
+    url: 'https://opencollective.com/coderabbit',
   },
   {
-    name: 'GoCardless',
-    image: 'https://images.opencollective.com/gocardless/0b942fa/logo.png',
-    url: 'https://opencollective.com/gocardless',
+    name: 'EY Doberman',
+    image: 'https://images.opencollective.com/ey-doberman/b269462/logo.png',
+    url: 'https://opencollective.com/ey-doberman',
   },
   {
-    name: 'St. Galler Kantonalbank AG',
-    image:
-      'https://images.opencollective.com/st-galler-kantonalbank-ag/bfdd17f/logo.png',
-    url: 'https://opencollective.com/st-galler-kantonalbank-ag',
+    name: 'Agendrix',
+    image: 'https://images.opencollective.com/agendrix/32bd295/logo.png',
+    url: 'https://opencollective.com/agendrix',
   },
   {
-    name: 'Flowdash',
-    image: 'https://images.opencollective.com/flowdash/e9f182e/logo.png',
-    url: 'https://opencollective.com/flowdash',
-  },
-  {
-    name: 'WORKetc',
-    image: 'https://images.opencollective.com/worketc/e05e8c8/logo.png',
-    url: 'https://opencollective.com/worketc',
-  },
-  {
-    name: 'TakeShape',
-    image: 'https://images.opencollective.com/takeshapeio/2a25ad2/logo.png',
-    url: 'https://opencollective.com/takeshapeio',
-  },
-  {
-    name: 'José Manuel Lucas Muñoz',
-    image: 'https://images.opencollective.com/jmlweb/ee58468/avatar.png',
-    url: 'https://opencollective.com/jmlweb',
-  },
-  {
-    name: 'Buttondown, LLC',
-    image: 'https://images.opencollective.com/buttondownemail/02198e5/logo.png',
-    url: 'https://opencollective.com/buttondownemail',
+    name: 'Sebastian Software GmbH',
+    image: 'https://images.opencollective.com/sebastiansoft/c8c1bf5/logo.png',
+    url: 'https://opencollective.com/sebastiansoft',
   },
   {
     name: 'Live Graphic Systems',
@@ -246,8 +241,13 @@ const sponsors = [
     url: 'https://opencollective.com/livegraphicsys',
   },
   {
-    name: 'Shogun Labs, Inc.',
-    image: 'https://images.opencollective.com/shogun-labs-inc/f9122d2/logo.png',
-    url: 'https://opencollective.com/shogun-labs-inc',
+    name: 'Triplebyte',
+    image: 'https://images.opencollective.com/triplebyte/3f80e63/logo.png',
+    url: 'https://opencollective.com/triplebyte',
+  },
+  {
+    name: 'Fusonic GmbH',
+    image: 'https://images.opencollective.com/fusonic/02ed1e5/logo.png',
+    url: 'https://opencollective.com/fusonic',
   },
 ];
