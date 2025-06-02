@@ -67,3 +67,8 @@
   from = "/sb-test-eap"
   to = "https://forms.gle/zVeNrM7QiedZVv7K9"
   status = 200
+
+[[redirects]]
+  from = "/announce/*"
+  to = "https://storybook-announce.netlify.app/announce/:splat"
+  status = 200
