@@ -8,12 +8,13 @@ import { Button } from '../../ui/button';
 import { AspectRatio } from '../../ui/aspect-ratio';
 import { Community } from '../../community';
 import { Youtube } from '../../logos/youtube';
+import   AutoSlider  from './slider';
 
 const projects = [
   {
     name: 'Polaris',
     bgColor: '#377e62',
-    width: 100,
+    width: 80,
     height: 28,
     logoAlt: 'Shopify',
     logoUrl: '/home/community/logos/shopify.svg',
@@ -22,7 +23,7 @@ const projects = [
   {
     name: 'Psammead',
     bgColor: '#8F1F19',
-    width: 102,
+    width: 80,
     height: 28,
     logoAlt: 'BBC',
     logoUrl: '/home/community/logos/bbc.svg',
@@ -31,7 +32,7 @@ const projects = [
   {
     name: 'UI React',
     bgColor: '#333333',
-    width: 88,
+    width: 80,
     height: 30,
     logoAlt: 'Audi UI React',
     logoUrl: '/home/community/logos/audi.svg',
@@ -40,8 +41,8 @@ const projects = [
   {
     name: 'Fluent UI Web Compnents',
     bgColor: '#0078d4',
-    width: 40,
-    height: 70,
+    width: 20,
+    height: 40,
     logoAlt: 'Fluent UI Web Compnents',
     logoUrl: '/home/community/logos/fluent.svg',
     projectUrl: 'https://storybook.js.org/showcase/microsoft-fluent-ui-web-components',
@@ -49,8 +50,8 @@ const projects = [
   {
     name: 'Gutenberg',
     bgColor: '#3171A6',
-    width: 52,
-    height: 52,
+    width: 40,
+    height: 40,
     logoAlt: 'WordPress Gutenberg',
     logoUrl: '/home/community/logos/wordpress.svg',
     projectUrl: 'https://storybook.js.org/showcase/wordpress-gutenberg',
@@ -58,7 +59,7 @@ const projects = [
   {
     name: 'Explorer 1',
     bgColor: '#0b3d91',
-    width: 100,
+    width: 80,
     height: 28,
     logoAlt: 'Nasa Explorer 1',
     logoUrl: '/home/community/logos/nasa.svg',
@@ -67,8 +68,8 @@ const projects = [
   {
     name: 'React Spectrum',
     bgColor: '#e03422',
-    width: 56,
-    height: 48,
+    width: 36,
+    height: 38,
     logoAlt: 'Adobe',
     logoUrl: '/home/community/logos/adobe.svg',
     projectUrl:
@@ -76,88 +77,6 @@ const projects = [
   },
 ];
 
-const storybooks = [
-  {
-    name: 'Monday.com',
-    url: 'https://style.monday.com/',
-    logo: 'https://avatars.githubusercontent.com/u/61420283?v=4',
-    image: {
-      src: '/home/community/storybooks/monday-com.webp',
-      width: 1440,
-      height: 1050,
-    },
-  },
-  {
-    name: 'Microsoft',
-    url: 'https://master--628d031b55e942004ac95df1.chromatic.com/',
-    logo: 'https://avatars.githubusercontent.com/u/6154722?v=4',
-    image: {
-      src: '/home/community/storybooks/microsoft.webp',
-      width: 1440,
-      height: 1050,
-    },
-  },
-  {
-    name: 'D2IQ',
-    url: 'http://design-system.d2iq.com/',
-    logo: 'https://avatars.githubusercontent.com/u/19392808?v=4',
-    image: {
-      src: '/home/community/storybooks/d2iq.webp',
-      width: 1440,
-      height: 1050,
-    },
-  },
-  {
-    name: 'Drei',
-    url: 'https://drei.pmnd.rs/',
-    logo: 'https://avatars.githubusercontent.com/u/45790596?v=4',
-    image: {
-      src: '/home/community/storybooks/drei.webp',
-      width: 1440,
-      height: 1050,
-    },
-  },
-  {
-    name: 'Shopify',
-    url: 'https://main--5d559397bae39100201eedc1.chromatic.com/',
-    logo: 'https://avatars.githubusercontent.com/u/8085?v=4',
-    image: {
-      src: '/home/community/storybooks/shopify.webp',
-      width: 1440,
-      height: 1050,
-    },
-  },
-  {
-    name: 'kickstartDS',
-    url: 'https://www.kickstartds.com/storybook/',
-    logo: 'https://avatars.githubusercontent.com/u/79609753?v=4',
-    image: {
-      src: '/home/community/storybooks/kickstart-ds.webp',
-      width: 1440,
-      height: 1050,
-    },
-  },
-  {
-    name: 'Grommet',
-    url: 'https://master--5d9774839a6eff00203f5cbf.chromatic.com/',
-    logo: 'https://avatars.githubusercontent.com/u/14203820?v=4',
-    image: {
-      src: '/home/community/storybooks/grommet.webp',
-      width: 1440,
-      height: 1050,
-    },
-  },
-  {
-    name: 'JSTOR',
-    url: 'https://develop--60919c26122bd50039b34644.chromatic.com/',
-    logo: 'https://avatars.githubusercontent.com/u/74469?v=4',
-    image: {
-      src: '/home/community/storybooks/jstor.webp',
-      width: 1440,
-      height: 1050,
-    },
-  },
-];
 
 const contributors = [
   '/home/community/contributor6.jpg',
@@ -215,45 +134,11 @@ export function SocialValidation({
           </div>
         </div>
       </Container>
-      <div className="mb-[calc(5rem-1rem)] mt-12 flex snap-x scroll-p-8 gap-8 overflow-scroll px-8 py-0 pb-4 text-white sm:mt-20 md:mt-28">
-        {storybooks.map((storybookProject) => (
-          <a
-            className="block w-[240px] flex-none no-underline sm:w-[480px]"
-            href={storybookProject.url}
-            key={storybookProject.name}
-            rel="noopener nofollow noreferrer"
-            target="_blank"
-          >
-            <div className="overflow-hidden rounded-md">
-              <div className="flex h-4 w-full items-center gap-1 border-y border-b-zinc-300 border-t-transparent bg-zinc-200 pl-2">
-                <div className="h-[5px] w-[5px] rounded-full bg-red-500" />
-                <div className="h-[5px] w-[5px] rounded-full bg-yellow-500" />
-                <div className="h-[5px] w-[5px] rounded-full bg-green-500" />
-              </div>
-              <Image
-                alt={storybookProject.name}
-                height={storybookProject.image.height}
-                src={storybookProject.image.src}
-                width={storybookProject.image.width}
-              />
-            </div>
-            <div className="mt-3 flex items-center text-white">
-              <Image
-                alt={storybookProject.name}
-                className="mr-2 h-5 w-5"
-                height={20}
-                src={storybookProject.logo}
-                width={20}
-              />
-              <span className="text-sm">{storybookProject.name}</span>
-            </div>
-          </a>
-        ))}
-      </div>
-      <div className="mb-[calc(5rem-1rem)] mt-12 flex snap-x scroll-p-8 gap-8 overflow-scroll px-8 py-0 pb-4 sm:mt-20 md:mt-28">
+      <AutoSlider/>
+      <div className="mb-[calc(5rem-1rem)] mt-12 flex snap-x scroll-p-8 gap-8 md:overflow-hidden overflow-x-scroll justify-center items-center px-8 py-0 pb-4 sm:mt-20 md:mt-28">
         {projects.map((project) => (
           <a
-            className="w-[240px] flex-none rounded-md bg-red-500"
+            className="w-[160px] flex-none rounded-md bg-red-500"
             href={project.projectUrl}
             key={project.logoAlt}
             rel="noopener"
@@ -261,7 +146,7 @@ export function SocialValidation({
             target="_blank"
           >
             <AspectRatio
-              className="flex flex-col items-center justify-center gap-2 font-bold text-white"
+              className="flex flex-col items-center justify-center gap-4 font-bold text-white"
               ratio={4 / 3}
             >
               <Image
@@ -270,7 +155,7 @@ export function SocialValidation({
                 src={project.logoUrl}
                 width={project.width}
               />
-              {project.name}
+             <p className='text-sm text-center'>{project.name}</p>
             </AspectRatio>
           </a>
         ))}
