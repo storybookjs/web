@@ -56,7 +56,7 @@ const features = [
 
 export const Document: FC = () => {
   return (
-    <div className="pt-12 border-b border-zinc-600 sm:pt-20 md:pt-28">
+    <div className="overflow-hidden border-b border-zinc-600 pt-12 sm:pt-20 md:pt-28">
       {features.map((feature) => (
         <Link
           as="video"
@@ -65,8 +65,8 @@ export const Document: FC = () => {
           rel="preload"
         />
       ))}
-      <Container className="lg:px-8 text-white md:flex justify-between gap-20">
-        <h2 className="flex-1 text-4xl md:text-[56px]/[70px] font-bold">
+      <Container className="justify-between gap-20 text-white md:flex lg:px-8">
+        <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
           Document UI for your team to reuse
         </h2>
         <div className="flex-1 pt-4">
