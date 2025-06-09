@@ -13,6 +13,7 @@ export interface TreeMetaProps {
   sidebar?: {
     title?: string;
     order?: number;
+    hidden?: boolean;
   };
   tab?: {
     title?: string;
