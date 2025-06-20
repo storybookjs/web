@@ -24,7 +24,7 @@ export const footerNav = [
     links: [
       { title: 'Addons', href: '/integrations' },
       { title: 'Get involved', href: '/community' },
-      { title: 'Blog', href: '/releases' },
+      { title: 'Blog', href: '/blog' },
     ],
   },
   {
