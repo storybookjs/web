@@ -27,7 +27,7 @@ export const Header: FC<HeaderProps> = ({
   eyebrow = (
     <Eyebrow
       href="https://us02web.zoom.us/webinar/register/5717513963908/WN_JtdqrZuKRHibNwTiRPymcQ"
-      title="Join us live: Setup a component-driven A11y pipeline"
+      title="Join us live: How to setup your component-driven A11y pipeline"
     />
   ),
   githubCount = 0,
