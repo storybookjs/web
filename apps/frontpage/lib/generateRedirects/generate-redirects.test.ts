@@ -151,6 +151,11 @@ test('generateRedirects, no pre-release', () => {
       {
         "destination": "/docs/:path*",
         "permanent": true,
+        "source": "/docs/8.1/:path*",
+      },
+      {
+        "destination": "/docs/:path*",
+        "permanent": true,
         "source": "/docs/:renderer(react|vue)/:path*",
       },
       {
@@ -240,6 +245,11 @@ test('generateRedirects, minor pre-release', () => {
         "destination": "/docs/writing-tests/stories-in-unit-tests/",
         "permanent": true,
         "source": "/docs/:renderer(react|vue)/workflows/unit-testing/",
+      },
+      {
+        "destination": "/docs/:path*",
+        "permanent": true,
+        "source": "/docs/8.1/:path*",
       },
       {
         "destination": "/docs/:path*",
@@ -337,6 +347,11 @@ test('generateRedirects, major pre-release', () => {
       {
         "destination": "/docs/:path*",
         "permanent": true,
+        "source": "/docs/8.1/:path*",
+      },
+      {
+        "destination": "/docs/:path*",
+        "permanent": true,
         "source": "/docs/:renderer(react|vue)/:path*",
       },
       {
@@ -401,6 +416,97 @@ test('generateRedirects, major pre-release', () => {
       },
       {
         "destination": "/releases/8.1",
+        "permanent": false,
+        "source": "/releases",
+      },
+    ]
+  `);
+});
+
+test('generateRedirects, major latest', () => {
+  const result = generateRedirects({
+    rawRedirects: `
+/docs/workflows/unit-testing/ /docs/writing-tests/stories-in-unit-tests/ 308
+    `,
+    latestVersionString: '9.0',
+    nextVersionString: null,
+    renderers: ['react', 'vue'],
+    versions: [
+      { version: 9.0, string: '9.0', label: 'latest' },
+      { version: 8.6, string: '8.6' },
+      { version: 7.6, string: '7.6' },
+      { string: 'next' },
+    ],
+  });
+  expect(result).toMatchInlineSnapshot(`
+    [
+      {
+        "destination": "/docs/writing-tests/stories-in-unit-tests/",
+        "permanent": true,
+        "source": "/docs/workflows/unit-testing/",
+      },
+      {
+        "destination": "/docs/writing-tests/stories-in-unit-tests/",
+        "permanent": true,
+        "source": "/docs/:renderer(react|vue)/workflows/unit-testing/",
+      },
+      {
+        "destination": "/docs/:path*",
+        "permanent": true,
+        "source": "/docs/9.0/:path*",
+      },
+      {
+        "destination": "/docs/:path*",
+        "permanent": true,
+        "source": "/docs/9/:path*",
+      },
+      {
+        "destination": "/docs/:path*",
+        "permanent": true,
+        "source": "/docs/:renderer(react|vue)/:path*",
+      },
+      {
+        "destination": "/docs/:path*",
+        "permanent": false,
+        "source": "/docs/9.0/:path*",
+      },
+      {
+        "destination": "/docs/8",
+        "permanent": true,
+        "source": "/docs/8.6",
+      },
+      {
+        "destination": "/docs/8/:path*",
+        "permanent": true,
+        "source": "/docs/8.6/:path*",
+      },
+      {
+        "destination": "/docs/7/get-started/install/",
+        "permanent": true,
+        "source": "/docs/7.6",
+      },
+      {
+        "destination": "/docs/7/:path*",
+        "permanent": true,
+        "source": "/docs/7.6/:path*",
+      },
+      {
+        "destination": "/docs",
+        "permanent": false,
+        "source": "/docs/next",
+      },
+      {
+        "destination": "/docs/:path*",
+        "permanent": false,
+        "source": "/docs/next/:renderer(react|vue)/:path*",
+      },
+      {
+        "destination": "/docs/:path*",
+        "permanent": false,
+        "source": "/docs/next/:path*",
+      },
+      {
+        "destination": "/releases/9.0",
         "permanent": false,
         "source": "/releases",
       },

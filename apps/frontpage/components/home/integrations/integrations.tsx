@@ -51,7 +51,7 @@ export function Integrations() {
       name: 'Notion',
     },
     {
-      href: `/docs/writing-tests/stories-in-unit-tests`,
+      href: `/docs/writing-tests/integrations/stories-in-unit-tests`,
       image: TestingLib,
       name: 'TestingLib',
     },
@@ -110,7 +110,7 @@ export function Integrations() {
       name: 'Apollo',
     },
     {
-      href: `/docs/writing-tests/stories-in-end-to-end-tests`,
+      href: `/docs/writing-tests/integrations/stories-in-end-to-end-tests`,
       image: Playwright,
       name: 'Playwright',
     },
@@ -198,7 +198,7 @@ export function Integrations() {
       name: 'Supernova',
     },
     {
-      href: `/docs/writing-tests/stories-in-end-to-end-tests`,
+      href: `/docs/writing-tests/integrations/stories-in-end-to-end-tests`,
       image: Cypress,
       name: 'Cypress',
     },

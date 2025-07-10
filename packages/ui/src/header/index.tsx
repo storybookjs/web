@@ -6,10 +6,11 @@ import { cn } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import { GithubIcon } from '@storybook/icons';
 import { StorybookLogo } from '../logos/storybook-logo';
+// import { NewsletterForm } from '../newsletter-form';
 import { Search } from '../search';
 import { MobileMenu } from './mobile-menu';
 import { Button } from './button';
-// import { Eyebrow } from './eyebrow';
+import { Eyebrow } from './eyebrow';
 import { nav } from './nav';
 
 export interface HeaderProps {
@@ -22,13 +23,13 @@ export interface HeaderProps {
 
 export const Header: FC<HeaderProps> = ({
   algoliaApiKey,
-  eyebrow,
-  // eyebrow = (
-  //   <Eyebrow
-  //     href="https://storybook.js.org/sb-test-eap"
-  //     title="Join live session: Test your components in browser with Storybook Test"
-  //   />
-  // ),
+  // eyebrow,
+  eyebrow = (
+    <Eyebrow
+      href="https://us02web.zoom.us/webinar/register/5717513963908/WN_JtdqrZuKRHibNwTiRPymcQ"
+      title="Join us live: How to setup your component-driven A11y pipeline"
+    />
+  ),
   githubCount = 0,
   subMenu,
   variant = 'system',

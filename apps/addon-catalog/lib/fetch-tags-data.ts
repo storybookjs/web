@@ -16,20 +16,17 @@ export async function fetchTagsData({
   let value: TagValue[] = []; // Moved outside to be accessible by fetchPartialData
 
   // Define fetchPartialData at the root of fetchTagsData function body
-  async function fetchPartialData(skip = 0): Promise<TagValue[]> {
-    const data = await fetchAddonsQuery<
-      TagsData,
-      { isCategory: boolean; skip: number }
-    >(
+  async function fetchPartialData(): Promise<TagValue[]> {
+    const data = await fetchAddonsQuery<TagsData, { isCategory: boolean }>(
       gql`
-        query TagNames($isCategory: Boolean!, $skip: Int!) {
-          tags(isCategory: $isCategory, limit: 30, skip: $skip) {
+        query TagNames($isCategory: Boolean!) {
+          tags(isCategory: $isCategory) {
             name
           }
         }
       `,
       {
-        variables: { isCategory: Boolean(isCategory), skip },
+        variables: { isCategory: Boolean(isCategory) },
       },
     );
 
@@ -38,8 +35,6 @@ export async function fetchTagsData({
     const { tags } = data;
 
     value = [...value, ...tags.map(({ name }) => name)];
-
-    if (tags.length > 0) await fetchPartialData(skip + tags.length);
 
     return value;
   }

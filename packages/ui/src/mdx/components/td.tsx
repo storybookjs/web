@@ -7,7 +7,7 @@ type TableProps = DetailedHTMLProps<
 export const Td: FC<TableProps> = ({ children }) => {
   return (
     // TODO: Check prefix placement in ones like `[&>code]:ui-text-slate-500`
-    <td className="ui-py-4 ui-pr-6 ui-align-top [&>code]:ui-text-slate-500">
+    <td className="ui-py-4 ui-pr-6 ui-align-top [&>code]:ui-text-slate-500 [&>code]:dark:ui-text-slate-400">
       {children}
     </td>
   );

@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import type { MotionValue } from 'framer-motion';
 import { motion, useTransform } from 'framer-motion';
-import { Connector } from '../../connector';
 import { useMediaQuery } from '../../../../hooks/use-media-query';
 import { Sidebar } from './sidebar';
-import { AddonsPanel } from './addons-panel';
 import { RangeSlider } from './range-slider';
 import { VSCode } from './vscode';
-import { App } from './app';
 
 interface ScrollDemoProps {
   appearProgress: MotionValue<number>;
   isolationProgress: MotionValue<number>;
-  addonsProgress: MotionValue<number>;
-  dropInProgress: MotionValue<number>;
   storyIndex: MotionValue<number>;
-  panelIndex: MotionValue<number>;
 }
 
 const rangeSlider = {
@@ -26,14 +20,10 @@ const rangeSlider = {
 export function ScrollDemo({
   appearProgress,
   isolationProgress,
-  addonsProgress,
-  dropInProgress,
   storyIndex,
-  panelIndex,
   ...props
 }: ScrollDemoProps) {
   const [activeStory, setActiveStory] = useState('default');
-  const [activePanel, setActivePanel] = useState('controls');
 
   useEffect(() => {
     function updateId() {
@@ -41,22 +31,15 @@ export function ScrollDemo({
     }
     const unsubscribeStoryIndex = storyIndex.on('change', updateId);
 
-    function updatePanel() {
-      setActivePanel(rangeSlider.addons[panelIndex.get()]);
-    }
-    const unsubscribePanel = panelIndex.on('change', updatePanel);
-
     return () => {
       unsubscribeStoryIndex();
-      unsubscribePanel();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- We don't need to update the effect when the props change
   }, []);
 
   const zoom = useTransform<number, number>(
-    [isolationProgress, dropInProgress],
-    ([latestIsolationProgress, latestDropInProgress]) =>
-      (latestIsolationProgress || 0) - (latestDropInProgress || 0),
+    [isolationProgress],
+    ([latestIsolationProgress]) => latestIsolationProgress || 0,
   );
 
   const [stacked] = useMediaQuery(`(min-width: 648px)`);
@@ -72,26 +55,15 @@ export function ScrollDemo({
     clamp: true,
   });
 
-  const frameScale = useTransform(dropInProgress, [0, 1], [1, 0], {
-    clamp: true,
-  });
-  const frameOpacity = useTransform(dropInProgress, [0, 1], [1, 0.25], {
-    clamp: true,
-  });
-
-  const connectorProgress = useTransform(dropInProgress, [0.75, 1], [0, 1], {
-    clamp: true,
-  });
-
   return (
     <motion.div
-      className="relative w-full h-0 pb-[69.10907577%]"
+      className="relative h-0 w-full pb-[69.10907577%]"
       style={{ scale, x }}
       transition={{ delay: 0.4 }}
       {...props}
     >
       <motion.div
-        className="absolute h-[75vh] top-[-35vh] left-0 right-0 pointer-events-none user-select-none bg-gradient-to-b from-homeBackground from-90% to-homeBackground/10"
+        className="user-select-none from-homeBackground to-homeBackground/10 pointer-events-none absolute left-0 right-0 top-[-35vh] h-[75vh] bg-gradient-to-b from-90%"
         style={{
           y: scrimY,
           opacity: scrimOpacity,
@@ -99,40 +71,11 @@ export function ScrollDemo({
       />
       <motion.img
         alt=""
-        className="absolute top-0 left-0 block w-full h-auto"
+        className="absolute left-0 top-0 block h-auto w-full"
         src="/home/develop/storybook-frame.svg"
-        style={{
-          scale: frameScale,
-          opacity: frameOpacity,
-        }}
       />
-      <Sidebar
-        activeStory={activeStory}
-        style={{
-          scale: frameScale,
-          opacity: frameOpacity,
-        }}
-        type="rangeSlider"
-      />
-      <AddonsPanel
-        activePanel={activePanel}
-        scrollProgress={addonsProgress}
-        style={{
-          scale: frameScale,
-          opacity: frameOpacity,
-        }}
-      />
-      <App scrollProgress={dropInProgress} />
-      <Connector
-        className="w-[24%] h-auto absolute top-[20%] left-[17.8%] rotate-[-56deg] z-[2]"
-        name="rs-to-app"
-        progress={connectorProgress}
-      />
-      <RangeSlider
-        activeStory={activeStory}
-        appearProgress={appearProgress}
-        scrollProgress={dropInProgress}
-      />
+      <Sidebar activeStory={activeStory} type="rangeSlider" />
+      <RangeSlider activeStory={activeStory} appearProgress={appearProgress} />
       <VSCode
         appearProgress={appearProgress}
         scrollProgress={isolationProgress}
