@@ -10,7 +10,7 @@ import { StorybookLogo } from '../logos/storybook-logo';
 import { Search } from '../search';
 import { MobileMenu } from './mobile-menu';
 import { Button } from './button';
-import { Eyebrow } from './eyebrow';
+// import { Eyebrow } from './eyebrow';
 import { nav } from './nav';
 
 export interface HeaderProps {
@@ -23,13 +23,13 @@ export interface HeaderProps {
 
 export const Header: FC<HeaderProps> = ({
   algoliaApiKey,
-  // eyebrow,
-  eyebrow = (
-    <Eyebrow
-      href="https://us02web.zoom.us/webinar/register/4217528604397/WN_9WrQ1dWNTbOjJfWlw1rEVQ"
-      title="Join us live: How to fix A11y debt without burning out"
-    />
-  ),
+  eyebrow,
+  // eyebrow = (
+  //   <Eyebrow
+  //     href="https://us02web.zoom.us/webinar/register/4217528604397/WN_9WrQ1dWNTbOjJfWlw1rEVQ"
+  //     title="Join us live: How to fix A11y debt without burning out"
+  //   />
+  // ),
   githubCount = 0,
   subMenu,
   variant = 'system',
