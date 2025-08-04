@@ -89,7 +89,7 @@ export function getFrameworks() {
               'preact',
             ],
             unsupported: ['ember'],
-            path: 'writing-tests/test-runner',
+            path: 'writing-tests/integrations/test-runner',
           },
           {
             name: 'test coverage',

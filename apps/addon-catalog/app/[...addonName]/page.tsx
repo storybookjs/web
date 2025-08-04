@@ -2,6 +2,9 @@ import { type Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { SubHeader } from '@repo/ui';
 import { cn } from '@repo/utils';
+// eslint-disable-next-line -- the variable is camelCase
+import { unstable_cache } from 'next/cache';
+import { fetchAddonsData } from '../../lib/fetch-addons-data';
 import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 import { AddonHero } from '../../components/addon/addon-hero';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
@@ -31,9 +34,14 @@ async function getAddonFromName(
   return await fetchAddonDetailsData(name);
 }
 
+const getCachedAddonFromName = unstable_cache(
+  async (addonName: string[]) => getAddonFromName(addonName),
+  ['addon-details'],
+);
+
 export const generateMetadata: GenerateMetaData = async ({ params }) => {
   const name = (await params).addonName;
-  const addon = await getAddonFromName(name);
+  const addon = await getCachedAddonFromName(name);
 
   const title = addon?.displayName ?? addon?.name;
 
@@ -133,4 +141,20 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
       </div>
     </main>
   );
+}
+
+export async function generateStaticParams() {
+  const addons = (await fetchAddonsData()) || [];
+  const listOfNames = addons
+    // TODO: Better encoding?
+    .map((addon) =>
+      addon ? { name: [...addon.replace('@', '%40').split('/')] } : null,
+    )
+    .filter(Boolean);
+
+  if (listOfNames.length === 0) {
+    throw new Error('No addons found');
+  }
+
+  return listOfNames;
 }

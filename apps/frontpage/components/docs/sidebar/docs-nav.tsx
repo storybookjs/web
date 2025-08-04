@@ -104,10 +104,11 @@ const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
 const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
   const pathname = usePathname();
   const isDraft = lvl2.draft === true;
+  const isHidden = lvl2.sidebar?.hidden === true;
   const hasChildren = lvl2.children && lvl2.children.length > 0;
   const slug = lvl2.slug;
 
-  if (isDraft) return null;
+  if (isDraft || isHidden) return null;
 
   return (
     <li key={lvl2.pathSegment}>
@@ -151,10 +152,11 @@ const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
 
 const Level3 = ({ lvl3 }: { lvl3: TreeProps }) => {
   const isDraft = lvl3.draft === true;
+  const isHidden = lvl3.sidebar?.hidden === true;
   const slug = lvl3.slug;
   const pathname = usePathname();
 
-  if (isDraft) return null;
+  if (isDraft || isHidden) return null;
 
   return (
     <li className="ml-4" key={lvl3.pathSegment}>

@@ -4,7 +4,12 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const historicalVersions = [
+const HISTORICAL_VERSIONS = [
+  '8.6',
+  '8.5',
+  '8.4',
+  '8.3',
+  '8.2',
   '8.1',
   '8.0',
   '7.6',
@@ -67,7 +72,7 @@ module.exports = withBundleAnalyzer(
       ],
     },
     async headers() {
-      return historicalVersions.map((v) => ({
+      return HISTORICAL_VERSIONS.map((v) => ({
         source: `/docs/${v}/:path*`,
         headers: [
           {
@@ -94,7 +99,7 @@ module.exports = withBundleAnalyzer(
        * https://vercel.com/guides/how-can-i-use-files-in-serverless-functions#using-next.js
        */
       outputFileTracingIncludes: {
-        '/docs/**': ['./content/docs/**', './content/snippets/**'],
+        '/docs/**': ['./content/docs/**', './content/snippets/**', './public/docs-assets/**'],
       },
     },
     async redirects() {

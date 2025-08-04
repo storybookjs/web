@@ -5,7 +5,6 @@ import { Testimonial } from '../testimonial';
 import { LogoCloudbees } from './logo-cloudbee';
 import { PublishIntegrations } from './publish-integrations';
 import { EmbedIntegrations } from './embed-integrations';
-import { TestIntegrations } from './test-integrations';
 
 export function Share() {
   return (
@@ -60,28 +59,6 @@ export function Share() {
             </Link>
           </div>
           <EmbedIntegrations />
-        </div>
-        <div className="flex flex-col gap-8 pt-12 sm:gap-16 md:flex-row md:items-center md:gap-24 md:pt-48">
-          <div className="flex max-w-[520px] flex-shrink-0 flex-col gap-6 text-white md:max-w-[320px]">
-            <h3 className="text-2xl font-bold">
-              <span className="inline-block rounded border border-zinc-600 bg-zinc-800 px-2 font-mono text-[19px]">
-                import
-              </span>{' '}
-              stories into other JavaScript tooling
-            </h3>
-            <p className="text-md leading-7">
-              Stories are a portable standard based on ES6 modules. Write
-              stories once and import them into any JavaScript library.
-            </p>
-            <Link
-              className="flex items-center gap-2 font-bold text-blue-500"
-              href="/docs/writing-tests/stories-in-unit-tests"
-            >
-              Reuse stories in tests and libraries
-              <ChevronSmallRightIcon />
-            </Link>
-          </div>
-          <TestIntegrations />
         </div>
       </Container>
       <Testimonial

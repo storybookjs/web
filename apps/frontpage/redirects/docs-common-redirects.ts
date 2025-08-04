@@ -51,10 +51,20 @@ export const docsCommonRedirects: RedirectData[] = [
     destination: '/docs/7/migration-guide',
     permanent: true,
   },
-  // TODO: Make sure this one works after 9.0
   {
     source: '/migration-guides/8.0',
+    destination: '/docs/8/migration-guide',
+    permanent: true,
+  },
+  // TODO: Make sure this one works after 9.0
+  {
+    source: '/migration-guides/9.0',
     destination: '/docs/migration-guide',
+    permanent: true,
+  },
+  {
+    source: '/rn-vs-rnw',
+    destination: '/docs/get-started/frameworks/react-native-web-vite?renderer=react-native-web#react-native-vs-react-native-web',
     permanent: true,
   },
   /* Supporting old docs URLs */
@@ -198,7 +208,7 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/docs/testing/interaction-testing',
-    destination: '/docs/writing-tests/component-testing',
+    destination: '/docs/writing-tests/interaction-testing',
     permanent: true,
   },
   {
