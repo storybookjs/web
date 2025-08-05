@@ -31,8 +31,7 @@ export const footerNav = [
     title: 'Showcase',
     links: [
       { title: 'Explore', href: '/showcase' },
-      { title: 'Projects', href: '/showcase/projects' },
-      { title: 'Component glossary', href: '/showcase/glossary' },
+      { title: 'About', href: '/showcase/about' },
     ],
   },
 ];
