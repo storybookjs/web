@@ -147,3 +147,7 @@
 /docs/writing-tests/test-addon                                          /docs/writing-tests/integrations/vitest-addon                           308
 /docs/writing-tests/vitest-addon                                        /docs/writing-tests/integrations/vitest-addon                           308
 /docs/writing-tests/test-runner                                         /docs/writing-tests/integrations/test-runner                            308
+/docs/migration-guide                                                   /docs/releases/migration-guide                                          308
+/docs/migration-guide/from-older-version                                /docs/releases/migration-guide-from-older-version                       308
+/docs/contribute/roadmap                                                /docs/releases/roadmap                                                  308
+/docs/configure/upgrading                                               /docs/releases/upgrading                                                308
