@@ -10,7 +10,7 @@ import { StorybookLogo } from '../logos/storybook-logo';
 import { Search } from '../search';
 import { MobileMenu } from './mobile-menu';
 import { Button } from './button';
-import { Eyebrow } from './eyebrow';
+// import { Eyebrow } from './eyebrow';
 import { nav } from './nav';
 
 export interface HeaderProps {
@@ -23,14 +23,13 @@ export interface HeaderProps {
 
 export const Header: FC<HeaderProps> = ({
   algoliaApiKey,
-  // eyebrow,
-  eyebrow = (
-    <Eyebrow
-      hideIcon
-      href="https://storybook.js.org/blog/storybook-9"
-      title="Learn about Storybook Test and the new Storybook 9"
-    />
-  ),
+  eyebrow,
+  // eyebrow = (
+  //   <Eyebrow
+  //     href="https://us02web.zoom.us/webinar/register/4217528604397/WN_ehG_NaegQD-VzkiUJXfrgw"
+  //     title="Join us live: Automated vs Manual—The right A11y Testing Mix"
+  //   />
+  // ),
   githubCount = 0,
   subMenu,
   variant = 'system',

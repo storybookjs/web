@@ -28,13 +28,13 @@ export interface DocsVersion {
  **/
 export const docsVersions: DocsVersion[] = [
   {
-    label: 'Version 9.0',
-    id: '9.0',
+    label: 'Version 9.1',
+    id: '9.1',
     branch: 'main',
   },
   // {
-  //   label: 'Version 9.1 (alpha)',
-  //   id: '9.1',
+  //   label: 'Version 9.2 (alpha)',
+  //   id: '9.2',
   //   branch: 'next',
   //   preRelease: true,
   // },
