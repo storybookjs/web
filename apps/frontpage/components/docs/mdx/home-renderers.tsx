@@ -81,6 +81,12 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         title="Svelte"
       />
       <Card
+        href="https://github.com/solidjs-community/storybook"
+        logo="logo-solidjs.svg"
+        subtitle="with Vite"
+        title="SolidJS"
+      />
+      <Card
         href="/docs/get-started/frameworks/web-components-vite/?renderer=web-components"
         logo="logo-web-components.svg"
         subtitle="with Vite"
