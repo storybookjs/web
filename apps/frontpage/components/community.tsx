@@ -98,9 +98,10 @@ export function Community() {
 
   useEffect(() => {
     const pauseVideo = () => {
-      videoBRef.current && videoBRef.current.pause();
-      videoBRef.current &&
+      if (videoBRef.current) {
+        videoBRef.current.pause();
         videoBRef.current.removeEventListener('loadeddata', pauseVideo);
+      }
     };
 
     if (videoBRef.current && !pauseVideoB) {
@@ -111,14 +112,14 @@ export function Community() {
 
   return (
     <div
-      className="grid grid-cols-[repeat(4,_1fr)] auto-rows-[280px] gap-8"
+      className="grid auto-rows-[280px] grid-cols-[repeat(4,_1fr)] gap-8"
       ref={sectionRef}
     >
       <div className="relative col-[1_/_-1] rounded-lg bg-zinc-600 sm:col-[1_/_3]">
         <AnimatePresence initial={false}>
           <motion.div
             animate="center"
-            className="absolute top-0 bottom-0 left-0 right-0 bg-center bg-no-repeat bg-cover rounded-lg"
+            className="absolute bottom-0 left-0 right-0 top-0 rounded-lg bg-cover bg-center bg-no-repeat"
             exit="exit"
             initial="enter"
             key={activeIndex.img}
@@ -140,7 +141,7 @@ export function Community() {
           <motion.video
             animate="center"
             autoPlay
-            className="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full overflow-hidden rounded-lg"
+            className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden rounded-lg object-cover"
             exit="exit"
             initial="enter"
             key={activeIndex.videoA}
@@ -164,7 +165,7 @@ export function Community() {
           <motion.video
             animate="center"
             autoPlay
-            className="absolute top-0 bottom-0 left-0 right-0 object-cover w-full h-full overflow-hidden rounded-lg"
+            className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden rounded-lg object-cover"
             exit="exit"
             initial="enter"
             key={activeIndex.videoB}
