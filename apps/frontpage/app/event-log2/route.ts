@@ -1,4 +1,3 @@
-import { headers } from 'next/headers';
 import type { NextRequest } from 'next/server';
 import crypto from 'node:crypto';
 
