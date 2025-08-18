@@ -30,7 +30,11 @@ function flatten(
 export async function POST(request: NextRequest) {
   const { headers, method } = request;
   const body = await request.text();
-  const received = JSON.parse(body);
+  const received: {
+    eventType: string;
+    context: { storybookVersion: string; anonymousId: string };
+    payload: { error: { message: string }; errorHash: string };
+  } = JSON.parse(body);
 
   if (received.eventType === 'error') {
     const now = new Date().toISOString();
@@ -54,7 +58,7 @@ export async function POST(request: NextRequest) {
       message: {
         formatted:
           received.payload.error.message ||
-          received.errorHash ||
+          received.payload.errorHash ||
           'Unknown error',
       },
     };
