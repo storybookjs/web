@@ -27,6 +27,14 @@ function flatten(
   return acc;
 }
 
+function getEnvironment(storybookVersion: string) {
+  if (storybookVersion.includes('alpha')) return 'alpha';
+  if (storybookVersion.includes('beta')) return 'beta';
+  if (storybookVersion.includes('rc')) return 'rc';
+  if (storybookVersion.includes('canary')) return 'canary';
+  return 'latest';
+}
+
 export async function POST(request: NextRequest) {
   const { headers, method } = request;
   const body = await request.text();
@@ -52,6 +60,7 @@ export async function POST(request: NextRequest) {
       release: received.context.storybookVersion,
       user: { id: received.context.anonymousId },
       timestamp: now,
+      environment: getEnvironment(received.context.storybookVersion),
       level: 'error',
       platform: 'javascript',
       tags: flatten(received),
