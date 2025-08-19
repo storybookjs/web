@@ -92,12 +92,8 @@ export async function POST(request: NextRequest) {
         headers: { 'Content-Type': 'application/x-sentry-envelope' },
         body: envelope,
       });
-
-      // eslint-disable-next-line no-console -- we want to log the error
-      console.error('Failed to send event to Sentry', res);
     } catch (e) {
-      // eslint-disable-next-line no-console -- we want to log the error
-      console.error('Error to send event to Sentry', e);
+      //
     }
   }
 
