@@ -62,17 +62,18 @@ export async function POST(request: NextRequest) {
       const itemHeader = { type: 'event' };
       const payload = {
         event_id: eventId,
-        release: received.context.storybookVersion,
-        user: { id: received.context.userSince.toString() },
+        release: received?.context?.storybookVersion ?? 'unknown',
+        user: { id: received?.context?.userSince.toString() ?? 'unknown' },
         timestamp: now,
-        environment: getEnvironment(received.context.storybookVersion),
+        environment:
+          getEnvironment(received?.context?.storybookVersion) ?? 'unknown',
         level: 'error',
         platform: 'javascript',
-        tags: flatten(received),
+        tags: flatten(received ?? {}),
         message: {
           formatted:
-            received.payload.error.message ||
-            received.payload.errorHash ||
+            received?.payload?.error?.message ||
+            received?.payload?.errorHash ||
             'Unknown error',
         },
       };
