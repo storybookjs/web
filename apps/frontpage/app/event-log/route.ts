@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
       const payload = {
         event_id: eventId,
         release: received?.context?.storybookVersion ?? 'unknown',
-        user: { id: received?.context?.userSince.toString() ?? 'unknown' },
+        user: { id: received?.context?.userSince?.toString() ?? 'unknown' },
         timestamp: now,
         environment:
           getEnvironment(received?.context?.storybookVersion) ?? 'unknown',
