@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
         JSON.stringify(payload),
       ].join('\n');
 
-      const res = await fetch(sentryEnvelopeUrl, {
+      await fetch(sentryEnvelopeUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-sentry-envelope' },
         body: envelope,
