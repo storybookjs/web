@@ -40,49 +40,57 @@ export async function POST(request: NextRequest) {
   const body = await request.text();
   const received: {
     eventType: string;
-    context: { storybookVersion: string; anonymousId: string };
+    context: {
+      storybookVersion: string;
+      anonymousId: string;
+      userSince: string;
+    };
     payload: { error: { message: string }; errorHash: string };
   } = JSON.parse(body);
 
   if (received.eventType === 'error') {
-    const now = new Date().toISOString();
-    const eventId = crypto.randomUUID().replace(/-/g, '');
+    try {
+      const now = new Date().toISOString();
+      const eventId = crypto.randomUUID().replace(/-/g, '');
 
-    const envelopeHeader = {
-      event_id: eventId,
-      sent_at: now,
-      sdk: { name: 'custom.fetch.sender', version: '1.0' },
-    };
+      const envelopeHeader = {
+        event_id: eventId,
+        sent_at: now,
+        sdk: { name: 'custom.fetch.sender', version: '1.0' },
+      };
 
-    const itemHeader = { type: 'event' };
-    const payload = {
-      event_id: eventId,
-      release: received.context.storybookVersion,
-      user: { id: received.context.anonymousId },
-      timestamp: now,
-      environment: getEnvironment(received.context.storybookVersion),
-      level: 'error',
-      platform: 'javascript',
-      tags: flatten(received),
-      message: {
-        formatted:
-          received.payload.error.message ||
-          received.payload.errorHash ||
-          'Unknown error',
-      },
-    };
+      const itemHeader = { type: 'event' };
+      const payload = {
+        event_id: eventId,
+        release: received.context.storybookVersion,
+        user: { id: received.context.userSince.toString() },
+        timestamp: now,
+        environment: getEnvironment(received.context.storybookVersion),
+        level: 'error',
+        platform: 'javascript',
+        tags: flatten(received),
+        message: {
+          formatted:
+            received.payload.error.message ||
+            received.payload.errorHash ||
+            'Unknown error',
+        },
+      };
 
-    const envelope = [
-      JSON.stringify(envelopeHeader),
-      JSON.stringify(itemHeader),
-      JSON.stringify(payload),
-    ].join('\n');
+      const envelope = [
+        JSON.stringify(envelopeHeader),
+        JSON.stringify(itemHeader),
+        JSON.stringify(payload),
+      ].join('\n');
 
-    await fetch(sentryEnvelopeUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-sentry-envelope' },
-      body: envelope,
-    });
+      await fetch(sentryEnvelopeUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-sentry-envelope' },
+        body: envelope,
+      });
+    } catch (e) {
+      //
+    }
   }
 
   // we send the request forward to https://us-central1-storybook-warehouse.cloudfunctions.net/storybook-event-log-production-event-log
