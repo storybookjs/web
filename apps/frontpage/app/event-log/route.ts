@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       anonymousId: string;
       userSince: string;
     };
-    payload: { error: { message: string }; errorHash: string };
+    payload: { error: { message: string }; errorHash: string; name: string };
   } = JSON.parse(body);
 
   if (received.eventType === 'error') {
@@ -71,8 +71,10 @@ export async function POST(request: NextRequest) {
         platform: 'javascript',
         tags: flatten(received ?? {}),
         message: {
+          message: received?.payload?.name || 'Uncategorized error',
           formatted:
             received?.payload?.error?.message ||
+            received?.payload?.name ||
             received?.payload?.errorHash ||
             'Unknown error',
         },
