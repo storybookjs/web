@@ -46,6 +46,7 @@ export async function POST(request: NextRequest) {
       userSince: string;
     };
     payload: { error: { message: string }; errorHash: string; name: string };
+    metadata: { userSince: string };
   } = JSON.parse(body);
 
   if (received.eventType === 'error') {
@@ -63,7 +64,7 @@ export async function POST(request: NextRequest) {
       const payload = {
         event_id: eventId,
         release: received?.context?.storybookVersion ?? 'unknown',
-        user: { id: received?.context?.userSince?.toString() ?? 'unknown' },
+        user: { id: received?.metadata?.userSince?.toString() ?? 'unknown' },
         timestamp: now,
         environment:
           getEnvironment(received?.context?.storybookVersion) ?? 'unknown',
