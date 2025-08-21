@@ -1,8 +1,7 @@
 {
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
-    "plugins": [{ "name": "next" }],
-    "lib": ["ES2022", "dom"]
+    "plugins": [{ "name": "next" }]
   },
   "include": [
     "next-env.d.ts",
