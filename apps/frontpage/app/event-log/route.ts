@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       userSince: string;
     };
     payload: { error: { message: string }; errorHash: string; name: string };
-    metadata: { userSince: string };
+    metadata: { userSince: string; storybookVersion: string };
   } = JSON.parse(body);
 
   if (received.eventType === 'error') {
@@ -70,7 +70,10 @@ export async function POST(request: NextRequest) {
         user: { id: received?.metadata?.userSince?.toString() ?? 'unknown' },
         timestamp: now,
         environment:
-          getEnvironment(received?.context?.storybookVersion) ?? 'unknown',
+          getEnvironment(
+            received?.context?.storybookVersion ??
+              received?.metadata?.storybookVersion,
+          ) ?? 'unknown',
         level: 'error',
         platform: 'javascript',
         tags: flatten(received ?? {}),
