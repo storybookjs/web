@@ -18,7 +18,7 @@ function flatten(
       } catch (e) {
         //
       }
-    } else if (typeof value === 'string' && value.includes('\n')) {
+    } else if (value && typeof value === 'string' && value.includes('\n')) {
       acc[p] = `...${value.split('\n')[0]}...`;
     } else if (value) {
       acc[p] = value;
