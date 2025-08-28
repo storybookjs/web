@@ -160,9 +160,7 @@ interface SentryStackFrame {
   in_app?: boolean;
 }
 
-export function parseStackTrace(
-  stackString?: string | null,
-): SentryStackFrame[] {
+function parseStackTrace(stackString?: string | null): SentryStackFrame[] {
   if (!stackString) return [];
 
   const lines = stackString.split('\n').slice(1); // skip "Error: ..." line if present
