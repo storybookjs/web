@@ -35,7 +35,7 @@ function getEnvironment(storybookVersion: string) {
   if (storybookVersion.includes('alpha')) return 'alpha';
   if (storybookVersion.includes('beta')) return 'beta';
   if (storybookVersion.includes('rc')) return 'rc';
-  if (storybookVersion.includes('0.0.0')) return 'canary';
+  if (storybookVersion.startsWith('0.0.0')) return 'canary';
   if (storybookVersion.includes('canary')) return 'canary';
   return 'latest';
 }
@@ -100,19 +100,6 @@ export async function POST(request: NextRequest) {
             received?.payload?.name ||
             received?.payload?.errorHash ||
             'Unknown error',
-        },
-
-        contexts: {
-          state: {
-            state: {
-              type: 'X',
-              value: received?.context,
-            },
-            b: {
-              type: 'B',
-              value: received?.metadata,
-            },
-          },
         },
       };
 
@@ -237,14 +224,3 @@ interface ErrorLocation {
   length?: number;
   lineText?: string;
 }
-
-// function buildFrameFromLocation(loc: ErrorLocation): SentryStackFrame {
-//   return {
-//     filename: loc.file ?? '<unknown>',
-//     function: '<unknown>',
-//     lineno: loc.line,
-//     colno: loc.column,
-//     in_app: true,
-//     context_line: loc.lineText,
-//   };
-// }
