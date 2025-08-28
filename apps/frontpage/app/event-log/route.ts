@@ -75,8 +75,8 @@ export async function POST(request: NextRequest) {
         platform: 'javascript',
         tags: flatten({ ...(received ?? {}) }),
         fingerprint: received?.payload?.name
-          ? [received.payload.name]
-          : [received.payload.errorHash],
+          ? [`fp-${received.payload.name}`]
+          : [`fp-${received.payload.errorHash}`],
 
         exception: {
           values: [
