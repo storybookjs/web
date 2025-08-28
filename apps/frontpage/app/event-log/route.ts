@@ -57,19 +57,6 @@ export async function POST(request: NextRequest) {
         sdk: { name: 'custom.fetch.sender', version: '1.1' },
       };
 
-      const { storybookPackages, testPackages, addons, ...rest } =
-        received?.metadata ?? {};
-
-      // delete the extracted info
-      received.metadata = rest;
-
-      const remainder = flatten({
-        ...(received ?? {}),
-        ...storybookPackages,
-        ...testPackages,
-        ...addons,
-      });
-
       const itemHeader = { type: 'event' };
       const version =
         received?.context?.storybookVersion ??
@@ -78,21 +65,18 @@ export async function POST(request: NextRequest) {
       const payload = {
         event_id: eventId,
         release: version ?? 'unknown',
+
+        // anonymized
         user: { id: received?.metadata?.userSince?.toString() ?? 'unknown' },
+
         timestamp: now,
         environment: getEnvironment(version),
         level: 'error',
         platform: 'javascript',
-        tags: remainder,
+        tags: flatten({ ...(received ?? {}) }),
         fingerprint: received?.payload?.name
           ? [received.payload.name]
           : [received.payload.errorHash],
-
-        modules: {
-          ...(received?.metadata?.storybookPackages ?? {}),
-          ...(received?.metadata?.testPackages ?? {}),
-          ...(received?.metadata?.addons ?? {}),
-        },
 
         exception: {
           values: [
@@ -110,11 +94,25 @@ export async function POST(request: NextRequest) {
           ],
         },
         message: {
+          message: received?.payload?.error?.message,
           formatted:
             received?.payload?.error?.message ||
             received?.payload?.name ||
             received?.payload?.errorHash ||
             'Unknown error',
+        },
+
+        contexts: {
+          state: {
+            state: {
+              type: 'X',
+              value: received?.context,
+            },
+            b: {
+              type: 'B',
+              value: received?.metadata,
+            },
+          },
         },
       };
 
@@ -177,9 +175,6 @@ interface TelemetryEvent {
   metadata: {
     userSince: string;
     storybookVersion: string;
-    storybookPackages?: Record<string, unknown>;
-    testPackages?: Record<string, unknown>;
-    addons?: Record<string, unknown>;
   };
 }
 
