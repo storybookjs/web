@@ -214,13 +214,13 @@ interface ErrorLocation {
   lineText?: string;
 }
 
-function buildFrameFromLocation(loc: ErrorLocation): SentryStackFrame {
-  return {
-    filename: loc.file ?? '<unknown>',
-    function: '<unknown>',
-    lineno: loc.line,
-    colno: loc.column,
-    in_app: true,
-    context_line: loc.lineText,
-  };
-}
+// function buildFrameFromLocation(loc: ErrorLocation): SentryStackFrame {
+//   return {
+//     filename: loc.file ?? '<unknown>',
+//     function: '<unknown>',
+//     lineno: loc.line,
+//     colno: loc.column,
+//     in_app: true,
+//     context_line: loc.lineText,
+//   };
+// }
