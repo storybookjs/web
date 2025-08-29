@@ -9,10 +9,15 @@ function flatten(
   prefix = '',
 ) {
   Object.entries(obj).forEach(([key, value]) => {
-    const p = (prefix ? `${prefix}.${key}` : key)
-      .replaceAll('@', 'at_')
+    let p: string = (prefix ? `${prefix}.${key}` : key)
+      .replaceAll('@', '_at_')
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- we know it's a string
-      .replaceAll('/', 'slash_');
+      .replaceAll('/', '_slash_');
+
+    if (p.startsWith('_')) {
+      p = p.slice(1);
+    }
+
     if (typeof value === 'object' && value !== null) {
       try {
         flatten(value as Record<string, unknown>, acc, p);
@@ -20,7 +25,8 @@ function flatten(
         //
       }
     } else if (value && typeof value === 'string' && value.includes('\n')) {
-      acc[p] = `...${value.split('\n')[0]}...`;
+      acc[p] =
+        `...${value.split('\n').find((line) => line.trim().length > 0) ?? ''}...`;
     } else if (value) {
       acc[p] = value;
     }
@@ -35,7 +41,7 @@ function getEnvironment(storybookVersion: string) {
   if (storybookVersion.includes('alpha')) return 'alpha';
   if (storybookVersion.includes('beta')) return 'beta';
   if (storybookVersion.includes('rc')) return 'rc';
-  if (storybookVersion.includes('0.0.0')) return 'canary';
+  if (storybookVersion.startsWith('0.0.0')) return 'canary';
   if (storybookVersion.includes('canary')) return 'canary';
   return 'latest';
 }
@@ -57,6 +63,8 @@ export async function POST(request: NextRequest) {
         sdk: { name: 'custom.fetch.sender', version: '1.1' },
       };
 
+      const fingerprint = getFingerPrint(received);
+
       const itemHeader = { type: 'event' };
       const version =
         received?.context?.storybookVersion ??
@@ -74,45 +82,35 @@ export async function POST(request: NextRequest) {
         level: 'error',
         platform: 'javascript',
         tags: flatten({ ...(received ?? {}) }),
-        fingerprint: received?.payload?.name
-          ? [`fp-${received.payload.name}`]
-          : [`fp-${received.payload.errorHash}`],
+        fingerprint,
 
         exception: {
           values: [
             {
               type: received?.payload?.name ?? 'CustomError',
               value:
-                received?.payload?.error?.message ||
-                received?.payload?.name ||
-                received?.payload?.errorHash ||
+                received?.payload?.error?.message ??
+                received?.payload?.name ??
+                received?.payload?.errorHash ??
                 'Unknown error',
-              stacktrace: {
-                frames: parseStackTrace(received?.payload?.error?.stack ?? ''),
-              },
+              stacktrace: received?.payload?.error?.stack
+                ? {
+                    frames: parseStackTrace(
+                      received?.payload?.error?.stack ?? '',
+                    ),
+                  }
+                : undefined,
             },
           ],
         },
         message: {
           message: received?.payload?.error?.message,
           formatted:
-            received?.payload?.error?.message ||
-            received?.payload?.name ||
-            received?.payload?.errorHash ||
+            received?.payload?.error?.message ??
+            received?.payload?.metadataErrorMessage ??
+            received?.payload?.name ??
+            received?.payload?.errorHash ??
             'Unknown error',
-        },
-
-        contexts: {
-          state: {
-            state: {
-              type: 'X',
-              value: received?.context,
-            },
-            b: {
-              type: 'B',
-              value: received?.metadata,
-            },
-          },
         },
       };
 
@@ -157,7 +155,9 @@ interface TelemetryEvent {
     cliVersion?: string;
   };
   payload: {
+    eventType?: string;
     category?: string;
+    metadataErrorMessage?: string;
     code?: string;
     error: {
       message: string;
@@ -184,6 +184,22 @@ interface SentryStackFrame {
   lineno?: number;
   colno?: number;
   in_app?: boolean;
+}
+
+function getFingerPrint(received: TelemetryEvent) {
+  if (typeof received?.payload?.category === 'string') {
+    return [`fp-${received.payload.name}`];
+  }
+
+  if (typeof received?.payload?.code === 'string') {
+    return [
+      received?.payload?.eventType ?? 'unknown',
+      received?.payload?.code ?? 'unknown',
+      received?.payload?.name ?? 'unknown',
+    ];
+  }
+
+  return [`fp-${received.payload.errorHash}`];
 }
 
 function parseStackTrace(stackString?: string | null): SentryStackFrame[] {
@@ -237,14 +253,3 @@ interface ErrorLocation {
   length?: number;
   lineText?: string;
 }
-
-// function buildFrameFromLocation(loc: ErrorLocation): SentryStackFrame {
-//   return {
-//     filename: loc.file ?? '<unknown>',
-//     function: '<unknown>',
-//     lineno: loc.line,
-//     colno: loc.column,
-//     in_app: true,
-//     context_line: loc.lineText,
-//   };
-// }
