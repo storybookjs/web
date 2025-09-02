@@ -38,9 +38,9 @@ function getEnvironment(storybookVersion: string) {
   if (!storybookVersion) {
     return 'unknown';
   }
-  if (storybookVersion.includes('alpha')) return 'alpha';
-  if (storybookVersion.includes('beta')) return 'beta';
-  if (storybookVersion.includes('rc')) return 'rc';
+  if (storybookVersion.includes('alpha')) return 'prerelease';
+  if (storybookVersion.includes('beta')) return 'prerelease';
+  if (storybookVersion.includes('rc')) return 'prerelease';
   if (storybookVersion.startsWith('0.0.0')) return 'canary';
   if (storybookVersion.includes('canary')) return 'canary';
   return 'latest';
