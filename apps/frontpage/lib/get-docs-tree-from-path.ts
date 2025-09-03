@@ -27,7 +27,7 @@ export const getDocsTreeFromPath = (
   const newDocsRoot = docsRoot ?? newPath;
 
   const files = fs.readdirSync(path.join(process.cwd(), newPath));
-  const tree: RawTreeProps[] = [];
+  let tree: RawTreeProps[] = [];
 
   files.forEach((file) => {
     const filePath = path.join(newPath, file);
@@ -79,6 +79,8 @@ export const getDocsTreeFromPath = (
       });
     }
   });
+
+  tree = tree.filter((item) => !item.pathSegment.includes('api') && !item.pathSegment.includes('writing'));
 
   return tree.sort((a, b) =>
     a.sidebar?.order && b.sidebar?.order
