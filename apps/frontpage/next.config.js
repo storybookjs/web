@@ -93,6 +93,15 @@ module.exports = withBundleAnalyzer(
       return config;
     },
     transpilePackages: ['@repo/ui', '@repo/utils'],
+    experimental: {
+      /**
+       * This ensures that we can read files from these directories when deployed
+       * https://vercel.com/guides/how-can-i-use-files-in-serverless-functions#using-next.js
+       */
+      outputFileTracingIncludes: {
+        '/docs/**': ['./content/docs/**'],
+      },
+    },
     async redirects() {
       return [...generatedRedirects];
     },
