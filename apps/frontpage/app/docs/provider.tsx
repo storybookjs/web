@@ -8,15 +8,18 @@ import {
   cookieLanguageId,
   cookiePackageManagerId,
   cookieRenderId,
+  cookieSnippetTabsId,
 } from '../../constants';
 
 export interface DocsContextProps {
   activeRenderer: null | string;
   setRenderer: (id: string) => void;
   activeLanguage: null | string;
+  activeSnippetTabs: string[];
   setLanguage: (id: string) => void;
   activePackageManager: null | string;
   setPackageManager: (id: string) => void;
+  setSnippetTabs: (id: string) => void;
 }
 
 export const DocsContext = createContext<DocsContextProps | undefined>(
@@ -33,11 +36,13 @@ export function DocsProvider({ children }: { children: ReactNode }) {
   const [activePackageManager, setActivePackageManager] = useState<
     null | string
   >(packageManagers[0].id);
+  const [activeSnippetTabs, setActiveSnippetTabs] = useState<string[]>([]);
 
   useEffect(() => {
     const cookieRenderer = getCookie(cookieRenderId);
     const cookieLanguage = getCookie(cookieLanguageId);
     const cookiePackageManager = getCookie(cookiePackageManagerId);
+    const cookieSnippetTabs = getCookie(cookieSnippetTabsId);
 
     if (cookieRenderer) {
       setActiveRenderer(cookieRenderer);
@@ -56,6 +61,12 @@ export function DocsProvider({ children }: { children: ReactNode }) {
     } else {
       setCookie(cookiePackageManagerId, packageManagers[0].id);
     }
+
+    if (cookieSnippetTabs) {
+      setActiveSnippetTabs(cookieSnippetTabs.split(',').map(decodeURIComponent));
+    } else {
+      setCookie(cookieSnippetTabsId, '');
+    }
   }, []);
 
   const setRenderer = (id: string) => {
@@ -73,15 +84,25 @@ export function DocsProvider({ children }: { children: ReactNode }) {
     setCookie(cookiePackageManagerId, id);
   };
 
+  const setSnippetTabs = (id: string) => {
+    setActiveSnippetTabs((prev) => [id, ...prev.filter((tab) => tab !== id)]);
+    setCookie(
+      cookieSnippetTabsId,
+      [id, ...activeSnippetTabs.filter((tab) => tab !== id)].join(','),
+    );
+  };
+
   return (
     <DocsContext.Provider
       value={{
         activeRenderer,
         setRenderer,
         activeLanguage,
+        activeSnippetTabs,
         setLanguage,
         activePackageManager,
         setPackageManager,
+        setSnippetTabs,
       }}
     >
       {children}

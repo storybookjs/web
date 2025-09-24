@@ -20,6 +20,16 @@ interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[] | null;
 }
 
+const getInitialTab = (tabs: Tab[], activeSnippetTabs: string[]) => {
+  let initialTab: Tab | undefined;
+  
+  activeSnippetTabs.forEach((localTab) => {
+    initialTab ??= tabs.find((tab) => tab.id === localTab);
+    initialTab ??= tabs.find((tab) => tab.id.includes(localTab) || localTab.includes(tab.id));
+  });
+  return initialTab;
+};
+
 const Error = () => {
   return (
     <div>
@@ -62,8 +72,10 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
     activeRenderer: activeRendererIn,
     activeLanguage,
     activePackageManager,
+    activeSnippetTabs,
     setLanguage,
     setPackageManager,
+    setSnippetTabs,
   } = useDocs();
   const [activeTab, setActiveTab] = useState<Tab['id'] | null>(null);
 
@@ -79,6 +91,11 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
 
   const handlePackageManager = (id: string) => {
     setPackageManager(id);
+  };
+
+  const handleTabChange = (id: string) => {
+    setActiveTab(id);
+    setSnippetTabs(id);
   };
 
   // Get possible tabs and their content
@@ -108,15 +125,20 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
       activeLanguage &&
       activePackageManager &&
       activeRenderer &&
+      activeSnippetTabs &&
       tabs &&
-      tabs.length > 0 &&
-      !activeTab
+      tabs.length > 0
     ) {
-      setActiveTab(tabs[0].id);
+      const initialTab = getInitialTab(tabs, activeSnippetTabs);
+      if (initialTab) {
+        setActiveTab(initialTab.id);
+      } else if (!activeTab) {
+        setActiveTab(tabs[0].id);
+      }
     } else if (tabs && tabs.length === 0 && activeTab) {
       setActiveTab(null);
     }
-  }, [activeTab, tabs, activeLanguage, activePackageManager, activeRenderer]);
+  }, [activeTab, tabs, activeLanguage, activePackageManager, activeRenderer, activeSnippetTabs]);
 
   if (!content)
     return (
@@ -143,7 +165,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
       copy={activeContent?.raw ?? ''}
       top={
         tabs && tabs.length > 1 ? (
-          <Tabs activeTab={activeTab} onTabChange={setActiveTab} tabs={tabs} />
+          <Tabs activeTab={activeTab} onTabChange={handleTabChange} tabs={tabs} />
         ) : null
       }
       options={
