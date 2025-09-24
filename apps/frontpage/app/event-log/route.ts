@@ -134,16 +134,18 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  const ip = headers.get('x-forwarded-for') ?? headers.get('x-real-ip');
+
   if (received.payload?.userAgent) {
     try {
       // eslint-disable-next-line no-console -- we want to log the error
-      console.log({ userAgent: received.payload.userAgent, ip: request.ip });
+      console.log({ userAgent: received.payload.userAgent, ip });
       await fetch('https://plausible.io/api/event', {
         method: 'POST',
         headers: {
           'User-Agent': received.payload.userAgent ?? '',
           'Content-Type': 'application/json',
-          'X-Forwarded-For': request.ip ?? '',
+          'X-Forwarded-For': ip ?? '127.0.0.1',
         },
         body: JSON.stringify({
           name: received.eventType,
