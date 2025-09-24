@@ -47,6 +47,9 @@ function getEnvironment(storybookVersion: string) {
 }
 
 export async function POST(request: NextRequest) {
+  // eslint-disable-next-line no-console -- we want to log the error
+  console.log('handling event-log');
+
   const { headers, method } = request;
   const body = await request.text();
 
@@ -131,6 +134,28 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  if (received.payload?.userAgent) {
+    try {
+      // eslint-disable-next-line no-console -- we want to log the error
+      console.log({ userAgent: received.payload.userAgent, ip: request.ip });
+      await fetch('https://plausible.io/api/event', {
+        method: 'POST',
+        headers: {
+          'User-Agent': received.payload.userAgent ?? '',
+          'Content-Type': 'application/json',
+          'X-Forwarded-For': request.ip ?? '',
+        },
+        body: JSON.stringify({
+          name: received.eventType,
+          url: 'https://storybook.js.org/event-log',
+          domain: 'storybook.js.org',
+        }),
+      });
+    } catch (e) {
+      // no-op
+    }
+  }
+
   // we send the request forward to https://us-central1-storybook-warehouse.cloudfunctions.net/storybook-event-log-production-event-log
   const res = await fetch(
     'https://us-central1-storybook-warehouse.cloudfunctions.net/storybook-event-log-production-event-log',
@@ -169,6 +194,7 @@ interface TelemetryEvent {
         }[];
       };
     };
+    userAgent?: string;
     errorHash: string;
     name: string;
   };
