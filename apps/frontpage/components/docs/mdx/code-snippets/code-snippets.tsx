@@ -129,7 +129,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
       tabs &&
       tabs.length > 0
     ) {
-      const initialTab = getInitialTab(tabs, activeSnippetTabs);
+      const initialTab = activeSnippetTabs?.length > 0 ? getInitialTab(tabs, activeSnippetTabs) : undefined;
       if (initialTab) {
         setActiveTab(initialTab.id);
       } else if (!activeTab) {

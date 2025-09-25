@@ -15,7 +15,7 @@ export interface DocsContextProps {
   activeRenderer: null | string;
   setRenderer: (id: string) => void;
   activeLanguage: null | string;
-  activeSnippetTabs: string[];
+  activeSnippetTabs: null | string[];
   setLanguage: (id: string) => void;
   activePackageManager: null | string;
   setPackageManager: (id: string) => void;
