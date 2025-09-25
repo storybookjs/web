@@ -150,6 +150,7 @@ export async function POST(request: NextRequest) {
         },
         body: JSON.stringify({
           name: received.eventType,
+          props: received.payload,
           url: 'https://storybook.js.org/event-log',
           domain: 'storybook.js.org',
         }),
