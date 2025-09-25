@@ -3,12 +3,15 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import copy from 'copy-to-clipboard';
 import { AnimatePresence, motion } from 'framer-motion';
+import { usePlausible } from 'next-plausible';
 
 export const InitCommand: FC = () => {
   const [state, setState] = useState(false);
+  const plausible = usePlausible();
 
   const onClick = () => {
     copy('npm create storybook@latest');
+    plausible('copy-init-command', { props: { source: 'hero' } });
     setState(true);
     setTimeout(() => {
       setState(false);
