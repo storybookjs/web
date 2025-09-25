@@ -50,8 +50,9 @@ const meta = {
   },
   args: {
     activeRenderer: 'react',
-    activeLanguage: null,
-    activePackageManager: null,
+    activeLanguage: 'js',
+    activePackageManager: 'npm',
+    activeSnippetTabs: [],
     content: content1,
   },
   decorators: [
@@ -76,6 +77,11 @@ const meta = {
               .mockImplementation((id) => {
                 setArgs({ activeRenderer: id });
               }),
+            setSnippetTabs: fn()
+              .mockName('setSnippetTabs')
+              .mockImplementation((id) => {
+                setArgs({ activeSnippetTabs: id });
+              }),
           }}
         >
           <Story />
@@ -88,6 +94,7 @@ const meta = {
     activeRenderer: string | null;
     activePackageManager: string | null;
     activeLanguage: string | null;
+    activeSnippetTabs: string[] | null;
   }
 >;
 
@@ -101,7 +108,6 @@ export const ContentOnly: Story = {
 export const PackageNPM: Story = {
   args: {
     content: content1,
-    activePackageManager: 'npm',
   },
 };
 
@@ -122,15 +128,13 @@ export const PackagePNPM: Story = {
 export const ReactNoLanguage: Story = {
   args: {
     content: content2,
-    activeRenderer: 'react',
+    activeLanguage: null,
   },
 };
 
 export const ReactJS: Story = {
   args: {
     content: content2,
-    activeRenderer: 'react',
-    activeLanguage: 'js',
   },
 };
 
@@ -145,6 +149,7 @@ export const AngularNoLanguage: Story = {
   args: {
     content: content2,
     activeRenderer: 'angular',
+    activeLanguage: null,
   },
 };
 
@@ -158,7 +163,13 @@ export const ReactNativeWebFallbackToReact: Story = {
 export const MultipleTabs: Story = {
   args: {
     content: contentMultiTab,
-    activeLanguage: 'js',
+  },
+};
+
+export const MultipleTabsWithTabFromCookie: Story = {
+  args: {
+    content: contentMultiTab,
+    activeSnippetTabs: ['vite'],
   },
 };
 
@@ -166,7 +177,6 @@ export const MultipleTabsVue3Only: Story = {
   args: {
     content: contentMultiTabVue3Only,
     activeRenderer: 'vue',
-    activeLanguage: 'js',
   },
 };
 
@@ -174,7 +184,6 @@ export const MultipleTabsVue3OnlySuffix: Story = {
   args: {
     content: contentMultiTabVue3OnlySuffix,
     activeRenderer: 'vue',
-    activeLanguage: 'js',
   },
 };
 
@@ -182,7 +191,6 @@ export const MultipleTabsVue2And3: Story = {
   args: {
     content: contentMultiTabVue2And3,
     activeRenderer: 'vue',
-    activeLanguage: 'js',
   },
 };
 
@@ -190,7 +198,6 @@ export const MultipleTabsVue2And3Suffix: Story = {
   args: {
     content: contentMultiTabVue2And3Suffix,
     activeRenderer: 'vue',
-    activeLanguage: 'js',
   },
 };
 
@@ -206,7 +213,6 @@ export const NoRenderer: Story = {
   args: {
     content: content2,
     activeRenderer: 'ember',
-    activeLanguage: 'js',
   },
 };
 
