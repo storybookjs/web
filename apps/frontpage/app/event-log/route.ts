@@ -47,9 +47,6 @@ function getEnvironment(storybookVersion: string) {
 }
 
 export async function POST(request: NextRequest) {
-  // eslint-disable-next-line no-console -- we want to log the error
-  console.log('handling event-log');
-
   const { headers, method } = request;
   const body = await request.text();
 
@@ -135,12 +132,27 @@ export async function POST(request: NextRequest) {
   }
 
   const ip = headers.get('x-forwarded-for') ?? headers.get('x-real-ip');
-  const userAgent = received.payload?.userAgent;
+  const { userAgent, step } = received.payload ?? {};
 
   if (userAgent) {
     try {
-      // eslint-disable-next-line no-console -- we want to log the error
-      console.log({ userAgent, ip });
+      let name = received.eventType;
+
+      // FIXME: want a more general way to handle this
+      if (step) {
+        name = `${name} - ${step}`;
+      }
+
+      const { builder, renderer, framework, storybookVersion } =
+        received.metadata ?? {};
+
+      const props = {
+        builder,
+        renderer,
+        framework: framework?.name,
+        storybookVersion,
+      };
+
       await fetch('https://plausible.io/api/event', {
         method: 'POST',
         headers: {
@@ -149,8 +161,8 @@ export async function POST(request: NextRequest) {
           'X-Forwarded-For': ip ?? '127.0.0.1',
         },
         body: JSON.stringify({
-          name: received.eventType,
-          props: received.payload,
+          name,
+          props,
           url: 'https://storybook.js.org/event-log',
           domain: 'storybook.js.org',
         }),
@@ -188,6 +200,7 @@ interface TelemetryEvent {
     category?: string;
     metadataErrorMessage?: string;
     code?: string;
+    step?: string;
     error: {
       message: string;
       stack?: string;
@@ -205,6 +218,11 @@ interface TelemetryEvent {
   metadata: {
     userSince: string;
     storybookVersion: string;
+    builder: string;
+    renderer: string;
+    framework?: {
+      name: string;
+    };
   };
 }
 
