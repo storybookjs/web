@@ -131,6 +131,47 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  const ip = headers.get('x-forwarded-for') ?? headers.get('x-real-ip');
+  const { userAgent, step } = received.payload ?? {};
+
+  if (userAgent) {
+    try {
+      let name = received.eventType;
+
+      // FIXME: want a more general way to handle this
+      if (step) {
+        name = `${name} - ${step}`;
+      }
+
+      const { builder, renderer, framework, storybookVersion } =
+        received.metadata ?? {};
+
+      const props = {
+        builder,
+        renderer,
+        framework: framework?.name,
+        storybookVersion,
+      };
+
+      await fetch('https://plausible.io/api/event', {
+        method: 'POST',
+        headers: {
+          'User-Agent': userAgent,
+          'Content-Type': 'application/json',
+          'X-Forwarded-For': ip ?? '127.0.0.1',
+        },
+        body: JSON.stringify({
+          name,
+          props,
+          url: 'https://storybook.js.org/event-log',
+          domain: 'storybook.js.org',
+        }),
+      });
+    } catch (e) {
+      // no-op
+    }
+  }
+
   // we send the request forward to https://us-central1-storybook-warehouse.cloudfunctions.net/storybook-event-log-production-event-log
   const res = await fetch(
     'https://us-central1-storybook-warehouse.cloudfunctions.net/storybook-event-log-production-event-log',
@@ -159,6 +200,7 @@ interface TelemetryEvent {
     category?: string;
     metadataErrorMessage?: string;
     code?: string;
+    step?: string;
     error: {
       message: string;
       stack?: string;
@@ -169,12 +211,18 @@ interface TelemetryEvent {
         }[];
       };
     };
+    userAgent?: string;
     errorHash: string;
     name: string;
   };
   metadata: {
     userSince: string;
     storybookVersion: string;
+    builder: string;
+    renderer: string;
+    framework?: {
+      name: string;
+    };
   };
 }
 
