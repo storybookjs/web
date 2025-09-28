@@ -52,138 +52,45 @@ export async function POST(request: NextRequest) {
 
   const received: TelemetryEvent = JSON.parse(body);
 
-  if (received.eventType === 'error') {
-    try {
-      const now = new Date().toISOString();
-      const eventId = crypto.randomUUID().replace(/-/g, '');
+  const requests = [];
 
-      const envelopeHeader = {
-        event_id: eventId,
-        sent_at: now,
-        sdk: { name: 'custom.fetch.sender', version: '1.1' },
-      };
-
-      const fingerprint = getFingerPrint(received);
-
-      const itemHeader = { type: 'event' };
-      const version =
-        received?.context?.storybookVersion ??
-        received?.metadata?.storybookVersion ??
-        received?.context?.cliVersion;
-      const payload = {
-        event_id: eventId,
-        release: version ?? 'unknown',
-
-        // anonymized
-        user: { id: received?.metadata?.userSince?.toString() ?? 'unknown' },
-
-        timestamp: now,
-        environment: getEnvironment(version),
-        level: 'error',
-        platform: 'javascript',
-        tags: flatten({ ...(received ?? {}) }),
-        fingerprint,
-
-        exception: {
-          values: [
-            {
-              type: received?.payload?.name ?? 'CustomError',
-              value:
-                received?.payload?.error?.message ??
-                received?.payload?.name ??
-                received?.payload?.errorHash ??
-                'Unknown error',
-              stacktrace: received?.payload?.error?.stack
-                ? {
-                    frames: parseStackTrace(
-                      received?.payload?.error?.stack ?? '',
-                    ),
-                  }
-                : undefined,
-            },
-          ],
-        },
-        message: {
-          message: received?.payload?.error?.message,
-          formatted:
-            received?.payload?.error?.message ??
-            received?.payload?.metadataErrorMessage ??
-            received?.payload?.name ??
-            received?.payload?.errorHash ??
-            'Unknown error',
-        },
-      };
-
-      const envelope = [
-        JSON.stringify(envelopeHeader),
-        JSON.stringify(itemHeader),
-        JSON.stringify(payload),
-      ].join('\n');
-
-      await fetch(sentryEnvelopeUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-sentry-envelope' },
-        body: envelope,
-      });
-    } catch (e) {
-      // eslint-disable-next-line no-console -- we want to log the error
-      console.error('Failed to send event to Sentry', e);
-    }
-  }
-
-  const ip = headers.get('x-forwarded-for') ?? headers.get('x-real-ip');
-  const { userAgent, step } = received.payload ?? {};
-
-  if (userAgent) {
-    try {
-      let name = received.eventType;
-
-      // FIXME: want a more general way to handle this
-      if (step) {
-        name = `${name} - ${step}`;
-      }
-
-      const { builder, renderer, framework, storybookVersion } =
-        received.metadata ?? {};
-
-      const props = {
-        builder,
-        renderer,
-        framework: framework?.name,
-        storybookVersion,
-      };
-
-      await fetch('https://plausible.io/api/event', {
-        method: 'POST',
-        headers: {
-          'User-Agent': userAgent,
-          'Content-Type': 'application/json',
-          'X-Forwarded-For': ip ?? '127.0.0.1',
-        },
-        body: JSON.stringify({
-          name,
-          props,
-          url: 'https://storybook.js.org/event-log',
-          domain: 'storybook.js.org',
-        }),
-      });
-    } catch (e) {
-      // no-op
-    }
-  }
-
-  // we send the request forward to https://us-central1-storybook-warehouse.cloudfunctions.net/storybook-event-log-production-event-log
-  const res = await fetch(
-    'https://us-central1-storybook-warehouse.cloudfunctions.net/storybook-event-log-production-event-log',
-    {
-      method,
-      body,
-      headers,
-    },
+  requests.push(
+    fetch(
+      'https://us-central1-storybook-warehouse.cloudfunctions.net/storybook-event-log-production-event-log',
+      {
+        method,
+        body,
+        headers,
+      },
+    ),
   );
 
-  return new Response(await res.text(), {
-    status: res.status,
+  if (received.eventType === 'error') {
+    requests.push(forwardToSentry(received));
+  }
+
+  if (received.payload?.userAgent) {
+    requests.push(forwardToPlausible(received, headers));
+  }
+
+  const responses = await Promise.allSettled(requests);
+  responses.forEach((res) => {
+    if (res.status === 'rejected') {
+      // eslint-disable-next-line no-console -- we want to log the error
+      console.error('Forwarding error', res.reason);
+    }
+  });
+
+  const res = responses[0];
+  if (res.status === 'rejected') {
+    const reason = (res.reason ? res.reason : 'unknown') as string;
+    return new Response(reason, {
+      status: 500,
+    });
+  }
+
+  return new Response(await res.value.text(), {
+    status: res.value.status,
   });
 }
 
@@ -234,6 +141,115 @@ interface SentryStackFrame {
   in_app?: boolean;
 }
 
+async function forwardToSentry(received: TelemetryEvent) {
+  const now = new Date().toISOString();
+  const eventId = crypto.randomUUID().replace(/-/g, '');
+
+  const envelopeHeader = {
+    event_id: eventId,
+    sent_at: now,
+    sdk: { name: 'custom.fetch.sender', version: '1.1' },
+  };
+
+  const fingerprint = getFingerPrint(received);
+
+  const itemHeader = { type: 'event' };
+  const version =
+    received?.context?.storybookVersion ??
+    received?.metadata?.storybookVersion ??
+    received?.context?.cliVersion;
+  const payload = {
+    event_id: eventId,
+    release: version ?? 'unknown',
+
+    // anonymized
+    user: { id: received?.metadata?.userSince?.toString() ?? 'unknown' },
+
+    timestamp: now,
+    environment: getEnvironment(version),
+    level: 'error',
+    platform: 'javascript',
+    tags: flatten({ ...(received ?? {}) }),
+    fingerprint,
+
+    exception: {
+      values: [
+        {
+          type: received?.payload?.name ?? 'CustomError',
+          value:
+            received?.payload?.error?.message ??
+            received?.payload?.name ??
+            received?.payload?.errorHash ??
+            'Unknown error',
+          stacktrace: received?.payload?.error?.stack
+            ? {
+                frames: parseStackTrace(received?.payload?.error?.stack ?? ''),
+              }
+            : undefined,
+        },
+      ],
+    },
+    message: {
+      message: received?.payload?.error?.message,
+      formatted:
+        received?.payload?.error?.message ??
+        received?.payload?.metadataErrorMessage ??
+        received?.payload?.name ??
+        received?.payload?.errorHash ??
+        'Unknown error',
+    },
+  };
+
+  const envelope = [
+    JSON.stringify(envelopeHeader),
+    JSON.stringify(itemHeader),
+    JSON.stringify(payload),
+  ].join('\n');
+
+  return fetch(sentryEnvelopeUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-sentry-envelope' },
+    body: envelope,
+  });
+}
+
+async function forwardToPlausible(received: TelemetryEvent, headers: Headers) {
+  const ip = headers.get('x-forwarded-for') ?? headers.get('x-real-ip');
+  const { userAgent, step } = received.payload ?? {};
+
+  let name = received.eventType;
+
+  // FIXME: want a more general way to handle this
+  if (step) {
+    name = `${name} - ${step}`;
+  }
+
+  const { builder, renderer, framework, storybookVersion } =
+    received.metadata ?? {};
+
+  const props = {
+    builder,
+    renderer,
+    framework: framework?.name,
+    storybookVersion,
+  };
+
+  return fetch('https://plausible.io/api/event', {
+    method: 'POST',
+    headers: {
+      'User-Agent': userAgent!,
+      'Content-Type': 'application/json',
+      'X-Forwarded-For': ip ?? '127.0.0.1',
+    },
+    body: JSON.stringify({
+      name,
+      props,
+      url: 'https://storybook.js.org/event-log',
+      domain: 'storybook.js.org',
+    }),
+  });
+}
+
 function getFingerPrint(received: TelemetryEvent) {
   if (typeof received?.payload?.category === 'string') {
     return [`fp-${received.payload.name}`];
@@ -259,10 +275,10 @@ function parseStackTrace(stackString?: string | null): SentryStackFrame[] {
   for (const line of lines) {
     // Case 1: function + file + line + col
     // eslint-disable-next-line prefer-named-capture-group -- 🤷
-    const fnMatch = line.match(/at (.+?) \((.+):(\d+):(\d+)\)/);
+    const fnMatch = /at (.+?) \((.+):(\d+):(\d+)\)/.exec(line);
     // Case 2: file + line + col (no function)
     // eslint-disable-next-line prefer-named-capture-group -- 🤷
-    const fileMatch = line.match(/at (.+):(\d+):(\d+)/);
+    const fileMatch = /at (.+):(\d+):(\d+)/.exec(line);
 
     if (fnMatch) {
       const [, fn, file, lineNum, colNum] = fnMatch;
