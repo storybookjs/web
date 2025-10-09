@@ -10,7 +10,7 @@ import { StorybookLogo } from '../logos/storybook-logo';
 import { Search } from '../search';
 import { MobileMenu } from './mobile-menu';
 import { Button } from './button';
-// import { Eyebrow } from './eyebrow';
+import { Eyebrow } from './eyebrow';
 import { nav } from './nav';
 
 export interface HeaderProps {
@@ -23,13 +23,13 @@ export interface HeaderProps {
 
 export const Header: FC<HeaderProps> = ({
   algoliaApiKey,
-  eyebrow,
-  // eyebrow = (
-  //   <Eyebrow
-  //     href="https://us02web.zoom.us/webinar/register/4217528604397/WN__h2Ayr3mSIi-AM6cQJXKzw"
-  //     title="Join us live: Rapid Frontend Prototyping with Cursor & Storybook"
-  //   />
-  // ),
+  // eyebrow,
+  eyebrow = (
+    <Eyebrow
+      href="https://us02web.zoom.us/webinar/register/1817522455361/WN_YfPY1PvpRIOs3GcB4p_P9w"
+      title="Join us live: CSF Next: Less Boilerplate, faster story writing"
+    />
+  ),
   githubCount = 0,
   subMenu,
   variant = 'system',
