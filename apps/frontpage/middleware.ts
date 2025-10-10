@@ -22,6 +22,7 @@ async function embedTelemetry(path: string, headers: Headers) {
       name: 'pageview',
       referrer: referer,
       interactive: false,
+      props: { referer },
       url: `https://storybook.js.org${path}`,
       domain: 'storybook.js.org',
     }),
