@@ -66,13 +66,13 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^4.1.1",
+    "@chromatic-com/storybook": "^4.2.0-next.1",
     "@next/eslint-plugin-next": "^14.1.1",
     "@repo/eslint-config": "*",
     "@repo/tailwind-config": "*",
     "@repo/typescript-config": "*",
-    "@storybook/addon-links": "^9.1.10",
-    "@storybook/nextjs": "^9.1.10",
+    "@storybook/addon-links": "^10.0.0-beta.10",
+    "@storybook/nextjs": "^10.0.0-beta.10",
     "@testing-library/react": "^16.0.0",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20",
@@ -82,15 +82,15 @@
     "@types/react-syntax-highlighter": "^15.5.12",
     "@types/tar": "^6.1.13",
     "@vitejs/plugin-react": "^4.3.0",
-    "eslint-plugin-storybook": "^9.1.10",
+    "eslint-plugin-storybook": "^10.0.0-beta.10",
     "jsdom": "^24.1.0",
     "postcss": "^8",
     "prompts": "^2.4.2",
-    "storybook": "^9.1.10",
+    "storybook": "^10.0.0-beta.10",
     "tailwindcss": "^3.4.1",
     "tsx": "^4.9.0",
     "typescript": "^5.3.3",
     "vitest": "^1.6.0",
-    "@storybook/addon-docs": "^9.1.10"
+    "@storybook/addon-docs": "^10.0.0-beta.10"
   }
 }
