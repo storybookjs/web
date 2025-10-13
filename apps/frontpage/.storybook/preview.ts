@@ -1,5 +1,5 @@
-import type { Preview } from '@storybook/nextjs';
 import '@docsearch/css';
+import type { Preview } from '@storybook/nextjs-vite';
 import '../app/globals.css';
 import '@repo/ui/styles.css';
 

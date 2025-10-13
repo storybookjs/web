@@ -1,5 +1,5 @@
 import { useArgs } from 'storybook/preview-api';
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { fn } from 'storybook/test';
 import type { ComponentProps } from 'react';
 import { DocsContext } from '../../../../app/docs/provider';
