@@ -22,9 +22,6 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
         <StorybookLogo color="dark" />
         <div className="flex items-center">
           <div className="flex items-center justify-center w-8 h-8">
-            <PlayIcon className="text-[#73828C]" />
-          </div>
-          <div className="flex items-center justify-center w-8 h-8">
             <CogIcon className="text-[#73828C]" />
           </div>
         </div>
