@@ -72,7 +72,7 @@
     "@repo/tailwind-config": "*",
     "@repo/typescript-config": "*",
     "@storybook/addon-links": "^10.0.0-beta.10",
-    "@storybook/nextjs": "^10.0.0-beta.10",
+    "@storybook/nextjs-vite": "^10.0.0-beta.10",
     "@testing-library/react": "^16.0.0",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20",
