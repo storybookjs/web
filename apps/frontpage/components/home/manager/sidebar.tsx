@@ -8,7 +8,6 @@ import {
   DocumentIcon,
   ExpandAltIcon,
   FolderIcon,
-  PlayIcon,
   PlusIcon,
   SearchIcon,
 } from '@storybook/icons';
