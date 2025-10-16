@@ -4,7 +4,7 @@
 import { useEffect, useState, type FC } from 'react';
 import { usePathname } from 'next/navigation';
 import { type CodeSnippetsProps } from '@repo/utils';
-import { CodeSnippetsWrapper } from '@repo/ui';
+import { CodeSnippetsWrapper, mdxComponents } from '@repo/ui';
 import { InfoIcon } from '@storybook/icons';
 import { useDocs } from '../../../../app/docs/provider';
 import { getFilters } from './utils/get-filters';
@@ -15,6 +15,8 @@ import {
 import { Dropdown } from './dropdown';
 import { transformVueTabTitle } from './utils/transform-vue-tab-title';
 import { type Tab, Tabs } from './tabs';
+
+const Link = mdxComponents.A;
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[] | null;
@@ -63,6 +65,17 @@ const getActiveRenderer = (activeRendererIn: string | null, pathname: string) =>
   };
 
   return  map[frameworkOrRendererPortion] ?? frameworkOrRendererPortion;
+}
+
+const getActiveInfo = (activeTab: string | null) => {
+  if (activeTab?.includes('CSF Next')) {
+    return (
+      <div className="flex items-center gap-2 px-4 py-3 text-sm text-blue-900 bg-blue-100 border-t border-blue-300 dark:border-blue-900 dark:bg-blue-950 dark:text-blue-600">
+        <InfoIcon />
+        <Link href="/docs/api/csf/csf-next" className="text-inherit hover:underline">Learn more about CSF Next</Link>
+      </div>
+    );
+  }
 }
 
 export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
@@ -168,6 +181,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
           <Tabs activeTab={activeTab} onTabChange={handleTabChange} tabs={tabs} />
         ) : null
       }
+      bottom={getActiveInfo(activeTab)}
       options={
         <>
           {filters && filters.languages.length > 1 ? (
