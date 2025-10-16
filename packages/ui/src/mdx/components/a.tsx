@@ -4,6 +4,7 @@ import type { FC, ReactNode } from 'react';
 type AProps = {
   children?: ReactNode;
   href?: string;
+  className?: string;
 };
 
 export const A: FC<AProps> = ({ children, href, ...rest }) => {

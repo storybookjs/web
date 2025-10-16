@@ -12,6 +12,7 @@ import { contentMultiTabVue3Only } from './mocked-data/content-multiple-tabs-vue
 import { contentMultiTabVue3OnlySuffix } from './mocked-data/content-multiple-tabs-vue-3-only-suffix';
 import { contentMultiTabVue2And3 } from './mocked-data/content-multiple-tabs-vue-2-and-3';
 import { contentMultiTabVue2And3Suffix } from './mocked-data/content-multiple-tabs-vue-2-and-3-suffix';
+import { contentCSFNext } from './mocked-data/content-csf-next';
 
 const meta = {
   title: 'CodeSnippets',
@@ -207,6 +208,14 @@ export const CoerceTS49ToTS: Story = {
     content: content2.filter((tab) => tab.language !== 'ts-4-9'),
     activeLanguage: 'ts-4-9',
   },
+}
+
+export const CSFNextInfo: Story = {
+  args: {
+    content: contentCSFNext,
+    activeRenderer: 'react',
+    activeSnippetTabs: ['CSF Next 🧪']
+  }
 }
 
 export const NoRenderer: Story = {
