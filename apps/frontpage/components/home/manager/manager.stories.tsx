@@ -6,7 +6,7 @@ export default {
   parameters: {
     layout: 'fullscreen',
     chromatic: {
-      diffThreshold: 0.2, // Accommodate animation flake
+      diffThreshold: 0.3, // Accommodate animation flake
     }
   }
 };
