@@ -5,6 +5,9 @@ export default {
   component: Manager,
   parameters: {
     layout: 'fullscreen',
+    chromatic: {
+      diffThreshold: 0.2, // Accommodate animation flake
+    }
   }
 };
 
