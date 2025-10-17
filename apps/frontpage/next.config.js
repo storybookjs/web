@@ -99,7 +99,7 @@ module.exports = withBundleAnalyzer(
        * https://vercel.com/guides/how-can-i-use-files-in-serverless-functions#using-next.js
        */
       outputFileTracingIncludes: {
-        '/docs/**': ['./content/docs/**', './content/snippets/**', './public/docs-assets/**'],
+        '/docs/**': ['./content/docs/**'],
       },
     },
     async redirects() {

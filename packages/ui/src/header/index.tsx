@@ -26,8 +26,8 @@ export const Header: FC<HeaderProps> = ({
   eyebrow,
   // eyebrow = (
   //   <Eyebrow
-  //     href="https://us02web.zoom.us/webinar/register/4217528604397/WN_ehG_NaegQD-VzkiUJXfrgw"
-  //     title="Join us live: Automated vs Manual—The right A11y Testing Mix"
+  //     href="https://us02web.zoom.us/webinar/register/1817522455361/WN_YfPY1PvpRIOs3GcB4p_P9w"
+  //     title="Join us live: CSF Next: Less Boilerplate, faster story writing"
   //   />
   // ),
   githubCount = 0,

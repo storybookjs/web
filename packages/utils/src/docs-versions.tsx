@@ -32,12 +32,13 @@ export const docsVersions: DocsVersion[] = [
     id: '9.1',
     branch: 'main',
   },
-  // {
-  //   label: 'Version 9.2 (alpha)',
-  //   id: '9.2',
-  //   branch: 'next',
-  //   preRelease: true,
-  // },
+  {
+    label: 'Version 10 (beta)',
+    id: '10.0',
+    inSlug: '10',
+    branch: 'next',
+    preRelease: true,
+  },
   {
     label: 'Version 8',
     id: '8.6',

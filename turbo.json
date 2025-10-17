@@ -4,6 +4,7 @@
   "globalEnv": [
     "ALGOLIA_API_KEY",
     "ANALYZE",
+    "SENTRY_KEY",
     "CONTEXT",
     "GCP_CREDENTIALS",
     "GITHUB_STORYBOOK_BOT_PAT",
