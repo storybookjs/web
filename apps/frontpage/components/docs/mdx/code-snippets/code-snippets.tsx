@@ -93,9 +93,9 @@ function ActiveInfo({ activeTab }: { activeTab: string | null }) {
           className="ml-auto h-8 select-none items-center justify-between gap-1 rounded px-2 text-sm text-slate-600 transition-all hover:border-zinc-300 hover:bg-slate-200 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800"
           onClick={() => { setDismissals('csf-next-info') }}
           type="button"
-          aria-label="Copy"
+          aria-label="Dismiss all CSF Next messages"
         >
-          <CloseIcon aria-label="Dismiss all CSF Next messages" />
+          <CloseIcon />
         </button>
       </div>
     );

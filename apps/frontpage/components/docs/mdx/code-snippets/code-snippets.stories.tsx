@@ -1,6 +1,7 @@
 import { useArgs } from '@storybook/preview-api';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
+// import { fn, userEvent, within, expect, waitFor } from '@storybook/test';
 import type { ComponentProps } from 'react';
 import { DocsContext } from '../../../../app/docs/provider';
 import { CodeSnippetsClient } from './code-snippets';
@@ -54,6 +55,7 @@ const meta = {
     activeLanguage: 'js',
     activePackageManager: 'npm',
     activeSnippetTabs: [],
+    activeDismissals: [],
     content: content1,
   },
   decorators: [
@@ -81,7 +83,12 @@ const meta = {
             setSnippetTabs: fn()
               .mockName('setSnippetTabs')
               .mockImplementation((id) => {
-                setArgs({ activeSnippetTabs: id });
+                setArgs({ activeSnippetTabs: [id] });
+              }),
+            setDismissals: fn()
+              .mockName('setDismissals')
+              .mockImplementation((id) => {
+                setArgs({ activeDismissals: [id] });
               }),
           }}
         >
@@ -96,6 +103,7 @@ const meta = {
     activePackageManager: string | null;
     activeLanguage: string | null;
     activeSnippetTabs: string[] | null;
+    activeDismissals: string[] | null;
   }
 >;
 
@@ -217,6 +225,33 @@ export const CSFNextInfo: Story = {
     activeSnippetTabs: ['CSF Next 🧪']
   }
 }
+
+// TODO: Couldn't get this working, something with `setArgs`?
+// export const DismissCSFNextInfo: Story = {
+//   parameters: {
+//     chromatic: {
+//       disableSnapshot: true,
+//     },
+//   },
+//   args: {
+//     content: contentCSFNext,
+//     activeRenderer: 'react',
+//     activeSnippetTabs: ['CSF Next 🧪'],
+//     activeDismissals: [],
+//   },
+//   async play({ canvasElement }) {
+//     const canvas = within(canvasElement);
+//     await waitFor(async () => {
+//       await canvas.findByText(/Learn more about CSF Next/i);
+//     });
+//     const dismissButton = canvas.getByRole('button', { name: /dismiss/i });
+//     await userEvent.click(dismissButton);
+
+//     await expect(
+//       canvas.queryByText(/Learn more about CSF Next/i)
+//     ).not.toBeInTheDocument();
+//   },
+// }
 
 export const NoRenderer: Story = {
   args: {
