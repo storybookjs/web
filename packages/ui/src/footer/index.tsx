@@ -127,18 +127,7 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
               href="https://netlify.com"
             >
               Netlify
-            </a>{' '}
-            and{' '}
-            <a
-              className={cn(
-                'hover:ui-text-blue-500 ui-transition-colors ui-text-md',
-                variant === 'home' && 'ui-text-white',
-                variant !== 'home' && 'ui-text-zinc-600 dark:ui-text-white',
-              )}
-              href="https://circleci.com"
-            >
-              CircleCI
-            </a>
+            </a>.
           </div>
         </div>
       </Container>
