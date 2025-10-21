@@ -1,0 +1,16 @@
+name: Build adddon catalog
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 7am UTC (12am PST) every day
+    - cron: '0 7 * * *'
+
+jobs:
+  compute:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build
+        run: |
+          curl -X POST -d '{}' ${{ secrets.BUILD_ADDON_CATALOG_URL }}
