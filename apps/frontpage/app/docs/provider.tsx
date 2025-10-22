@@ -9,6 +9,7 @@ import {
   cookiePackageManagerId,
   cookieRenderId,
   cookieSnippetTabsId,
+  cookieDismissalsId,
 } from '../../constants';
 
 export interface DocsContextProps {
@@ -16,10 +17,12 @@ export interface DocsContextProps {
   setRenderer: (id: string) => void;
   activeLanguage: null | string;
   activeSnippetTabs: null | string[];
+  activeDismissals: null | string[];
   setLanguage: (id: string) => void;
   activePackageManager: null | string;
   setPackageManager: (id: string) => void;
   setSnippetTabs: (id: string) => void;
+  setDismissals: (id: string) => void;
 }
 
 export const DocsContext = createContext<DocsContextProps | undefined>(
@@ -37,12 +40,14 @@ export function DocsProvider({ children }: { children: ReactNode }) {
     null | string
   >(packageManagers[0].id);
   const [activeSnippetTabs, setActiveSnippetTabs] = useState<string[]>([]);
+  const [activeDismissals, setActiveDismissals] = useState<string[]>([]);
 
   useEffect(() => {
     const cookieRenderer = getCookie(cookieRenderId);
     const cookieLanguage = getCookie(cookieLanguageId);
     const cookiePackageManager = getCookie(cookiePackageManagerId);
     const cookieSnippetTabs = getCookie(cookieSnippetTabsId);
+    const cookieDismissals = getCookie(cookieDismissalsId);
 
     if (cookieRenderer) {
       setActiveRenderer(cookieRenderer);
@@ -66,6 +71,10 @@ export function DocsProvider({ children }: { children: ReactNode }) {
       setActiveSnippetTabs(cookieSnippetTabs.split(',').map(decodeURIComponent));
     } else {
       setCookie(cookieSnippetTabsId, '');
+    }
+
+    if (cookieDismissals) {
+      setActiveDismissals(cookieDismissals.split(',').map(decodeURIComponent));
     }
   }, []);
 
@@ -92,6 +101,14 @@ export function DocsProvider({ children }: { children: ReactNode }) {
     );
   };
 
+  const setDismissals = (id: string) => {
+    setActiveDismissals((prev) => [id, ...prev.filter((dismissal) => dismissal !== id)]);
+    setCookie(
+      cookieDismissalsId,
+      [id, ...activeDismissals.filter((dismissal) => dismissal !== id)].join(','),
+    );
+  };
+
   return (
     <DocsContext.Provider
       value={{
@@ -99,10 +116,12 @@ export function DocsProvider({ children }: { children: ReactNode }) {
         setRenderer,
         activeLanguage,
         activeSnippetTabs,
+        activeDismissals,
         setLanguage,
         activePackageManager,
         setPackageManager,
         setSnippetTabs,
+        setDismissals,
       }}
     >
       {children}
