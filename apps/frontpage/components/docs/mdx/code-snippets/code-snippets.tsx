@@ -3,10 +3,11 @@
 
 import { useEffect, useState, type FC } from 'react';
 import { usePathname } from 'next/navigation';
-import { type CodeSnippetsProps } from '@repo/utils';
-import { CodeSnippetsWrapper } from '@repo/ui';
-import { InfoIcon } from '@storybook/icons';
+import { getVersion, type CodeSnippetsProps, latestVersion } from '@repo/utils';
+import { CodeSnippetsWrapper, mdxComponents } from '@repo/ui';
+import { CloseIcon, InfoIcon } from '@storybook/icons';
 import { useDocs } from '../../../../app/docs/provider';
+import { buildPathWithVersion } from '../../../../lib/build-path-with-version';
 import { getFilters } from './utils/get-filters';
 import {
   getActiveContentTabs,
@@ -15,6 +16,8 @@ import {
 import { Dropdown } from './dropdown';
 import { transformVueTabTitle } from './utils/transform-vue-tab-title';
 import { type Tab, Tabs } from './tabs';
+
+const Link = mdxComponents.A;
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[] | null;
@@ -63,6 +66,40 @@ const getActiveRenderer = (activeRendererIn: string | null, pathname: string) =>
   };
 
   return  map[frameworkOrRendererPortion] ?? frameworkOrRendererPortion;
+}
+
+function ActiveInfo({ activeTab }: { activeTab: string | null }) {
+  const {
+    activeDismissals,
+    setDismissals,
+  } = useDocs();
+
+  const pathname = usePathname();
+  const slug: string[] = pathname ? pathname.replace('/docs/', '').split('/') : [];
+  const activeVersion = getVersion(slug);
+
+  function getVersionedPath(path: string) {
+    return activeVersion.id === latestVersion.id
+      ? path
+      : buildPathWithVersion(path, activeVersion.inSlug ?? activeVersion.id);
+  }
+
+  if (activeTab?.includes('CSF Next') && !activeDismissals?.includes('csf-next-info')) {
+    return (
+      <div className="flex items-center gap-2 px-4 py-1 text-sm border-t border-zinc-300 dark:border-slate-700">
+        <InfoIcon color="#029cfd" /> {/* color-blue-500, to match the link */}
+        <Link href={getVersionedPath('/docs/api/csf/csf-next')} className="text-blue-500 hover:underline">Learn more about CSF Next</Link>
+        <button
+          className="ml-auto h-8 select-none items-center justify-between gap-1 rounded px-2 text-sm text-slate-600 transition-all hover:border-zinc-300 hover:bg-slate-200 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800"
+          onClick={() => { setDismissals('csf-next-info') }}
+          type="button"
+          aria-label="Dismiss all CSF Next messages"
+        >
+          <CloseIcon />
+        </button>
+      </div>
+    );
+  }
 }
 
 export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
@@ -168,6 +205,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
           <Tabs activeTab={activeTab} onTabChange={handleTabChange} tabs={tabs} />
         ) : null
       }
+      bottom={<ActiveInfo activeTab={activeTab} />}
       options={
         <>
           {filters && filters.languages.length > 1 ? (

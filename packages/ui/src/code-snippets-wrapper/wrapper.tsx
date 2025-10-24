@@ -10,6 +10,7 @@ type CodeSnippetsWrapperProps = {
   options?: ReactNode;
   title?: string;
   top?: ReactNode;
+  bottom?: ReactNode;
 };
 
 const languageIcons = {
@@ -25,6 +26,7 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
   options,
   title,
   top,
+  bottom,
 }) => {
   return (
     <div className="ui-my-6 ui-w-full ui-overflow-hidden ui-rounded ui-border ui-border-zinc-300 dark:ui-border-slate-700">
@@ -43,6 +45,7 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
       <div className="ui-max-w-full ui-overflow-auto ui-p-4 ui-text-sm ui-bg-white dark:ui-bg-slate-900">
         {children}
       </div>
+      {bottom}
     </div>
   );
 };
