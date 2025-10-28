@@ -147,7 +147,7 @@ export function Hero({
                 alt="Storybook 9"
                 height={39}
                 // Generated using Noto Sans font in Figma
-                src="/home/nine.svg"
+                src="/home/version.svg"
                 width={26}
               />
               <Star delay={1} x={-36} y={-10} />
