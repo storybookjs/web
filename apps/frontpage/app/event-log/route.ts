@@ -119,6 +119,8 @@ interface TelemetryEvent {
       };
     };
     userAgent?: string;
+    isNewUser?: boolean;
+    timeSinceInit?: number;
     errorHash: string;
     name: string;
   };
@@ -215,12 +217,20 @@ async function forwardToSentry(received: TelemetryEvent) {
 
 async function forwardToPlausible(received: TelemetryEvent, headers: Headers) {
   const ip = headers.get('x-forwarded-for') ?? headers.get('x-real-ip');
-  const { userAgent, step } = received.payload ?? {};
+  const { userAgent, step, isNewUser, timeSinceInit } = received.payload ?? {};
 
   let name = received.eventType;
 
   // FIXME: want a more general way to handle this
-  if (step) {
+  if (name === 'preview-first-load') {
+    if (isNewUser) {
+      name = 'new-user-first-load';
+    } else if (timeSinceInit) {
+      name = 'init-first-load';
+    }
+    // skip logging for non-init preview loads
+    return new Response(null, { status: 204 });
+  } else if (step) {
     name = `${name} - ${step}`;
   }
 
