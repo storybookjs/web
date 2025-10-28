@@ -227,9 +227,10 @@ async function forwardToPlausible(received: TelemetryEvent, headers: Headers) {
       name = 'new-user-first-load';
     } else if (timeSinceInit) {
       name = 'init-first-load';
+    } else {
+      // skip logging for non-init preview loads
+      return new Response(null, { status: 204 });
     }
-    // skip logging for non-init preview loads
-    return new Response(null, { status: 204 });
   } else if (step) {
     name = `${name} - ${step}`;
   }
