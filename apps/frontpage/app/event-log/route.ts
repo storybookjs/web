@@ -222,16 +222,16 @@ async function forwardToPlausible(received: TelemetryEvent, headers: Headers) {
   let name = received.eventType;
 
   // FIXME: want a more general way to handle this
-  if (step) {
-    name = `${name} - ${step}`;
-  } else if (name === 'preview-first-load') {
+  if (name === 'preview-first-load') {
     if (isNewUser) {
       name = 'new-user-first-load';
     } else if (timeSinceInit) {
       name = 'init-first-load';
     }
     // skip logging for non-init preview loads
-    return;
+    return new Response(null, { status: 204 });
+  } else if (step) {
+    name = `${name} - ${step}`;
   }
 
   const { builder, renderer, framework, storybookVersion } =
