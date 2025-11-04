@@ -122,7 +122,7 @@ export function Hero({
                 className="md:hidden"
                 href="https://github.com/storybookjs/storybook/releases"
               >
-                <div className="text-md text-white">v9</div>
+                <div className="text-md text-white">v10</div>
                 <div className="text-sm text-white/60">Latest version</div>
               </a>
               <div>
