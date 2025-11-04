@@ -148,7 +148,7 @@ export function Hero({
                 height={39}
                 // Generated using Noto Sans font in Figma
                 src="/home/version.svg"
-                width={26}
+                width={52}
               />
               <Star delay={1} x={-36} y={-10} />
               <Star delay={0.2} w={7} x={-16} y={-20} />
