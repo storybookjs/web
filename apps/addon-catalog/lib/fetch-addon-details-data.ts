@@ -30,7 +30,10 @@ interface AddonData {
 function createAddonBaseLink(
   addon: Pick<Addon, 'repositoryUrl' | 'npmUrl'>,
 ): string {
-  return `${addon.repositoryUrl ?? addon.npmUrl ?? ''}/`;
+  return addon.repositoryUrl ?
+    // TODO: Fetch default branch, instead of assuming 'main'
+    `${addon.repositoryUrl}/blob/main/` :
+    `${addon.npmUrl ?? ''}/`;
 }
 
 export async function fetchAddonDetailsData(name: string) {
