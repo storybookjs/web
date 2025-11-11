@@ -1,6 +1,6 @@
 'use client';
 
-import type { FC } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import { ChevronSmallRightIcon, MenuIcon } from '@storybook/icons';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
@@ -33,9 +33,18 @@ export const Submenu: FC<SubmenuProps> = ({ listOfTrees }) => {
     title = activeSection.title;
   }
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
+
   return (
     <div className="flex items-center gap-3 p-4 text-sm border-b border-zinc-200 sm:px-8 md:hidden dark:border-slate-800">
-      <DropdownMenu.Root>
+      <DropdownMenu.Root
+        onOpenChange={setIsMenuOpen}
+        open={isMenuOpen}
+      >
         <DropdownMenu.Trigger asChild>
           <button
             className={cn(
