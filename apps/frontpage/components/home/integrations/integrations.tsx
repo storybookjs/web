@@ -7,7 +7,6 @@ import Emotion from './images/emotion.png';
 import Figma from './images/figma.svg';
 import Gatsby from './images/gatsby.svg';
 import GraphQL from './images/graphql.svg';
-import Invision from './images/invision.svg';
 import Jest from './images/jest.svg';
 import MSW from './images/msw.svg';
 import Nextjs from './images/nextjs.svg';
@@ -179,11 +178,6 @@ export function Integrations() {
       href: `/docs/sharing/design-integrations`,
       image: Sketch,
       name: 'Sketch',
-    },
-    {
-      href: '/docs/sharing/design-integrations#invision-design-system-manager/',
-      image: Invision,
-      name: 'Invision',
     },
     {
       href: '/addons/@storybook/testing-angular',
