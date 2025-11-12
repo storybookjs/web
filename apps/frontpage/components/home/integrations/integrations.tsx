@@ -33,7 +33,7 @@ import Supernova from './images/supernova.svg';
 export function Integrations() {
   const integrations = [
     {
-      href: 'https://storybook.js.org/blog/storybook-for-vite/',
+      href: 'https://storybook.js.org/blog/first-class-vite-support-in-storybook/',
       image: Vite,
       name: 'Vite',
       isExternal: true,
@@ -61,12 +61,9 @@ export function Integrations() {
       name: 'Emotion',
     },
     {
-      target: '_blank',
-      rel: 'noopener nofollow noreferrer',
-      href: 'https://medium.com/storybookjs/building-a-front-end-project-with-react-tailwindcss-and-storybook-742bdb1417da',
+      href: '/recipes/tailwindcss',
       image: Tailwind,
       name: 'Tailwind',
-      isExternal: true,
     },
     {
       image: Jest,
@@ -74,12 +71,12 @@ export function Integrations() {
       href: '/addons/@storybook/addon-jest',
     },
     {
-      href: '/addons/storybook-addon-next',
+      href: '/docs/get-started/frameworks/nextjs',
       image: Nextjs,
       name: 'Nextjs',
     },
     {
-      href: `/docs/builders/webpack#gatsby-focus-wrapper`,
+      href: `/docs/builders/webpack`,
       image: Webpack,
       name: 'Webpack',
     },
@@ -120,11 +117,11 @@ export function Integrations() {
       name: 'Axe',
     },
     {
-      href: 'https://redwoodjs.com/docs/storybook',
+      href: 'https://docs.rwsdk.com/guides/frontend/storybook/',
       target: '_blank',
       rel: 'noopener nofollow noreferrer',
       image: RedwoodJS,
-      name: 'RedwoodJS',
+      name: 'RedwoodSDK',
       isExternal: true,
     },
     {
@@ -153,10 +150,9 @@ export function Integrations() {
       name: 'Launchdarkly',
     },
     {
-      href: 'https://github.com/storybookjs/presets/tree/master/packages/preset-scss',
+      href: '/addons/@storybook/addon-styling-webpack',
       image: Sass,
       name: 'Sass',
-      isExternal: true,
     },
     {
       href: '/addons/storybook-addon-swc/',
@@ -185,12 +181,9 @@ export function Integrations() {
       name: 'Sketch',
     },
     {
-      target: '_blank',
-      rel: 'noopener nofollow noreferrer',
-      href: 'https://support.invisionapp.com/hc/en-us/articles/360051565792',
+      href: '/docs/sharing/design-integrations#invision-design-system-manager/',
       image: Invision,
       name: 'Invision',
-      isExternal: true,
     },
     {
       href: '/addons/@storybook/testing-angular',
