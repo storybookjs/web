@@ -93,16 +93,16 @@ export const Header: FC<HeaderProps> = ({
                 </NavigationMenu.List>
               </NavigationMenu.Root>
             </div>
-            <div className="ui-flex">
+            <div className="ui-flex ui-gap-4">
               <a
                 aria-label="Star Storybook on GitHub"
                 className={cn(
-                  'ui-h-8 ui-flex ui-items-center ui-justify-center ui-border ui-rounded-full ui-transition-colors max-[1040px]:ui-hidden ui-px-3 ui-gap-2 ui-mr-4',
+                  'ui-h-8 ui-flex ui-items-center ui-justify-center ui-border ui-rounded-full ui-transition-colors max-[1120px]:ui-hidden ui-px-3 ui-gap-2 focus-visible:ui-outline-none focus-visible:ui-ring-inset focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700',
                   githubCount === 0 && 'w-8 px-0',
                   variant === 'home' &&
                     'ui-border-white/30 hover:ui-border-white ui-text-white',
                   variant === 'system' &&
-                    'ui-border ui-border-zinc-200 dark:ui-border-slate-700 ui-text-zinc-500 dark:ui-text-white',
+                    'ui-border ui-border-zinc-200 dark:ui-border-slate-700 ui-text-zinc-500 dark:ui-text-white  hover:ui-border-zinc-400 dark:hover:ui-border-slate-500',
                 )}
                 href="https://github.com/storybookjs/storybook"
                 rel="noreferrer noopener"
@@ -110,14 +110,7 @@ export const Header: FC<HeaderProps> = ({
               >
                 <GithubIcon />
                 {githubCount > 0 && (
-                  <span
-                    className={cn(
-                      'ui-text-xs ui-font-bold',
-                      variant === 'home' && 'ui-text-white',
-                      variant !== 'home' &&
-                        'ui-text-slate-600 dark:ui-text-white',
-                    )}
-                  >
+                  <span className={cn('ui-text-xs ui-font-bold')}>
                     {githubCount.toLocaleString('en-US')}
                   </span>
                 )}
@@ -127,6 +120,21 @@ export const Header: FC<HeaderProps> = ({
                 className="max-[440px]:ui-hidden"
                 variant={variant}
               />
+              {
+              pathname !== '/docs' && (
+                <a
+                  className={cn(
+                    'ui-h-8 ui-flex ui-items-center ui-justify-center ui-rounded-full ui-transition-colors max-[1040px]:ui-hidden ui-px-3 focus-visible:ui-outline-none focus-visible:ui-ring-inset focus-visible:ui-ring-2  focus-visible:ui-ring-blue-700 focus-visible:ui-shadow-[inset_0_0_0_4px_white] dark:focus-visible:ui-shadow-[inset_0_0_0_4px_#0d1026]',
+                    variant === 'home' && 'ui-bg-white hover:ui-bg-white/96 ui-text-black',
+                    variant === 'system' && 'ui-bg-zinc-700 hover:ui-bg-zinc-900 ui-text-white dark:ui-bg-slate-100 dark:hover:ui-bg-white dark:ui-text-zinc-900',
+                  )}
+                  href="/docs"
+                >
+                  <span className={cn('ui-text-xs ui-font-bold whitespace-nowrap')}>
+                    Get Started
+                  </span>
+                </a>
+              )}
               <MobileMenu algoliaApiKey={algoliaApiKey} variant={variant} />
             </div>
           </div>
