@@ -122,7 +122,7 @@ export function Hero({
                 className="md:hidden"
                 href="https://github.com/storybookjs/storybook/releases"
               >
-                <div className="text-md text-white">v9</div>
+                <div className="text-md text-white">v10</div>
                 <div className="text-sm text-white/60">Latest version</div>
               </a>
               <div>
@@ -147,8 +147,8 @@ export function Hero({
                 alt="Storybook 9"
                 height={39}
                 // Generated using Noto Sans font in Figma
-                src="/home/nine.svg"
-                width={26}
+                src="/home/version.svg"
+                width={52}
               />
               <Star delay={1} x={-36} y={-10} />
               <Star delay={0.2} w={7} x={-16} y={-20} />
