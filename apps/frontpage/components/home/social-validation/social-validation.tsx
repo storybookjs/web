@@ -218,10 +218,10 @@ export function SocialValidation({
           </div>
         </div>
       </Container>
-      <div className="mb-[calc(5rem-1rem)] mt-12 flex snap-x scroll-p-8 gap-8 overflow-scroll px-8 py-0 pb-4 text-white sm:mt-20 md:mt-28">
+      <div className="mb-[calc(5rem-1rem)] mt-12 flex snap-x scroll-p-8 gap-8 overflow-x-scroll snap-proximity px-8 py-0 pb-4 text-white sm:mt-20 md:mt-28">
         {storybooks.map((storybookProject) => (
           <a
-            className="block w-[240px] flex-none no-underline sm:w-[480px]"
+            className="block w-[240px] flex-none no-underline sm:w-[480px] snap-end"
             href={storybookProject.url}
             key={storybookProject.name}
             rel="noopener nofollow noreferrer"
@@ -253,10 +253,10 @@ export function SocialValidation({
           </a>
         ))}
       </div>
-      <div className="mb-[calc(5rem-1rem)] mt-12 flex snap-x scroll-p-8 gap-8 overflow-scroll px-8 py-0 pb-4 sm:mt-20 md:mt-28">
+      <div className="mb-[calc(5rem-1rem)] mt-12 flex snap-x scroll-p-8 gap-8 overflow-x-scroll snap-proximity px-8 py-0 pb-4 sm:mt-20 md:mt-28">
         {projects.map((project) => (
           <a
-            className="w-[240px] flex-none rounded-md bg-red-500"
+            className="w-[240px] flex-none rounded-md snap-end"
             href={project.projectUrl}
             key={project.logoAlt}
             rel="noopener"
