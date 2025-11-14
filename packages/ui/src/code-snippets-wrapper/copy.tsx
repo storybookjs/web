@@ -6,8 +6,9 @@ import type { FC, ReactNode } from 'react';
 import { useState } from 'react';
 import copy from 'copy-to-clipboard';
 import { decode } from 'he';
+import { cn } from '@repo/utils';
 
-export const Copy: FC<{ content: ReactNode }> = ({ content }) => {
+export const Copy: FC<{ content: ReactNode, variant?: "default" | "new-users" }> = ({ content, variant = "default" }) => {
   const [state, setState] = useState<'idle' | 'copied'>('idle');
 
   const onClick = (): void => {
@@ -22,12 +23,21 @@ export const Copy: FC<{ content: ReactNode }> = ({ content }) => {
 
   return (
     <button
-      className="ui-flex ui-h-8 ui-select-none ui-items-center ui-justify-between ui-gap-1 ui-rounded ui-px-2 ui-text-sm ui-text-slate-600 ui-transition-all hover:ui-border-zinc-300 hover:ui-bg-slate-200 hover:ui-text-slate-900 dark:ui-text-slate-400 dark:ui-hover:bg-slate-800"
+      className={cn(
+        "ui-flex ui-h-8 ui-select-none ui-items-center ui-gap-1 ui-rounded ui-px-2 ui-text-sm ui-transition-all",
+        variant === "default" && "ui-justify-between",
+        variant === "default" && "ui-text-slate-600 hover:ui-bg-slate-200 hover:ui-text-slate-900",
+        variant === "default" && "dark:ui-text-slate-400 dark:hover:ui-bg-slate-800 dark:hover:ui-text-slate-400",
+        variant === "new-users" && "ui-min-w-[10ch] ui-justify-center",
+        variant === "new-users" && "ui-text-slate-600 hover:ui-bg-slate-200 hover:ui-text-slate-900",
+        variant === "new-users" && "dark:ui-bg-yellow-500 dark:hover:ui-bg-yellow-500 dark:ui-text-slate-900 ui-font-bold dark:hover:ui-text-black",
+      )}
       onClick={onClick}
       type="button"
       aria-label="Copy"
     >
-      {state === 'idle' ? <CopyIcon /> : <CheckIcon />}
+      {variant === "default" && (state === 'idle' ? <CopyIcon /> : <CheckIcon />)}
+      {variant === "new-users" && (state === 'idle' ? <><CopyIcon /> Copy</> : <><CheckIcon /> Copied</>)}
     </button>
   );
 };
