@@ -30,7 +30,8 @@ export const docsVersions: DocsVersion[] = [
   {
     label: 'Version 10.1',
     id: '10.1',
-    branch: 'main',
+    // FIXME/TEMP: switch back to main before merging.
+    branch: 'sidnioulz/growth-www-cta-batch-3-cta-positioning',
   },
   // {
   //   label: 'Version 10.2 (beta)',
