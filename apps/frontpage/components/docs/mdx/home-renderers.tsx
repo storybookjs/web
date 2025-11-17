@@ -26,12 +26,6 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         subtitle="with Webpack"
         title="React"
       />
-      <Card
-        href="https://storybook.rsbuild.dev/guide/framework/react.html"
-        logo="logo-react.svg"
-        title="React"
-        subtitle="with Rspack / Rsbuild"
-      />
       {Number(activeVersion.id) >= 8.5 ? (
         <Card
           href="/docs/get-started/frameworks/react-native-web-vite/?renderer=react-native-web"
@@ -59,12 +53,6 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         title="Vue"
       />
       <Card
-        href="https://storybook.rsbuild.dev/guide/framework/vue.html"
-        logo="logo-vue.svg"
-        title="Vue"
-        subtitle="with Rspack / Rsbuild"
-      />
-      <Card
         href="/docs/get-started/frameworks/angular/?renderer=angular"
         logo="logo-angular.svg"
         title="Angular"
@@ -81,21 +69,9 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         title="Svelte"
       />
       <Card
-        href="https://github.com/solidjs-community/storybook"
-        logo="logo-solidjs.svg"
-        subtitle="with Vite"
-        title="SolidJS"
-      />
-      <Card
         href="/docs/get-started/frameworks/web-components-vite/?renderer=web-components"
         logo="logo-web-components.svg"
         subtitle="with Vite"
-        title="Web Components"
-      />
-      <Card
-        href="https://storybook.rsbuild.dev/guide/framework/web-components.html"
-        logo="logo-web-components.svg"
-        subtitle="with Rspack / Rsbuild"
         title="Web Components"
       />
     </div>
