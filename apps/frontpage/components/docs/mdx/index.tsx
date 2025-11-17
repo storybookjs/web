@@ -1,5 +1,6 @@
 export { A } from './a';
 export { CodeSnippets } from './code-snippets';
+export { CommunityRenderers } from './community-renderers';
 export { FeatureSnippets } from './feature-snippets';
 export { HomeConcepts } from './home-concepts';
 export { HomeRenderers } from './home-renderers';
