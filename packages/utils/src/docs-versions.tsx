@@ -30,7 +30,7 @@ export const docsVersions: DocsVersion[] = [
   {
     label: 'Version 10.0',
     id: '10.0',
-    branch: 'main',
+    branch: 'sidnioulz/growth-www-cta-batch-3-cta-positioning',
   },
   // {
   //   label: 'Version 10.1 (beta)',
