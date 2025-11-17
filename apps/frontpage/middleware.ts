@@ -1,34 +1,14 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { cookieRenderId } from './constants';
 import { docsVersionsRedirects } from './redirects/docs-versions-redirects';
-import { type RedirectData } from './redirects/types';
+import { RedirectData } from './redirects/types';
 import { docsRenderersRedirects } from './redirects/docs-renderers-redirects';
 import { docsCommonRedirects } from './redirects/docs-common-redirects';
-
-async function embedTelemetry(path: string, headers: Headers) {
-  if (!path) return;
-  const referer = headers.get('referer') ?? 'unknown';
-  const forwardedFor = headers.get('x-forwarded-for');
-  const realIp = headers.get('x-real-ip');
-
-  return fetch('https://plausible.io/api/event', {
-    method: 'POST',
-    headers: {
-      'User-Agent': headers.get('user-agent')!,
-      'Content-Type': 'application/json',
-      'X-Forwarded-For': forwardedFor ?? realIp!,
-    },
-    body: JSON.stringify({
-      name: 'pageview',
-      referrer: referer,
-      interactive: false,
-      url: `https://storybook.js.org${path}`,
-      domain: 'storybook.js.org',
-    }),
-  });
-}
+import { renderers } from '@repo/utils';
 
 export async function middleware(request: NextRequest) {
+  let searchParam = request.nextUrl.searchParams.get('renderer');
   const pathname: string = request.nextUrl.pathname;
 
   // Merge all redirects into a single list
@@ -39,14 +19,6 @@ export async function middleware(request: NextRequest) {
     ...docsRenderersRedirects,
     ...docsCommonRedirects,
   ];
-
-  if (pathname.startsWith('/embed/')) {
-    try {
-      await embedTelemetry(pathname, request.headers);
-    } catch (error) {
-      console.error('Error forwarding embed to plausible:', error);
-    }
-  }
 
   for (const redirectData of redirectList) {
     let sourcePattern = redirectData.source;
