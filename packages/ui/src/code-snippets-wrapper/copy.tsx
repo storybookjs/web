@@ -28,9 +28,9 @@ export const Copy: FC<{ content: ReactNode, variant?: "default" | "new-users" }>
         variant === "default" && "ui-justify-between",
         variant === "default" && "ui-text-slate-600 hover:ui-bg-slate-200 hover:ui-text-slate-900",
         variant === "default" && "dark:ui-text-slate-400 dark:hover:ui-bg-slate-800 dark:hover:ui-text-slate-400",
-        variant === "new-users" && "ui-min-w-[10ch] ui-justify-center",
-        variant === "new-users" && "ui-text-slate-600 hover:ui-bg-slate-200 hover:ui-text-slate-900",
-        variant === "new-users" && "dark:ui-bg-yellow-500 dark:hover:ui-bg-yellow-500 dark:ui-text-slate-900 ui-font-bold dark:hover:ui-text-black",
+        variant === "new-users" && "ui-min-w-[10ch] ui-justify-center ui-font-bold",
+        variant === "new-users" && "ui-bg-zinc-700 hover:ui-bg-zinc-900 ui-text-white",
+        variant === "new-users" && "dark:ui-bg-slate-100 dark:hover:ui-bg-white dark:ui-text-slate-900  dark:hover:ui-text-black",
       )}
       onClick={onClick}
       type="button"
