@@ -66,6 +66,7 @@ export function AddonHero({ addon }: { addon: Addon }) {
               </AnimatePresence>
             </button>
             <a
+              // TODO: Enhance with repo directory
               href={addon.repositoryUrl ?? ''}
               target="_blank"
               className="flex items-center gap-2 text-sm text-black transition-colors hover:text-blue-500 dark:text-slate-400"
