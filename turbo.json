@@ -11,6 +11,7 @@
     "NEXT_PUBLIC_ALGOLIA_API_KEY",
     "NEXT_PUBLIC_BASE_PATH",
     "SKIP_IP_HASH",
+    "SLOW_GRAPHQL_CLIENT",
     "URL"
   ],
   "tasks": {
