@@ -36,11 +36,13 @@ async function fetchAndExtract(version: DocsVersion): Promise<void> {
 
   let folder = '';
   const versionWithoutPrefix = version.tag?.substring(1);
-  if (version.branch) folder = `storybook-${version.branch}/docs`;
+  if (version.branch)
+    folder = `storybook-${version.branch.replace('/', '-')}/docs`;
   if (version.tag) folder = `storybook-${versionWithoutPrefix}/docs`;
   if (version.commit) folder = `storybook-${version.commit}/docs`;
 
   const response = await fetch(url || '');
+  mkdirp(folder);
 
   if (!response.ok) {
     throw new Error(`unexpected response ${response.statusText}`);
