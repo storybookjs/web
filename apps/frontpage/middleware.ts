@@ -1,14 +1,11 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { cookieRenderId } from './constants';
 import { docsVersionsRedirects } from './redirects/docs-versions-redirects';
-import { RedirectData } from './redirects/types';
+import { type RedirectData } from './redirects/types';
 import { docsRenderersRedirects } from './redirects/docs-renderers-redirects';
 import { docsCommonRedirects } from './redirects/docs-common-redirects';
-import { renderers } from '@repo/utils';
 
 export async function middleware(request: NextRequest) {
-  let searchParam = request.nextUrl.searchParams.get('renderer');
   const pathname: string = request.nextUrl.pathname;
 
   // Merge all redirects into a single list
