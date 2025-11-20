@@ -13,7 +13,7 @@ const features = [
     description: 'Stories are tests you can debug in dev and QA.',
     link: {
       label: 'Learn about UI tests',
-      href: '/docs/writing-tests',
+      href: '/docs/writing-tests/',
     },
     media: '/home/test/homepage-spot-testing-lg.mp4',
     poster: '/home/test/homepage-spot-testing-poster-lg.jpg',
@@ -24,7 +24,7 @@ const features = [
     description: 'Pinpoint UI changes down to the pixel.',
     link: {
       label: 'Learn about visual tests',
-      href: '/docs/writing-tests/visual-testing',
+      href: '/docs/writing-tests/visual-testing/',
     },
     media: '/home/test/homepage-visual-testing-lg.mp4',
     poster: '/home/test/homepage-visual-testing-poster-lg.jpg',
@@ -35,7 +35,7 @@ const features = [
     description: 'Simulate user behavior and assert in the browser.',
     link: {
       label: 'Learn about interaction tests',
-      href: '/docs/writing-tests/interaction-testing',
+      href: '/docs/writing-tests/interaction-testing/',
     },
     media: '/home/test/homepage-component-testing-lg.mp4',
     poster: '/home/test/homepage-component-testing-poster-lg.jpg',
@@ -46,7 +46,7 @@ const features = [
     description: 'Check stories for WCAG and ARIA issues.',
     link: {
       label: 'Learn about accessibility tests',
-      href: '/docs/writing-tests/accessibility-testing',
+      href: '/docs/writing-tests/accessibility-testing/',
     },
     media: '/home/test/homepage-accessibility-testing-lg.mp4',
     poster: '/home/test/homepage-accessibility-testing-poster-lg.jpg',
@@ -57,7 +57,7 @@ const features = [
     description: 'Track how much of your frontend code is tested.',
     link: {
       label: 'Learn about coverage reports',
-      href: '/docs/writing-tests/test-coverage',
+      href: '/docs/writing-tests/test-coverage/',
     },
     media: '/home/test/homepage-test-coverage-lg.mp4',
     poster: '/home/test/homepage-test-coverage-poster-lg.jpg',
@@ -68,7 +68,7 @@ const features = [
     description: 'Detect regressions in DOM markup.',
     link: {
       label: 'Learn about snapshot tests',
-      href: '/docs/writing-tests/snapshot-testing',
+      href: '/docs/writing-tests/snapshot-testing/',
     },
     media: '/home/test/homepage-snapshot-testing-lg.mp4',
     poster: '/home/test/homepage-snapshot-testing-poster-lg.jpg',

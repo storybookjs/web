@@ -23,14 +23,14 @@ interface HomeProps {
 
 const categories = [
   { name: 'Popular', href: '/' },
-  { name: 'Essential', href: '/tag/essentials' },
-  { name: 'Code', href: '/tag/code' },
-  { name: 'Data & State', href: '/tag/data-state' },
-  { name: 'Test', href: '/tag/test' },
-  { name: 'Style', href: '/tag/style' },
-  { name: 'Design', href: '/tag/design' },
-  { name: 'Appearance', href: '/tag/appearance' },
-  { name: 'Organize', href: '/tag/organize' },
+  { name: 'Essential', href: '/tag/essentials/' },
+  { name: 'Code', href: '/tag/code/' },
+  { name: 'Data & State', href: '/tag/data-state/' },
+  { name: 'Test', href: '/tag/test/' },
+  { name: 'Style', href: '/tag/style/' },
+  { name: 'Design', href: '/tag/design/' },
+  { name: 'Appearance', href: '/tag/appearance/' },
+  { name: 'Organize', href: '/tag/organize/' },
 ];
 
 export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
@@ -70,7 +70,7 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
           </p>
         </div>
         <a
-          href="/docs/addons/integration-catalog"
+          href="/docs/addons/integration-catalog/"
           className="hidden h-10 flex-shrink-0 items-center gap-2 rounded-full bg-blue-500 px-5 text-sm font-bold text-white md:flex"
         >
           <PlusIcon />
@@ -138,13 +138,13 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
               </ul>
               <div className="mt-6 flex flex-col gap-4">
                 <a
-                  href="/docs/addons/install-addons"
+                  href="/docs/addons/install-addons/"
                   className="flex items-center gap-2 text-sm transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
                 >
                   <BookIcon /> How to install addons
                 </a>
                 <a
-                  href="/docs/addons/writing-addons"
+                  href="/docs/addons/writing-addons/"
                   className="flex items-center gap-2 text-sm transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
                 >
                   <EditIcon /> Create an addon
