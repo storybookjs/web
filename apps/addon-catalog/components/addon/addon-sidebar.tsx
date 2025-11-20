@@ -81,13 +81,13 @@ export function AddonSidebar({ addon }: { addon: AddonWithTagLinks }) {
       ) : null}
       <div className="flex flex-col gap-4 pt-6 mt-6 border-t border-t-zinc-300 dark:border-t-slate-700">
         <a
-          href="/docs/addons/install-addons"
+          href="/docs/addons/install-addons/"
           className="flex items-center gap-2 text-sm transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
         >
           <BookIcon /> How to install addons
         </a>
         <a
-          href="/docs/addons/writing-addons"
+          href="/docs/addons/writing-addons/"
           className="flex items-center gap-2 text-sm transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
         >
           <EditIcon /> Create an addon

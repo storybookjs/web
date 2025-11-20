@@ -14,13 +14,13 @@ export const NavTop: FC = () => {
         <div className="flex h-full">
           <a
             className="flex h-full items-center px-[15px] text-sm font-bold text-blue-500 shadow-[0_-3px_0_0_inset] shadow-blue-500"
-            href="/community"
+            href="/community/"
           >
             Get involved
           </a>
           <a
             className="flex h-full items-center px-[15px] text-sm font-bold text-zinc-400 transition-all hover:-translate-y-px hover:text-blue-500"
-            href="/blog"
+            href="/blog/"
           >
             Blog
           </a>

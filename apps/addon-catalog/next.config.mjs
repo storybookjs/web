@@ -3,6 +3,7 @@ import { withPlausibleProxy } from 'next-plausible';
 
 const nextConfig = withPlausibleProxy()({
   basePath: '/addons',
+  trailingSlash: true,
   images: {
     unoptimized: true,
     remotePatterns: [

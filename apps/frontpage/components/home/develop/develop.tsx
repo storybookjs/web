@@ -109,7 +109,7 @@ export function Develop() {
             </p>
             <Link
               className="flex items-center gap-2 font-bold text-blue-500"
-              href="/docs/get-started/why-storybook"
+              href="/docs/get-started/why-storybook/"
             >
               Why build UIs in isolation?
               <ChevronSmallRightIcon />
@@ -130,7 +130,7 @@ export function Develop() {
             </p>
             <Link
               className="flex items-center gap-2 font-bold text-blue-500"
-              href="/docs/get-started/whats-a-story"
+              href="/docs/get-started/whats-a-story/"
             >
               How to write a story
               <ChevronSmallRightIcon />
@@ -151,7 +151,7 @@ export function Develop() {
           </p>
           <Link
             className="flex items-center gap-2 font-bold text-blue-500"
-            href="/addons"
+            href="/addons/"
           >
             Browse integrations
             <ChevronSmallRightIcon />

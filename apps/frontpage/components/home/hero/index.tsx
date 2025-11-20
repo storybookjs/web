@@ -111,7 +111,7 @@ export function Hero({
             <div className="flex gap-4">
               <Link
                 className="text-md flex h-12 items-center justify-center rounded-full bg-white px-6 font-bold text-black"
-                href="/docs"
+                href="/docs/"
               >
                 Get Started
               </Link>
