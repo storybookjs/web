@@ -29,6 +29,8 @@ export default async function Page({ params: { slug } }: PageProps) {
 
   const page = await getRelease(slug);
 
+  const collator = new Intl.Collator('en', { numeric: true });
+
   return (
     <>
       <Header
@@ -41,7 +43,7 @@ export default async function Page({ params: { slug } }: PageProps) {
             <DocsMainNav />
             <div className="flex flex-col pt-4 mt-4 border-t border-zinc-200">
               {releases
-                .sort((a, b) => b.localeCompare(a))
+                .sort((a, b) => collator.compare(b, a))
                 .map((release) => (
                   <Link
                     className={cn(
