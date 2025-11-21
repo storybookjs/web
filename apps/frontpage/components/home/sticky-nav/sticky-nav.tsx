@@ -74,7 +74,7 @@ export function StickyNav({
                   </a>
                 </Button>
                 <Button asChild rounded="full" size="sm" variant="solid">
-                  <Link href="/docs">Get started</Link>
+                  <Link href="/docs/">Get started</Link>
                 </Button>
               </div>
             </section>

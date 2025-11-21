@@ -13,7 +13,7 @@ const features = [
     description: 'Storybook is a single source of truth for UI.',
     link: {
       label: 'Learn about search',
-      href: '/docs/get-started/browse-stories#sidebar-and-canvas',
+      href: '/docs/get-started/browse-stories/#sidebar-and-canvas',
     },
     media: '/home/document/homepage-search-stories-lg.mp4',
     poster: '/home/document/homepage-search-stories-poster-lg.jpg',
@@ -24,7 +24,7 @@ const features = [
     description: 'Write Markdown and build custom docs.',
     link: {
       label: 'Learn about docs addon',
-      href: '/docs/writing-docs/introduction',
+      href: '/docs/writing-docs/introduction/',
     },
     media: '/home/document/homepage-component-document-lg.mp4',
     poster: '/home/document/homepage-component-document-poster-lg.jpg',
@@ -35,7 +35,7 @@ const features = [
     description: 'Every story is a use case that you can reuse.',
     link: {
       label: 'Learn about reuse',
-      href: '/docs/get-started/browse-stories#use-stories-to-build-uis',
+      href: '/docs/get-started/browse-stories/#use-stories-to-build-uis',
     },
     media: '/home/document/homepage-reuse-components-across-apps-lg.mp4',
     poster:
@@ -47,7 +47,7 @@ const features = [
     description: 'QA unexpected bugs by going back in time.',
     link: {
       label: 'Learn about versioning',
-      href: '/docs/sharing/publish-storybook#versioning-and-history',
+      href: '/docs/sharing/publish-storybook/#versioning-and-history',
     },
     media: '/home/document/homepage-component-history-lg.mp4',
     poster: '/home/document/homepage-component-history-poster-lg.jpg',
