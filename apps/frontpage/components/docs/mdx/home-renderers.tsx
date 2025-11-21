@@ -14,6 +14,14 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         logo="logo-nextjs.svg"
         title="Next.js"
       />
+      {Number(activeVersion.id) >= 8.5 ? (
+        <Card
+          href="/docs/get-started/frameworks/nextjs-vite/?renderer=react"
+          logo="logo-nextjs.svg"
+          subtitle="with Vite"
+          title="Next.js"
+        />
+      ) : null}
       <Card
         href="/docs/get-started/frameworks/react-vite/?renderer=react"
         logo="logo-react.svg"
