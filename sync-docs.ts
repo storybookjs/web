@@ -73,15 +73,11 @@ dotenv.config();
 
   function getChoiceTitle(version: DocsVersion) {
     let title = version.label;
-    if (version.preRelease) {
+    if (version.preRelease || isLatest(version)) {
+      const branchOrigin = version.branch ?? version.commit ?? version.tag;
       title = title.includes(')')
-        ? title.replace(')', ', branched from next)')
-        : `${title} (branched from next)`;
-    }
-    if (isLatest(version)) {
-      title = title.includes(')')
-        ? title.replace(')', ', branched from main)')
-        : `${title} (branched from main)`;
+        ? title.replace(')', `, branched from ${branchOrigin})`)
+        : `${title} (branched from ${branchOrigin})`;
     }
     return title;
   }
