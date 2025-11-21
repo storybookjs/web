@@ -6,6 +6,7 @@ type Variant = 'neutral' | 'positive' | 'info' | 'warning';
 
 const VARIANT_DEFAULT_ICON: Partial<Record<Variant, string>> = {
   info: 'ℹ️',
+  positive: '🎉',
   warning: '⚠️',
 };
 
@@ -32,7 +33,7 @@ export const Callout: FC<CalloutProps> = ({
         variant === 'neutral' &&
           'ui-border ui-border-blue-200 ui-bg-blue-100 dark:ui-border-slate-700 dark:ui-bg-slate-900',
         variant === 'positive' &&
-          'ui-border ui-border-blue-200 ui-bg-blue-100 dark:ui-border-slate-700 dark:ui-bg-slate-900',
+          'ui-border ui-border-green-200 ui-bg-green-100 dark:ui-border-green-800 dark:ui-bg-green-950',
         variant === 'info' &&
           'ui-border ui-border-blue-200 ui-bg-blue-100 dark:ui-border-slate-700 dark:ui-bg-slate-900',
         variant === 'warning' &&
