@@ -11,6 +11,7 @@ type CodeSnippetsWrapperProps = {
   title?: string;
   top?: ReactNode;
   bottom?: ReactNode;
+  variant?: "default" | "new-users";
 };
 
 const languageIcons = {
@@ -27,6 +28,7 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
   title,
   top,
   bottom,
+  variant = 'default',
 }) => {
   return (
     <div className="ui-my-6 ui-w-full ui-overflow-hidden ui-rounded ui-border ui-border-zinc-300 dark:ui-border-slate-700">
@@ -38,7 +40,7 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
           </div>
           <div className="ui-flex ui-items-center ui-gap-2">
             {options}
-            {copy ? <Copy content={copy} /> : null}
+            {copy ? <Copy content={copy} variant={variant} /> : null}
           </div>
         </div>
       </div>
