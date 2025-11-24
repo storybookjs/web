@@ -8,14 +8,15 @@ import copy from 'copy-to-clipboard';
 import { decode } from 'he';
 import { cn } from '@repo/utils';
 
-export const Copy: FC<{ content: ReactNode, variant?: "default" | "new-users" }> = ({ content, variant = "default" }) => {
+export const Copy: FC<{ content: ReactNode; onClick?: () => void; variant?: "default" | "new-users" }> = ({ content, onClick, variant = "default" }) => {
   const [state, setState] = useState<'idle' | 'copied'>('idle');
 
-  const onClick = (): void => {
+  const wrappedOnClick = (): void => {
     const textToConvertIntoString = renderToStaticMarkup(content);
     const decodedText = decode(textToConvertIntoString);
     copy(decodedText);
     setState('copied');
+    onClick?.();
     setTimeout(() => {
       setState('idle');
     }, 1000);
@@ -32,7 +33,7 @@ export const Copy: FC<{ content: ReactNode, variant?: "default" | "new-users" }>
         variant === "new-users" && "ui-bg-zinc-700 hover:ui-bg-zinc-900 ui-text-white",
         variant === "new-users" && "dark:ui-bg-slate-100 dark:hover:ui-bg-white dark:ui-text-slate-900  dark:hover:ui-text-black",
       )}
-      onClick={onClick}
+      onClick={wrappedOnClick}
       type="button"
       aria-label="Copy"
     >

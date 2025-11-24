@@ -11,11 +11,13 @@ import copy from 'copy-to-clipboard';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { StorybookIcon } from '@repo/ui';
+import { usePlausible } from 'next-plausible';
 import { type Addon } from '../../types';
 
 export function AddonHero({ addon }: { addon: Addon }) {
   const installCommand = `npm install -D ${addon.name ?? ''}`;
   const [state, setState] = useState(false);
+  const plausible = usePlausible();
 
   const onClick = () => {
     copy(installCommand);
@@ -77,6 +79,7 @@ export function AddonHero({ addon }: { addon: Addon }) {
               </a>
               <a
                 href="https://storybook.js.org/docs"
+                onClick={() => { plausible('GetStartedClick', { props: { location: 'addon-secondary-cta' }})}}
                 className="rounded-full px-4 py-2 text-sm font-bold text-black transition-colors hover:text-blue-500 dark:bg-slate-800 dark:text-slate-100"
               >
                 New to Storybook? Get started

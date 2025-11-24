@@ -5,12 +5,14 @@ import { ChromaticLogo } from '../logos/chromatic';
 import { Container } from '../container';
 import { TopSection } from './top-section';
 import { footerNav } from './nav';
+import { usePlausible } from 'next-plausible';
 
 export interface FooterProps {
   variant?: 'system' | 'home';
 }
 
 export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
+  const plausible = usePlausible();
   return (
     <footer
       className={cn(
@@ -40,6 +42,7 @@ export const Footer: FC<FooterProps> = ({ variant = 'system' }) => {
                           'ui-text-zinc-600 dark:ui-text-slate-400',
                       )}
                       href={link.href}
+                      onClick={() => { if (link.href === '/docs' || link.href === '/docs/') { plausible('GetStartedClick', { props: { location: 'footer' }})}}}
                       key={link.title}
                       rel="noreferrer"
                       target="_blank"
