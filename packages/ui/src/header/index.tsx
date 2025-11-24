@@ -5,6 +5,7 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { cn } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import { GithubIcon } from '@storybook/icons';
+import { usePlausible } from 'next-plausible';
 import { StorybookLogo } from '../logos/storybook-logo';
 // import { NewsletterForm } from '../newsletter-form';
 import { Search } from '../search';
@@ -35,6 +36,7 @@ export const Header: FC<HeaderProps> = ({
   variant = 'system',
 }) => {
   const pathname = usePathname();
+  const plausible = usePlausible();
 
   return (
     <>
@@ -84,6 +86,7 @@ export const Header: FC<HeaderProps> = ({
                         active={active}
                         external={item.external}
                         href={item.href}
+                        onClick={() => { if (item.href === '/docs' || item.href === '/docs/') { plausible('GetStartedClick', { props: { location: 'header-nav' }})}}}
                         key={item.title}
                         title={item.title}
                         variant={variant}
@@ -121,7 +124,7 @@ export const Header: FC<HeaderProps> = ({
                 variant={variant}
               />
               {
-              pathname !== '/docs' && (
+              pathname !== '/docs' && pathname !== '/docs/' && (
                 <a
                   className={cn(
                     'ui-h-8 ui-flex ui-items-center ui-justify-center ui-rounded-full ui-transition-colors max-[1040px]:ui-hidden ui-px-3 focus-visible:ui-outline-none focus-visible:ui-ring-inset focus-visible:ui-ring-2  focus-visible:ui-ring-blue-700 focus-visible:ui-shadow-[inset_0_0_0_4px_white] dark:focus-visible:ui-shadow-[inset_0_0_0_4px_#0d1026]',
@@ -129,6 +132,7 @@ export const Header: FC<HeaderProps> = ({
                     variant === 'system' && 'ui-bg-zinc-700 hover:ui-bg-zinc-900 ui-text-white dark:ui-bg-slate-100 dark:hover:ui-bg-white dark:ui-text-zinc-900',
                   )}
                   href="/docs"
+                  onClick={() => { plausible('GetStartedClick', { props: { location: 'header-cta' }})}}
                 >
                   <span className={cn('ui-text-xs ui-font-bold whitespace-nowrap')}>
                     Get Started

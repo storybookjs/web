@@ -4,6 +4,7 @@ import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 import { cn, latestVersion } from '@repo/utils';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
+import { usePlausible } from 'next-plausible';
 import { getVersion } from '../../../lib/get-version';
 import {
   APIIcon,
@@ -15,6 +16,7 @@ import {
 
 export const DocsMainNav = () => {
   const pathname = usePathname();
+  const plausible = usePlausible();
   const segment = useSelectedLayoutSegment();
   const slug: string[] = segment ? segment.split('/') : [];
   const activeVersion = getVersion(slug);
@@ -27,6 +29,7 @@ export const DocsMainNav = () => {
     <nav className="flex flex-col gap-1.5 text-sm font-medium">
       <Line
         href={docsLink}
+        onClick={() => { plausible('GetStartedClick', { props: { location: 'main-nav' }})}}
         icon={<DocsIcon />}
         isActive={
           pathname.startsWith('/docs') && !pathname.startsWith('/docs/api')
@@ -66,15 +69,17 @@ export const DocsMainNav = () => {
 const Line: FC<{
   isActive: boolean;
   href: string;
+  onClick?: () => void;
   icon: ReactNode;
   label: string;
-}> = ({ isActive, href, label, icon }) => (
+}> = ({ isActive, href, label, icon, onClick }) => (
   <Link
     className={cn(
       'flex h-8 items-center gap-3 px-2 font-bold transition-colors hover:text-blue-500',
       isActive && 'text-blue-500',
     )}
     href={href}
+    onClick={onClick}
   >
     {icon}
     {label}
