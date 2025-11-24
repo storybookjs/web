@@ -1,25 +1,10 @@
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 
-interface AProps {
-  children?: ReactNode;
-  href?: string;
-  indexPagePath?: string[] | null;
-}
-
-export const A: FC<AProps> = ({
-  children,
-  href: hrefIn,
-  indexPagePath,
-  ...rest
-}) => {
+export function getHref({ href: hrefIn, indexPagePath }: AProps) {
   const isExternal = hrefIn?.startsWith('http');
   if (isExternal ?? !hrefIn) {
-    return (
-      <a className="ui-text-blue-500" href={hrefIn} {...rest}>
-        {children}
-      </a>
-    );
+    return hrefIn ?? '#';
   }
 
   let href = hrefIn
@@ -41,6 +26,23 @@ export const A: FC<AProps> = ({
     href = href.replace(/^\.\.\//, '../../');
     href = href.replace(/^\.\//, '../');
   }
+
+  return href;
+}
+
+interface AProps {
+  children?: ReactNode;
+  href?: string;
+  indexPagePath?: string[] | null;
+}
+
+export const A: FC<AProps> = ({
+  children,
+  href: hrefIn,
+  indexPagePath,
+  ...rest
+}) => {
+  const href = getHref({ href: hrefIn, indexPagePath });
 
   return (
     <Link className="ui-text-blue-500" href={href} {...rest}>
