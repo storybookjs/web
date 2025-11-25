@@ -110,11 +110,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const addonPaths = addons.map((name) => {
     if (!name) throw new Error('Addon name is missing');
-    return { loc: `https://storybook.js.org/addons/${name}` };
+    return { loc: `https://storybook.js.org/addons/${name}/` };
   });
   const tagAndCategoryPaths = [...categories, ...tags].map((name) => {
     if (!name) throw new Error('Tag name is missing');
-    return { loc: `https://storybook.js.org/addons/tag/${name}` };
+    return { loc: `https://storybook.js.org/addons/tag/${name}/` };
   });
 
   const urls = [...addonPaths, ...tagAndCategoryPaths].map(({ loc }) => {
@@ -127,5 +127,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return { url: encoded };
   });
 
-  return [{ url: 'https://storybook.js.org/addons' }, ...urls];
+  return [{ url: 'https://storybook.js.org/addons/' }, ...urls];
 }
