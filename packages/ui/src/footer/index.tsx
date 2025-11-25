@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@repo/utils';
 import type { FC } from 'react';
 import { StorybookLogo } from '../logos/storybook-logo';
