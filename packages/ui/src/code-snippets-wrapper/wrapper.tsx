@@ -1,3 +1,5 @@
+'use client'
+
 import type { FC, ReactNode } from 'react';
 import { usePlausible } from 'next-plausible';
 import { JSIcon, TSIcon, ShellIcon } from './icons';
