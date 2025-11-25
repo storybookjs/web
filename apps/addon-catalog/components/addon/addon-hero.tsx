@@ -67,7 +67,7 @@ export function AddonHero({ addon }: { addon: Addon }) {
                 ) : null}
               </AnimatePresence>
             </button>
-            <span className="flex flex-row gap-6">
+            <span className="flex flex-row gap-6 pe-3">
               <a
                 href={addon.repositoryUrl ?? ''}
                 target="_blank"
@@ -77,13 +77,16 @@ export function AddonHero({ addon }: { addon: Addon }) {
                 <GithubIcon />
                 View on Github
               </a>
-              <a
-                href="https://storybook.js.org/docs"
-                onClick={() => { plausible('GetStartedClick', { props: { location: 'addon-secondary-cta' }})}}
-                className="rounded-full px-4 py-2 text-sm font-bold text-black transition-colors hover:text-blue-500 dark:bg-slate-800 dark:text-slate-100"
-              >
-                New to Storybook? Get started
-              </a>
+              <span className="flex items-center gap-2 text-sm">
+                New to Storybook?
+                <a
+                  href="https://storybook.js.org/docs"
+                  onClick={() => { plausible('GetStartedClick', { props: { location: 'addon-secondary-cta' }})}}
+                  className="text-black transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
+                >
+                  Get started
+                </a>
+              </span>
             </span>
           </div>
         </div>
