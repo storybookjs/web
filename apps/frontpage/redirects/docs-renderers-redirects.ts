@@ -6,7 +6,7 @@ const renderersPathWildcardWithRegex = `:renderer(${renderers.join('|')})`;
 export const docsRenderersRedirects: RedirectData[] = [
   {
     source: `/docs/${renderersPathWildcardWithRegex}/get-started/examples`,
-    destination: '/showcase',
+    destination: '/showcase/',
     permanent: true,
   },
 ];
