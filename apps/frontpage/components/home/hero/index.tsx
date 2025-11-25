@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
+import { latestVersion } from '@repo/utils';
 import { Manager } from '../manager';
 import { InitCommand } from './init-command';
 import { Chrome } from './chrome';
@@ -122,7 +123,7 @@ export function Hero({
                 className="md:hidden"
                 href="https://github.com/storybookjs/storybook/releases"
               >
-                <div className="text-md text-white">v10</div>
+                <div className="text-md text-white">v{latestVersion.id.split('.')[0]}</div>
                 <div className="text-sm text-white/60">Latest version</div>
               </a>
               <div>
