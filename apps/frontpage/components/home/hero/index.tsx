@@ -123,7 +123,7 @@ export function Hero({
                 className="md:hidden"
                 href="https://github.com/storybookjs/storybook/releases"
               >
-                <div className="text-md text-white">v{latestVersion.id}</div>
+                <div className="text-md text-white">v{latestVersion.id.split('.')[0]}</div>
                 <div className="text-sm text-white/60">Latest version</div>
               </a>
               <div>
