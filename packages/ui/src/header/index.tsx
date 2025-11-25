@@ -71,9 +71,9 @@ export const Header: FC<HeaderProps> = ({
                 <NavigationMenu.List className="ui-flex ui-gap-2">
                   {nav.map((item) => {
                     let active = false;
-                    if (item.href === '/docs') {
+                    if (item.href === '/docs/') {
                       active = pathname.startsWith('/docs');
-                    } else if (item.href === '/addons') {
+                    } else if (item.href === '/addons/') {
                       active = pathname.startsWith('/addons');
                     } else {
                       active = pathname === item.href;
