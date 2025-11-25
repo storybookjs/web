@@ -49,7 +49,7 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         subtitle="on device"
       />
       <Card
-        href="/docs/get-started/frameworks/preact-vite?renderer=preact"
+        href="/docs/get-started/frameworks/preact-vite/?renderer=preact"
         logo="logo-preact.svg"
         subtitle="with Vite"
         title="Preact"

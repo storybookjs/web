@@ -3,37 +3,37 @@ import { type RedirectData } from './types';
 export const docsCommonRedirects: RedirectData[] = [
   {
     source: '/versions.json',
-    destination: '/versions',
+    destination: '/versions/',
     permanent: true,
   },
   {
     source: '/docs/get-started',
-    destination: '/docs',
+    destination: '/docs/',
     permanent: true,
   },
   {
     source: '/addons/addon-gallery',
-    destination: '/addons',
+    destination: '/addons/',
     permanent: true,
   },
   {
     source: '/integrations',
-    destination: '/addons',
+    destination: '/addons/',
     permanent: true,
   },
   {
     source: '/integrations/tag/:path',
-    destination: '/addons/tag/:path',
+    destination: '/addons/tag/:path/',
     permanent: true,
   },
   {
     source: '/recipes',
-    destination: '/addons',
+    destination: '/addons/',
     permanent: true,
   },
   {
     source: '/telemetry',
-    destination: '/docs/configure/telemetry',
+    destination: '/docs/configure/telemetry/',
     permanent: true,
   },
   {
@@ -48,43 +48,43 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/migration-guides/7.0',
-    destination: '/docs/7/migration-guide',
+    destination: '/docs/7/migration-guide/',
     permanent: true,
   },
   {
     source: '/migration-guides/8.0',
-    destination: '/docs/8/migration-guide',
+    destination: '/docs/8/migration-guide/',
     permanent: true,
   },
   {
     source: '/migration-guides/9.0',
-    destination: '/docs/releases/migration-guide',
+    destination: '/docs/releases/migration-guide/',
     permanent: true,
   },
   {
     source: '/docs/9/migration-guide',
-    destination: '/docs/releases/migration-guide',
+    destination: '/docs/releases/migration-guide/',
     permanent: true,
   },
   {
     source: '/rn-vs-rnw',
-    destination: '/docs/get-started/frameworks/react-native-web-vite?renderer=react-native-web#react-native-vs-react-native-web',
+    destination: '/docs/get-started/frameworks/react-native-web-vite/?renderer=react-native-web#react-native-vs-react-native-web',
     permanent: true,
   },
   /* Supporting old docs URLs */
   {
     source: '/basics/slow-start-guide',
-    destination: '/docs/configure',
+    destination: '/docs/configure/',
     permanent: true,
   },
   {
     source: '/docs/basics/slow-start-guide',
-    destination: '/docs/configure',
+    destination: '/docs/configure/',
     permanent: true,
   },
   {
     source: '/docs/guides/slow-start-guide',
-    destination: '/docs/configure',
+    destination: '/docs/configure/',
     permanent: true,
   },
   {
@@ -107,17 +107,17 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/docs/basics/writing-stories',
-    destination: '/docs/get-started/whats-a-story',
+    destination: '/docs/get-started/whats-a-story/',
     permanent: true,
   },
   {
     source: '/docs/basics/exporting-storybook',
-    destination: '/docs/sharing/publish-storybook',
+    destination: '/docs/sharing/publish-storybook/',
     permanent: true,
   },
   {
     source: '/docs/basics/faq',
-    destination: '/docs/faq',
+    destination: '/docs/faq/',
     permanent: true,
   },
   // TODO: Fix - This is a 404
@@ -129,53 +129,53 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/docs/configurations/options-parameter',
-    destination: '/docs/configure/features-and-behavior',
+    destination: '/docs/configure/features-and-behavior/',
     permanent: true,
   },
   {
     source: '/docs/configurations/custom-webpack-config',
-    destination: '/docs/builders/webpack',
+    destination: '/docs/builders/webpack/',
     permanent: true,
   },
   {
     source: '/docs/configurations/custom-babel-config',
-    destination: '/docs/configure/compilers',
+    destination: '/docs/configure/compilers/',
     permanent: true,
   },
   {
     source: '/docs/configurations/typescript-config',
-    destination: '/docs/configure/typescript',
+    destination: '/docs/configure/typescript/',
     permanent: true,
   },
   {
     source: '/docs/configurations/add-custom-head-tags',
-    destination: '/docs/configure/story-rendering#adding-to-head',
+    destination: '/docs/configure/story-rendering/#adding-to-head',
     permanent: true,
   },
   {
     source: '/docs/configurations/add-custom-body',
-    destination: '/docs/configure/story-rendering#adding-to-body',
+    destination: '/docs/configure/story-rendering/#adding-to-body',
     permanent: true,
   },
   {
     source: '/docs/configurations/serving-static-files',
     destination:
-      '/docs/configure/images-and-assets#serving-static-files-via-storybook',
+      '/docs/configure/images-and-assets/#serving-static-files-via-storybook',
     permanent: true,
   },
   {
     source: '/docs/configurations/env-vars',
-    destination: '/docs/configure/environment-variables',
+    destination: '/docs/configure/environment-variables/',
     permanent: true,
   },
   {
     source: '/docs/configurations/theming',
-    destination: '/docs/configure/theming',
+    destination: '/docs/configure/theming/',
     permanent: true,
   },
   {
     source: '/docs/configurations/cli-options',
-    destination: '/docs/api/cli-options',
+    destination: '/docs/api/cli-options/',
     permanent: true,
   },
   {
@@ -186,7 +186,7 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/docs/formats/component-story-format',
-    destination: '/docs/api/csf',
+    destination: '/docs/api/csf/',
     permanent: true,
   },
   {
@@ -197,52 +197,52 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/docs/formats/mdx-syntax',
-    destination: '/docs/writing-docs/mdx',
+    destination: '/docs/writing-docs/mdx/',
     permanent: true,
   },
   {
     source: '/docs/testing/react-ui-testing',
-    destination: '/docs/writing-tests',
+    destination: '/docs/writing-tests/',
     permanent: true,
   },
   {
     source: '/docs/testing/structural-testing',
-    destination: '/docs/writing-tests/snapshot-testing',
+    destination: '/docs/writing-tests/snapshot-testing/',
     permanent: true,
   },
   {
     source: '/docs/testing/interaction-testing',
-    destination: '/docs/writing-tests/interaction-testing',
+    destination: '/docs/writing-tests/interaction-testing/',
     permanent: true,
   },
   {
     source: '/docs/testing/automated-visual-testing',
-    destination: '/docs/writing-tests/visual-testing',
+    destination: '/docs/writing-tests/visual-testing/',
     permanent: true,
   },
   {
     source: '/docs/testing/manual-testing',
-    destination: '/docs/writing-tests',
+    destination: '/docs/writing-tests/',
     permanent: true,
   },
   {
     source: '/docs/addons/using-addons',
-    destination: '/docs/addons/install-addons',
+    destination: '/docs/addons/install-addons/',
     permanent: true,
   },
   {
     source: '/addons/writing-addons',
-    destination: '/docs/addons/writing-addons',
+    destination: '/docs/addons/writing-addons/',
     permanent: true,
   },
   {
     source: '/docs/addons/api',
-    destination: '/docs/addons/addons-api',
+    destination: '/docs/addons/addons-api/',
     permanent: true,
   },
   {
     source: '/docs/presets/introduction',
-    destination: '/docs/addons/writing-presets',
+    destination: '/docs/addons/writing-presets/',
     permanent: true,
   },
   {
@@ -252,68 +252,68 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/docs/presets/writing-presets',
-    destination: '/docs/addons/writing-presets',
+    destination: '/docs/addons/writing-presets/',
     permanent: true,
   },
   /* 🐺 Wild Cards */
   {
     source: '/basics/:path*',
-    destination: '/docs',
+    destination: '/docs/',
     permanent: true,
   },
   {
     source: '/docs/basics/:path*',
-    destination: '/docs',
+    destination: '/docs/',
     permanent: true,
   },
   {
     source: '/configurations/:path*',
-    destination: '/docs/configure',
+    destination: '/docs/configure/',
     permanent: true,
   },
   {
     source: '/docs/configurations/:path*',
-    destination: '/docs/configure',
+    destination: '/docs/configure/',
     permanent: true,
   },
   {
     source: '/examples/:path*',
-    destination: '/docs',
+    destination: '/docs/',
     permanent: true,
   },
   {
     source: '/docs/examples/:path*',
-    destination: '/docs',
+    destination: '/docs/',
     permanent: true,
   },
   {
     source: '/logos/:path*',
-    destination: '/docs',
+    destination: '/docs/',
     permanent: true,
   },
   {
     source: '/docs/logos/:path*',
-    destination: '/docs',
+    destination: '/docs/',
     permanent: true,
   },
   {
     source: '/testing/:path*',
-    destination: '/docs',
+    destination: '/docs/',
     permanent: true,
   },
   {
     source: '/docs/testing/:path*',
-    destination: '/docs/writing-tests',
+    destination: '/docs/writing-tests/',
     permanent: true,
   },
   {
     source: '/docs/guides/:path*',
-    destination: '/docs',
+    destination: '/docs/',
     permanent: true,
   },
   {
     source: '/tag/:path*',
-    destination: '/addons/tag/:path*',
+    destination: '/addons/tag/:path*/',
     permanent: true,
   },
 ];

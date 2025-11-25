@@ -33,7 +33,7 @@ export function Share() {
             </p>
             <Link
               className="flex items-center gap-2 font-bold text-blue-500"
-              href="/docs/sharing/publish-storybook"
+              href="/docs/sharing/publish-storybook/"
             >
               Publish Storybook
               <ChevronSmallRightIcon />
@@ -52,7 +52,7 @@ export function Share() {
             </p>
             <Link
               className="flex items-center gap-2 font-bold text-blue-500"
-              href="/docs/sharing/embed"
+              href="/docs/sharing/embed/"
             >
               Embed stories
               <ChevronSmallRightIcon />

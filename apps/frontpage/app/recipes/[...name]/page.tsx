@@ -87,7 +87,7 @@ export default async function RecipeDetails({ params }: RecipeDetailsProps) {
         githubCount={githubCount}
       />
       <Container className="mb-16">
-        <SubHeader leftLabel="Back to integrations" leftHref="/addons" />
+        <SubHeader leftLabel="Back to integrations" leftHref="/addons/" />
         <div className="mx-auto flex max-w-[1024px] flex-col items-center justify-center pb-20">
           <div className="mb-8 flex gap-10">
             <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-[#ff4785]">

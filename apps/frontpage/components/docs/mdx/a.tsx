@@ -1,65 +1,48 @@
-/* eslint-disable no-nested-ternary -- TODO */
-import { type DocsVersion, latestVersion } from '@repo/utils';
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 
+export function getHref({ href: hrefIn, indexPagePath }: AProps) {
+  const isExternal = hrefIn?.startsWith('http');
+  if (isExternal ?? !hrefIn) {
+    return hrefIn ?? '#';
+  }
+
+  let href = hrefIn
+    // eslint-disable-next-line prefer-named-capture-group -- TODO: Fix regex with new eslint rules
+    ?.replace(/^((?!http).*)\.mdx/, '$1/')
+    .replace(/\/index\/$/, '/')
+    // ../../release-7-6/docs/migration-guide.mdx#major-breaking-changes -> ../../docs/7/migration-guide#major-breaking-changes
+    // eslint-disable-next-line prefer-named-capture-group -- TODO: Fix regex with new eslint rules
+    .replace(/^((?!http).*)(?:release-)(\d+)-\d+\/docs(.*)/, '$1docs/$2$3');
+
+  /**
+   * The link hrefs are authored to match the file system, e.g. `../get-started/install.mdx`, but the
+   * URL for that page is `/docs/get-started/install/`. So, we need to rewrite relative hrefs to
+   * accommodate the change from file to directory in the route.
+   * 
+   * Index pages have a trailing slash, so the transformation doesn't require adjustment.
+   */
+  if (!indexPagePath) {
+    href = href.replace(/^\.\.\//, '../../');
+    href = href.replace(/^\.\//, '../');
+  }
+
+  return href;
+}
+
 interface AProps {
-  activeVersion?: DocsVersion;
   children?: ReactNode;
   href?: string;
   indexPagePath?: string[] | null;
-}
-
-/**
- * ['8.1'] to 'docs' (when latestVersion is '8.1')
- * ['8.2'] to '8.2' (when '8.2' is pre-release)
- * ['7.6'] to '7'
- * [ '8.1', 'configure' ] to 'configure'
- * [ '8.1', 'writing-tests', 'snapshot-testing'] to 'snapshot-testing'
- */
-function getParentPartOfPath(
-  indexPagePath: string[],
-  activeVersion: DocsVersion,
-) {
-  return indexPagePath.length === 1
-    ? activeVersion.id === latestVersion.id
-      ? 'docs'
-      : (activeVersion.inSlug ?? activeVersion.id)
-    : indexPagePath[indexPagePath.length - 1];
 }
 
 export const A: FC<AProps> = ({
   children,
   href: hrefIn,
   indexPagePath,
-  activeVersion = latestVersion,
   ...rest
 }) => {
-  const isExternal = hrefIn?.startsWith('http');
-  if (isExternal ?? !hrefIn) {
-    return (
-      <a className="ui-text-blue-500" href={hrefIn} {...rest}>
-        {children}
-      </a>
-    );
-  }
-
-  let href = hrefIn
-    // eslint-disable-next-line prefer-named-capture-group -- TODO: Fix regex with new eslint rules
-    ?.replace(/^((?!http).*)\.mdx/, '$1')
-    .replace(/\/index$/, '')
-    // ../../release-7-6/docs/migration-guide.mdx#major-breaking-changes -> ../../docs/7/migration-guide#major-breaking-changes
-    // eslint-disable-next-line prefer-named-capture-group -- TODO: Fix regex with new eslint rules
-    .replace(/^((?!http).*)(?:release-)(\d+)-\d+\/docs(.*)/, '$1docs/$2$3');
-
-  if (indexPagePath && href?.startsWith('./')) {
-    href = href.replace(
-      './',
-      `./${getParentPartOfPath(indexPagePath, activeVersion)}/`,
-    );
-  } else if (indexPagePath && href?.startsWith('../')) {
-    href = href.replace('../', './');
-  }
+  const href = getHref({ href: hrefIn, indexPagePath });
 
   return (
     <Link className="ui-text-blue-500" href={href} {...rest}>
