@@ -40,12 +40,12 @@ export const docsVersionsRedirects = [
     .reduce<RedirectData[]>((acc, v) => {
       acc.push({
         source: `/docs/${v}`,
-        destination: `/docs/`,
+        destination: `/docs`,
         permanent: false,
       });
       acc.push({
         source: `/docs/${v}/:path*`,
-        destination: `/docs/`,
+        destination: `/docs`,
         permanent: false,
       });
       return acc;
