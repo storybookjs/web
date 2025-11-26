@@ -35,26 +35,26 @@ export const DocsMainNav = () => {
       />
       {Number(activeVersion.id) >= 7 ? (
         <Line
-          href="/docs/api/"
+          href="/docs/api"
           icon={<APIIcon />}
           isActive={pathname.startsWith('/docs/api')}
           label="API"
         />
       ) : null}
       <Line
-        href="/tutorials/"
+        href="/tutorials"
         icon={<TutorialsIcon />}
         isActive={pathname === '/tutorials'}
         label="Tutorials"
       />
       <Line
-        href="/integrations/"
+        href="/integrations"
         icon={<IntegrationsIcon />}
         isActive={false}
         label="Addons"
       />
       <Line
-        href="/releases/"
+        href="/releases"
         icon={<ChangelogIcon />}
         isActive={pathname.startsWith('/releases')}
         label="Changelog"
