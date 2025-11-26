@@ -1,19 +1,19 @@
 export const nav = [
   {
     title: 'Docs',
-    href: '/docs/',
+    href: '/docs',
   },
   {
     title: 'Addons',
-    href: '/addons/',
+    href: '/addons',
   },
   {
     title: 'Showcase',
-    href: '/showcase/',
+    href: '/showcase',
   },
   {
     title: 'Blog',
-    href: '/blog/',
+    href: '/blog',
   },
   {
     title: 'Visual Test',

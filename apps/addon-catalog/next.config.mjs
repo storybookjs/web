@@ -3,7 +3,6 @@ import { withPlausibleProxy } from 'next-plausible';
 
 const nextConfig = withPlausibleProxy()({
   basePath: '/addons',
-  trailingSlash: true,
   images: {
     unoptimized: true,
     remotePatterns: [
@@ -25,14 +24,10 @@ const nextConfig = withPlausibleProxy()({
     ],
   },
   async redirects() {
-    // Base path already ensures that `/` is `/addons/` in production.
-    if (process.env.NODE_ENV === 'production') {
-      return [];
-    }
     return [
       {
         source: '/',
-        destination: '/addons/',
+        destination: '/addons',
         basePath: false,
         permanent: false,
       },
