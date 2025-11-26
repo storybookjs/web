@@ -8,6 +8,7 @@ import {
   CodeSnippets,
   CommunityRenderers,
   FeatureSnippets,
+  GetStartedVersions,
   HomeConcepts,
   HomeRenderers,
   HomeResources,
@@ -89,6 +90,7 @@ export const getPageData = async (
       FrameworkSupportTable: (props: { children: ReactNode }) => (
         <div {...props}>{props.children}</div>
       ),
+      GetStartedVersions,
       HomeConcepts,
       HomeRenderers: () => <HomeRenderers activeVersion={activeVersion} />,
       HomeResources,

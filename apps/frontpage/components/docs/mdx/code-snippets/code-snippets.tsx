@@ -21,11 +21,12 @@ const Link = mdxComponents.A;
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[] | null;
+  variant?: "default" | "new-users";
 }
 
 const getInitialTab = (tabs: Tab[], activeSnippetTabs: string[]) => {
   let initialTab: Tab | undefined;
-  
+
   activeSnippetTabs.forEach((localTab) => {
     initialTab ??= tabs.find((tab) => tab.id === localTab);
     initialTab ??= tabs.find((tab) => tab.id.includes(localTab) || localTab.includes(tab.id));
@@ -52,12 +53,12 @@ const Error = () => {
 const getActiveRenderer = (activeRendererIn: string | null, pathname: string) => {
   // eslint-disable-next-line prefer-named-capture-group -- TODO: Enable via TS config changes
   const matches = /\/docs\/get-started\/frameworks\/(.*)/.exec(pathname);
-  
+
   if (!matches) return activeRendererIn;
 
   const framework = matches[1];
   const frameworkOrRendererPortion = framework.replace(/-(?:vite|webpack5)/, '') as keyof typeof map;
-  
+
   const map = {
     'nextjs': 'react',
     'react-native-web': 'react',
@@ -104,6 +105,7 @@ function ActiveInfo({ activeTab }: { activeTab: string | null }) {
 
 export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   content,
+  variant = "default",
 }) => {
   const {
     activeRenderer: activeRendererIn,
@@ -236,6 +238,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
               : 'js'
             : null
       }
+      variant={variant}
     >
       {activeContent?.content ? (
         <>
