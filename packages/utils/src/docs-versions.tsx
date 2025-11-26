@@ -32,25 +32,6 @@ export const docsVersions: DocsVersion[] = [
     id: '10.1',
     branch: 'main',
   },
-  // {
-  //   label: 'Version 10.2 (beta)',
-  //   id: '10.2',
-  //   inSlug: '10.2',
-  //   branch: 'next',
-  //   preRelease: true,
-  // },
-  {
-    label: 'Version 9',
-    id: '9.1',
-    inSlug: '9',
-    branch: 'release-9-1',
-  },
-  {
-    label: 'Version 8',
-    id: '8.6',
-    inSlug: '8',
-    branch: 'release-8-6',
-  },
 ];
 
 export const latestVersion = docsVersions[0];
