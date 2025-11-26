@@ -1,16 +1,11 @@
 [[redirects]]
-  from = "/addons"
-  to = "https://storybook-addon-catalog.netlify.app/addons"
-  status = 200
-
-[[redirects]]
   from = "/addons/sitemap.xml"
   to = "/addons/sitemap.xml"
   status = 200
 
 [[redirects]]
   from = "/addons/*"
-  to = "https://storybook-addon-catalog.netlify.app/addons/:splat"
+  to = "https://storybook-addon-catalog.netlify.app/addons/:splat/"
   status = 200
 
 [[redirects]]
