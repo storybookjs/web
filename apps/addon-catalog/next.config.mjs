@@ -31,7 +31,7 @@ const nextConfig = withPlausibleProxy()({
     return [
       {
         source: '/',
-        destination: '/addons/',
+        destination: '/addons',
         basePath: false,
         permanent: false,
       },
