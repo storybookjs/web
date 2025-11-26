@@ -16,17 +16,17 @@ export async function fetchTagsData({
   let value: TagValue[] = []; // Moved outside to be accessible by fetchPartialData
 
   // Define fetchPartialData at the root of fetchTagsData function body
-  async function fetchPartialData(): Promise<TagValue[]> {
-    const data = await fetchAddonsQuery<TagsData, { isCategory: boolean }>(
+  async function fetchPartialData(skip = 0): Promise<TagValue[]> {
+    const data = await fetchAddonsQuery<TagsData, { isCategory: boolean, skip: number }>(
       gql`
-        query TagNames($isCategory: Boolean!) {
-          tags(isCategory: $isCategory) {
+        query TagNames($isCategory: Boolean!, $skip: Int!) {
+          tags(isCategory: $isCategory, limit: 30, skip: $skip) {
             name
           }
         }
       `,
       {
-        variables: { isCategory: Boolean(isCategory) },
+        variables: { isCategory: Boolean(isCategory), skip },
       },
     );
 
@@ -36,11 +36,13 @@ export async function fetchTagsData({
 
     value = [...value, ...tags.map(({ name }) => name)];
 
+    // if (tags.length > 0) await fetchPartialData(skip + tags.length);
+
     return value;
   }
 
   try {
-    return await fetchPartialData(); // Call fetchPartialData at the end of fetchTagsData
+    return await fetchPartialData();
   } catch (error) {
     throw new Error(`Failed to fetch addons data: ${(error as Error).message}`);
   }

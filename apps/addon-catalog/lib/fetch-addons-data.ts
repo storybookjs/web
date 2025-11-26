@@ -30,7 +30,7 @@ export async function fetchAddonsData() {
 
     value = [...value, ...addons.map(({ name }) => name)];
 
-    if (addons.length > 0) await fetchPartialData(skip + addons.length);
+    // if (addons.length > 0) await fetchPartialData(skip + addons.length);
 
     return value;
   }

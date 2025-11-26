@@ -35,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       value = [...value, ...addons.map(({ name }) => name)];
 
-      if (addons.length > 0) await fetchPartialData(skip + addons.length);
+      // if (addons.length > 0) await fetchPartialData(skip + addons.length);
 
       return value;
     }
@@ -87,7 +87,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       value = [...value, ...tags.map(({ name }) => name)];
 
-      if (tags.length > 0) await fetchPartialData(skip + tags.length);
+      // if (tags.length > 0) await fetchPartialData(skip + tags.length);
 
       return value;
     }
