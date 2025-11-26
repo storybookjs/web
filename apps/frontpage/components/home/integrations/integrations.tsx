@@ -55,22 +55,22 @@ export function Integrations() {
       name: 'TestingLib',
     },
     {
-      href: '/addons/@react-theming/storybook-addon/',
+      href: '/addons/@react-theming/storybook-addon',
       image: Emotion,
       name: 'Emotion',
     },
     {
-      href: '/recipes/tailwindcss/',
+      href: '/recipes/tailwindcss',
       image: Tailwind,
       name: 'Tailwind',
     },
     {
       image: Jest,
       name: 'Jest',
-      href: '/addons/@storybook/addon-jest/',
+      href: '/addons/@storybook/addon-jest',
     },
     {
-      href: '/docs/get-started/frameworks/nextjs/',
+      href: '/docs/get-started/frameworks/nextjs',
       image: Nextjs,
       name: 'Nextjs',
     },
@@ -101,7 +101,7 @@ export function Integrations() {
       isExternal: true,
     },
     {
-      href: '/addons/storybook-addon-apollo-client/',
+      href: '/addons/storybook-addon-apollo-client',
       image: Apollo,
       name: 'Apollo',
     },
@@ -111,7 +111,7 @@ export function Integrations() {
       name: 'Playwright',
     },
     {
-      href: '/addons/@storybook/addon-a11y/',
+      href: '/addons/@storybook/addon-a11y',
       image: Axe,
       name: 'Axe',
     },
@@ -124,17 +124,17 @@ export function Integrations() {
       isExternal: true,
     },
     {
-      href: '/addons/mswjs/msw-storybook-addon/',
+      href: '/addons/mswjs/msw-storybook-addon',
       image: MSW,
       name: 'MSW',
     },
     {
-      href: '/addons/storybook-zeplin/',
+      href: '/addons/storybook-zeplin',
       image: Zeplin,
       name: 'Zeplin',
     },
     {
-      href: '/addons/tag/graphql/',
+      href: '/addons/tag/graphql',
       image: GraphQL,
       name: 'GraphQL',
     },
@@ -149,7 +149,7 @@ export function Integrations() {
       name: 'Launchdarkly',
     },
     {
-      href: '/addons/@storybook/addon-styling-webpack/',
+      href: '/addons/@storybook/addon-styling-webpack',
       image: Sass,
       name: 'Sass',
     },
@@ -180,7 +180,7 @@ export function Integrations() {
       name: 'Sketch',
     },
     {
-      href: '/addons/@storybook/testing-angular/',
+      href: '/addons/@storybook/testing-angular',
       image: Supernova,
       name: 'Supernova',
     },
