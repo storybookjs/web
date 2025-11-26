@@ -25,6 +25,10 @@ const nextConfig = withPlausibleProxy()({
     ],
   },
   async redirects() {
+    // Base path already ensures that `/` is `/addons/` in production.
+    if (process.env.NODE_ENV === 'production') {
+      return [];
+    }
     return [
       {
         source: '/',
