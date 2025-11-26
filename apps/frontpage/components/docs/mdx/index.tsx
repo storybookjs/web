@@ -2,6 +2,7 @@ export { A } from './a';
 export { CodeSnippets } from './code-snippets';
 export { CommunityRenderers } from './community-renderers';
 export { FeatureSnippets } from './feature-snippets';
+export { GetStartedVersions } from './get-started-versions';
 export { HomeConcepts } from './home-concepts';
 export { HomeRenderers } from './home-renderers';
 export { HomeResources } from './home-resources';
