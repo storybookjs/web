@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/addons"
-  to = "https://storybook-addon-catalog.netlify.app/addons"
+  to = "https://sb-addons-experiment.netlify.app/addons"
   status = 200
 
 [[redirects]]
@@ -10,7 +10,7 @@
 
 [[redirects]]
   from = "/addons/*"
-  to = "https://storybook-addon-catalog.netlify.app/addons/:splat"
+  to = "https://sb-addons-experiment.netlify.app/addons/:splat"
   status = 200
 
 [[redirects]]
