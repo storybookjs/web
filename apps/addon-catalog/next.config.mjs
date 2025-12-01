@@ -3,9 +3,6 @@ import { withPlausibleProxy } from 'next-plausible';
 
 const nextConfig = withPlausibleProxy()({
   basePath: '/addons',
-  experimental: {
-    cpus: 1,
-  },
   images: {
     unoptimized: true,
     remotePatterns: [
