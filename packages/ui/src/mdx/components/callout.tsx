@@ -53,7 +53,7 @@ export const Callout: FC<CalloutProps> = ({
           <div dangerouslySetInnerHTML={{ __html: snarkdown(title) }} />
         ) : null}
         {/* TODO: Check prefix placement in ones like `[&>p]:ui-mb-0` */}
-        <div className="ui-mb-0 [&>p]:ui-mb-0">{children}</div>
+        <div className="ui-mb-0 [&>p]:ui-mb-0 [&>ul]:ui-mb-0">{children}</div>
       </div>
     </div>
   );

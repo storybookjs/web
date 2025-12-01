@@ -1,4 +1,7 @@
+'use client'
+
 import type { FC, ReactNode } from 'react';
+import { usePlausible } from 'next-plausible';
 import { JSIcon, TSIcon, ShellIcon } from './icons';
 import { Copy } from './copy';
 
@@ -11,6 +14,7 @@ type CodeSnippetsWrapperProps = {
   title?: string;
   top?: ReactNode;
   bottom?: ReactNode;
+  variant?: "default" | "new-users";
 };
 
 const languageIcons = {
@@ -27,7 +31,10 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
   title,
   top,
   bottom,
+  variant = 'default',
 }) => {
+  const plausible = usePlausible()
+
   return (
     <div className="ui-my-6 ui-w-full ui-overflow-hidden ui-rounded ui-border ui-border-zinc-300 dark:ui-border-slate-700">
       <div className="ui-bg-slate-50 dark:ui-bg-slate-950">
@@ -38,7 +45,12 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
           </div>
           <div className="ui-flex ui-items-center ui-gap-2">
             {options}
-            {copy ? <Copy content={copy} /> : null}
+            {copy ? <Copy content={copy} onClick={() => {
+              plausible('CodeSnippetCopy', {  props: {
+                language: iconLanguage,
+                title,
+              }})
+            }} variant={variant} /> : null}
           </div>
         </div>
       </div>

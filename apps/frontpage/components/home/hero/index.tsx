@@ -3,13 +3,13 @@
 'use client';
 
 import Link from 'next/link';
-import { cn } from '@repo/utils';
+import { cn , latestVersion } from '@repo/utils';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
-import { latestVersion } from '@repo/utils';
+import { usePlausible } from 'next-plausible';
 import { Manager } from '../manager';
 import { InitCommand } from './init-command';
 import { Chrome } from './chrome';
@@ -69,6 +69,7 @@ export function Hero({
 }) {
   const [slide, setSlide] = useState(1);
   const intervalId = useRef<number | null>(null);
+  const plausible = usePlausible();
 
   const setSlideInterval = () => {
     if (intervalId.current !== null) {
@@ -113,6 +114,7 @@ export function Hero({
               <Link
                 className="text-md flex h-12 items-center justify-center rounded-full bg-white px-6 font-bold text-black"
                 href="/docs"
+                onClick={() => { plausible('GetStartedClick', { props: { location: 'hero' }})}}
               >
                 Get Started
               </Link>
