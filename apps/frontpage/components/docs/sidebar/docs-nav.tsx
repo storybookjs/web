@@ -6,6 +6,7 @@ import { useEffect, useState, type FC } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import type { TreeProps } from '@repo/utils';
 import { cn, docsVersions } from '@repo/utils';
+import { usePlausible } from 'next-plausible';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { getVersion } from '../../../lib/get-version';
 import { VersionSelector } from './version-selector';
@@ -15,6 +16,8 @@ type Tree = TreeProps[] | null | undefined;
 interface NavDocsProps {
   listOfTrees: TreeProps[];
 }
+
+const GET_STARTED_SLUGS = ['/docs', '/docs/', '/docs/get-started', '/docs/get-started/'];
 
 export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
   const pathname = usePathname();
@@ -66,6 +69,7 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
 
 const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
   const pathname = usePathname();
+  const plausible = usePlausible();
   let slug = lvl1.slug;
   docsVersions.forEach((version) => {
     if (
@@ -87,6 +91,9 @@ const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
           isActive && 'text-blue-500',
         )}
         href={lvl1.slug}
+        onClick={GET_STARTED_SLUGS.includes(lvl1.slug)
+          ? () => { plausible('GetStartedClick', { props: { location: 'sidebar-nav' }})}
+          : undefined}
       >
         {lvl1.sidebar?.title ?? lvl1.title}
       </Link>
