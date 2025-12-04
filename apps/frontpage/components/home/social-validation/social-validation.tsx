@@ -74,8 +74,7 @@ const projects = [
     height: 48,
     logoAlt: 'Adobe',
     logoUrl: '/home/community/logos/adobe.svg',
-    projectUrl:
-      'https://storybook.js.org/showcase/adobe-spectrum-web-components',
+    projectUrl: 'https://react-spectrum.adobe.com/',
   },
 ];
 
