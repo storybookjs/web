@@ -11,7 +11,7 @@ function flatten(
   Object.entries(obj).forEach(([key, value]) => {
     let p: string = (prefix ? `${prefix}.${key}` : key)
       .replaceAll('@', '_at_')
-       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- we know it's a string
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- we know it's a string
       .replaceAll('/', '_slash_');
 
     if (p.startsWith('_')) {
