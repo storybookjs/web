@@ -14,6 +14,8 @@ type CodeSnippetsWrapperProps = {
   title?: string;
   top?: ReactNode;
   bottom?: ReactNode;
+  copyEvent?: string;
+  snippetPath?: string;
   variant?: "default" | "new-users";
 };
 
@@ -31,6 +33,8 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
   title,
   top,
   bottom,
+  copyEvent,
+  snippetPath,
   variant = 'default',
 }) => {
   const plausible = usePlausible()
@@ -46,10 +50,11 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
           <div className="ui-flex ui-items-center ui-gap-2">
             {options}
             {copy ? <Copy content={copy} onClick={() => {
-              plausible('CodeSnippetCopy', {  props: {
-                language: iconLanguage,
-                title,
-              }})
+              const props = { language: iconLanguage, snippetPath, title };
+              plausible('CodeSnippetCopy', {  props });
+              if (copyEvent) {
+                plausible(copyEvent, {  props });
+              }
             }} variant={variant} /> : null}
           </div>
         </div>

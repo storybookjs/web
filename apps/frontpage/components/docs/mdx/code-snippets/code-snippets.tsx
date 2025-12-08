@@ -21,6 +21,8 @@ const Link = mdxComponents.A;
 
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[] | null;
+  copyEvent?: string;
+  snippetPath?: string;
   variant?: "default" | "new-users";
 }
 
@@ -105,6 +107,8 @@ function ActiveInfo({ activeTab }: { activeTab: string | null }) {
 
 export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   content,
+  copyEvent,
+  snippetPath,
   variant = "default",
 }) => {
   const {
@@ -238,6 +242,8 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
               : 'js'
             : null
       }
+      copyEvent={copyEvent}
+      snippetPath={snippetPath}
       variant={variant}
     >
       {activeContent?.content ? (
