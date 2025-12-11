@@ -27,14 +27,10 @@ export const Header: FC<HeaderProps> = ({
   // eyebrow,
   eyebrow = (
     <Eyebrow
-      href="https://us02web.zoom.us/webinar/register/4217528604397/WN_iPyLHSR_S0uc5npmGjcr6A"
-      title="Join us live: Agentic Design Systems with Brad Frost"
+      href="https://storybook.js.org/blog/storybook-mcp-sneak-peek/"
+      title="Storybook MCP sneak peek: Get early access"
+      hideIcon
     />
-    // <Eyebrow
-    //   href="https://storybook.js.org/blog/storybook-mcp-sneak-peek/"
-    //   title="Storybook MCP sneak peek: Get early access"
-    //   hideIcon
-    // />
   ),
   githubCount = 0,
   subMenu,
