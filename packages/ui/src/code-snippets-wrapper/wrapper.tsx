@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
 import type { FC, ReactNode } from 'react';
-import { usePlausible } from 'next-plausible';
+import { useAnalytics } from '../analytics';
 import { JSIcon, TSIcon, ShellIcon } from './icons';
 import { Copy } from './copy';
 
@@ -16,7 +16,7 @@ type CodeSnippetsWrapperProps = {
   bottom?: ReactNode;
   copyEvent?: string;
   snippetPath?: string;
-  variant?: "default" | "new-users";
+  variant?: 'default' | 'new-users';
 };
 
 const languageIcons = {
@@ -37,7 +37,7 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
   snippetPath,
   variant = 'default',
 }) => {
-  const plausible = usePlausible()
+  const track = useAnalytics();
 
   return (
     <div className="ui-my-6 ui-w-full ui-overflow-hidden ui-rounded ui-border ui-border-zinc-300 dark:ui-border-slate-700">
@@ -49,13 +49,19 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
           </div>
           <div className="ui-flex ui-items-center ui-gap-2">
             {options}
-            {copy ? <Copy content={copy} onClick={() => {
-              const props = { language: iconLanguage, snippetPath, title };
-              plausible('CodeSnippetCopy', {  props });
-              if (copyEvent) {
-                plausible(copyEvent, {  props });
-              }
-            }} variant={variant} /> : null}
+            {copy ? (
+              <Copy
+                content={copy}
+                onClick={() => {
+                  const props = { language: iconLanguage, snippetPath, title };
+                  track('CodeSnippetCopy', props);
+                  if (copyEvent) {
+                    track(copyEvent, props);
+                  }
+                }}
+                variant={variant}
+              />
+            ) : null}
           </div>
         </div>
       </div>
