@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { NewsletterForm } from '../newsletter-form';
 import { Eyebrow } from './eyebrow';
 import { Header } from './index';

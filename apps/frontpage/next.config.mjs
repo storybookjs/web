@@ -1,6 +1,8 @@
-const generatedRedirects = require('./generated-redirects.json');
-const { withPlausibleProxy } = require('next-plausible');
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+import generatedRedirects from './generated-redirects.json' with { type: 'json' };
+import { withPlausibleProxy } from 'next-plausible';
+import withBundleAnalyzer from '@next/bundle-analyzer';
+
+const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
@@ -28,7 +30,7 @@ const HISTORICAL_VERSIONS = [
 ];
 
 /** @type {import('next').NextConfig} */
-module.exports = withBundleAnalyzer(
+export default bundleAnalyzer(
   withPlausibleProxy()({
     images: {
       unoptimized: true,
