@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState, useRef } from 'react';
 import {
   BookIcon,
   CloseIcon,
@@ -41,6 +41,20 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
     recipes: Recipe[];
   }>({ addons: [], recipes: [] });
   const pathname = usePathname();
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Keyboard shortcut: Ctrl+K or Cmd+K to focus search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -82,13 +96,20 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
           <div className="relative flex h-10 w-full flex-shrink-0 items-center rounded-full border border-zinc-300 md:w-[250px] dark:border-slate-700">
             <SearchIcon className="absolute left-4 dark:text-slate-500" />
             <input
-              className="h-full w-full rounded-full bg-transparent pl-10 placeholder:text-slate-500 dark:placeholder:text-slate-400"
+              ref={searchInputRef}
+              className="h-full w-full rounded-full bg-transparent pl-10 pr-20 placeholder:text-slate-500 dark:placeholder:text-slate-400"
               placeholder="Search integrations"
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);
               }}
+              title="Press Ctrl+K or ⌘K to focus"
             />
+            {!search && (
+              <kbd className="absolute right-3 hidden rounded border border-zinc-300 bg-zinc-50 px-2 py-0.5 text-xs text-zinc-500 md:inline-block dark:border-slate-600 dark:bg-slate-800 dark:text-slate-400">
+                ⌘K
+              </kbd>
+            )}
             {search.length > 0 && (
               <div
                 className="absolute right-2 top-1/2 flex h-7 w-7 -translate-y-1/2 cursor-pointer items-center justify-center"

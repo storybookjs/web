@@ -8,6 +8,7 @@ import {
 import { cn } from '@repo/utils';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Providers } from './providers';
+import { ScrollToTop } from '../components/scroll-to-top';
 
 import '@docsearch/css';
 import './globals.css';
@@ -60,6 +61,7 @@ export default function RootLayout({
         )}
       >
         <Providers>{children}</Providers>
+        <ScrollToTop />
       </body>
       <GoogleAnalytics gaId="G-MN8NJ34M7T" />
     </html>
