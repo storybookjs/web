@@ -18,6 +18,7 @@ export const Providers: FC<ProvidersProps> = ({ children }) => {
       ui_host: 'https://us.posthog.com',
       defaults: '2025-05-24',
       capture_exceptions: true,
+      disable_compression: true,
       debug: process.env.NODE_ENV === 'development',
     });
   }, []);
