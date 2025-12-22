@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
 import type { NextRequest } from 'next/server';
+import postHogClient from '../../lib/posthog';
 
 const sentryEnvelopeUrl = `https://o4507096816484352.ingest.sentry.io/api/4507096819892224/envelope/?sentry_key=${process.env.SENTRY_KEY ?? ''}&sentry_version=7`;
 
@@ -70,7 +71,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (received.payload?.userAgent) {
-    requests.push(forwardToPlausible(received, headers));
+    requests.push(forwardToAnalytics(received, headers));
   }
 
   const responses = await Promise.allSettled(requests);
@@ -96,6 +97,7 @@ export async function POST(request: NextRequest) {
 
 interface TelemetryEvent {
   eventType: string;
+  sessionId: string;
   context: {
     storybookVersion?: string;
     anonymousId: string;
@@ -215,7 +217,7 @@ async function forwardToSentry(received: TelemetryEvent) {
   });
 }
 
-async function forwardToPlausible(received: TelemetryEvent, headers: Headers) {
+async function forwardToAnalytics(received: TelemetryEvent, headers: Headers) {
   const ip = headers.get('x-forwarded-for') ?? headers.get('x-real-ip');
   const { userAgent, step, isNewUser, timeSinceInit } = received.payload ?? {};
 
@@ -244,6 +246,22 @@ async function forwardToPlausible(received: TelemetryEvent, headers: Headers) {
     framework: framework?.name,
     storybookVersion,
   };
+
+  try {
+    const posthog = postHogClient();
+    posthog.capture({
+      distinctId: received.sessionId,
+      event: name,
+      properties: {
+        ...props,
+        $ip: ip ?? '127.0.0.1',
+        $user_agent: userAgent ?? 'unknown',
+        $process_person_profile: false,
+      },
+    });
+  } catch (e) {
+    /* */
+  }
 
   return fetch('https://plausible.io/api/event', {
     method: 'POST',
