@@ -27,8 +27,8 @@ export const Header: FC<HeaderProps> = ({
   // eyebrow,
   eyebrow = (
     <Eyebrow
-      href="https://storybook.js.org/blog/security-advisory/"
-      title="Security advisory: Potential vulnerability in published Storybooks"
+      href="https://storybook.js.org/blog/storybook-mcp-sneak-peek/"
+      title="Storybook MCP sneak peek: Get early access"
       hideIcon
     />
   ),
