@@ -3,17 +3,23 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import copy from 'copy-to-clipboard';
 import { AnimatePresence, motion } from 'framer-motion';
-import { usePlausible } from 'next-plausible';
+import { useAnalytics } from '../../../lib/analytics';
 
 export const InitCommand: FC = () => {
   const [state, setState] = useState(false);
-  const plausible = usePlausible();
+  const track = useAnalytics();
 
   const onClick = () => {
     copy('npm create storybook@latest');
     setState(true);
-    plausible('CodeSnippetCopy', { props: { language: 'sh', snippetPath: 'create-command.md' } });
-    plausible('CreateCommandCopy', { props: { language: 'sh', snippetPath: 'create-command.md' } });
+    track('CodeSnippetCopy', {
+      language: 'sh',
+      snippetPath: 'create-command.md',
+    });
+    track('CreateCommandCopy', {
+      language: 'sh',
+      snippetPath: 'create-command.md',
+    });
     setTimeout(() => {
       setState(false);
     }, 2000);
@@ -21,7 +27,7 @@ export const InitCommand: FC = () => {
 
   return (
     <button
-      className="relative overflow-hidden hidden md:flex items-center justify-center border border-white px-6 h-12 rounded-full text-white text-md font-bold gap-3"
+      className="text-md relative hidden h-12 items-center justify-center gap-3 overflow-hidden rounded-full border border-white px-6 font-bold text-white md:flex"
       onClick={onClick}
       type="button"
     >
@@ -31,7 +37,7 @@ export const InitCommand: FC = () => {
         {state ? (
           <motion.div
             animate={{ opacity: 1 }}
-            className="absolute bg-white top-0 left-0 w-full h-full text-black flex items-center justify-center gap-2"
+            className="absolute left-0 top-0 flex h-full w-full items-center justify-center gap-2 bg-white text-black"
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
           >

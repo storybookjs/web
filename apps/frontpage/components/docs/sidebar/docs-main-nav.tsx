@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 import { cn, latestVersion } from '@repo/utils';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
-import { usePlausible } from 'next-plausible';
+import { useAnalytics } from '../../../lib/analytics';
 import { getVersion } from '../../../lib/get-version';
 import {
   APIIcon,
@@ -16,7 +16,7 @@ import {
 
 export const DocsMainNav = () => {
   const pathname = usePathname();
-  const plausible = usePlausible();
+  const track = useAnalytics();
   const segment = useSelectedLayoutSegment();
   const slug: string[] = segment ? segment.split('/') : [];
   const activeVersion = getVersion(slug);
@@ -29,7 +29,9 @@ export const DocsMainNav = () => {
     <nav className="flex flex-col gap-1.5 text-sm font-medium">
       <Line
         href={docsLink}
-        onClick={() => { plausible('GetStartedClick', { props: { location: 'main-nav' }})}}
+        onClick={() => {
+          track('GetStartedClick', { location: 'main-nav' });
+        }}
         icon={<DocsIcon />}
         isActive={
           pathname.startsWith('/docs') && !pathname.startsWith('/docs/api')

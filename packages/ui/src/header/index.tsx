@@ -5,7 +5,7 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { cn } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import { GithubIcon } from '@storybook/icons';
-import { usePlausible } from 'next-plausible';
+import { useAnalytics } from '../analytics';
 import { StorybookLogo } from '../logos/storybook-logo';
 // import { NewsletterForm } from '../newsletter-form';
 import { Search } from '../search';
@@ -27,8 +27,8 @@ export const Header: FC<HeaderProps> = ({
   // eyebrow,
   eyebrow = (
     <Eyebrow
-      href="https://storybook.js.org/blog/security-advisory/"
-      title="Security advisory: Potential vulnerability in published Storybooks"
+      href="https://storybook.js.org/blog/storybook-mcp-sneak-peek/"
+      title="Storybook MCP sneak peek: Get early access"
       hideIcon
     />
   ),
@@ -37,7 +37,7 @@ export const Header: FC<HeaderProps> = ({
   variant = 'system',
 }) => {
   const pathname = usePathname();
-  const plausible = usePlausible();
+  const track = useAnalytics();
 
   return (
     <>
@@ -87,7 +87,13 @@ export const Header: FC<HeaderProps> = ({
                         active={active}
                         external={item.external}
                         href={item.href}
-                        onClick={() => { if (item.href === '/docs' || item.href === '/docs/') { plausible('GetStartedClick', { props: { location: 'header-nav' }})}}}
+                        onClick={() => {
+                          if (item.href === '/docs' || item.href === '/docs/') {
+                            track('GetStartedClick', {
+                              location: 'header-nav',
+                            });
+                          }
+                        }}
                         key={item.title}
                         title={item.title}
                         variant={variant}
@@ -106,7 +112,7 @@ export const Header: FC<HeaderProps> = ({
                   variant === 'home' &&
                     'ui-border-white/30 hover:ui-border-white ui-text-white',
                   variant === 'system' &&
-                    'ui-border ui-border-zinc-200 dark:ui-border-slate-700 ui-text-zinc-500 dark:ui-text-white  hover:ui-border-zinc-400 dark:hover:ui-border-slate-500',
+                    'ui-border ui-border-zinc-200 dark:ui-border-slate-700 ui-text-zinc-500 dark:ui-text-white hover:ui-border-zinc-400 dark:hover:ui-border-slate-500',
                 )}
                 href="https://github.com/storybookjs/storybook"
                 rel="noreferrer noopener"
@@ -124,18 +130,23 @@ export const Header: FC<HeaderProps> = ({
                 className="max-[440px]:ui-hidden"
                 variant={variant}
               />
-              {
-              pathname !== '/docs' && pathname !== '/docs/' && (
+              {pathname !== '/docs' && pathname !== '/docs/' && (
                 <a
                   className={cn(
-                    'ui-h-8 ui-flex ui-items-center ui-justify-center ui-rounded-full ui-transition-colors max-[1040px]:ui-hidden ui-px-3 focus-visible:ui-outline-none focus-visible:ui-ring-inset focus-visible:ui-ring-2  focus-visible:ui-ring-blue-700 focus-visible:ui-shadow-[inset_0_0_0_4px_white] dark:focus-visible:ui-shadow-[inset_0_0_0_4px_#0d1026]',
-                    variant === 'home' && 'ui-bg-white hover:ui-bg-white/96 ui-text-black',
-                    variant === 'system' && 'ui-bg-zinc-700 hover:ui-bg-zinc-900 ui-text-white dark:ui-bg-slate-100 dark:hover:ui-bg-white dark:ui-text-zinc-900',
+                    'ui-h-8 ui-flex ui-items-center ui-justify-center ui-rounded-full ui-transition-colors max-[1040px]:ui-hidden ui-px-3 focus-visible:ui-outline-none focus-visible:ui-ring-inset focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 focus-visible:ui-shadow-[inset_0_0_0_4px_white] dark:focus-visible:ui-shadow-[inset_0_0_0_4px_#0d1026]',
+                    variant === 'home' &&
+                      'ui-bg-white hover:ui-bg-white/96 ui-text-black',
+                    variant === 'system' &&
+                      'ui-bg-zinc-700 hover:ui-bg-zinc-900 ui-text-white dark:ui-bg-slate-100 dark:hover:ui-bg-white dark:ui-text-zinc-900',
                   )}
                   href="/docs"
-                  onClick={() => { plausible('GetStartedClick', { props: { location: 'header-cta' }})}}
+                  onClick={() => {
+                    track('GetStartedClick', { location: 'header-cta' });
+                  }}
                 >
-                  <span className={cn('ui-text-xs ui-font-bold whitespace-nowrap')}>
+                  <span
+                    className={cn('ui-text-xs ui-font-bold whitespace-nowrap')}
+                  >
                     Get Started
                   </span>
                 </a>
