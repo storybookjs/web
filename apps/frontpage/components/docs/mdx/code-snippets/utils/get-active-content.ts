@@ -71,6 +71,12 @@ export const getActiveContentTabs = ({
 
   const filterByRenderer = filterByLanguage.reduce<CodeSnippetsProps[]>(
     (acc, item) => {
+      if (item.packageManager) {
+        // If package manager is defined on the snippet, we skip it here
+        acc.push(item);
+        return acc;
+      }
+
       if (item.renderer !== activeRenderer && item.renderer !== 'common') {
         return acc;
       }
