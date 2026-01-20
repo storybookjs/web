@@ -22,11 +22,73 @@ export const getActiveContentTabs = ({
 } => {
   let error: string | null = null;
 
-  const filterByRenderer = content.filter((item) => {
-    if (item.renderer === activeRenderer || item.renderer === 'common')
-      return true;
+  const filterByLanguage = content.filter((item) => {
+    // If activeLanguage is null, we don't need to filter
+    if (!activeLanguage) return true;
+
+    // If there is only one language, we don't need to filter
+    if (filters.languages.length <= 1) return true;
+
+    // If there's a match, we return true
+    if (item.language === activeLanguage) return true;
+
     return false;
   });
+
+  if (activeLanguage === 'ts' && filterByLanguage.length === 0) {
+    const tsVersions = content.filter(
+      (v) => v.language === 'ts-4-9',
+    );
+    const jsVersions = content.filter(
+      (v) => v.language === 'js',
+    );
+    if (tsVersions.length > 0) {
+      filterByLanguage.splice(-1, 0, ...tsVersions);
+    } else if (jsVersions.length > 0) {
+      filterByLanguage.splice(-1, 0, ...jsVersions);
+    } else {
+      // This mean there's an error
+      // We need to show an error message
+    }
+  }
+
+  if (activeLanguage === 'ts-4-9' && filterByLanguage.length === 0) {
+    const tsVersions = content.filter(
+      (v) => v.language === 'ts',
+    );
+    const jsVersions = content.filter(
+      (v) => v.language === 'js',
+    );
+    if (tsVersions.length > 0) {
+      filterByLanguage.splice(-1, 0, ...tsVersions);
+    } else if (jsVersions.length > 0) {
+      filterByLanguage.splice(-1, 0, ...jsVersions);
+    } else {
+      // This mean there's an error
+      // We need to show an error message
+    }
+  }
+
+  const filterByRenderer = filterByLanguage.reduce<CodeSnippetsProps[]>(
+    (acc, item) => {
+      if (item.renderer !== activeRenderer && item.renderer !== 'common') {
+        return acc;
+      }
+
+      const existingIndex = acc.findIndex(
+        (existing) => decodeURIComponent(existing.tabTitle ?? '') === decodeURIComponent(item.tabTitle ?? ''),
+      );
+
+      if (existingIndex === -1) {
+        acc.push(item);
+      } else if (item.renderer !== 'common' && acc[existingIndex].renderer === 'common') {
+        acc[existingIndex] = item;
+      }
+
+      return acc;
+    },
+    [],
+  );
 
   let filteredContent = filterByRenderer;
 
@@ -52,7 +114,7 @@ export const getActiveContentTabs = ({
     }
   }
 
-  const filterByPackageManager = filteredContent.filter((item) => {
+  filteredContent = filteredContent.filter((item) => {
     // If activePackageManager is null, we don't need to filter
     if (!activePackageManager) return true;
 
@@ -69,57 +131,10 @@ export const getActiveContentTabs = ({
     return false;
   });
 
-  const filterByLanguage = filterByPackageManager.filter((item) => {
-    // If activeLanguage is null, we don't need to filter
-    if (!activeLanguage) return true;
-
-    // If there is only one language, we don't need to filter
-    if (filters.languages.length <= 1) return true;
-
-    // If there's a match, we return true
-    if (item.language === activeLanguage) return true;
-
-    return false;
-  });
-
-  if (activeLanguage === 'ts' && filterByLanguage.length === 0) {
-    const tsVersions = filterByPackageManager.filter(
-      (v) => v.language === 'ts-4-9',
-    );
-    const jsVersions = filterByPackageManager.filter(
-      (v) => v.language === 'js',
-    );
-    if (tsVersions.length > 0) {
-      filterByLanguage.splice(-1, 0, ...tsVersions);
-    } else if (jsVersions.length > 0) {
-      filterByLanguage.splice(-1, 0, ...jsVersions);
-    } else {
-      // This mean there's an error
-      // We need to show an error message
-    }
-  }
-
-  if (activeLanguage === 'ts-4-9' && filterByLanguage.length === 0) {
-    const tsVersions = filterByPackageManager.filter(
-      (v) => v.language === 'ts',
-    );
-    const jsVersions = filterByPackageManager.filter(
-      (v) => v.language === 'js',
-    );
-    if (tsVersions.length > 0) {
-      filterByLanguage.splice(-1, 0, ...tsVersions);
-    } else if (jsVersions.length > 0) {
-      filterByLanguage.splice(-1, 0, ...jsVersions);
-    } else {
-      // This mean there's an error
-      // We need to show an error message
-    }
-  }
-
-  if (filterByLanguage.length === 0) return { activeContentTabs: null, error };
+  if (filteredContent.length === 0) return { activeContentTabs: null, error };
 
   return {
-    activeContentTabs: filterByLanguage || null,
+    activeContentTabs: filteredContent || null,
     error,
   };
 };
