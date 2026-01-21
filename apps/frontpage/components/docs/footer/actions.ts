@@ -497,6 +497,15 @@ export async function sendFeedback(
   const headersList = headers();
 
   try {
+    // Skip strict validation in development mode
+    if (!siteUrl) {
+      console.info('Development mode: Simulating successful feedback submission');
+      return {
+        status: 'ok',
+        message: 'Feedback received (development mode)',
+      };
+    }
+
     const ip =
       headersList.get('x-real-ip') ??
       headersList.get('x-forwarded-for') ??
@@ -508,9 +517,10 @@ export async function sendFeedback(
 
     const path = slug.replace('/docs', '');
 
+    const origin = headersList.get('origin');
     const hasValidOrigin = siteUrl
-      ? headersList.get('origin') === process.env.URL
-      : true;
+      ? origin === 'https://storybook.js.org'
+      : origin?.startsWith('http://localhost:') ?? true;
     const hasValidReferer = headersList.get('referer')?.endsWith(path);
 
     if (!hasValidOrigin || !hasValidReferer || spuriousComment) {
