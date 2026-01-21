@@ -7,8 +7,16 @@ export function useAnalytics() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Generic event properties
   function track(eventName: string, properties?: Record<string, any>) {
-    plausible(eventName, { props: properties });
-    posthog.capture(eventName, properties);
+    try {
+      plausible(eventName, { props: properties });
+    } catch (e) {
+      /* */
+    }
+    try {
+      posthog.capture(eventName, properties);
+    } catch (e) {
+      /* */
+    }
   }
 
   return track;
