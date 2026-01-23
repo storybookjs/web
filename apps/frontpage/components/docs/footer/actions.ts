@@ -9,7 +9,7 @@ import type { TreeProps } from '@repo/utils';
 import { docsVersions } from '@repo/utils';
 import { getAllTrees } from '../../../lib/get-all-trees';
 
-const siteUrl = process.env.CONTEXT === 'production';
+const isProduction = process.env.CONTEXT === 'production';
 
 const schema = z.object({
   comment: z.string().optional(),
@@ -508,9 +508,14 @@ export async function sendFeedback(
 
     const path = slug.replace('/docs', '');
 
-    const hasValidOrigin = siteUrl
-      ? headersList.get('origin') === process.env.URL
+    const origin = headersList.get('origin');
+    const hasValidOrigin = isProduction
+      ? origin === process.env.URL
       : true;
+    console.log({
+      origin,
+      'process.env.URL': process.env.URL,
+    })
     const hasValidReferer = headersList.get('referer')?.endsWith(path);
 
     if (!hasValidOrigin || !hasValidReferer || spuriousComment) {
@@ -518,7 +523,7 @@ export async function sendFeedback(
         JSON.stringify(
           {
             hasValidOrigin,
-            siteUrl,
+            isProduction,
             hasValidReferer,
             path,
             headers,
