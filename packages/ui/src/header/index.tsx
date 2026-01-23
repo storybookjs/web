@@ -27,9 +27,8 @@ export const Header: FC<HeaderProps> = ({
   // eyebrow,
   eyebrow = (
     <Eyebrow
-      href="https://storybook.js.org/blog/storybook-mcp-sneak-peek/"
-      title="Storybook MCP sneak peek: Get early access"
-      hideIcon
+      href="https://us02web.zoom.us/webinar/register/4217528604397/WN_hRyXQEe1RuSjoTCJoOpRyA"
+      title="Join live: How to implement generative UI without losing control"
     />
   ),
   githubCount = 0,
