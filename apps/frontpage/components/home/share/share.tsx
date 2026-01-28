@@ -30,6 +30,8 @@ export function Share() {
             <p className="text-md leading-7">
               Publish Storybook as a website for stakeholders to reference. Your
               team can check that the UI looks right without touching code.
+              Publishing also hosts your MCP server, giving your entire
+              organization access to validated patterns for their coding agents.
             </p>
             <Link
               className="flex items-center gap-2 font-bold text-blue-500"

@@ -59,7 +59,8 @@ export function Develop() {
           <p className="mb-6 leading-7">
             Storybook provides a workshop to build UIs in isolation. It helps
             you develop hard-to-reach states and edge cases without needing to
-            run the whole app.
+            run the whole app. The same context that helps your team also equips
+            AI agents to generate code that matches your patterns.
           </p>
           <div className="flex flex-col gap-4">
             <div className="text-xs font-bold uppercase tracking-widest text-zinc-300">

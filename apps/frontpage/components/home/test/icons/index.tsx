@@ -5,3 +5,4 @@ export { Interact } from './interact';
 export { Accessibility } from './accessibility';
 export { Projects } from './projects';
 export { Document } from './document';
+export { Agent } from './agent';

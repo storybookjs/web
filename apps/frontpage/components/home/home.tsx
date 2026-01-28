@@ -8,6 +8,7 @@ import { Develop } from './develop/develop';
 import { StickyNav } from './sticky-nav/sticky-nav';
 import { Test } from './test/test';
 import { Document } from './document/document';
+import { AI } from './ai/ai';
 import { Share } from './share/share';
 import { Automate } from './automate/automate';
 import { SocialValidation } from './social-validation/social-validation';
@@ -34,6 +35,9 @@ export function Home({
   const documentRef = useRef(null);
   const documentInView = useInView(documentRef);
 
+  const aiRef = useRef(null);
+  const aiInView = useInView(aiRef);
+
   const shareRef = useRef(null);
   const shareInView = useInView(shareRef);
 
@@ -47,6 +51,7 @@ export function Home({
     if (whoInView) return 'who';
     if (automateInView) return 'automate';
     if (shareInView) return 'share';
+    if (aiInView) return 'ai';
     if (documentInView) return 'document';
     if (testInView) return 'test';
     if (developInView) return 'develop';
@@ -55,6 +60,7 @@ export function Home({
     developInView,
     testInView,
     documentInView,
+    aiInView,
     shareInView,
     automateInView,
     whoInView,
@@ -81,6 +87,9 @@ export function Home({
         </div>
         <div id="document" ref={documentRef}>
           <Document />
+        </div>
+        <div id="ai" ref={aiRef}>
+          <AI />
         </div>
         <div id="share" ref={shareRef}>
           <Share />
