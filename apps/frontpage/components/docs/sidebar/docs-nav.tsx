@@ -6,8 +6,8 @@ import { useEffect, useState, type FC } from 'react';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import type { TreeProps } from '@repo/utils';
 import { cn, docsVersions } from '@repo/utils';
-import { useAnalytics } from '../../../lib/analytics';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
+import { useAnalytics } from '../../../lib/analytics';
 import { getVersion } from '../../../lib/get-version';
 import { VersionSelector } from './version-selector';
 

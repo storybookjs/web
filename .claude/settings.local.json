@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm tsc:*)",
+      "Bash(npm run typecheck:*)",
+      "Bash(pkill:*)",
+      "Bash(npm run lint)"
+    ]
+  }
+}

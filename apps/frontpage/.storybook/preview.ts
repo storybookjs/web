@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react';
+import '@docsearch/css';
 import '../app/globals.css';
 import '@repo/ui/styles.css';
 

@@ -35,7 +35,8 @@ export const Header: FC<HeaderProps> = ({
   subMenu,
   variant = 'system',
 }) => {
-  const pathname = usePathname();
+  const pathname = usePathname() || '';
+
   const track = useAnalytics();
 
   return (
