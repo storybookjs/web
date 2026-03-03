@@ -32,13 +32,13 @@ export const docsVersions: DocsVersion[] = [
     id: '10.2',
     branch: 'main',
   },
-  // {
-  //   label: 'Version 10.3 (alpha)',
-  //   id: '10.3',
-  //   inSlug: '10.3',
-  //   branch: 'next',
-  //   preRelease: true,
-  // },
+  {
+    label: 'Version 10.3 (alpha)',
+    id: '10.3',
+    inSlug: '10.3',
+    branch: 'docs-ai',
+    preRelease: true,
+  },
   {
     label: 'Version 9',
     id: '9.1',
