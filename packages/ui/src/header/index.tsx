@@ -27,8 +27,8 @@ export const Header: FC<HeaderProps> = ({
   // eyebrow,
   eyebrow = (
     <Eyebrow
-      href="https://us02web.zoom.us/webinar/register/4217528604397/WN_uZvJ7lt7RgOOFlVW7ukPLQ"
-      title="Join live: How GitHub does Frontend Performance"
+      href="https://us02web.zoom.us/webinar/register/4217528604397/WN_HG3SDDSNTVW6YX_qDlhxFw"
+      title="Join live: How to ship UI with Storybook MCP"
     />
   ),
   githubCount = 0,
