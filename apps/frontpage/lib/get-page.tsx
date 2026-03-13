@@ -76,7 +76,8 @@ export const getPageData = async (
       a: (props) => (
         <A
           activeVersion={activeVersion}
-          indexPagePath={isIndexMDX || isIndexMD ? path : null}
+          isIndexPage={isIndexMDX || isIndexMD}
+          pagePath={path}
           {...props}
         />
       ),

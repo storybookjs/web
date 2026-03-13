@@ -1,38 +1,65 @@
-/* eslint-disable no-nested-ternary -- TODO */
-import { type DocsVersion, latestVersion } from '@repo/utils';
 import Link from 'next/link';
+import { type DocsVersion, latestVersion } from '@repo/utils';
 import type { FC, ReactNode } from 'react';
 
-interface AProps {
+interface AProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   activeVersion?: DocsVersion;
   children?: ReactNode;
-  href?: string;
-  indexPagePath?: string[] | null;
+  isIndexPage: boolean;
+  pagePath: string[];
 }
 
-/**
- * ['8.1'] to 'docs' (when latestVersion is '8.1')
- * ['8.2'] to '8.2' (when '8.2' is pre-release)
- * ['7.6'] to '7'
- * [ '8.1', 'configure' ] to 'configure'
- * [ '8.1', 'writing-tests', 'snapshot-testing'] to 'snapshot-testing'
- */
-function getParentPartOfPath(
-  indexPagePath: string[],
-  activeVersion: DocsVersion,
-) {
-  return indexPagePath.length === 1
-    ? activeVersion.id === latestVersion.id
-      ? 'docs'
-      : (activeVersion.inSlug ?? activeVersion.id)
-    : indexPagePath[indexPagePath.length - 1];
+export function processHref({
+  activeVersion,
+  href: hrefIn,
+  isIndexPage,
+  pagePath,
+}: {
+  activeVersion: DocsVersion;
+  href: string;
+  isIndexPage: boolean;
+  pagePath: string[];
+}): string {
+   
+  const href = hrefIn
+    // eslint-disable-next-line prefer-named-capture-group -- TODO: Fix regex with new eslint rules
+    .replace(/^((?!http).*)\.mdx/, '$1')
+    .replace(/\/index$/, '')
+    // eslint-disable-next-line prefer-named-capture-group -- TODO: Fix regex with new eslint rules
+    .replace(/^((?!http).*)(?:release-)(\d+)-\d+\/docs(.*)/, '$1$2$3');
+
+  const pathWithoutVersion = pagePath.slice(1);
+
+  // If not on an index page, start with the directory of the current page (not the page itself)
+  const segments = isIndexPage
+    ? [...pathWithoutVersion]
+    : [...pathWithoutVersion.slice(0, -1)];
+
+  const hrefParts = href.split('/');
+  for (const part of hrefParts) {
+    if (part === '.') {
+      continue;
+    } else if (part === '..') {
+      segments.pop();
+    } else {
+      segments.push(part);
+    }
+  }
+
+  const versionPrefix =
+    activeVersion.id === latestVersion.id || hrefIn.includes('/release-')
+      ? ''
+      : `${activeVersion.inSlug ?? activeVersion.id}/`;
+
+  return `/docs/${versionPrefix}${segments.join('/')}`;
 }
 
 export const A: FC<AProps> = ({
+  activeVersion = latestVersion,
   children,
   href: hrefIn,
-  indexPagePath,
-  activeVersion = latestVersion,
+  isIndexPage,
+  pagePath = [],
   ...rest
 }) => {
   const isExternal = hrefIn?.startsWith('http');
@@ -44,25 +71,12 @@ export const A: FC<AProps> = ({
     );
   }
 
-  let href = hrefIn
-    // eslint-disable-next-line prefer-named-capture-group -- TODO: Fix regex with new eslint rules
-    ?.replace(/^((?!http).*)\.mdx/, '$1')
-    .replace(/\/index$/, '')
-    // ../../release-7-6/docs/migration-guide.mdx#major-breaking-changes -> ../../docs/7/migration-guide#major-breaking-changes
-    // eslint-disable-next-line prefer-named-capture-group -- TODO: Fix regex with new eslint rules
-    .replace(/^((?!http).*)(?:release-)(\d+)-\d+\/docs(.*)/, '$1docs/$2$3');
-
-  if (indexPagePath && href?.startsWith('./')) {
-    href = href.replace(
-      './',
-      `./${getParentPartOfPath(indexPagePath, activeVersion)}/`,
-    );
-  } else if (indexPagePath && href?.startsWith('../')) {
-    href = href.replace('../', './');
-  }
-
   return (
-    <Link className="ui-text-blue-500" href={href} {...rest}>
+    <Link
+      className="ui-text-blue-500"
+      href={processHref({ activeVersion, href: hrefIn, isIndexPage, pagePath })}
+      {...rest}
+    >
       {children}
     </Link>
   );
