@@ -1,9 +1,9 @@
 import { type FC } from 'react';
-import Link from 'next/link';
 import { cn } from '@repo/utils';
 import { type PageDataProps } from '../../lib/get-page';
 import { Renderers } from './renderers';
 import { DocsFooter } from './footer/footer';
+import { PageTabs } from './page-tabs';
 import { TableOfContent } from './table-of-content';
 
 export const Content: FC<{ page: PageDataProps }> = ({ page }) => {
@@ -19,45 +19,7 @@ export const Content: FC<{ page: PageDataProps }> = ({ page }) => {
           </h1>
           {!page.hideRendererSelector && <Renderers />}
           {page.tabs && page.tabs.length > 0 ? (
-            <div className="mb-8 flex items-center gap-8 border-b border-zinc-200">
-              {page.tabs.map((tab) => {
-                const tabTitle = tab.tab?.title ?? tab.title;
-                const isActive = tab.pathSegment === page.path;
-                const className = cn(
-                  '-mb-px border-b px-2 pb-2 text-sm capitalize transition-colors hover:text-blue-500',
-                  isActive && 'border-b border-blue-500 text-blue-500',
-                );
-
-                if (isActive) {
-                  return (
-                    <span className={className} key={tab.name}>
-                      {tabTitle}
-                    </span>
-                  );
-                }
-
-                const relevantPathSegments = (
-                  tab.name === 'index.mdx'
-                    ? tab.pathSegment.split('/').slice(-2, -1)
-                    : tab.pathSegment.split('/').slice(-2)
-                )
-                  .join('/')
-                  .replace('.mdx', '');
-                const href = page.isIndexPage
-                  ? `./${relevantPathSegments}`
-                  : `../${relevantPathSegments}`;
-
-                return (
-                  <Link
-                    className={className}
-                    href={href}
-                    key={tab.name}
-                  >
-                    {tabTitle}
-                  </Link>
-                );
-              })}
-            </div>
+            <PageTabs {...page} />
           ) : null}
           <div
             className={cn(
