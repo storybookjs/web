@@ -72,7 +72,8 @@ export const Document: FC = () => {
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">
             Storybook brings together UI, examples, and documentation in one
-            place. That helps your team adopt existing UI patterns.
+            place. That helps your team and AI agents adopt existing UI
+            patterns.
           </p>
         </div>
       </Container>

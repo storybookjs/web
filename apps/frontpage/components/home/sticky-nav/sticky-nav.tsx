@@ -12,6 +12,7 @@ interface StickyNavProps {
     | 'who'
     | 'automate'
     | 'share'
+    | 'ai'
     | 'document'
     | 'test'
     | 'develop'
@@ -22,6 +23,7 @@ const items = [
   { id: 'develop', label: 'Develop', href: '#develop' },
   { id: 'test', label: 'Test', href: '#test' },
   { id: 'document', label: 'Document', href: '#document' },
+  { id: 'ai', label: 'AI', href: '#ai' },
   { id: 'share', label: 'Share', href: '#share' },
   { id: 'automate', label: 'Automate', href: '#automate' },
   { id: 'who', label: "Who's it for", href: '#who' },
