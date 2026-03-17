@@ -27,7 +27,7 @@ export function Hero() {
             />
             <Link
               className="text-md flex h-12 items-center justify-center rounded-full border border-white bg-transparent px-6 font-bold text-white"
-              href="/docs"
+              href="/docs/ai"
             >
               Go to docs
             </Link>

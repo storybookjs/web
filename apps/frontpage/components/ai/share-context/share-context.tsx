@@ -1,13 +1,25 @@
 import { Container } from '@repo/ui';
+import Link from 'next/link';
+import { SectionLede } from '../../ui/section-lede';
 import { FeatureCard } from '../feature-card';
 import { ShareContextAnimation } from './share-context-animation';
-import { SectionLede } from '../../ui/section-lede';
 
 const features = [
   {
     title: 'Publish a single canonical UI context',
-    description:
-      'Publish your Storybook using Chromatic so agents, tools, and CI reference the same UI context. AI never operates against stale or invalid context.',
+    description: (
+      <>
+        Publish your Storybook using{' '}
+        <Link
+          className="text-blue-500"
+          href="https://chromatic.com?ref=storybook"
+        >
+          Chromatic
+        </Link>{' '}
+        so agents, tools, and CI reference the same UI context. AI never
+        operates against stale or invalid context.
+      </>
+    ),
   },
   {
     title: 'Control updates to UI context',

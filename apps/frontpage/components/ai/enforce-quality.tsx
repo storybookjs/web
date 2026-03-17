@@ -1,4 +1,5 @@
 import { Container } from '@repo/ui';
+import Link from 'next/link';
 import { SectionLede } from '../ui/section-lede';
 import { Check, Redo, Turbo } from './icons';
 import { FeatureCard } from './feature-card';
@@ -30,7 +31,16 @@ export function EnforceQuality() {
     <div className="overflow-hidden border-b border-white/10 pt-12 sm:pt-20 md:pt-28">
       <SectionLede
         title="Enforce UI quality"
-        description="Storybook Test provides fast feedback on agent-generated changes. Tests run in a real browser against real stories. Failures are sent back to the agent so it can fix issues before review."
+        description={
+          <>
+            <Link className="text-blue-500" href="/docs/writing-tests">
+              Storybook Test
+            </Link>{' '}
+            provides fast feedback on agent-generated changes. Tests run in a
+            real browser against real stories. Failures are sent back to the
+            agent so it can fix issues before review.
+          </>
+        }
       />
 
       <EnforceQualityAnimation />

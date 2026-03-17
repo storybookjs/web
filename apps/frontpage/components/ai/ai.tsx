@@ -38,7 +38,7 @@ export function AI({ githubCount }: AIProps) {
               />
               <Link
                 className="flex h-12 items-center justify-center rounded-full border border-white bg-transparent px-6 text-sm font-bold text-white"
-                href="/docs"
+                href="/docs/ai"
               >
                 Go to docs
               </Link>

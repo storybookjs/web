@@ -1,6 +1,7 @@
 'use client';
 
 import { cn } from '@repo/utils';
+import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 
 export interface GradientBadgeProps {
@@ -16,7 +17,7 @@ export const GradientBadge: FC<GradientBadgeProps> = ({
   icon,
   className,
 }) => (
-  <a
+  <Link
     href={link}
     className={cn(
       'ui-gradient-badge',
@@ -26,5 +27,5 @@ export const GradientBadge: FC<GradientBadgeProps> = ({
   >
     {icon}
     {children}
-  </a>
+  </Link>
 );

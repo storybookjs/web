@@ -1,11 +1,12 @@
 import { Container } from '@repo/ui';
+import type { ReactNode } from 'react';
 
 export const SectionLede = ({
   title,
   description,
 }: {
   title: string;
-  description: string;
+  description: ReactNode;
 }) => (
   <Container className="justify-between gap-20 text-white lg:flex">
     <h2 className="flex-1 text-3xl font-bold md:text-[40px]/[48px] lg:text-[56px]/[70px]">

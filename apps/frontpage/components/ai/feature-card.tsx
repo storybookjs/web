@@ -1,6 +1,6 @@
 interface FeatureCardProps {
   title: string;
-  description: string;
+  description: React.ReactNode;
   icon?: React.ReactNode;
 }
 
