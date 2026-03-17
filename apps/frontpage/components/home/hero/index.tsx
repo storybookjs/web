@@ -99,7 +99,11 @@ export function Hero({
 
   return (
     <Container className="relative z-20 justify-between gap-20 overflow-hidden pt-12 text-white md:pt-16 lg:px-8 lg:pt-24">
-      <GradientBadge link="/ai" icon={<WandIcon />} className="mb-8">
+      <GradientBadge
+        link="/ai"
+        icon={<WandIcon aria-hidden />}
+        className="mb-8"
+      >
         Introducing MCP for React
       </GradientBadge>
       <h1 className="flex-1 text-4xl font-bold max-sm:max-w-80 md:text-[56px]/[70px]">
