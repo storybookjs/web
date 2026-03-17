@@ -34,9 +34,17 @@ const getCachedTagFromName = unstable_cache(
   ['tag-details'],
 );
 
+const getCachedCategoryTags = unstable_cache(
+  async () => fetchTagsData({ isCategory: true }),
+  ['category-tags'],
+);
+
 export const generateMetadata: GenerateMetaData = async ({ params }) => {
   const tagName = (await params).name.join('/');
   const data = await getCachedTagFromName([tagName]);
+  const categoryTags = await getCachedCategoryTags() || [];
+
+  const isCategoryTag = categoryTags.includes(tagName);
 
   if ('error' in data) return {};
 
@@ -48,6 +56,9 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
           title: `${title} tag | Storybook integrations`,
         }
       : undefined),
+    robots: {
+      index: isCategoryTag,
+    },
   };
 };
 
@@ -78,7 +89,7 @@ export default async function TagDetails({
 }
 
 export async function generateStaticParams() {
-  const tags = (await fetchTagsData({ isCategory: true })) || [];
+  const tags = (await getCachedCategoryTags()) || [];
   const listOfNames = tags.map((tag) => ({ name: [...tag.split('/')] }));
 
   if (listOfNames.length === 0) {
