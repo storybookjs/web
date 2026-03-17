@@ -41,7 +41,7 @@ export function GenerateUI() {
       </div>
 
       <Container className="mb-12">
-        <div className="grid gap-12 md:pb-20 lg:grid-cols-3 lg:gap-20">
+        <div className="grid gap-12 lg:grid-cols-3 lg:gap-20 lg:pb-20">
           {features.map((feature) => (
             <FeatureCard
               key={feature.title}

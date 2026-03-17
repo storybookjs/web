@@ -1,6 +1,7 @@
 import { Container } from '@repo/ui';
 import { FeatureCard } from '../feature-card';
 import { ShareContextAnimation } from './share-context-animation';
+import { SectionLede } from '../../ui/section-lede';
 
 const features = [
   {
@@ -18,20 +19,10 @@ const features = [
 export function ShareContext() {
   return (
     <div className="overflow-hidden pt-12 sm:pt-20 md:pt-28">
-      <Container className="justify-between gap-20 text-white md:flex">
-        <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
-          Share UI context across teams
-        </h2>
-        <div className="flex-1 pt-4">
-          <p className="mb-6 max-w-[520px] leading-7">
-            Agents run across environments, repositories, and CI. Without
-            published UI context, they drift and make decisions against
-            different rules. Publishing Storybook ensures agents operate against
-            the same reviewed context everywhere. Humans still decide what
-            enters context.
-          </p>
-        </div>
-      </Container>
+      <SectionLede
+        title="Share UI context across teams"
+        description="Agents run across environments, repositories, and CI. Without published UI context, they drift and make decisions against different rules. Publishing Storybook ensures agents operate against the same reviewed context everywhere. Humans still decide what enters context."
+      />
 
       <Container>
         <ShareContextAnimation />

@@ -77,7 +77,7 @@ export default function StaggeredGrid() {
   ));
 
   return (
-    <div className="relative grid grid-cols-3 justify-center gap-2 px-12 pb-12 pt-16 sm:gap-4 md:grid-cols-[repeat(3,_minmax(auto,_100px))] md:px-12 md:py-20">
+    <div className="relative grid grid-cols-[repeat(3,_minmax(auto,_100px))] justify-center gap-2 px-12 pb-12 pt-16 sm:gap-4 md:px-12 md:py-20">
       <div className="absolute left-4 top-4 text-[11px] font-extrabold uppercase leading-4 tracking-[0.35em] text-white/70 sm:left-8 sm:top-8">
         Your Components
       </div>
