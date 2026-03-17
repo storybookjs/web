@@ -106,7 +106,7 @@ export function Hero({
       >
         Introducing MCP for React
       </GradientBadge>
-      <h1 className="flex-1 text-4xl font-bold max-sm:max-w-80 md:text-[56px]/[70px]">
+      <h1 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
         Build, test & document components
       </h1>
       <div className="mb-8 flex-1 pt-4 md:mb-20">

@@ -1,5 +1,6 @@
 import { Container } from '@repo/ui';
 import { Overlap } from '../home/document/icons';
+import { SectionLede } from '../ui/section-lede';
 import { FeatureCard } from './feature-card';
 import { Detect, StorybookOpen } from './icons';
 import { GenerateUIAnimation } from './generate-ui-animation';
@@ -28,20 +29,12 @@ const features = [
 export function GenerateUI() {
   return (
     <div className="overflow-hidden border-b border-white/10 pt-12 sm:pt-20 md:pt-28">
-      <Container className="justify-between gap-20 text-white md:flex">
-        <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
-          Generate UI from your components
-        </h2>
-        <div className="flex-1 pt-4">
-          <p className="mb-6 max-w-[520px] leading-7">
-            Teams only merge when code conforms to their codebase. Force agents
-            to reuse existing components instead of inventing new ones or
-            hallucinating. This speeds up review and avoids pattern drift.
-          </p>
-        </div>
-      </Container>
+      <SectionLede
+        title="Generate UI from your components"
+        description="Teams only merge when code conforms to their codebase. Force agents to reuse existing components instead of inventing new ones or hallucinating. This speeds up review and avoids pattern drift."
+      />
 
-      <div className="my-12 lg:my-32 lg:border-b lg:border-t lg:border-white/10">
+      <div className="my-12 lg:my-32">
         <Container>
           <GenerateUIAnimation />
         </Container>

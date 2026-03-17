@@ -91,7 +91,7 @@ const MotionImage = motion(Image);
 export function GenerateUIAnimation() {
   return (
     <div
-      className="grid grid-cols-1 overflow-clip rounded-md border border-white/10 lg:grid-cols-2 lg:rounded-none lg:border-none"
+      className="grid grid-cols-1 overflow-clip rounded-md border border-white/10 md:grid-cols-2"
       data-chromatic="ignore"
     >
       <StaggeredGrid />
