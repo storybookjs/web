@@ -7,8 +7,8 @@ import { cn, latestVersion } from '@repo/utils';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@storybook/icons';
-import { Container } from '@repo/ui';
+import { ChevronLeftIcon, ChevronRightIcon, WandIcon } from '@storybook/icons';
+import { Container, GradientBadge } from '@repo/ui';
 import { useAnalytics } from '../../../lib/analytics';
 import { Manager } from '../manager';
 import { InitCommand } from './init-command';
@@ -98,8 +98,15 @@ export function Hero({
   };
 
   return (
-    <Container className="relative z-20 justify-between gap-20 overflow-hidden pt-12 text-white md:pt-24 lg:px-8">
-      <h1 className="flex-1 text-4xl font-bold max-sm:max-w-80 md:text-[56px]/[70px]">
+    <Container className="relative z-20 justify-between gap-20 overflow-hidden pt-12 text-white md:pt-16 lg:px-8 lg:pt-24">
+      <GradientBadge
+        link="/ai"
+        icon={<WandIcon aria-hidden />}
+        className="mb-8"
+      >
+        Introducing MCP for React
+      </GradientBadge>
+      <h1 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
         Build, test & document components
       </h1>
       <div className="mb-8 flex-1 pt-4 md:mb-20">

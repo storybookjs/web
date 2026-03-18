@@ -12,5 +12,6 @@ export * from './mdx/options';
 export { CodeSnippetsWrapper } from './code-snippets-wrapper/wrapper';
 export { NewsletterForm } from './newsletter-form';
 export { Search } from './search';
+export { GradientBadge } from './gradient-badge/gradient-badge';
 export { Pill } from './pill';
 export { SubHeader } from './sub-header';
