@@ -11,7 +11,7 @@ import { StorybookLogo } from '../logos/storybook-logo';
 import { Search } from '../search';
 import { MobileMenu } from './mobile-menu';
 import { Button } from './button';
-import { Eyebrow } from './eyebrow';
+// import { Eyebrow } from './eyebrow';
 import { nav } from './nav';
 
 export interface HeaderProps {
@@ -24,13 +24,13 @@ export interface HeaderProps {
 
 export const Header: FC<HeaderProps> = ({
   algoliaApiKey,
-  // eyebrow,
-  eyebrow = (
-    <Eyebrow
-      href="https://us02web.zoom.us/webinar/register/4217528604397/WN_HG3SDDSNTVW6YX_qDlhxFw"
-      title="Join live: How to ship UI with Storybook MCP"
-    />
-  ),
+  eyebrow,
+  // eyebrow = (
+  //   <Eyebrow
+  //     href="https://us02web.zoom.us/webinar/register/4217528604397/WN_HG3SDDSNTVW6YX_qDlhxFw"
+  //     title="Join live: How to ship UI with Storybook MCP"
+  //   />
+  // ),
   githubCount = 0,
   subMenu,
   variant = 'system',
