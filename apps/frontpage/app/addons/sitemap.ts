@@ -102,9 +102,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const addons = await fetchAddonsData();
   const categories = await fetchTagsData({ isCategory: true });
-  const tags = await fetchTagsData();
 
-  if (addons.length === 0 || categories.length === 0 || tags.length === 0) {
+  if (addons.length === 0 || categories.length === 0) {
     throw new Error('Failed to fetch addons data');
   }
 
@@ -112,12 +111,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (!name) throw new Error('Addon name is missing');
     return { loc: `https://storybook.js.org/addons/${name}` };
   });
-  const tagAndCategoryPaths = [...categories, ...tags].map((name) => {
+  const categoryPaths = categories.map((name) => {
     if (!name) throw new Error('Tag name is missing');
     return { loc: `https://storybook.js.org/addons/tag/${name}` };
   });
 
-  const urls = [...addonPaths, ...tagAndCategoryPaths].map(({ loc }) => {
+  const urls = [...addonPaths, ...categoryPaths].map(({ loc }) => {
     const encoded = loc
       .replace('&', '&amp;')
       .replace('<', '&lt;')
