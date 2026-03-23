@@ -22,11 +22,6 @@ export const docsCommonRedirects: RedirectData[] = [
     permanent: true,
   },
   {
-    source: '/integrations/tag/:path',
-    destination: '/addons/tag/:path',
-    permanent: true,
-  },
-  {
     source: '/recipes',
     destination: '/addons',
     permanent: true,
@@ -68,7 +63,8 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/rn-vs-rnw',
-    destination: '/docs/get-started/frameworks/react-native-web-vite?renderer=react-native-web#react-native-vs-react-native-web',
+    destination:
+      '/docs/get-started/frameworks/react-native-web-vite?renderer=react-native-web#react-native-vs-react-native-web',
     permanent: true,
   },
   /* Supporting old docs URLs */
@@ -312,8 +308,15 @@ export const docsCommonRedirects: RedirectData[] = [
     permanent: true,
   },
   {
+    source: '/integrations/tag/:path*',
+    // We know that adding a * here causes it to appear in the destination URL and causes a 500
+    destination: '/addons/tag/:path',
+    permanent: true,
+  },
+  {
     source: '/tag/:path*',
-    destination: '/addons/tag/:path*',
+    // We know that adding a * here causes it to appear in the destination URL and causes a 500
+    destination: '/addons/tag/:path',
     permanent: true,
   },
 ];
