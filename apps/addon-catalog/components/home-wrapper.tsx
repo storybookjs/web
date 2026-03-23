@@ -12,12 +12,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@repo/utils';
 import { fetchSearchData } from '../lib/fetch-search-data';
-import type { Addon, Recipe, TagLinkType } from '../types';
+import type { Addon, Recipe } from '../types';
 import { SearchResults } from './search-results';
-import { TagList } from './tag-list';
 
 interface HomeProps {
-  tagLinks?: TagLinkType[];
   children: ReactNode;
 }
 
@@ -33,7 +31,7 @@ const categories = [
   { name: 'Organize', href: '/tag/organize' },
 ];
 
-export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
+export const HomeWrapper = ({ children }: HomeProps) => {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
   const [searchResults, setSearchResults] = useState<{
@@ -108,7 +106,6 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
               </div>
             )}
           </div>
-          {tagLinks ? <TagList tagLinks={tagLinks} /> : null}
         </div>
         {search ? (
           <SearchResults
