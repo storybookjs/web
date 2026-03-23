@@ -68,7 +68,8 @@ export const docsCommonRedirects: RedirectData[] = [
   },
   {
     source: '/rn-vs-rnw',
-    destination: '/docs/get-started/frameworks/react-native-web-vite?renderer=react-native-web#react-native-vs-react-native-web',
+    destination:
+      '/docs/get-started/frameworks/react-native-web-vite?renderer=react-native-web#react-native-vs-react-native-web',
     permanent: true,
   },
   /* Supporting old docs URLs */
@@ -312,8 +313,8 @@ export const docsCommonRedirects: RedirectData[] = [
     permanent: true,
   },
   {
-    source: '/tag/:path*',
-    destination: '/addons/tag/:path*',
+    source: '/tag/:path',
+    destination: '/addons/tag/:path',
     permanent: true,
   },
 ];
