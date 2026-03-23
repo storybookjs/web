@@ -22,11 +22,6 @@ export const docsCommonRedirects: RedirectData[] = [
     permanent: true,
   },
   {
-    source: '/integrations/tag/:path',
-    destination: '/addons/tag/:path',
-    permanent: true,
-  },
-  {
     source: '/recipes',
     destination: '/addons',
     permanent: true,
@@ -313,7 +308,14 @@ export const docsCommonRedirects: RedirectData[] = [
     permanent: true,
   },
   {
-    source: '/tag/:path',
+    source: '/integrations/tag/:path*',
+    // We know that adding a * here causes it to appear in the destination URL and causes a 500
+    destination: '/addons/tag/:path',
+    permanent: true,
+  },
+  {
+    source: '/tag/:path*',
+    // We know that adding a * here causes it to appear in the destination URL and causes a 500
     destination: '/addons/tag/:path',
     permanent: true,
   },
