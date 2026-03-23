@@ -126,6 +126,7 @@ export const HomeWrapper = ({ tagLinks, children }: HomeProps) => {
                   <li key={name}>
                     <Link
                       href={href}
+                      rel="nofollow"
                       className={cn(
                         'flex items-center px-2 py-[5px] text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500',
                         pathname === href && 'text-blue-500',

@@ -73,7 +73,9 @@ export function AddonSidebar({ addon }: { addon: AddonWithTagLinks }) {
           <ul className="flex flex-wrap gap-2 mb-6">
             {tags.map(({ link, name }) => (
               <Pill key={name}>
-                <Link href={link}>{name}</Link>
+                <Link href={link} rel="nofollow">
+                  {name}
+                </Link>
               </Pill>
             ))}
           </ul>
