@@ -98,9 +98,12 @@ interface TelemetryEvent {
   eventType: string;
   context: {
     storybookVersion?: string;
-    anonymousId: string;
+    anonymousId?: string;
     userSince: string;
     cliVersion?: string;
+    agent?: {
+      name?: string;
+    };
   };
   payload: {
     eventType?: string;
@@ -218,6 +221,7 @@ async function forwardToSentry(received: TelemetryEvent) {
 async function forwardToPlausible(received: TelemetryEvent, headers: Headers) {
   const ip = headers.get('x-forwarded-for') ?? headers.get('x-real-ip');
   const { userAgent, step, isNewUser, timeSinceInit } = received.payload ?? {};
+  const { agent, anonymousId } = received.context ?? {};
 
   let name = received.eventType;
 
@@ -243,6 +247,8 @@ async function forwardToPlausible(received: TelemetryEvent, headers: Headers) {
     renderer,
     framework: framework?.name,
     storybookVersion,
+    agentName: agent?.name,
+    hasProjectId: Boolean(anonymousId),
   };
 
   return fetch('https://plausible.io/api/event', {
