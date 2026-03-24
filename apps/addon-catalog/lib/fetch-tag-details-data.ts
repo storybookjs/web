@@ -4,12 +4,7 @@ import { fetchAddonsQuery, gql } from './fetch-addons-query';
 
 type TagValue = Pick<
   Tag,
-  | 'name'
-  | 'displayName'
-  | 'description'
-  | 'icon'
-  | 'relatedTags'
-  | 'topIntegrations'
+  'name' | 'displayName' | 'description' | 'icon' | 'topIntegrations'
 >;
 
 async function fetchTagData({ name }: { name: string }) {
@@ -22,11 +17,6 @@ async function fetchTagData({ name }: { name: string }) {
               displayName
               description
               icon
-              relatedTags {
-                name
-                displayName
-                icon
-              }
               topIntegrations(sort: monthlyDownloads) {
                 addons {
                   ${addonFragment}
