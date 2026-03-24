@@ -51,7 +51,7 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
 
   return {
     title: page?.title ? `${page.title} | Storybook docs` : 'Storybook docs',
-    ...(page?.isIndexPage && !page?.isHeading
+    ...(page?.isIndexPage && !page?.isHeading && !page.isTab
       ? {
           robots: {
             index: false,
