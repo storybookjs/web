@@ -57,6 +57,9 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
 
   return {
     title: title ? `${title} | Storybook recipes` : 'Storybook recipes',
+    alternates: {
+      canonical: `/recipes/${name.join('/')}`,
+    }
   };
 };
 
