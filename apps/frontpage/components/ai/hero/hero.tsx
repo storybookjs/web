@@ -14,7 +14,7 @@ export function Hero() {
           Now AI can ship production UI
         </h1>
         <div className="mb-16 flex-1 pt-4 md:mb-20">
-          <p className="text mb-8 leading-7 sm:mb-12 md:max-w-[600px] md:text-xl">
+          <p className="text mb-8 leading-7 sm:mb-12 md:max-w-[75%] md:text-xl">
             Storybook gives agents structured UI context and test feedback.
             Components, props, stories, and docs define what agents can build.
             Tests return failures so agents can self-correct.
