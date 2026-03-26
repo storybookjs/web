@@ -14,7 +14,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_34c705b51a7f543",
-    "test": "vitest"
+    "test": "vitest",
+    "validate:llm": "tsx --tsconfig tsconfig.json scripts/validate-llm-friendliness.ts"
   },
   "dependencies": {
     "@docsearch/css": "^3.6.0",
