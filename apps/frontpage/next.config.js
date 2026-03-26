@@ -72,15 +72,29 @@ module.exports = withBundleAnalyzer(
       ],
     },
     async headers() {
-      return HISTORICAL_VERSIONS.map((v) => ({
-        source: `/docs/${v}/:path*`,
-        headers: [
-          {
-            key: 'X-Robots-Tag',
-            value: 'noindex',
-          },
-        ],
-      }));
+      return [
+        // Advertise llms.txt on all docs pages via Link header
+        {
+          source: '/docs/:path*',
+          headers: [
+            {
+              key: 'Link',
+              value:
+                '<https://storybook.js.org/llms.txt>; rel="llms"; type="text/plain"',
+            },
+          ],
+        },
+        // Mark historical versions as noindex
+        ...HISTORICAL_VERSIONS.map((v) => ({
+          source: `/docs/${v}/:path*`,
+          headers: [
+            {
+              key: 'X-Robots-Tag',
+              value: 'noindex',
+            },
+          ],
+        })),
+      ];
     },
     // This was added to fix the error with remarkExpressiveCode
     // https://stackoverflow.com/questions/77009138/module-has-no-exports-error-works-fine-on-stackblitz-but-fails-locally
