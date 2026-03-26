@@ -65,8 +65,8 @@ export function GET(request: NextRequest) {
   }
 
   // Return specific page as markdown (backward compatibility with ?path= param)
-  const renderer = searchParams.get('renderer') || 'react';
-  const language = searchParams.get('language') || 'ts';
+  const renderer = searchParams.get('renderer') ?? 'react';
+  const language = searchParams.get('language') ?? 'ts';
 
   const docFile = findDocFile(slug, latestVersion.id);
   if (!docFile) {
@@ -83,7 +83,7 @@ export function GET(request: NextRequest) {
     language,
   });
 
-  const title = data.title || '';
+  const title = String(data.title ?? '');
   const banner = buildContentBanner(renderer, language, availableRenderers, availableLanguages);
   const markdown = `${banner}# ${title}\n\n${content}`;
 

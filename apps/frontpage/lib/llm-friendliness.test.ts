@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
+import { describe, expect, it } from 'vitest';
 
 const FRONTPAGE_ROOT = path.resolve(__dirname, '..');
 
@@ -35,7 +35,7 @@ describe('LLM Friendliness', () => {
         expect(robotsTxt).toContain(`User-agent: ${crawler}`);
         const crawlerSection = robotsTxt.split(`User-agent: ${crawler}`)[1];
         expect(crawlerSection).toBeDefined();
-        const nextDirective = crawlerSection!.split('\n').find(
+        const nextDirective = crawlerSection?.split('\n').find(
           (line) => line.trim().startsWith('Allow:') || line.trim().startsWith('Disallow:'),
         );
         expect(nextDirective?.trim()).toBe('Allow: /');
@@ -69,7 +69,7 @@ describe('LLM Friendliness', () => {
         path.join(FRONTPAGE_ROOT, 'public/.well-known/ai-plugin.json'),
         'utf8',
       ),
-    );
+    ) as Record<string, unknown>;
 
     it('has required schema fields', () => {
       expect(pluginJson).toHaveProperty('schema_version', 'v1');
@@ -81,9 +81,10 @@ describe('LLM Friendliness', () => {
 
     it('has valid API configuration', () => {
       expect(pluginJson).toHaveProperty('api');
-      expect(pluginJson.api).toHaveProperty('type');
-      expect(pluginJson.api).toHaveProperty('url');
-      expect(pluginJson.api.url).toContain('storybook.js.org');
+      const api = pluginJson.api as Record<string, unknown>;
+      expect(api).toHaveProperty('type');
+      expect(api).toHaveProperty('url');
+      expect(api.url).toContain('storybook.js.org');
     });
 
     it('has contact and branding info', () => {
@@ -264,10 +265,6 @@ describe('LLM Friendliness', () => {
 
     it('rewrites to the markdown API path-based endpoint', () => {
       expect(middlewareCode).toContain('/docs/api/md/');
-    });
-
-    it('excludes /docs/api routes from rewriting', () => {
-      expect(middlewareCode).toContain("/docs/api");
     });
 
     it('forwards renderer and language params', () => {

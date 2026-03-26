@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
-import { renderers as allRenderers } from '@repo/utils';
+import { renderers as allRenderersList } from '@repo/utils';
 
 interface CodeBlock {
   lang: string;
@@ -23,8 +23,14 @@ interface ResolveResult {
 }
 
 const RENDERER_NAMES: Record<string, string> = Object.fromEntries(
-  allRenderers.map((r) => [r.id, r.title]),
+  allRenderersList.map((r) => [r.id, r.title]),
 );
+
+function getLangTitle(lang: string): string {
+  if (lang === 'ts') return 'TypeScript';
+  if (lang === 'js') return 'JavaScript';
+  return lang;
+}
 
 /**
  * Parse a snippet markdown file and extract all code blocks with their metadata.
@@ -39,16 +45,20 @@ function parseSnippetFile(filePath: string): CodeBlock[] {
   for (const node of tree.children) {
     if (node.type === 'code') {
       const meta: Record<string, string> = {};
-      const matches = (node as any).meta?.match(/(?:\w+)="(?:[^"]*)"/g);
+      const matches = node.meta?.match(/(?:\w+)="(?:[^"]*)"/g);
       if (matches) {
         for (const match of matches) {
-          const [key, value] = match.split('=').map((p: string) => p.replace(/"/g, ''));
-          meta[key] = value;
+          const parts = match.split('=').map((p: string) => p.replace(/"/g, ''));
+          const key = parts[0];
+          const value = parts[1];
+          if (key && value) {
+            meta[key] = value;
+          }
         }
       }
       blocks.push({
-        lang: (node as any).lang ?? '',
-        value: (node as any).value ?? '',
+        lang: node.lang ?? '',
+        value: node.value ?? '',
         meta,
       });
     }
@@ -64,17 +74,17 @@ function selectSnippets(
   blocks: CodeBlock[],
   renderer: string,
   language: string,
-): { selected: CodeBlock[]; allRenderers: Set<string>; allLanguages: Set<string> } {
-  const allRendererSet = new Set<string>();
-  const allLanguageSet = new Set<string>();
+): { selected: CodeBlock[]; snippetRenderers: Set<string>; snippetLanguages: Set<string> } {
+  const snippetRenderers = new Set<string>();
+  const snippetLanguages = new Set<string>();
 
   // Collect all available renderers and languages
   for (const block of blocks) {
     if (block.meta.renderer && block.meta.renderer !== 'common') {
-      allRendererSet.add(block.meta.renderer);
+      snippetRenderers.add(block.meta.renderer);
     }
     if (block.meta.language) {
-      allLanguageSet.add(block.meta.language);
+      snippetLanguages.add(block.meta.language);
     }
   }
 
@@ -92,7 +102,7 @@ function selectSnippets(
     filtered = langMatches;
   }
 
-  return { selected: filtered, allRenderers: allRendererSet, allLanguages: allLanguageSet };
+  return { selected: filtered, snippetRenderers, snippetLanguages };
 }
 
 /**
@@ -103,8 +113,8 @@ function formatSnippetsAsMarkdown(blocks: CodeBlock[]): string {
 
   const parts: string[] = [];
   for (const block of blocks) {
-    const filename = block.meta.filename || '';
-    const tabTitle = block.meta.tabTitle || '';
+    const filename = block.meta.filename ?? '';
+    const tabTitle = block.meta.tabTitle ?? '';
     const comment = [filename, tabTitle].filter(Boolean).join(' — ');
     const header = comment ? `// ${comment}\n` : '';
     parts.push(`\`\`\`${block.lang}\n${header}${block.value}\n\`\`\``);
@@ -114,41 +124,36 @@ function formatSnippetsAsMarkdown(blocks: CodeBlock[]): string {
 
 /**
  * Resolve <IfRenderer> and <If> blocks based on the active renderer.
- *
- * Handles:
- * - <IfRenderer renderer="svelte">content</IfRenderer>
- * - <If renderer="react">content</If>
- * - <If notRenderer="svelte">content</If>
- * - Nested blocks
  */
 function resolveIfRendererBlocks(content: string, renderer: string): string {
-  // Process <IfRenderer renderer="X"> blocks
-  // Use a loop to handle nested blocks (process innermost first)
   let result = content;
   let changed = true;
 
   while (changed) {
     changed = false;
+    const prevResult = result;
 
-    // Match <IfRenderer renderer="X"> or <If renderer="X"> (non-greedy, innermost first)
+    // Match <IfRenderer renderer="X"> or <If renderer="X">
     result = result.replace(
-      /<(?:IfRenderer|If)\s+renderer="([^"]*)"[^>]*>([\s\S]*?)<\/(?:IfRenderer|If)>/g,
-      (_, rendererAttr: string, inner: string) => {
-        changed = true;
+      /<(?:IfRenderer|If)\s+renderer="(?<rendererAttr>[^"]*)"[^>]*>(?<inner>[\s\S]*?)<\/(?:IfRenderer|If)>/g,
+      (_match, rendererAttr: string, inner: string) => {
         const rendererList = rendererAttr.split(',').map((r) => r.trim());
         return rendererList.includes(renderer) ? inner : '';
       },
     );
 
-    // Match <If notRenderer="X"> (non-greedy, innermost first)
+    // Match <If notRenderer="X">
     result = result.replace(
-      /<If\s+notRenderer="([^"]*)"[^>]*>([\s\S]*?)<\/If>/g,
-      (_, notRendererAttr: string, inner: string) => {
-        changed = true;
+      /<If\s+notRenderer="(?<notRendererAttr>[^"]*)"[^>]*>(?<inner>[\s\S]*?)<\/If>/g,
+      (_match, notRendererAttr: string, inner: string) => {
         const excludeList = notRendererAttr.split(',').map((r) => r.trim());
         return excludeList.includes(renderer) ? '' : inner;
       },
     );
+
+    if (result !== prevResult) {
+      changed = true;
+    }
   }
 
   return result;
@@ -162,13 +167,13 @@ function inlineCodeSnippets(
   versionId: string,
   renderer: string,
   language: string,
-): { result: string; allRenderers: Set<string>; allLanguages: Set<string> } {
-  const allRenderers = new Set<string>();
-  const allLanguages = new Set<string>();
+): { result: string; collectedRenderers: Set<string>; collectedLanguages: Set<string> } {
+  const collectedRenderers = new Set<string>();
+  const collectedLanguages = new Set<string>();
 
   const result = content.replace(
-    /<CodeSnippets\s+path="([^"]*)"[^/]*\/>/g,
-    (_, snippetPath: string) => {
+    /<CodeSnippets\s+path="(?<snippetPath>[^"]*)"[^/]*\/>/g,
+    (_match, snippetPath: string) => {
       const filePath = path.join(
         process.cwd(),
         'content',
@@ -180,20 +185,20 @@ function inlineCodeSnippets(
       const blocks = parseSnippetFile(filePath);
       if (blocks.length === 0) return '';
 
-      const { selected, allRenderers: r, allLanguages: l } = selectSnippets(
+      const { selected, snippetRenderers, snippetLanguages } = selectSnippets(
         blocks,
         renderer,
         language,
       );
 
-      for (const rr of r) allRenderers.add(rr);
-      for (const ll of l) allLanguages.add(ll);
+      for (const rr of snippetRenderers) collectedRenderers.add(rr);
+      for (const ll of snippetLanguages) collectedLanguages.add(ll);
 
       return formatSnippetsAsMarkdown(selected);
     },
   );
 
-  return { result, allRenderers, allLanguages };
+  return { result, collectedRenderers, collectedLanguages };
 }
 
 /**
@@ -210,12 +215,11 @@ function stripRemainingJsx(content: string): string {
   cleaned = cleaned.replace(/<[A-Z][A-Za-z]*\s*\/>/g, '');
 
   // Remove block JSX components but keep their text content
-  // Loop to handle nested components
   let prev = '';
   while (prev !== cleaned) {
     prev = cleaned;
     cleaned = cleaned.replace(
-      /<([A-Z][A-Za-z]*)[^>]*>([\s\S]*?)<\/\1>/g,
+      /<(?<tag>[A-Z][A-Za-z]*)[^>]*>(?<inner>[\s\S]*?)<\/\1>/g,
       '$2',
     );
   }
@@ -238,19 +242,19 @@ function stripRemainingJsx(content: string): string {
 function buildBanner(
   renderer: string,
   language: string,
-  availableRenderers: string[],
-  availableLanguages: string[],
+  rendererList: string[],
+  languageList: string[],
 ): string {
-  const rendererTitle = RENDERER_NAMES[renderer] || renderer;
-  const langTitle = language === 'ts' ? 'TypeScript' : language === 'js' ? 'JavaScript' : language;
+  const rendererTitle = RENDERER_NAMES[renderer] ?? renderer;
+  const langTitle = getLangTitle(language);
 
-  const otherRenderers = availableRenderers
+  const otherRenderers = rendererList
     .filter((r) => r !== renderer)
-    .map((r) => RENDERER_NAMES[r] || r);
+    .map((r) => RENDERER_NAMES[r] ?? r);
 
-  const otherLanguages = availableLanguages
+  const otherLanguages = languageList
     .filter((l) => l !== language)
-    .map((l) => (l === 'ts' ? 'TypeScript' : l === 'js' ? 'JavaScript' : l));
+    .map((l) => getLangTitle(l));
 
   if (otherRenderers.length === 0 && otherLanguages.length === 0) {
     return '';
@@ -269,7 +273,10 @@ function buildBanner(
   }
 
   lines.push(`> It is also available for ${alternatives.join(' and ')}.`);
-  lines.push(`> To switch, re-fetch with query parameters: \`?renderer=${otherRenderers.length > 0 ? availableRenderers.find((r) => r !== renderer) || 'vue' : renderer}&language=${otherLanguages.length > 0 ? availableLanguages.find((l) => l !== language) || 'js' : language}\``);
+
+  const exampleRenderer = rendererList.find((r) => r !== renderer) ?? renderer;
+  const exampleLanguage = languageList.find((l) => l !== language) ?? language;
+  lines.push(`> To switch, re-fetch with query parameters: \`?renderer=${exampleRenderer}&language=${exampleLanguage}\``);
   lines.push('');
 
   return lines.join('\n');
@@ -287,15 +294,15 @@ export function resolveDocForLLM(
   rawContent: string,
   options: ResolveOptions,
 ): ResolveResult {
-  const renderer = options.renderer || 'react';
-  const language = options.language || 'ts';
+  const renderer = options.renderer ?? 'react';
+  const language = options.language ?? 'ts';
   const { versionId } = options;
 
   // 1. Resolve <IfRenderer> and <If> blocks
   let content = resolveIfRendererBlocks(rawContent, renderer);
 
   // 2. Inline code snippets
-  const { result: withSnippets, allRenderers, allLanguages } = inlineCodeSnippets(
+  const { result: withSnippets, collectedRenderers, collectedLanguages } = inlineCodeSnippets(
     content,
     versionId,
     renderer,
@@ -308,8 +315,8 @@ export function resolveDocForLLM(
 
   return {
     content,
-    availableRenderers: [...allRenderers].sort(),
-    availableLanguages: [...allLanguages].sort(),
+    availableRenderers: [...collectedRenderers].sort(),
+    availableLanguages: [...collectedLanguages].sort(),
   };
 }
 
@@ -319,8 +326,8 @@ export function resolveDocForLLM(
 export function buildContentBanner(
   renderer: string,
   language: string,
-  availableRenderers: string[],
-  availableLanguages: string[],
+  rendererList: string[],
+  languageList: string[],
 ): string {
-  return buildBanner(renderer, language, availableRenderers, availableLanguages);
+  return buildBanner(renderer, language, rendererList, languageList);
 }

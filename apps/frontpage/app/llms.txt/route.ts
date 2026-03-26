@@ -1,11 +1,11 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { docsVersions, latestVersion } from '@repo/utils';
 import { getAllTrees } from '../../lib/get-all-trees';
 import { getFlatTree } from '../../lib/get-flat-tree';
 
 export const dynamic = 'force-static';
 
-export function GET(request: NextRequest) {
+export function GET() {
   const listOfTrees = getAllTrees();
   const tree = listOfTrees.find((t) => t.name === latestVersion.id);
   const flatTree = tree?.children

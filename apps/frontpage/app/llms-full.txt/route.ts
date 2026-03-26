@@ -29,8 +29,8 @@ function findDocFile(slug: string): string | null {
 }
 
 export function GET(request: NextRequest) {
-  const renderer = request.nextUrl.searchParams.get('renderer') || 'react';
-  const language = request.nextUrl.searchParams.get('language') || 'ts';
+  const renderer = request.nextUrl.searchParams.get('renderer') ?? 'react';
+  const language = request.nextUrl.searchParams.get('language') ?? 'ts';
 
   const listOfTrees = getAllTrees();
   const tree = listOfTrees.find((t) => t.name === latestVersion.id);
@@ -65,7 +65,7 @@ export function GET(request: NextRequest) {
 
     if (!content) continue;
 
-    const title = data.title || '';
+    const title = String(data.title ?? '');
     pageSections.push(`# ${title}\n\n${content}`);
     pageSections.push(`> Source: ${baseUrl}${node.slug}`);
     pageSections.push('---');

@@ -37,8 +37,8 @@ export async function GET(
   const { path: pathSegments } = await context.params;
   const slug = pathSegments.join('/');
 
-  const renderer = request.nextUrl.searchParams.get('renderer') || 'react';
-  const language = request.nextUrl.searchParams.get('language') || 'ts';
+  const renderer = request.nextUrl.searchParams.get('renderer') ?? 'react';
+  const language = request.nextUrl.searchParams.get('language') ?? 'ts';
 
   const docFile = findDocFile(slug, latestVersion.id);
   if (!docFile) {
@@ -55,7 +55,7 @@ export async function GET(
     language,
   });
 
-  const title = data.title || '';
+  const title = String(data.title ?? '');
   const banner = buildContentBanner(renderer, language, availableRenderers, availableLanguages);
   const markdown = `${banner}# ${title}\n\n${content}`;
 
