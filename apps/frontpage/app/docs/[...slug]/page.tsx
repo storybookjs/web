@@ -87,8 +87,45 @@ export const generateStaticParams = () => {
 };
 
 export default async function Page({ params: { slug } }: PageProps) {
-  const { page } = await getPageFromSlug(slug);
+  const { activeVersion, page } = await getPageFromSlug(slug);
   if (!page) notFound();
 
-  return <Content page={page} />;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: page.title ?? 'Storybook docs',
+    url: `https://storybook.js.org/docs/${slug.join('/')}`,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Storybook',
+      url: 'https://storybook.js.org',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://storybook.js.org/icon.svg',
+      },
+    },
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Storybook',
+      url: 'https://storybook.js.org',
+    },
+    about: {
+      '@type': 'SoftwareApplication',
+      name: 'Storybook',
+      applicationCategory: 'DeveloperApplication',
+      operatingSystem: 'Cross-platform',
+    },
+    inLanguage: 'en',
+    version: activeVersion.label,
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Content page={page} />
+    </>
+  );
 }
