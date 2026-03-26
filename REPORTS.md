@@ -395,13 +395,63 @@ curl -s https://actions.zapier.com/.well-known/ai-plugin.json | python3 -m json.
 
 ---
 
+## 8. Code Snippet Inlining with Renderer/Language Filtering
+
+**Commit:** `feat: inline code snippets and resolve conditional renderer blocks in markdown API`
+
+**Files changed:**
+- `apps/frontpage/lib/resolve-doc-for-llm.ts` (new)
+- `apps/frontpage/app/docs/api/md/[...path]/route.ts` (modified)
+- `apps/frontpage/app/docs/api/md/route.ts` (modified)
+- `apps/frontpage/app/llms-full.txt/route.ts` (modified)
+- `apps/frontpage/app/llms.txt/route.ts` (modified)
+- `apps/frontpage/middleware.ts` (modified)
+
+**What it does:**
+All `<CodeSnippets path="..." />` components are resolved server-side by reading snippet files from `content/snippets/{version}/`, parsing them with remark, and filtering by renderer and language. `<IfRenderer>` / `<If notRenderer>` conditional blocks are also resolved. A contextual banner at the top tells the consumer which renderer/language variant they're seeing and how to switch.
+
+**Impact:** CRITICAL — Code examples are the most important part of Storybook documentation. Without this, LLMs get docs with placeholder gaps where every code example should be. With it, they get complete, framework-specific code examples that match what users see in the browser.
+
+**Who else does this:**
+- [Stripe Docs](https://docs.stripe.com/testing.md) — Language-specific code via `.md` suffix (but no renderer filtering)
+- No other documentation site offers this level of framework-specific code filtering for LLM consumption
+
+**Try it yourself — compare renderers:**
+
+```bash
+# Default (React + TypeScript)
+curl -s https://storybook.js.org/docs/api/md/writing-stories/decorators | head -30
+
+# Vue + TypeScript
+curl -s "https://storybook.js.org/docs/api/md/writing-stories/decorators?renderer=vue" | head -30
+
+# Angular + JavaScript
+curl -s "https://storybook.js.org/docs/api/md/writing-stories/decorators?renderer=angular&language=js" | head -30
+
+# Via content negotiation (what Claude Code uses)
+curl -s -H "Accept: text/markdown" "https://storybook.js.org/docs/writing-stories/decorators?renderer=svelte"
+```
+
+<details>
+<summary>Example banner output</summary>
+
+```
+> **Note:** This documentation is shown for **React** with **TypeScript**.
+> It is also available for renderers: Angular, HTML, Solid, Svelte, Vue, Web Components and languages: JavaScript.
+> To switch, re-fetch with query parameters: `?renderer=angular&language=js`
+```
+</details>
+
+---
+
 ## Summary
 
 | Change | Impact | Primary Benefit | Quick Test |
 |--------|--------|-----------------|------------|
 | llms.txt / llms-full.txt | HIGH | LLMs can discover and consume all docs | `curl https://storybook.js.org/llms.txt` |
-| Docs Markdown API | HIGH | Programmatic access to individual pages | `curl https://storybook.js.org/docs/api/md?path=get-started` |
+| Docs Markdown API | HIGH | Programmatic access to individual pages | `curl https://storybook.js.org/docs/api/md/get-started` |
 | Content Negotiation | HIGH | Transparent markdown for LLM tools | `curl -H "Accept: text/markdown" https://storybook.js.org/docs/get-started` |
+| **Code Snippet Inlining** | **CRITICAL** | **Complete code examples in LLM output** | `curl https://storybook.js.org/docs/api/md/writing-stories/decorators` |
 | AI Crawler robots.txt | MEDIUM | Clear intent to allow AI indexing | `curl https://storybook.js.org/robots.txt` |
 | JSON-LD Structured Data | MEDIUM | Better semantic understanding by LLMs | Inspect `<script type="application/ld+json">` on any doc page |
 | Link Header Discovery | MEDIUM | Multiple discovery paths for llms.txt | `curl -sI https://storybook.js.org/docs/get-started \| grep link` |
@@ -416,6 +466,8 @@ curl -s https://actions.zapier.com/.well-known/ai-plugin.json | python3 -m json.
 | `.md` URL suffix | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ |
 | Markdown API | ✅ | ❌ | ✅ | ❌ | ❌ | via GitHub |
 | Content negotiation | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| **Code snippet inlining** | **✅** | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Renderer/language filtering** | **✅** | ❌ | ❌ | ❌ | ❌ | ❌ |
 | AI crawler robots.txt | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
 | JSON-LD structured data | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ |
 | HTTP Link header | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
