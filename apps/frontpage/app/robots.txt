@@ -2,6 +2,41 @@
 User-agent: *
 Allow: /
 
+# AI Crawlers - Explicitly allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# LLM-friendly content
+# llms.txt: https://storybook.js.org/llms.txt
+# llms-full.txt: https://storybook.js.org/llms-full.txt
+
 # Host
 Host: https://storybook.js.org
 
