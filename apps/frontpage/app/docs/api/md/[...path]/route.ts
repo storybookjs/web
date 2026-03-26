@@ -1,10 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { type NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { latestVersion } from '@repo/utils';
 import matter from 'gray-matter';
-import { getAllTrees } from '../../../../lib/get-all-trees';
-import { getFlatTree } from '../../../../lib/get-flat-tree';
 
 function stripMdxComponents(content: string): string {
   let cleaned = content.replace(/^import\s+.*$/gm, '');
@@ -45,39 +43,17 @@ function findAndReadDoc(
   return null;
 }
 
-export function GET(request: NextRequest) {
-  const { searchParams } = request.nextUrl;
-  const slug = searchParams.get('path');
+interface RouteContext {
+  params: Promise<{ path: string[] }>;
+}
 
-  if (!slug) {
-    // Return index of all available pages
-    const listOfTrees = getAllTrees();
-    const tree = listOfTrees.find((t) => t.name === latestVersion.id);
-    const flatTree = tree?.children
-      ? getFlatTree({ tree: tree.children })
-      : [];
+export async function GET(
+  _request: Request,
+  context: RouteContext,
+) {
+  const { path: pathSegments } = await context.params;
+  const slug = pathSegments.join('/');
 
-    const pages = flatTree.map((node) => ({
-      slug: node.slug,
-      url: `https://storybook.js.org${node.slug}`,
-      markdownUrl: `https://storybook.js.org/docs/api/md/${node.slug.replace('/docs/', '')}`,
-    }));
-
-    return NextResponse.json(
-      {
-        version: latestVersion.id,
-        label: latestVersion.label,
-        pages,
-      },
-      {
-        headers: {
-          'Cache-Control': 'public, max-age=3600, s-maxage=86400',
-        },
-      },
-    );
-  }
-
-  // Return specific page as markdown
   const doc = findAndReadDoc(slug, latestVersion.id);
   if (!doc) {
     return new NextResponse('Page not found', { status: 404 });

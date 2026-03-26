@@ -154,26 +154,34 @@ describe('LLM Friendliness', () => {
   });
 
   describe('docs markdown API', () => {
-    const routeCode = fs.readFileSync(
+    const indexRouteCode = fs.readFileSync(
       path.join(FRONTPAGE_ROOT, 'app/docs/api/md/route.ts'),
+      'utf8',
+    );
+    const pathRouteCode = fs.readFileSync(
+      path.join(FRONTPAGE_ROOT, 'app/docs/api/md/[...path]/route.ts'),
       'utf8',
     );
 
     it('supports index listing (no path param)', () => {
-      expect(routeCode).toContain("searchParams.get('path')");
-      expect(routeCode).toContain('NextResponse.json');
+      expect(indexRouteCode).toContain("searchParams.get('path')");
+      expect(indexRouteCode).toContain('NextResponse.json');
     });
 
-    it('supports individual page fetch (with path param)', () => {
-      expect(routeCode).toContain("'Content-Type': 'text/markdown; charset=utf-8'");
+    it('supports individual page fetch via path segments', () => {
+      expect(pathRouteCode).toContain("'Content-Type': 'text/markdown; charset=utf-8'");
+    });
+
+    it('supports individual page fetch via query param (backward compat)', () => {
+      expect(indexRouteCode).toContain("'Content-Type': 'text/markdown; charset=utf-8'");
     });
 
     it('returns 404 for missing pages', () => {
-      expect(routeCode).toContain('status: 404');
+      expect(pathRouteCode).toContain('status: 404');
     });
 
     it('strips MDX components from output', () => {
-      expect(routeCode).toContain('stripMdxComponents');
+      expect(pathRouteCode).toContain('stripMdxComponents');
     });
   });
 
@@ -191,8 +199,8 @@ describe('LLM Friendliness', () => {
       expect(middlewareCode).toContain('text/html');
     });
 
-    it('rewrites to the markdown API endpoint', () => {
-      expect(middlewareCode).toContain('/docs/api/md');
+    it('rewrites to the markdown API path-based endpoint', () => {
+      expect(middlewareCode).toContain('/docs/api/md/');
     });
 
     it('excludes /docs/api routes from rewriting', () => {

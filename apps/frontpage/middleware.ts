@@ -16,13 +16,13 @@ export async function middleware(request: NextRequest) {
     !acceptHeader.includes('text/html');
 
   if (prefersMarkdown && pathname.startsWith('/docs') && !pathname.startsWith('/docs/api')) {
-    // Strip /docs/ prefix and redirect to the markdown API
+    // Strip /docs/ prefix and rewrite to the markdown API route
     const docPath = pathname.replace(/^\/docs\/?/, '');
-    const mdUrl = new URL(
-      `/docs/api/md${docPath ? `?path=${docPath}` : ''}`,
-      request.url,
-    );
-    return NextResponse.rewrite(mdUrl);
+    const url = request.nextUrl.clone();
+    // Use path segments instead of query params (Next.js rewrites drop query params)
+    url.pathname = docPath ? `/docs/api/md/${docPath}` : '/docs/api/md';
+    url.search = '';
+    return NextResponse.rewrite(url);
   }
 
   // Merge all redirects into a single list

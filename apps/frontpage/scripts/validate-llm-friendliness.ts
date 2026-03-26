@@ -43,6 +43,7 @@ const REQUIRED_FILES = [
   'app/llms.txt/route.ts',
   'app/llms-full.txt/route.ts',
   'app/docs/api/md/route.ts',
+  'app/docs/api/md/[...path]/route.ts',
   'app/robots.txt',
   'public/.well-known/ai-plugin.json',
 ];
