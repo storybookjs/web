@@ -8,6 +8,23 @@ import { docsCommonRedirects } from './redirects/docs-common-redirects';
 export async function middleware(request: NextRequest) {
   const pathname: string = request.nextUrl.pathname;
 
+  // Content negotiation: serve markdown for docs pages when requested by LLMs
+  // LLM tools like Claude Code send Accept: text/markdown headers
+  const acceptHeader = request.headers.get('accept') || '';
+  const prefersMarkdown =
+    acceptHeader.includes('text/markdown') &&
+    !acceptHeader.includes('text/html');
+
+  if (prefersMarkdown && pathname.startsWith('/docs') && !pathname.startsWith('/docs/api')) {
+    // Strip /docs/ prefix and redirect to the markdown API
+    const docPath = pathname.replace(/^\/docs\/?/, '');
+    const mdUrl = new URL(
+      `/docs/api/md${docPath ? `?path=${docPath}` : ''}`,
+      request.url,
+    );
+    return NextResponse.rewrite(mdUrl);
+  }
+
   // Merge all redirects into a single list
   // The order of the list is important
   // The first matching redirect will be used
@@ -80,6 +97,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * - bubbles.png (docs background file)
      */
-    '/((?!api|images|docs-assets|_next/static|_next/image|icon.svg|favicon.ico|bubbles.png).*)',
+    '/((?!api|images|docs-assets|_next/static|_next/image|icon.svg|favicon.ico|bubbles.png|llms.txt|llms-full.txt).*)',
   ],
 };
