@@ -33,7 +33,6 @@ describe('LLM Friendliness', () => {
       'allows AI crawler: %s',
       (crawler) => {
         expect(robotsTxt).toContain(`User-agent: ${crawler}`);
-        // Verify there's an Allow directive for this crawler
         const crawlerSection = robotsTxt.split(`User-agent: ${crawler}`)[1];
         expect(crawlerSection).toBeDefined();
         const nextDirective = crawlerSection!.split('\n').find(
@@ -121,8 +120,10 @@ describe('LLM Friendliness', () => {
       expect(routeCode).toContain('llms-full.txt');
     });
 
-    it('sets correct content type', () => {
-      expect(routeCode).toContain("'Content-Type': 'text/plain; charset=utf-8'");
+    it('documents query parameters', () => {
+      expect(routeCode).toContain('### Query Parameters');
+      expect(routeCode).toContain('renderer');
+      expect(routeCode).toContain('language');
     });
   });
 
@@ -137,19 +138,21 @@ describe('LLM Friendliness', () => {
       expect(routeCode).toContain('getFlatTree');
     });
 
-    it('strips MDX components', () => {
-      expect(routeCode).toContain('stripMdxComponents');
+    it('uses resolveDocForLLM for snippet inlining', () => {
+      expect(routeCode).toContain('resolveDocForLLM');
     });
 
-    it('handles multiple file extensions', () => {
-      expect(routeCode).toContain('.mdx');
-      expect(routeCode).toContain('.md');
-      expect(routeCode).toContain('index.mdx');
-      expect(routeCode).toContain('index.md');
+    it('supports renderer and language params', () => {
+      expect(routeCode).toContain("get('renderer')");
+      expect(routeCode).toContain("get('language')");
     });
 
     it('includes source attribution per section', () => {
       expect(routeCode).toContain('Source:');
+    });
+
+    it('includes content banner', () => {
+      expect(routeCode).toContain('buildContentBanner');
     });
   });
 
@@ -180,8 +183,68 @@ describe('LLM Friendliness', () => {
       expect(pathRouteCode).toContain('status: 404');
     });
 
-    it('strips MDX components from output', () => {
-      expect(pathRouteCode).toContain('stripMdxComponents');
+    it('uses resolveDocForLLM for snippet inlining', () => {
+      expect(pathRouteCode).toContain('resolveDocForLLM');
+      expect(indexRouteCode).toContain('resolveDocForLLM');
+    });
+
+    it('supports renderer and language params', () => {
+      expect(pathRouteCode).toContain("get('renderer')");
+      expect(pathRouteCode).toContain("get('language')");
+    });
+
+    it('includes content banner', () => {
+      expect(pathRouteCode).toContain('buildContentBanner');
+    });
+
+    it('documents availableParams in index response', () => {
+      expect(indexRouteCode).toContain('availableParams');
+      expect(indexRouteCode).toContain('renderer');
+      expect(indexRouteCode).toContain('language');
+    });
+  });
+
+  describe('resolve-doc-for-llm utility', () => {
+    const resolverCode = fs.readFileSync(
+      path.join(FRONTPAGE_ROOT, 'lib/resolve-doc-for-llm.ts'),
+      'utf8',
+    );
+
+    it('parses snippet files from content/snippets/', () => {
+      expect(resolverCode).toContain("'snippets'");
+      expect(resolverCode).toContain('parseSnippetFile');
+    });
+
+    it('resolves IfRenderer blocks', () => {
+      expect(resolverCode).toContain('resolveIfRendererBlocks');
+      expect(resolverCode).toContain('IfRenderer');
+      expect(resolverCode).toContain('notRenderer');
+    });
+
+    it('inlines CodeSnippets components', () => {
+      expect(resolverCode).toContain('inlineCodeSnippets');
+      expect(resolverCode).toContain('CodeSnippets');
+    });
+
+    it('filters by renderer and language', () => {
+      expect(resolverCode).toContain('selectSnippets');
+      expect(resolverCode).toContain('renderer');
+      expect(resolverCode).toContain('language');
+    });
+
+    it('builds content banner with available alternatives', () => {
+      expect(resolverCode).toContain('buildContentBanner');
+      expect(resolverCode).toContain('availableRenderers');
+      expect(resolverCode).toContain('availableLanguages');
+    });
+
+    it('strips remaining JSX components', () => {
+      expect(resolverCode).toContain('stripRemainingJsx');
+    });
+
+    it('uses remark to parse snippet markdown', () => {
+      expect(resolverCode).toContain('remarkParse');
+      expect(resolverCode).toContain('unified');
     });
   });
 
@@ -205,6 +268,11 @@ describe('LLM Friendliness', () => {
 
     it('excludes /docs/api routes from rewriting', () => {
       expect(middlewareCode).toContain("/docs/api");
+    });
+
+    it('forwards renderer and language params', () => {
+      expect(middlewareCode).toContain("get('renderer')");
+      expect(middlewareCode).toContain("get('language')");
     });
 
     it('excludes llms.txt and llms-full.txt from middleware matcher', () => {

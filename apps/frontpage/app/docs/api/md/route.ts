@@ -5,24 +5,12 @@ import { latestVersion } from '@repo/utils';
 import matter from 'gray-matter';
 import { getAllTrees } from '../../../../lib/get-all-trees';
 import { getFlatTree } from '../../../../lib/get-flat-tree';
+import { resolveDocForLLM, buildContentBanner } from '../../../../lib/resolve-doc-for-llm';
 
-function stripMdxComponents(content: string): string {
-  let cleaned = content.replace(/^import\s+.*$/gm, '');
-  cleaned = cleaned.replace(/<[A-Z][A-Za-z]*\s[^>]*\/>/g, '');
-  cleaned = cleaned.replace(
-    /<([A-Z][A-Za-z]*)[^>]*>([\s\S]*?)<\/\1>/g,
-    '$2',
-  );
-  cleaned = cleaned.replace(/<[A-Z][A-Za-z]*\s*\/>/g, '');
-  cleaned = cleaned.replace(/<!--[\s\S]*?-->/g, '');
-  cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
-  return cleaned.trim();
-}
-
-function findAndReadDoc(
+function findDocFile(
   docPath: string,
   versionId: string,
-): { title: string; content: string } | null {
+): string | null {
   const basePath = `content/docs/${versionId}/${docPath}`;
   const candidates = [
     `${basePath}.mdx`,
@@ -34,12 +22,7 @@ function findAndReadDoc(
   for (const candidate of candidates) {
     const fullPath = path.join(process.cwd(), candidate);
     if (fs.existsSync(fullPath)) {
-      const fileContent = fs.readFileSync(fullPath, 'utf8');
-      const { content, data } = matter(fileContent);
-      return {
-        title: data.title || '',
-        content: stripMdxComponents(content),
-      };
+      return candidate;
     }
   }
   return null;
@@ -67,6 +50,10 @@ export function GET(request: NextRequest) {
       {
         version: latestVersion.id,
         label: latestVersion.label,
+        availableParams: {
+          renderer: 'Filter code snippets by framework (default: react). Options: react, vue, angular, svelte, web-components, solid, etc.',
+          language: 'Filter code snippets by language (default: ts). Options: ts, js',
+        },
         pages,
       },
       {
@@ -77,13 +64,28 @@ export function GET(request: NextRequest) {
     );
   }
 
-  // Return specific page as markdown
-  const doc = findAndReadDoc(slug, latestVersion.id);
-  if (!doc) {
+  // Return specific page as markdown (backward compatibility with ?path= param)
+  const renderer = searchParams.get('renderer') || 'react';
+  const language = searchParams.get('language') || 'ts';
+
+  const docFile = findDocFile(slug, latestVersion.id);
+  if (!docFile) {
     return new NextResponse('Page not found', { status: 404 });
   }
 
-  const markdown = `# ${doc.title}\n\n${doc.content}`;
+  const fullPath = path.join(process.cwd(), docFile);
+  const fileContent = fs.readFileSync(fullPath, 'utf8');
+  const { content: rawContent, data } = matter(fileContent);
+
+  const { content, availableRenderers, availableLanguages } = resolveDocForLLM(rawContent, {
+    versionId: latestVersion.id,
+    renderer,
+    language,
+  });
+
+  const title = data.title || '';
+  const banner = buildContentBanner(renderer, language, availableRenderers, availableLanguages);
+  const markdown = `${banner}# ${title}\n\n${content}`;
 
   return new NextResponse(markdown, {
     headers: {

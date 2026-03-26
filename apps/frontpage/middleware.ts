@@ -21,7 +21,13 @@ export async function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     // Use path segments instead of query params (Next.js rewrites drop query params)
     url.pathname = docPath ? `/docs/api/md/${docPath}` : '/docs/api/md';
-    url.search = '';
+    // Forward renderer and language params if present
+    const renderer = request.nextUrl.searchParams.get('renderer');
+    const language = request.nextUrl.searchParams.get('language');
+    const params = new URLSearchParams();
+    if (renderer) params.set('renderer', renderer);
+    if (language) params.set('language', language);
+    url.search = params.toString() ? `?${params.toString()}` : '';
     return NextResponse.rewrite(url);
   }
 

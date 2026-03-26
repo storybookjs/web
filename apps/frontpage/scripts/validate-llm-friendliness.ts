@@ -46,6 +46,7 @@ const REQUIRED_FILES = [
   'app/docs/api/md/[...path]/route.ts',
   'app/robots.txt',
   'public/.well-known/ai-plugin.json',
+  'lib/resolve-doc-for-llm.ts',
 ];
 
 for (const file of REQUIRED_FILES) {
@@ -133,12 +134,55 @@ check(
   llmsFullRoute.includes('getAllTrees'),
   'Should import and use getAllTrees to stay in sync with docs',
 );
+check(
+  'llms-full.txt uses resolveDocForLLM()',
+  llmsFullRoute.includes('resolveDocForLLM'),
+  'Should use resolveDocForLLM to inline code snippets',
+);
 
 const mdApiRoute = readFile('app/docs/api/md/route.ts');
 check(
   'Markdown API uses getAllTrees()',
   mdApiRoute.includes('getAllTrees'),
   'Should import and use getAllTrees to stay in sync with docs',
+);
+
+const mdApiPathRoute = readFile('app/docs/api/md/[...path]/route.ts');
+check(
+  'Markdown API (path) uses resolveDocForLLM()',
+  mdApiPathRoute.includes('resolveDocForLLM'),
+  'Should use resolveDocForLLM to inline code snippets',
+);
+
+// ── 4b. Code snippet resolver ────────────────────────────────────────────
+
+console.log('\n📝 Code snippet resolution:');
+
+const resolver = readFile('lib/resolve-doc-for-llm.ts');
+check(
+  'Resolver parses snippet files',
+  resolver.includes('parseSnippetFile') && resolver.includes("'snippets'"),
+  'Should read from content/snippets/',
+);
+check(
+  'Resolver handles IfRenderer blocks',
+  resolver.includes('resolveIfRendererBlocks') && resolver.includes('IfRenderer'),
+  'Should resolve conditional renderer blocks',
+);
+check(
+  'Resolver inlines CodeSnippets',
+  resolver.includes('inlineCodeSnippets') && resolver.includes('CodeSnippets'),
+  'Should inline code snippet components',
+);
+check(
+  'Resolver filters by renderer and language',
+  resolver.includes('selectSnippets'),
+  'Should filter snippets by renderer and language',
+);
+check(
+  'Resolver builds content banner',
+  resolver.includes('buildContentBanner') && resolver.includes('availableRenderers'),
+  'Should generate banner with available alternatives',
 );
 
 // ── 5. Content negotiation middleware ─────────────────────────────────────

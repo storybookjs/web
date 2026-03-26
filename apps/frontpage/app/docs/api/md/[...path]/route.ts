@@ -1,26 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import { latestVersion } from '@repo/utils';
 import matter from 'gray-matter';
+import { resolveDocForLLM, buildContentBanner } from '../../../../../lib/resolve-doc-for-llm';
 
-function stripMdxComponents(content: string): string {
-  let cleaned = content.replace(/^import\s+.*$/gm, '');
-  cleaned = cleaned.replace(/<[A-Z][A-Za-z]*\s[^>]*\/>/g, '');
-  cleaned = cleaned.replace(
-    /<([A-Z][A-Za-z]*)[^>]*>([\s\S]*?)<\/\1>/g,
-    '$2',
-  );
-  cleaned = cleaned.replace(/<[A-Z][A-Za-z]*\s*\/>/g, '');
-  cleaned = cleaned.replace(/<!--[\s\S]*?-->/g, '');
-  cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
-  return cleaned.trim();
-}
-
-function findAndReadDoc(
+function findDocFile(
   docPath: string,
   versionId: string,
-): { title: string; content: string } | null {
+): string | null {
   const basePath = `content/docs/${versionId}/${docPath}`;
   const candidates = [
     `${basePath}.mdx`,
@@ -32,12 +20,7 @@ function findAndReadDoc(
   for (const candidate of candidates) {
     const fullPath = path.join(process.cwd(), candidate);
     if (fs.existsSync(fullPath)) {
-      const fileContent = fs.readFileSync(fullPath, 'utf8');
-      const { content, data } = matter(fileContent);
-      return {
-        title: data.title || '',
-        content: stripMdxComponents(content),
-      };
+      return candidate;
     }
   }
   return null;
@@ -48,18 +31,33 @@ interface RouteContext {
 }
 
 export async function GET(
-  _request: Request,
+  request: NextRequest,
   context: RouteContext,
 ) {
   const { path: pathSegments } = await context.params;
   const slug = pathSegments.join('/');
 
-  const doc = findAndReadDoc(slug, latestVersion.id);
-  if (!doc) {
+  const renderer = request.nextUrl.searchParams.get('renderer') || 'react';
+  const language = request.nextUrl.searchParams.get('language') || 'ts';
+
+  const docFile = findDocFile(slug, latestVersion.id);
+  if (!docFile) {
     return new NextResponse('Page not found', { status: 404 });
   }
 
-  const markdown = `# ${doc.title}\n\n${doc.content}`;
+  const fullPath = path.join(process.cwd(), docFile);
+  const fileContent = fs.readFileSync(fullPath, 'utf8');
+  const { content: rawContent, data } = matter(fileContent);
+
+  const { content, availableRenderers, availableLanguages } = resolveDocForLLM(rawContent, {
+    versionId: latestVersion.id,
+    renderer,
+    language,
+  });
+
+  const title = data.title || '';
+  const banner = buildContentBanner(renderer, language, availableRenderers, availableLanguages);
+  const markdown = `${banner}# ${title}\n\n${content}`;
 
   return new NextResponse(markdown, {
     headers: {
