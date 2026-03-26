@@ -134,8 +134,10 @@ function resolveIfRendererBlocks(content: string, renderer: string): string {
     const prevResult = result;
 
     // Match <IfRenderer renderer="X"> or <If renderer="X">
+    // eslint-disable-next-line prefer-named-capture-group -- TS target does not support named capture groups
+    const ifRendererRegex = /<(?:IfRenderer|If)\s+renderer="([^"]*)"[^>]*>([\s\S]*?)<\/(?:IfRenderer|If)>/g;
     result = result.replace(
-      /<(?:IfRenderer|If)\s+renderer="(?<rendererAttr>[^"]*)"[^>]*>(?<inner>[\s\S]*?)<\/(?:IfRenderer|If)>/g,
+      ifRendererRegex,
       (_match, rendererAttr: string, inner: string) => {
         const rendererList = rendererAttr.split(',').map((r) => r.trim());
         return rendererList.includes(renderer) ? inner : '';
@@ -143,8 +145,10 @@ function resolveIfRendererBlocks(content: string, renderer: string): string {
     );
 
     // Match <If notRenderer="X">
+    // eslint-disable-next-line prefer-named-capture-group -- TS target does not support named capture groups
+    const notRendererRegex = /<If\s+notRenderer="([^"]*)"[^>]*>([\s\S]*?)<\/If>/g;
     result = result.replace(
-      /<If\s+notRenderer="(?<notRendererAttr>[^"]*)"[^>]*>(?<inner>[\s\S]*?)<\/If>/g,
+      notRendererRegex,
       (_match, notRendererAttr: string, inner: string) => {
         const excludeList = notRendererAttr.split(',').map((r) => r.trim());
         return excludeList.includes(renderer) ? '' : inner;
@@ -171,8 +175,10 @@ function inlineCodeSnippets(
   const collectedRenderers = new Set<string>();
   const collectedLanguages = new Set<string>();
 
+  // eslint-disable-next-line prefer-named-capture-group -- TS target does not support named capture groups
+  const codeSnippetsRegex = /<CodeSnippets\s+path="([^"]*)"[^/]*\/>/g;
   const result = content.replace(
-    /<CodeSnippets\s+path="(?<snippetPath>[^"]*)"[^/]*\/>/g,
+    codeSnippetsRegex,
     (_match, snippetPath: string) => {
       const filePath = path.join(
         process.cwd(),
@@ -218,10 +224,9 @@ function stripRemainingJsx(content: string): string {
   let prev = '';
   while (prev !== cleaned) {
     prev = cleaned;
-    cleaned = cleaned.replace(
-      /<(?<tag>[A-Z][A-Za-z]*)[^>]*>(?<inner>[\s\S]*?)<\/\1>/g,
-      '$2',
-    );
+    // eslint-disable-next-line prefer-named-capture-group -- TS target does not support named capture groups
+    const jsxBlockRegex = /<([A-Z][A-Za-z]*)[^>]*>([\s\S]*?)<\/\1>/g;
+    cleaned = cleaned.replace(jsxBlockRegex, '$2');
   }
 
   // Remove JSX comments: {/* ... */}
