@@ -38,6 +38,7 @@ yarn-error.log*
 apps/frontpage/content/docs
 apps/frontpage/content/snippets
 apps/frontpage/generated-redirects.json
+apps/frontpage/generated-versions.json
 apps/frontpage/public/docs-assets
 
 # ui
