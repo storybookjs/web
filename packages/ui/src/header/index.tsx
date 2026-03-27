@@ -27,9 +27,8 @@ export const Header: FC<HeaderProps> = ({
   // eyebrow,
   eyebrow = (
     <Eyebrow
-      href="https://storybook.js.org/blog/storybook-mcp-for-react"
-      title="Introducing Storybook MCP for React"
-      hideIcon
+      href="https://us02web.zoom.us/webinar/register/4217528604397/WN_r4BArQTaRySZ2WGxd8xAkQ"
+      title="Join live: Storybook MCP AMA"
     />
   ),
   githubCount = 0,
