@@ -1,5 +1,6 @@
 export { A } from './a';
 export { CodeSnippets } from './code-snippets';
+export { CopyPromptButton } from '../../../components/copy-prompt-button';
 export { CommunityRenderers } from './community-renderers';
 export { FeatureSnippets } from './feature-snippets';
 export { GetStartedVersions } from './get-started-versions';
