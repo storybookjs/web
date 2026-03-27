@@ -68,7 +68,12 @@ export function Hero({
   contributorCount: string;
 }) {
   const [slide, setSlide] = useState(1);
+  const [indicator, setIndicator] = useState({
+    left: 0,
+    width: 0,
+  });
   const intervalId = useRef<number | null>(null);
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const track = useAnalytics();
 
   const setSlideInterval = () => {
@@ -96,6 +101,21 @@ export function Hero({
       clearInterval(intervalId.current);
     }
   };
+
+  useEffect(() => {
+    const btn = buttonRefs.current[slide - 1];
+    if (!btn) return;
+
+    const parent = btn.parentElement;
+    if (!parent) return;
+
+    const parentRect = parent.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    setIndicator({
+      left: btnRect.left - parentRect.left,
+      width: btnRect.width,
+    });
+  }, [slide]);
 
   return (
     <Container className="relative z-20 justify-between gap-20 overflow-hidden pt-12 text-white md:pt-16 lg:px-8 lg:pt-24">
@@ -194,13 +214,11 @@ export function Hero({
         </div>
         <div className="relative hidden h-20 gap-12 md:flex">
           <div
-            className={cn(
-              'absolute top-0 h-0.5 bg-white transition-all',
-              slide === 1 && 'left-0 w-[96px]',
-              slide === 2 && 'left-[144px] w-[132px]',
-              slide === 3 && 'left-[324px] w-[101px]',
-              slide === 4 && 'left-[474px] w-[110px]',
-            )}
+            className="absolute top-0 h-0.5 bg-white transition-all"
+            style={{
+              left: indicator.left,
+              width: indicator.width,
+            }}
           />
           {features.map((label, i) => (
             <button
@@ -211,6 +229,9 @@ export function Hero({
               key={label}
               onClick={() => {
                 handleSlideChange(i + 1);
+              }}
+              ref={(el) => {
+                buttonRefs.current[i] = el;
               }}
               type="button"
             >
