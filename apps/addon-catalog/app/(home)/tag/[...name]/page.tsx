@@ -37,7 +37,7 @@ const getCachedTagFromName = unstable_cache(
 const getCachedTags = unstable_cache(
   async () => [
     ...(await fetchTagsData({ isCategory: true })),
-    ...(await fetchTagsData()).slice(0, 300),
+    ...(await fetchTagsData()).slice(0, 100),
   ],
   ['tags'],
 );
