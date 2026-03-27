@@ -68,10 +68,10 @@ export function Hero({
   contributorCount: string;
 }) {
   const [slide, setSlide] = useState(1);
-  const [indicator, setIndicator] = useState({
-    left: 0,
-    width: 0,
-  });
+  const [indicator, setIndicator] = useState<{
+    left: number;
+    width: number;
+  } | null>(null);
   const intervalId = useRef<number | null>(null);
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const track = useAnalytics();
@@ -217,20 +217,23 @@ export function Hero({
           className="relative hidden h-20 gap-12 md:flex"
           role="tablist"
         >
-          <div
-            aria-hidden
-            className="absolute top-0 h-0.5 bg-white transition-all"
-            style={{
-              left: indicator.left,
-              width: indicator.width,
-            }}
-          />
+          {indicator && (
+            <div
+              aria-hidden
+              className="absolute top-0 h-0.5 bg-white transition-all"
+              style={{
+                left: indicator.left,
+                width: indicator.width,
+              }}
+            />
+          )}
           {features.map((label, i) => (
             <button
               aria-selected={i === slide - 1}
               className={cn(
                 'text-white/60 transition-colors hover:text-white',
                 i === slide - 1 && 'text-white',
+                !indicator && i === 0 && 'shadow-[inset_0_2px_0_0_white]',
               )}
               key={label}
               onClick={() => {
