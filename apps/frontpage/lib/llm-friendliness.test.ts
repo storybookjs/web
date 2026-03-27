@@ -107,9 +107,14 @@ describe('LLM Friendliness', () => {
 
     it('includes required sections', () => {
       expect(routeCode).toContain('## Documentation');
+      expect(routeCode).toContain('## Markdown Access');
       expect(routeCode).toContain('## Docs Pages');
       expect(routeCode).toContain('## Other Versions');
       expect(routeCode).toContain('## Community & Resources');
+    });
+
+    it('documents .md suffix convention', () => {
+      expect(routeCode).toContain('.md');
     });
 
     it('includes version info', () => {
@@ -254,6 +259,11 @@ describe('LLM Friendliness', () => {
       path.join(FRONTPAGE_ROOT, 'middleware.ts'),
       'utf8',
     );
+
+    it('handles .md suffix for markdown access', () => {
+      expect(middlewareCode).toContain(".md");
+      expect(middlewareCode).toContain("endsWith('.md')");
+    });
 
     it('checks for text/markdown Accept header', () => {
       expect(middlewareCode).toContain('text/markdown');

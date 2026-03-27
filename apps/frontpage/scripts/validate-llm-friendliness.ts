@@ -191,6 +191,11 @@ console.log('\n🔀 Content negotiation middleware:');
 
 const middleware = readFile('middleware.ts');
 check(
+  'Middleware handles .md suffix',
+  middleware.includes(".md") && middleware.includes("endsWith('.md')"),
+  'Should rewrite .md suffix URLs to markdown API',
+);
+check(
   'Middleware checks Accept: text/markdown',
   middleware.includes('text/markdown'),
   'Should detect text/markdown Accept header',

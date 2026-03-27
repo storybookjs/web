@@ -8,20 +8,32 @@ import { docsCommonRedirects } from './redirects/docs-common-redirects';
 export async function middleware(request: NextRequest) {
   const pathname: string = request.nextUrl.pathname;
 
+  // .md suffix: serve markdown for any /docs/*.md URL (like Stripe's docs.stripe.com/testing.md)
+  if (pathname.startsWith('/docs/') && pathname.endsWith('.md') && !pathname.startsWith('/docs/api')) {
+    const docPath = pathname.replace(/^\/docs\//, '').replace(/\.md$/, '');
+    const url = request.nextUrl.clone();
+    url.pathname = docPath ? `/docs/api/md/${docPath}` : '/docs/api/md';
+    // Forward renderer and language params if present
+    const renderer = request.nextUrl.searchParams.get('renderer');
+    const language = request.nextUrl.searchParams.get('language');
+    const params = new URLSearchParams();
+    if (renderer) params.set('renderer', renderer);
+    if (language) params.set('language', language);
+    url.search = params.toString() ? `?${params.toString()}` : '';
+    return NextResponse.rewrite(url);
+  }
+
   // Content negotiation: serve markdown for docs pages when requested by LLMs
   // LLM tools like Claude Code send Accept: text/markdown headers
-  const acceptHeader = request.headers.get('accept') || '';
+  const acceptHeader = request.headers.get('accept') ?? '';
   const prefersMarkdown =
     acceptHeader.includes('text/markdown') &&
     !acceptHeader.includes('text/html');
 
   if (prefersMarkdown && pathname.startsWith('/docs') && !pathname.startsWith('/docs/api')) {
-    // Strip /docs/ prefix and rewrite to the markdown API route
     const docPath = pathname.replace(/^\/docs\/?/, '');
     const url = request.nextUrl.clone();
-    // Use path segments instead of query params (Next.js rewrites drop query params)
     url.pathname = docPath ? `/docs/api/md/${docPath}` : '/docs/api/md';
-    // Forward renderer and language params if present
     const renderer = request.nextUrl.searchParams.get('renderer');
     const language = request.nextUrl.searchParams.get('language');
     const params = new URLSearchParams();

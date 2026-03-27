@@ -43,7 +43,7 @@ export function GET(request: NextRequest) {
     const pages = flatTree.map((node) => ({
       slug: node.slug,
       url: `https://storybook.js.org${node.slug}`,
-      markdownUrl: `https://storybook.js.org/docs/api/md/${node.slug.replace('/docs/', '')}`,
+      markdownUrl: `https://storybook.js.org${node.slug}.md`,
     }));
 
     return NextResponse.json(
