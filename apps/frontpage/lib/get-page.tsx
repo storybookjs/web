@@ -6,7 +6,6 @@ import type { ReactNode, ReactElement } from 'react';
 import {
   A,
   CodeSnippets,
-  CopyPromptButton,
   CommunityRenderers,
   FeatureSnippets,
   GetStartedVersions,
@@ -88,7 +87,6 @@ export const getPageData = async (
       CodeSnippets: (props) => (
         <CodeSnippets activeVersion={activeVersion} {...props} />
       ),
-      CopyPromptButton,
       CommunityRenderers,
       FeatureSnippets,
       FrameworkSupportTable: (props: { children: ReactNode }) => (
