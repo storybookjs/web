@@ -35,7 +35,10 @@ const getCachedTagFromName = unstable_cache(
 );
 
 const getCachedTags = unstable_cache(
-  async () => fetchTagsData(),
+  async () => [
+    ...(await fetchTagsData({ isCategory: true })),
+    ...(await fetchTagsData()).slice(0, 300),
+  ],
   ['tags'],
 );
 
@@ -47,7 +50,7 @@ const getCachedCategoryTags = unstable_cache(
 export const generateMetadata: GenerateMetaData = async ({ params }) => {
   const tagName = (await params).name.join('/');
   const data = await getCachedTagFromName([tagName]);
-  const categoryTags = await getCachedCategoryTags() || [];
+  const categoryTags = (await getCachedCategoryTags()) || [];
 
   const isCategoryTag = categoryTags.includes(tagName);
 
