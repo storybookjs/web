@@ -1,6 +1,6 @@
 'use client';
 
-import { CheckIcon, CopyIcon } from '@storybook/icons';
+import { CheckIcon, WandIcon } from '@storybook/icons';
 import type { FC } from 'react';
 import { useState } from 'react';
 import copyToClipboard from 'copy-to-clipboard';
@@ -44,7 +44,7 @@ export const CopyPrompt: FC<{
     >
       {state === 'idle' ? (
         <>
-          <CopyIcon /> Copy prompt
+          <WandIcon /> Copy prompt
         </>
       ) : (
         <>
