@@ -212,8 +212,13 @@ export function Hero({
             <ChevronRightIcon />
           </div>
         </div>
-        <div className="relative hidden h-20 gap-12 md:flex">
+        <div
+          aria-label="Features"
+          className="relative hidden h-20 gap-12 md:flex"
+          role="tablist"
+        >
           <div
+            aria-hidden
             className="absolute top-0 h-0.5 bg-white transition-all"
             style={{
               left: indicator.left,
@@ -222,6 +227,7 @@ export function Hero({
           />
           {features.map((label, i) => (
             <button
+              aria-selected={i === slide - 1}
               className={cn(
                 'text-white/60 transition-colors hover:text-white',
                 i === slide - 1 && 'text-white',
@@ -233,6 +239,7 @@ export function Hero({
               ref={(el) => {
                 buttonRefs.current[i] = el;
               }}
+              role="tab"
               type="button"
             >
               {label}
