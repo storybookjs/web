@@ -42,7 +42,7 @@ export async function fetchGeneratedVersions(): Promise<GeneratedVersions> {
 
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch Storybook dist-tags from npm: ${response.status} ${response.statusText}`,
+      `Failed to fetch Storybook dist-tags from npm: ${String(response.status)} ${response.statusText}`,
     );
   }
 
