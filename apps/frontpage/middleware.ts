@@ -17,8 +17,9 @@ function extractVersionAndPath(docsPath: string): { versionSlug: string | undefi
   if (segments.length === 0) return { versionSlug: undefined, docPath: '' };
 
   const firstSegment = segments[0];
+  const firstMajor = firstSegment.split('.')[0];
   const isVersion = docsVersions.some(
-    (v) => (v.inSlug ?? v.id) === firstSegment || v.id.split('.')[0] === firstSegment,
+    (v) => (v.inSlug ?? v.id) === firstSegment || v.id === firstSegment || v.id.split('.')[0] === firstMajor,
   );
 
   if (isVersion) {
