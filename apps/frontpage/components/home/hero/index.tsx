@@ -128,8 +128,10 @@ export function Hero({
               >
                 Get Started
               </Link>
-              <InitCommand />
-              <CopyPrompt />
+              <div className="flex flex-col gap-2">
+                <InitCommand />
+                <CopyPrompt />
+              </div>
             </div>
             <div className="flex gap-6 sm:gap-10 md:hidden lg:flex">
               <a

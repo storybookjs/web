@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useAnalytics } from '../../../lib/analytics';
 
 const PROMPT_TEXT =
-  'Install Storybook in this project with `npx storybook@latest init` and follow its instructions';
+  'Install Storybook in this project with `npx storybook@0.0.0-pr-34345-sha-aba9b514 init` and follow its instructions';
 
 export const CopyPrompt: FC = () => {
   const [state, setState] = useState(false);
@@ -25,25 +25,13 @@ export const CopyPrompt: FC = () => {
 
   return (
     <button
-      className="text-md relative hidden h-12 items-center justify-center gap-3 overflow-hidden rounded-full border border-white px-6 font-bold text-white md:flex"
+      className="hidden items-center gap-1.5 font-mono text-sm text-white/60 transition-colors hover:text-white md:flex"
       onClick={onClick}
       title="Copy AI prompt to install Storybook"
       type="button"
     >
-      <WandIcon />
-      Copy prompt
-      <AnimatePresence>
-        {state ? (
-          <motion.div
-            animate={{ opacity: 1 }}
-            className="absolute left-0 top-0 flex h-full w-full items-center justify-center gap-2 bg-white text-black"
-            exit={{ opacity: 0 }}
-            initial={{ opacity: 0 }}
-          >
-            <CheckIcon /> Copied!
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+      <WandIcon className="h-3.5 w-3.5" />
+      {state ? 'Copied!' : 'Copy agent prompt'}
     </button>
   );
 };
