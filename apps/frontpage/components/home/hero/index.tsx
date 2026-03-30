@@ -12,6 +12,7 @@ import { Container, GradientBadge } from '@repo/ui';
 import { useAnalytics } from '../../../lib/analytics';
 import { Manager } from '../manager';
 import { InitCommand } from './init-command';
+import { CopyPrompt } from './copy-prompt';
 import { Chrome } from './chrome';
 import SocialProof from './social-proof';
 
@@ -127,7 +128,10 @@ export function Hero({
               >
                 Get Started
               </Link>
-              <InitCommand />
+              <div className="flex flex-col gap-2">
+                <InitCommand />
+                <CopyPrompt />
+              </div>
             </div>
             <div className="flex gap-6 sm:gap-10 md:hidden lg:flex">
               <a
