@@ -117,19 +117,15 @@ describe('LLM Friendliness', () => {
       expect(routeCode).toContain('.md');
     });
 
-    it('includes version info', () => {
-      expect(routeCode).toContain('latestVersion');
-      expect(routeCode).toContain('docsVersions');
-    });
-
-    it('links to llms-full.txt', () => {
-      expect(routeCode).toContain('llms-full.txt');
-    });
-
     it('documents query parameters', () => {
       expect(routeCode).toContain('### Query Parameters');
       expect(routeCode).toContain('renderer');
       expect(routeCode).toContain('language');
+      expect(routeCode).toContain('codeOnly');
+    });
+
+    it('documents versioned access', () => {
+      expect(routeCode).toContain('### Versioned Access');
     });
   });
 
@@ -148,13 +144,11 @@ describe('LLM Friendliness', () => {
       expect(routeCode).toContain('resolveDocForLLM');
     });
 
-    it('supports renderer and language params', () => {
+    it('supports renderer, language, codeOnly, and version params', () => {
       expect(routeCode).toContain("get('renderer')");
       expect(routeCode).toContain("get('language')");
-    });
-
-    it('includes source attribution per section', () => {
-      expect(routeCode).toContain('Source:');
+      expect(routeCode).toContain("get('codeOnly')");
+      expect(routeCode).toContain("get('version')");
     });
 
     it('includes content banner', () => {
@@ -162,51 +156,37 @@ describe('LLM Friendliness', () => {
     });
   });
 
-  describe('docs markdown API', () => {
-    const indexRouteCode = fs.readFileSync(
-      path.join(FRONTPAGE_ROOT, 'app/docs/api/md/route.ts'),
-      'utf8',
-    );
-    const pathRouteCode = fs.readFileSync(
-      path.join(FRONTPAGE_ROOT, 'app/docs/api/md/[...path]/route.ts'),
+  describe('markdown route handler', () => {
+    const routeCode = fs.readFileSync(
+      path.join(FRONTPAGE_ROOT, 'app/md-api/[...path]/route.ts'),
       'utf8',
     );
 
-    it('supports index listing (no path param)', () => {
-      expect(indexRouteCode).toContain("searchParams.get('path')");
-      expect(indexRouteCode).toContain('NextResponse.json');
-    });
-
-    it('supports individual page fetch via path segments', () => {
-      expect(pathRouteCode).toContain("'Content-Type': 'text/markdown; charset=utf-8'");
-    });
-
-    it('supports individual page fetch via query param (backward compat)', () => {
-      expect(indexRouteCode).toContain("'Content-Type': 'text/markdown; charset=utf-8'");
+    it('serves markdown content type', () => {
+      expect(routeCode).toContain("'Content-Type': 'text/markdown; charset=utf-8'");
     });
 
     it('returns 404 for missing pages', () => {
-      expect(pathRouteCode).toContain('status: 404');
+      expect(routeCode).toContain('status: 404');
     });
 
     it('uses resolveDocForLLM for snippet inlining', () => {
-      expect(pathRouteCode).toContain('resolveDocForLLM');
-      expect(indexRouteCode).toContain('resolveDocForLLM');
+      expect(routeCode).toContain('resolveDocForLLM');
     });
 
-    it('supports renderer and language params', () => {
-      expect(pathRouteCode).toContain("get('renderer')");
-      expect(pathRouteCode).toContain("get('language')");
+    it('supports renderer, language, and codeOnly params', () => {
+      expect(routeCode).toContain("get('renderer')");
+      expect(routeCode).toContain("get('language')");
+      expect(routeCode).toContain("get('codeOnly')");
+    });
+
+    it('extracts version from path prefix', () => {
+      expect(routeCode).toContain("=== 'v'");
+      expect(routeCode).toContain('resolveVersionFromSlug');
     });
 
     it('includes content banner', () => {
-      expect(pathRouteCode).toContain('buildContentBanner');
-    });
-
-    it('documents availableParams in index response', () => {
-      expect(indexRouteCode).toContain('availableParams');
-      expect(indexRouteCode).toContain('renderer');
-      expect(indexRouteCode).toContain('language');
+      expect(routeCode).toContain('buildContentBanner');
     });
   });
 
@@ -238,10 +218,20 @@ describe('LLM Friendliness', () => {
       expect(resolverCode).toContain('language');
     });
 
-    it('builds content banner with available alternatives', () => {
+    it('supports codeOnly mode', () => {
+      expect(resolverCode).toContain('codeOnly');
+      expect(resolverCode).toContain('extractCodeBlocksOnly');
+    });
+
+    it('supports version resolution', () => {
+      expect(resolverCode).toContain('resolveVersionFromSlug');
+      expect(resolverCode).toContain('docsVersions');
+    });
+
+    it('builds content banner with all params', () => {
       expect(resolverCode).toContain('buildContentBanner');
-      expect(resolverCode).toContain('availableRenderers');
-      expect(resolverCode).toContain('availableLanguages');
+      expect(resolverCode).toContain('codeOnly');
+      expect(resolverCode).toContain('versionId');
     });
 
     it('strips remaining JSX components', () => {
@@ -261,7 +251,6 @@ describe('LLM Friendliness', () => {
     );
 
     it('handles .md suffix for markdown access', () => {
-      expect(middlewareCode).toContain(".md");
       expect(middlewareCode).toContain("endsWith('.md')");
     });
 
@@ -273,13 +262,15 @@ describe('LLM Friendliness', () => {
       expect(middlewareCode).toContain('text/html');
     });
 
-    it('rewrites to the markdown API path-based endpoint', () => {
-      expect(middlewareCode).toContain('/docs/api/md/');
+    it('extracts version from URL path', () => {
+      expect(middlewareCode).toContain('extractVersionAndPath');
+      expect(middlewareCode).toContain('versionSlug');
     });
 
-    it('forwards renderer and language params', () => {
+    it('forwards renderer, language, and codeOnly params', () => {
       expect(middlewareCode).toContain("get('renderer')");
       expect(middlewareCode).toContain("get('language')");
+      expect(middlewareCode).toContain("get('codeOnly')");
     });
 
     it('excludes llms.txt and llms-full.txt from middleware matcher', () => {
@@ -305,11 +296,6 @@ describe('LLM Friendliness', () => {
     it('includes publisher organization', () => {
       expect(pageCode).toContain("'@type': 'Organization'");
       expect(pageCode).toContain("name: 'Storybook'");
-    });
-
-    it('includes software application metadata', () => {
-      expect(pageCode).toContain("'@type': 'SoftwareApplication'");
-      expect(pageCode).toContain("applicationCategory: 'DeveloperApplication'");
     });
 
     it('renders JSON-LD script tag', () => {

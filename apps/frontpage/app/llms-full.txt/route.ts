@@ -1,14 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { type NextRequest, NextResponse } from 'next/server';
-import { latestVersion } from '@repo/utils';
+import { docsVersions, latestVersion } from '@repo/utils';
 import matter from 'gray-matter';
 import { getAllTrees } from '../../lib/get-all-trees';
 import { getFlatTree } from '../../lib/get-flat-tree';
-import { resolveDocForLLM, buildContentBanner } from '../../lib/resolve-doc-for-llm';
+import { resolveDocForLLM, buildContentBanner, resolveVersionFromSlug } from '../../lib/resolve-doc-for-llm';
 
-function findDocFile(slug: string): string | null {
-  const versionId = latestVersion.id;
+function findDocFile(slug: string, versionId: string): string | null {
   const docPath = slug.replace(/^\/docs\/?/, '');
   const basePath = `content/docs/${versionId}/${docPath}`;
 
@@ -31,9 +30,15 @@ function findDocFile(slug: string): string | null {
 export function GET(request: NextRequest) {
   const renderer = request.nextUrl.searchParams.get('renderer') ?? 'react';
   const language = request.nextUrl.searchParams.get('language') ?? 'ts';
+  const codeOnly = request.nextUrl.searchParams.get('codeOnly') === 'true';
+  const versionSlug = request.nextUrl.searchParams.get('version') ?? undefined;
+
+  const versionId = resolveVersionFromSlug(versionSlug);
+  const version = docsVersions.find((v) => v.id === versionId);
+  const versionLabel = version?.label ?? versionId;
 
   const listOfTrees = getAllTrees();
-  const tree = listOfTrees.find((t) => t.name === latestVersion.id);
+  const tree = listOfTrees.find((t) => t.name === versionId);
   const flatTree = tree?.children
     ? getFlatTree({ tree: tree.children })
     : [];
@@ -47,7 +52,7 @@ export function GET(request: NextRequest) {
   const pageSections: string[] = [];
 
   for (const node of flatTree) {
-    const docFile = findDocFile(node.slug);
+    const docFile = findDocFile(node.slug, versionId);
     if (!docFile) continue;
 
     const fullPath = path.join(process.cwd(), docFile);
@@ -55,9 +60,10 @@ export function GET(request: NextRequest) {
     const { content: rawContent, data } = matter(fileContent);
 
     const { content, availableRenderers, availableLanguages } = resolveDocForLLM(rawContent, {
-      versionId: latestVersion.id,
+      versionId,
       renderer,
       language,
+      codeOnly,
     });
 
     for (const r of availableRenderers) globalRenderers.add(r);
@@ -72,17 +78,19 @@ export function GET(request: NextRequest) {
     pageSections.push('');
   }
 
-  const banner = buildContentBanner(
+  const banner = buildContentBanner({
     renderer,
     language,
-    [...globalRenderers].sort(),
-    [...globalLanguages].sort(),
-  );
+    rendererList: [...globalRenderers].sort(),
+    languageList: [...globalLanguages].sort(),
+    versionId,
+    codeOnly,
+  });
 
   const header = [
     '# Storybook Documentation',
     '',
-    `> Complete documentation for Storybook ${latestVersion.label}`,
+    `> Complete documentation for Storybook ${versionLabel}`,
     `> Source: ${baseUrl}/docs`,
     '',
     banner,

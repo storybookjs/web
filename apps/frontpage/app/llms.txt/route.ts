@@ -30,18 +30,35 @@ export function GET() {
     '',
     'Append `.md` to any docs URL to get clean markdown with code examples:',
     `- \`${baseUrl}/docs/writing-stories/decorators.md\``,
+    `- \`${baseUrl}/docs/9/writing-stories/decorators.md\` (Version 9)`,
     '',
     '### Query Parameters',
     '',
-    'All markdown endpoints support the following query parameters:',
+    'All markdown endpoints (`.md` URLs and `llms-full.txt`) support these query parameters:',
     '- `renderer` - Framework filter for code snippets (default: `react`). Options: `react`, `vue`, `angular`, `svelte`, `web-components`, `solid`, `preact`, `html`, `ember`, `qwik`',
     '- `language` - Language filter for code snippets (default: `ts`). Options: `ts`, `js`',
+    '- `codeOnly` - When `true`, returns only the code snippets without prose',
     '',
-    'Example: `GET /docs/writing-stories/decorators.md?renderer=vue&language=ts`',
+    'Examples:',
+    '- `GET /docs/writing-stories/decorators.md?renderer=vue&language=ts`',
+    '- `GET /docs/writing-stories/decorators.md?codeOnly=true`',
+    '- `GET /llms-full.txt?renderer=angular&language=js`',
     '',
-    '## Docs Pages',
+    '### Versioned Access',
     '',
+    'Prefix the path with a version slug for older versions:',
   ];
+
+  for (const version of docsVersions) {
+    if (version.id === latestVersion.id) continue;
+    const slug = version.inSlug ?? version.id;
+    lines.push(`- \`/docs/${slug}/get-started.md\` — ${version.label}`);
+  }
+  lines.push(`- \`/llms-full.txt?version=${docsVersions.find((v) => v.id !== latestVersion.id)?.inSlug ?? '9'}\` — Full docs for that version`);
+
+  lines.push('');
+  lines.push('## Docs Pages');
+  lines.push('');
 
   for (const node of flatTree) {
     const indent = node.level > 1 ? '  '.repeat(node.level - 1) : '';

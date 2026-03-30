@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
-import { renderers as allRenderersList } from '@repo/utils';
+import { renderers as allRenderersList, docsVersions, latestVersion } from '@repo/utils';
 
 interface CodeBlock {
   lang: string;
@@ -10,13 +10,14 @@ interface CodeBlock {
   meta: Record<string, string>;
 }
 
-interface ResolveOptions {
+export interface ResolveOptions {
   versionId: string;
   renderer?: string;
   language?: string;
+  codeOnly?: boolean;
 }
 
-interface ResolveResult {
+export interface ResolveResult {
   content: string;
   availableRenderers: string[];
   availableLanguages: string[];
@@ -30,6 +31,28 @@ function getLangTitle(lang: string): string {
   if (lang === 'ts') return 'TypeScript';
   if (lang === 'js') return 'JavaScript';
   return lang;
+}
+
+/**
+ * Resolve a version slug (e.g. "9", "8") to a version ID (e.g. "9.1", "8.6").
+ * Returns the latest version if no match or no slug provided.
+ */
+export function resolveVersionFromSlug(slug?: string): string {
+  if (!slug) return latestVersion.id;
+
+  // Try exact match on inSlug or id
+  for (const v of docsVersions) {
+    if (v.inSlug === slug || v.id === slug) return v.id;
+  }
+
+  return latestVersion.id;
+}
+
+/**
+ * Get available version slugs for documentation in banner.
+ */
+export function getAvailableVersionSlugs(): string[] {
+  return docsVersions.map((v) => v.inSlug ?? v.id);
 }
 
 /**
@@ -242,16 +265,32 @@ function stripRemainingJsx(content: string): string {
 }
 
 /**
+ * Extract only code blocks from resolved content (for codeOnly mode).
+ */
+function extractCodeBlocksOnly(content: string): string {
+  const codeBlockRegex = /```[\s\S]*?```/g;
+  const matches = content.match(codeBlockRegex);
+  if (!matches) return '';
+  return matches.join('\n\n');
+}
+
+/**
  * Build the contextual banner shown at the top of markdown responses.
  */
-function buildBanner(
-  renderer: string,
-  language: string,
-  rendererList: string[],
-  languageList: string[],
-): string {
+export function buildContentBanner(options: {
+  renderer: string;
+  language: string;
+  rendererList: string[];
+  languageList: string[];
+  versionId: string;
+  codeOnly?: boolean;
+}): string {
+  const { renderer, language, rendererList, languageList, versionId, codeOnly } = options;
   const rendererTitle = RENDERER_NAMES[renderer] ?? renderer;
   const langTitle = getLangTitle(language);
+
+  const version = docsVersions.find((v) => v.id === versionId);
+  const versionLabel = version?.label ?? versionId;
 
   const otherRenderers = rendererList
     .filter((r) => r !== renderer)
@@ -261,27 +300,28 @@ function buildBanner(
     .filter((l) => l !== language)
     .map((l) => getLangTitle(l));
 
-  if (otherRenderers.length === 0 && otherLanguages.length === 0) {
-    return '';
-  }
-
   const lines = [
-    `> **Note:** This documentation is shown for **${rendererTitle}** with **${langTitle}**.`,
+    `> **${versionLabel}** — **${rendererTitle}** / **${langTitle}**${codeOnly ? ' (code snippets only)' : ''}`,
   ];
 
-  const alternatives: string[] = [];
+  const paramParts: string[] = [];
   if (otherRenderers.length > 0) {
-    alternatives.push(`renderers: ${otherRenderers.join(', ')}`);
+    paramParts.push(`\`?renderer=${rendererList.find((r) => r !== renderer) ?? 'vue'}\` for ${otherRenderers.join(', ')}`);
   }
   if (otherLanguages.length > 0) {
-    alternatives.push(`languages: ${otherLanguages.join(', ')}`);
+    paramParts.push(`\`?language=${languageList.find((l) => l !== language) ?? 'js'}\` for ${otherLanguages.join(', ')}`);
+  }
+  paramParts.push('`?codeOnly=true` for code snippets only');
+
+  const otherVersions = docsVersions
+    .filter((v) => v.id !== versionId)
+    .map((v) => `${v.label} (\`/docs/${v.inSlug ?? v.id}/\`)`)
+    .join(', ');
+  if (otherVersions) {
+    paramParts.push(`other versions: ${otherVersions}`);
   }
 
-  lines.push(`> It is also available for ${alternatives.join(' and ')}.`);
-
-  const exampleRenderer = rendererList.find((r) => r !== renderer) ?? renderer;
-  const exampleLanguage = languageList.find((l) => l !== language) ?? language;
-  lines.push(`> To switch, re-fetch with query parameters: \`?renderer=${exampleRenderer}&language=${exampleLanguage}\``);
+  lines.push(`> Also available: ${paramParts.join(' | ')}`);
   lines.push('');
 
   return lines.join('\n');
@@ -289,11 +329,6 @@ function buildBanner(
 
 /**
  * Resolve an MDX document for LLM consumption.
- *
- * - Inlines code snippets from snippet files
- * - Resolves <IfRenderer> conditional blocks
- * - Strips remaining JSX components
- * - Adds contextual banner with available renderers/languages
  */
 export function resolveDocForLLM(
   rawContent: string,
@@ -301,7 +336,7 @@ export function resolveDocForLLM(
 ): ResolveResult {
   const renderer = options.renderer ?? 'react';
   const language = options.language ?? 'ts';
-  const { versionId } = options;
+  const { versionId, codeOnly } = options;
 
   // 1. Resolve <IfRenderer> and <If> blocks
   let content = resolveIfRendererBlocks(rawContent, renderer);
@@ -318,21 +353,14 @@ export function resolveDocForLLM(
   // 3. Strip remaining JSX
   content = stripRemainingJsx(content);
 
+  // 4. If codeOnly, extract only code blocks
+  if (codeOnly) {
+    content = extractCodeBlocksOnly(content);
+  }
+
   return {
     content,
     availableRenderers: [...collectedRenderers].sort(),
     availableLanguages: [...collectedLanguages].sort(),
   };
-}
-
-/**
- * Build the banner string from resolve result.
- */
-export function buildContentBanner(
-  renderer: string,
-  language: string,
-  rendererList: string[],
-  languageList: string[],
-): string {
-  return buildBanner(renderer, language, rendererList, languageList);
 }

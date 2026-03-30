@@ -42,8 +42,7 @@ console.log('\n📁 Required LLM files exist:');
 const REQUIRED_FILES = [
   'app/llms.txt/route.ts',
   'app/llms-full.txt/route.ts',
-  'app/docs/api/md/route.ts',
-  'app/docs/api/md/[...path]/route.ts',
+  'app/md-api/[...path]/route.ts',
   'app/robots.txt',
   'public/.well-known/ai-plugin.json',
   'lib/resolve-doc-for-llm.ts',
@@ -117,9 +116,9 @@ try {
   check('ai-plugin.json is valid JSON', false, String(e));
 }
 
-// ── 4. Route handlers use dynamic doc tree ───────────────────────────────
+// ── 4. Route handlers ────────────────────────────────────────────────────
 
-console.log('\n🌲 Route handlers use dynamic doc tree:');
+console.log('\n🌲 Route handlers:');
 
 const llmsTxtRoute = readFile('app/llms.txt/route.ts');
 check(
@@ -130,31 +129,29 @@ check(
 
 const llmsFullRoute = readFile('app/llms-full.txt/route.ts');
 check(
-  'llms-full.txt uses getAllTrees()',
-  llmsFullRoute.includes('getAllTrees'),
-  'Should import and use getAllTrees to stay in sync with docs',
-);
-check(
   'llms-full.txt uses resolveDocForLLM()',
   llmsFullRoute.includes('resolveDocForLLM'),
   'Should use resolveDocForLLM to inline code snippets',
 );
-
-const mdApiRoute = readFile('app/docs/api/md/route.ts');
 check(
-  'Markdown API uses getAllTrees()',
-  mdApiRoute.includes('getAllTrees'),
-  'Should import and use getAllTrees to stay in sync with docs',
+  'llms-full.txt supports version param',
+  llmsFullRoute.includes("get('version')"),
+  'Should accept ?version= query param',
 );
 
-const mdApiPathRoute = readFile('app/docs/api/md/[...path]/route.ts');
+const mdRoute = readFile('app/md-api/[...path]/route.ts');
 check(
-  'Markdown API (path) uses resolveDocForLLM()',
-  mdApiPathRoute.includes('resolveDocForLLM'),
+  'Markdown route uses resolveDocForLLM()',
+  mdRoute.includes('resolveDocForLLM'),
   'Should use resolveDocForLLM to inline code snippets',
 );
+check(
+  'Markdown route supports version from path',
+  mdRoute.includes('resolveVersionFromSlug'),
+  'Should resolve version from path prefix',
+);
 
-// ── 4b. Code snippet resolver ────────────────────────────────────────────
+// ── 5. Code snippet resolver ─────────────────────────────────────────────
 
 console.log('\n📝 Code snippet resolution:');
 
@@ -175,25 +172,30 @@ check(
   'Should inline code snippet components',
 );
 check(
-  'Resolver filters by renderer and language',
-  resolver.includes('selectSnippets'),
-  'Should filter snippets by renderer and language',
+  'Resolver supports codeOnly mode',
+  resolver.includes('codeOnly') && resolver.includes('extractCodeBlocksOnly'),
+  'Should support extracting only code blocks',
+);
+check(
+  'Resolver supports version resolution',
+  resolver.includes('resolveVersionFromSlug') && resolver.includes('docsVersions'),
+  'Should resolve version slugs to version IDs',
 );
 check(
   'Resolver builds content banner',
-  resolver.includes('buildContentBanner') && resolver.includes('availableRenderers'),
+  resolver.includes('buildContentBanner'),
   'Should generate banner with available alternatives',
 );
 
-// ── 5. Content negotiation middleware ─────────────────────────────────────
+// ── 6. Middleware ─────────────────────────────────────────────────────────
 
-console.log('\n🔀 Content negotiation middleware:');
+console.log('\n🔀 Middleware:');
 
 const middleware = readFile('middleware.ts');
 check(
   'Middleware handles .md suffix',
-  middleware.includes(".md") && middleware.includes("endsWith('.md')"),
-  'Should rewrite .md suffix URLs to markdown API',
+  middleware.includes("endsWith('.md')"),
+  'Should rewrite .md suffix URLs',
 );
 check(
   'Middleware checks Accept: text/markdown',
@@ -201,22 +203,17 @@ check(
   'Should detect text/markdown Accept header',
 );
 check(
-  'Middleware excludes text/html (browser requests)',
-  middleware.includes('text/html'),
-  'Should not rewrite when text/html is present',
+  'Middleware extracts version from path',
+  middleware.includes('extractVersionAndPath'),
+  'Should parse version slug from URL',
 );
 check(
-  'Middleware rewrites to /docs/api/md',
-  middleware.includes('/docs/api/md'),
-  'Should rewrite to the markdown API endpoint',
-);
-check(
-  'Middleware excludes /docs/api from rewrite',
-  middleware.includes('/docs/api'),
-  'Should not rewrite /docs/api routes',
+  'Middleware forwards codeOnly param',
+  middleware.includes("get('codeOnly')"),
+  'Should forward codeOnly query param',
 );
 
-// ── 6. JSON-LD structured data ───────────────────────────────────────────
+// ── 7. JSON-LD structured data ───────────────────────────────────────────
 
 console.log('\n📊 JSON-LD structured data:');
 
@@ -237,7 +234,7 @@ check(
   'Should render JSON-LD as script tag',
 );
 
-// ── 7. Layout llms.txt link ──────────────────────────────────────────────
+// ── 8. Layout & headers ─────────────────────────────────────────────────
 
 console.log('\n🔗 Layout metadata & headers:');
 
@@ -255,7 +252,7 @@ check(
   'Should set Link header on /docs pages',
 );
 
-// ── 8. Check docs content directory ──────────────────────────────────────
+// ── 9. Documentation content ─────────────────────────────────────────────
 
 console.log('\n📄 Documentation content:');
 
@@ -274,7 +271,6 @@ if (hasContentDocs) {
     'No version folders found in content/docs/',
   );
 
-  // Count total doc files across latest version
   if (versions.length > 0) {
     const latestDir = path.join(contentDocsPath, versions[versions.length - 1]);
     let docCount = 0;

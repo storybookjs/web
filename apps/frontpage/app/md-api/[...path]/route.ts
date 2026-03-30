@@ -1,9 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { type NextRequest, NextResponse } from 'next/server';
-import { latestVersion } from '@repo/utils';
 import matter from 'gray-matter';
-import { resolveDocForLLM, buildContentBanner } from '../../../../../lib/resolve-doc-for-llm';
+import { resolveDocForLLM, buildContentBanner, resolveVersionFromSlug } from '../../../lib/resolve-doc-for-llm';
 
 function findDocFile(
   docPath: string,
@@ -35,12 +34,24 @@ export async function GET(
   context: RouteContext,
 ) {
   const { path: pathSegments } = await context.params;
-  const slug = pathSegments.join('/');
 
   const renderer = request.nextUrl.searchParams.get('renderer') ?? 'react';
   const language = request.nextUrl.searchParams.get('language') ?? 'ts';
+  const codeOnly = request.nextUrl.searchParams.get('codeOnly') === 'true';
 
-  const docFile = findDocFile(slug, latestVersion.id);
+  // Version is encoded in path by middleware: /md-api/v/{version}/{docPath}
+  let versionSlug: string | undefined;
+  let docSegments = pathSegments;
+
+  if (pathSegments[0] === 'v' && pathSegments.length >= 3) {
+    versionSlug = pathSegments[1];
+    docSegments = pathSegments.slice(2);
+  }
+
+  const versionId = resolveVersionFromSlug(versionSlug);
+  const slug = docSegments.join('/');
+
+  const docFile = findDocFile(slug, versionId);
   if (!docFile) {
     return new NextResponse('Page not found', { status: 404 });
   }
@@ -50,14 +61,25 @@ export async function GET(
   const { content: rawContent, data } = matter(fileContent);
 
   const { content, availableRenderers, availableLanguages } = resolveDocForLLM(rawContent, {
-    versionId: latestVersion.id,
+    versionId,
     renderer,
     language,
+    codeOnly,
   });
 
   const title = String(data.title ?? '');
-  const banner = buildContentBanner(renderer, language, availableRenderers, availableLanguages);
-  const markdown = `${banner}# ${title}\n\n${content}`;
+  const banner = buildContentBanner({
+    renderer,
+    language,
+    rendererList: availableRenderers,
+    languageList: availableLanguages,
+    versionId,
+    codeOnly,
+  });
+
+  const markdown = codeOnly
+    ? `${banner}# ${title} — Code Snippets\n\n${content}`
+    : `${banner}# ${title}\n\n${content}`;
 
   return new NextResponse(markdown, {
     headers: {
