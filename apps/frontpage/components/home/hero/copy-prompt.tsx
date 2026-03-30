@@ -2,7 +2,6 @@ import { CheckIcon, WandIcon } from '@storybook/icons';
 import type { FC } from 'react';
 import { useState } from 'react';
 import copy from 'copy-to-clipboard';
-import { AnimatePresence, motion } from 'framer-motion';
 import { useAnalytics } from '../../../lib/analytics';
 
 const PROMPT_TEXT =
@@ -30,7 +29,7 @@ export const CopyPrompt: FC = () => {
       title="Copy AI prompt to install Storybook"
       type="button"
     >
-      <WandIcon className="h-3.5 w-3.5" />
+      { state ? <CheckIcon className="h-3.5 w-3.5" /> : <WandIcon className="h-3.5 w-3.5" /> }
       {state ? 'Copied!' : 'Copy agent prompt'}
     </button>
   );
