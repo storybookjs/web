@@ -62,6 +62,28 @@ function buildMdRewriteUrl(
 export async function middleware(request: NextRequest) {
   const pathname: string = request.nextUrl.pathname;
 
+  // Redirect /docs/{latestVersionId}/... to /docs/... (latest version doesn't need a prefix)
+  // This handles cases like /docs/10.3/writing-stories → /docs/writing-stories
+  if (pathname.startsWith('/docs/') && !pathname.endsWith('.md')) {
+    const rawPath = pathname.replace(/^\/docs\//, '');
+    const segments = rawPath.split('/').filter(Boolean);
+    if (segments.length >= 2) {
+      const firstSegment = segments[0];
+      const firstMajor = firstSegment.split('.')[0];
+      const matchedVersion = docsVersions.find(
+        (v) => v.id === firstSegment || v.id.split('.')[0] === firstMajor,
+      );
+      // Only redirect if it matches the latest version (non-latest versions are handled by existing routing)
+      if (matchedVersion && matchedVersion.id === latestVersion.id && !matchedVersion.inSlug) {
+        const restPath = segments.slice(1).join('/');
+        return NextResponse.redirect(
+          new URL(`/docs/${restPath}`, request.url),
+          308,
+        );
+      }
+    }
+  }
+
   // .md suffix: serve markdown for any /docs/*.md URL (like Stripe's docs.stripe.com/testing.md)
   // Supports versioned URLs: /docs/9/writing-stories.md, /docs/8/get-started.md
   if (pathname.startsWith('/docs/') && pathname.endsWith('.md')) {
