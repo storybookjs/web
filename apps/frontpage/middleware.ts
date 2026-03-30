@@ -40,9 +40,10 @@ function buildMdRewriteUrl(
   docPath: string,
   versionSlug: string | undefined,
 ): URL {
-  // Encode version as a path prefix: /md-api/v/{version}/{docPath}
-  // Query params added in middleware rewrites are NOT forwarded by Next.js,
-  // so we encode the version in the path instead.
+  // Version is encoded as /md-api/v/{version}/{docPath} to disambiguate
+  // version segments (e.g. "9") from doc path segments in the catch-all route.
+  // The "v/" sentinel lets the route handler reliably detect when a version
+  // prefix is present vs when the first segment is part of the doc path.
   const versionPrefix = versionSlug ? `v/${versionSlug}/` : '';
   const url = new URL(`/md-api/${versionPrefix}${docPath}`, request.url);
 

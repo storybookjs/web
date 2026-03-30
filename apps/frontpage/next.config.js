@@ -73,7 +73,7 @@ module.exports = withBundleAnalyzer(
     },
     async headers() {
       return [
-        // Advertise llms.txt on all docs pages via Link header
+        // Advertise llms.txt on docs pages (per-page .md links can't be dynamic in Next.js headers config)
         {
           source: '/docs/:path*',
           headers: [

@@ -6,7 +6,11 @@
       "Bash(pkill:*)",
       "Bash(npm run lint)",
       "Bash(find:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(git log:*)",
+      "Bash(gh pr:*)",
+      "Bash(gh api:*)",
+      "Bash(npx tsx:*)"
     ]
   }
 }

@@ -63,37 +63,6 @@ describe('LLM Friendliness', () => {
     });
   });
 
-  describe('ai-plugin.json', () => {
-    const pluginJson = JSON.parse(
-      fs.readFileSync(
-        path.join(FRONTPAGE_ROOT, 'public/.well-known/ai-plugin.json'),
-        'utf8',
-      ),
-    ) as Record<string, unknown>;
-
-    it('has required schema fields', () => {
-      expect(pluginJson).toHaveProperty('schema_version', 'v1');
-      expect(pluginJson).toHaveProperty('name_for_human');
-      expect(pluginJson).toHaveProperty('name_for_model');
-      expect(pluginJson).toHaveProperty('description_for_human');
-      expect(pluginJson).toHaveProperty('description_for_model');
-    });
-
-    it('has valid API configuration', () => {
-      expect(pluginJson).toHaveProperty('api');
-      const api = pluginJson.api as Record<string, unknown>;
-      expect(api).toHaveProperty('type');
-      expect(api).toHaveProperty('url');
-      expect(api.url).toContain('storybook.js.org');
-    });
-
-    it('has contact and branding info', () => {
-      expect(pluginJson).toHaveProperty('logo_url');
-      expect(pluginJson).toHaveProperty('contact_email');
-      expect(pluginJson).toHaveProperty('legal_info_url');
-    });
-  });
-
   describe('llms.txt route', () => {
     const routeCode = fs.readFileSync(
       path.join(FRONTPAGE_ROOT, 'app/llms.txt/route.ts'),

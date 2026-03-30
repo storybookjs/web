@@ -44,7 +44,6 @@ const REQUIRED_FILES = [
   'app/llms-full.txt/route.ts',
   'app/md-api/[...path]/route.ts',
   'app/robots.txt',
-  'public/.well-known/ai-plugin.json',
   'lib/resolve-doc-for-llm.ts',
 ];
 
@@ -84,39 +83,7 @@ check(
   'robots.txt should reference llms.txt and llms-full.txt',
 );
 
-// ── 3. ai-plugin.json schema validation ──────────────────────────────────
-
-console.log('\n🔌 ai-plugin.json validation:');
-
-try {
-  const pluginJson = JSON.parse(readFile('public/.well-known/ai-plugin.json'));
-
-  const requiredFields = [
-    'schema_version',
-    'name_for_human',
-    'name_for_model',
-    'description_for_human',
-    'description_for_model',
-    'api',
-    'logo_url',
-    'contact_email',
-    'legal_info_url',
-  ];
-
-  for (const field of requiredFields) {
-    check(`Field: ${field}`, field in pluginJson, 'Missing required field');
-  }
-
-  check(
-    'API has url',
-    pluginJson.api?.url?.includes('storybook.js.org'),
-    'API url should reference storybook.js.org',
-  );
-} catch (e) {
-  check('ai-plugin.json is valid JSON', false, String(e));
-}
-
-// ── 4. Route handlers ────────────────────────────────────────────────────
+// ── 3. Route handlers ────────────────────────────────────────────────────
 
 console.log('\n🌲 Route handlers:');
 

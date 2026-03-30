@@ -54,7 +54,13 @@ export function GET() {
     const slug = version.inSlug ?? version.id;
     lines.push(`- \`/docs/${slug}/get-started.md\` — ${version.label}`);
   }
-  lines.push(`- \`/llms-full.txt?version=${docsVersions.find((v) => v.id !== latestVersion.id)?.inSlug ?? '9'}\` — Full docs for that version`);
+  lines.push('');
+  lines.push('Full documentation dump for older versions:');
+  for (const version of docsVersions) {
+    if (version.id === latestVersion.id) continue;
+    const slug = version.inSlug ?? version.id;
+    lines.push(`- \`/llms-full.txt?version=${slug}\` — ${version.label}`);
+  }
 
   lines.push('');
   lines.push('## Docs Pages');
