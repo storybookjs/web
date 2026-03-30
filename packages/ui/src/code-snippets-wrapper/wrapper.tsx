@@ -4,13 +4,11 @@ import type { FC, ReactNode } from 'react';
 import { useAnalytics } from '../analytics';
 import { JSIcon, TSIcon, ShellIcon } from './icons';
 import { Copy } from './copy';
-import { CopyPrompt } from './copy-prompt';
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions -- With an interface, we get this error in ./index: https://github.com/microsoft/TypeScript/issues/5711
 type CodeSnippetsWrapperProps = {
   children: ReactNode;
   copy?: ReactNode;
-  copyPrompt?: string;
   iconLanguage?: 'js' | 'ts' | 'sh' | null;
   options?: ReactNode;
   title?: string;
@@ -30,7 +28,6 @@ const languageIcons = {
 export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
   children,
   copy,
-  copyPrompt,
   iconLanguage = 'js',
   options,
   title,
@@ -61,15 +58,6 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
                   if (copyEvent) {
                     track(copyEvent, props);
                   }
-                }}
-                variant={variant}
-              />
-            ) : null}
-            {copyPrompt ? (
-              <CopyPrompt
-                prompt={copyPrompt}
-                onClick={() => {
-                  track('CopyPromptClick', { snippetPath });
                 }}
                 variant={variant}
               />

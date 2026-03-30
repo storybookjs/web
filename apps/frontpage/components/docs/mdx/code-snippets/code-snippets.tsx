@@ -22,7 +22,6 @@ const Link = mdxComponents.A;
 interface CodeSnippetsClientProps {
   content: CodeSnippetsProps[] | null;
   copyEvent?: string;
-  copyPrompt?: string;
   snippetPath?: string;
   variant?: "default" | "new-users";
 }
@@ -109,7 +108,6 @@ function ActiveInfo({ activeTab }: { activeTab: string | null }) {
 export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   content,
   copyEvent,
-  copyPrompt,
   snippetPath,
   variant = "default",
 }) => {
@@ -208,7 +206,6 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
   return (
     <CodeSnippetsWrapper
       copy={activeContent?.raw ?? ''}
-      copyPrompt={copyPrompt}
       top={
         tabs && tabs.length > 1 ? (
           <Tabs activeTab={activeTab} onTabChange={handleTabChange} tabs={tabs} />
