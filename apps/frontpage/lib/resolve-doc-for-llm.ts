@@ -40,9 +40,11 @@ function getLangTitle(lang: string): string {
 export function resolveVersionFromSlug(slug?: string): string {
   if (!slug) return latestVersion.id;
 
-  // Try exact match on inSlug or id
   for (const v of docsVersions) {
+    // Exact match on inSlug or id (e.g. "9" → 9.1, "8.6" → 8.6)
     if (v.inSlug === slug || v.id === slug) return v.id;
+    // Major version match (e.g. "10" → 10.3)
+    if (v.id.split('.')[0] === slug) return v.id;
   }
 
   return latestVersion.id;
