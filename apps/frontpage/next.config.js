@@ -100,6 +100,7 @@ module.exports = withBundleAnalyzer(
        */
       outputFileTracingIncludes: {
         '/docs/**': ['./content/docs/**'],
+        '/md-api/**': ['./content/docs/**', './content/snippets/**'],
       },
     },
     async redirects() {
