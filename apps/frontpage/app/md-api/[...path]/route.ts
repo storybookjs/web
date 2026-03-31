@@ -5,6 +5,8 @@ import matter from 'gray-matter';
 import { resolveDocForLLM, buildContentBanner, resolveVersionFromSlug } from '../../../lib/resolve-doc-for-llm';
 import { findDocFile } from '../../../lib/get-page';
 
+export const dynamic = 'force-dynamic';
+
 interface RouteContext {
   params: Promise<{ path: string[] }>;
 }
