@@ -8,8 +8,8 @@ import { docsCommonRedirects } from './redirects/docs-common-redirects';
 
 /**
  * Extract version prefix and remaining doc path from a docs URL path.
- * E.g. "/docs/9/writing-stories" → { versionSlug: "9", docPath: "writing-stories" }
- * E.g. "/docs/writing-stories"  → { versionSlug: undefined, docPath: "writing-stories" }
+ * E.g. "/docs/9/writing-stories" → \{ versionSlug: "9", docPath: "writing-stories" \}
+ * E.g. "/docs/writing-stories"  → \{ versionSlug: undefined, docPath: "writing-stories" \}
  */
 function extractVersionAndPath(docsPath: string): { versionSlug: string | undefined; docPath: string } {
   // Check if first segment matches a known version slug
@@ -40,11 +40,7 @@ function buildMdRewriteUrl(
   docPath: string,
   versionSlug: string | undefined,
 ): URL {
-  // Version is encoded as /md-api/v/{version}/{docPath} to disambiguate
-  // version segments (e.g. "9") from doc path segments in the catch-all route.
-  // The "v/" sentinel lets the route handler reliably detect when a version
-  // prefix is present vs when the first segment is part of the doc path.
-  const versionPrefix = versionSlug ? `v/${versionSlug}/` : '';
+  const versionPrefix = versionSlug ? `${versionSlug}/` : '';
   const url = new URL(`/md-api/${versionPrefix}${docPath}`, request.url);
 
   // Copy user-provided query params (these are from the original request URL,
@@ -60,6 +56,7 @@ function buildMdRewriteUrl(
   return url;
 }
 
+// eslint-disable-next-line @typescript-eslint/require-await -- Following Next.js middleware convention, even though we don't have async work here
 export async function middleware(request: NextRequest) {
   const pathname: string = request.nextUrl.pathname;
 

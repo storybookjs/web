@@ -60,6 +60,9 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
       : {
           alternates: {
             canonical: findPage?.canonical,
+            types: {
+              'text/markdown': `/docs/${newSlug.join('/')}.md`,
+            },
           },
           other: {
             [globalSearchMetaKeys.version]: activeVersion.id,

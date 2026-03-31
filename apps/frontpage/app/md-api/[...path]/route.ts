@@ -3,27 +3,7 @@ import path from 'node:path';
 import { type NextRequest, NextResponse } from 'next/server';
 import matter from 'gray-matter';
 import { resolveDocForLLM, buildContentBanner, resolveVersionFromSlug } from '../../../lib/resolve-doc-for-llm';
-
-function findDocFile(
-  docPath: string,
-  versionId: string,
-): string | null {
-  const basePath = `content/docs/${versionId}/${docPath}`;
-  const candidates = [
-    `${basePath}.mdx`,
-    `${basePath}.md`,
-    `${basePath}/index.mdx`,
-    `${basePath}/index.md`,
-  ];
-
-  for (const candidate of candidates) {
-    const fullPath = path.join(process.cwd(), candidate);
-    if (fs.existsSync(fullPath)) {
-      return candidate;
-    }
-  }
-  return null;
-}
+import { findDocFile } from '../../../lib/get-page';
 
 interface RouteContext {
   params: Promise<{ path: string[] }>;
@@ -39,24 +19,26 @@ export async function GET(
   const language = request.nextUrl.searchParams.get('language') ?? 'ts';
   const codeOnly = request.nextUrl.searchParams.get('codeOnly') === 'true';
 
-  // Version is encoded in path by middleware: /md-api/v/{version}/{docPath}
   let versionSlug: string | undefined;
   let docSegments = pathSegments;
 
-  if (pathSegments[0] === 'v' && pathSegments.length >= 3) {
-    versionSlug = pathSegments[1];
-    docSegments = pathSegments.slice(2);
+  const firstSegment = pathSegments[0];
+  const isVersion = Boolean(/\d+(?:\.\d+)?/.exec(firstSegment));
+
+  if (isVersion) {
+    versionSlug = firstSegment;
+    docSegments = pathSegments.slice(1);
   }
 
   const versionId = resolveVersionFromSlug(versionSlug);
   const slug = docSegments.join('/');
 
-  const docFile = findDocFile(slug, versionId);
-  if (!docFile) {
+  const result = findDocFile(`${versionId}/${slug}`);
+  if (!result) {
     return new NextResponse('Page not found', { status: 404 });
   }
 
-  const fullPath = path.join(process.cwd(), docFile);
+  const fullPath = path.join(process.cwd(), result.filePath);
   const fileContent = fs.readFileSync(fullPath, 'utf8');
   const { content: rawContent, data } = matter(fileContent);
 
@@ -75,6 +57,7 @@ export async function GET(
     languageList: availableLanguages,
     versionId,
     codeOnly,
+    slug,
   });
 
   const markdown = codeOnly

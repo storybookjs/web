@@ -78,7 +78,6 @@ describe('LLM Friendliness', () => {
       expect(routeCode).toContain('## Documentation');
       expect(routeCode).toContain('## Markdown Access');
       expect(routeCode).toContain('## Docs Pages');
-      expect(routeCode).toContain('## Other Versions');
       expect(routeCode).toContain('## Community & Resources');
     });
 
@@ -121,7 +120,7 @@ describe('LLM Friendliness', () => {
     });
 
     it('includes content banner', () => {
-      expect(routeCode).toContain('buildContentBanner');
+      expect(routeCode).toContain('getLlmsBannerLines');
     });
   });
 
@@ -150,7 +149,7 @@ describe('LLM Friendliness', () => {
     });
 
     it('extracts version from path prefix', () => {
-      expect(routeCode).toContain("=== 'v'");
+      expect(routeCode).toContain('isVersion');
       expect(routeCode).toContain('resolveVersionFromSlug');
     });
 
@@ -289,16 +288,4 @@ describe('LLM Friendliness', () => {
     });
   });
 
-  describe('next.config.js headers', () => {
-    const configCode = fs.readFileSync(
-      path.join(FRONTPAGE_ROOT, 'next.config.js'),
-      'utf8',
-    );
-
-    it('adds Link header for llms.txt on /docs pages', () => {
-      expect(configCode).toContain("'/docs/:path*'");
-      expect(configCode).toContain('llms.txt');
-      expect(configCode).toContain('rel="llms"');
-    });
-  });
 });

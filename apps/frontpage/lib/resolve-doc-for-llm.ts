@@ -3,6 +3,7 @@ import path from 'node:path';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import { renderers as allRenderersList, docsVersions, latestVersion } from '@repo/utils';
+import { getVersion } from './get-version';
 
 interface CodeBlock {
   lang: string;
@@ -38,20 +39,7 @@ function getLangTitle(lang: string): string {
  * Returns the latest version if no match or no slug provided.
  */
 export function resolveVersionFromSlug(slug?: string): string {
-  if (!slug) return latestVersion.id;
-
-  // 1. Exact match on inSlug or id (e.g. "9" → 9.1, "8.6" → 8.6)
-  for (const v of docsVersions) {
-    if (v.inSlug === slug || v.id === slug) return v.id;
-  }
-
-  // 2. Major version match (e.g. "10" → 10.3, "9.0" → 9.1)
-  const major = slug.split('.')[0];
-  for (const v of docsVersions) {
-    if (v.id.split('.')[0] === major) return v.id;
-  }
-
-  return latestVersion.id;
+  return getVersion(slug ? [slug] : undefined).id;
 }
 
 /**
@@ -226,8 +214,8 @@ function inlineCodeSnippets(
         language,
       );
 
-      for (const rr of snippetRenderers) collectedRenderers.add(rr);
-      for (const ll of snippetLanguages) collectedLanguages.add(ll);
+      snippetRenderers.forEach((rr: string) => collectedRenderers.add(rr));
+      snippetLanguages.forEach((ll: string) => collectedLanguages.add(ll));
 
       return formatSnippetsAsMarkdown(selected);
     },
@@ -290,8 +278,9 @@ export function buildContentBanner(options: {
   languageList: string[];
   versionId: string;
   codeOnly?: boolean;
+  slug: string;
 }): string {
-  const { renderer, language, rendererList, languageList, versionId, codeOnly } = options;
+  const { renderer, language, rendererList, languageList, versionId, codeOnly, slug } = options;
   const rendererTitle = RENDERER_NAMES[renderer] ?? renderer;
   const langTitle = getLangTitle(language);
 
@@ -300,7 +289,6 @@ export function buildContentBanner(options: {
 
   const otherRenderers = rendererList
     .filter((r) => r !== renderer)
-    .map((r) => RENDERER_NAMES[r] ?? r);
 
   const otherLanguages = languageList
     .filter((l) => l !== language)
@@ -321,13 +309,14 @@ export function buildContentBanner(options: {
 
   const otherVersions = docsVersions
     .filter((v) => v.id !== versionId)
-    .map((v) => `${v.label} (\`/docs/${v.inSlug ?? v.id}/\`)`)
+    .map((v) => v.id === latestVersion.id ? `${v.label} (latest) (\`/docs/${slug}.md\`)` : `${v.label} (\`/docs/${v.inSlug ?? v.id}/${slug}.md\`)`)
     .join(', ');
   if (otherVersions) {
     paramParts.push(`other versions: ${otherVersions}`);
   }
 
-  lines.push(`> Also available: ${paramParts.join(' | ')}`);
+  lines.push(`> Also available:\n- ${paramParts.join('\n- ')}`);
+  lines.push('');
   lines.push('');
 
   return lines.join('\n');
@@ -366,7 +355,9 @@ export function resolveDocForLLM(
 
   return {
     content,
+    // eslint-disable-next-line @typescript-eslint/require-array-sort-compare -- sorting primitive strings
     availableRenderers: [...collectedRenderers].sort(),
+    // eslint-disable-next-line @typescript-eslint/require-array-sort-compare -- sorting primitive strings
     availableLanguages: [...collectedLanguages].sort(),
   };
 }
