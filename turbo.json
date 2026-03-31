@@ -29,6 +29,10 @@
       "outputs": ["./apps/frontpage/generated-redirects.json"],
       "cache": false
     },
+    "generate-versions": {
+      "cache": false,
+      "outputs": ["./apps/frontpage/generated-versions.json"]
+    },
     "fetch-docs": {
       "cache": false
     },
@@ -41,7 +45,7 @@
       "inputs": ["$TURBO_DEFAULT$", ".env"]
     },
     "build": {
-      "dependsOn": ["fetch-docs", "generate-redirects", "^build"],
+      "dependsOn": ["fetch-docs", "generate-redirects", "generate-versions", "^build"],
       "outputs": [
         "dist/**",
         ".next/**",
@@ -51,6 +55,7 @@
       "inputs": [
         "$TURBO_DEFAULT$",
         ".env",
+        "./apps/frontpage/generated-versions.json",
         "./apps/frontpage/content/docs/**",
         "./apps/frontpage/content/snippets/**",
         "./apps/frontpage/public/docs-assets/**"

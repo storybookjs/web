@@ -100,6 +100,7 @@ module.exports = withBundleAnalyzer(
        */
       outputFileTracingIncludes: {
         '/docs/**': ['./content/docs/**'],
+        '/versions': ['./generated-versions.json'],
       },
     },
     async redirects() {
