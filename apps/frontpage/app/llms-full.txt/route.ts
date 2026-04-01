@@ -9,6 +9,8 @@ import { resolveDocForLLM, resolveVersionFromSlug } from '../../lib/resolve-doc-
 import { findDocFile } from '../../lib/get-page';
 import { getLlmsBannerLines } from '../llms.txt/route';
 
+export const dynamic = 'force-dynamic';
+
 export function GET(request: NextRequest) {
   const renderer = request.nextUrl.searchParams.get('renderer') ?? 'react';
   const language = request.nextUrl.searchParams.get('language') ?? 'ts';

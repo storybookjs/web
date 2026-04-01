@@ -4,6 +4,8 @@ import { getAllTrees } from '../../lib/get-all-trees';
 import { getFlatTree } from '../../lib/get-flat-tree';
 import { resolveVersionFromSlug } from '../../lib/resolve-doc-for-llm';
 
+export const dynamic = 'force-dynamic';
+
 const baseUrl = 'https://storybook.js.org';
 
 export const getLlmsBannerLines = ({ version }: { version: DocsVersion }) => [

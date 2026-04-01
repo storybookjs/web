@@ -2,7 +2,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { type NextRequest, NextResponse } from 'next/server';
 import matter from 'gray-matter';
-import { resolveDocForLLM, buildContentBanner, resolveVersionFromSlug } from '../../../lib/resolve-doc-for-llm';
+import {
+  resolveDocForLLM,
+  buildContentBanner,
+  resolveVersionFromSlug,
+} from '../../../lib/resolve-doc-for-llm';
 import { findDocFile } from '../../../lib/get-page';
 
 export const dynamic = 'force-dynamic';
@@ -11,10 +15,7 @@ interface RouteContext {
   params: Promise<{ path: string[] }>;
 }
 
-export async function GET(
-  request: NextRequest,
-  context: RouteContext,
-) {
+export async function GET(request: NextRequest, context: RouteContext) {
   const { path: pathSegments } = await context.params;
 
   const renderer = request.nextUrl.searchParams.get('renderer') ?? 'react';
@@ -44,12 +45,15 @@ export async function GET(
   const fileContent = fs.readFileSync(fullPath, 'utf8');
   const { content: rawContent, data } = matter(fileContent);
 
-  const { content, availableRenderers, availableLanguages } = resolveDocForLLM(rawContent, {
-    versionId,
-    renderer,
-    language,
-    codeOnly,
-  });
+  const { content, availableRenderers, availableLanguages } = resolveDocForLLM(
+    rawContent,
+    {
+      versionId,
+      renderer,
+      language,
+      codeOnly,
+    },
+  );
 
   const title = String(data.title ?? '');
   const banner = buildContentBanner({
@@ -70,6 +74,7 @@ export async function GET(
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
       'Cache-Control': 'public, max-age=3600',
+      Vary: 'Accept',
     },
   });
 }

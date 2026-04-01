@@ -6,18 +6,6 @@ description: Validate that the Storybook website's LLM-friendliness infrastructu
 
 When asked to verify or validate LLM friendliness of the Storybook website, follow these steps:
 
-## Quick Validation
-
-Run the validation script:
-```bash
-cd apps/frontpage && npx tsx scripts/validate-llm-friendliness.ts
-```
-
-And run the tests:
-```bash
-cd apps/frontpage && npx vitest run lib/llm-friendliness.test.ts
-```
-
 ## What to Check
 
 ### Files That Must Exist
@@ -68,7 +56,6 @@ Required crawlers: GPTBot, ChatGPT-User, ClaudeBot, Claude-Web, anthropic-ai, Am
 
 ### Discovery Headers
 - `apps/frontpage/app/layout.tsx` must include `alternates.types['text/plain'] = '/llms.txt'`
-- `apps/frontpage/next.config.js` must set a `Link` response header with `rel="llms"` on `/docs/:path*`
 
 ## Manual Testing
 
