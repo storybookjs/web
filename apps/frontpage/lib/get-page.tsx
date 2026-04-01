@@ -24,6 +24,7 @@ export interface PageDataProps {
   hideRendererSelector?: boolean;
   isIndexPage: boolean;
   isHeading: boolean;
+  isTab?: boolean;
   tabs: RawTreeProps[];
   content: ReactElement;
   path: string;
