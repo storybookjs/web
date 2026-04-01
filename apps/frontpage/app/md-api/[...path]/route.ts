@@ -74,6 +74,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
       'Cache-Control': 'public, max-age=3600',
+      'CDN-Cache-Control': 'no-store',
       Vary: 'Accept',
     },
   });

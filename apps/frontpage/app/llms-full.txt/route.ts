@@ -5,7 +5,10 @@ import { docsVersions, latestVersion } from '@repo/utils';
 import matter from 'gray-matter';
 import { getAllTrees } from '../../lib/get-all-trees';
 import { getFlatTree } from '../../lib/get-flat-tree';
-import { resolveDocForLLM, resolveVersionFromSlug } from '../../lib/resolve-doc-for-llm';
+import {
+  resolveDocForLLM,
+  resolveVersionFromSlug,
+} from '../../lib/resolve-doc-for-llm';
 import { findDocFile } from '../../lib/get-page';
 import { getLlmsBannerLines } from '../llms.txt/route';
 
@@ -22,9 +25,7 @@ export function GET(request: NextRequest) {
 
   const listOfTrees = getAllTrees();
   const tree = listOfTrees.find((t) => t.name === versionId);
-  const flatTree = tree?.children
-    ? getFlatTree({ tree: tree.children })
-    : [];
+  const flatTree = tree?.children ? getFlatTree({ tree: tree.children }) : [];
 
   const baseUrl = 'https://storybook.js.org';
 
@@ -51,12 +52,13 @@ export function GET(request: NextRequest) {
     const fileContent = fs.readFileSync(fullPath, 'utf8');
     const { content: rawContent, data } = matter(fileContent);
 
-    const { content, availableRenderers, availableLanguages } = resolveDocForLLM(rawContent, {
-      versionId,
-      renderer,
-      language,
-      codeOnly,
-    });
+    const { content, availableRenderers, availableLanguages } =
+      resolveDocForLLM(rawContent, {
+        versionId,
+        renderer,
+        language,
+        codeOnly,
+      });
 
     for (const r of availableRenderers) globalRenderers.add(r);
     for (const l of availableLanguages) globalLanguages.add(l);
@@ -82,6 +84,7 @@ export function GET(request: NextRequest) {
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
       'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+      'CDN-Cache-Control': 'no-store',
     },
   });
 }

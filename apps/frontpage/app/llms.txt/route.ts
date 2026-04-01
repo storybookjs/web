@@ -46,13 +46,12 @@ export const getLlmsBannerLines = ({ version }: { version: DocsVersion }) => [
 export function GET(request: NextRequest) {
   const versionSlug = request.nextUrl.searchParams.get('version') ?? undefined;
   const versionId = resolveVersionFromSlug(versionSlug);
-  const activeVersion = docsVersions.find((v) => v.id === versionId) ?? latestVersion;
+  const activeVersion =
+    docsVersions.find((v) => v.id === versionId) ?? latestVersion;
 
   const listOfTrees = getAllTrees();
   const tree = listOfTrees.find((t) => t.name === versionId);
-  const flatTree = tree?.children
-    ? getFlatTree({ tree: tree.children })
-    : [];
+  const flatTree = tree?.children ? getFlatTree({ tree: tree.children }) : [];
 
   const lines = [...getLlmsBannerLines({ version: activeVersion })];
 
@@ -95,6 +94,7 @@ export function GET(request: NextRequest) {
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
       'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+      'CDN-Cache-Control': 'no-store',
     },
   });
 }
