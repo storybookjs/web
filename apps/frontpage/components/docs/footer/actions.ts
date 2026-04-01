@@ -586,6 +586,7 @@ export async function sendFeedback(
       url,
     };
   } catch (error) {
+    console.error('Failed to submit feedback', error);
     return {
       status: 'fail',
       message: 'Could not submit feedback. Please try again.',
