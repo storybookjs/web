@@ -265,3 +265,10 @@ export const ContentUndefined: Story = {
     content: content3,
   },
 };
+
+export const CopyPrompt: Story = {
+  args: {
+    content: content3,
+    copyPrompt: 'This is a prompt'
+  },
+};
