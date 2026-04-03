@@ -73,8 +73,9 @@
     "@repo/eslint-config": "*",
     "@repo/tailwind-config": "*",
     "@repo/typescript-config": "*",
-    "@storybook/addon-links": "^10.0.0-beta.10",
-    "@storybook/nextjs-vite": "^10.0.0-beta.10",
+    "@storybook/addon-docs": "^10.0.0",
+    "@storybook/addon-links": "^10.0.0",
+    "@storybook/nextjs-vite": "^10.0.0",
     "@testing-library/react": "^16.0.0",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20",
@@ -84,15 +85,14 @@
     "@types/react-syntax-highlighter": "^15.5.12",
     "@types/tar": "^6.1.13",
     "@vitejs/plugin-react": "^4.3.0",
-    "eslint-plugin-storybook": "^10.0.0-beta.10",
+    "eslint-plugin-storybook": "^10.0.0",
     "jsdom": "^24.1.0",
     "postcss": "^8",
     "prompts": "^2.4.2",
-    "storybook": "^10.0.0-beta.10",
+    "storybook": "^10.0.0",
     "tailwindcss": "^3.4.1",
     "tsx": "^4.9.0",
     "typescript": "^5.3.3",
-    "vitest": "^1.6.0",
-    "@storybook/addon-docs": "^10.0.0-beta.10"
+    "vitest": "^1.6.0"
   }
 }
