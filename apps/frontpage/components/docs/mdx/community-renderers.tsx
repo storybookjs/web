@@ -23,19 +23,19 @@ export function CommunityRenderers() {
         subtitle="with Vite"
       />
       <Card
-        href="https://storybook.rsbuild.dev/guide/framework/react.html"
+        href="https://storybook.rsbuild.rs/guide/framework/react"
         logo="logo-react.svg"
         title="React"
         subtitle="with Rspack / Rsbuild"
       />
       <Card
-        href="https://storybook.rsbuild.dev/guide/framework/vue.html"
+        href="https://storybook.rsbuild.rs/guide/framework/vue"
         logo="logo-vue.svg"
         title="Vue"
         subtitle="with Rspack / Rsbuild"
       />
       <Card
-        href="https://storybook.rsbuild.dev/guide/framework/web-components.html"
+        href="https://storybook.rsbuild.rs/guide/framework/web-components"
         logo="logo-web-components.svg"
         title="Web Components"
         subtitle="with Rspack / Rsbuild"
