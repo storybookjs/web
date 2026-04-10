@@ -1,7 +1,12 @@
 # Static redirects
 
 ## Proxy rewrites
+/addons/sitemap.xml                           /addons/sitemap.xml                                                             200
+/addons/*                                     https://storybook-addon-catalog.netlify.app/addons/:splat                       200
 /announce/*                                   https://storybook-announce.netlify.app/announce/:splat                          200
+/blog/sitemap.xml                             /blog/sitemap.xml                                                               200
+/blog/*                                       https://storybook-blog.netlify.app/blog/:splat                                  200
+/day/*                                        https://storybook-day-2023.netlify.app/day/:splat                               200
 /showcase/sitemap.xml                         /showcase/sitemap.xml                                                           200
 /showcase/*                                   https://storybook-component-catalog.netlify.app/showcase/:splat                 200
 /tutorials/sitemap.xml                        /tutorials/sitemap.xml                                                          200
