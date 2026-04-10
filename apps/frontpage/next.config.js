@@ -1,10 +1,15 @@
-const generatedRedirects = require('./generated-redirects.json');
 const { withPlausibleProxy } = require('next-plausible');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+// TODO: Remove duplication with those in docs-versions.tsx
 const HISTORICAL_VERSIONS = [
+  '10.2',
+  '10.1',
+  '10.0',
+  '9.1',
+  '9.0',
   '8.6',
   '8.5',
   '8.4',
@@ -102,9 +107,6 @@ module.exports = withBundleAnalyzer(
         '/docs/**': ['./content/docs/**'],
         '/md-api/**': ['./content/docs/**', './content/snippets/**'],
       },
-    },
-    async redirects() {
-      return [...generatedRedirects];
     },
     skipTrailingSlashRedirect: true,
     async rewrites() {

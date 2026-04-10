@@ -25,8 +25,11 @@
       "dependsOn": ["^typecheck"]
     },
     "generate-redirects": {
-      "inputs": ["./apps/frontpage/scripts/raw-redirects"],
-      "outputs": ["./apps/frontpage/generated-redirects.json"],
+      "inputs": [
+        "./apps/frontpage/scripts/raw-redirects",
+        "./apps/frontpage/scripts/static-redirects"
+      ],
+      "outputs": ["./apps/frontpage/public/_redirects"],
       "cache": false
     },
     "fetch-docs": {
