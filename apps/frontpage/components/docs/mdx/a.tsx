@@ -20,7 +20,11 @@ export function processHref({
   isIndexPage: boolean;
   pagePath: string[];
 }): string {
-   
+   // Hash-only links should not be processed
+  if (hrefIn.startsWith('#')) {
+    return hrefIn;
+  }
+
   const href = hrefIn
     // eslint-disable-next-line prefer-named-capture-group -- TODO: Fix regex with new eslint rules
     .replace(/^((?!http).*)\.mdx/, '$1')

@@ -26,7 +26,7 @@ const Heading: FC<HeadingProps> = ({ children, className, id, level }) => {
     HeadingComponent,
     {
       className: cn(
-        'ui-group ui-relative ui-font-bold target:ui-scroll-mt-40 md:target:ui-scroll-mt-24',
+        'ui-group ui-relative ui-font-bold ui-scroll-mt-40 md:ui-scroll-mt-24',
         className,
       ),
       'data-docs-heading': true,

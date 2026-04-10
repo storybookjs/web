@@ -166,5 +166,15 @@ describe('processHref', () => {
       });
       expect(result).toBe('/docs/writing-stories/args');
     });
+
+    it('ignores hash-only link', () => {
+      const result = processHref({
+        activeVersion: latestVersion,
+        href: '#test-behavior',
+        isIndexPage: false,
+        pagePath: ['10.2', 'writing-tests', 'accessibility-testing'],
+      });
+      expect(result).toBe('#test-behavior');
+    });
   });
 });
