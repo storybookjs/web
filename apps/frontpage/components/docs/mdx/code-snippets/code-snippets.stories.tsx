@@ -1,7 +1,6 @@
-import { useArgs } from '@storybook/preview-api';
-import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
-// import { fn, userEvent, within, expect, waitFor } from '@storybook/test';
+import { useArgs } from 'storybook/preview-api';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import { fn } from 'storybook/test';
 import type { ComponentProps } from 'react';
 import { DocsContext } from '../../../../app/docs/provider';
 import { CodeSnippetsClient } from './code-snippets';
@@ -216,15 +215,15 @@ export const CoerceTS49ToTS: Story = {
     content: content2.filter((tab) => tab.language !== 'ts-4-9'),
     activeLanguage: 'ts-4-9',
   },
-}
+};
 
 export const CSFNextInfo: Story = {
   args: {
     content: contentCSFNext,
     activeRenderer: 'react',
-    activeSnippetTabs: ['CSF Next 🧪']
-  }
-}
+    activeSnippetTabs: ['CSF Next 🧪'],
+  },
+};
 
 // TODO: Couldn't get this working, something with `setArgs`?
 // export const DismissCSFNextInfo: Story = {
