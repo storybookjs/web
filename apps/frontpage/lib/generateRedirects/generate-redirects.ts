@@ -92,22 +92,29 @@ function parseRawRedirects(raw: string): Rule[] {
     if (!trimmed) continue;
 
     // eslint-disable-next-line prefer-named-capture-group -- TS version issue
-    const headerMatch = /^#\s+(.+)$/.exec(trimmed);
+    const headerMatch = /^#\s+(\d+\.\d+)\s*$/.exec(trimmed);
     if (headerMatch) {
       currentVersion = headerMatch[1].trim();
       continue;
     }
 
-    if (currentVersion) {
-      const parts = trimmed.split(/\s+/).filter(Boolean);
-      if (parts.length >= 3) {
-        rules.push({
-          headerVersion: currentVersion,
-          from: parts[0],
-          to: parts[1],
-          status: parts[2],
-        });
-      }
+    // Skip comment lines (# lines that aren't version headers)
+    if (trimmed.startsWith('#')) continue;
+
+    if (!currentVersion) {
+      throw new Error(
+        `Redirect rule appears before a valid version header: "${trimmed}"`,
+      );
+    }
+
+    const parts = trimmed.split(/\s+/).filter(Boolean);
+    if (parts.length >= 3) {
+      rules.push({
+        headerVersion: currentVersion,
+        from: parts[0],
+        to: parts[1],
+        status: parts[2],
+      });
     }
   }
 

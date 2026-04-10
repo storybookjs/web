@@ -86,7 +86,7 @@
 /blog/sitemap.xml                             /blog/sitemap.xml                                                               200
 /showcase/sitemap.xml                         /showcase/sitemap.xml                                                           200
 /tutorials/sitemap.xml                        /tutorials/sitemap.xml                                                          200
-# This entry is neccessary for the `/addons` route to resolve without infinite redirects (not sure why)
+# This entry is necessary for the `/addons` route to resolve without infinite redirects (not sure why)
 /addons                                       https://storybook-addon-catalog.netlify.app/addons                              200
 /addons/*                                     https://storybook-addon-catalog.netlify.app/addons/:splat                       200
 /announce/*                                   https://storybook-announce.netlify.app/announce/:splat                          200
@@ -94,5 +94,5 @@
 /day/*                                        https://storybook-day-2023.netlify.app/day/:splat                               200
 /showcase/*                                   https://storybook-component-catalog.netlify.app/showcase/:splat                 200
 /tutorials/*                                  https://storybook-tutorials.netlify.app/tutorials/:splat                        200
-/proxy/api/events/*                           https://plausible.io/api/event                                                  200
+/proxy/api/event                              https://plausible.io/api/event                                                  200
 /whats-new/v1/*                               https://storybook-dx.netlify.app/.netlify/functions/whats-new/:splat            200

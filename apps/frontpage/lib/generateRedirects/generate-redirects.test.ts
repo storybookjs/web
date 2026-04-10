@@ -595,6 +595,53 @@ describe('generateRedirects', () => {
       expect(entriesB.length).toBeGreaterThan(entriesA.length);
     });
 
+    test('throws when a redirect line appears before a valid version header', () => {
+      expect(() =>
+        generateSpecificPathRedirects({
+          rawRedirects: '/docs/old/path /docs/new/path 301',
+          renderers,
+          historicalVersions: defaultHistorical,
+          supportedVersions: ['10.3', '9.1', '8.6'],
+          latestVersion: '10.3',
+          nextVersion: null,
+        })
+      ).toThrow('Redirect rule appears before a valid version header');
+    });
+
+    test('comment lines within a version section are ignored', () => {
+      const result = generateSpecificPathRedirects({
+        rawRedirects: [
+          '# 6.4',
+          '/docs/old/path /docs/new/path 301',
+          '# This is a comment, not a version header',
+          '/docs/another/old /docs/another/new 301',
+        ].join('\n'),
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
+
+      // Both redirect lines should use 6.4 as the header version,
+      // producing unversioned-era entries (one per renderer)
+      const pathEntries = result.filter(([from]) =>
+        from.includes('old/path')
+      );
+      const anotherEntries = result.filter(([from]) =>
+        from.includes('another/old')
+      );
+
+      expect(pathEntries).toEqual([
+        ['/docs/react/old/path', '/docs/new/path', '301'],
+        ['/docs/vue/old/path', '/docs/new/path', '301'],
+      ]);
+      expect(anotherEntries).toEqual([
+        ['/docs/react/another/old', '/docs/another/new', '301'],
+        ['/docs/vue/another/old', '/docs/another/new', '301'],
+      ]);
+    });
+
     test('raw redirects with extra whitespace are parsed correctly', () => {
       const result = generateRedirects({
         rawRedirects: `# 6.4\n  /docs/the/from/path   /docs/the/to/path   301  `,
