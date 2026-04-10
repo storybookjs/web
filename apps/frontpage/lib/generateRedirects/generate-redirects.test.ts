@@ -253,6 +253,7 @@ describe('generateRedirects', () => {
         ['/docs/9.0/*', '/docs/9/:splat', '301'],
         ['/docs/9.1/*', '/docs/9/:splat', '301'],
         ['/docs/10.0/*', '/docs/:splat', '302'],
+        ['/docs/10/*', '/docs/:splat', '302'],
         ['/docs/10.1/*', '/docs/:splat', '302'],
         ['/docs/next/*', '/docs/:splat', '302'],
       ]);
@@ -301,6 +302,7 @@ describe('generateRedirects', () => {
         ['/docs/9.0/*', '/docs/9/:splat', '301'],
         ['/docs/9.1/*', '/docs/9/:splat', '301'],
         ['/docs/10.0/*', '/docs/:splat', '302'],
+        ['/docs/10/*', '/docs/:splat', '302'],
         ['/docs/10.1/*', '/docs/:splat', '302'],
         ['/docs/next/*', '/docs/10.2/:splat', '302'],
       ]);
@@ -349,6 +351,7 @@ describe('generateRedirects', () => {
         ['/docs/9.0/*', '/docs/9/:splat', '301'],
         ['/docs/9.1/*', '/docs/9/:splat', '301'],
         ['/docs/10.0/*', '/docs/:splat', '302'],
+        ['/docs/10/*', '/docs/:splat', '302'],
         ['/docs/10.2/*', '/docs/:splat', '302'],
         ['/docs/11.0/*', '/docs/11/:splat', '302'],
         ['/docs/next/*', '/docs/11/:splat', '302'],
@@ -401,33 +404,20 @@ describe('generateRedirects', () => {
         ['/docs/10.0/*', '/docs/10/:splat', '301'],
         ['/docs/10.2/*', '/docs/10/:splat', '301'],
         ['/docs/11.0/*', '/docs/:splat', '302'],
+        ['/docs/11/*', '/docs/:splat', '302'],
         ['/docs/next/*', '/docs/:splat', '302'],
       ]);
     });
   });
 
   describe('Install Redirects', () => {
-    test('IN-1: Latest 10.1, no pre-release', () => {
-      const historical = [
-        '6.0',
-        '6.4',
-        '7.0',
-        '7.4',
-        '7.5',
-        '8.0',
-        '8.6',
-        '9.0',
-        '9.1',
-        '10.0',
-        '10.1',
-      ];
-
+    test('only produces redirects for pre-8 versions (old install slug)', () => {
       const result = generateInstallRedirects({
         rawRedirects: '',
         renderers,
-        historicalVersions: historical,
-        supportedVersions: ['10.1', '9.1', '8.6'],
-        latestVersion: '10.1',
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
         nextVersion: null,
       });
 
@@ -443,21 +433,12 @@ describe('generateRedirects', () => {
         ['/docs/7/vue', '/docs/get-started/install/', '301'],
         ['/docs/7.4/react', '/docs/get-started/install/', '301'],
         ['/docs/7.4/vue', '/docs/get-started/install/', '301'],
-        ['/docs/next/react', '/docs', '302'],
-        ['/docs/next/vue', '/docs', '302'],
-        // Non-renderer group — 7.5 uses old slug, 8.0+ uses /docs
+        // Non-renderer group — only 7.5 (pre-8 versioned)
         ['/docs/7.5', '/docs/get-started/install/', '301'],
-        ['/docs/8.0', '/docs/8', '301'],
-        ['/docs/8.6', '/docs/8', '301'],
-        ['/docs/9.0', '/docs/9', '301'],
-        ['/docs/9.1', '/docs/9', '301'],
-        ['/docs/10.0', '/docs', '302'],
-        ['/docs/10.1', '/docs', '302'],
-        ['/docs/next', '/docs', '302'],
       ]);
     });
 
-    test('IN-2: Latest 10.2, major pre-release 11.0', () => {
+    test('output is independent of supported/latest/next params', () => {
       const historical = [
         '6.0',
         '6.4',
@@ -470,40 +451,30 @@ describe('generateRedirects', () => {
         '9.1',
         '10.0',
         '10.2',
+        '11.0',
       ];
 
-      const result = generateInstallRedirects({
+      const base = {
         rawRedirects: '',
         renderers,
         historicalVersions: historical,
+      };
+
+      const a = generateInstallRedirects({
+        ...base,
         supportedVersions: ['10.2', '9.1', '8.6'],
         latestVersion: '10.2',
         nextVersion: '11.0',
       });
 
-      expect(result).toEqual([
-        ['/docs/react', '/docs/get-started/install/', '301'],
-        ['/docs/vue', '/docs/get-started/install/', '301'],
-        ['/docs/6.4/react', '/docs/get-started/install/', '301'],
-        ['/docs/6.4/vue', '/docs/get-started/install/', '301'],
-        ['/docs/7.0/react', '/docs/get-started/install/', '301'],
-        ['/docs/7.0/vue', '/docs/get-started/install/', '301'],
-        ['/docs/7/react', '/docs/get-started/install/', '301'],
-        ['/docs/7/vue', '/docs/get-started/install/', '301'],
-        ['/docs/7.4/react', '/docs/get-started/install/', '301'],
-        ['/docs/7.4/vue', '/docs/get-started/install/', '301'],
-        ['/docs/next/react', '/docs', '302'],
-        ['/docs/next/vue', '/docs', '302'],
-        ['/docs/7.5', '/docs/get-started/install/', '301'],
-        ['/docs/8.0', '/docs', '301'],
-        ['/docs/8.6', '/docs', '301'],
-        ['/docs/9.0', '/docs/9', '301'],
-        ['/docs/9.1', '/docs/9', '301'],
-        ['/docs/10.0', '/docs/10', '301'],
-        ['/docs/10.2', '/docs/10', '301'],
-        // Major pre-release gets an entry
-        ['/docs/11.0', '/docs/11', '302'],
-      ]);
+      const b = generateInstallRedirects({
+        ...base,
+        supportedVersions: ['11.0', '10.2', '9.1'],
+        latestVersion: '11.0',
+        nextVersion: null,
+      });
+
+      expect(a).toEqual(b);
     });
   });
 

@@ -1,6 +1,8 @@
 import { docsVersions, latestVersion as LATEST_VERSION, historicalVersions as HISTORICAL_VERSIONS } from '@repo/utils';
 import { getFrameworks } from '../get-frameworks';
 
+const PREVIOUS_INSTALL_DOCS_PAGE_SLUG = '/docs/get-started/install/';
+
 function getAllRenderers() {
   const { coreFrameworks, communityFrameworks } = getFrameworks();
   return [...coreFrameworks, ...communityFrameworks];
@@ -73,12 +75,6 @@ function getNextTo(
     ? `/docs/${String(nextMajor)}/${suffix}`
     : `/docs/${nextVersion}/${suffix}`;
 }
-
-const installDocsPageSlug = (version: string) =>
-  version === 'next' || Number(version) >= 8
-    ? '/docs'
-    : '/docs/get-started/install/';
-
 interface Rule {
   headerVersion: string;
   from: string;
@@ -289,27 +285,19 @@ export function generateSpecificPathRedirects(options: Options) {
 }
 
 export function generateInstallRedirects(options: Options) {
-  const { renderers, historicalVersions, supportedVersions, latestVersion, nextVersion } = mergeOptions(options);
+  const { renderers, historicalVersions } = mergeOptions(options);
   const entries: string[][] = [];
-  const latestMajor = getMajor(latestVersion);
-  const isMajorPreRelease = nextVersion && getMajor(nextVersion) > latestMajor;
 
-  // When a major pre-release exists, the oldest supported major drops off
-  // and the current latest major becomes supported non-latest.
-  const allSupportedMajors = new Set(supportedVersions.map((v) => getMajor(v)));
-  let effectiveSupportedMajors: Set<number>;
-  if (isMajorPreRelease) {
-    const minMajor = Math.min(...allSupportedMajors);
-    effectiveSupportedMajors = new Set([...allSupportedMajors].filter((m) => m !== minMajor));
-  } else {
-    effectiveSupportedMajors = new Set([...allSupportedMajors].filter((m) => m !== latestMajor));
-  }
+  // Only pre-8 versions need explicit install redirects because their install
+  // page lived at /docs/get-started/install/ instead of /docs.  For 8+ versions
+  // (and /docs/next), the wildcard redirects already cover the bare-path case
+  // (/* matches the empty splat).
 
   // --- Renderer group ---
 
   // Unversioned
   for (const r of renderers) {
-    entries.push([`/docs/${r}`, installDocsPageSlug('6.0'), '301']);
+    entries.push([`/docs/${r}`, PREVIOUS_INSTALL_DOCS_PAGE_SLUG, '301']);
   }
 
   // Renderer-era versions (6.4–7.4)
@@ -319,19 +307,14 @@ export function generateInstallRedirects(options: Options) {
   let added7Alias = false;
   for (const v of rendererEra) {
     for (const r of renderers) {
-      entries.push([`/docs/${v}/${r}`, installDocsPageSlug(v), '301']);
+      entries.push([`/docs/${v}/${r}`, PREVIOUS_INSTALL_DOCS_PAGE_SLUG, '301']);
     }
     if (getMajor(v) === 7 && !added7Alias) {
       added7Alias = true;
       for (const r of renderers) {
-        entries.push([`/docs/7/${r}`, installDocsPageSlug('7'), '301']);
+        entries.push([`/docs/7/${r}`, PREVIOUS_INSTALL_DOCS_PAGE_SLUG, '301']);
       }
     }
-  }
-
-  // next with renderer
-  for (const r of renderers) {
-    entries.push([`/docs/next/${r}`, installDocsPageSlug('next'), '302']);
   }
 
   // --- Non-renderer group ---
@@ -340,25 +323,9 @@ export function generateInstallRedirects(options: Options) {
     (v) => getEra(v) === 'versioned',
   );
   for (const v of nonRenderer) {
-    const major = getMajor(v);
-    if (!isMajorPreRelease && major === latestMajor) {
-      entries.push([`/docs/${v}`, '/docs', '302']);
-    } else if (effectiveSupportedMajors.has(major)) {
-      entries.push([`/docs/${v}`, `/docs/${String(major)}`, '301']);
-    } else {
-      entries.push([`/docs/${v}`, installDocsPageSlug(v), '301']);
+    if (getMajor(v) < 8) {
+      entries.push([`/docs/${v}`, PREVIOUS_INSTALL_DOCS_PAGE_SLUG, '301']);
     }
-  }
-
-  // Major pre-release entry
-  if (isMajorPreRelease) {
-    const nextMajor = getMajor(nextVersion);
-    entries.push([`/docs/${nextVersion}`, `/docs/${String(nextMajor)}`, '302']);
-  }
-
-  // next without renderer (only when no major pre-release)
-  if (!isMajorPreRelease) {
-    entries.push([`/docs/next`, installDocsPageSlug('next'), '302']);
   }
 
   return entries;
@@ -404,10 +371,15 @@ export function generateWildcardRedirects(options: Options) {
   const nonRenderer = historicalVersions.filter(
     (v) => getEra(v) === 'versioned',
   );
+  let addedLatestMajorAlias = false;
   for (const v of nonRenderer) {
     const major = getMajor(v);
     if (major === latestMajor) {
       entries.push([`/docs/${v}/*`, '/docs/:splat', '302']);
+      if (!addedLatestMajorAlias) {
+        addedLatestMajorAlias = true;
+        entries.push([`/docs/${String(latestMajor)}/*`, '/docs/:splat', '302']);
+      }
     } else if (supportedMajors.has(major)) {
       entries.push([`/docs/${v}/*`, `/docs/${String(major)}/:splat`, '301']);
     } else {
