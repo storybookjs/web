@@ -1,515 +1,645 @@
-import { expect, test } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import {
-  generateSequence,
-  parseRawRedirects,
   generateRedirects,
+  generateInstallRedirects,
+  generateSpecificPathRedirects,
+  generateWildcardRedirects,
 } from './generate-redirects';
 
-const inputString = `
-# Multi-line preamble
-# Should not be included
+// Only boundary-significant versions: era transitions and one representative per supported major.
+// Unversioned: 6.0 | Versioned+renderer: 6.4, 7.0, 7.4 | Non-renderer: 7.5 | Supported system: 8.0, 8.6, 9.0, 9.1, 10.0, 10.3
+const defaultHistorical = [
+  '6.0',
+  '6.4',
+  '7.0',
+  '7.4',
+  '7.5',
+  '8.0',
+  '8.6',
+  '9.0',
+  '9.1',
+  '10.0',
+  '10.3',
+];
 
-# 6.4
-/docs/workflows/testing-with-storybook/          /docs/writing-tests/                                   308
-/docs/workflows/unit-testing/                    /docs/writing-tests/stories-in-unit-tests/             308
+const renderers = ['react', 'vue'];
 
-# 7.1
-/docs/writing-tests/importing-stories-in-tests/  /docs/writing-tests/stories-in-unit-tests/             308
-`;
+describe('generateRedirects', () => {
+  describe('Specific Path Redirects', () => {
+    test('SP-1: Header at 6.4 (unversioned era only)', () => {
+      const result = generateSpecificPathRedirects({
+        rawRedirects: `# 6.4\n/docs/the/from/path /docs/the/to/path 301`,
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
 
-test('generateSequence, no pre-release', () => {
-  const result = generateSequence(['8.1', '7.6', '6.5']);
-  expect(result).toMatchInlineSnapshot(`
-    [
-      "8.1",
-      "8.0",
-      "7.6",
-      "7.5",
-      "7.4",
-      "7.3",
-      "7.2",
-      "7.1",
-      "7.0",
-      "6.5",
-      "6.4",
-      "6.3",
-      "6.2",
-      "6.1",
-      "6.0",
-    ]
-  `);
-});
+      expect(result).toEqual([
+        ['/docs/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/vue/the/from/path', '/docs/the/to/path', '301'],
+      ]);
+    });
 
-test('generateSequence, minor pre-release', () => {
-  const result = generateSequence(['8.1', '8.2', '7.6']);
-  expect(result).toMatchInlineSnapshot(`
-    [
-      "8.1",
-      "8.0",
-      "8.2",
-      "7.6",
-      "7.5",
-      "7.4",
-      "7.3",
-      "7.2",
-      "7.1",
-      "7.0",
-    ]
-  `);
-});
+    test('SP-2: Header at 7.1 (versioned + renderer era)', () => {
+      const result = generateSpecificPathRedirects({
+        rawRedirects: `# 7.1\n/docs/the/from/path /docs/the/to/path 301`,
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
 
-test('generateSequence, major pre-release', () => {
-  const result = generateSequence(['8.4', '9.0', '7.6']);
-  expect(result).toMatchInlineSnapshot(`
-    [
-      "8.4",
-      "8.3",
-      "8.2",
-      "8.1",
-      "8.0",
-      "9.0",
-      "7.6",
-      "7.5",
-      "7.4",
-      "7.3",
-      "7.2",
-      "7.1",
-      "7.0",
-    ]
-  `);
-});
+      expect(result).toEqual([
+        ['/docs/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/6.4/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/6.4/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.0/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.0/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/next/react/the/from/path', '/docs/the/to/path', '302'],
+        ['/docs/next/vue/the/from/path', '/docs/the/to/path', '302'],
+      ]);
+    });
 
-test('parseRawRedirects', () => {
-  const result = parseRawRedirects(inputString);
-  expect(result).toMatchInlineSnapshot(`
-    [
-      [
-        "/docs/workflows/testing-with-storybook/",
-        "/docs/writing-tests/",
-        "308",
-      ],
-      [
-        "/docs/workflows/unit-testing/",
-        "/docs/writing-tests/stories-in-unit-tests/",
-        "308",
-      ],
-      [
-        "/docs/writing-tests/importing-stories-in-tests/",
-        "/docs/writing-tests/stories-in-unit-tests/",
-        "308",
-      ],
-    ]
-  `);
-});
+    test('SP-3: Header at 7.6 (spans renderer boundary)', () => {
+      const result = generateSpecificPathRedirects({
+        rawRedirects: `# 7.6\n/docs/the/from/path /docs/the/to/path 301`,
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
 
-test('generateRedirects, no pre-release', () => {
-  const result = generateRedirects({
-    rawRedirects: inputString,
-    latestVersionString: '8.1',
-    nextVersionString: null,
-    renderers: ['react', 'vue'],
-    versions: [
-      { version: 8.1, string: '8.1', label: 'latest' },
-      { version: 8.0, string: '8.0' },
-      { version: 7.6, string: '7.6' },
-      { version: 7, string: '7.0' },
-      { string: 'next' },
-    ],
+      expect(result).toEqual([
+        ['/docs/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/6.4/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/6.4/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.0/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.0/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.4/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.4/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/next/react/the/from/path', '/docs/the/to/path', '302'],
+        ['/docs/next/vue/the/from/path', '/docs/the/to/path', '302'],
+        ['/docs/7.5/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/next/the/from/path', '/docs/the/to/path', '302'],
+      ]);
+    });
+
+    test('SP-4a: Header at 8.2 (supported versions)', () => {
+      const result = generateSpecificPathRedirects({
+        rawRedirects: `# 8.2\n/docs/the/from/path /docs/the/to/path 301`,
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
+
+      expect(result).toEqual([
+        ['/docs/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/6.4/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/6.4/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.0/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.0/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.4/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.4/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/next/react/the/from/path', '/docs/the/to/path', '302'],
+        ['/docs/next/vue/the/from/path', '/docs/the/to/path', '302'],
+        ['/docs/7.5/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/8.0/the/from/path', '/docs/8/the/to/path', '301'],
+        ['/docs/next/the/from/path', '/docs/the/to/path', '302'],
+      ]);
+    });
+
+    test('SP-4b: Header at 11.0, latest 11.1 (latest-major special case)', () => {
+      const historical = [
+        '6.0',
+        '6.4',
+        '7.0',
+        '7.4',
+        '7.5',
+        '8.0',
+        '8.6',
+        '9.0',
+        '9.1',
+        '10.0',
+        '10.2',
+        '11.0',
+        '11.1',
+      ];
+
+      const result = generateSpecificPathRedirects({
+        rawRedirects: `# 11.0\n/docs/the/from/path /docs/the/to/path 301`,
+        renderers,
+        historicalVersions: historical,
+        supportedVersions: ['11.1', '10.2', '9.1'],
+        latestVersion: '11.1',
+        nextVersion: null,
+      });
+
+      expect(result).toEqual([
+        ['/docs/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/6.4/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/6.4/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.0/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.0/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.4/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/7.4/vue/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/next/react/the/from/path', '/docs/the/to/path', '302'],
+        ['/docs/next/vue/the/from/path', '/docs/the/to/path', '302'],
+        ['/docs/7.5/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/8.0/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/8/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/8.6/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/9.0/the/from/path', '/docs/9/the/to/path', '301'],
+        ['/docs/9.1/the/from/path', '/docs/9/the/to/path', '301'],
+        ['/docs/10.0/the/from/path', '/docs/10/the/to/path', '301'],
+        ['/docs/10.2/the/from/path', '/docs/10/the/to/path', '301'],
+        ['/docs/11.0/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/11/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/next/the/from/path', '/docs/the/to/path', '302'],
+      ]);
+    });
+
+    test('preserves non-301 status codes from raw rules', () => {
+      const result = generateSpecificPathRedirects({
+        rawRedirects: `# 6.4\n/docs/the/from/path /docs/the/to/path 308`,
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
+
+      expect(result).toEqual([
+        ['/docs/react/the/from/path', '/docs/the/to/path', '308'],
+        ['/docs/vue/the/from/path', '/docs/the/to/path', '308'],
+      ]);
+    });
+
+    test('to paths with hardcoded versions are used as-is', () => {
+      const result = generateSpecificPathRedirects({
+        rawRedirects: `# 8.2\n/docs/the/from/path /docs/8/writing-tests/storyshots-migration-guide 301`,
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
+
+      // All entries should use the hardcoded to path as-is
+      for (const entry of result) {
+        expect(entry[1]).toBe('/docs/8/writing-tests/storyshots-migration-guide');
+      }
+    });
   });
-  expect(result).toMatchInlineSnapshot(`
-    [
-      {
-        "destination": "/docs/writing-tests/",
-        "permanent": true,
-        "source": "/docs/workflows/testing-with-storybook/",
-      },
-      {
-        "destination": "/docs/writing-tests/",
-        "permanent": true,
-        "source": "/docs/:renderer(react|vue)/workflows/testing-with-storybook/",
-      },
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/workflows/unit-testing/",
-      },
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/:renderer(react|vue)/workflows/unit-testing/",
-      },
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/writing-tests/importing-stories-in-tests/",
-      },
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/:renderer(react|vue)/writing-tests/importing-stories-in-tests/",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": true,
-        "source": "/docs/8.1/:path*",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": true,
-        "source": "/docs/:renderer(react|vue)/:path*",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": false,
-        "source": "/docs/8.1/:path*",
-      },
-      {
-        "destination": "/docs",
-        "permanent": true,
-        "source": "/docs/8.0",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": true,
-        "source": "/docs/8.0/:path*",
-      },
-      {
-        "destination": "/docs/7/get-started/install/",
-        "permanent": true,
-        "source": "/docs/7.6",
-      },
-      {
-        "destination": "/docs/7/:path*",
-        "permanent": true,
-        "source": "/docs/7.6/:path*",
-      },
-      {
-        "destination": "/docs/7/get-started/install/",
-        "permanent": true,
-        "source": "/docs/7.0",
-      },
-      {
-        "destination": "/docs/7/:path*",
-        "permanent": true,
-        "source": "/docs/7.0/:renderer(react|vue)/:path*",
-      },
-      {
-        "destination": "/docs",
-        "permanent": false,
-        "source": "/docs/next",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": false,
-        "source": "/docs/next/:renderer(react|vue)/:path*",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": false,
-        "source": "/docs/next/:path*",
-      },
-      {
-        "destination": "/releases/8.1",
-        "permanent": false,
-        "source": "/releases",
-      },
-    ]
-  `);
-});
 
-test('generateRedirects, minor pre-release', () => {
-  const result = generateRedirects({
-    rawRedirects: `
-/docs/workflows/unit-testing/ /docs/writing-tests/stories-in-unit-tests/ 308
-    `,
-    latestVersionString: '8.1',
-    nextVersionString: '8.2',
-    renderers: ['react', 'vue'],
-    versions: [
-      { version: 8.1, string: '8.1', label: 'latest' },
-      { version: 8.0, string: '8.0' },
-      { version: 7.6, string: '7.6' },
-      { version: 7, string: '7.0' },
-      { version: 8.2, string: '8.2', label: 'alpha' },
-      { string: 'next' },
-    ],
-  });
-  expect(result).toMatchInlineSnapshot(`
-    [
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/workflows/unit-testing/",
-      },
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/:renderer(react|vue)/workflows/unit-testing/",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": true,
-        "source": "/docs/8.1/:path*",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": true,
-        "source": "/docs/:renderer(react|vue)/:path*",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": false,
-        "source": "/docs/8.1/:path*",
-      },
-      {
-        "destination": "/docs",
-        "permanent": true,
-        "source": "/docs/8.0",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": true,
-        "source": "/docs/8.0/:path*",
-      },
-      {
-        "destination": "/docs/7/get-started/install/",
-        "permanent": true,
-        "source": "/docs/7.6",
-      },
-      {
-        "destination": "/docs/7/:path*",
-        "permanent": true,
-        "source": "/docs/7.6/:path*",
-      },
-      {
-        "destination": "/docs/7/get-started/install/",
-        "permanent": true,
-        "source": "/docs/7.0",
-      },
-      {
-        "destination": "/docs/7/:path*",
-        "permanent": true,
-        "source": "/docs/7.0/:renderer(react|vue)/:path*",
-      },
-      {
-        "destination": "/docs/8.2",
-        "permanent": false,
-        "source": "/docs/next",
-      },
-      {
-        "destination": "/docs/8.2/:path*",
-        "permanent": false,
-        "source": "/docs/next/:renderer(react|vue)/:path*",
-      },
-      {
-        "destination": "/docs/8.2/:path*",
-        "permanent": false,
-        "source": "/docs/next/:path*",
-      },
-      {
-        "destination": "/releases/8.1",
-        "permanent": false,
-        "source": "/releases",
-      },
-    ]
-  `);
-});
+  describe('Wildcard Redirects', () => {
+    test('WC-1: Latest 10.1, no pre-release', () => {
+      const historical = [
+        '6.0',
+        '6.4',
+        '7.0',
+        '7.4',
+        '7.5',
+        '8.0',
+        '8.6',
+        '9.0',
+        '9.1',
+        '10.0',
+        '10.1',
+      ];
 
-test('generateRedirects, major pre-release', () => {
-  const result = generateRedirects({
-    rawRedirects: `
-/docs/workflows/unit-testing/ /docs/writing-tests/stories-in-unit-tests/ 308
-    `,
-    latestVersionString: '8.1',
-    nextVersionString: '9.0',
-    renderers: ['react', 'vue'],
-    versions: [
-      { version: 8.1, string: '8.1', label: 'latest' },
-      { version: 8.0, string: '8.0' },
-      { version: 7.6, string: '7.6' },
-      { version: 7, string: '7.0' },
-      { version: 9.0, string: '9.0', label: 'alpha' },
-      { string: 'next' },
-    ],
-  });
-  expect(result).toMatchInlineSnapshot(`
-    [
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/workflows/unit-testing/",
-      },
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/:renderer(react|vue)/workflows/unit-testing/",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": true,
-        "source": "/docs/8.1/:path*",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": true,
-        "source": "/docs/:renderer(react|vue)/:path*",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": false,
-        "source": "/docs/8.1/:path*",
-      },
-      {
-        "destination": "/docs",
-        "permanent": true,
-        "source": "/docs/8.0",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": true,
-        "source": "/docs/8.0/:path*",
-      },
-      {
-        "destination": "/docs/7/get-started/install/",
-        "permanent": true,
-        "source": "/docs/7.6",
-      },
-      {
-        "destination": "/docs/7/:path*",
-        "permanent": true,
-        "source": "/docs/7.6/:path*",
-      },
-      {
-        "destination": "/docs/7/get-started/install/",
-        "permanent": true,
-        "source": "/docs/7.0",
-      },
-      {
-        "destination": "/docs/7/:path*",
-        "permanent": true,
-        "source": "/docs/7.0/:renderer(react|vue)/:path*",
-      },
-      {
-        "destination": "/docs/9",
-        "permanent": true,
-        "source": "/docs/9.0",
-      },
-      {
-        "destination": "/docs/9/:path*",
-        "permanent": true,
-        "source": "/docs/9.0/:path*",
-      },
-      {
-        "destination": "/docs/9",
-        "permanent": false,
-        "source": "/docs/next",
-      },
-      {
-        "destination": "/docs/9/:path*",
-        "permanent": false,
-        "source": "/docs/next/:renderer(react|vue)/:path*",
-      },
-      {
-        "destination": "/docs/9/:path*",
-        "permanent": false,
-        "source": "/docs/next/:path*",
-      },
-      {
-        "destination": "/releases/8.1",
-        "permanent": false,
-        "source": "/releases",
-      },
-    ]
-  `);
-});
+      const result = generateWildcardRedirects({
+        rawRedirects: '',
+        renderers,
+        historicalVersions: historical,
+        supportedVersions: ['10.1', '9.1', '8.6'],
+        latestVersion: '10.1',
+        nextVersion: null,
+      });
 
-test('generateRedirects, major latest', () => {
-  const result = generateRedirects({
-    rawRedirects: `
-/docs/workflows/unit-testing/ /docs/writing-tests/stories-in-unit-tests/ 308
-    `,
-    latestVersionString: '9.0',
-    nextVersionString: null,
-    renderers: ['react', 'vue'],
-    versions: [
-      { version: 9.0, string: '9.0', label: 'latest' },
-      { version: 8.6, string: '8.6' },
-      { version: 7.6, string: '7.6' },
-      { string: 'next' },
-    ],
+      expect(result).toEqual([
+        ['/docs/react/*', '/docs/:splat', '301'],
+        ['/docs/vue/*', '/docs/:splat', '301'],
+        ['/docs/6.4/react/*', '/docs/:splat', '301'],
+        ['/docs/6.4/vue/*', '/docs/:splat', '301'],
+        ['/docs/7.0/react/*', '/docs/:splat', '301'],
+        ['/docs/7.0/vue/*', '/docs/:splat', '301'],
+        ['/docs/7/react/*', '/docs/:splat', '301'],
+        ['/docs/7/vue/*', '/docs/:splat', '301'],
+        ['/docs/7.4/react/*', '/docs/:splat', '301'],
+        ['/docs/7.4/vue/*', '/docs/:splat', '301'],
+        ['/docs/next/react/*', '/docs/:splat', '302'],
+        ['/docs/next/vue/*', '/docs/:splat', '302'],
+        ['/docs/7.5/*', '/docs/:splat', '301'],
+        ['/docs/8.0/*', '/docs/8/:splat', '301'],
+        ['/docs/8.6/*', '/docs/8/:splat', '301'],
+        ['/docs/9.0/*', '/docs/9/:splat', '301'],
+        ['/docs/9.1/*', '/docs/9/:splat', '301'],
+        ['/docs/10.0/*', '/docs/:splat', '302'],
+        ['/docs/10.1/*', '/docs/:splat', '302'],
+        ['/docs/next/*', '/docs/:splat', '302'],
+      ]);
+    });
+
+    test('WC-2: Latest 10.1, minor pre-release 10.2', () => {
+      const historical = [
+        '6.0',
+        '6.4',
+        '7.0',
+        '7.4',
+        '7.5',
+        '8.0',
+        '8.6',
+        '9.0',
+        '9.1',
+        '10.0',
+        '10.1',
+      ];
+
+      const result = generateWildcardRedirects({
+        rawRedirects: '',
+        renderers,
+        historicalVersions: historical,
+        supportedVersions: ['10.1', '9.1', '8.6'],
+        latestVersion: '10.1',
+        nextVersion: '10.2',
+      });
+
+      expect(result).toEqual([
+        ['/docs/react/*', '/docs/:splat', '301'],
+        ['/docs/vue/*', '/docs/:splat', '301'],
+        ['/docs/6.4/react/*', '/docs/:splat', '301'],
+        ['/docs/6.4/vue/*', '/docs/:splat', '301'],
+        ['/docs/7.0/react/*', '/docs/:splat', '301'],
+        ['/docs/7.0/vue/*', '/docs/:splat', '301'],
+        ['/docs/7/react/*', '/docs/:splat', '301'],
+        ['/docs/7/vue/*', '/docs/:splat', '301'],
+        ['/docs/7.4/react/*', '/docs/:splat', '301'],
+        ['/docs/7.4/vue/*', '/docs/:splat', '301'],
+        ['/docs/next/react/*', '/docs/:splat', '302'],
+        ['/docs/next/vue/*', '/docs/:splat', '302'],
+        ['/docs/7.5/*', '/docs/:splat', '301'],
+        ['/docs/8.0/*', '/docs/8/:splat', '301'],
+        ['/docs/8.6/*', '/docs/8/:splat', '301'],
+        ['/docs/9.0/*', '/docs/9/:splat', '301'],
+        ['/docs/9.1/*', '/docs/9/:splat', '301'],
+        ['/docs/10.0/*', '/docs/:splat', '302'],
+        ['/docs/10.1/*', '/docs/:splat', '302'],
+        ['/docs/next/*', '/docs/10.2/:splat', '302'],
+      ]);
+    });
+
+    test('WC-3: Latest 10.2, major pre-release 11.0', () => {
+      const historical = [
+        '6.0',
+        '6.4',
+        '7.0',
+        '7.4',
+        '7.5',
+        '8.0',
+        '8.6',
+        '9.0',
+        '9.1',
+        '10.0',
+        '10.2',
+      ];
+
+      const result = generateWildcardRedirects({
+        rawRedirects: '',
+        renderers,
+        historicalVersions: historical,
+        supportedVersions: ['10.2', '9.1', '8.6'],
+        latestVersion: '10.2',
+        nextVersion: '11.0',
+      });
+
+      expect(result).toEqual([
+        ['/docs/react/*', '/docs/:splat', '301'],
+        ['/docs/vue/*', '/docs/:splat', '301'],
+        ['/docs/6.4/react/*', '/docs/:splat', '301'],
+        ['/docs/6.4/vue/*', '/docs/:splat', '301'],
+        ['/docs/7.0/react/*', '/docs/:splat', '301'],
+        ['/docs/7.0/vue/*', '/docs/:splat', '301'],
+        ['/docs/7/react/*', '/docs/:splat', '301'],
+        ['/docs/7/vue/*', '/docs/:splat', '301'],
+        ['/docs/7.4/react/*', '/docs/:splat', '301'],
+        ['/docs/7.4/vue/*', '/docs/:splat', '301'],
+        ['/docs/next/react/*', '/docs/:splat', '302'],
+        ['/docs/next/vue/*', '/docs/:splat', '302'],
+        ['/docs/7.5/*', '/docs/:splat', '301'],
+        ['/docs/8.0/*', '/docs/8/:splat', '301'],
+        ['/docs/8.6/*', '/docs/8/:splat', '301'],
+        ['/docs/9.0/*', '/docs/9/:splat', '301'],
+        ['/docs/9.1/*', '/docs/9/:splat', '301'],
+        ['/docs/10.0/*', '/docs/:splat', '302'],
+        ['/docs/10.2/*', '/docs/:splat', '302'],
+        ['/docs/11.0/*', '/docs/11/:splat', '302'],
+        ['/docs/next/*', '/docs/11/:splat', '302'],
+      ]);
+    });
+
+    test('WC-4: Latest 11.0, no pre-release (major 8 now unsupported)', () => {
+      const historical = [
+        '6.0',
+        '6.4',
+        '7.0',
+        '7.4',
+        '7.5',
+        '8.0',
+        '8.6',
+        '9.0',
+        '9.1',
+        '10.0',
+        '10.2',
+        '11.0',
+      ];
+
+      const result = generateWildcardRedirects({
+        rawRedirects: '',
+        renderers,
+        historicalVersions: historical,
+        supportedVersions: ['11.0', '10.2', '9.1'],
+        latestVersion: '11.0',
+        nextVersion: null,
+      });
+
+      expect(result).toEqual([
+        ['/docs/react/*', '/docs/:splat', '301'],
+        ['/docs/vue/*', '/docs/:splat', '301'],
+        ['/docs/6.4/react/*', '/docs/:splat', '301'],
+        ['/docs/6.4/vue/*', '/docs/:splat', '301'],
+        ['/docs/7.0/react/*', '/docs/:splat', '301'],
+        ['/docs/7.0/vue/*', '/docs/:splat', '301'],
+        ['/docs/7/react/*', '/docs/:splat', '301'],
+        ['/docs/7/vue/*', '/docs/:splat', '301'],
+        ['/docs/7.4/react/*', '/docs/:splat', '301'],
+        ['/docs/7.4/vue/*', '/docs/:splat', '301'],
+        ['/docs/next/react/*', '/docs/:splat', '302'],
+        ['/docs/next/vue/*', '/docs/:splat', '302'],
+        ['/docs/7.5/*', '/docs/:splat', '301'],
+        ['/docs/8.0/*', '/docs/:splat', '301'],
+        ['/docs/8.6/*', '/docs/:splat', '301'],
+        ['/docs/9.0/*', '/docs/9/:splat', '301'],
+        ['/docs/9.1/*', '/docs/9/:splat', '301'],
+        ['/docs/10.0/*', '/docs/10/:splat', '301'],
+        ['/docs/10.2/*', '/docs/10/:splat', '301'],
+        ['/docs/11.0/*', '/docs/:splat', '302'],
+        ['/docs/next/*', '/docs/:splat', '302'],
+      ]);
+    });
   });
-  expect(result).toMatchInlineSnapshot(`
-    [
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/workflows/unit-testing/",
-      },
-      {
-        "destination": "/docs/writing-tests/stories-in-unit-tests/",
-        "permanent": true,
-        "source": "/docs/:renderer(react|vue)/workflows/unit-testing/",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": true,
-        "source": "/docs/9.0/:path*",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": true,
-        "source": "/docs/9/:path*",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": true,
-        "source": "/docs/:renderer(react|vue)/:path*",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": false,
-        "source": "/docs/9.0/:path*",
-      },
-      {
-        "destination": "/docs/8",
-        "permanent": true,
-        "source": "/docs/8.6",
-      },
-      {
-        "destination": "/docs/8/:path*",
-        "permanent": true,
-        "source": "/docs/8.6/:path*",
-      },
-      {
-        "destination": "/docs/7/get-started/install/",
-        "permanent": true,
-        "source": "/docs/7.6",
-      },
-      {
-        "destination": "/docs/7/:path*",
-        "permanent": true,
-        "source": "/docs/7.6/:path*",
-      },
-      {
-        "destination": "/docs",
-        "permanent": false,
-        "source": "/docs/next",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": false,
-        "source": "/docs/next/:renderer(react|vue)/:path*",
-      },
-      {
-        "destination": "/docs/:path*",
-        "permanent": false,
-        "source": "/docs/next/:path*",
-      },
-      {
-        "destination": "/releases/9.0",
-        "permanent": false,
-        "source": "/releases",
-      },
-    ]
-  `);
+
+  describe('Install Redirects', () => {
+    test('IN-1: Latest 10.1, no pre-release', () => {
+      const historical = [
+        '6.0',
+        '6.4',
+        '7.0',
+        '7.4',
+        '7.5',
+        '8.0',
+        '8.6',
+        '9.0',
+        '9.1',
+        '10.0',
+        '10.1',
+      ];
+
+      const result = generateInstallRedirects({
+        rawRedirects: '',
+        renderers,
+        historicalVersions: historical,
+        supportedVersions: ['10.1', '9.1', '8.6'],
+        latestVersion: '10.1',
+        nextVersion: null,
+      });
+
+      expect(result).toEqual([
+        // Renderer group — all pre-8 versions use old install slug
+        ['/docs/react', '/docs/get-started/install/', '301'],
+        ['/docs/vue', '/docs/get-started/install/', '301'],
+        ['/docs/6.4/react', '/docs/get-started/install/', '301'],
+        ['/docs/6.4/vue', '/docs/get-started/install/', '301'],
+        ['/docs/7.0/react', '/docs/get-started/install/', '301'],
+        ['/docs/7.0/vue', '/docs/get-started/install/', '301'],
+        ['/docs/7/react', '/docs/get-started/install/', '301'],
+        ['/docs/7/vue', '/docs/get-started/install/', '301'],
+        ['/docs/7.4/react', '/docs/get-started/install/', '301'],
+        ['/docs/7.4/vue', '/docs/get-started/install/', '301'],
+        ['/docs/next/react', '/docs', '302'],
+        ['/docs/next/vue', '/docs', '302'],
+        // Non-renderer group — 7.5 uses old slug, 8.0+ uses /docs
+        ['/docs/7.5', '/docs/get-started/install/', '301'],
+        ['/docs/8.0', '/docs/8', '301'],
+        ['/docs/8.6', '/docs/8', '301'],
+        ['/docs/9.0', '/docs/9', '301'],
+        ['/docs/9.1', '/docs/9', '301'],
+        ['/docs/10.0', '/docs', '302'],
+        ['/docs/10.1', '/docs', '302'],
+        ['/docs/next', '/docs', '302'],
+      ]);
+    });
+
+    test('IN-2: Latest 10.2, major pre-release 11.0', () => {
+      const historical = [
+        '6.0',
+        '6.4',
+        '7.0',
+        '7.4',
+        '7.5',
+        '8.0',
+        '8.6',
+        '9.0',
+        '9.1',
+        '10.0',
+        '10.2',
+      ];
+
+      const result = generateInstallRedirects({
+        rawRedirects: '',
+        renderers,
+        historicalVersions: historical,
+        supportedVersions: ['10.2', '9.1', '8.6'],
+        latestVersion: '10.2',
+        nextVersion: '11.0',
+      });
+
+      expect(result).toEqual([
+        ['/docs/react', '/docs/get-started/install/', '301'],
+        ['/docs/vue', '/docs/get-started/install/', '301'],
+        ['/docs/6.4/react', '/docs/get-started/install/', '301'],
+        ['/docs/6.4/vue', '/docs/get-started/install/', '301'],
+        ['/docs/7.0/react', '/docs/get-started/install/', '301'],
+        ['/docs/7.0/vue', '/docs/get-started/install/', '301'],
+        ['/docs/7/react', '/docs/get-started/install/', '301'],
+        ['/docs/7/vue', '/docs/get-started/install/', '301'],
+        ['/docs/7.4/react', '/docs/get-started/install/', '301'],
+        ['/docs/7.4/vue', '/docs/get-started/install/', '301'],
+        ['/docs/next/react', '/docs', '302'],
+        ['/docs/next/vue', '/docs', '302'],
+        ['/docs/7.5', '/docs/get-started/install/', '301'],
+        ['/docs/8.0', '/docs', '301'],
+        ['/docs/8.6', '/docs', '301'],
+        ['/docs/9.0', '/docs/9', '301'],
+        ['/docs/9.1', '/docs/9', '301'],
+        ['/docs/10.0', '/docs/10', '301'],
+        ['/docs/10.2', '/docs/10', '301'],
+        // Major pre-release gets an entry
+        ['/docs/11.0', '/docs/11', '302'],
+      ]);
+    });
+  });
+
+  describe('Combined: specific path + wildcard redirects', () => {
+    test('specific path redirects appear before wildcard redirects', () => {
+      const result = generateRedirects({
+        rawRedirects: `# 6.4\n/docs/the/from/path /docs/the/to/path 301`,
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
+
+      // Specific path entries come first
+      const specificEntries = result.filter(
+        ([from]) => !from.endsWith('/*')
+      );
+      const wildcardEntries = result.filter(([from]) => from.endsWith('/*'));
+
+      expect(specificEntries.length).toBeGreaterThan(0);
+      expect(wildcardEntries.length).toBeGreaterThan(0);
+
+      // All specific entries should precede all wildcard entries
+      const lastSpecificIndex = result.findIndex(
+        ([from]) => from.endsWith('/*')
+      );
+      for (let i = 0; i < lastSpecificIndex; i++) {
+        expect(result[i][0].endsWith('/*')).toBe(false);
+      }
+    });
+  });
+
+  describe('Edge cases', () => {
+    test('empty raw redirects produces no specific path redirects', () => {
+      const result = generateSpecificPathRedirects({
+        rawRedirects: '',
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
+
+      expect(result).toEqual([]);
+    });
+
+    test('multiple raw redirect rules are all expanded', () => {
+      const result = generateRedirects({
+        rawRedirects: [
+          '# 6.4',
+          '/docs/old/path-a /docs/new/path-a 301',
+          '/docs/old/path-b /docs/new/path-b 308',
+        ].join('\n'),
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
+
+      const specificEntries = result.filter(
+        ([from]) => !from.endsWith('/*')
+      );
+
+      // Both rules should produce entries for each renderer
+      const pathAEntries = specificEntries.filter(([from]) =>
+        from.includes('path-a')
+      );
+      const pathBEntries = specificEntries.filter(([from]) =>
+        from.includes('path-b')
+      );
+
+      expect(pathAEntries.length).toBe(2); // react + vue
+      expect(pathBEntries.length).toBe(2);
+
+      // Status codes preserved independently
+      for (const entry of pathAEntries) {
+        expect(entry[2]).toBe('301');
+      }
+      for (const entry of pathBEntries) {
+        expect(entry[2]).toBe('308');
+      }
+    });
+
+    test('rules across multiple version headers', () => {
+      const result = generateRedirects({
+        rawRedirects: [
+          '# 6.4',
+          '/docs/old-a /docs/new-a 301',
+          '',
+          '# 7.6',
+          '/docs/old-b /docs/new-b 301',
+        ].join('\n'),
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
+
+      const specificEntries = result.filter(
+        ([from]) => !from.endsWith('/*')
+      );
+
+      const entriesA = specificEntries.filter(([from]) =>
+        from.includes('old-a')
+      );
+      const entriesB = specificEntries.filter(([from]) =>
+        from.includes('old-b')
+      );
+
+      // Rule A (header 6.4): only unversioned entries (2 renderers)
+      expect(entriesA.length).toBe(2);
+
+      // Rule B (header 7.6): unversioned + versioned renderer entries + non-renderer + next entries
+      // Should be significantly more than Rule A
+      expect(entriesB.length).toBeGreaterThan(entriesA.length);
+    });
+
+    test('raw redirects with extra whitespace are parsed correctly', () => {
+      const result = generateRedirects({
+        rawRedirects: `# 6.4\n  /docs/the/from/path   /docs/the/to/path   301  `,
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
+
+      expect(result).toEqual(
+        expect.arrayContaining([
+          ['/docs/react/the/from/path', '/docs/the/to/path', '301'],
+          ['/docs/vue/the/from/path', '/docs/the/to/path', '301'],
+        ])
+      );
+    });
+  });
 });

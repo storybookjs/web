@@ -1,10 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { docsVersions, latestVersion } from '@repo/utils';
-import { docsVersionsRedirects } from './redirects/docs-versions-redirects';
-import { type RedirectData } from './redirects/types';
-import { docsRenderersRedirects } from './redirects/docs-renderers-redirects';
-import { docsCommonRedirects } from './redirects/docs-common-redirects';
+import { docsVersions } from '@repo/utils';
 
 /**
  * Extract version prefix and remaining doc path from a docs URL path.
@@ -60,28 +56,6 @@ function buildMdRewriteUrl(
 export async function middleware(request: NextRequest) {
   const pathname: string = request.nextUrl.pathname;
 
-  // Redirect /docs/{latestVersionId}/... to /docs/... (latest version doesn't need a prefix)
-  // This handles cases like /docs/10.3/writing-stories → /docs/writing-stories
-  if (pathname.startsWith('/docs/') && !pathname.endsWith('.md')) {
-    const rawPath = pathname.replace(/^\/docs\//, '');
-    const segments = rawPath.split('/').filter(Boolean);
-    if (segments.length >= 2) {
-      const firstSegment = segments[0];
-      const firstMajor = firstSegment.split('.')[0];
-      const matchedVersion = docsVersions.find(
-        (v) => v.id === firstSegment || v.id.split('.')[0] === firstMajor,
-      );
-      // Only redirect if it matches the latest version (non-latest versions are handled by existing routing)
-      if (matchedVersion && matchedVersion.id === latestVersion.id && !matchedVersion.inSlug) {
-        const restPath = segments.slice(1).join('/');
-        return NextResponse.redirect(
-          new URL(`/docs/${restPath}`, request.url),
-          308,
-        );
-      }
-    }
-  }
-
   // .md suffix: serve markdown for any /docs/*.md URL (like Stripe's docs.stripe.com/testing.md)
   // Supports versioned URLs: /docs/9/writing-stories.md, /docs/8/get-started.md
   if (pathname.startsWith('/docs/') && pathname.endsWith('.md')) {
@@ -109,62 +83,6 @@ export async function middleware(request: NextRequest) {
         const url = buildMdRewriteUrl(request, docPath, versionSlug);
         return NextResponse.rewrite(url);
       }
-    }
-  }
-
-  // Merge all redirects into a single list
-  // The order of the list is important
-  // The first matching redirect will be used
-  const redirectList: RedirectData[] = [
-    ...docsVersionsRedirects,
-    ...docsRenderersRedirects,
-    ...docsCommonRedirects,
-  ];
-
-  for (const redirectData of redirectList) {
-    let sourcePattern = redirectData.source;
-    let destinationURL = redirectData.destination;
-
-    // Check if the source pattern includes ":path" or ":path*"
-    if (sourcePattern.includes(':path')) {
-      // Check if the source pattern includes a wildcard
-      const wildcard = sourcePattern.endsWith('*');
-
-      // Replace ":path*" and ":path" with the appropriate regex
-      sourcePattern = sourcePattern
-        .replace(':path*', '(.*)')
-        .replace(':path', '([^/]+)');
-
-      // Create a regex pattern to match the source pattern
-      const regex = new RegExp(`^${sourcePattern}$`);
-
-      // Check if the current path matches the source pattern
-      const match = pathname.match(regex);
-
-      if (match) {
-        // If wildcard is true, replace ":path" in the destination with all matched segments
-        // Otherwise, replace with the first matched segment
-        if (wildcard) {
-          // Assuming the entire path after ":path*" is captured in match[1]
-          destinationURL = destinationURL.replace(':path', match[1]);
-        } else {
-          // Replace ":path" with the first matched segment
-          destinationURL = destinationURL.replace(':path', match[1]);
-        }
-
-        const statusCode = redirectData.permanent ? 308 : 307;
-        return NextResponse.redirect(
-          new URL(destinationURL, request.url),
-          statusCode,
-        );
-      }
-    } else if (pathname === redirectData.source) {
-      // Handle exact matches
-      const statusCode = redirectData.permanent ? 308 : 307;
-      return NextResponse.redirect(
-        new URL(destinationURL, request.url),
-        statusCode,
-      );
     }
   }
 

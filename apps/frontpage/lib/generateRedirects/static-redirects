@@ -1,0 +1,89 @@
+# Static redirects
+
+## Proxy rewrites
+/announce/*                                   https://storybook-announce.netlify.app/announce/:splat                          200
+/showcase/sitemap.xml                         /showcase/sitemap.xml                                                           200
+/showcase/*                                   https://storybook-component-catalog.netlify.app/showcase/:splat                 200
+/tutorials/sitemap.xml                        /tutorials/sitemap.xml                                                          200
+/tutorials/*                                  https://storybook-tutorials.netlify.app/tutorials/:splat                        200
+/proxy/api/events/*                           https://plausible.io/api/event                                                  200
+/whats-new/v1/*                               https://storybook-dx.netlify.app/.netlify/functions/whats-new/:splat            200
+
+## Curated
+/design-system                                https://master--5ccbc373887ca40020446347.chromatic.com                          301
+/status                                       https://github.com/storybookjs/storybook/issues/23279                           302
+/telemetry                                    /docs/configure/telemetry                                                       301
+/versions.json                                /versions                                                                       301
+/rn-vs-rnw                                    /docs/get-started/frameworks/react-native-web-vite?renderer=react-native-web#react-native-vs-react-native-web 301
+/migration-guides/7.0                         /docs/7/migration-guide                                                         301
+/migration-guides/8.0                         /docs/8/migration-guide                                                         301
+/migration-guides/9.0                         /docs/9/releases/migration-guide                                                301
+/docs/9/migration-guide                       /docs/9/releases/migration-guide                                                301
+
+## Non-versioned and renderer-agnostic docs URLs
+/addons/writing-addons                        /docs/addons/writing-addons                                                     301
+/docs/addons/using-addons                     /docs/addons/install-addons                                                     301
+/docs/addons/api                              /docs/addons/addons-api                                                         301
+/basics/slow-start-guide                      /docs/configure                                                                 301
+/basics/guide-react-native                    https://github.com/storybookjs/react-native#storybook-for-react-native          301
+/basics/*                                     /docs                                                                           301
+/docs/basics/slow-start-guide                 /docs/configure                                                                 301
+/docs/basics/guide-react-native               https://github.com/storybookjs/react-native#storybook-for-react-native          301
+/docs/basics/writing-stories                  /docs/get-started/whats-a-story                                                 301
+/docs/basics/exporting-storybook              /docs/sharing/publish-storybook                                                 301
+/docs/basics/faq                              /docs/faq                                                                       301
+/docs/basics/live-examples                    https://github.com/storybookjs/storybook/blob/release-6-5/examples/README.md    301
+/docs/basics/*                                /docs                                                                           301
+/configurations/*                             /docs/configure                                                                 301
+/docs/configurations/options-parameter        /docs/configure/features-and-behavior                                           301
+/docs/configurations/custom-webpack-config    /docs/builders/webpack                                                          301
+/docs/configurations/custom-babel-config      /docs/configure/compilers                                                       301
+/docs/configurations/typescript-config        /docs/configure/typescript                                                      301
+/docs/configurations/add-custom-head-tags     /docs/configure/story-rendering#adding-to-head                                  301
+/docs/configurations/add-custom-body          /docs/configure/story-rendering#adding-to-body                                  301
+/docs/configurations/serving-static-files     /docs/configure/images-and-assets#serving-static-files-via-storybook            301
+/docs/configurations/env-vars                 /docs/configure/environment-variables                                           301
+/docs/configurations/theming                  /docs/configure/theming                                                         301
+/docs/configurations/cli-options              /docs/api/cli-options                                                           301
+/docs/configurations/standalone-options       https://github.com/storybookjs/storybook/blob/next/lib/core/docs/standalone.md  301
+/docs/configurations/*                        /docs/configure                                                                 301
+/examples/*                                   /docs                                                                           301
+/docs/examples/*                              /docs                                                                           301
+/docs/formats/component-story-format          /docs/api/csf                                                                   301
+/docs/formats/storiesof-api                   https://github.com/storybookjs/storybook/blob/next/lib/core/docs/storiesOf.md   301
+/docs/formats/mdx-syntax                      /docs/writing-docs/mdx                                                          301
+/docs/get-started                             /docs                                                                           301
+/docs/guides/slow-start-guide                 /docs/configure                                                                 301
+/docs/guides/guide-react-native               https://github.com/storybookjs/react-native#storybook-for-react-native          301
+/docs/guides/*                                /docs                                                                           301
+/logos/*                                      /docs                                                                           301
+/docs/logos/*                                 /docs                                                                           301
+/docs/presets/introduction                    /docs/addons/writing-presets                                                    301
+/docs/presets/preset-gallery                  https://github.com/storybookjs/presets                                          301
+/docs/presets/writing-presets                 /docs/addons/writing-presets                                                    301
+/testing/*                                    /docs                                                                           301
+/docs/testing/react-ui-testing                /docs/writing-tests                                                             301
+/docs/testing/structural-testing              /docs/writing-tests/snapshot-testing                                            301
+/docs/testing/interaction-testing             /docs/writing-tests/interaction-testing                                         301
+/docs/testing/automated-visual-testing        /docs/writing-tests/visual-testing                                              301
+/docs/testing/manual-testing                  /docs/writing-tests                                                             301
+/docs/testing/*                               /docs/writing-tests                                                             301
+
+## Renderer examples
+/docs/react/get-started/examples              /showcase                                                                       301
+/docs/vue/get-started/examples                /showcase                                                                       301
+/docs/angular/get-started/examples            /showcase                                                                       301
+/docs/web-components/get-started/examples     /showcase                                                                       301
+/docs/ember/get-started/examples              /showcase                                                                       301
+/docs/html/get-started/examples               /showcase                                                                       301
+/docs/svelte/get-started/examples             /showcase                                                                       301
+/docs/preact/get-started/examples             /showcase                                                                       301
+/docs/qwik/get-started/examples               /showcase                                                                       301
+/docs/solid/get-started/examples              /showcase                                                                       301
+
+## Addons
+/addons/addon-gallery                         /addons                                                                         301
+/integrations                                 /addons                                                                         301
+/recipes                                      /addons                                                                         301
+/integrations/tag/*                           /addons/tag/:splat                                                              301
+/tag/*                                        /addons/tag/:splat                                                              301

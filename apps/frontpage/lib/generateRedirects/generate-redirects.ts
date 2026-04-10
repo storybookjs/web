@@ -1,268 +1,448 @@
-import { docsVersions, latestVersion } from '@repo/utils';
-import { buildPathWithVersion } from '../build-path-with-version';
+import { docsVersions, latestVersion as LATEST_VERSION, historicalVersions as HISTORICAL_VERSIONS } from '@repo/utils';
 import { getFrameworks } from '../get-frameworks';
-
-// We need to fill out the minor versions that aren't represented in the versions we import
-export function generateSequence(inputVersions: string[]) {
-  const result = new Set<string>();
-
-  for (const version of inputVersions) {
-    result.add(version);
-
-    const [major, maxMinor] = version.split('.');
-
-    for (let minor = Number(maxMinor) - 1; minor >= 0; minor--) {
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions -- TODO: Fix this
-      result.add(`${major}.${minor}`);
-    }
-  }
-
-  return [...result];
-}
-
-const allMinorDocsVersions = generateSequence(docsVersions.map((v) => v.id));
-
-type Lines = [string, string, string][];
-
-export function parseRawRedirects(rawRedirects: string) {
-  const lines = rawRedirects.split('\n');
-  const parsed: Lines = [];
-
-  lines.forEach((line) => {
-    if (!line.startsWith('#') && line.trim() !== '') {
-      // Add non-empty lines to the current version's lines array
-      parsed.push(line.split(/\s+/) as Lines[0]);
-    }
-  });
-
-  return parsed;
-}
-
-interface Version {
-  string: string;
-  label?: string;
-  version?: number;
-}
-
-interface Redirect {
-  source: string;
-  destination: string;
-  permanent: boolean;
-}
 
 function getAllRenderers() {
   const { coreFrameworks, communityFrameworks } = getFrameworks();
   return [...coreFrameworks, ...communityFrameworks];
 }
 
-function shouldShortenToMajor(version: string, nextVersion?: string | null) {
-  return version !== nextVersion || nextVersion.split('.')[1] === '0';
+const defaultOptions = {
+  rawRedirects: '',
+  renderers: getAllRenderers(),
+  supportedVersions: docsVersions.map((v) => v.id),
+  historicalVersions: HISTORICAL_VERSIONS,
+  latestVersion: LATEST_VERSION.id,
+  nextVersion: docsVersions.find((v) => v.preRelease)?.id,
+};
+
+function parseVersion(v: string) {
+  const [major, minor] = v.split('.').map(Number);
+  return { major, minor };
 }
 
-function getShortedVersionString(version: string, nextVersion?: string | null) {
-  return shouldShortenToMajor(version, nextVersion)
-    ? version.split('.')[0]
-    : version;
+function compareVersions(a: string, b: string) {
+  const pa = parseVersion(a);
+  const pb = parseVersion(b);
+  return pa.major !== pb.major ? pa.major - pb.major : pa.minor - pb.minor;
 }
 
-function getRedirect(
-  source: string,
-  destination: string,
-  code: string,
-  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars -- TODO: Fix this
-  debugType?: string,
+function getMajor(v: string) {
+  return parseVersion(v).major;
+}
+
+function getEra(v: string): 'unversioned' | 'renderer' | 'versioned' {
+  const { major, minor } = parseVersion(v);
+  if (major < 6 || (major === 6 && minor < 4)) return 'unversioned';
+  if (major < 7 || (major === 7 && minor <= 4)) return 'renderer';
+  return 'versioned';
+}
+
+function hasHardcodedVersion(toPath: string) {
+  return /^\/docs\/\d+(?:\.\d+)?\//.test(toPath);
+}
+
+function getSuffix(path: string) {
+  return path.replace(/^\/docs\//, '');
+}
+
+function getToForVersion(
+  rawTo: string,
+  version: string,
+  supportedVersions: string[],
+  latestVersion: string,
 ) {
-  return {
-    source,
-    destination,
-    permanent: code === '308',
-    // debugType,
-  };
+  if (hasHardcodedVersion(rawTo)) return rawTo;
+  const major = getMajor(version);
+  if (major === getMajor(latestVersion)) return rawTo;
+  if (supportedVersions.some((sv) => getMajor(sv) === major)) {
+    return `/docs/${String(major)}/${getSuffix(rawTo)}`;
+  }
+  return rawTo;
 }
 
-function fromWithRenderer(from: string, renderer: string) {
-  const parts = from.split('/');
-  parts.splice(2, 0, renderer);
-  return parts.join('/');
+function getNextTo(
+  rawTo: string,
+  nextVersion: string | null | undefined,
+  latestVersion: string,
+) {
+  if (hasHardcodedVersion(rawTo)) return rawTo;
+  if (!nextVersion) return rawTo;
+  const suffix = getSuffix(rawTo);
+  const nextMajor = getMajor(nextVersion);
+  return nextMajor > getMajor(latestVersion)
+    ? `/docs/${String(nextMajor)}/${suffix}`
+    : `/docs/${nextVersion}/${suffix}`;
 }
 
-const installDocsPageSlug = (string: string) =>
-  string === 'next' || Number(string) >= 8
+const installDocsPageSlug = (version: string) =>
+  version === 'next' || Number(version) >= 8
     ? '/docs'
     : '/docs/get-started/install/';
 
-export function generateRedirects({
-  latestVersionString = latestVersion.id,
-  nextVersionString = docsVersions.find((v) => v.preRelease)?.id,
-  rawRedirects,
-  renderers: renderersIn,
-  versions = [
-    ...allMinorDocsVersions.map((v) => ({ string: v, version: Number(v) })),
-    { string: 'next' },
-  ],
-}: {
-  latestVersionString?: string;
-  nextVersionString?: string | null;
-  rawRedirects: string;
-  renderers?: string[];
-  versions?: Version[];
-}) {
-  const renderers = renderersIn ?? getAllRenderers();
-  const renderersPathWildcardWithRegex = `:renderer(${renderers.join('|')})`;
+interface Rule {
+  headerVersion: string;
+  from: string;
+  to: string;
+  status: string;
+}
 
-  const parsedRedirects = parseRawRedirects(rawRedirects);
+function parseRawRedirects(raw: string): Rule[] {
+  const lines = raw.split('\n');
+  let currentVersion: string | null = null;
+  const rules: Rule[] = [];
 
-  const result = versions
-    .reduce<Redirect[]>(
-      (acc, { string, version = Number(latestVersionString) }) => {
-        const isNext = string === 'next';
-        const includeRenderers = version < 7.6;
-        const isLatest = string === latestVersionString;
-        const versionSlug = isLatest ? '' : `/${string}`;
-        const versionStringNormalized = isNext
-          ? nextVersionString ?? latestVersionString
-          : string;
-        const versionStringOverride = isLatest
-          ? ''
-          : getShortedVersionString(versionStringNormalized, nextVersionString);
-        const versionSlugOverride = isLatest ? '' : `/${versionStringOverride}`;
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
 
-        const [stringMajor, stringMinor] = string.split('.');
-        const isMajorOfLatestMinor =
-          stringMinor === '0' &&
-          stringMajor === latestVersionString.split('.')[0];
+    // eslint-disable-next-line prefer-named-capture-group -- TS version issue
+    const headerMatch = /^#\s+(.+)$/.exec(trimmed);
+    if (headerMatch) {
+      currentVersion = headerMatch[1].trim();
+      continue;
+    }
 
-        if (isLatest) {
-          parsedRedirects.forEach(([from, to, code]) => {
-            acc.push(getRedirect(from, to, code, 'a'));
-            acc.push(
-              getRedirect(
-                fromWithRenderer(from, renderersPathWildcardWithRegex),
-                to,
-                code,
-                'b',
-              ),
-            );
-          });
-          acc.push(
-            getRedirect(
-              `/docs/${string}/:path*`,
-              `/docs/:path*`,
-              '308',
-              'b',
-            )
-          );
-          if (string.includes('.0')) {
-            acc.push(
-              getRedirect(
-                `/docs/${string.replace('.0', '')}/:path*`,
-                `/docs/:path*`,
-                '308',
-                'b',
-              )
-            );
-          }
-        } else {
-          // acc.push({
-          //   debug: {
-          //     includeRenderers,
-          //     string,
-          //     versionStringNormalized,
-          //     versionSlugOverride,
-          //     isLatest,
-          //     isNext,
-          //     isMajorOfLatestMinor,
-          //     shouldShortenToMajor: shouldShortenToMajor(
-          //       versionStringNormalized,
-          //       nextVersionString,
-          //     ),
-          //   },
-          // });
-          // eslint-disable-next-line no-lonely-if -- TODO: Fix this
-          if (versionSlug !== `/${versionStringOverride}`) {
-            acc.push(
-              getRedirect(
-                `/docs${versionSlug}`,
-                isMajorOfLatestMinor || (isNext && !nextVersionString)
-                  ? installDocsPageSlug(string)
-                  : buildPathWithVersion(
-                      installDocsPageSlug(string),
-                      versionStringOverride,
-                    ),
-                isNext ? '307' : '308',
-                'c',
-              ),
-            );
-          }
-        }
-
-        if (includeRenderers || isLatest || isNext) {
-          if (isLatest) {
-            acc.push(
-              getRedirect(
-                `/docs/${renderersPathWildcardWithRegex}/:path*`,
-                '/docs/:path*',
-                '308',
-                'd',
-              ),
-            );
-          } else {
-            acc.push(
-              getRedirect(
-                `/docs/${string}/${renderersPathWildcardWithRegex}/:path*`,
-                isMajorOfLatestMinor || (isNext && !nextVersionString)
-                  ? `/docs/:path*`
-                  : `/docs${versionSlugOverride}/:path*`,
-                isNext ? '307' : '308',
-                'e',
-              ),
-            );
-          }
-        }
-
-        if (
-          !includeRenderers &&
-          (isLatest ||
-            isNext ||
-            shouldShortenToMajor(versionStringNormalized, nextVersionString))
-        ) {
-          acc.push(
-            getRedirect(
-              `/docs/${string}/:path*`,
-              isMajorOfLatestMinor || (isNext && !nextVersionString)
-                ? `/docs/:path*`
-                : `/docs${versionSlugOverride}/:path*`,
-              isLatest || isNext ? '307' : '308',
-              'f',
-            ),
-          );
-        }
-
-        return acc;
-      },
-      [],
-    )
-    .concat([
-      {
-        source: '/releases',
-        destination: `/releases/${latestVersionString}`,
-        permanent: false,
-      },
-    ]);
-
-  // eslint-disable-next-line no-console -- OK
-  console.log(`Generated ${result.length.toString()} redirects`);
-  if (result.length > 900) {
-    throw new Error(`
-That's too many redirects.
-
-Next.js only allows 1024 redirects in Next.config:
-https://nextjs.org/docs/app/building-your-application/routing/redirecting#redirects-in-nextconfigjs
-
-At-scale approach:
-https://nextjs.org/docs/app/building-your-application/routing/redirecting#managing-redirects-at-scale-advanced
-  `);
+    if (currentVersion) {
+      const parts = trimmed.split(/\s+/).filter(Boolean);
+      if (parts.length >= 3) {
+        rules.push({
+          headerVersion: currentVersion,
+          from: parts[0],
+          to: parts[1],
+          status: parts[2],
+        });
+      }
+    }
   }
 
+  return rules;
+}
+
+function generateSpecificRedirectsForRule(
+  rule: Rule,
+  renderers: string[],
+  historicalVersions: string[],
+  supportedVersions: string[],
+  latestVersion: string,
+  nextVersion: string | null | undefined,
+): string[][] {
+  const { headerVersion, from: rawFrom, to: rawTo, status } = rule;
+  const fromSuffix = getSuffix(rawFrom);
+  const entries: string[][] = [];
+
+  const beforeHeader = historicalVersions.filter(
+    (v) => compareVersions(v, headerVersion) < 0,
+  );
+
+  const headerMajor = getMajor(headerVersion);
+  const latestMajor = getMajor(latestVersion);
+  const isLatestMajorCase =
+    headerMajor === latestMajor &&
+    compareVersions(headerVersion, latestVersion) <= 0;
+
+  const hasVersioned = beforeHeader.some((v) => getEra(v) !== 'unversioned');
+
+  // --- Renderer group ---
+
+  // Unversioned entries (deduplicated — all produce the same from-path)
+  if (beforeHeader.some((v) => getEra(v) === 'unversioned')) {
+    for (const r of renderers) {
+      entries.push([
+        `/docs/${r}/${fromSuffix}`,
+        getToForVersion(rawTo, '6.0', supportedVersions, latestVersion),
+        status,
+      ]);
+    }
+  }
+
+  // Versioned + renderer entries (6.4–7.4)
+  const rendererEra = beforeHeader.filter((v) => getEra(v) === 'renderer');
+  let added7Alias = false;
+  for (const v of rendererEra) {
+    for (const r of renderers) {
+      entries.push([
+        `/docs/${v}/${r}/${fromSuffix}`,
+        getToForVersion(rawTo, v, supportedVersions, latestVersion),
+        status,
+      ]);
+    }
+    // Major 7 alias after first 7.x version
+    if (getMajor(v) === 7 && !added7Alias) {
+      added7Alias = true;
+      for (const r of renderers) {
+        entries.push([
+          `/docs/7/${r}/${fromSuffix}`,
+          getToForVersion(rawTo, '7.0', supportedVersions, latestVersion),
+          status,
+        ]);
+      }
+    }
+  }
+
+  // next with renderer (only when there are versioned entries)
+  if (hasVersioned) {
+    for (const r of renderers) {
+      entries.push([`/docs/next/${r}/${fromSuffix}`, rawTo, '302']);
+    }
+  }
+
+  // --- Non-renderer group ---
+
+  const nonRenderer = beforeHeader.filter((v) => getEra(v) === 'versioned');
+  const hasNonRendererGroup = nonRenderer.length > 0 || isLatestMajorCase;
+
+  if (hasNonRendererGroup) {
+    const supportedMajors = new Set(
+      supportedVersions.map((v) => getMajor(v)),
+    );
+    const seenMajors = new Set<number>();
+
+    for (const v of nonRenderer) {
+      const major = getMajor(v);
+      entries.push([
+        `/docs/${v}/${fromSuffix}`,
+        getToForVersion(rawTo, v, supportedVersions, latestVersion),
+        status,
+      ]);
+      // Alias after first version of each unsupported major >= 8
+      if (major >= 8 && !seenMajors.has(major) && !supportedMajors.has(major)) {
+        entries.push([
+          `/docs/${String(major)}/${fromSuffix}`,
+          getToForVersion(
+            rawTo,
+            `${String(major)}.0`,
+            supportedVersions,
+            latestVersion,
+          ),
+          status,
+        ]);
+      }
+      seenMajors.add(major);
+    }
+
+    // Latest-major special case: include header version + major alias
+    if (isLatestMajorCase) {
+      entries.push([
+        `/docs/${headerVersion}/${fromSuffix}`,
+        getToForVersion(
+          rawTo,
+          headerVersion,
+          supportedVersions,
+          latestVersion,
+        ),
+        status,
+      ]);
+      entries.push([
+        `/docs/${String(headerMajor)}/${fromSuffix}`,
+        getToForVersion(
+          rawTo,
+          headerVersion,
+          supportedVersions,
+          latestVersion,
+        ),
+        status,
+      ]);
+    }
+
+    // next without renderer
+    entries.push([
+      `/docs/next/${fromSuffix}`,
+      getNextTo(rawTo, nextVersion, latestVersion),
+      '302',
+    ]);
+  }
+
+  return entries;
+}
+
+interface Options {
+  rawRedirects: string;
+  renderers?: string[];
+  supportedVersions?: string[];
+  historicalVersions?: string[];
+  latestVersion?: string;
+  nextVersion?: string | null;
+}
+
+function mergeOptions(options: Options) {
+  return { ...defaultOptions, ...options };
+}
+
+export function generateSpecificPathRedirects(options: Options) {
+  const { rawRedirects, renderers, historicalVersions, supportedVersions, latestVersion, nextVersion } = mergeOptions(options);
+
+  const result: string[][] = [];
+  const rules = parseRawRedirects(rawRedirects);
+  for (const rule of rules) {
+    result.push(
+      ...generateSpecificRedirectsForRule(
+        rule,
+        renderers,
+        historicalVersions,
+        supportedVersions,
+        latestVersion,
+        nextVersion,
+      ),
+    );
+  }
   return result;
+}
+
+export function generateInstallRedirects(options: Options) {
+  const { renderers, historicalVersions, supportedVersions, latestVersion, nextVersion } = mergeOptions(options);
+  const entries: string[][] = [];
+  const latestMajor = getMajor(latestVersion);
+  const isMajorPreRelease = nextVersion && getMajor(nextVersion) > latestMajor;
+
+  // When a major pre-release exists, the oldest supported major drops off
+  // and the current latest major becomes supported non-latest.
+  const allSupportedMajors = new Set(supportedVersions.map((v) => getMajor(v)));
+  let effectiveSupportedMajors: Set<number>;
+  if (isMajorPreRelease) {
+    const minMajor = Math.min(...allSupportedMajors);
+    effectiveSupportedMajors = new Set([...allSupportedMajors].filter((m) => m !== minMajor));
+  } else {
+    effectiveSupportedMajors = new Set([...allSupportedMajors].filter((m) => m !== latestMajor));
+  }
+
+  // --- Renderer group ---
+
+  // Unversioned
+  for (const r of renderers) {
+    entries.push([`/docs/${r}`, installDocsPageSlug('6.0'), '301']);
+  }
+
+  // Renderer-era versions (6.4–7.4)
+  const rendererEra = historicalVersions.filter(
+    (v) => getEra(v) === 'renderer',
+  );
+  let added7Alias = false;
+  for (const v of rendererEra) {
+    for (const r of renderers) {
+      entries.push([`/docs/${v}/${r}`, installDocsPageSlug(v), '301']);
+    }
+    if (getMajor(v) === 7 && !added7Alias) {
+      added7Alias = true;
+      for (const r of renderers) {
+        entries.push([`/docs/7/${r}`, installDocsPageSlug('7'), '301']);
+      }
+    }
+  }
+
+  // next with renderer
+  for (const r of renderers) {
+    entries.push([`/docs/next/${r}`, installDocsPageSlug('next'), '302']);
+  }
+
+  // --- Non-renderer group ---
+
+  const nonRenderer = historicalVersions.filter(
+    (v) => getEra(v) === 'versioned',
+  );
+  for (const v of nonRenderer) {
+    const major = getMajor(v);
+    if (!isMajorPreRelease && major === latestMajor) {
+      entries.push([`/docs/${v}`, '/docs', '302']);
+    } else if (effectiveSupportedMajors.has(major)) {
+      entries.push([`/docs/${v}`, `/docs/${String(major)}`, '301']);
+    } else {
+      entries.push([`/docs/${v}`, installDocsPageSlug(v), '301']);
+    }
+  }
+
+  // Major pre-release entry
+  if (isMajorPreRelease) {
+    const nextMajor = getMajor(nextVersion);
+    entries.push([`/docs/${nextVersion}`, `/docs/${String(nextMajor)}`, '302']);
+  }
+
+  // next without renderer (only when no major pre-release)
+  if (!isMajorPreRelease) {
+    entries.push([`/docs/next`, installDocsPageSlug('next'), '302']);
+  }
+
+  return entries;
+}
+
+export function generateWildcardRedirects(options: Options) {
+  const { renderers, historicalVersions, supportedVersions, latestVersion, nextVersion } = mergeOptions(options);
+  const entries: string[][] = [];
+  const latestMajor = getMajor(latestVersion);
+  const supportedMajors = new Set(supportedVersions.map((v) => getMajor(v)));
+
+  // --- Renderer group ---
+
+  // Unversioned
+  for (const r of renderers) {
+    entries.push([`/docs/${r}/*`, '/docs/:splat', '301']);
+  }
+
+  // Renderer-era versions (6.4–7.4)
+  const rendererEra = historicalVersions.filter(
+    (v) => getEra(v) === 'renderer',
+  );
+  let added7Alias = false;
+  for (const v of rendererEra) {
+    for (const r of renderers) {
+      entries.push([`/docs/${v}/${r}/*`, '/docs/:splat', '301']);
+    }
+    if (getMajor(v) === 7 && !added7Alias) {
+      added7Alias = true;
+      for (const r of renderers) {
+        entries.push([`/docs/7/${r}/*`, '/docs/:splat', '301']);
+      }
+    }
+  }
+
+  // next with renderer
+  for (const r of renderers) {
+    entries.push([`/docs/next/${r}/*`, '/docs/:splat', '302']);
+  }
+
+  // --- Non-renderer group ---
+
+  const nonRenderer = historicalVersions.filter(
+    (v) => getEra(v) === 'versioned',
+  );
+  for (const v of nonRenderer) {
+    const major = getMajor(v);
+    if (major === latestMajor) {
+      entries.push([`/docs/${v}/*`, '/docs/:splat', '302']);
+    } else if (supportedMajors.has(major)) {
+      entries.push([`/docs/${v}/*`, `/docs/${String(major)}/:splat`, '301']);
+    } else {
+      entries.push([`/docs/${v}/*`, '/docs/:splat', '301']);
+    }
+  }
+
+  // Major pre-release entry
+  if (nextVersion && getMajor(nextVersion) > latestMajor) {
+    const nextMajor = getMajor(nextVersion);
+    entries.push([
+      `/docs/${nextVersion}/*`,
+      `/docs/${String(nextMajor)}/:splat`,
+      '302',
+    ]);
+  }
+
+  // next without renderer
+  let nextTo = '/docs/:splat';
+  if (nextVersion) {
+    const nextMajor = getMajor(nextVersion);
+    nextTo =
+      nextMajor > latestMajor
+        ? `/docs/${String(nextMajor)}/:splat`
+        : `/docs/${nextVersion}/:splat`;
+  }
+  entries.push([`/docs/next/*`, nextTo, '302']);
+
+  return entries;
+}
+
+export function generateRedirects(options: Options) {
+  return [
+    ...generateSpecificPathRedirects(options),
+    ...generateInstallRedirects(options),
+    ...generateWildcardRedirects(options),
+  ];
 }
