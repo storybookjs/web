@@ -23,7 +23,7 @@ type GenerateMetaData = (props: {
 }) => Promise<Metadata>;
 
 interface AddonDetailsProps {
-  params: Params;
+  params: Promise<Params>;
 }
 
 async function getAddonFromName(
@@ -55,7 +55,8 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
 };
 
 export default async function AddonDetails({ params }: AddonDetailsProps) {
-  const addon = await getAddonFromName(params.addonName);
+  const { addonName } = await params;
+  const addon = await getAddonFromName(addonName);
 
   if (!addon) notFound();
 
