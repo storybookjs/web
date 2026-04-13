@@ -4,9 +4,9 @@ import { getRelease } from '../../../../lib/get-release';
 import { getReleases } from '../../../../lib/get-releases';
 
 interface HomeProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export const generateStaticParams = () => {
@@ -15,7 +15,8 @@ export const generateStaticParams = () => {
   }));
 };
 
-export default async function Home({ params: { slug } }: HomeProps) {
+export default async function Home({ params }: HomeProps) {
+  const { slug } = await params;
   const releases = getReleases();
 
   // TODO: This is not really working on prod

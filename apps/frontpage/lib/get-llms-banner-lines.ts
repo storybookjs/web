@@ -1,0 +1,38 @@
+import { type DocsVersion } from '@repo/utils';
+
+const baseUrl = 'https://storybook.js.org';
+
+export const getLlmsBannerLines = ({ version }: { version: DocsVersion }) => [
+  '# Storybook',
+  '',
+  '> Storybook is a frontend workshop for building UI components and pages in isolation. It helps with UI development, testing, and documentation.',
+  '',
+  `Current version: ${version.label} (${version.id})`,
+  '',
+  '## Documentation',
+  '',
+  `- [Storybook Docs](${baseUrl}/docs): Main documentation`,
+  `- [Full Documentation (Markdown)](${baseUrl}/llms-full.txt): Complete documentation in plain text for LLM consumption`,
+  '',
+  '## Markdown Access',
+  '',
+  'Append `.md` to any docs URL to get clean markdown with code examples:',
+  `- \`${baseUrl}/docs/writing-stories/decorators.md\``,
+  `- \`${baseUrl}/docs/9/writing-stories/decorators.md\` (Version 9)`,
+  '',
+  '### Query Parameters',
+  '',
+  'All markdown endpoints (`.md` URLs and `llms-full.txt`) support these query parameters:',
+  '- `renderer` - Framework filter for code snippets (default: `react`). Options: `react`, `vue`, `angular`, `svelte`, `web-components`, `solid`, `preact`, `html`, `ember`, `qwik`',
+  '- `language` - Language filter for code snippets (default: `ts`). Options: `ts`, `js`',
+  '- `codeOnly` - When `true`, returns only the code snippets without prose',
+  '',
+  'Examples:',
+  '- `GET /docs/writing-stories/decorators.md?renderer=vue&language=ts`',
+  '- `GET /docs/writing-stories/decorators.md?codeOnly=true`',
+  '- `GET /llms-full.txt?renderer=angular&language=js`',
+  '',
+  '### Versioned Access',
+  '',
+  'Prefix the path with a version slug for older versions:',
+];

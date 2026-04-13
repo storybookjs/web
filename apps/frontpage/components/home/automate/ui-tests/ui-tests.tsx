@@ -40,7 +40,7 @@ const lineAnimationLength = 1550;
 const lineAnimationDelay = 500;
 
 interface PureUITestsProps {
-  forwardRef: React.RefObject<HTMLDivElement>;
+  forwardRef: React.RefObject<HTMLDivElement | null>;
   activeIndex: number;
   isAnimatingLoop: boolean;
   isPaused: boolean | null;
@@ -173,7 +173,7 @@ export const baseWorkflows = [
 ];
 
 export function UITests() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   // Pause animation if not in viewport
   const isInView = useInView(ref, { once: true, amount: 'all' });
   const shouldReduceMotion = useReducedMotion();

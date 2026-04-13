@@ -17,7 +17,7 @@ type GenerateMetaData = (props: {
 }) => Promise<Metadata>;
 
 interface PageProps {
-  params: Params;
+  params: Promise<Params>;
 }
 
 async function getPageFromSlug(
@@ -89,7 +89,8 @@ export const generateStaticParams = () => {
   return listOfSlugs;
 };
 
-export default async function Page({ params: { slug } }: PageProps) {
+export default async function Page({ params }: PageProps) {
+  const { slug } = await params;
   const { activeVersion, page } = await getPageFromSlug(slug);
   if (!page) notFound();
 

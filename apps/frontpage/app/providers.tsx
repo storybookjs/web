@@ -25,13 +25,7 @@ export const Providers: FC<ProvidersProps> = ({ children }) => {
 
   return (
     <PHProvider client={posthog}>
-      <PlausibleProvider
-        domain="storybook.js.org"
-        taggedEvents
-        pageviewProps={{
-          experiment: 'Grow-SB-website-acquisition:A',
-        }}
-      >
+      <PlausibleProvider>
         <ThemeProvider attribute="class">{children}</ThemeProvider>
       </PlausibleProvider>
     </PHProvider>
