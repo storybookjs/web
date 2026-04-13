@@ -34,7 +34,7 @@ const HISTORICAL_VERSIONS = [
 
 /** @type {import('next').NextConfig} */
 module.exports = withBundleAnalyzer(
-  withPlausibleProxy({ src: 'https://plausible.io/js/script.js' })({
+  withPlausibleProxy({ src: 'https://plausible.io/js/pa-anM74fP8S5w3vipeaMMrx.js' })({
     images: {
       unoptimized: true,
       remotePatterns: [
