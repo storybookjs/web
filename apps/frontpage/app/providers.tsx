@@ -25,7 +25,7 @@ export const Providers: FC<ProvidersProps> = ({ children }) => {
 
   return (
     <PHProvider client={posthog}>
-      <PlausibleProvider>
+      <PlausibleProvider init={{ customProperties: { experiment: 'Grow-SB-website-acquisition:A' } }}>
         <ThemeProvider attribute="class">{children}</ThemeProvider>
       </PlausibleProvider>
     </PHProvider>
