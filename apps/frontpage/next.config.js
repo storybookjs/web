@@ -34,7 +34,9 @@ const HISTORICAL_VERSIONS = [
 
 /** @type {import('next').NextConfig} */
 module.exports = withBundleAnalyzer(
-  withPlausibleProxy({ src: 'https://plausible.io/js/pa-anM74fP8S5w3vipeaMMrx.js' })({
+  withPlausibleProxy({
+    src: 'https://plausible.io/js/pa-anM74fP8S5w3vipeaMMrx.js',
+  })({
     images: {
       unoptimized: true,
       remotePatterns: [
@@ -120,5 +122,10 @@ module.exports = withBundleAnalyzer(
       ];
     },
     pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+    // more robust static generation with retries and concurrency control
+    experimental: {
+      staticGenerationRetryCount: 1,
+      staticGenerationMaxConcurrency: 50,
+    },
   }),
 );
