@@ -35,6 +35,11 @@ const nextConfig = withPlausibleProxy({
       },
     ];
   },
+  // more robust static generation with retries and concurrency control
+  experimental: {
+    staticGenerationRetryCount: 1,
+    staticGenerationMaxConcurrency: 50,
+  },
 });
 
 export default nextConfig;
