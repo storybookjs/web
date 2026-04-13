@@ -10,13 +10,7 @@ interface ProvidersProps {
 
 export const Providers: FC<ProvidersProps> = ({ children }) => {
   return (
-    <PlausibleProvider
-      domain="storybook.js.org"
-      taggedEvents
-      pageviewProps={{
-        experiment: 'Grow-SB-website-acquisition:A',
-      }}
-    >
+    <PlausibleProvider>
       <ThemeProvider attribute="class">{children}</ThemeProvider>
     </PlausibleProvider>
   );

@@ -28,7 +28,7 @@ type GenerateMetaData = (props: {
 }) => Promise<Metadata>;
 
 interface RecipeDetailsProps {
-  params: Params;
+  params: Promise<Params>;
 }
 
 async function getRecipeFromName(addonName: string[]): Promise<
@@ -73,8 +73,9 @@ export async function generateStaticParams() {
 }
 
 export default async function RecipeDetails({ params }: RecipeDetailsProps) {
+  const { name } = await params;
   const { number: githubCount } = await fetchGithubCount();
-  const recipe = await getRecipeFromName(params.name);
+  const recipe = await getRecipeFromName(name);
 
   if (!recipe) notFound();
 
