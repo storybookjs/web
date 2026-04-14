@@ -9,9 +9,9 @@ import { getReleases } from '../../../lib/get-releases';
 import { DocsMainNav } from '../../../components/docs/sidebar/docs-main-nav';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export const generateStaticParams = () => {
@@ -20,7 +20,8 @@ export const generateStaticParams = () => {
   }));
 };
 
-export default async function Page({ params: { slug } }: PageProps) {
+export default async function Page({ params }: PageProps) {
+  const { slug } = await params;
   const releases = getReleases();
   const { number: githubCount } = await fetchGithubCount();
 

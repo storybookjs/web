@@ -188,7 +188,7 @@ function DropdownMenuShortcut({
   ...props
 }: React.HTMLAttributes<HTMLSpanElement> & {
   className?: string;
-}): JSX.Element {
+}) {
   return (
     <span
       className={cn(

@@ -41,7 +41,7 @@ export const Player: FC<PlayerProps> = ({ x, y, type, delay, count }) => (
     data-chromatic="ignore"
     initial="initial"
     style={{ left: x, top: y }}
-    transition={{ type: 'pop', delay, duration: 0.4 }}
+    transition={{ type: 'spring', delay, duration: 0.4 }}
     variants={{
       initial: { scale: 0, opacity: 0 },
       animate: { scale: 1, opacity: 1 },

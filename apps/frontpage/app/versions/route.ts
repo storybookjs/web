@@ -60,7 +60,7 @@ const log = async (searchParams: URLSearchParams) => {
     return;
   }
 
-  const headersList = headers();
+  const headersList = await headers();
 
   logger.log('logging event');
 

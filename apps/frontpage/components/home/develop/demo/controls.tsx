@@ -1,10 +1,10 @@
 import React from 'react';
-import type { AnimationControls, MotionProps } from 'framer-motion';
-import { motion } from 'framer-motion';
+import type { MotionProps } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 
 interface ControlsProps extends MotionProps {
-  startTimeControls: AnimationControls;
-  endTimeControls: AnimationControls;
+  startTimeControls: ReturnType<typeof useAnimation>;
+  endTimeControls: ReturnType<typeof useAnimation>;
 }
 
 const charVariants = {

@@ -34,7 +34,9 @@ const HISTORICAL_VERSIONS = [
 
 /** @type {import('next').NextConfig} */
 module.exports = withBundleAnalyzer(
-  withPlausibleProxy()({
+  withPlausibleProxy({
+    src: 'https://plausible.io/js/pa-anM74fP8S5w3vipeaMMrx.js',
+  })({
     images: {
       unoptimized: true,
       remotePatterns: [
@@ -98,15 +100,13 @@ module.exports = withBundleAnalyzer(
       return config;
     },
     transpilePackages: ['@repo/ui', '@repo/utils'],
-    experimental: {
-      /**
-       * This ensures that we can read files from these directories when deployed
-       * https://vercel.com/guides/how-can-i-use-files-in-serverless-functions#using-next.js
-       */
-      outputFileTracingIncludes: {
-        '/docs/**': ['./content/docs/**'],
-        '/md-api/**': ['./content/docs/**', './content/snippets/**'],
-      },
+    /**
+     * This ensures that we can read files from these directories when deployed
+     * https://vercel.com/guides/how-can-i-use-files-in-serverless-functions#using-next.js
+     */
+    outputFileTracingIncludes: {
+      '/docs/**': ['./content/docs/**'],
+      '/md-api/**': ['./content/docs/**', './content/snippets/**'],
     },
     skipTrailingSlashRedirect: true,
     async rewrites() {
@@ -122,5 +122,10 @@ module.exports = withBundleAnalyzer(
       ];
     },
     pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+    // more robust static generation with retries and concurrency control
+    experimental: {
+      staticGenerationRetryCount: 1,
+      staticGenerationMaxConcurrency: 50,
+    },
   }),
 );

@@ -494,7 +494,7 @@ export async function sendFeedback(
 
   const now = Date.now();
 
-  const headersList = headers();
+  const headersList = await headers();
 
   try {
     const ip =

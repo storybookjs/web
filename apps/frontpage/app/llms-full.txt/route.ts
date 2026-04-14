@@ -10,7 +10,7 @@ import {
   resolveVersionFromSlug,
 } from '../../lib/resolve-doc-for-llm';
 import { findDocFile } from '../../lib/get-page';
-import { getLlmsBannerLines } from '../llms.txt/route';
+import { getLlmsBannerLines } from '../../lib/get-llms-banner-lines';
 
 export const dynamic = 'force-dynamic';
 

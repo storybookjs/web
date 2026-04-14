@@ -9,7 +9,7 @@ interface TopSectionProps {
   variant?: FooterProps['variant'];
 }
 
-export function TopSection({ variant }: TopSectionProps): JSX.Element {
+export function TopSection({ variant }: TopSectionProps) {
   return (
     <div className="ui-mb-14">
       <div className="ui-mb-4 ui-font-bold ui-text-md">Join the community</div>

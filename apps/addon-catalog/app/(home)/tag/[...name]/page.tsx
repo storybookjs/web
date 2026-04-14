@@ -19,7 +19,7 @@ type GenerateMetaData = (props: {
 }) => Promise<Metadata>;
 
 interface TagDetailsProps {
-  params: Params;
+  params: Promise<Params>;
 }
 
 async function getTagFromName(
@@ -63,8 +63,9 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
 };
 
 export default async function TagDetails({
-  params: { name },
+  params,
 }: TagDetailsProps) {
+  const { name } = await params;
   const data = await getCachedTagFromName(name);
 
   if (!data || 'error' in data) return notFound();
