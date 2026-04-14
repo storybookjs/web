@@ -19,7 +19,7 @@ type GenerateMetaData = (props: {
 }) => Promise<Metadata>;
 
 interface TagDetailsProps {
-  params: Params;
+  params: Promise<Params>;
 }
 
 async function getTagFromName(
@@ -32,6 +32,11 @@ async function getTagFromName(
 const getCachedTagFromName = unstable_cache(
   async (tagName: string[]) => getTagFromName(tagName),
   ['tag-details'],
+);
+
+const getCachedTags = unstable_cache(
+  async () => fetchTagsData(),
+  ['tags'],
 );
 
 const getCachedCategoryTags = unstable_cache(
@@ -63,8 +68,9 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
 };
 
 export default async function TagDetails({
-  params: { name },
+  params,
 }: TagDetailsProps) {
+  const { name } = await params;
   const data = await getCachedTagFromName(name);
 
   if (!data || 'error' in data) return notFound();
@@ -89,7 +95,7 @@ export default async function TagDetails({
 }
 
 export async function generateStaticParams() {
-  const tags = (await getCachedCategoryTags()) || [];
+  const tags = (await getCachedTags()) || [];
   const listOfNames = tags.map((tag) => ({ name: [...tag.split('/')] }));
 
   if (listOfNames.length === 0) {

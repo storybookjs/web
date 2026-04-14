@@ -125,7 +125,7 @@ module.exports = withBundleAnalyzer(
     // more robust static generation with retries and concurrency control
     experimental: {
       staticGenerationRetryCount: 1,
-      staticGenerationMaxConcurrency: 50,
+      staticGenerationMaxConcurrency: 10,
     },
   }),
 );
