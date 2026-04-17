@@ -11,6 +11,11 @@ import * as fs from 'fs-extra';
 
 dotenv.config();
 
+const LOCAL_CONTENT_PATH = './apps/frontpage/content';
+const LOCAL_DOCS_PATH = path.join(LOCAL_CONTENT_PATH, 'docs');
+const LOCAL_SNIPPETS_PATH = path.join(LOCAL_CONTENT_PATH, 'snippets');
+const LOCAL_ASSETS_PATH = './apps/frontpage/public/docs-assets';
+
 (async () => {
   const envVar = process.env.SB_DOCS_PATH;
   let monorepoRelativePath = envVar || '../storybook';
@@ -98,19 +103,21 @@ dotenv.config();
       })),
     instructions: false,
   });
+  const version = versionPrompt.version.id;
 
-  const pathToLocalDocs = path.join(
-    './apps/frontpage/content/docs',
-    versionPrompt.version.id,
-  );
-  const pathToLocalSnippets = path.join(
-    './apps/frontpage/content/snippets',
-    versionPrompt.version.id,
-  );
-  const pathToLocalAssets = path.join(
-    './apps/frontpage/public/docs-assets',
-    versionPrompt.version.id,
-  );
+  if (!fs.existsSync(LOCAL_DOCS_PATH)) {
+    fs.mkdirSync(LOCAL_DOCS_PATH);
+  }
+  if (!fs.existsSync(LOCAL_SNIPPETS_PATH)) {
+    fs.mkdirSync(LOCAL_SNIPPETS_PATH);
+  }
+  if (!fs.existsSync(LOCAL_ASSETS_PATH)) {
+    fs.mkdirSync(LOCAL_ASSETS_PATH);
+  }
+
+  const pathToLocalDocs = path.join(LOCAL_DOCS_PATH, version);
+  const pathToLocalSnippets = path.join(LOCAL_SNIPPETS_PATH, version);
+  const pathToLocalAssets = path.join(LOCAL_ASSETS_PATH, version);
 
   if (!fs.existsSync(pathToLocalDocs)) {
     fs.mkdirSync(pathToLocalDocs);
