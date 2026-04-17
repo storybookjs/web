@@ -36,7 +36,7 @@ export const docsVersions: DocsVersion[] = [
     label: 'Version 10.4 (alpha)',
     id: '10.4',
     inSlug: '10.4',
-    branch: 'next',
+    branch: 'project/sb-agentic-setup',
     preRelease: true,
   },
   {
