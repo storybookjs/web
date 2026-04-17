@@ -45,6 +45,9 @@ export async function GET(request: NextRequest, context: RouteContext) {
   const fileContent = fs.readFileSync(fullPath, 'utf8');
   const { content: rawContent, data } = matter(fileContent);
 
+  const pagePath = [versionId, ...slug.split('/')];
+  const baseUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}`;
+
   const { content, availableRenderers, availableLanguages } = resolveDocForLLM(
     rawContent,
     {
@@ -52,6 +55,9 @@ export async function GET(request: NextRequest, context: RouteContext) {
       renderer,
       language,
       codeOnly,
+      pagePath,
+      isIndexPage: result.isIndexPage,
+      baseUrl,
     },
   );
 

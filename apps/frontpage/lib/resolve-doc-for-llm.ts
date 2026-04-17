@@ -2,7 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
-import { renderers as allRenderersList, docsVersions, latestVersion } from '@repo/utils';
+import { type DocsVersion, renderers as allRenderersList, docsVersions, latestVersion } from '@repo/utils';
+import { processHref } from '../components/docs/mdx/a';
 import { getVersion } from './get-version';
 
 interface CodeBlock {
@@ -16,6 +17,9 @@ export interface ResolveOptions {
   renderer?: string;
   language?: string;
   codeOnly?: boolean;
+  pagePath: string[];
+  isIndexPage: boolean;
+  baseUrl: string;
 }
 
 export interface ResolveResult {
@@ -323,6 +327,44 @@ export function buildContentBanner(options: {
 }
 
 /**
+ * Resolve relative markdown links to absolute URLs with .md extension.
+ * Reuses the same path resolution logic as the <A> component.
+ */
+export function resolveMarkdownLinks(
+  content: string,
+  options: {
+    activeVersion: DocsVersion;
+    pagePath: string[];
+    isIndexPage: boolean;
+    baseUrl: string;
+  },
+): string {
+  // Match markdown links: [text](href) but not images ![alt](src)
+  // eslint-disable-next-line prefer-named-capture-group -- TS target does not support named capture groups
+  return content.replace(/(?<!!)\[([^\]]*)\]\(([^)]+)\)/g, (_match, text: string, href: string) => {
+    // Skip external links, hash-only links, and already-absolute URLs
+    if (href.startsWith('http') || href.startsWith('#') || href.startsWith('/')) {
+      return `[${text}](${href})`;
+    }
+
+    const resolved = processHref({
+      activeVersion: options.activeVersion,
+      href,
+      isIndexPage: options.isIndexPage,
+      pagePath: options.pagePath,
+    });
+
+    // Convert /docs/... path to absolute URL with .md extension
+    // Preserve any hash fragment
+    const hashIndex = resolved.indexOf('#');
+    const pathPart = hashIndex >= 0 ? resolved.slice(0, hashIndex) : resolved;
+    const hashPart = hashIndex >= 0 ? resolved.slice(hashIndex) : '';
+
+    return `[${text}](${options.baseUrl}${pathPart}.md${hashPart})`;
+  });
+}
+
+/**
  * Resolve an MDX document for LLM consumption.
  */
 export function resolveDocForLLM(
@@ -331,7 +373,7 @@ export function resolveDocForLLM(
 ): ResolveResult {
   const renderer = options.renderer ?? 'react';
   const language = options.language ?? 'ts';
-  const { versionId, codeOnly } = options;
+  const { versionId, codeOnly, pagePath, isIndexPage, baseUrl } = options;
 
   // 1. Resolve <IfRenderer> and <If> blocks
   let content = resolveIfRendererBlocks(rawContent, renderer);
@@ -348,7 +390,16 @@ export function resolveDocForLLM(
   // 3. Strip remaining JSX
   content = stripRemainingJsx(content);
 
-  // 4. If codeOnly, extract only code blocks
+  // 4. Resolve relative links to absolute URLs with .md extension
+  const activeVersion = docsVersions.find((v) => v.id === versionId) ?? latestVersion;
+  content = resolveMarkdownLinks(content, {
+    activeVersion,
+    pagePath,
+    isIndexPage,
+    baseUrl,
+  });
+
+  // 5. If codeOnly, extract only code blocks
   if (codeOnly) {
     content = extractCodeBlocksOnly(content);
   }
