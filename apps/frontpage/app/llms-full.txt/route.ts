@@ -10,7 +10,7 @@ import {
   resolveVersionFromSlug,
 } from '../../lib/resolve-doc-for-llm';
 import { findDocFile } from '../../lib/get-page';
-import { getLlmsBannerLines } from '../llms.txt/route';
+import { getLlmsBannerLines } from '../../lib/get-llm-banner-lines';
 
 export const dynamic = 'force-dynamic';
 
@@ -27,7 +27,7 @@ export function GET(request: NextRequest) {
   const tree = listOfTrees.find((t) => t.name === versionId);
   const flatTree = tree?.children ? getFlatTree({ tree: tree.children }) : [];
 
-  const baseUrl = 'https://storybook.js.org';
+  const baseUrl = `${request.nextUrl.protocol}//${request.nextUrl.host}`;
 
   // Collect all renderers and languages across all pages
   const globalRenderers = new Set<string>();
@@ -53,7 +53,6 @@ export function GET(request: NextRequest) {
     const { content: rawContent, data } = matter(fileContent);
 
     const pagePath = [versionId, ...docPath.split('/')];
-    const baseUrlForLinks = `${request.nextUrl.protocol}//${request.nextUrl.host}`;
 
     const { content, availableRenderers, availableLanguages } =
       resolveDocForLLM(rawContent, {
@@ -63,7 +62,7 @@ export function GET(request: NextRequest) {
         codeOnly,
         pagePath,
         isIndexPage: result.isIndexPage,
-        baseUrl: baseUrlForLinks,
+        baseUrl,
       });
 
     for (const r of availableRenderers) globalRenderers.add(r);
@@ -79,7 +78,7 @@ export function GET(request: NextRequest) {
   }
 
   const header = [
-    ...getLlmsBannerLines({ version: version ?? latestVersion }),
+    ...getLlmsBannerLines({ baseUrl, version: version ?? latestVersion }),
     '---',
     '',
   ].join('\n');
