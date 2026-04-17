@@ -52,12 +52,18 @@ export function GET(request: NextRequest) {
     const fileContent = fs.readFileSync(fullPath, 'utf8');
     const { content: rawContent, data } = matter(fileContent);
 
+    const pagePath = [versionId, ...docPath.split('/')];
+    const baseUrlForLinks = `${request.nextUrl.protocol}//${request.nextUrl.host}`;
+
     const { content, availableRenderers, availableLanguages } =
       resolveDocForLLM(rawContent, {
         versionId,
         renderer,
         language,
         codeOnly,
+        pagePath,
+        isIndexPage: result.isIndexPage,
+        baseUrl: baseUrlForLinks,
       });
 
     for (const r of availableRenderers) globalRenderers.add(r);
