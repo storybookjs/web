@@ -1,6 +1,7 @@
 import { type FC } from 'react';
 import { cn } from '@repo/utils';
 import { type PageDataProps } from '../../lib/get-page';
+import { CopyMarkdownButton } from './copy-markdown-button';
 import { Renderers } from './renderers';
 import { DocsFooter } from './footer/footer';
 import { PageTabs } from './page-tabs';
@@ -17,7 +18,10 @@ export const Content: FC<{ page: PageDataProps }> = ({ page }) => {
           >
             {page.title ?? 'Title is missing'}
           </h1>
-          {!page.hideRendererSelector && <Renderers />}
+          <div className="mb-8 flex flex-col items-start gap-2 min-[430px]:flex-row min-[430px]:justify-between">
+            {!page.hideRendererSelector && <Renderers />}
+            <CopyMarkdownButton />
+          </div>
           {page.tabs && page.tabs.length > 0 ? (
             <PageTabs {...page} />
           ) : null}
