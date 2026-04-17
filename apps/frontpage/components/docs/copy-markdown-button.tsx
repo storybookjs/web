@@ -2,6 +2,7 @@
 
 import { type FC, useCallback, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { latestVersion } from '@repo/utils';
 import { useDocs } from '../../app/docs/provider';
 import { Button } from './button';
 
@@ -11,7 +12,10 @@ export const CopyMarkdownButton: FC = () => {
   const [copied, setCopied] = useState(false);
 
   const handleClick = useCallback(() => {
-    const mdApiPath = pathname.replace(/^\/docs\//, '/md-api/');
+    const mdApiPath =
+      /^\/docs\/?$/.test(pathname)
+        ? `/md-api/${latestVersion.id}`
+        : pathname.replace(/^\/docs\//, '/md-api/');
     const params = new URLSearchParams();
     if (activeRenderer) params.set('renderer', activeRenderer);
     if (activeLanguage) params.set('language', activeLanguage);

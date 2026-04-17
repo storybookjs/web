@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { docsVersions } from '@repo/utils';
+import { docsVersions, latestVersion } from '@repo/utils';
 
 /**
  * Extract version prefix and remaining doc path from a docs URL path.
@@ -58,14 +58,13 @@ export async function middleware(request: NextRequest) {
 
   // .md suffix: serve markdown for any /docs/*.md URL (like Stripe's docs.stripe.com/testing.md)
   // Supports versioned URLs: /docs/9/writing-stories.md, /docs/8/get-started.md
-  if (pathname.startsWith('/docs/') && pathname.endsWith('.md')) {
-    const rawPath = pathname.replace(/^\/docs\//, '').replace(/\.md$/, '');
+  // Also supports /docs.md for the root docs page
+  if (pathname.startsWith('/docs') && pathname.endsWith('.md')) {
+    const rawPath = pathname.replace(/^\/docs\/?/, '').replace(/\.md$/, '');
     const { versionSlug, docPath } = extractVersionAndPath(rawPath);
 
-    if (docPath) {
-      const url = buildMdRewriteUrl(request, docPath, versionSlug);
-      return NextResponse.rewrite(url);
-    }
+    const url = buildMdRewriteUrl(request, docPath, versionSlug ?? latestVersion.id);
+    return NextResponse.rewrite(url);
   }
 
   // Content negotiation: serve markdown for docs pages when requested by LLMs
@@ -77,13 +76,10 @@ export async function middleware(request: NextRequest) {
 
   if (prefersMarkdown && pathname.startsWith('/docs') && !pathname.endsWith('.md')) {
     const rawPath = pathname.replace(/^\/docs\/?/, '');
-    if (rawPath) {
-      const { versionSlug, docPath } = extractVersionAndPath(rawPath);
-      if (docPath) {
-        const url = buildMdRewriteUrl(request, docPath, versionSlug);
-        return NextResponse.rewrite(url);
-      }
-    }
+    const { versionSlug, docPath } = extractVersionAndPath(rawPath);
+
+    const url = buildMdRewriteUrl(request, docPath, versionSlug ?? latestVersion.id);
+    return NextResponse.rewrite(url);
   }
 
   return NextResponse.next();
