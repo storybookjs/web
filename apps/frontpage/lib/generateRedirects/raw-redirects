@@ -1,0 +1,153 @@
+# The redirects here will have an appropriate version (and sometimes renderer) added to the `from` (first path in the line)
+# They are broken down by the version at which the `to` (second path in the line) was added
+
+# 6.4
+/docs/workflows/testing-with-storybook                                  /docs/writing-tests                                                     301
+/docs/workflows/unit-testing                                            /docs/writing-tests/integrations/stories-in-unit-tests                  301
+/docs/workflows/visual-testing                                          /docs/writing-tests/visual-testing                                      301
+/docs/workflows/interaction-testing                                     /docs/writing-tests/interaction-testing                                 301
+/docs/workflows/snapshot-testing                                        /docs/writing-tests/snapshot-testing                                    301
+/docs/workflows/build-pages-with-storybook                              /docs/writing-stories/build-pages-with-storybook                        301
+/docs/workflows/stories-for-multiple-components                         /docs/writing-stories/stories-for-multiple-components                   301
+/docs/workflows/publish-storybook                                       /docs/sharing/publish-storybook                                         301
+/docs/workflows/storybook-composition                                   /docs/sharing/storybook-composition                                     301
+/docs/workflows/package-composition                                     /docs/sharing/package-composition                                       301
+/docs/workflows/faq                                                     /docs/faq                                                               301
+
+# 6.5
+/docs/configure/webpack                                                 /docs/builders/webpack                                                  301
+/docs/api/addons                                                        /docs/addons                                                            301
+/docs/api/addons-api                                                    /docs/addons/addons-api                                                 301
+/docs/api/presets                                                       /docs/addons/writing-presets                                            301
+/docs/addons/addon-catalog                                              /docs/addons/integration-catalog                                        301
+/docs/api/mdx                                                           /docs/writing-docs/mdx                                                  301
+/docs/why-storybook                                                     /docs/get-started/why-storybook                                         301
+/docs/get-started/introduction                                          /docs/get-started/install                                               301
+
+# 7.0
+/docs/writing-docs/docs-page                                            /docs/writing-docs/autodocs                                             301
+/docs/writing-docs/doc-block-argstable                                  /docs/api/doc-blocks/doc-block-controls                                 301
+/docs/writing-docs/doc-block-canvas                                     /docs/api/doc-blocks/doc-block-canvas                                   301
+/docs/writing-docs/doc-block-colorpalette                               /docs/api/doc-blocks/doc-block-colorpalette                             301
+/docs/writing-docs/doc-block-description                                /docs/api/doc-blocks/doc-block-description                              301
+/docs/writing-docs/doc-block-icongallery                                /docs/api/doc-blocks/doc-block-icongallery                              301
+/docs/writing-docs/doc-block-source                                     /docs/api/doc-blocks/doc-block-source                                   301
+/docs/writing-docs/doc-block-story                                      /docs/api/doc-blocks/doc-block-story                                    301
+/docs/writing-docs/doc-block-typeset                                    /docs/api/doc-blocks/doc-block-typeset                                  301
+/docs/api/frameworks-feature-support                                    /docs/configure/integration/frameworks-feature-support                  301
+/docs/api/argtypes                                                      /docs/api/arg-types                                                     301
+
+# 7.1
+/docs/writing-tests/importing-stories-in-tests                          /docs/writing-tests/integrations/stories-in-unit-tests                  301
+
+# 7.6
+/docs/writing-stories/introduction                                      /docs/writing-stories                                                   301
+/docs/writing-docs/introduction                                         /docs/writing-docs                                                      301
+/docs/writing-tests/introduction                                        /docs/writing-tests                                                     301
+/docs/essentials/introduction                                           /docs/essentials                                                        301
+/docs/addons/introduction                                               /docs/addons                                                            301
+/docs/configure/overview                                                /docs/configure                                                         301
+/docs/builders/overview                                                 /docs/builders                                                          301
+/docs/contribute/how-to-contribute                                      /docs/contribute                                                        301
+/docs/configure/babel                                                   /docs/configure/integration/compilers                                   301
+
+# 8.1
+/docs/get-started/angular                                               /docs/get-started/frameworks/angular                                    301
+/docs/get-started/nextjs                                                /docs/get-started/frameworks/nextjs                                     301
+/docs/get-started/react-vite                                            /docs/get-started/frameworks/react-vite                                 301
+/docs/get-started/react-webpack5                                        /docs/get-started/frameworks/react-webpack5                             301
+/docs/get-started/sveltekit                                             /docs/get-started/frameworks/sveltekit                                  301
+/docs/get-started/svelte-vite                                           /docs/get-started/frameworks/svelte-vite                                301
+/docs/get-started/svelte-webpack5                                       /docs/get-started/frameworks/svelte-webpack5                            301
+/docs/get-started/vue3-vite                                             /docs/get-started/frameworks/vue3-vite                                  301
+/docs/get-started/vue3-webpack5                                         /docs/get-started/frameworks/vue3-webpack5                              301
+/docs/get-started/web-components-vite                                   /docs/get-started/frameworks/web-components-vite                        301
+/docs/get-started/web-components-webpack5                               /docs/get-started/frameworks/web-components-webpack5                    301
+
+/docs/writing-stories/mocking-modules                                   /docs/writing-stories/mocking-data-and-modules/mocking-modules          301
+/docs/writing-stories/mocking-network-requests                          /docs/writing-stories/mocking-data-and-modules/mocking-network-requests 301
+/docs/writing-stories/mocking-providers                                 /docs/writing-stories/mocking-data-and-modules/mocking-providers        301
+
+/docs/writing-tests/storyshots-migration-guide                          /docs/8/writing-tests/snapshot-testing/storyshots-migration-guide       301
+
+/docs/writing-tests/stories-in-end-to-end-tests                         /docs/writing-tests/integrations/stories-in-end-to-end-tests            301
+/docs/writing-tests/stories-in-unit-tests                               /docs/writing-tests/integrations/stories-in-unit-tests                  301
+
+/docs/configure/frameworks                                              /docs/configure/integration/frameworks                                  301
+/docs/configure/frameworks-feature-support                              /docs/configure/integration/frameworks-feature-support                  301
+/docs/configure/compilers                                               /docs/configure/integration/compilers                                   301
+/docs/configure/typescript                                              /docs/configure/integration/typescript                                  301
+/docs/configure/images-and-assets                                       /docs/configure/integration/images-and-assets                           301
+
+/docs/configure/features-and-behavior                                   /docs/configure/user-interface/features-and-behavior                    301
+/docs/configure/theming                                                 /docs/configure/user-interface/theming                                  301
+/docs/configure/sidebar-and-urls                                        /docs/configure/user-interface/sidebar-and-urls                         301
+/docs/configure/storybook-addons                                        /docs/configure/user-interface/storybook-addons                         301
+
+/docs/api/main-config                                                   /docs/api/main-config/main-config                                       301
+/docs/api/main-config-framework                                         /docs/api/main-config/main-config-framework                             301
+/docs/api/main-config-stories                                           /docs/api/main-config/main-config-stories                               301
+/docs/api/main-config-addons                                            /docs/api/main-config/main-config-addons                                301
+/docs/api/main-config-babel                                             /docs/api/main-config/main-config-babel                                 301
+/docs/api/main-config-babel-default                                     /docs/api/main-config/main-config-babel-default                         301
+/docs/api/main-config-build                                             /docs/api/main-config/main-config-build                                 301
+/docs/api/main-config-core                                              /docs/api/main-config/main-config-core                                  301
+/docs/api/main-config-docs                                              /docs/api/main-config/main-config-docs                                  301
+/docs/api/main-config-env                                               /docs/api/main-config/main-config-env                                   301
+/docs/api/main-config-features                                          /docs/api/main-config/main-config-features                              301
+/docs/api/main-config-indexers                                          /docs/api/main-config/main-config-indexers                              301
+/docs/api/main-config-logLevel                                          /docs/api/main-config/main-config-logLevel                              301
+/docs/api/main-config-manager-head                                      /docs/api/main-config/main-config-manager-head                          301
+/docs/api/main-config-preview-annotations                               /docs/api/main-config/main-config-preview-annotations                   301
+/docs/api/main-config-preview-body                                      /docs/api/main-config/main-config-preview-body                          301
+/docs/api/main-config-preview-head                                      /docs/api/main-config/main-config-preview-head                          301
+/docs/api/main-config-refs                                              /docs/api/main-config/main-config-refs                                  301
+/docs/api/main-config-static-dirs                                       /docs/api/main-config/main-config-static-dirs                           301
+/docs/api/main-config-swc                                               /docs/api/main-config/main-config-swc                                   301
+/docs/api/main-config-typescript                                        /docs/api/main-config/main-config-typescript                            301
+/docs/api/main-config-vite-final                                        /docs/api/main-config/main-config-vite-final                            301
+/docs/api/main-config-webpack-final                                     /docs/api/main-config/main-config-webpack-final                         301
+
+/docs/api/doc-block-argtypes                                            /docs/api/doc-blocks/doc-block-argtypes                                 301
+/docs/api/doc-block-canvas                                              /docs/api/doc-blocks/doc-block-canvas                                   301
+/docs/api/doc-block-colorpalette                                        /docs/api/doc-blocks/doc-block-colorpalette                             301
+/docs/api/doc-block-controls                                            /docs/api/doc-blocks/doc-block-controls                                 301
+/docs/api/doc-block-description                                         /docs/api/doc-blocks/doc-block-description                              301
+/docs/api/doc-block-icongallery                                         /docs/api/doc-blocks/doc-block-icongallery                              301
+/docs/api/doc-block-markdown                                            /docs/api/doc-blocks/doc-block-markdown                                 301
+/docs/api/doc-block-meta                                                /docs/api/doc-blocks/doc-block-meta                                     301
+/docs/api/doc-block-primary                                             /docs/api/doc-blocks/doc-block-primary                                  301
+/docs/api/doc-block-source                                              /docs/api/doc-blocks/doc-block-source                                   301
+/docs/api/doc-block-stories                                             /docs/api/doc-blocks/doc-block-stories                                  301
+/docs/api/doc-block-story                                               /docs/api/doc-blocks/doc-block-story                                    301
+/docs/api/doc-block-subtitle                                            /docs/api/doc-blocks/doc-block-subtitle                                 301
+/docs/api/doc-block-title                                               /docs/api/doc-blocks/doc-block-title                                    301
+/docs/api/doc-block-typeset                                             /docs/api/doc-blocks/doc-block-typeset                                  301
+/docs/api/doc-block-unstyled                                            /docs/api/doc-blocks/doc-block-unstyled                                 301
+/docs/api/doc-block-useof                                               /docs/api/doc-blocks/doc-block-useof                                    301
+
+/docs/api/portable-stories-playwright                                   /docs/api/portable-stories/portable-stories-playwright                  301
+
+/docs/contribute/documentation-updates                                  /docs/contribute/documentation/documentation-updates                    301
+/docs/contribute/new-snippets                                           /docs/contribute/documentation/new-snippets                             301
+
+# 8.4
+/docs/writing-tests/vitest-plugin                                       /docs/writing-tests/integrations/vitest-addon                           301
+
+# 9.0
+/docs/essentials/interactions                                           /docs/writing-tests/interaction-testing                                 301
+/docs/get-started/frameworks/svelte-webpack5                            /docs/get-started/frameworks/svelte-vite                                301
+/docs/get-started/frameworks/vue3-webpack5                              /docs/get-started/frameworks/vue3-vite                                  301
+/docs/get-started/frameworks/web-components-webpack5                    /docs/get-started/frameworks/web-components-vite                        301
+/docs/writing-tests/component-testing                                   /docs/writing-tests/interaction-testing                                 301
+/docs/writing-tests/import-stories-in-tests/stories-in-end-to-end-tests /docs/writing-tests/integrations/stories-in-end-to-end-tests            301
+/docs/writing-tests/import-stories-in-tests/stories-in-unit-tests       /docs/writing-tests/integrations/stories-in-unit-tests                  301
+/docs/writing-tests/snapshot-testing/snapshot-testing                   /docs/writing-tests/snapshot-testing                                    301
+/docs/writing-tests/snapshot-testing/storyshots-migration-guide         /docs/8/writing-tests/snapshot-testing/storyshots-migration-guide       301
+/docs/writing-tests/test-addon                                          /docs/writing-tests/integrations/vitest-addon                           301
+/docs/writing-tests/vitest-addon                                        /docs/writing-tests/integrations/vitest-addon                           301
+/docs/writing-tests/test-runner                                         /docs/writing-tests/integrations/test-runner                            301
+/docs/migration-guide                                                   /docs/releases/migration-guide                                          301
+/docs/migration-guide/from-older-version                                /docs/releases/migration-guide-from-older-version                       301
+/docs/contribute/roadmap                                                /docs/releases/roadmap                                                  301
+/docs/configure/upgrading                                               /docs/releases/upgrading                                                301

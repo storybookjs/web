@@ -11,7 +11,7 @@ import {
 } from '@repo/ui';
 import { useMediaQuery } from '../../../hooks/use-media-query';
 import { useDocs } from '../../../app/docs/provider';
-import { Button } from './button';
+import { Button } from '../button';
 
 export const Renderers: FC = () => {
   const pathname = usePathname();
@@ -24,7 +24,7 @@ export const Renderers: FC = () => {
 
   type Renderer = (typeof renderers)[number];
 
-  const [isMobile] = useMediaQuery('(max-width: 480px)');
+  const [isMobile] = useMediaQuery('(max-width: 575px)');
   const [firstList, setFirstList] = useState<Renderer[]>(renderers.slice(0, 3));
   const [lastRenderer, setLastRenderer] = useState<Renderer>(renderers[3]);
 
@@ -43,7 +43,7 @@ export const Renderers: FC = () => {
   }, [activeRenderer, firstList, isMobile, renderers]);
 
   useEffect(() => {
-    // On mobile we only show the first two renderers
+    // On mobile we only show the first three renderers
     if (isMobile) {
       setFirstList(renderers.slice(0, 2));
       setLastRenderer(renderers[2]);
@@ -60,7 +60,7 @@ export const Renderers: FC = () => {
   });
 
   return (
-    <div className="mb-8 flex gap-2">
+    <div className="flex gap-2">
       {firstList.map((renderer) => (
         <Button
           active={renderer.id === activeRenderer}
