@@ -105,6 +105,7 @@ module.exports = withBundleAnalyzer(
        */
       outputFileTracingIncludes: {
         '/docs/**': ['./content/docs/**'],
+        '/versions': ['./generated-versions.json'],
         '/md-api/**': ['./content/docs/**', './content/snippets/**'],
       },
     },
