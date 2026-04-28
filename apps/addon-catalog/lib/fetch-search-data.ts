@@ -13,7 +13,7 @@ export async function fetchSearchData(query: string) {
   try {
     const data = await fetchAddonsQuery<SearchData, { query: string }>(
       gql`
-          query Search($query: String!) {
+          query Search($query: string!) {
             partialSearchIntegrations(query: $query) {
               addons {
                 ${addonFragment}
