@@ -11,7 +11,7 @@ type HeadingProps = DetailedHTMLProps<
   HTMLAttributes<HTMLHeadingElement>,
   HTMLHeadingElement
 > & {
-  level: 1 | 2 | 3 | 4;
+  level: 1 | 2 | 3 | 4 | 5;
 };
 const Heading: FC<HeadingProps> = ({ children, className, id, level }) => {
   const HeadingComponent =
@@ -67,4 +67,8 @@ export const H3: FC<Omit<HeadingProps, 'level'>> = (props) => {
 
 export const H4: FC<Omit<HeadingProps, 'level'>> = (props) => {
   return <Heading className="ui-mb-4 ui-text-lg" level={4} {...props} />;
+};
+
+export const H5: FC<Omit<HeadingProps, 'level'>> = (props) => {
+  return <Heading className="ui-mb-4 ui-text-md" level={5} {...props} />;
 };

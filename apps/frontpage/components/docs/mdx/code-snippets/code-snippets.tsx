@@ -65,6 +65,7 @@ const getActiveRenderer = (activeRendererIn: string | null, pathname: string) =>
     'nextjs': 'react',
     'react-native-web': 'react',
     'sveltekit': 'svelte',
+    'tanstack-react': 'react',
     'vue3': 'vue',
   };
 
