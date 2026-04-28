@@ -18,9 +18,14 @@ interface LocalProps {
    * locate it and learn about it. Currently only used for "create" code snippets.
    */
   variant?: "default" | "new-users";
+
+  /**
+   * An optional AI prompt to show as a "Copy prompt" button next to the copy button.
+   */
+  copyPrompt?: string;
 }
 
-export async function CodeSnippets({ path, activeVersion, copyEvent, variant = "default" }: LocalProps) {
+export async function CodeSnippets({ path, activeVersion, copyEvent, variant = "default", copyPrompt }: LocalProps) {
   // If there is no path or active version, return null
   // TODO: Perhaps we could return a message saying that there are no code snippets
   if (!path || !activeVersion) return null;
@@ -34,5 +39,5 @@ export async function CodeSnippets({ path, activeVersion, copyEvent, variant = "
 
   // Render the Code Snippets component
   // This happen on the client since we need to use the context
-  return <CodeSnippetsClient content={codeSnippetsContent} variant={variant} copyEvent={copyEvent} snippetPath={path} />;
+  return <CodeSnippetsClient content={codeSnippetsContent} variant={variant} copyEvent={copyEvent} snippetPath={path} copyPrompt={copyPrompt} />;
 }
