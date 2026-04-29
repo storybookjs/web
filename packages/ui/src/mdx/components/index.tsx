@@ -2,7 +2,7 @@ import { A } from './a';
 import { Code } from './code';
 import { Figcaption } from './figcaption';
 import { Figure } from './figure';
-import { H1, H2, H3, H4 } from './headings';
+import { H1, H2, H3, H4, H5 } from './headings';
 import { Hr } from './hr';
 import { P } from './p';
 import { Pre } from './pre';
@@ -24,6 +24,7 @@ export const mdxComponents = {
   h2: H2,
   h3: H3,
   h4: H4,
+  h5: H5,
   hr: Hr,
   p: P,
   pre: Pre,
