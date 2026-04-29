@@ -20,6 +20,7 @@ const Heading: FC<HeadingProps> = ({ children, className, id, level }) => {
       2: 'h2',
       3: 'h3',
       4: 'h4',
+      5: 'h5',
     }[level] || 'h1';
 
   return createElement(
