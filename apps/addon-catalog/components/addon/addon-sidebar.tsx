@@ -1,6 +1,6 @@
 'use client';
 
-import { Pill } from '@repo/ui';
+import { Button, Pill } from '@repo/ui';
 import { BookIcon, EditIcon } from '@storybook/icons';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -39,15 +39,16 @@ export function AddonSidebar({ addon }: { addon: AddonWithTagLinks }) {
             ))}
           </ul>
           {moreAuthors.length > 0 && !moreAuthorsVisible && (
-            <button
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => {
                 setMoreAuthorsVisible(true);
               }}
               type="button"
-              className="flex text-sm transition-colors hover:text-blue-500"
             >
               {`+ ${moreAuthors.length.toString()} more`}
-            </button>
+            </Button>
           )}
         </>
       ) : null}
