@@ -39,7 +39,6 @@ type CopyAction = ActionBase & {
 
 type LinkAction = ActionBase & {
   href: string;
-  external?: boolean;
   copy?: never;
 };
 
@@ -109,9 +108,6 @@ const ActionButton: FC<{ action: CalloutAction }> = ({ action }) => {
             track(action.event);
             flashSuccess();
           }}
-          {...(action.external
-            ? { target: '_blank', rel: 'noopener noreferrer' }
-            : {})}
         >
           {buttonIcon}
           {buttonLabel}
