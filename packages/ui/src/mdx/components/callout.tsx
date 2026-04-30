@@ -24,24 +24,109 @@ const VARIANT_DEFAULT_ICON: Partial<Record<Variant, string>> = {
 
 interface ActionBase {
   label: string;
-  labelOnSuccess?: string;
-  icon?: ActionIconName;
-  iconOnSuccess?: ActionIconName;
+  icon?: ActionIconName | null;
   event: string;
 }
 
 const SUCCESS_LABEL_DURATION_MS = 2000;
 
-export type CalloutAction =
-  | (ActionBase & {
-      onClick: (helpers: { copy: (text: string) => void }) => void;
-      href?: never;
-    })
-  | (ActionBase & {
-      href: string;
-      external?: boolean;
-      onClick?: never;
-    });
+type CopyAction = ActionBase & {
+  copy: string;
+  labelOnSuccess?: string | null;
+  iconOnSuccess?: ActionIconName | null;
+  href?: never;
+};
+
+type LinkAction = ActionBase & {
+  href: string;
+  external?: boolean;
+  copy?: never;
+};
+
+export type CalloutAction = CopyAction | LinkAction;
+
+const isCopyAction = (action: CalloutAction): action is CopyAction =>
+  Boolean(action.copy);
+
+const isLinkAction = (action: CalloutAction): action is LinkAction =>
+  Boolean(action.href);
+
+const ActionButton: FC<{ action: CalloutAction }> = ({ action }) => {
+  const track = useAnalytics();
+  const [showSuccess, setShowSuccess] = useState(false);
+  const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(
+    () => () => {
+      if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current);
+    },
+    [],
+  );
+
+  let resolvedLabelOnSuccess: string | null | undefined;
+  let resolvedIconOnSuccess: ActionIconName | null | undefined;
+  let resolvedIcon: ActionIconName | null | undefined = action.icon;
+
+  if (isCopyAction(action)) {
+    resolvedLabelOnSuccess =
+      action.labelOnSuccess === undefined ? 'Copied!' : action.labelOnSuccess;
+    resolvedIconOnSuccess =
+      action.iconOnSuccess === undefined ? 'check' : action.iconOnSuccess;
+    if (resolvedIcon === undefined) {
+      resolvedIcon = 'copy';
+    }
+  }
+
+  const flashSuccess = (): void => {
+    if (!resolvedLabelOnSuccess && !resolvedIconOnSuccess) return;
+    setShowSuccess(true);
+    if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current);
+    successTimeoutRef.current = setTimeout(() => {
+      setShowSuccess(false);
+    }, SUCCESS_LABEL_DURATION_MS);
+  };
+
+  const handleClick = (): void => {
+    track(action.event);
+    if (isCopyAction(action)) {
+      copyToClipboard(action.copy);
+    }
+    flashSuccess();
+  };
+
+  const buttonLabel =
+    showSuccess && resolvedLabelOnSuccess ? resolvedLabelOnSuccess : action.label;
+  const buttonIconName =
+    showSuccess && resolvedIconOnSuccess ? resolvedIconOnSuccess : resolvedIcon;
+  const buttonIcon = buttonIconName ? ACTION_ICONS[buttonIconName] : null;
+
+  if (isLinkAction(action)) {
+    return (
+      <Button variant="solid" size="md" asChild>
+        <a
+          href={action.href}
+          onClick={() => {
+            track(action.event);
+            flashSuccess();
+          }}
+          {...(action.external
+            ? { target: '_blank', rel: 'noopener noreferrer' }
+            : {})}
+        >
+          {buttonIcon}
+          {buttonLabel}
+        </a>
+      </Button>
+    );
+  }
+
+  return (
+    <Button variant="ghost" size="md" onClick={handleClick} type="button">
+      {buttonIcon}
+      {buttonLabel}
+    </Button>
+  );
+};
 
 export interface CalloutProps {
   title?: string;
@@ -59,40 +144,7 @@ export const Callout: FC<CalloutProps> = ({
   action,
 }) => {
   const appliedIcon = icon ?? VARIANT_DEFAULT_ICON[variant];
-  const track = useAnalytics();
-  const [showSuccess, setShowSuccess] = useState(false);
-  const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(
-    () => () => {
-      if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current);
-    },
-    [],
-  );
-
-  const flashSuccess = (): void => {
-    if (!action?.labelOnSuccess) return;
-    setShowSuccess(true);
-    if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current);
-    successTimeoutRef.current = setTimeout(() => {
-      setShowSuccess(false);
-    }, SUCCESS_LABEL_DURATION_MS);
-  };
-
-  const handleClick = (): void => {
-    if (!action) return;
-    track(action.event);
-    if ('onClick' in action && action.onClick) {
-      action.onClick({ copy: (text) => copyToClipboard(text) });
-    }
-    flashSuccess();
-  };
-
-  const buttonLabel =
-    showSuccess && action?.labelOnSuccess ? action.labelOnSuccess : action?.label;
-  const buttonIconName =
-    showSuccess && action?.iconOnSuccess ? action.iconOnSuccess : action?.icon;
-  const buttonIcon = buttonIconName ? ACTION_ICONS[buttonIconName] : null;
+  const actionKey = action ? action.copy ?? action.href : undefined;
 
   return (
     <div
@@ -126,28 +178,7 @@ export const Callout: FC<CalloutProps> = ({
       </div>
       {action ? (
         <div className="ui-flex-none">
-          {'href' in action && action.href ? (
-            <Button variant="solid" size="md" asChild>
-              <a
-                href={action.href}
-                onClick={() => {
-                  track(action.event);
-                  flashSuccess();
-                }}
-                {...(action.external
-                  ? { target: '_blank', rel: 'noopener noreferrer' }
-                  : {})}
-              >
-                {buttonIcon}
-                {buttonLabel}
-              </a>
-            </Button>
-          ) : (
-            <Button variant="ghost" size="md" onClick={handleClick} type="button">
-              {buttonIcon}
-              {buttonLabel}
-            </Button>
-          )}
+          <ActionButton key={actionKey} action={action} />
         </div>
       ) : null}
     </div>

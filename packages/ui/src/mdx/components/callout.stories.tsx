@@ -63,13 +63,8 @@ export const WithCopyAction: Story = {
     children: 'Use this prompt with your AI assistant to scaffold a Storybook.',
     action: {
       label: 'Copy prompt',
-      labelOnSuccess: 'Copied!',
-      icon: 'copy',
-      iconOnSuccess: 'check',
       event: 'copy_storybook_prompt',
-      onClick: ({ copy }) => {
-        copy('Set up Storybook in this project with sensible defaults.')
-      },
+      copy: 'Set up Storybook in this project with sensible defaults.',
     },
   },
   play: async ({ canvas, step }) => {
@@ -92,16 +87,41 @@ export const WithCopyAction: Story = {
   },
 };
 
-export const WithCustomAction: Story = {
+export const WithCopyActionOverrides: Story = {
   args: {
-    icon: '🎉',
-    children: 'Run the diagnostic before reporting an issue.',
+    icon: '🤖',
+    children: 'Use this prompt with your AI assistant to scaffold a Storybook.',
     action: {
-      label: 'Run diagnostic',
-      event: 'run_diagnostic',
-      // eslint-disable-next-line no-alert -- Demo purposes
-      onClick: () => { alert('Running diagnostic...') },
+      label: 'Copy command',
+      labelOnSuccess: 'Got it!',
+      icon: 'check',
+      iconOnSuccess: 'copy',
+      event: 'copy_storybook_prompt_overrides',
+      copy: 'storybook init',
     },
+  },
+  play: async ({ canvas, step }) => {
+    await step('button starts with overridden label', async () => {
+      await expect(
+        canvas.getByRole('button', { name: 'Copy command' }),
+      ).toBeInTheDocument();
+    });
+    await step('clicking shows overridden labelOnSuccess', async () => {
+      await userEvent.click(canvas.getByRole('button', { name: 'Copy command' }));
+      await expect(
+        await canvas.findByRole('button', { name: 'Got it!' }),
+      ).toBeInTheDocument();
+    });
+    await step('label reverts after the success window', async () => {
+      await waitFor(
+        async () => {
+          await expect(
+            canvas.getByRole('button', { name: 'Copy command' }),
+          ).toBeInTheDocument();
+        },
+        { timeout: 3000 },
+      );
+    });
   },
 };
 
@@ -127,7 +147,7 @@ export const LongContent: Story = {
     action: {
       label: 'Copy codemod',
       event: 'copy_codemod',
-      onClick: ({ copy }) => { copy('npx storybook@latest migrate') },
+      copy: 'npx storybook@latest migrate',
     },
   },
 };
