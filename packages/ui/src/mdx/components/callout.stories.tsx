@@ -133,7 +133,6 @@ export const WithLinkAction: Story = {
       label: 'Open guide',
       event: 'open_migration_guide',
       href: 'https://storybook.js.org/docs/migration-guide',
-      external: true,
     },
   },
 };
