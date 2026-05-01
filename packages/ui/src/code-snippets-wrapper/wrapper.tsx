@@ -1,7 +1,7 @@
 'use client';
 
 import type { FC, ReactNode } from 'react';
-import { useAnalytics } from '@repo/utils';
+import { useAnalytics } from '@repo/utils/analytics';
 import { JSIcon, TSIcon, ShellIcon } from './icons';
 import { Copy } from './copy';
 

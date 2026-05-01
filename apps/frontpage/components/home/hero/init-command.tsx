@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import copy from 'copy-to-clipboard';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useAnalytics } from '@repo/utils';
+import { useAnalytics } from '@repo/utils/analytics';
 
 export const InitCommand: FC = () => {
   const [state, setState] = useState(false);

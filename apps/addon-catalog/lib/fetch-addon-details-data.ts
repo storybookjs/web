@@ -1,10 +1,5 @@
-import {
-  addonFragment,
-  buildTagLinks,
-  fetchAddonsQuery,
-  gql,
-  validateResponse,
-} from '@repo/utils';
+import { addonFragment, buildTagLinks, validateResponse } from '@repo/utils';
+import { fetchAddonsQuery, gql } from '@repo/utils/fetch-addons-query';
 import type { Addon } from '../types';
 import { createMarkdownProcessor } from './create-markdown-processor';
 

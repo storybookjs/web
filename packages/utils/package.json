@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    ".": "./src/main.ts"
+    ".": "./src/main.ts",
+    "./analytics": "./src/analytics.ts",
+    "./fetch-addons-query": "./src/fetch-addons-query.ts"
   },
   "scripts": {
     "lint": "eslint src/",

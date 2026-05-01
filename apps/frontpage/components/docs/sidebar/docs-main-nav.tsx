@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
-import { cn, latestVersion, useAnalytics } from '@repo/utils';
+import { cn, latestVersion } from '@repo/utils';
+import { useAnalytics } from '@repo/utils/analytics';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { getVersion } from '../../../lib/get-version';
 import {

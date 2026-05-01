@@ -1,4 +1,5 @@
-import { fetchAddonsQuery, gql, validateResponse } from '@repo/utils';
+import { validateResponse } from '@repo/utils';
+import { fetchAddonsQuery, gql } from '@repo/utils/fetch-addons-query';
 import { type Tag } from '../types';
 
 type TagValue = Tag['name'];

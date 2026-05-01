@@ -3,7 +3,8 @@
 'use client';
 
 import Link from 'next/link';
-import { cn, latestVersion, useAnalytics } from '@repo/utils';
+import { cn, latestVersion } from '@repo/utils';
+import { useAnalytics } from '@repo/utils/analytics';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';

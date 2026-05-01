@@ -2,7 +2,7 @@
 
 import type { FC, ReactNode } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import { useAnalytics } from '@repo/utils';
+import { useAnalytics } from '@repo/utils/analytics';
 import { usePathname } from 'next/navigation';
 import { GithubIcon } from '@storybook/icons';
 import { cn } from '../cn';

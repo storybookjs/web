@@ -11,7 +11,7 @@ import copy from 'copy-to-clipboard';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { StorybookIcon } from '@repo/ui';
-import { useAnalytics } from '@repo/utils';
+import { useAnalytics } from '@repo/utils/analytics';
 import { type Addon } from '../../types';
 
 export function AddonHero({ addon }: { addon: Addon }) {

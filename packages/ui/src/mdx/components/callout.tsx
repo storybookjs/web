@@ -1,6 +1,6 @@
 'use client';
 
-import { useAnalytics } from '@repo/utils';
+import { useAnalytics } from '@repo/utils/analytics';
 import { type FC, type ReactNode, useEffect, useRef, useState } from 'react';
 import copyToClipboard from 'copy-to-clipboard';
 import snarkdown from 'snarkdown';
