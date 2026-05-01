@@ -6,8 +6,7 @@ import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import type { TreeProps } from '@repo/utils';
-import { cn, docsVersions } from '@repo/utils';
-import { useAnalytics } from '../../../lib/analytics';
+import { cn, docsVersions, useAnalytics } from '@repo/utils';
 import { getVersion } from '../../../lib/get-version';
 import { VersionSelector } from './version-selector';
 

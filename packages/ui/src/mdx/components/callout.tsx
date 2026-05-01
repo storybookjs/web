@@ -1,12 +1,11 @@
 'use client';
 
-import { cn } from '@repo/utils';
+import { cn, useAnalytics } from '@repo/utils';
 import { type FC, type ReactNode, useEffect, useRef, useState } from 'react';
 import copyToClipboard from 'copy-to-clipboard';
 import snarkdown from 'snarkdown';
 import { CheckIcon, CopyIcon } from '@storybook/icons';
 import { Button } from '../../button';
-import { useAnalytics } from '../../analytics';
 
 export type ActionIconName = 'copy' | 'check';
 

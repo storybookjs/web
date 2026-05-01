@@ -3,13 +3,12 @@
 'use client';
 
 import Link from 'next/link';
-import { cn, latestVersion } from '@repo/utils';
+import { cn, latestVersion, useAnalytics } from '@repo/utils';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon, WandIcon } from '@storybook/icons';
 import { Container, GradientBadge } from '@repo/ui';
-import { useAnalytics } from '../../../lib/analytics';
 import { Manager } from '../manager';
 import { InitCommand } from './init-command';
 import { Chrome } from './chrome';

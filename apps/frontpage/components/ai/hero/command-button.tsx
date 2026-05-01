@@ -4,8 +4,7 @@ import { CheckIcon, CopyIcon } from '@storybook/icons';
 import { useState } from 'react';
 import copy from 'copy-to-clipboard';
 import { AnimatePresence, motion } from 'framer-motion';
-import { cn } from '@repo/utils';
-import { useAnalytics } from '../../../lib/analytics';
+import { cn, useAnalytics } from '@repo/utils';
 
 interface CommandButtonProps {
   command: string;
