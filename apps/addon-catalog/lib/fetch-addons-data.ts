@@ -1,6 +1,5 @@
-import { validateResponse } from '@repo/utils';
+import { fetchAddonsQuery, gql, validateResponse } from '@repo/utils';
 import type { Addon } from '../types';
-import { fetchAddonsQuery, gql } from './fetch-addons-query';
 
 type AddonValue = Addon['name'];
 

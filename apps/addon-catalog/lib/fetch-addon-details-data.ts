@@ -1,6 +1,11 @@
-import { addonFragment, buildTagLinks, validateResponse } from '@repo/utils';
+import {
+  addonFragment,
+  buildTagLinks,
+  fetchAddonsQuery,
+  gql,
+  validateResponse,
+} from '@repo/utils';
 import type { Addon } from '../types';
-import { fetchAddonsQuery, gql } from './fetch-addons-query';
 import { createMarkdownProcessor } from './create-markdown-processor';
 
 type AddonValue = Pick<

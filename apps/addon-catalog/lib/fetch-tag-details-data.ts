@@ -1,6 +1,11 @@
-import { addonFragment, recipeFragment, validateResponse } from '@repo/utils';
+import {
+  addonFragment,
+  fetchAddonsQuery,
+  gql,
+  recipeFragment,
+  validateResponse,
+} from '@repo/utils';
 import { type Tag } from '../types';
-import { fetchAddonsQuery, gql } from './fetch-addons-query';
 
 type TagValue = Pick<
   Tag,

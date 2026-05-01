@@ -1,6 +1,5 @@
 import { type MetadataRoute } from 'next';
-import { validateResponse } from '@repo/utils';
-import { fetchAddonsQuery, gql } from '../../lib/fetch-addons-query';
+import { fetchAddonsQuery, gql, validateResponse } from '@repo/utils';
 
 type AddonValue = string;
 

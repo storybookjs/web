@@ -13,6 +13,7 @@ export { validateResponse } from './validate-response';
 export { getVersion } from './get-version';
 export { useAnalytics } from './analytics';
 export { buildTagLinks } from './build-tag-links';
+export { fetchAddonsQuery, gql } from './fetch-addons-query';
 
 // Constants
 export { addonFragment, recipeFragment } from './constants';
