@@ -2,7 +2,7 @@ import { cn } from '@repo/utils';
 import type { ComponentProps, ReactNode, FC } from 'react';
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
-import type { Button } from '../../ui/button';
+import type { Button } from '@repo/ui';
 
 interface IntegrationProps extends ComponentProps<typeof Button> {
   image: string;

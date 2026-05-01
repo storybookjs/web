@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import Image from 'next/image';
-import { Button } from '../ui/button';
+import { Button } from '@repo/ui';
 import { Section } from './section';
 
 export const Sponsor: FC = () => {

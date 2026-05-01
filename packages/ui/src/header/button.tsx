@@ -2,7 +2,7 @@
 
 import type { FC } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import { cn } from '@repo/utils';
+import { cn } from '../cn';
 import { Arrow } from './arrow';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import copy from 'copy-to-clipboard';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@repo/utils';
-import { useAnalytics } from '../../../lib/analytics';
+import { useAnalytics } from '@repo/utils/analytics';
 
 interface CommandButtonProps {
   command: string;

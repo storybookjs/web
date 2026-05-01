@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import { Formik, type FormikValues } from 'formik';
-import { cn } from '@repo/utils';
+import { cn } from '../cn';
+import { Button } from '../button';
 import { useMailingListForm } from './use-mailing-list-form';
 
 const validateForm = (values: FormikValues): FormikValues => {
@@ -68,18 +69,20 @@ export const NewsletterForm = ({
             autoCapitalize="off"
             autoCorrect="off"
           />
-          <button
+          <Button
+            variant="solid"
+            size="md"
             className={cn(
-              'ui-absolute ui-flex ui-items-center ui-justify-center ui-gap-2 ui-px-2 ui-font-bold ui-text-white ui-transition-all ui-duration-300 -ui-translate-y-1/2 ui-bg-blue-500 ui-whitespace-nowrap ui-ring-offset-white focus-visible:ui-outline-none focus-visible:ui-ring-2 focus-visible:ui-ring-blue-700 focus-visible:ui-ring-offset-2 disabled:ui-pointer-events-none disabled:ui-opacity-50 dark:ui-ring-offset-slate-950 dark:focus-visible:ui-ring-slate-300 hover:ui-bg-blue-600 ui-right-2 ui-top-1/2 group',
+              'ui-absolute -ui-translate-y-1/2 ui-top-1/2',
               inEyebrow
                 ? 'ui-h-[22px] ui-right-[3px] ui-text-xs ui-rounded-[3px]'
-                : 'ui-h-8 ui-right-2 ui-text-sm ui-rounded-md',
+                : 'ui-right-2',
             )}
             type="submit"
             aria-disabled={isSubmitting}
           >
             Subscribe
-          </button>
+          </Button>
           {hasSubmitted ? (
             <div
               className="ui-absolute ui-top-0 ui-left-0 ui-w-full ui-h-full ui-z-10 ui-rounded-md ui-flex ui-items-center ui-justify-between ui-px-4 ui-bg-green-600"

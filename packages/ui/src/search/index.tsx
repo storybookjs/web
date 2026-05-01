@@ -2,8 +2,9 @@
 
 import type { FC } from 'react';
 import { DocSearch } from '@docsearch/react';
-import { cn, getVersion } from '@repo/utils';
+import { getVersion } from '@repo/utils';
 import { useSelectedLayoutSegment } from 'next/navigation';
+import { cn } from '../cn';
 import type { HeaderProps } from '../header';
 import { globalSearchAgnostic } from '../constants';
 

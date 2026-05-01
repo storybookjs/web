@@ -2,8 +2,7 @@ import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpIcon } from '@storybook/icons';
 import Link from 'next/link';
-import { Container } from '@repo/ui';
-import { Button } from '../../ui/button';
+import { Container, Button } from '@repo/ui';
 import { MobileMenu } from './mobile-menu';
 
 interface StickyNavProps {

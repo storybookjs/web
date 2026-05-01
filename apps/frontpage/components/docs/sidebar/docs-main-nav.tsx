@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 import { cn, latestVersion } from '@repo/utils';
+import { useAnalytics } from '@repo/utils/analytics';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
-import { useAnalytics } from '../../../lib/analytics';
 import { getVersion } from '../../../lib/get-version';
 import {
   APIIcon,

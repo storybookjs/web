@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    ".": "./src/main.ts"
+    ".": "./src/main.ts",
+    "./analytics": "./src/analytics.ts",
+    "./fetch-addons-query": "./src/fetch-addons-query.ts"
   },
   "scripts": {
     "lint": "eslint src/",
@@ -24,6 +26,8 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "graphql-request": "^7.1.0",
+    "next-plausible": "^3.12.0",
+    "posthog-js": "^1.306.0",
     "tailwind-merge": "^2.3.0"
   }
 }

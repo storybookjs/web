@@ -1,13 +1,13 @@
 'use client';
 
-import { cn } from '@repo/utils';
+import { useAnalytics } from '@repo/utils/analytics';
 import type { FC } from 'react';
+import { cn } from '../cn';
 import { StorybookLogo } from '../logos/storybook-logo';
 import { ChromaticLogo } from '../logos/chromatic';
 import { Container } from '../container';
 import { TopSection } from './top-section';
 import { footerNav } from './nav';
-import { useAnalytics } from '../analytics';
 
 export interface FooterProps {
   variant?: 'system' | 'home';

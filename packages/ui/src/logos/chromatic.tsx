@@ -1,5 +1,5 @@
-import { cn } from '@repo/utils';
 import type { FC } from 'react';
+import { cn } from '../cn';
 
 interface ChromaticLogoProps {
   color?: 'white' | 'system';
