@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import Link from 'next/link';
-import { Button } from '../../ui/button';
+import { Button } from '@repo/ui';
 
 interface MenuItemProps {
   id: string;

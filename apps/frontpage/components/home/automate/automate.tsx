@@ -1,8 +1,7 @@
 import type { FC } from 'react';
 import React from 'react';
-import { Container } from '@repo/ui';
+import { Container, Button } from '@repo/ui';
 import Image from 'next/image';
-import { Button } from '../../ui/button';
 import AutomateSvg from '../share/images/automate.svg';
 
 export const Automate: FC = () => {

@@ -4,8 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@repo/utils';
 import { ArrowRightIcon, ChevronSmallRightIcon } from '@storybook/icons';
 import Link from 'next/link';
-import { Container } from '@repo/ui';
-import { Button } from '../ui/button';
+import { Container, Button } from '@repo/ui';
 
 type Alignment = 'left' | 'right';
 
