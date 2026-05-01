@@ -1,4 +1,5 @@
-import { GraphQLClient } from 'graphql-request';
+import { GraphQLClient, gql } from 'graphql-request';
+import { validateResponse } from './validate-response';
 
 export { gql } from 'graphql-request';
 
@@ -49,5 +50,67 @@ export async function fetchAddonsQuery<
     throw new Error(
       `Failed to fetch Addons query, ${JSON.stringify(error, null, 2)}`,
     );
+  }
+}
+
+interface NamesPage {
+  addons?: { name: string }[];
+  tags?: { name: string }[];
+}
+
+export async function fetchAddonsData(): Promise<string[]> {
+  const value: string[] = [];
+  async function fetchPage(skip = 0): Promise<void> {
+    const data = await fetchAddonsQuery<NamesPage, { skip: number }>(
+      gql`
+        query Addons($skip: Int!) {
+          addons(limit: 30, skip: $skip) {
+            name
+          }
+        }
+      `,
+      { variables: { skip } },
+    );
+    validateResponse(() => data.addons);
+    const page = data.addons ?? [];
+    value.push(...page.map(({ name }) => name));
+    if (page.length > 0) await fetchPage(skip + page.length);
+  }
+  try {
+    await fetchPage();
+    return value;
+  } catch (error) {
+    throw new Error(`Failed to fetch addons data: ${(error as Error).message}`);
+  }
+}
+
+export async function fetchTagsData({
+  isCategory,
+}: { isCategory?: boolean } = {}): Promise<string[]> {
+  const value: string[] = [];
+  async function fetchPage(skip = 0): Promise<void> {
+    const data = await fetchAddonsQuery<
+      NamesPage,
+      { isCategory: boolean; skip: number }
+    >(
+      gql`
+        query TagNames($isCategory: Boolean!, $skip: Int!) {
+          tags(isCategory: $isCategory, limit: 30, skip: $skip) {
+            name
+          }
+        }
+      `,
+      { variables: { isCategory: Boolean(isCategory), skip } },
+    );
+    validateResponse(() => data.tags);
+    const page = data.tags ?? [];
+    value.push(...page.map(({ name }) => name));
+    if (page.length > 0) await fetchPage(skip + page.length);
+  }
+  try {
+    await fetchPage();
+    return value;
+  } catch (error) {
+    throw new Error(`Failed to fetch tags data: ${(error as Error).message}`);
   }
 }

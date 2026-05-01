@@ -4,7 +4,7 @@ import { SubHeader } from '@repo/ui';
 import { cn } from '@repo/utils';
 // eslint-disable-next-line -- the variable is camelCase
 import { unstable_cache } from 'next/cache';
-import { fetchAddonsData } from '../../lib/fetch-addons-data';
+import { fetchAddonsData } from '@repo/utils/fetch-addons-query';
 import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 import { AddonHero } from '../../components/addon/addon-hero';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
