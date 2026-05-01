@@ -1,7 +1,11 @@
-import { validateResponse, addonFragment, recipeFragment } from '@repo/utils';
+import {
+  addonFragment,
+  buildTagLinks,
+  recipeFragment,
+  validateResponse,
+} from '@repo/utils';
 import type { Recipe } from '../types';
 import { fetchAddonsQuery, gql } from './fetch-addons-query';
-import { buildTagLinks } from './build-tag-links';
 
 type RecipeValue = Pick<
   Recipe,
@@ -54,7 +58,7 @@ export async function fetchRecipeDetailsData(name: string) {
 
     return {
       ...restRecipe,
-      tags: tags ? buildTagLinks(tags) : [],
+      tags: tags ? buildTagLinks(tags, { basePath: '/addons/tag' }) : [],
     };
   } catch (error) {
     throw new Error(

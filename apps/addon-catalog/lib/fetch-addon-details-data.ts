@@ -1,7 +1,6 @@
-import { addonFragment, validateResponse } from '@repo/utils';
+import { addonFragment, buildTagLinks, validateResponse } from '@repo/utils';
 import type { Addon } from '../types';
 import { fetchAddonsQuery, gql } from './fetch-addons-query';
-import { buildTagLinks } from './build-tag-links';
 import { createMarkdownProcessor } from './create-markdown-processor';
 
 type AddonValue = Pick<
@@ -78,7 +77,7 @@ export async function fetchAddonDetailsData(name: string) {
     return {
       ...restAddon,
       readme: readme ? processor.processSync(readme).toString() : null,
-      tags: tags ? buildTagLinks(tags) : [],
+      tags: tags ? buildTagLinks(tags, { basePath: '/tag' }) : [],
     };
   } catch (error) {
     throw new Error(
