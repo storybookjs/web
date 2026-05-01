@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Formik, type FormikValues } from 'formik';
-import { cn } from '@repo/utils';
+import { cn } from '../cn';
 import { Button } from '../button';
 import { useMailingListForm } from './use-mailing-list-form';
 

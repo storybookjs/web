@@ -1,7 +1,8 @@
 'use client';
 
-import { cn, useAnalytics } from '@repo/utils';
+import { useAnalytics } from '@repo/utils';
 import type { FC } from 'react';
+import { cn } from '../cn';
 import { StorybookLogo } from '../logos/storybook-logo';
 import { ChromaticLogo } from '../logos/chromatic';
 import { Container } from '../container';

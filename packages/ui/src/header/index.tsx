@@ -2,9 +2,10 @@
 
 import type { FC, ReactNode } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import { cn, useAnalytics } from '@repo/utils';
+import { useAnalytics } from '@repo/utils';
 import { usePathname } from 'next/navigation';
 import { GithubIcon } from '@storybook/icons';
+import { cn } from '../cn';
 import { StorybookLogo } from '../logos/storybook-logo';
 // import { NewsletterForm } from '../newsletter-form';
 import { Search } from '../search';

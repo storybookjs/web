@@ -5,7 +5,7 @@ import {
   type DetailedHTMLProps,
   type HTMLAttributes,
 } from 'react';
-import { cn } from '@repo/utils';
+import { cn } from '../../cn';
 
 type HeadingProps = DetailedHTMLProps<
   HTMLAttributes<HTMLHeadingElement>,
