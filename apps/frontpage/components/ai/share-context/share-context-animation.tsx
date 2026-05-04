@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 
 // Animated circle component that moves along a path
-const AnimatedCircleAlongPath = ({
+function AnimatedCircleAlongPath({
   path,
   delay = 0,
   duration = 1.5,
@@ -11,8 +11,8 @@ const AnimatedCircleAlongPath = ({
   path: string;
   delay?: number;
   duration?: number;
-}) => (
-  <g>
+}) {
+  return <g>
     <motion.circle
       {...props}
       style={
@@ -35,7 +35,7 @@ const AnimatedCircleAlongPath = ({
       }}
     />
   </g>
-);
+}
 
 const delays = {
   docsBlue: 0,
@@ -50,8 +50,8 @@ const delays = {
   docsAqua: 2.7,
 };
 
-export const ShareContextAnimation = () => (
-  <svg
+export function ShareContextAnimation() {
+  return <svg
     data-chromatic="ignore"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 1060 430"
@@ -916,4 +916,4 @@ export const ShareContextAnimation = () => (
       </radialGradient>
     </defs>
   </svg>
-);
+}

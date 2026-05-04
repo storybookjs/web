@@ -18,35 +18,37 @@ const meta = preview.meta({
   component: CodeSnippetsClient,
   tags: ['autodocs'],
   argTypes: {
-    activeRenderer: {
-      control: 'select',
-      options: [
-        'react',
-        'vue',
-        'angular',
-        'web-components',
-        'react-native-web',
-        'ember',
-        'html',
-        'svelte',
-        'preact',
-        'qwik',
-        'solid',
-      ],
-    },
-    activeLanguage: {
-      control: 'radio',
-      options: ['js', 'ts', 'ts-4-9'],
-    },
-    activePackageManager: {
-      control: 'radio',
-      options: ['npm', 'npx', 'yarn', 'pnpm'],
-    },
     content: {
       control: {
         type: 'object',
       },
     },
+    ...({
+      activeRenderer: {
+        control: 'select',
+        options: [
+          'react',
+          'vue',
+          'angular',
+          'web-components',
+          'react-native-web',
+          'ember',
+          'html',
+          'svelte',
+          'preact',
+          'qwik',
+          'solid',
+        ],
+      },
+      activeLanguage: {
+        control: 'radio',
+        options: ['js', 'ts', 'ts-4-9'],
+      },
+      activePackageManager: {
+        control: 'radio',
+        options: ['npm', 'npx', 'yarn', 'pnpm'],
+      },
+    } as Record<string, unknown>),
   },
   args: {
     activeRenderer: 'react',

@@ -2,8 +2,8 @@ import { type Metadata } from 'next';
 import { notFound } from 'next/navigation';
 // eslint-disable-next-line -- the variable is camelCase
 import { unstable_cache } from 'next/cache';
-import { Preview } from '../../../../components/preview';
 import { fetchTagsData } from '@repo/utils/fetch-addons-query';
+import { Preview } from '../../../../components/preview';
 import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
 import type { Tag } from '../../../../types';
 

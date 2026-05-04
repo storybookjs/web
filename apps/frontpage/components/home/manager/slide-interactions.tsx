@@ -34,7 +34,7 @@ const item = {
   },
 };
 
-export const SlideInteractions = () => {
+export function SlideInteractions() {
   const [text, setText] = useState('Runs');
 
   useEffect(() => {
@@ -155,10 +155,10 @@ export const SlideInteractions = () => {
       </div>
     </motion.div>
   );
-};
+}
 
-const Line = ({ children }: { children: ReactNode }) => (
-  <motion.div
+function Line({ children }: { children: ReactNode }) {
+  return <motion.div
     className="border-b border-b-[#D9E0E6] flex items-center px-5 gap-4 py-3"
     variants={item}
   >
@@ -182,16 +182,16 @@ const Line = ({ children }: { children: ReactNode }) => (
     </div>
     <div className="leading-3">{children}</div>
   </motion.div>
-);
+}
 
-const Span = ({
+function Span({
   children,
   color = '#2E3438',
 }: {
   children: string;
   color?: string;
-}) => (
-  <span className="font-mono text-xs" style={{ color }}>
+}) {
+  return <span className="font-mono text-xs" style={{ color }}>
     {children}
   </span>
-);
+}

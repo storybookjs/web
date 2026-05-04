@@ -10,13 +10,13 @@ import { Arrow } from './arrow';
 import { nav } from './nav';
 import type { HeaderProps } from '.';
 
-export const MobileMenu = ({
+export function MobileMenu({
   // algoliaApiKey,
   variant,
 }: {
   algoliaApiKey: string;
   variant: HeaderProps['variant'];
-}): ReactNode => {
+}): ReactNode {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -76,7 +76,7 @@ export const MobileMenu = ({
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
   );
-};
+}
 
 interface DropdownLabelProps {
   children: ReactNode;

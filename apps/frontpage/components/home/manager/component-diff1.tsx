@@ -1,6 +1,6 @@
 import { ComponentImage } from './component-image';
 
-export const ComponentDiff1 = () => {
+export function ComponentDiff1() {
   return (
     <svg
       className="max-h-full max-w-[500px]"
@@ -138,4 +138,4 @@ export const ComponentDiff1 = () => {
       </defs>
     </svg>
   );
-};
+}

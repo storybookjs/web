@@ -9,7 +9,7 @@ import { Toolbar } from './toolbar';
 import { ComponentControls } from './component-controls';
 import { ComponentSmall } from './component-small';
 
-export const SlideControls = () => {
+export function SlideControls() {
   const [scope, animate] = useAnimate();
 
   useEffect(() => {
@@ -95,4 +95,4 @@ export const SlideControls = () => {
       </div>
     </motion.div>
   );
-};
+}

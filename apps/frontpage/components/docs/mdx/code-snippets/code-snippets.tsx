@@ -36,7 +36,7 @@ const getInitialTab = (tabs: Tab[], activeSnippetTabs: string[]) => {
   return initialTab;
 };
 
-const Error = () => {
+function Error() {
   return (
     <div>
       <div>Oh no! We could not find the code you are looking for.</div>
@@ -46,7 +46,7 @@ const Error = () => {
       </div>
     </div>
   );
-};
+}
 
 /**
  * For the framework docs pages, we coerce the active renderer to the relevant one for that framework.
@@ -177,7 +177,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
       tabs &&
       tabs.length > 0
     ) {
-      const initialTab = activeSnippetTabs?.length > 0 ? getInitialTab(tabs, activeSnippetTabs) : undefined;
+      const initialTab = activeSnippetTabs.length > 0 ? getInitialTab(tabs, activeSnippetTabs) : undefined;
       if (initialTab) {
         setActiveTab(initialTab.id);
       } else if (!activeTab) {
@@ -242,7 +242,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
         activeContent?.packageManager
           ? 'sh'
           : activeContent?.language
-            ? ['ts', 'ts-4-9'].includes(activeContent?.language)
+            ? ['ts', 'ts-4-9'].includes(activeContent.language)
               ? 'ts'
               : 'js'
             : null

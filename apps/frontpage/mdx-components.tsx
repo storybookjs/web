@@ -4,7 +4,7 @@ import { mdxComponents } from '@repo/ui';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    ...mdxComponents,
+    ...(mdxComponents as MDXComponents),
     ...components,
   };
 }

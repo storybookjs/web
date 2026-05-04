@@ -5,7 +5,7 @@ export interface Tab {
   title: string;
 }
 
-export const Tabs = ({
+export function Tabs({
   activeTab,
   onTabChange,
   tabs,
@@ -13,8 +13,8 @@ export const Tabs = ({
   activeTab: string | null;
   onTabChange: (tabId: string) => void;
   tabs: Tab[];
-}) => (
-  <div className="flex gap-2">
+}) {
+  return <div className="flex gap-2">
     {tabs.map((tab) => (
       <Button
         key={tab.id}
@@ -30,4 +30,4 @@ export const Tabs = ({
       </Button>
     ))}
   </div>
-);
+}

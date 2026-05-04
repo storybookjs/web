@@ -3,7 +3,7 @@ import { motion, useAnimate } from 'framer-motion';
 import { useEffect } from 'react';
 import { ComponentImage } from './component-image';
 
-export const ComponentControls = () => {
+export function ComponentControls() {
   const DURATION = 0.2;
   const DELAY = 1.4;
   const DELAY2 = 2.7;
@@ -242,4 +242,4 @@ export const ComponentControls = () => {
       </defs>
     </svg>
   );
-};
+}

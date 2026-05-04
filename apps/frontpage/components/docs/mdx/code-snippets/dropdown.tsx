@@ -22,7 +22,7 @@ export const Dropdown: FC<DropdownProps> = ({ list, activeId, action }) => {
   let newActiveId = activeId;
   if (activeId === 'npx') newActiveId = 'npm';
 
-  const activeItem = list.find((item) => item?.id === newActiveId);
+  const activeItem = list.find((item) => item.id === newActiveId);
 
   return (
     <DropdownMenu>
@@ -40,12 +40,12 @@ export const Dropdown: FC<DropdownProps> = ({ list, activeId, action }) => {
         {list.map((item) => {
           return (
             <DropdownMenuItem
-              key={item?.id}
+              key={item.id}
               onClick={() => {
-                item?.id && action(item.id);
+                item.id && action(item.id);
               }}
             >
-              {item?.title}
+              {item.title}
             </DropdownMenuItem>
           );
         })}

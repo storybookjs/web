@@ -1,4 +1,5 @@
 const { resolve } = require('node:path');
+const sharedRules = require('./_shared-rules');
 
 const project = resolve(process.cwd(), 'tsconfig.json');
 
@@ -34,11 +35,7 @@ module.exports = {
     },
   },
   ignorePatterns: ['node_modules/', 'dist/', '.eslintrc.js', '**/*.css'],
-  // add rules configurations here
-  rules: {
-    'import/no-default-export': 'off',
-    'react/function-component-definition': 'off',
-  },
+  rules: sharedRules,
   overrides: [
     {
       files: ['*.config.js'],

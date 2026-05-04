@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['@repo/eslint-config/react.js', 'plugin:storybook/recommended'],
+  extends: ['@repo/eslint-config/react.js', '@repo/eslint-config/storybook'],
   rules: {
     'no-restricted-imports': [
       'error',

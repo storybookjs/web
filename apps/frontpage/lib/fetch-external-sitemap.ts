@@ -11,7 +11,7 @@ export async function fetchExternalSitemap(
   const { sites, errors } = await blogXml.fetch();
   const fetchErrors = errors as ExtendedSitemapperErrorData[];
 
-  if (fetchErrors?.length > 0) {
+  if (fetchErrors.length > 0) {
     return {
       sites: [],
       error: fetchErrors[0].message || 'Error fetching sitemap',

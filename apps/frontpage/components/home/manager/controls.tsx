@@ -165,7 +165,7 @@ export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
   );
 };
 
-const Line = ({
+function Line({
   label,
   control,
   required = false,
@@ -179,7 +179,7 @@ const Line = ({
   description?: string;
   defaultValue?: ReactNode;
   isPanel: boolean;
-}) => {
+}) {
   return (
     <div className="flex border-b border-b-[#D9E0E6] py-3">
       <div
@@ -219,15 +219,15 @@ const Line = ({
       </div>
     </div>
   );
-};
+}
 
-const Input = ({
+function Input({
   value,
   muted = false,
 }: {
   value: string;
   muted?: boolean;
-}) => {
+}) {
   return (
     <div
       className={cn(
@@ -238,9 +238,9 @@ const Input = ({
       <div className="w-full truncate">{value}</div>
     </div>
   );
-};
+}
 
-const Range = ({ value }: { value: number }) => {
+function Range({ value }: { value: number }) {
   return (
     <div className={cn('flex w-full items-center gap-2')}>
       <div>0</div>
@@ -257,9 +257,9 @@ const Range = ({ value }: { value: number }) => {
       <div>40</div>
     </div>
   );
-};
+}
 
-const Radio = () => {
+function Radio() {
   return (
     <div className={cn('flex w-full flex-col gap-2')}>
       {['White', 'Space Grey', 'Yellow'].map((item) => (
@@ -279,4 +279,4 @@ const Radio = () => {
       ))}
     </div>
   );
-};
+}

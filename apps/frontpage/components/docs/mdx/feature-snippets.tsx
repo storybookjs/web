@@ -1,3 +1,3 @@
-export const FeatureSnippets = () => {
+export function FeatureSnippets() {
   return <div className="">Feature Snippets</div>;
-};
+}

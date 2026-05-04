@@ -1,6 +1,6 @@
 import { ComponentImage } from './component-image';
 
-export const ComponentVTA = () => {
+export function ComponentVTA() {
   return (
     <svg
       className="hidden max-h-full sm:block"
@@ -159,4 +159,4 @@ export const ComponentVTA = () => {
       </defs>
     </svg>
   );
-};
+}

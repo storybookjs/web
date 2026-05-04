@@ -6,11 +6,11 @@ interface SVGRProps {
   titleId?: string;
 }
 
-export const Redo = ({
+export function Redo({
   titleId,
   ...props
-}: SVGProps<SVGSVGElement> & SVGRProps) => (
-  <svg
+}: SVGProps<SVGSVGElement> & SVGRProps) {
+  return <svg
     viewBox="0 0 48 49"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -32,4 +32,4 @@ export const Redo = ({
       fill="#96D07C"
     />
   </svg>
-);
+}

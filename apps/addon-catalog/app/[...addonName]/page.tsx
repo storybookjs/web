@@ -68,7 +68,7 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
           {addon.readme ? (
             <Highlight withHTMLChildren={false}>
               <div
-                /**
+                /*
                  * Descendant-selector styling for the addon README, which
                  * arrives as raw HTML and is mounted via
                  * dangerouslySetInnerHTML below. These intentionally mirror

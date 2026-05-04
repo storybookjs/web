@@ -1,4 +1,5 @@
 const { resolve } = require('node:path');
+const sharedRules = require('./_shared-rules');
 
 const project = resolve(process.cwd(), 'tsconfig.json');
 
@@ -38,8 +39,8 @@ module.exports = {
     },
   },
   ignorePatterns: ['node_modules/', 'dist/'],
-  // add rules configurations here
   rules: {
-    'import/no-default-export': 'off',
+    ...sharedRules,
+    'storybook/default-exports': 'off', // No longer true with CSF Next
   },
 };

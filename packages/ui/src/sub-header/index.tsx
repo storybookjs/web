@@ -10,12 +10,12 @@ interface SubHeaderProps {
   right?: ReactNode;
 }
 
-export const SubHeader = ({
+export function SubHeader({
   className,
   leftLabel,
   leftHref,
   right,
-}: SubHeaderProps): ReactNode => {
+}: SubHeaderProps): ReactNode {
   return (
     <div
       className={cn(
@@ -32,4 +32,4 @@ export const SubHeader = ({
       {right}
     </div>
   );
-};
+}
