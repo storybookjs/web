@@ -11,6 +11,7 @@ export { fetchDiscordMembers } from './fetch-discord-members';
 export { fetchYouTubeSubscribers } from './fetch-youtube-subscribers';
 export { validateResponse } from './validate-response';
 export { getVersion } from './get-version';
+export { buildTagLinks } from './build-tag-links';
 
 // Constants
 export { addonFragment, recipeFragment } from './constants';

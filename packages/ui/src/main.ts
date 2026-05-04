@@ -1,4 +1,5 @@
 export * from './constants';
+export { Button, buttonVariants, type ButtonProps } from './button';
 export { Container } from './container';
 export * from './dropdown-menu';
 export { Footer } from './footer';

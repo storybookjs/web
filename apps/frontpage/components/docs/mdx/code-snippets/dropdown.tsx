@@ -4,6 +4,7 @@ import type { FC } from 'react';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import type { CodeSnippetsFilter } from '@repo/utils';
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -25,9 +26,15 @@ export const Dropdown: FC<DropdownProps> = ({ list, activeId, action }) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="group flex h-8 select-none items-center justify-between gap-1 rounded px-2 text-sm text-zinc-600 transition-all hover:border-zinc-300 hover:bg-slate-200 hover:text-zinc-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:data-[state=open]:bg-slate-800 dark:data-[state=open]:text-slate-400">
-        {activeItem?.title}
-        <ChevronSmallDownIcon className="transition-transform group-data-[state=open]:rotate-180" />
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          size="md"
+          className="group !text-zinc-600 hover:!bg-slate-200 hover:!text-zinc-900 dark:!text-slate-400 dark:hover:!bg-slate-800 dark:data-[state=open]:!bg-slate-800 dark:data-[state=open]:!text-slate-400"
+        >
+          {activeItem?.title}
+          <ChevronSmallDownIcon className="transition-transform group-data-[state=open]:rotate-180" />
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {list.map((item) => {

@@ -1,8 +1,8 @@
 'use client';
 
-import { cn } from '@repo/utils';
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
+import { cn } from '../cn';
 
 export interface GradientBadgeProps {
   link: string;

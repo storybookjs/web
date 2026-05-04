@@ -4,7 +4,7 @@ import { type FC, type ReactNode } from 'react';
 import { MenuIcon } from '@storybook/icons';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
-import { cn } from '@repo/utils';
+import { cn } from '../cn';
 // import { Search } from '../search';
 import { Arrow } from './arrow';
 import { nav } from './nav';

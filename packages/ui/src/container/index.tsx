@@ -1,4 +1,3 @@
-import { cn } from '@repo/utils';
 import type {
   ForwardRefExoticComponent,
   RefAttributes,
@@ -6,6 +5,7 @@ import type {
 } from 'react';
 import { forwardRef } from 'react';
 import { Slot } from '@radix-ui/react-slot';
+import { cn } from '../cn';
 
 interface ContainerProps {
   variant?: 'default' | 'small';

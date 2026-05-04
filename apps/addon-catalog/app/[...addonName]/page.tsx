@@ -4,7 +4,7 @@ import { SubHeader } from '@repo/ui';
 import { cn } from '@repo/utils';
 // eslint-disable-next-line -- the variable is camelCase
 import { unstable_cache } from 'next/cache';
-import { fetchAddonsData } from '../../lib/fetch-addons-data';
+import { fetchAddonsData } from '@repo/utils/fetch-addons-query';
 import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
 import { AddonHero } from '../../components/addon/addon-hero';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
@@ -69,9 +69,14 @@ export default async function AddonDetails({ params }: AddonDetailsProps) {
             <Highlight withHTMLChildren={false}>
               <div
                 /**
-                 * These are copied from \@repo/ui/src/components/mdx/...
-                 *
-                 * TODO: Tweak these styles
+                 * Descendant-selector styling for the addon README, which
+                 * arrives as raw HTML and is mounted via
+                 * dangerouslySetInnerHTML below. These intentionally mirror
+                 * the look of @repo/ui's MDX components but cannot reuse them
+                 * directly: those are React components that apply per-tag,
+                 * not class strings. A future refactor that renders the
+                 * README as MDX could swap this for `mdxComponents` from
+                 * @repo/ui; until then, expect drift.
                  */
                 className={cn(
                   '[&_a]:text-blue-500',

@@ -4,7 +4,7 @@
 import { useEffect, useState, type FC } from 'react';
 import { usePathname } from 'next/navigation';
 import { getVersion, type CodeSnippetsProps, latestVersion } from '@repo/utils';
-import { CodeSnippetsWrapper, mdxComponents } from '@repo/ui';
+import { Button, CodeSnippetsWrapper, mdxComponents } from '@repo/ui';
 import { CloseIcon, InfoIcon } from '@storybook/icons';
 import { useDocs } from '../../../../app/docs/provider';
 import { buildPathWithVersion } from '../../../../lib/build-path-with-version';
@@ -93,14 +93,18 @@ function ActiveInfo({ activeTab }: { activeTab: string | null }) {
       <div className="flex items-center gap-2 px-4 py-1 text-sm border-t border-zinc-300 dark:border-slate-700">
         <InfoIcon color="#029cfd" /> {/* color-blue-500, to match the link */}
         <Link href={getVersionedPath('/docs/api/csf/csf-next')} className="text-blue-500 hover:underline">Learn more about CSF Next</Link>
-        <button
-          className="ml-auto h-8 select-none items-center justify-between gap-1 rounded px-2 text-sm text-slate-600 transition-all hover:border-zinc-300 hover:bg-slate-200 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800"
-          onClick={() => { setDismissals('csf-next-info') }}
+        <Button
+          variant="ghost"
+          size="md"
+          className="ml-auto !text-slate-600 hover:!bg-slate-200 hover:!text-slate-900 dark:!text-slate-400 dark:hover:!bg-slate-800"
+          onClick={() => {
+            setDismissals('csf-next-info');
+          }}
           type="button"
           aria-label="Dismiss all CSF Next messages"
         >
           <CloseIcon />
-        </button>
+        </Button>
       </div>
     );
   }

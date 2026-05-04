@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { useParams, usePathname } from 'next/navigation';
 import { useDocs } from '../../../app/docs/provider';
 import { getVersion } from '../../../lib/get-version';
-import { Button } from '../../ui/button';
+import { Button } from '@repo/ui';
 import { sendFeedback, type FeedbackState } from './actions';
 import { type ReactionsProps } from './footer';
 

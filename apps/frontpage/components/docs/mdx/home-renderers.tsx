@@ -22,6 +22,13 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
           title="Next.js"
         />
       ) : null}
+      {Number(activeVersion.id) >= 10.4 ? (
+        <Card
+          href="/docs/get-started/frameworks/tanstack-react/?renderer=react"
+          logo="logo-tanstack.png"
+          title="TanStack React"
+        />
+      ) : null}
       <Card
         href="/docs/get-started/frameworks/react-vite/?renderer=react"
         logo="logo-react.svg"

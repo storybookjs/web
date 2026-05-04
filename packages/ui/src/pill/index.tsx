@@ -1,7 +1,7 @@
-import { cn } from '@repo/utils';
 import type { ReactNode } from 'react';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import { Slot, Slottable } from '@radix-ui/react-slot';
+import { cn } from '../cn';
 
 interface ButtonProps {
   onClick?: () => void;
