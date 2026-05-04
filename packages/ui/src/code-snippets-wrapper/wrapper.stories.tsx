@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { CodeSnippetsWrapper } from './wrapper';
 
 const sampleCode = (
   <pre>
-    <code>{`import { Meta } from '@storybook/nextjs';
+    <code>{`import { Meta } from '@storybook/nextjs-vite';
 
 export default { title: 'Button' } satisfies Meta;`}</code>
   </pre>

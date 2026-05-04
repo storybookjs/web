@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { WandIcon } from '@storybook/icons';
 import { GradientBadge } from './gradient-badge';
 

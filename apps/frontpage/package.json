@@ -75,7 +75,6 @@
     "@repo/tailwind-config": "*",
     "@repo/typescript-config": "*",
     "@storybook/addon-links": "^10.3.6",
-    "@storybook/nextjs": "^10.3.6",
     "@storybook/react": "^10.3.6",
     "@testing-library/react": "^16.0.0",
     "@types/fs-extra": "^11.0.4",
@@ -95,6 +94,8 @@
     "tsx": "^4.9.0",
     "typescript": "^5.3.3",
     "vitest": "^1.6.0",
-    "@storybook/addon-docs": "^10.3.6"
+    "@storybook/addon-docs": "^10.3.6",
+    "@storybook/nextjs-vite": "10.3.6",
+    "vite": "^7.0.0"
   }
 }

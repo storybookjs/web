@@ -1,6 +1,5 @@
-// This file has been automatically migrated to valid ESM format by Storybook.
 import { createRequire } from "node:module";
-import type { StorybookConfig } from '@storybook/nextjs';
+import type { StorybookConfig } from '@storybook/nextjs-vite';
 
 import { join, dirname } from 'path';
 
@@ -15,7 +14,7 @@ function getAbsolutePath(value: string): any {
 }
 const config: StorybookConfig = {
   framework: {
-    name: getAbsolutePath('@storybook/nextjs'),
+    name: getAbsolutePath('@storybook/nextjs-vite'),
     options: {},
   },
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -24,9 +23,6 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-themes"),
     getAbsolutePath("@storybook/addon-docs")
   ],
-  features: {
-    backgroundsStoryGlobals: true,
-    viewportStoryGlobals: true,
-  },
+  features: {},
 };
 export default config;
