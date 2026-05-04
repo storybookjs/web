@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import preview from '../../.storybook/preview';
 import { CodeSnippetsWrapper } from './wrapper';
 
 const sampleCode = (
@@ -9,7 +9,7 @@ export default { title: 'Button' } satisfies Meta;`}</code>
   </pre>
 );
 
-const meta = {
+const meta = preview.meta({
   title: 'CodeSnippetsWrapper',
   component: CodeSnippetsWrapper,
   parameters: {
@@ -20,19 +20,15 @@ const meta = {
     copy: 'npm install --save-dev @storybook/react',
     title: 'Button.stories.tsx',
   },
-} satisfies Meta<typeof CodeSnippetsWrapper>;
+});
 
-export default meta;
+export const Default = meta.story();
 
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {};
-
-export const TypeScript: Story = {
+export const TypeScript = meta.story({
   args: { iconLanguage: 'ts', title: 'Button.stories.ts' },
-};
+});
 
-export const Shell: Story = {
+export const Shell = meta.story({
   args: {
     iconLanguage: 'sh',
     title: 'Terminal',
@@ -42,27 +38,27 @@ export const Shell: Story = {
       </pre>
     ),
   },
-};
+});
 
-export const NoTitle: Story = {
+export const NoTitle = meta.story({
   args: { title: undefined },
-};
+});
 
-export const NoIcon: Story = {
+export const NoIcon = meta.story({
   args: { iconLanguage: null },
-};
+});
 
-export const WithoutCopy: Story = {
+export const WithoutCopy = meta.story({
   args: { copy: undefined },
-};
+});
 
-export const WithOptions: Story = {
+export const WithOptions = meta.story({
   args: {
     options: <span className="ui-text-xs ui-text-slate-500">v8.0+</span>,
   },
-};
+});
 
-export const WithTopAndBottom: Story = {
+export const WithTopAndBottom = meta.story({
   args: {
     top: <div className="ui-text-sm ui-font-bold">Recommended setup</div>,
     bottom: (
@@ -71,8 +67,8 @@ export const WithTopAndBottom: Story = {
       </div>
     ),
   },
-};
+});
 
-export const NewUsersVariant: Story = {
+export const NewUsersVariant = meta.story({
   args: { variant: 'new-users' },
-};
+});

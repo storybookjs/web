@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import preview from '../../.storybook/preview';
 import { AI } from './ai';
 
-const meta = {
+const meta = preview.meta({
   title: 'AI',
   component: AI,
   parameters: {
@@ -11,14 +11,11 @@ const meta = {
       viewports: [320, 768, 1200],
     },
   },
-} satisfies Meta<typeof AI>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   name: 'AI',
   args: {
     githubCount: 85000,
   },
-};
+});

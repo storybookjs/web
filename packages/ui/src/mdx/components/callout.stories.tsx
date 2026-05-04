@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { expect, userEvent, waitFor } from 'storybook/test';
+import { expect, waitFor } from 'storybook/test';
+import preview from '../../../.storybook/preview';
 import { Callout } from './callout';
 
-const meta = {
+const meta = preview.meta({
   title: 'MDX/Callout',
   component: Callout,
   parameters: {
@@ -11,41 +11,37 @@ const meta = {
   args: {
     children: 'This is a callout message that gives the reader useful context.',
   },
-} satisfies Meta<typeof Callout>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Neutral: Story = {
+export const Neutral = meta.story({
   args: { variant: 'neutral' },
-};
+});
 
-export const Positive: Story = {
+export const Positive = meta.story({
   args: { variant: 'positive', icon: '✅' },
-};
+});
 
-export const Info: Story = {
+export const Info = meta.story({
   args: { variant: 'info' },
-};
+});
 
-export const Warning: Story = {
+export const Warning = meta.story({
   args: { variant: 'warning' },
-};
+});
 
-export const WithTitle: Story = {
+export const WithTitle = meta.story({
   args: {
     variant: 'info',
     title: 'Heads up',
     children: 'Something important to read.',
   },
-};
+});
 
-export const WithCustomIcon: Story = {
+export const WithCustomIcon = meta.story({
   args: { icon: '🤖', children: 'AI-generated content ahead.' },
-};
+});
 
-export const WithJsxChildren: Story = {
+export const WithJsxChildren = meta.story({
   args: {
     variant: 'info',
     children: (
@@ -55,9 +51,9 @@ export const WithJsxChildren: Story = {
       </p>
     ),
   },
-};
+});
 
-export const WithCopyAction: Story = {
+export const WithCopyAction = meta.story({
   args: {
     icon: '🤖',
     children: 'Use this prompt with your AI assistant to scaffold a Storybook.',
@@ -67,9 +63,11 @@ export const WithCopyAction: Story = {
       copy: 'Set up Storybook in this project with sensible defaults.',
     },
   },
-  play: async ({ canvas, step }) => {
+  play: async ({ canvas, step, userEvent }) => {
     await step('clicking swaps to labelOnSuccess', async () => {
-      await userEvent.click(canvas.getByRole('button', { name: 'Copy prompt' }));
+      await userEvent.click(
+        canvas.getByRole('button', { name: 'Copy prompt' }),
+      );
       await expect(
         await canvas.findByRole('button', { name: 'Copied!' }),
       ).toBeInTheDocument();
@@ -85,9 +83,9 @@ export const WithCopyAction: Story = {
       );
     });
   },
-};
+});
 
-export const WithCopyActionOverrides: Story = {
+export const WithCopyActionOverrides = meta.story({
   args: {
     icon: '🤖',
     children: 'Use this prompt with your AI assistant to scaffold a Storybook.',
@@ -100,14 +98,16 @@ export const WithCopyActionOverrides: Story = {
       copy: 'storybook init',
     },
   },
-  play: async ({ canvas, step }) => {
+  play: async ({ canvas, step, userEvent }) => {
     await step('button starts with overridden label', async () => {
       await expect(
         canvas.getByRole('button', { name: 'Copy command' }),
       ).toBeInTheDocument();
     });
     await step('clicking shows overridden labelOnSuccess', async () => {
-      await userEvent.click(canvas.getByRole('button', { name: 'Copy command' }));
+      await userEvent.click(
+        canvas.getByRole('button', { name: 'Copy command' }),
+      );
       await expect(
         await canvas.findByRole('button', { name: 'Got it!' }),
       ).toBeInTheDocument();
@@ -123,9 +123,9 @@ export const WithCopyActionOverrides: Story = {
       );
     });
   },
-};
+});
 
-export const WithLinkAction: Story = {
+export const WithLinkAction = meta.story({
   args: {
     variant: 'info',
     children: 'Read the migration guide before upgrading.',
@@ -135,9 +135,9 @@ export const WithLinkAction: Story = {
       href: 'https://storybook.js.org/docs/migration-guide',
     },
   },
-};
+});
 
-export const LongContent: Story = {
+export const LongContent = meta.story({
   args: {
     variant: 'warning',
     title: 'Breaking change',
@@ -149,4 +149,4 @@ export const LongContent: Story = {
       copy: 'npx storybook@latest migrate',
     },
   },
-};
+});

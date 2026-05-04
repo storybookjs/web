@@ -1,15 +1,17 @@
-import type { Preview } from '@storybook/nextjs-vite';
+import { definePreview } from '@storybook/nextjs-vite';
+import addonA11y from "@storybook/addon-a11y";
+import addonDocs from "@storybook/addon-docs";
 import { withThemeByClassName } from '@storybook/addon-themes';
 
-import '../src/styles.css';
 import '@docsearch/css';
+import '../src/styles.css';
 
 if (typeof window !== 'undefined') {
   // copy-to-clipboard falls back to prompt() in test browsers; suppress the dialog.
   window.prompt = () => null;
 }
 
-const preview: Preview = {
+export default definePreview({
   decorators: [
     withThemeByClassName({
       themes: {
@@ -19,6 +21,7 @@ const preview: Preview = {
       defaultTheme: 'light',
     }),
   ],
+
   parameters: {
     controls: {
       matchers: {
@@ -38,6 +41,6 @@ const preview: Preview = {
       test: 'todo',
     },
   },
-};
 
-export default preview;
+  addons: [addonA11y(), addonDocs()]
+});

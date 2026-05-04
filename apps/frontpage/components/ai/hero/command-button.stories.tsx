@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import preview from '../../../.storybook/preview';
 import { CommandButton } from './command-button';
 
-const meta = {
+const meta = preview.meta({
   title: 'AI/CommandButton',
   component: CommandButton,
   parameters: {
@@ -15,28 +15,25 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof CommandButton>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Primary: Story = {
+export const Primary = meta.story({
   args: {
     command: 'npx storybook add addon-mcp',
     variant: 'primary',
   },
-};
+});
 
-export const Secondary: Story = {
+export const Secondary = meta.story({
   args: {
     command: 'npx storybook@10 upgrade',
     variant: 'secondary',
   },
-};
+});
 
-export const LongCommand: Story = {
+export const LongCommand = meta.story({
   args: {
     command: 'npm create storybook@latest',
     variant: 'primary',
   },
-};
+});

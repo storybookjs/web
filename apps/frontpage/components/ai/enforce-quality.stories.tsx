@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import preview from '../../.storybook/preview';
 import { EnforceQuality } from './enforce-quality';
 
-const meta = {
+const meta = preview.meta({
   title: 'AI/EnforceQuality',
   component: EnforceQuality,
   parameters: {
@@ -15,9 +15,6 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof EnforceQuality>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = { name: 'EnforceQuality' };
+export const Default = meta.story({ name: 'EnforceQuality' });

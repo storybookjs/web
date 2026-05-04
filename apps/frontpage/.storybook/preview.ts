@@ -1,9 +1,13 @@
-import type { Preview } from '@storybook/nextjs-vite';
+import { definePreview } from '@storybook/nextjs-vite';
+import addonA11y from "@storybook/addon-a11y";
+import addonDocs from "@storybook/addon-docs";
+import addonLinks from "@storybook/addon-links";
+
 import '@docsearch/css';
 import '../app/globals.css';
 import '@repo/ui/styles.css';
 
-const preview: Preview = {
+export default definePreview({
   parameters: {
     controls: {
       matchers: {
@@ -19,6 +23,6 @@ const preview: Preview = {
       test: 'todo',
     },
   },
-};
 
-export default preview;
+  addons: [addonA11y(), addonDocs(), addonLinks()]
+});

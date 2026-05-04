@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { WandIcon } from '@storybook/icons';
+import preview from '../../.storybook/preview';
 import { GradientBadge } from './gradient-badge';
 
-const meta = {
+const meta = preview.meta({
   title: 'GradientBadge',
   component: GradientBadge,
   parameters: {
@@ -13,17 +13,13 @@ const meta = {
       value: 'dark',
     },
   },
-} satisfies Meta<typeof GradientBadge>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   args: {
     link: '/ai',
     children: 'Introducing MCP for React',
     icon: <WandIcon />,
   },
   name: 'GradientBadge',
-};
+});
