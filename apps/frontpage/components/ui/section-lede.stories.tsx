@@ -4,8 +4,8 @@ import { SectionLede } from './section-lede';
 const meta = preview.meta({
   title: 'UI/SectionLede',
   component: SectionLede,
+  globals: { backgrounds: { value: 'dark' } },
   parameters: {
-    backgrounds: { default: 'dark' },
     layout: 'fullscreen',
     chromatic: {
       viewports: [320, 768, 1200],

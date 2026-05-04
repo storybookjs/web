@@ -4,8 +4,8 @@ import { CommandButton } from './command-button';
 const meta = preview.meta({
   title: 'AI/CommandButton',
   component: CommandButton,
+  globals: { backgrounds: { value: 'dark' } },
   parameters: {
-    backgrounds: { default: 'dark' },
     layout: 'centered',
   },
   decorators: [

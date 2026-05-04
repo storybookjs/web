@@ -4,8 +4,8 @@ import { AI } from './ai';
 const meta = preview.meta({
   title: 'AI',
   component: AI,
+  globals: { backgrounds: { value: 'dark' } },
   parameters: {
-    backgrounds: { default: 'dark' },
     layout: 'fullscreen',
     chromatic: {
       viewports: [320, 768, 1200],

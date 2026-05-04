@@ -4,8 +4,8 @@ import { ShareContext } from './share-context';
 const meta = preview.meta({
   title: 'AI/ShareContext',
   component: ShareContext,
+  globals: { backgrounds: { value: 'dark' } },
   parameters: {
-    backgrounds: { default: 'dark' },
     layout: 'fullscreen',
     chromatic: {
       viewports: [320, 768, 1200],

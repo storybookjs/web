@@ -4,8 +4,8 @@ import { Hero } from './hero';
 const meta = preview.meta({
   title: 'AI/Hero',
   component: Hero,
+  globals: { backgrounds: { value: 'dark' } },
   parameters: {
-    backgrounds: { default: 'dark' },
     layout: 'fullscreen',
     chromatic: {
       viewports: [320, 768, 1200],

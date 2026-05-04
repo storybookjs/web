@@ -5,9 +5,7 @@ import { FeatureCard } from './feature-card';
 const meta = preview.meta({
   title: 'AI/FeatureCard',
   component: FeatureCard,
-  parameters: {
-    backgrounds: { default: 'dark' },
-  },
+  globals: { backgrounds: { value: 'dark' } },
 });
 
 export const Default = meta.story({

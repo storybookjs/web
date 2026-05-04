@@ -4,8 +4,8 @@ import { EnforceQuality } from './enforce-quality';
 const meta = preview.meta({
   title: 'AI/EnforceQuality',
   component: EnforceQuality,
+  globals: { backgrounds: { value: 'dark' } },
   parameters: {
-    backgrounds: { default: 'dark' },
     layout: 'fullscreen',
   },
   decorators: [
