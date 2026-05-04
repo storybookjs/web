@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import preview from '../../../.storybook/preview';
 import { ShareContext } from './share-context';
 
-const meta = {
+const meta = preview.meta({
   title: 'AI/ShareContext',
   component: ShareContext,
+  globals: { backgrounds: { value: 'dark' } },
   parameters: {
-    backgrounds: { default: 'dark' },
     layout: 'fullscreen',
     chromatic: {
       viewports: [320, 768, 1200],
@@ -18,9 +18,6 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof ShareContext>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = { name: 'ShareContext' };
+export const Default = meta.story({ name: 'ShareContext' });

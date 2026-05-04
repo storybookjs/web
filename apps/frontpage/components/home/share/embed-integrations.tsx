@@ -157,7 +157,7 @@ const embedIntegrations = [
   },
 ];
 
-export const EmbedIntegrations = () => {
+export function EmbedIntegrations() {
   return (
     <div className="w-full relative max-w-[800px] md:w-[150%] lg:ml-[120px]">
       <IntegrationsCarousel integrations={embedIntegrations} />
@@ -170,4 +170,4 @@ export const EmbedIntegrations = () => {
       />
     </div>
   );
-};
+}

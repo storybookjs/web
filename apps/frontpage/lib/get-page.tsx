@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import nodePath from 'node:path';
+import type { MDXComponents } from 'mdx/types';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import type { DocsVersion, RawTreeProps } from '@repo/utils';
 import { mdxComponents, MDXRemoteOptions } from '@repo/ui';
@@ -75,7 +76,7 @@ export const getPageData = async (
     source: file,
     options: MDXRemoteOptions,
     components: {
-      ...mdxComponents,
+      ...(mdxComponents as MDXComponents),
       a: (props) => (
         <A
           activeVersion={activeVersion}

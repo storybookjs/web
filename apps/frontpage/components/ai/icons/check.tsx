@@ -6,12 +6,12 @@ interface SVGRProps {
   titleId?: string;
 }
 
-export const Check = ({
+export function Check({
   title,
   titleId,
   ...props
-}: SVGProps<SVGSVGElement> & SVGRProps) => (
-  <svg
+}: SVGProps<SVGSVGElement> & SVGRProps) {
+  return <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 48 48"
     role="img"
@@ -27,4 +27,4 @@ export const Check = ({
       />
     </g>
   </svg>
-);
+}

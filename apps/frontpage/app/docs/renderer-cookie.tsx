@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { renderers } from '@repo/utils';
 import { useDocs } from './provider';
 
-export const RendererCookie = () => {
+export function RendererCookie() {
   const { setRenderer } = useDocs();
   const searchParams = useSearchParams();
   const rendererParam = searchParams.get('renderer');
@@ -22,4 +22,4 @@ export const RendererCookie = () => {
   }, [rendererParam, setRenderer]);
 
   return null;
-};
+}

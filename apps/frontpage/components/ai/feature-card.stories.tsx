@@ -1,31 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import preview from '../../.storybook/preview';
 import { Document } from '../home/test/icons';
 import { FeatureCard } from './feature-card';
 
-const meta = {
+const meta = preview.meta({
   title: 'AI/FeatureCard',
   component: FeatureCard,
-  parameters: {
-    backgrounds: { default: 'dark' },
-  },
-} satisfies Meta<typeof FeatureCard>;
+  globals: { backgrounds: { value: 'dark' } },
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   args: {
     icon: <Document />,
     title: 'Match existing UI patterns',
     description:
       'Agents should reuse existing components instead of inventing new ones. Storybook exposes production components and their APIs so agents assemble UI from what already exists.',
   },
-};
+});
 
-export const ShortDescription: Story = {
+export const ShortDescription = meta.story({
   args: {
     icon: <Document />,
     title: 'Short title',
     description: 'A brief description for this feature.',
   },
-};
+});

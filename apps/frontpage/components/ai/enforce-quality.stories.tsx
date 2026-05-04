@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import preview from '../../.storybook/preview';
 import { EnforceQuality } from './enforce-quality';
 
-const meta = {
+const meta = preview.meta({
   title: 'AI/EnforceQuality',
   component: EnforceQuality,
+  globals: { backgrounds: { value: 'dark' } },
   parameters: {
-    backgrounds: { default: 'dark' },
     layout: 'fullscreen',
   },
   decorators: [
@@ -15,9 +15,6 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof EnforceQuality>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = { name: 'EnforceQuality' };
+export const Default = meta.story({ name: 'EnforceQuality' });

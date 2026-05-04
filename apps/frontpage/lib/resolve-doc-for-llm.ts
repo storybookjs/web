@@ -406,9 +406,9 @@ export function resolveDocForLLM(
 
   return {
     content,
-    // eslint-disable-next-line @typescript-eslint/require-array-sort-compare -- sorting primitive strings
+     
     availableRenderers: [...collectedRenderers].sort(),
-    // eslint-disable-next-line @typescript-eslint/require-array-sort-compare -- sorting primitive strings
+     
     availableLanguages: [...collectedLanguages].sort(),
   };
 }

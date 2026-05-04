@@ -1,24 +1,21 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import preview from '../../.storybook/preview';
 import { AI } from './ai';
 
-const meta = {
+const meta = preview.meta({
   title: 'AI',
   component: AI,
+  globals: { backgrounds: { value: 'dark' } },
   parameters: {
-    backgrounds: { default: 'dark' },
     layout: 'fullscreen',
     chromatic: {
       viewports: [320, 768, 1200],
     },
   },
-} satisfies Meta<typeof AI>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   name: 'AI',
   args: {
     githubCount: 85000,
   },
-};
+});

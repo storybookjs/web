@@ -734,7 +734,7 @@ export function PuzzlePieces() {
   if (typeof window === 'undefined') return null;
 
   const getPreferredScheme = () =>
-    window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches
+    window.matchMedia('(prefers-color-scheme:dark)').matches
       ? 'dark'
       : 'light';
 

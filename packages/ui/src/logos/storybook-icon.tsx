@@ -4,8 +4,8 @@ interface StorybookIconProps {
   size?: number;
 }
 
-export const StorybookIcon = ({ size = 40 }: StorybookIconProps): ReactNode => (
-  <svg
+export function StorybookIcon({ size = 40 }: StorybookIconProps): ReactNode {
+  return <svg
     fill="none"
     height={size}
     viewBox="0 0 40 40"
@@ -23,4 +23,4 @@ export const StorybookIcon = ({ size = 40 }: StorybookIconProps): ReactNode => (
       fillRule="evenodd"
     />
   </svg>
-);
+}

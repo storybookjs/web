@@ -6,12 +6,12 @@ interface SVGRProps {
   titleId?: string;
 }
 
-export const StorybookOpen = ({
+export function StorybookOpen({
   title,
   titleId,
   ...props
-}: SVGProps<SVGSVGElement> & SVGRProps) => (
-  <svg
+}: SVGProps<SVGSVGElement> & SVGRProps) {
+  return <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 40 40"
     role="img"
@@ -40,4 +40,4 @@ export const StorybookOpen = ({
       clipRule="evenodd"
     />
   </svg>
-);
+}

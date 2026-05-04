@@ -1,14 +1,14 @@
 import { Container } from '@repo/ui';
 import type { ReactNode } from 'react';
 
-export const SectionLede = ({
+export function SectionLede({
   title,
   description,
 }: {
   title: string;
   description: ReactNode;
-}) => (
-  <Container className="justify-between gap-20 text-white lg:flex">
+}) {
+  return <Container className="justify-between gap-20 text-white lg:flex">
     <h2 className="flex-1 text-3xl font-bold md:text-[40px]/[48px] lg:text-[56px]/[70px]">
       {title}
     </h2>
@@ -16,4 +16,4 @@ export const SectionLede = ({
       <p className="mb-6 leading-7 lg:max-w-[520px]">{description}</p>
     </div>
   </Container>
-);
+}

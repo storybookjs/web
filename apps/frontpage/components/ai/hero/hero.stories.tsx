@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import preview from '../../../.storybook/preview';
 import { Hero } from './hero';
 
-const meta = {
+const meta = preview.meta({
   title: 'AI/Hero',
   component: Hero,
+  globals: { backgrounds: { value: 'dark' } },
   parameters: {
-    backgrounds: { default: 'dark' },
     layout: 'fullscreen',
     chromatic: {
       viewports: [320, 768, 1200],
@@ -18,9 +18,6 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Hero>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = { name: 'Hero' };
+export const Default = meta.story({ name: 'Hero' });

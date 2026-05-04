@@ -46,7 +46,7 @@ export const TableOfContent: FC = () => {
           <div className="py-12 pl-1 pr-4">
             <div className="block h-8 text-sm font-bold">On this page</div>
             <ul className="mt-1">
-              {headings?.map((heading) => {
+              {headings.map((heading) => {
                 return (
                   <Element
                     heading={heading}

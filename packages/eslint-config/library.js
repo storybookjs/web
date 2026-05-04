@@ -1,4 +1,5 @@
 const { resolve } = require('node:path');
+const sharedRules = require('./_shared-rules');
 
 const project = resolve(process.cwd(), 'tsconfig.json');
 
@@ -34,4 +35,5 @@ module.exports = {
     },
   },
   ignorePatterns: ['node_modules/', 'dist/'],
+  rules: sharedRules,
 };

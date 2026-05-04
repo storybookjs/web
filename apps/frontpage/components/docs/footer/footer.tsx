@@ -13,7 +13,7 @@ interface FooterProps {
   isIndexPage: boolean;
 }
 
-export const DocsFooter = ({ isIndexPage }: FooterProps) => {
+export function DocsFooter({ isIndexPage }: FooterProps) {
   const [reaction, setReaction] = useState<ReactionsProps>(null);
   const pathname = usePathname();
 
@@ -91,4 +91,4 @@ export const DocsFooter = ({ isIndexPage }: FooterProps) => {
       </a>
     </div>
   );
-};
+}

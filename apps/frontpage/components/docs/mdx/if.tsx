@@ -12,7 +12,11 @@ interface IfProps {
 const normalizeValue = (value: string | string[]) =>
   Array.isArray(value) ? value : [value];
 
-export function If({ notRenderer, renderer, children }: IfProps) {
+export function If({
+  notRenderer,
+  renderer,
+  children,
+}: IfProps): JSX.Element | null {
   const { activeRenderer } = useDocs();
   const renderersList = renderers.map((r) => r.id);
   const notRendererArray = notRenderer && normalizeValue(notRenderer);
@@ -21,7 +25,8 @@ export function If({ notRenderer, renderer, children }: IfProps) {
     ? normalizeValue(renderer)
     : renderersList.filter((r) => !notRendererArray?.includes(r));
 
-  if (activeRenderer && toRender.includes(activeRenderer)) return children;
+  if (activeRenderer && toRender.includes(activeRenderer))
+    return <>{children}</>;
 
   return null;
 }

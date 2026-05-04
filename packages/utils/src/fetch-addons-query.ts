@@ -17,11 +17,11 @@ async function processQueue() {
   isProcessingQueue = true;
 
   while (requestQueue.length > 0) {
-    const release = requestQueue.shift()!;
+    const release = requestQueue.shift();
     await new Promise((r) => {
       setTimeout(r, 1000);
     });
-    release();
+    release?.();
   }
 
   isProcessingQueue = false;

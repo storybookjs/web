@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import preview from '../../.storybook/preview';
 import { Footer } from './index';
 
-const meta = {
+const meta = preview.meta({
   title: 'Footer',
   component: Footer,
   parameters: {
@@ -12,16 +12,12 @@ const meta = {
       value: 'dark',
     },
   },
-} satisfies Meta<typeof Footer>;
+});
 
-export default meta;
+export const System = meta.story();
 
-type Story = StoryObj<typeof meta>;
-
-export const System: Story = {};
-
-export const Home: Story = {
+export const Home = meta.story({
   args: {
     variant: 'home',
   },
-};
+});

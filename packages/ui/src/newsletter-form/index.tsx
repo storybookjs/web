@@ -19,10 +19,10 @@ interface NewsletterFormProps {
   onSubscribe?: () => void;
 }
 
-export const NewsletterForm = ({
+export function NewsletterForm({
   inEyebrow = false,
   onSubscribe,
-}: NewsletterFormProps): React.ReactElement => {
+}: NewsletterFormProps): React.ReactElement {
   const formRef = React.useRef<HTMLFormElement | null>(null);
   const [hasSubmitted, onSubmitForm] = useMailingListForm(onSubscribe);
 
@@ -100,4 +100,4 @@ export const NewsletterForm = ({
       )}
     </Formik>
   );
-};
+}

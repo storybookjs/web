@@ -12,7 +12,7 @@ interface ButtonProps {
   noHover?: boolean;
 }
 
-export const Pill = ({
+export function Pill({
   onClick,
   children = '',
   isActive = false,
@@ -20,7 +20,7 @@ export const Pill = ({
   asChild = false,
   noHover = false,
   ...props
-}: ButtonProps): ReactNode => {
+}: ButtonProps): ReactNode {
   let Comp = asChild ? Slot : 'button';
   if (noHover) Comp = 'div';
 
@@ -45,4 +45,4 @@ export const Pill = ({
       {arrow ? <ChevronSmallDownIcon /> : null}
     </Comp>
   );
-};
+}

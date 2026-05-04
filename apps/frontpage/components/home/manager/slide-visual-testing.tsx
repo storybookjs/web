@@ -16,7 +16,7 @@ import { ComponentVTA } from './component-vta';
 import { ComponentDiff2 } from './component-diff2';
 import { ComponentDiff1 } from './component-diff1';
 
-export const SlideVisualTesting = () => {
+export function SlideVisualTesting() {
   const [counter, setCounter] = useState(0);
   const [changeTitle, setChangeTitle] = useState('No changes');
 
@@ -135,4 +135,4 @@ export const SlideVisualTesting = () => {
       </div>
     </motion.div>
   );
-};
+}

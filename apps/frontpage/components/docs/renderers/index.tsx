@@ -73,12 +73,12 @@ export const Renderers: FC = () => {
         </Button>
       ))}
       <Button
-        active={lastRenderer?.id === activeRenderer}
+        active={lastRenderer.id === activeRenderer}
         onClick={() => {
-          setRenderer(lastRenderer?.id || '');
+          setRenderer(lastRenderer.id || '');
         }}
       >
-        {lastRenderer?.title || ''}
+        {lastRenderer.title || ''}
       </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

@@ -4,7 +4,7 @@ import { A } from './mdx/a';
 
 type PageTabsProps = Pick<PageDataProps, 'tabs' | 'path' | 'isIndexPage'>;
 
-export const PageTabs = ({ tabs, path, isIndexPage }: PageTabsProps) => {
+export function PageTabs({ tabs, path, isIndexPage }: PageTabsProps) {
   return (
     <div className="mb-8 flex items-center gap-8 border-b border-zinc-200">
       {tabs.map((tab) => {
@@ -49,4 +49,4 @@ export const PageTabs = ({ tabs, path, isIndexPage }: PageTabsProps) => {
       })}
     </div>
   );
-};
+}

@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import preview from '../../.storybook/preview';
 import { SectionLede } from './section-lede';
 
-const meta = {
+const meta = preview.meta({
   title: 'UI/SectionLede',
   component: SectionLede,
+  globals: { backgrounds: { value: 'dark' } },
   parameters: {
-    backgrounds: { default: 'dark' },
     layout: 'fullscreen',
     chromatic: {
       viewports: [320, 768, 1200],
@@ -18,16 +18,13 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof SectionLede>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   name: 'SectionLede',
   args: {
     title: 'Generate UI from your components',
     description:
       'Teams only merge when code conforms to their codebase. Force agents to reuse existing components instead of inventing new ones or hallucinating. This speeds up review and avoids pattern drift.',
   },
-};
+});

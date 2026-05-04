@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
     requests.push(forwardToSentry(received));
   }
 
-  if (received.payload?.userAgent) {
+  if (received.payload.userAgent) {
     requests.push(forwardToPlausible(received, headers));
   }
 
@@ -160,15 +160,15 @@ async function forwardToSentry(received: TelemetryEvent) {
 
   const itemHeader = { type: 'event' };
   const version =
-    received?.context?.storybookVersion ??
-    received?.metadata?.storybookVersion ??
-    received?.context?.cliVersion;
+    received.context.storybookVersion ??
+    received.metadata.storybookVersion ??
+    received.context.cliVersion;
   const payload = {
     event_id: eventId,
     release: version ?? 'unknown',
 
     // anonymized
-    user: { id: received?.metadata?.userSince?.toString() ?? 'unknown' },
+    user: { id: received.metadata.userSince.toString() ?? 'unknown' },
 
     timestamp: now,
     environment: getEnvironment(version),
@@ -180,27 +180,27 @@ async function forwardToSentry(received: TelemetryEvent) {
     exception: {
       values: [
         {
-          type: received?.payload?.name ?? 'CustomError',
+          type: received.payload.name ?? 'CustomError',
           value:
-            received?.payload?.error?.message ??
-            received?.payload?.name ??
-            received?.payload?.errorHash ??
+            received.payload.error.message ??
+            received.payload.name ??
+            received.payload.errorHash ??
             'Unknown error',
-          stacktrace: received?.payload?.error?.stack
+          stacktrace: received.payload.error.stack
             ? {
-                frames: parseStackTrace(received?.payload?.error?.stack ?? ''),
+                frames: parseStackTrace(received.payload.error.stack ?? ''),
               }
             : undefined,
         },
       ],
     },
     message: {
-      message: received?.payload?.error?.message,
+      message: received.payload.error.message,
       formatted:
-        received?.payload?.error?.message ??
-        received?.payload?.metadataErrorMessage ??
-        received?.payload?.name ??
-        received?.payload?.errorHash ??
+        received.payload.error.message ??
+        received.payload.metadataErrorMessage ??
+        received.payload.name ??
+        received.payload.errorHash ??
         'Unknown error',
     },
   };
@@ -268,15 +268,15 @@ async function forwardToPlausible(received: TelemetryEvent, headers: Headers) {
 }
 
 function getFingerPrint(received: TelemetryEvent) {
-  if (typeof received?.payload?.category === 'string') {
+  if (typeof received.payload.category === 'string') {
     return [`fp-${received.payload.name}`];
   }
 
-  if (typeof received?.payload?.code === 'string') {
+  if (typeof received.payload.code === 'string') {
     return [
-      received?.payload?.eventType ?? 'unknown',
-      received?.payload?.code ?? 'unknown',
-      received?.payload?.name ?? 'unknown',
+      received.payload.eventType ?? 'unknown',
+      received.payload.code ?? 'unknown',
+      received.payload.name ?? 'unknown',
     ];
   }
 

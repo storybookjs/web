@@ -14,7 +14,7 @@ import {
   TutorialsIcon,
 } from './icons';
 
-export const DocsMainNav = () => {
+export function DocsMainNav() {
   const pathname = usePathname();
   const track = useAnalytics();
   const segment = useSelectedLayoutSegment();
@@ -66,7 +66,7 @@ export const DocsMainNav = () => {
       />
     </nav>
   );
-};
+}
 
 const Line: FC<{
   isActive: boolean;

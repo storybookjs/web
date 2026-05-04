@@ -4,9 +4,9 @@ import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 import { motion } from 'framer-motion';
 import { useParams, usePathname } from 'next/navigation';
+import { Button } from '@repo/ui';
 import { useDocs } from '../../../app/docs/provider';
 import { getVersion } from '../../../lib/get-version';
-import { Button } from '@repo/ui';
 import { sendFeedback, type FeedbackState } from './actions';
 import { type ReactionsProps } from './footer';
 
@@ -22,13 +22,13 @@ const inaccessiblyVisuallyHiddenStyles: React.CSSProperties = {
   width: '1px',
 };
 
-export const Form = ({
+export function Form({
   reaction,
   setReaction,
 }: {
   reaction: string;
   setReaction: Dispatch<SetStateAction<ReactionsProps>>;
-}) => {
+}) {
   const [state, formAction] = useFormState(sendFeedback, initialState);
   const pathname = usePathname();
   const params = useParams<{ slug: string[] }>();
@@ -124,12 +124,12 @@ export const Form = ({
           animate={{ opacity: 1 }}
           className="flex flex-col items-center justify-center flex-1 gap-1 text-sm bg-white"
         >
-          <div>{state?.message}</div>
+          <div>{state.message}</div>
         </motion.div>
       ) : null}
     </motion.form>
   );
-};
+}
 
 function SubmitButton() {
   const { pending } = useFormStatus();
