@@ -30,4 +30,8 @@ export default defineMain({
     options: {},
   },
   staticDirs: ['../public'],
+  features: {
+    changeDetection: true,
+    experimentalReactComponentMeta: true,
+  }
 });

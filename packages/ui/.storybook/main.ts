@@ -26,5 +26,8 @@ export default defineMain({
     getAbsolutePath('@storybook/addon-themes'),
     getAbsolutePath('@storybook/addon-mcp'),
   ],
-  features: {},
+  features: {
+    changeDetection: true,
+    experimentalReactComponentMeta: true,
+  }
 });
