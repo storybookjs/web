@@ -12,7 +12,7 @@
     "generate-versions": "tsx --tsconfig tsconfig.json scripts/generate-versions.ts",
     "generate-redirects": "tsx --tsconfig tsconfig.json scripts/generate-redirects.ts",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6001",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_34c705b51a7f543",
     "test": "vitest"
@@ -77,6 +77,7 @@
     "@storybook/addon-a11y": "^10.3.6",
     "@storybook/addon-docs": "^10.3.6",
     "@storybook/addon-links": "^10.3.6",
+    "@storybook/addon-mcp": "^0.6.0",
     "@storybook/addon-vitest": "^10.3.6",
     "@storybook/nextjs-vite": "10.3.6",
     "@storybook/react": "^10.3.6",
