@@ -1,7 +1,7 @@
-import { useArgs } from '@storybook/preview-api';
-import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
-// import { fn, userEvent, within, expect, waitFor } from '@storybook/test';
+import { useArgs } from 'storybook/preview-api';
+import type { Meta, StoryObj } from '@storybook/nextjs';
+import { fn } from 'storybook/test';
+// import { fn, userEvent, within, expect, waitFor } from 'storybook/test';
 import type { ComponentProps } from 'react';
 import { DocsContext } from '../../../../app/docs/provider';
 import { CodeSnippetsClient } from './code-snippets';

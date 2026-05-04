@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, waitFor } from '@storybook/test';
+import type { Meta, StoryObj } from '@storybook/nextjs';
+import { expect, userEvent, waitFor } from 'storybook/test';
 import { Callout } from './callout';
 
 const meta = {

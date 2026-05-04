@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 import { CodeSnippetsWrapper } from './wrapper';
 
 const sampleCode = (
   <pre>
-    <code>{`import { Meta } from '@storybook/react';
+    <code>{`import { Meta } from '@storybook/nextjs';
 
 export default { title: 'Button' } satisfies Meta;`}</code>
   </pre>

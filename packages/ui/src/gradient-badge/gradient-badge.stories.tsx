@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 import { WandIcon } from '@storybook/icons';
 import { GradientBadge } from './gradient-badge';
 
