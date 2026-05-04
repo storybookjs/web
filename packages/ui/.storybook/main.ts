@@ -19,9 +19,11 @@ const config: StorybookConfig = {
   },
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
+    getAbsolutePath("@storybook/addon-vitest"),
+    getAbsolutePath("@storybook/addon-a11y"),
     getAbsolutePath('@chromatic-com/storybook'),
-    getAbsolutePath("@storybook/addon-themes"),
-    getAbsolutePath("@storybook/addon-docs")
+    getAbsolutePath("@storybook/addon-docs"),
+    getAbsolutePath("@storybook/addon-themes")
   ],
   features: {},
 };

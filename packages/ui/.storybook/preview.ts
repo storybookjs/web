@@ -4,6 +4,11 @@ import { withThemeByClassName } from '@storybook/addon-themes';
 import '../src/styles.css';
 import '@docsearch/css';
 
+if (typeof window !== 'undefined') {
+  // copy-to-clipboard falls back to prompt() in test browsers; suppress the dialog.
+  window.prompt = () => null;
+}
+
 const preview: Preview = {
   decorators: [
     withThemeByClassName({
