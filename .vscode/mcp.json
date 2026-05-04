@@ -3,6 +3,10 @@
     "storybook-frontpage": {
       "type": "http",
       "url": "http://localhost:6001/mcp"
+    },
+    "storybook-ui": {
+      "type": "http",
+      "url": "http://localhost:6002/mcp"
     }
   }
 }

@@ -8,5 +8,9 @@
       "Bash(find:*)",
       "Bash(cd:*)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "storybook-frontpage",
+    "storybook-ui"
+  ]
 }
