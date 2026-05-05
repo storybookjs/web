@@ -8,6 +8,9 @@ import { z } from 'zod';
 import type { TreeProps } from '@repo/utils';
 import { docsVersions } from '@repo/utils';
 import { getAllTrees } from '../../../lib/get-all-trees';
+import type { FeedbackState } from './types';
+
+export type { FeedbackState };
 
 const siteUrl = process.env.CONTEXT === 'production';
 
@@ -450,12 +453,6 @@ async function createDiscussion({
     number,
     closed,
   };
-}
-
-export interface FeedbackState {
-  status?: 'ok' | 'fail';
-  message?: string;
-  url?: string;
 }
 
 export async function sendFeedback(
