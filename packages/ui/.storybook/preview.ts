@@ -23,6 +23,12 @@ export default definePreview({
   ],
 
   parameters: {
+    backgrounds: {
+      options: {
+        dark: { value: '#0d1026', name: 'Dark' },
+      },
+    },
+
     controls: {
       matchers: {
         color: /(background|color)$/i,

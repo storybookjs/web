@@ -14,7 +14,7 @@ import { contentMultiTabVue2And3Suffix } from './mocked-data/content-multiple-ta
 import { contentCSFNext } from './mocked-data/content-csf-next';
 
 const meta = preview.meta({
-  title: 'CodeSnippets',
+  title: 'Docs/MDX/CodeSnippets',
   component: CodeSnippetsClient,
   tags: ['autodocs'],
   argTypes: {

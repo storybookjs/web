@@ -7,7 +7,7 @@ import { useParams, usePathname } from 'next/navigation';
 import { Button } from '@repo/ui';
 import { useDocs } from '../../../app/docs/provider';
 import { getVersion } from '../../../lib/get-version';
-import { sendFeedback, type FeedbackState } from './actions';
+import { type FeedbackState, type SendFeedback } from './types';
 import { type ReactionsProps } from './footer';
 
 const initialState: FeedbackState = {};
@@ -25,9 +25,11 @@ const inaccessiblyVisuallyHiddenStyles: React.CSSProperties = {
 export function Form({
   reaction,
   setReaction,
+  sendFeedback,
 }: {
   reaction: string;
   setReaction: Dispatch<SetStateAction<ReactionsProps>>;
+  sendFeedback: SendFeedback;
 }) {
   const [state, formAction] = useFormState(sendFeedback, initialState);
   const pathname = usePathname();

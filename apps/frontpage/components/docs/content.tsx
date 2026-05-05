@@ -4,6 +4,7 @@ import { type PageDataProps } from '../../lib/get-page';
 import { CopyMarkdownButton } from './copy-markdown-button';
 import { Renderers } from './renderers';
 import { DocsFooter } from './footer/footer';
+import { sendFeedback } from './footer/actions';
 import { PageTabs } from './page-tabs';
 import { TableOfContent } from './table-of-content';
 
@@ -48,7 +49,10 @@ export const Content: FC<{ page: PageDataProps }> = ({ page }) => {
           >
             {page.content}
           </div>
-          <DocsFooter isIndexPage={page.isIndexPage} />
+          <DocsFooter
+            isIndexPage={page.isIndexPage}
+            sendFeedback={sendFeedback}
+          />
         </main>
       </div>
       <TableOfContent />
