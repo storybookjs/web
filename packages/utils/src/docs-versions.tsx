@@ -28,17 +28,17 @@ export interface DocsVersion {
  **/
 export const docsVersions: DocsVersion[] = [
   {
-    label: 'Version 10.3',
-    id: '10.3',
+    label: 'Version 10.4',
+    id: '10.4',
     branch: 'main',
   },
-  {
-    label: 'Version 10.4 (beta)',
-    id: '10.4',
-    inSlug: '10.4',
-    branch: 'next',
-    preRelease: true,
-  },
+  // {
+  //   label: 'Version 10.5 (alpha)',
+  //   id: '10.5',
+  //   inSlug: '10.5',
+  //   branch: 'next',
+  //   preRelease: true,
+  // },
   {
     label: 'Version 9',
     id: '9.1',
