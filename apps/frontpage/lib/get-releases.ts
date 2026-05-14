@@ -7,5 +7,9 @@ export const getReleases = () => {
     releases.push(f.replace(".md", ""));
   });
 
-  return releases;
+  return releases.sort((a, b) => {
+    const [aMajor, aMinor] = a.split(".").map(Number);
+    const [bMajor, bMinor] = b.split(".").map(Number);
+    return aMajor - bMajor || aMinor - bMinor;
+  });
 };
