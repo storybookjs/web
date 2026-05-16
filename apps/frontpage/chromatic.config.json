@@ -1,0 +1,14 @@
+{
+  "onlyChanged": true,
+  "projectId": "Project:664214b6ca695f7f532c7421",
+  "storybookBaseDir": "apps/frontpage",
+  "zip": true,
+  "externals": [
+    "apps/frontpage/tailwind.config.ts",
+    "apps/frontpage/postcss.config.mjs",
+    "apps/frontpage/public/**",
+    "packages/tailwind-config/**",
+    "packages/ui/src/**",
+    "packages/ui/tailwind.config.ts"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "@repo/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "library.js",
+    "next.js",
+    "react.js",
+    "storybook.js"
+  ],
+  "devDependencies": {
+    "@vercel/style-guide": "^6.0.0",
+    "eslint-config-turbo": "^2.0.7"
+  }
+}

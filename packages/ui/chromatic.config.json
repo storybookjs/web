@@ -1,0 +1,12 @@
+{
+  "onlyChanged": true,
+  "projectId": "Project:673fa6ac863f3656a4dae9fd",
+  "storybookBaseDir": "packages/ui",
+  "zip": true,
+  "externals": [
+    "packages/ui/tailwind.config.ts",
+    "packages/ui/postcss.config.js",
+    "packages/ui/src/styles.css",
+    "packages/tailwind-config/**"
+  ]
+}

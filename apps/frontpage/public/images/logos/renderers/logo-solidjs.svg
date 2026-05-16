@@ -1,0 +1,29 @@
+<svg fill="none" height="28" viewBox="0 0 28 28" width="28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <linearGradient id="a" gradientUnits="userSpaceOnUse" x1="-.896759" x2="29.4212" y1="1.34824" y2="8.99362">
+    <stop offset=".1" stop-color="#76b3e1"/>
+    <stop offset=".3" stop-color="#dcf2fd"/>
+    <stop offset="1" stop-color="#76b3e1"/>
+  </linearGradient>
+
+  <linearGradient id="b" gradientUnits="userSpaceOnUse" x1="15.9606" x2=".090365" y1="1.12868" y2="28.1234"><stop offset="0" stop-color="#76b3e1"/>
+    <stop offset=".5" stop-color="#4377bb"/>
+    <stop offset="1" stop-color="#1f3b77"/>
+  </linearGradient>
+
+  <linearGradient id="c" gradientUnits="userSpaceOnUse" x1="3.54672" x2="34.8612" y1="1.96363" y2="14.9718"><stop offset="0" stop-color="#315aa9"/>
+    <stop offset=".5" stop-color="#518ac8"/>
+    <stop offset="1" stop-color="#315aa9"/>
+  </linearGradient>
+
+  <linearGradient id="d" gradientUnits="userSpaceOnUse" x1="12.6843" x2="4.23418" y1="13.4726" y2="44.6946"><stop offset="0" stop-color="#4377bb"/>
+    <stop offset=".5" stop-color="#1a336b"/>
+    <stop offset="1" stop-color="#1a336b"/>
+  </linearGradient>
+
+  <path d="m27.494 6.85961s-8.9398-6.529298-15.8555-5.02254l-.506.16742c-1.012.33484-1.85541.83709-2.36143 1.50676l-.33735.50226-2.53012 4.35286 4.3855.83709c1.8555 1.17194 4.2169 1.67414 6.4097 1.17194l7.759 1.5067z" fill="#76b3e1"/>
+  <path d="m27.494 6.85961s-8.9398-6.529298-15.8555-5.02254l-.506.16742c-1.012.33484-1.85541.83709-2.36143 1.50676l-.33735.50226-2.53012 4.35286 4.3855.83709c1.8555 1.17194 4.2169 1.67414 6.4097 1.17194l7.759 1.5067z" fill="url(#a)"/>
+  <path d="m8.77107 6.85961-.6747.16742c-2.86747.83709-3.71084 3.51577-2.19277 5.85967 1.68674 2.1764 5.2289 3.3483 8.0964 2.5112l10.4578-3.5158s-8.9397-6.52925-15.68673-5.02249z" fill="#518ac8"/>
+  <path d="m8.77107 6.85961-.6747.16742c-2.86747.83709-3.71084 3.51577-2.19277 5.85967 1.68674 2.1764 5.2289 3.3483 8.0964 2.5112l10.4578-3.5158s-8.9397-6.52925-15.68673-5.02249z" fill="url(#b)"/>
+  <path d="m22.6024 14.3934c-.9444-1.171-2.2194-2.0355-3.6618-2.4829s-2.9865-.4573-4.4346-.0284l-10.45782 3.3484-3.373497 5.8596 18.891517 3.181 3.3735-6.0271c.6747-1.1719.5061-2.5112-.3373-3.8506z" fill="url(#c)"/>
+  <path d="m19.2289 20.253c-.9444-1.171-2.2194-2.0355-3.6618-2.4829s-2.9865-.4573-4.4346-.0283l-10.457817 3.3483s8.939757 6.6967 15.855417 5.0226l.506-.1674c2.8675-.8371 3.8795-3.5158 2.1928-5.6923z" fill="url(#d)"/>
+</svg>

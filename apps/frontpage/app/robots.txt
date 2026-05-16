@@ -1,0 +1,50 @@
+# *
+User-agent: *
+Allow: /
+
+# AI Crawlers - Explicitly allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# LLM-friendly content
+# llms.txt: https://storybook.js.org/llms.txt
+# llms-full.txt: https://storybook.js.org/llms-full.txt
+
+# Host
+Host: https://storybook.js.org
+
+# Sitemaps
+Sitemap: https://storybook.js.org/addons/sitemap.xml
+Sitemap: https://storybook.js.org/blog/sitemap.xml
+Sitemap: https://storybook.js.org/docs/sitemap.xml
+Sitemap: https://storybook.js.org/recipes/sitemap.xml
+Sitemap: https://storybook.js.org/releases/sitemap.xml
+Sitemap: https://storybook.js.org/showcase/sitemap.xml
+Sitemap: https://storybook.js.org/tutorials/sitemap.xml
