@@ -24,7 +24,7 @@ const features = [
     description: 'Write Markdown and build custom docs.',
     link: {
       label: 'Learn about docs addon',
-      href: '/docs/writing-docs/introduction',
+      href: '/docs/writing-docs',
     },
     media: '/home/document/homepage-component-document-lg.mp4',
     poster: '/home/document/homepage-component-document-poster-lg.jpg',
