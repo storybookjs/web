@@ -59,7 +59,7 @@ const getActiveRenderer = (activeRendererIn: string | null, pathname: string) =>
   if (!matches) return activeRendererIn;
 
   const framework = matches[1];
-  const frameworkOrRendererPortion = framework.replace(/-(?:vite|webpack5)/, '') as keyof typeof map;
+  const frameworkOrRendererPortion = framework.replace(/-(?:vite|webpack5)\/?/, '') as keyof typeof map;
 
   const map = {
     'nextjs': 'react',
