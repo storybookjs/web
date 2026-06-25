@@ -36,7 +36,7 @@ export const docsVersions: DocsVersion[] = [
     label: 'Version 10.5 (alpha)',
     id: '10.5',
     inSlug: '10.5',
-    branch: 'next',
+    branch: 'docs-agentic-review-and-plugins',
     preRelease: true,
   },
   {
