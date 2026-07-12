@@ -40,7 +40,7 @@ export async function fetchHomeData() {
       `,
     );
 
-    validateResponse(() => data?.popular);
+validateResponse(() => data.popular?.addons && data.popular?.recipes);
 
     const { popular } = data;
 
