@@ -7,7 +7,6 @@ interface AddonsHomeData {
     addons: Addon[];
     recipes: Recipe[];
   };
-  vta: Addon;
 }
 
 export async function fetchHomeData() {
@@ -37,29 +36,17 @@ export async function fetchHomeData() {
               }
             }
           }
-          vta: detail(name: "@chromatic-com/storybook") {
-            ${addonFragment}
-            tags {
-              name
-              displayName
-              description
-              icon
-            }
-            repositoryUrl
-            npmUrl
-          }
         }
       `,
     );
 
-    validateResponse(() => data?.popular && data?.vta);
+    validateResponse(() => data?.popular);
 
-    const { popular, vta } = data;
+    const { popular } = data;
 
     return {
       popularAddons: popular.addons,
       popularRecipes: popular.recipes,
-      vta,
     };
   } catch (error) {
     throw new Error(`Failed to fetch home data: ${(error as Error).message}`);
