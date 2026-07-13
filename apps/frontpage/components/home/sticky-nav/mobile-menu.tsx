@@ -28,14 +28,14 @@ export const MobileMenu: FC<MenuProps> = ({ items, label }) => {
       <DropdownMenu.Portal>
         <DropdownMenu.Content
           align="start"
-          className="min-w-[200px] ml-1 bg-white rounded p-1 shadow-xl will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade z-50"
+          className="min-w-[200px] ml-1 bg-white rounded p-1 shadow-xl will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade z-50 dark:bg-slate-950"
           sideOffset={4}
         >
           <DropdownMenu.Group>
             {items.map((item) => (
               <DropdownMenu.Item asChild key={item.id}>
                 <Link
-                  className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
+                  className="flex data-[highlighted]:bg-slate-100 dark:data-[highlighted]:bg-slate-800 select-none outline-none rounded text-sm px-3 h-8 items-center text-slate-900 dark:text-slate-100"
                   href={item.href}
                 >
                   {item.label}
