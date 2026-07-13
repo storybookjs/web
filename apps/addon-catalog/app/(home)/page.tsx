@@ -10,7 +10,7 @@ export default async function Page() {
 
   return (
     <>
-      <h3 className="mb-8 mt-12 text-2xl font-bold">Popular addons</h3>
+      <h3 className="mb-8 text-2xl font-bold">Popular addons</h3>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
         {popularAddons.map((addon) => (
           <Preview
