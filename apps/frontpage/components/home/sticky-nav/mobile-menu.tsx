@@ -35,7 +35,7 @@ export const MobileMenu: FC<MenuProps> = ({ items, label }) => {
             {items.map((item) => (
               <DropdownMenu.Item asChild key={item.id}>
                 <Link
-                  className="flex data-[highlighted]:bg-slate-100 select-none outline-none rounded text-sm px-3 h-8 items-center"
+                  className="flex data-[highlighted]:bg-slate-100 text-slate-900 select-none outline-none rounded text-sm px-3 h-8 items-center"
                   href={item.href}
                 >
                   {item.label}
