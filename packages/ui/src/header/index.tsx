@@ -27,8 +27,8 @@ export const Header: FC<HeaderProps> = ({
   eyebrow,
   // eyebrow = (
   //   <Eyebrow
-  //     href="https://us02web.zoom.us/webinar/register/4217528604397/WN_b7NRZABcQQmdHA3LargPaQ"
-  //     title="Join live: How to use parallel agents to fix a11y issues"
+  //     href="https://us02web.zoom.us/webinar/register/4217528604397/WN_JiO-sitXS9aCg793H2TN0g"
+  //     title="Join live: How to review agent-built UI with Storybook"
   //   />
   // ),
   githubCount = 0,
