@@ -1,4 +1,6 @@
 import fs from 'node:fs';
+import nodePath from 'node:path';
+import type { MDXComponents } from 'mdx/types';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import type { DocsVersion, RawTreeProps } from '@repo/utils';
 import { mdxComponents, MDXRemoteOptions } from '@repo/ui';
@@ -24,9 +26,30 @@ export interface PageDataProps {
   hideRendererSelector?: boolean;
   isIndexPage: boolean;
   isHeading: boolean;
+  isTab?: boolean;
   tabs: RawTreeProps[];
   content: ReactElement;
   path: string;
+}
+
+export function findDocFile(docPath: string): {
+  filePath: string;
+  isIndexPage: boolean;
+} | null {
+  const basePath = `content/docs/${docPath}`;
+  const candidates = [
+    { path: `${basePath}.mdx`, isIndex: false },
+    { path: `${basePath}.md`, isIndex: false },
+    { path: `${basePath}/index.mdx`, isIndex: true },
+    { path: `${basePath}/index.md`, isIndex: true },
+  ];
+
+  for (const candidate of candidates) {
+    if (fs.existsSync(nodePath.join(process.cwd(), candidate.path))) {
+      return { filePath: candidate.path, isIndexPage: candidate.isIndex };
+    }
+  }
+  return null;
 }
 
 export const getPageData = async (
@@ -35,30 +58,11 @@ export const getPageData = async (
 ) => {
   const rootPath = 'content/docs';
   const pathString = path.join('/');
-  const indexPathMDX = `content/docs/${pathString}/index.mdx`;
-  const indexPathMD = `content/docs/${pathString}/index.md`;
 
-  const mdxPath = `${rootPath}/${pathString}.mdx`;
-  const mdPath = `${rootPath}/${pathString}.md`;
+  const result = findDocFile(pathString);
+  if (!result) return undefined;
 
-  const isMdx = fs.existsSync(mdxPath);
-  const isMd = fs.existsSync(mdPath);
-
-  let linkPath = null;
-  if (isMdx) linkPath = mdxPath;
-  if (isMd) linkPath = mdPath;
-
-  const isIndexMDX = fs.existsSync(indexPathMDX);
-  const isIndexMD = fs.existsSync(indexPathMD);
-  const isIndexPage = isIndexMDX || isIndexMD;
-  const isLink = linkPath ? fs.existsSync(linkPath) : false;
-
-  let newPath = null;
-  if (isIndexMDX) newPath = indexPathMDX;
-  if (isIndexMD) newPath = indexPathMD;
-  if (isLink) newPath = linkPath;
-
-  if (!newPath) return undefined;
+  const { filePath: newPath, isIndexPage } = result;
 
   const file = await fs.promises.readFile(
     `${process.cwd()}/${newPath}`,
@@ -72,11 +76,12 @@ export const getPageData = async (
     source: file,
     options: MDXRemoteOptions,
     components: {
-      ...mdxComponents,
+      ...(mdxComponents as MDXComponents),
       a: (props) => (
         <A
           activeVersion={activeVersion}
-          indexPagePath={isIndexMDX || isIndexMD ? path : null}
+          isIndexPage={isIndexPage}
+          pagePath={path}
           {...props}
         />
       ),
@@ -101,7 +106,7 @@ export const getPageData = async (
   });
 
   // Get Tabs
-  const pathToFiles = isLink
+  const pathToFiles = !isIndexPage
     ? `${rootPath}/${pathString}`.split('/').slice(0, -1).join('/')
     : `${rootPath}/${pathString}`;
 

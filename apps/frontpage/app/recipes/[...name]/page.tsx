@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import type { MDXComponents } from 'mdx/types';
 import { type Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import {
@@ -57,6 +58,9 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
 
   return {
     title: title ? `${title} | Storybook recipes` : 'Storybook recipes',
+    alternates: {
+      canonical: `/recipes/${name.join('/')}`,
+    }
   };
 };
 
@@ -128,7 +132,12 @@ export default async function RecipeDetails({ params }: RecipeDetailsProps) {
         <div className="flex flex-col gap-12 lg:flex-row">
           <div className="flex-1">
             <MDXRemote
-              components={{ ...mdxComponents, EmbeddedExample }}
+              components={
+                {
+                  ...mdxComponents,
+                  EmbeddedExample,
+                } as MDXComponents
+              }
               options={MDXRemoteOptions}
               source={mdx}
             />
@@ -136,7 +145,7 @@ export default async function RecipeDetails({ params }: RecipeDetailsProps) {
           <div className="w-[250px] flex-shrink-0">
             <div className="mb-6 flex items-center text-sm font-bold">Tags</div>
             <ul className="mb-6 flex flex-wrap gap-2">
-              {recipe.tags?.map((tag) => (
+              {recipe.tags.map((tag) => (
                 <Pill key={tag.name}>{tag.name}</Pill>
               ))}
             </ul>

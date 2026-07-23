@@ -2,16 +2,16 @@
 
 import type { FC, ReactNode } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
-import { cn } from '@repo/utils';
+import { useAnalytics } from '@repo/utils/analytics';
 import { usePathname } from 'next/navigation';
 import { GithubIcon } from '@storybook/icons';
-import { useAnalytics } from '../analytics';
+import { cn } from '../cn';
 import { StorybookLogo } from '../logos/storybook-logo';
 // import { NewsletterForm } from '../newsletter-form';
 import { Search } from '../search';
 import { MobileMenu } from './mobile-menu';
 import { Button } from './button';
-import { Eyebrow } from './eyebrow';
+// import { Eyebrow } from './eyebrow';
 import { nav } from './nav';
 
 export interface HeaderProps {
@@ -24,18 +24,19 @@ export interface HeaderProps {
 
 export const Header: FC<HeaderProps> = ({
   algoliaApiKey,
-  // eyebrow,
-  eyebrow = (
-    <Eyebrow
-      href="https://us02web.zoom.us/webinar/register/4217528604397/WN_hRyXQEe1RuSjoTCJoOpRyA"
-      title="Join live: How to implement generative UI without losing control"
-    />
-  ),
+  eyebrow,
+  // eyebrow = (
+  //   <Eyebrow
+  //     href="https://us02web.zoom.us/webinar/register/4217528604397/WN_JiO-sitXS9aCg793H2TN0g"
+  //     title="Join live: How to review agent-built UI with Storybook"
+  //   />
+  // ),
   githubCount = 0,
   subMenu,
   variant = 'system',
 }) => {
-  const pathname = usePathname();
+  const pathname = usePathname() || '';
+
   const track = useAnalytics();
 
   return (

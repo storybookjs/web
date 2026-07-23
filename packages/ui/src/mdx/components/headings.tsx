@@ -5,13 +5,13 @@ import {
   type DetailedHTMLProps,
   type HTMLAttributes,
 } from 'react';
-import { cn } from '@repo/utils';
+import { cn } from '../../cn';
 
 type HeadingProps = DetailedHTMLProps<
   HTMLAttributes<HTMLHeadingElement>,
   HTMLHeadingElement
 > & {
-  level: 1 | 2 | 3 | 4;
+  level: 1 | 2 | 3 | 4 | 5;
 };
 const Heading: FC<HeadingProps> = ({ children, className, id, level }) => {
   const HeadingComponent =
@@ -20,13 +20,14 @@ const Heading: FC<HeadingProps> = ({ children, className, id, level }) => {
       2: 'h2',
       3: 'h3',
       4: 'h4',
+      5: 'h5',
     }[level] || 'h1';
 
   return createElement(
     HeadingComponent,
     {
       className: cn(
-        'ui-group ui-relative ui-font-bold target:ui-scroll-mt-40 md:target:ui-scroll-mt-24',
+        'ui-group ui-relative ui-font-bold ui-scroll-mt-40 md:ui-scroll-mt-24',
         className,
       ),
       'data-docs-heading': true,
@@ -67,4 +68,8 @@ export const H3: FC<Omit<HeadingProps, 'level'>> = (props) => {
 
 export const H4: FC<Omit<HeadingProps, 'level'>> = (props) => {
   return <Heading className="ui-mb-4 ui-text-lg" level={4} {...props} />;
+};
+
+export const H5: FC<Omit<HeadingProps, 'level'>> = (props) => {
+  return <Heading className="ui-mb-4 ui-text-md" level={5} {...props} />;
 };

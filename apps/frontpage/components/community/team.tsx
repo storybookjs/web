@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import type { FC } from 'react';
-import { Button } from '../ui/button';
+import { Button } from '@repo/ui';
 import { Section } from './section';
 
 export const Team: FC = () => {

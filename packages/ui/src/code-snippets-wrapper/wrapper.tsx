@@ -1,7 +1,7 @@
 'use client';
 
-import type { FC, ReactNode } from 'react';
-import { useAnalytics } from '../analytics';
+import type { ReactNode } from 'react';
+import { useAnalytics } from '@repo/utils/analytics';
 import { JSIcon, TSIcon, ShellIcon } from './icons';
 import { Copy } from './copy';
 
@@ -25,7 +25,7 @@ const languageIcons = {
   sh: <ShellIcon />,
 };
 
-export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
+export function CodeSnippetsWrapper({
   children,
   copy,
   iconLanguage = 'js',
@@ -36,7 +36,7 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
   copyEvent,
   snippetPath,
   variant = 'default',
-}) => {
+}: CodeSnippetsWrapperProps): JSX.Element {
   const track = useAnalytics();
 
   return (
@@ -71,4 +71,4 @@ export const CodeSnippetsWrapper: FC<CodeSnippetsWrapperProps> = ({
       {bottom}
     </div>
   );
-};
+}

@@ -28,14 +28,14 @@ export interface DocsVersion {
  **/
 export const docsVersions: DocsVersion[] = [
   {
-    label: 'Version 10.2',
-    id: '10.2',
+    label: 'Version 10.5',
+    id: '10.5',
     branch: 'main',
   },
   // {
-  //   label: 'Version 10.3 (alpha)',
-  //   id: '10.3',
-  //   inSlug: '10.3',
+  //   label: 'Version 10.6 (alpha)',
+  //   id: '10.6',
+  //   inSlug: '10.6',
   //   branch: 'next',
   //   preRelease: true,
   // },
@@ -54,3 +54,31 @@ export const docsVersions: DocsVersion[] = [
 ];
 
 export const latestVersion = docsVersions[0];
+
+/**
+ * This needs updated alongside `docsVersions`, whenever a new major version is released.
+ * It defines all of the versions that we've ever published, which we maintain redirects for (e.g. /docs/7.1/writing-stories → /docs/writing-stories).
+ */
+export const historicalVersions = [
+  '6.0',
+  '6.1',
+  '6.2',
+  '6.3',
+  '6.4',
+  '6.5',
+  '7.0',
+  '7.1',
+  '7.2',
+  '7.3',
+  '7.4',
+  '7.5',
+  '7.6',
+  ...docsVersions.filter((v) => !v.preRelease).reduce<string[]>((acc, v) => {
+    // Fill in each latest major version with all minor versions (e.g. 8.6 -> 8.0, 8.1, 8.2, 8.3, 8.4, 8.5, 8.6)
+    const [major, minor] = v.id.split('.');
+    for (let i = 0; i <= Number(minor); i++) {
+      acc.push(`${major}.${String(i)}`);
+    }
+    return acc;
+  }, []),
+];

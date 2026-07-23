@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { ComponentImage } from './component-image';
 
-export const ComponentInteractions = () => {
+export function ComponentInteractions() {
   return (
     <svg
       className="hidden max-h-full sm:block"
@@ -168,4 +168,4 @@ export const ComponentInteractions = () => {
       </defs>
     </svg>
   );
-};
+}

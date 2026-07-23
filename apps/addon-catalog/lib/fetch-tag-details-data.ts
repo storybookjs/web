@@ -1,20 +1,18 @@
-import { addonFragment, recipeFragment, validateResponse } from '@repo/utils';
+import { addonFragment, recipeFragment } from '@repo/utils';
+import { fetchAddonsQuery, gql } from '@repo/utils/fetch-addons-query';
 import { type Tag } from '../types';
-import { fetchAddonsQuery, gql } from './fetch-addons-query';
 
 type TagValue = Pick<
   Tag,
-  | 'name'
-  | 'displayName'
-  | 'description'
-  | 'icon'
-  | 'relatedTags'
-  | 'topIntegrations'
+  'name' | 'displayName' | 'description' | 'icon' | 'topIntegrations'
 >;
 
 async function fetchTagData({ name }: { name: string }) {
   try {
-    const data = await fetchAddonsQuery<{ tag: TagValue }, { name: string }>(
+    const data = await fetchAddonsQuery<
+      { tag: TagValue | null },
+      { name: string }
+    >(
       gql`
           query Tag($name: String!) {
             tag(name: $name) {
@@ -22,11 +20,6 @@ async function fetchTagData({ name }: { name: string }) {
               displayName
               description
               icon
-              relatedTags {
-                name
-                displayName
-                icon
-              }
               topIntegrations(sort: monthlyDownloads) {
                 addons {
                   ${addonFragment}
@@ -46,8 +39,6 @@ async function fetchTagData({ name }: { name: string }) {
         variables: { name },
       },
     );
-
-    validateResponse(() => data.tag);
 
     const { tag } = data;
 

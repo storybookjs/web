@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import preview from '../../.storybook/preview';
 import { NewsletterForm } from '../newsletter-form';
 import { Eyebrow } from './eyebrow';
 import { Header } from './index';
@@ -12,11 +12,16 @@ const eyebrow = (
 
 const eyebrowWithNewsletterForm = (
   <Eyebrow
-  title={<>Storybook 9 is coming! Join the newsletter to get it first. <NewsletterForm inEyebrow /></>}
+    title={
+      <>
+        Storybook 9 is coming! Join the newsletter to get it first.{' '}
+        <NewsletterForm inEyebrow />
+      </>
+    }
   />
 );
 
-const meta = {
+const meta = preview.meta({
   component: Header,
   parameters: {
     layout: 'fullscreen',
@@ -31,13 +36,9 @@ const meta = {
     eyebrow: null,
     subMenu: null,
   },
-} satisfies Meta<typeof Header>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Light: Story = {};
+export const Light = meta.story();
 
 // TODO: @repo/ui's Tailwind config doesn't use the class for dark mode,
 //       so this doesn't work. But configuring the class for dark mode
@@ -50,7 +51,7 @@ export const Light: Story = {};
 //   }
 // };
 
-export const Home: Story = {
+export const Home = meta.story({
   args: {
     variant: 'home',
   },
@@ -59,9 +60,9 @@ export const Home: Story = {
       value: 'dark',
     },
   },
-};
+});
 
-export const TabletLight: Story = {
+export const TabletLight = meta.story({
   globals: {
     viewport: {
       value: 'tablet',
@@ -72,9 +73,9 @@ export const TabletLight: Story = {
       viewports: [834],
     },
   },
-};
+});
 
-export const MobileLight: Story = {
+export const MobileLight = meta.story({
   globals: {
     viewport: {
       value: 'mobile1',
@@ -85,7 +86,7 @@ export const MobileLight: Story = {
       viewports: [320],
     },
   },
-};
+});
 
 // export const MobileDark: Story = {
 //   globals: {
@@ -100,19 +101,19 @@ export const MobileLight: Story = {
 //   }
 // };
 
-export const DesktopWithEyebrow: Story = {
+export const DesktopWithEyebrow = meta.story({
   args: {
     eyebrow,
   },
-};
+});
 
-export const DesktopWithEyebrowWithNewsletterForm: Story = {
+export const DesktopWithEyebrowWithNewsletterForm = meta.story({
   args: {
     eyebrow: eyebrowWithNewsletterForm,
   },
-};
+});
 
-export const MobileWithEyebrow: Story = {
+export const MobileWithEyebrow = meta.story({
   args: {
     eyebrow,
   },
@@ -126,11 +127,11 @@ export const MobileWithEyebrow: Story = {
       viewports: [320],
     },
   },
-};
+});
 
-export const MobileWithEyebrowWithNewsletterForm: Story = {
-  ...MobileWithEyebrow,
+export const MobileWithEyebrowWithNewsletterForm = meta.story({
+  ...MobileWithEyebrow.input,
   args: {
     eyebrow: eyebrowWithNewsletterForm,
   },
-};
+});

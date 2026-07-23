@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
-import { cn } from '@repo/utils';
 import Link from 'next/link';
 import { ArrowLeftIcon } from '@storybook/icons';
+import { cn } from '../cn';
 
 interface SubHeaderProps {
   className?: string;
@@ -10,12 +10,12 @@ interface SubHeaderProps {
   right?: ReactNode;
 }
 
-export const SubHeader = ({
+export function SubHeader({
   className,
   leftLabel,
   leftHref,
   right,
-}: SubHeaderProps): ReactNode => {
+}: SubHeaderProps): ReactNode {
   return (
     <div
       className={cn(
@@ -32,4 +32,4 @@ export const SubHeader = ({
       {right}
     </div>
   );
-};
+}

@@ -6,8 +6,9 @@ export const getVersion = (slug: string[] | undefined): DocsVersion => {
   const versionFromUrl =
     slug &&
     slug.length >= 1 &&
-    // Exact version match, e.g. `8.2`
-    (docsVersions.find((version) => slug[0] === version.id) ??
+    // Exact match on inSlug or id, e.g. `8.2` or a custom slug
+    (docsVersions.find((version) => slug[0] === (version.inSlug ?? version.id)) ??
+      docsVersions.find((version) => slug[0] === version.id) ??
       // Major version match, e.g. `8` for `8.1`
       docsVersions.find((version) => slug[0] === version.id.split('.')[0]));
   if (versionFromUrl) activeVersion = versionFromUrl;

@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const tree = listOfTrees.find((t) => t.name === latestVersion.id);
 
   // We flatten the tree
-  const flatTree = tree?.children && getFlatTree({ tree: tree?.children });
+  const flatTree = tree?.children && getFlatTree({ tree: tree.children });
 
   // Generate URLs for each node
   const docsUrls = flatTree

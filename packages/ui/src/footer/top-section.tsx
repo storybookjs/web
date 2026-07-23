@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react';
 import { DiscordIcon, GithubIcon, XIcon, YoutubeIcon } from '@storybook/icons';
-import { cn } from '@repo/utils';
+import { cn } from '../cn';
 import { BlueSkyIcon } from '../logos/bluesky';
 import { NewsletterForm } from '../newsletter-form';
 import type { FooterProps } from '.';

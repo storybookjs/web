@@ -1,7 +1,7 @@
-import { cn } from '@repo/utils';
 import type { ReactNode } from 'react';
 import { ChevronSmallDownIcon } from '@storybook/icons';
 import { Slot, Slottable } from '@radix-ui/react-slot';
+import { cn } from '../cn';
 
 interface ButtonProps {
   onClick?: () => void;
@@ -12,7 +12,7 @@ interface ButtonProps {
   noHover?: boolean;
 }
 
-export const Pill = ({
+export function Pill({
   onClick,
   children = '',
   isActive = false,
@@ -20,7 +20,7 @@ export const Pill = ({
   asChild = false,
   noHover = false,
   ...props
-}: ButtonProps): ReactNode => {
+}: ButtonProps): ReactNode {
   let Comp = asChild ? Slot : 'button';
   if (noHover) Comp = 'div';
 
@@ -45,4 +45,4 @@ export const Pill = ({
       {arrow ? <ChevronSmallDownIcon /> : null}
     </Comp>
   );
-};
+}

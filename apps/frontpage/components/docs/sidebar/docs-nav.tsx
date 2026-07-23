@@ -1,13 +1,13 @@
 'use client';
 
-import Link from 'next/link';
-import * as Accordion from '@radix-ui/react-accordion';
 import { useEffect, useState, type FC } from 'react';
+import Link from 'next/link';
+import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
+import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import type { TreeProps } from '@repo/utils';
 import { cn, docsVersions } from '@repo/utils';
-import { useAnalytics } from '../../../lib/analytics';
-import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
+import { useAnalytics } from '@repo/utils/analytics';
 import { getVersion } from '../../../lib/get-version';
 import { VersionSelector } from './version-selector';
 
@@ -41,7 +41,7 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
 
       for (const current of t) {
         if (current.slug === pathname) {
-          parent?.pathSegment && setParentAccordion([parent?.pathSegment]);
+          parent?.pathSegment && setParentAccordion([parent.pathSegment]);
           return current;
         }
 
@@ -63,7 +63,7 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
       <VersionSelector activeVersion={activeVersion} />
       <ul className="mt-7 md:mt-9">
         {selectedTree?.children
-          ? selectedTree?.children.map((lvl1) => (
+          ? selectedTree.children.map((lvl1) => (
               <Level1 key={lvl1.pathSegment} lvl1={lvl1} />
             ))
           : []}
@@ -72,7 +72,7 @@ export const NavDocs: FC<NavDocsProps> = ({ listOfTrees }) => {
   );
 };
 
-const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
+function Level1({ lvl1 }: { lvl1: TreeProps }) {
   const pathname = usePathname();
   const track = useAnalytics();
   let slug = lvl1.slug;
@@ -115,9 +115,9 @@ const Level1 = ({ lvl1 }: { lvl1: TreeProps }) => {
       ) : null}
     </li>
   );
-};
+}
 
-const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
+function Level2({ lvl2 }: { lvl2: TreeProps }) {
   const pathname = usePathname();
   const isDraft = lvl2.draft === true;
   const isHidden = lvl2.sidebar?.hidden === true;
@@ -164,9 +164,9 @@ const Level2 = ({ lvl2 }: { lvl2: TreeProps }) => {
       ) : null}
     </li>
   );
-};
+}
 
-const Level3 = ({ lvl3 }: { lvl3: TreeProps }) => {
+function Level3({ lvl3 }: { lvl3: TreeProps }) {
   const isDraft = lvl3.draft === true;
   const isHidden = lvl3.sidebar?.hidden === true;
   const slug = lvl3.slug;
@@ -187,4 +187,4 @@ const Level3 = ({ lvl3 }: { lvl3: TreeProps }) => {
       </Link>
     </li>
   );
-};
+}

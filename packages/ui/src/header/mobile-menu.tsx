@@ -4,19 +4,19 @@ import { type FC, type ReactNode } from 'react';
 import { MenuIcon } from '@storybook/icons';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
-import { cn } from '@repo/utils';
+import { cn } from '../cn';
 // import { Search } from '../search';
 import { Arrow } from './arrow';
 import { nav } from './nav';
 import type { HeaderProps } from '.';
 
-export const MobileMenu = ({
+export function MobileMenu({
   // algoliaApiKey,
   variant,
 }: {
   algoliaApiKey: string;
   variant: HeaderProps['variant'];
-}): ReactNode => {
+}): ReactNode {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -76,7 +76,7 @@ export const MobileMenu = ({
       </DropdownMenu.Portal>
     </DropdownMenu.Root>
   );
-};
+}
 
 interface DropdownLabelProps {
   children: ReactNode;

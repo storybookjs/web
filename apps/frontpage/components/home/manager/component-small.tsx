@@ -1,6 +1,6 @@
 import { ComponentImage } from './component-image';
 
-export const ComponentSmall = ({ className }: { className?: string }) => {
+export function ComponentSmall({ className }: { className?: string }) {
   return (
     <svg
       className={className}
@@ -116,4 +116,4 @@ export const ComponentSmall = ({ className }: { className?: string }) => {
       </defs>
     </svg>
   );
-};
+}

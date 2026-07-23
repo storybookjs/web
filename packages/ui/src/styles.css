@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@property --gradient-badge-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes ui-gradient-badge-rotate {
+  from {
+    --gradient-badge-angle: 0deg;
+  }
+  to {
+    --gradient-badge-angle: 360deg;
+  }
+}
+
+.ui-gradient-badge {
+  animation: 8s ui-gradient-badge-rotate linear infinite;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(rgba(0 0 0 / 0.7), rgba(0 0 0 / 0.7)) padding-box,
+    conic-gradient(
+        from var(--gradient-badge-angle),
+        rgb(71 145 255 / 1),
+        rgb(255 71 133 / 1),
+        rgb(71 145 255 / 1)
+      )
+      border-box;
+}

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Pill } from '@repo/ui';
+import { Button, Pill } from '@repo/ui';
 import type { TagLinkType } from '../types';
 
 interface TagListProps {
@@ -30,15 +30,16 @@ export const TagList = ({ tagLinks }: TagListProps) => {
           ))
         : null}
       {moreTags.length > 0 && !moreTagsVisible && (
-        <button
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={() => {
             setMoreTagsVisible(true);
           }}
           type="button"
-          className="text-sm text-black transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
         >
           {`+ ${moreTags.length.toString()} more`}
-        </button>
+        </Button>
       )}
     </div>
   );

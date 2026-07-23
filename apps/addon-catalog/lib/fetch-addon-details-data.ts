@@ -1,7 +1,6 @@
-import { addonFragment, validateResponse } from '@repo/utils';
+import { addonFragment, buildTagLinks } from '@repo/utils';
+import { fetchAddonsQuery, gql } from '@repo/utils/fetch-addons-query';
 import type { Addon } from '../types';
-import { fetchAddonsQuery, gql } from './fetch-addons-query';
-import { buildTagLinks } from './build-tag-links';
 import { createMarkdownProcessor } from './create-markdown-processor';
 
 type AddonValue = Pick<
@@ -24,16 +23,16 @@ type AddonValue = Pick<
   | 'npmUrl'
 >;
 interface AddonData {
-  addon: AddonValue;
+  addon: AddonValue | null;
 }
 
 function createAddonBaseLink(
   addon: Pick<Addon, 'repositoryUrl' | 'npmUrl'>,
 ): string {
-  return addon.repositoryUrl ?
-    // TODO: Fetch default branch, instead of assuming 'main'
-    `${addon.repositoryUrl}/blob/main/` :
-    `${addon.npmUrl ?? ''}/`;
+  // TODO: Fetch default branch, instead of assuming 'main'
+  return addon.repositoryUrl
+    ? `${addon.repositoryUrl}/blob/main/`
+    : `${addon.npmUrl ?? ''}/`;
 }
 
 export async function fetchAddonDetailsData(name: string) {
@@ -68,7 +67,7 @@ export async function fetchAddonDetailsData(name: string) {
       },
     );
 
-    validateResponse(() => data.addon);
+    if (!data.addon) return undefined;
 
     const { readme, tags, ...restAddon } = data.addon;
 
@@ -78,7 +77,7 @@ export async function fetchAddonDetailsData(name: string) {
     return {
       ...restAddon,
       readme: readme ? processor.processSync(readme).toString() : null,
-      tags: tags ? buildTagLinks(tags) : [],
+      tags: tags ? buildTagLinks(tags, { basePath: '/tag' }) : [],
     };
   } catch (error) {
     throw new Error(

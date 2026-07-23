@@ -25,6 +25,10 @@ This project is structured around [Turborepo](https://turbo.build/repo). This do
 
 > Generate redirects file
 
+#### `npx turbo generate-versions`
+
+> Generate Storybook version metadata from npm dist-tags
+
 #### `npx turbo dev`
 
 > Run all apps locally

@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import type { FC, ReactNode } from 'react';
 import { cn, latestVersion } from '@repo/utils';
+import { useAnalytics } from '@repo/utils/analytics';
 import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
-import { useAnalytics } from '../../../lib/analytics';
 import { getVersion } from '../../../lib/get-version';
 import {
   APIIcon,
@@ -14,7 +14,7 @@ import {
   TutorialsIcon,
 } from './icons';
 
-export const DocsMainNav = () => {
+export function DocsMainNav() {
   const pathname = usePathname();
   const track = useAnalytics();
   const segment = useSelectedLayoutSegment();
@@ -66,7 +66,7 @@ export const DocsMainNav = () => {
       />
     </nav>
   );
-};
+}
 
 const Line: FC<{
   isActive: boolean;

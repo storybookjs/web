@@ -17,7 +17,7 @@ import { Toolbar } from './toolbar';
 import { ComponentSmall } from './component-small';
 import { ComponentDiff1 } from './component-diff1';
 
-export const SlideDocs = () => {
+export function SlideDocs() {
   const [isMobile] = useMediaQuery('(max-width: 640px)');
 
   return (
@@ -112,7 +112,7 @@ export const SlideDocs = () => {
       </motion.div>
     </motion.div>
   );
-};
+}
 
 const ToolbarButton: FC<{ children: ReactNode }> = ({ children }) => {
   return (

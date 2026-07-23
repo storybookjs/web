@@ -11,7 +11,7 @@ function flatten(
   Object.entries(obj).forEach(([key, value]) => {
     let p: string = (prefix ? `${prefix}.${key}` : key)
       .replaceAll('@', '_at_')
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- we know it's a string
+       
       .replaceAll('/', '_slash_');
 
     if (p.startsWith('_')) {
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
     requests.push(forwardToSentry(received));
   }
 
-  if (received.payload?.userAgent) {
+  if (received.payload.userAgent) {
     requests.push(forwardToPlausible(received, headers));
   }
 
@@ -98,9 +98,12 @@ interface TelemetryEvent {
   eventType: string;
   context: {
     storybookVersion?: string;
-    anonymousId: string;
+    anonymousId?: string;
     userSince: string;
     cliVersion?: string;
+    agent?: {
+      name?: string;
+    };
   };
   payload: {
     eventType?: string;
@@ -157,15 +160,15 @@ async function forwardToSentry(received: TelemetryEvent) {
 
   const itemHeader = { type: 'event' };
   const version =
-    received?.context?.storybookVersion ??
-    received?.metadata?.storybookVersion ??
-    received?.context?.cliVersion;
+    received.context.storybookVersion ??
+    received.metadata.storybookVersion ??
+    received.context.cliVersion;
   const payload = {
     event_id: eventId,
     release: version ?? 'unknown',
 
     // anonymized
-    user: { id: received?.metadata?.userSince?.toString() ?? 'unknown' },
+    user: { id: received.metadata.userSince.toString() ?? 'unknown' },
 
     timestamp: now,
     environment: getEnvironment(version),
@@ -177,27 +180,27 @@ async function forwardToSentry(received: TelemetryEvent) {
     exception: {
       values: [
         {
-          type: received?.payload?.name ?? 'CustomError',
+          type: received.payload.name ?? 'CustomError',
           value:
-            received?.payload?.error?.message ??
-            received?.payload?.name ??
-            received?.payload?.errorHash ??
+            received.payload.error.message ??
+            received.payload.name ??
+            received.payload.errorHash ??
             'Unknown error',
-          stacktrace: received?.payload?.error?.stack
+          stacktrace: received.payload.error.stack
             ? {
-                frames: parseStackTrace(received?.payload?.error?.stack ?? ''),
+                frames: parseStackTrace(received.payload.error.stack ?? ''),
               }
             : undefined,
         },
       ],
     },
     message: {
-      message: received?.payload?.error?.message,
+      message: received.payload.error.message,
       formatted:
-        received?.payload?.error?.message ??
-        received?.payload?.metadataErrorMessage ??
-        received?.payload?.name ??
-        received?.payload?.errorHash ??
+        received.payload.error.message ??
+        received.payload.metadataErrorMessage ??
+        received.payload.name ??
+        received.payload.errorHash ??
         'Unknown error',
     },
   };
@@ -218,6 +221,7 @@ async function forwardToSentry(received: TelemetryEvent) {
 async function forwardToPlausible(received: TelemetryEvent, headers: Headers) {
   const ip = headers.get('x-forwarded-for') ?? headers.get('x-real-ip');
   const { userAgent, step, isNewUser, timeSinceInit } = received.payload ?? {};
+  const { agent, anonymousId } = received.context ?? {};
 
   let name = received.eventType;
 
@@ -243,6 +247,8 @@ async function forwardToPlausible(received: TelemetryEvent, headers: Headers) {
     renderer,
     framework: framework?.name,
     storybookVersion,
+    agentName: agent?.name,
+    hasProjectId: Boolean(anonymousId),
   };
 
   return fetch('https://plausible.io/api/event', {
@@ -262,15 +268,15 @@ async function forwardToPlausible(received: TelemetryEvent, headers: Headers) {
 }
 
 function getFingerPrint(received: TelemetryEvent) {
-  if (typeof received?.payload?.category === 'string') {
+  if (typeof received.payload.category === 'string') {
     return [`fp-${received.payload.name}`];
   }
 
-  if (typeof received?.payload?.code === 'string') {
+  if (typeof received.payload.code === 'string') {
     return [
-      received?.payload?.eventType ?? 'unknown',
-      received?.payload?.code ?? 'unknown',
-      received?.payload?.name ?? 'unknown',
+      received.payload.eventType ?? 'unknown',
+      received.payload.code ?? 'unknown',
+      received.payload.name ?? 'unknown',
     ];
   }
 

@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import type { MDXComponents } from 'mdx/types';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import { mdxComponents } from '@repo/ui';
 
@@ -16,7 +17,7 @@ export async function getRelease(version: string) {
       parseFrontmatter: true,
     },
     components: {
-      ...mdxComponents,
+      ...(mdxComponents as MDXComponents),
     },
   });
 }

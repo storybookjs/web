@@ -1,6 +1,9 @@
-import type { StorybookConfig } from '@storybook/nextjs';
+import { defineMain } from '@storybook/nextjs-vite/node';
+import { createRequire } from 'node:module';
 
 import { join, dirname } from 'path';
+
+const require = createRequire(import.meta.url);
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -9,21 +12,22 @@ import { join, dirname } from 'path';
 function getAbsolutePath(value: string): any {
   return dirname(require.resolve(join(value, 'package.json')));
 }
-const config: StorybookConfig = {
+export default defineMain({
   framework: {
-    name: getAbsolutePath('@storybook/nextjs'),
+    name: getAbsolutePath('@storybook/nextjs-vite'),
     options: {},
   },
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
-    getAbsolutePath('@storybook/addon-essentials'),
+    getAbsolutePath('@storybook/addon-vitest'),
+    getAbsolutePath('@storybook/addon-a11y'),
     getAbsolutePath('@chromatic-com/storybook'),
-    getAbsolutePath('@storybook/addon-interactions'),
-    getAbsolutePath("@storybook/addon-themes")
+    getAbsolutePath('@storybook/addon-docs'),
+    getAbsolutePath('@storybook/addon-themes'),
+    getAbsolutePath('@storybook/addon-mcp'),
   ],
   features: {
-    backgroundsStoryGlobals: true,
-    viewportStoryGlobals: true,
-  },
-};
-export default config;
+    changeDetection: true,
+    experimentalReactComponentMeta: true,
+  }
+});

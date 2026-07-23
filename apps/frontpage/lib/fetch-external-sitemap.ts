@@ -11,7 +11,7 @@ export async function fetchExternalSitemap(
   const { sites, errors } = await blogXml.fetch();
   const fetchErrors = errors as ExtendedSitemapperErrorData[];
 
-  if (fetchErrors?.length > 0) {
+  if (fetchErrors.length > 0) {
     return {
       sites: [],
       error: fetchErrors[0].message || 'Error fetching sitemap',
@@ -20,8 +20,27 @@ export async function fetchExternalSitemap(
 
   return {
     sites: sites.map((site) => {
-      const newUrl = site.replace(/\/$/, '');
-      return { url: newUrl };
+      /* 
+       * TODO: Standardize trailing slash behavior across all sites
+       * 
+       * Does the site have a trailing slash?
+       * /addons - no
+       * /docs - no (both work, but canonical is without)
+       * /recipes - no (both work, but canonical is without)
+       * /blog - yes
+       * /showcase - yes
+       * /tutorials - yes
+       */
+      if (
+        !site.includes('/showcase') &&
+        !site.includes('/blog') &&
+        !site.includes('/tutorials')
+      ) {
+        const newUrl = site.replace(/\/$/, '');
+        return { url: newUrl };
+      }
+
+      return { url: site };
     }),
     error: null,
   };

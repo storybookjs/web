@@ -5,15 +5,17 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { cn } from '@repo/utils';
 import { Form } from './form';
+import type { SendFeedback } from './types';
 
 export type ReactionsProps = null | 'up' | 'down';
 const githubDocsBaseUrl = 'https://github.com/storybookjs/storybook/tree/next';
 
 interface FooterProps {
   isIndexPage: boolean;
+  sendFeedback: SendFeedback;
 }
 
-export const DocsFooter = ({ isIndexPage }: FooterProps) => {
+export function DocsFooter({ isIndexPage, sendFeedback }: FooterProps) {
   const [reaction, setReaction] = useState<ReactionsProps>(null);
   const pathname = usePathname();
 
@@ -77,7 +79,11 @@ export const DocsFooter = ({ isIndexPage }: FooterProps) => {
         </div>
         <AnimatePresence>
           {reaction ? (
-            <Form reaction={reaction} setReaction={setReaction} />
+            <Form
+              reaction={reaction}
+              setReaction={setReaction}
+              sendFeedback={sendFeedback}
+            />
           ) : null}
         </AnimatePresence>
       </motion.div>
@@ -91,4 +97,4 @@ export const DocsFooter = ({ isIndexPage }: FooterProps) => {
       </a>
     </div>
   );
-};
+}

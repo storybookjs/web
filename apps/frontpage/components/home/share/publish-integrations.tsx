@@ -13,7 +13,7 @@ const symbolVariants = {
   animate: { y: 0, opacity: 1 },
 };
 
-export const PublishIntegrations = () => {
+export function PublishIntegrations() {
   return (
     <motion.div
       className="relative w-full max-w-[800px] md:w-[150%]"
@@ -59,6 +59,6 @@ export const PublishIntegrations = () => {
       <Player count={1} delay={3.8} type="purple" x="65%" y="9%" />
     </motion.div>
   );
-};
+}
 
 PublishIntegrations.displayName = 'PublishIntegrations';

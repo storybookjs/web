@@ -12,6 +12,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: page?.title ? `${page.title} | Storybook docs` : 'Storybook docs',
     alternates: {
       canonical: '/docs',
+      types: {
+        'text/markdown': '/docs/get-started.md',
+      }
     },
     other: {
       [globalSearchMetaKeys.version]: latestVersion.id,

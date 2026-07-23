@@ -1,6 +1,6 @@
 import { validateResponse } from '@repo/utils';
+import { fetchAddonsQuery, gql } from '@repo/utils/fetch-addons-query';
 import type { Recipe } from '../types';
-import { fetchAddonsQuery, gql } from './fetch-addons-query';
 
 type RecipesValue = Recipe['name'];
 

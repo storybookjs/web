@@ -7,8 +7,7 @@ type PProps = {
 
 export const P: FC<PProps> = ({ children }) => {
   return (
-    // TODO: Check prefix placement in ones like `[&>code]:ui-text-md`
-    <p className="text-md [&>code]:ui-text-md ui-mb-6 ui-mt-0 ui-leading-7 [&>a]:ui-text-blue-500">
+    <p className="text-md ui-mb-6 ui-mt-0 ui-leading-7 [&>a]:ui-text-blue-500">
       {children}
     </p>
   );
