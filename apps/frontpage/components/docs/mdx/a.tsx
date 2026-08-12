@@ -20,9 +20,13 @@ export function processHref({
   isIndexPage: boolean;
   pagePath: string[];
 }): string {
-   // Hash-only links should not be processed
+  // Hash-only links should not be processed
   if (hrefIn.startsWith('#')) {
     return hrefIn;
+  }
+
+  if (hrefIn.startsWith('/')) {
+    return hrefIn.replace(/\/+/g, '/');
   }
 
   const href = hrefIn

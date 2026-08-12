@@ -3,7 +3,11 @@ import { processHref } from './a';
 
 const latestVersion = { id: '10.2', label: 'Version 10.2' };
 const otherVersion = { id: '10.3', label: 'Version 10.3', inSlug: '10.3' };
-const olderVersionWithDifferentSlug = { id: '9.1', label: 'Version 9', inSlug: '9' };
+const olderVersionWithDifferentSlug = {
+  id: '9.1',
+  label: 'Version 9',
+  inSlug: '9',
+};
 
 vi.mock('@repo/utils', () => ({
   latestVersion: { id: '10.2', label: 'Version 10.2' },
@@ -105,6 +109,26 @@ describe('processHref', () => {
   });
 
   describe('href transformations', () => {
+    it('preserves root-relative links without adding the docs path', () => {
+      const result = processHref({
+        activeVersion: latestVersion,
+        href: '/blog/storybook-csf3-is-here/',
+        isIndexPage: true,
+        pagePath: ['10.2', 'releases'],
+      });
+      expect(result).toBe('/blog/storybook-csf3-is-here/');
+    });
+
+    it('removes duplicate slashes from root-relative links', () => {
+      const result = processHref({
+        activeVersion: latestVersion,
+        href: '//blog/storybook-csf3-is-here/',
+        isIndexPage: true,
+        pagePath: ['10.2', 'releases'],
+      });
+      expect(result).toBe('/blog/storybook-csf3-is-here/');
+    });
+
     it('transforms release-X-Y/docs paths to docs/X paths', () => {
       const result = processHref({
         activeVersion: latestVersion,
@@ -132,7 +156,9 @@ describe('processHref', () => {
         isIndexPage: true,
         pagePath: ['10.2', 'writing-stories'],
       });
-      expect(result).toBe('/docs/writing-stories/migration-guide#major-breaking-changes');
+      expect(result).toBe(
+        '/docs/writing-stories/migration-guide#major-breaking-changes',
+      );
     });
   });
 

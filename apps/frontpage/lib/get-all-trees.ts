@@ -29,6 +29,7 @@ const getSlug = (pathSegment: string) => {
   }
 
   return `/${splitSegment
+    .filter(Boolean)
     .join('/')
     .replace(/\.mdx?$|\.md$/, '')
     .replace(/\/index$/, '')}`;
