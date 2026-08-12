@@ -9,7 +9,7 @@ import { type FlatTreeNode, getFlatTree } from './get-flat-tree';
 
 const getSlug = (pathSegment: string) => {
   // We first split the pathSegment into an array
-  const splitSegment = pathSegment.split('/');
+  const splitSegment = pathSegment.split('/').filter(Boolean);
 
   // If the first segment is 'content', we remove it
   if (splitSegment[0] === 'content') splitSegment.shift();
@@ -29,7 +29,6 @@ const getSlug = (pathSegment: string) => {
   }
 
   return `/${splitSegment
-    .filter(Boolean)
     .join('/')
     .replace(/\.mdx?$|\.md$/, '')
     .replace(/\/index$/, '')}`;

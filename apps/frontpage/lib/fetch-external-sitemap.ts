@@ -8,7 +8,7 @@ export function normalizeSitemapUrl(site: string): string {
   const url = new URL(site);
   const pathname = url.pathname.replace(/\/{2,}/g, '/');
   const isTrailingSlashSite = ['/showcase', '/blog', '/tutorials'].some(
-    (path) => pathname.startsWith(path),
+    (path) => pathname === path || pathname.startsWith(`${path}/`),
   );
 
   url.pathname = isTrailingSlashSite
