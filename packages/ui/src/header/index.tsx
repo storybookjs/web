@@ -11,7 +11,7 @@ import { StorybookLogo } from '../logos/storybook-logo';
 import { Search } from '../search';
 import { MobileMenu } from './mobile-menu';
 import { Button } from './button';
-// import { Eyebrow } from './eyebrow';
+import { Eyebrow } from './eyebrow';
 import { nav } from './nav';
 
 export interface HeaderProps {
@@ -24,13 +24,13 @@ export interface HeaderProps {
 
 export const Header: FC<HeaderProps> = ({
   algoliaApiKey,
-  eyebrow,
-  // eyebrow = (
-  //   <Eyebrow
-  //     href="https://us02web.zoom.us/webinar/register/4217528604397/WN_JiO-sitXS9aCg793H2TN0g"
-  //     title="Join live: How to review agent-built UI with Storybook"
-  //   />
-  // ),
+  // eyebrow,
+  eyebrow = (
+    <Eyebrow
+      href="https://us02web.zoom.us/webinar/register/9817872466781/WN_7GfyXMbJSGiKopxmhU1F8A"
+      title="Join live: Why agents get frontend context wrong"
+    />
+  ),
   githubCount = 0,
   subMenu,
   variant = 'system',
