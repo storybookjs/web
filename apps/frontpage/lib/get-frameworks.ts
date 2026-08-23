@@ -287,6 +287,7 @@ export function getFrameworks() {
               'html',
               'svelte',
               'angular',
+              'solid',
             ],
           },
         ],
