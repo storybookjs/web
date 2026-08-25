@@ -89,6 +89,14 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         subtitle="with Vite"
         title="Web Components"
       />
+      {Number(activeVersion.id) >= 10.6 ? (
+        <Card
+          href="/docs/get-started/frameworks/symfony-vite/?renderer=symfony"
+          logo="logo-symfony.svg"
+          subtitle="with Vite"
+          title="Symfony"
+        />
+      ) : null}
     </div>
   );
 }
