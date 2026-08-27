@@ -3,10 +3,16 @@ import { rehype } from 'rehype';
 import rehypeUrls from 'rehype-urls';
 import rehypeStringify from 'rehype-stringify';
 import { visit } from 'unist-util-visit';
+import type { Element } from 'hast';
+import type { Root, Link, Image, HTML } from 'mdast';
 
 interface Options {
   assetBase: string | null;
   base: string;
+}
+
+interface TransformOptions extends Options {
+  isAsset?: boolean;
 }
 
 function assetUrl(repositoryUrl: string | null) {
@@ -25,25 +31,21 @@ function assetUrl(repositoryUrl: string | null) {
 
 function absoluteLink(
   link: string,
-  // @ts-expect-error - TODO: Fix types
-  { base, assetBase, isAsset }: Options & { isAsset?: boolean } = {},
+  { base, assetBase, isAsset }: TransformOptions = { base: '', assetBase: null },
 ) {
   if (link.startsWith('#')) {
     return link;
   }
-  // @ts-expect-error - TODO: Fix types
-  return resolve(isAsset ? assetBase : base, link);
+  return resolve(isAsset && assetBase ? assetBase : base, link);
 }
 
 function absoluteLinksHtml(html: string, opts: Options) {
   const buf = rehype()
-    // @ts-expect-error - TODO: Fix types
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- TODO: Fix types
-    .use(rehypeUrls, (url, node) => {
+    .use(rehypeUrls, (url: unknown, node: unknown) => {
+      const element = node as Element;
       return absoluteLink(format(url as string), {
         ...opts,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- TODO: Fix types
-        isAsset: node.properties.src,
+        isAsset: !!element.properties?.src,
       });
     })
     .use(rehypeStringify, { closeSelfClosing: true })
@@ -59,39 +61,24 @@ export function absoluteLinks(opts: Options) {
 
   return transform;
 
-  // @ts-expect-error - TODO: Fix types
-  function transform(tree) {
+  function transform(tree: Root) {
     // https://github.com/syntax-tree/mdast#nodes
-    visit(tree, ['link', 'image', 'html'], visitor);
-
-    // @ts-expect-error - TODO: Fix types
-    function visitor(node) {
+    visit(tree, ['link', 'image', 'html'], (node) => {
       if (!node) return;
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- TODO: Fix types
-      switch (node.type) {
-        case 'link': {
-          // eslint-disable-next-line -- TODO: Fix types
-          node.url = absoluteLink(node.url, opts);
-          return;
-        }
-        case 'html': {
-          // eslint-disable-next-line -- TODO: Fix types
-          node.value = absoluteLinksHtml(node.value, opts);
-          return;
-        }
-        case 'image': {
-          // eslint-disable-next-line -- TODO: Fix types
-          node.url = absoluteLink(node.url, {
-            ...opts,
-            isAsset: true,
-          });
-          return;
-        }
-        default:
-          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-unsafe-member-access -- TODO: Fix types
-          throw new Error(`Unexpected: ${node.type}`);
+      if (node.type === 'link') {
+        const linkNode = node as Link;
+        linkNode.url = absoluteLink(linkNode.url, opts);
+      } else if (node.type === 'html') {
+        const htmlNode = node as HTML;
+        htmlNode.value = absoluteLinksHtml(htmlNode.value, opts);
+      } else if (node.type === 'image') {
+        const imageNode = node as Image;
+        imageNode.url = absoluteLink(imageNode.url, {
+          ...opts,
+          isAsset: true,
+        });
       }
-    }
+    });
   }
 }

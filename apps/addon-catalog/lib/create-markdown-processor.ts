@@ -9,9 +9,9 @@ export function createMarkdownProcessor(absoluteLinkBase: string) {
 
   if (absoluteLinkBase) {
     processor
-      // @ts-expect-error - TODO: Fix types
       .use(absoluteLinks, {
         base: absoluteLinkBase,
+        assetBase: null,
       })
       .use(remarkGFM);
   }

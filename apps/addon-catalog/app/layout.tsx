@@ -4,6 +4,7 @@ import { Nunito_Sans as nunitoSans } from 'next/font/google';
 import { Header, Footer, Container } from '@repo/ui';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Providers } from './providers';
+import { ScrollToTop } from '../components/scroll-to-top';
 
 import '@docsearch/css';
 import './globals.css';
@@ -50,6 +51,7 @@ export default async function RootLayout({
           <Container>{children}</Container>
         </Providers>
         <Footer />
+        <ScrollToTop />
       </body>
       <GoogleAnalytics gaId="G-MN8NJ34M7T" />
     </html>
