@@ -45,7 +45,7 @@ export function TopSection({ variant }: TopSectionProps): JSX.Element {
           <Circle
             href="https://discord.gg/storybook"
             variant={variant}
-            name="Storybook"
+            name="Discord"
           >
             <DiscordIcon size={18} />
           </Circle>
