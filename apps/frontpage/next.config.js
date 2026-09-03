@@ -112,6 +112,19 @@ module.exports = withBundleAnalyzer(
     skipTrailingSlashRedirect: true,
     async rewrites() {
       return [
+        // The blog (storybook.js.org/blog, hosted separately on Netlify) loads
+        // Plausible from the root-relative path /js/script.js, so the request
+        // is served by this app's proxy rather than by Netlify. Serve the
+        // tagged-events build under that name so tagged link clicks in blog
+        // posts are tracked. The generic filename is deliberate: the real one
+        // (script.tagged-events.js) is on ad-blocker lists such as EasyPrivacy.
+        // This must stay ahead of next-plausible's own /js/script.js rewrite;
+        // withPlausibleProxy appends its rules after these, and Next.js uses
+        // the first matching rewrite.
+        {
+          source: '/js/script.js',
+          destination: 'https://plausible.io/js/script.tagged-events.js',
+        },
         {
           source: '/ingest/static/:path*',
           destination: 'https://us-assets.i.posthog.com/static/:path*',
