@@ -4,6 +4,22 @@ interface ExtendedSitemapperErrorData extends SitemapperErrorData {
   message: string;
 }
 
+export function normalizeSitemapUrl(site: string): string {
+  const url = new URL(site);
+  const pathname = url.pathname.replace(/\/{2,}/g, '/');
+  const isTrailingSlashSite = ['/showcase', '/blog', '/tutorials'].some(
+    (path) => pathname === path || pathname.startsWith(`${path}/`),
+  );
+
+  url.pathname = isTrailingSlashSite
+    ? pathname.endsWith('/')
+      ? pathname
+      : `${pathname}/`
+    : pathname.replace(/\/$/, '');
+
+  return url.toString();
+}
+
 export async function fetchExternalSitemap(
   url: string,
 ): Promise<{ sites: { url: string }[]; error: string | null }> {
@@ -19,29 +35,7 @@ export async function fetchExternalSitemap(
   }
 
   return {
-    sites: sites.map((site) => {
-      /* 
-       * TODO: Standardize trailing slash behavior across all sites
-       * 
-       * Does the site have a trailing slash?
-       * /addons - no
-       * /docs - no (both work, but canonical is without)
-       * /recipes - no (both work, but canonical is without)
-       * /blog - yes
-       * /showcase - yes
-       * /tutorials - yes
-       */
-      if (
-        !site.includes('/showcase') &&
-        !site.includes('/blog') &&
-        !site.includes('/tutorials')
-      ) {
-        const newUrl = site.replace(/\/$/, '');
-        return { url: newUrl };
-      }
-
-      return { url: site };
-    }),
+    sites: sites.map((site) => ({ url: normalizeSitemapUrl(site) })),
     error: null,
   };
 }
