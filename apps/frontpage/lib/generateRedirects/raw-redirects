@@ -41,11 +41,11 @@
 /docs/writing-tests/importing-stories-in-tests                          /docs/writing-tests/integrations/stories-in-unit-tests                  301
 
 # 7.6
-/docs/writing-stories/introduction                                      /docs/writing-stories                                                   301
-/docs/writing-docs/introduction                                         /docs/writing-docs                                                      301
-/docs/writing-tests/introduction                                        /docs/writing-tests                                                     301
-/docs/essentials/introduction                                           /docs/essentials                                                        301
-/docs/addons/introduction                                               /docs/addons                                                            301
+/docs/writing-stories                                                   /docs/writing-stories                                                   301
+/docs/writing-docs                                                      /docs/writing-docs                                                      301
+/docs/writing-tests                                                     /docs/writing-tests                                                     301
+/docs/essentials                                                        /docs/essentials                                                        301
+/docs/addons                                                            /docs/addons                                                            301
 /docs/configure/overview                                                /docs/configure                                                         301
 /docs/builders/overview                                                 /docs/builders                                                          301
 /docs/contribute/how-to-contribute                                      /docs/contribute                                                        301
