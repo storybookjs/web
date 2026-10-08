@@ -1,3 +1,5 @@
+import type { StaticImageData } from 'next/image';
+
 export type Appearance = 'official' | 'integrator' | 'community';
 
 export interface Addon {
@@ -80,4 +82,15 @@ export type Verified = 'integrators' | 'official';
 export interface TagLinkType {
   link: string;
   name: string;
+}
+
+/** A hand-picked third-party tool that works with Storybook but is not an addon */
+export interface Integration {
+  name: string;
+  platform: string;
+  description: string;
+  href: string;
+  icon: StaticImageData;
+  /** 16:9 screenshot of the tool in use */
+  image: StaticImageData;
 }
