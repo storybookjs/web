@@ -74,13 +74,16 @@ export const HomeWrapper = ({ children }: HomeProps) => {
             advanced features.
           </p>
         </div>
-        <a
-          href="/docs/addons/integration-catalog"
-          className="hidden h-10 flex-shrink-0 items-center gap-2 rounded-full bg-blue-500 px-5 text-sm font-bold text-white md:flex"
-        >
-          <PlusIcon />
-          Add your integration
-        </a>
+        {/* Third-party tools are hand-picked, so there is nothing to submit */}
+        {pathname !== '/integrations' && (
+          <a
+            href="/docs/addons/integration-catalog"
+            className="hidden h-10 flex-shrink-0 items-center gap-2 rounded-full bg-blue-500 px-5 text-sm font-bold text-white md:flex"
+          >
+            <PlusIcon />
+            Add your integration
+          </a>
+        )}
       </div>
       <div className="mb-24">
         <div className="mb-12 flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
