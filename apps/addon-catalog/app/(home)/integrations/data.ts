@@ -1,5 +1,5 @@
 import type { Integration } from '../../../types';
-import jetbrainsIcon from '../../../images/integrations/jetbrains-storybook-connect-icon.svg';
+import jetbrainsIcon from '../../../images/integrations/jetbrains-icon.svg';
 import jetbrainsImage from '../../../images/integrations/jetbrains-storybook-connect.webp';
 
 export const integrations: Integration[] = [

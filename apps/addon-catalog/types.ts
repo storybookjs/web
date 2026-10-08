@@ -90,6 +90,7 @@ export interface Integration {
   platform: string;
   description: string;
   href: string;
+  /** Logo of the platform, not the tool, so cards are distinguishable */
   icon: StaticImageData;
   /** 16:9 screenshot of the tool in use */
   image: StaticImageData;
