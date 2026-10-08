@@ -31,6 +31,13 @@ const categories = [
   { name: 'Organize', href: '/tag/organize' },
 ];
 
+const navSections: { links: { name: string; href: string }[]; rel?: string }[] =
+  [
+    { links: categories, rel: 'nofollow' },
+    // Not a tag, so it sits apart from the categories and is followed for SEO
+    { links: [{ name: 'Third-party tools', href: '/integrations' }] },
+  ];
+
 export const HomeWrapper = ({ children }: HomeProps) => {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
@@ -67,13 +74,16 @@ export const HomeWrapper = ({ children }: HomeProps) => {
             advanced features.
           </p>
         </div>
-        <a
-          href="/docs/addons/integration-catalog"
-          className="hidden h-10 flex-shrink-0 items-center gap-2 rounded-full bg-blue-500 px-5 text-sm font-bold text-white md:flex"
-        >
-          <PlusIcon />
-          Add your integration
-        </a>
+        {/* Third-party tools are hand-picked, so there is nothing to submit */}
+        {pathname !== '/integrations' && (
+          <a
+            href="/docs/addons/integration-catalog"
+            className="hidden h-10 flex-shrink-0 items-center gap-2 rounded-full bg-blue-500 px-5 text-sm font-bold text-white md:flex"
+          >
+            <PlusIcon />
+            Add your integration
+          </a>
+        )}
       </div>
       <div className="mb-24">
         <div className="mb-12 flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
@@ -118,22 +128,27 @@ export const HomeWrapper = ({ children }: HomeProps) => {
           <div className="flex flex-col gap-12 md:flex-row">
             <div className="hidden flex-shrink-0 md:block md:w-[250px]">
               <h3 className="mb-6 text-2xl font-bold">Categories</h3>
-              <ul className="-ml-2 border-b border-b-zinc-300 pb-6 dark:border-b-slate-700">
-                {categories.map(({ name, href }) => (
-                  <li key={name}>
-                    <Link
-                      href={href}
-                      rel="nofollow"
-                      className={cn(
-                        'flex items-center px-2 py-[5px] text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500',
-                        pathname === href && 'text-blue-500',
-                      )}
-                    >
-                      {name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              {navSections.map(({ links, rel }) => (
+                <ul
+                  key={links[0].href}
+                  className="-ml-2 border-b border-b-zinc-300 py-6 first-of-type:pt-0 dark:border-b-slate-700"
+                >
+                  {links.map(({ name, href }) => (
+                    <li key={name}>
+                      <Link
+                        href={href}
+                        rel={rel}
+                        className={cn(
+                          'flex items-center px-2 py-[5px] text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500',
+                          pathname === href && 'text-blue-500',
+                        )}
+                      >
+                        {name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ))}
               <div className="mt-6 flex flex-col gap-4">
                 <a
                   href="/docs/addons/install-addons"
