@@ -1,4 +1,4 @@
-import { addonFragment, recipeFragment, validateResponse } from '@repo/utils';
+import { addonFragment, recipeFragment } from '@repo/utils';
 import { fetchAddonsQuery, gql } from '@repo/utils/fetch-addons-query';
 import { type Tag } from '../types';
 
@@ -9,7 +9,10 @@ type TagValue = Pick<
 
 async function fetchTagData({ name }: { name: string }) {
   try {
-    const data = await fetchAddonsQuery<{ tag: TagValue }, { name: string }>(
+    const data = await fetchAddonsQuery<
+      { tag: TagValue | null },
+      { name: string }
+    >(
       gql`
           query Tag($name: String!) {
             tag(name: $name) {
@@ -36,8 +39,6 @@ async function fetchTagData({ name }: { name: string }) {
         variables: { name },
       },
     );
-
-    validateResponse(() => data.tag);
 
     const { tag } = data;
 

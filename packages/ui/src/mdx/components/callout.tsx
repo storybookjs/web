@@ -1,12 +1,12 @@
 'use client';
 
 import { useAnalytics } from '@repo/utils/analytics';
-import { type FC, type ReactNode, useEffect, useRef, useState } from 'react';
+import { CheckIcon, CopyIcon, WandIcon } from '@storybook/icons';
 import copyToClipboard from 'copy-to-clipboard';
+import { type FC, type ReactNode, useEffect, useRef, useState } from 'react';
 import snarkdown from 'snarkdown';
-import { CheckIcon, CopyIcon } from '@storybook/icons';
-import { cn } from '../../cn';
 import { Button } from '../../button';
+import { cn } from '../../cn';
 
 export type ActionIconName = 'copy' | 'check';
 
@@ -15,10 +15,11 @@ const ACTION_ICONS: Record<ActionIconName, ReactNode> = {
   check: <CheckIcon />,
 };
 
-type Variant = 'neutral' | 'positive' | 'info' | 'warning';
+type Variant = 'neutral' | 'positive' | 'prompt' | 'info' | 'warning';
 
-const VARIANT_DEFAULT_ICON: Partial<Record<Variant, string>> = {
+const VARIANT_DEFAULT_ICON: Partial<Record<Variant, string | ReactNode>> = {
   info: 'ℹ️',
+  prompt: <WandIcon size={20} />,
   warning: '⚠️',
 };
 
@@ -117,7 +118,13 @@ const ActionButton: FC<{ action: CalloutAction }> = ({ action }) => {
   }
 
   return (
-    <Button variant="ghost" size="md" onClick={handleClick} type="button">
+    <Button
+      variant="ghost"
+      size="md"
+      className="dark:ui-text-blue-400"
+      onClick={handleClick}
+      type="button"
+    >
       {buttonIcon}
       {buttonLabel}
     </Button>
@@ -126,7 +133,7 @@ const ActionButton: FC<{ action: CalloutAction }> = ({ action }) => {
 
 export interface CalloutProps {
   title?: string;
-  icon?: string;
+  icon?: string | ReactNode;
   variant?: Variant;
   action?: CalloutAction;
   children: ReactNode;
@@ -150,6 +157,8 @@ export const Callout: FC<CalloutProps> = ({
           'ui-border ui-border-blue-200 ui-bg-blue-100 dark:ui-border-slate-700 dark:ui-bg-slate-900',
         variant === 'positive' &&
           'ui-border ui-border-blue-200 ui-bg-blue-100 dark:ui-border-slate-700 dark:ui-bg-slate-900',
+        variant === 'prompt' &&
+          'ui-gradient-callout [--callout-bg:theme(colors.blue.100)] dark:[--callout-bg:theme(colors.slate.900)]',
         variant === 'info' &&
           'ui-border ui-border-blue-200 ui-bg-blue-100 dark:ui-border-slate-700 dark:ui-bg-slate-900',
         variant === 'warning' &&
@@ -165,7 +174,7 @@ export const Callout: FC<CalloutProps> = ({
             {appliedIcon}
           </span>
         ) : null}
-        <div className="ui-min-w-0">
+        <div className="ui-min-w-0 dark:[&_a]:ui-text-blue-400">
           {title ? (
             <div dangerouslySetInnerHTML={{ __html: snarkdown(title) }} />
           ) : null}

@@ -25,6 +25,18 @@ export const Info = meta.story({
   args: { variant: 'info' },
 });
 
+export const Prompt = meta.story({
+  args: {
+    variant: 'prompt',
+    children: 'Use this prompt with your AI assistant to scaffold a Storybook.',
+    action: {
+      label: 'Copy prompt',
+      event: 'copy_storybook_prompt',
+      copy: 'Set up Storybook in this project with sensible defaults.',
+    },
+  },
+});
+
 export const Warning = meta.story({
   args: { variant: 'warning' },
 });

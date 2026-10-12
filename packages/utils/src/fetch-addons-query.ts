@@ -4,7 +4,7 @@ import { validateResponse } from './validate-response';
 export { gql } from 'graphql-request';
 
 const client = new GraphQLClient(
-  'https://boring-heisenberg-43a6ed.netlify.app/',
+  'https://storybook-addon-backend.netlify.app/',
 );
 
 const requestQueue: (() => void)[] = [];

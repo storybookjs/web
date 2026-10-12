@@ -30,3 +30,17 @@
       )
       border-box;
 }
+
+.ui-gradient-callout {
+  animation: 8s ui-gradient-badge-rotate linear infinite;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--callout-bg), var(--callout-bg)) padding-box,
+    conic-gradient(
+        from var(--gradient-badge-angle),
+        rgb(71 145 255 / 1),
+        rgb(255 71 133 / 1),
+        rgb(71 145 255 / 1)
+      )
+      border-box;
+}
