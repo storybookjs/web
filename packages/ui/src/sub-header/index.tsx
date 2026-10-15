@@ -52,9 +52,9 @@ export function SubHeader(props: SubHeaderProps): ReactNode {
                 href={href}
                 aria-current={isActive ? 'page' : undefined}
                 className={cn(
-                  '-ui-mb-px ui-flex ui-items-center ui-border-b-2 ui-border-transparent ui-text-sm ui-font-bold ui-text-zinc-600 ui-transition-colors hover:ui-text-blue-500 dark:ui-text-slate-400 dark:hover:ui-text-blue-500',
+                  '-ui-mb-px ui-flex ui-items-center ui-border-b-2 ui-border-transparent ui-text-sm ui-font-bold ui-text-zinc-600 ui-transition-colors hover:ui-text-blue-700 dark:ui-text-slate-400 dark:hover:ui-text-blue-500',
                   isActive &&
-                    'ui-border-blue-500 ui-text-blue-700 dark:ui-text-blue-500',
+                    'ui-border-blue-700 ui-text-blue-700 dark:ui-border-blue-500 dark:ui-text-blue-500',
                 )}
               >
                 {label}
@@ -64,7 +64,7 @@ export function SubHeader(props: SubHeaderProps): ReactNode {
         </nav>
       ) : (
         <Link
-          className="ui-flex ui-items-center ui-gap-3 ui-transition-colors hover:ui-text-blue-500"
+          className="ui-flex ui-items-center ui-gap-3 ui-transition-colors hover:ui-text-blue-700 dark:hover:ui-text-blue-500"
           href={props.leftHref ?? '/'}
         >
           <ArrowLeftIcon /> {props.leftLabel ?? 'Back'}
