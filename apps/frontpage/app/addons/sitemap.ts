@@ -33,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     { url: 'https://storybook.js.org/addons' },
+    { url: 'https://storybook.js.org/addons/recipes' },
     { url: 'https://storybook.js.org/addons/integrations' },
     ...urls,
   ];
