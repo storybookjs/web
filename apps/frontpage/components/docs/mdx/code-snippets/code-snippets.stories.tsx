@@ -236,6 +236,19 @@ export const CSFNextInfo = meta.story({
     activeRenderer: 'react',
     activeSnippetTabs: ['CSF Next 🧪'],
   },
+  play: async ({ canvasElement }) => {
+    // Pre-11 display behavior: the stored pre-rename title still selects its own tab
+    // (the migration only applies when the page offers the target tab), and the
+    // "Learn more about CSF Next" banner keeps displaying.
+    await waitFor(async () => {
+      await expect(getActiveTabTitle(canvasElement)).toBe('CSF Next 🧪');
+    });
+    await expect(
+      within(canvasElement).getByRole('link', {
+        name: /learn more about csf next/i,
+      }),
+    ).toBeTruthy();
+  },
 });
 
 export const CSFRenamedTabOrder = meta.story({
@@ -269,6 +282,47 @@ export const CSFPreRenameTabOrder = meta.story({
     await expect(tabTitles).toEqual(['CSF 3', 'CSF Next 🧪']);
     await waitFor(async () => {
       await expect(getActiveTabTitle(canvasElement)).toBe('CSF 3');
+    });
+  },
+});
+
+export const CSFCookieMigratesLegacyTab = meta.story({
+  args: {
+    content: contentCSFRenamed,
+    activeSnippetTabs: ['CSF 3'],
+  },
+  play: async ({ canvasElement }) => {
+    // A stored "CSF 3" preference lands on "CSF (Legacy)" — not on "CSF", which the
+    // fuzzy matcher would otherwise resolve it to.
+    await waitFor(async () => {
+      await expect(getActiveTabTitle(canvasElement)).toBe('CSF (Legacy)');
+    });
+  },
+});
+
+export const CSFCookieMigratesCurrentTab = meta.story({
+  args: {
+    content: contentCSFRenamed,
+    activeSnippetTabs: ['CSF Next 🧪'],
+  },
+  play: async ({ canvasElement }) => {
+    // A stored "CSF Next 🧪" preference lands on "CSF".
+    await waitFor(async () => {
+      await expect(getActiveTabTitle(canvasElement)).toBe('CSF');
+    });
+  },
+});
+
+export const CSFCookieUnknownUnchanged = meta.story({
+  args: {
+    content: contentCSFRenamed,
+    activeSnippetTabs: ['vite-env'],
+  },
+  play: async ({ canvasElement }) => {
+    // Unknown stored values pass through untouched: no tab matches, so the default
+    // (first displayed) tab is selected, exactly as before the migration.
+    await waitFor(async () => {
+      await expect(getActiveTabTitle(canvasElement)).toBe('CSF');
     });
   },
 });

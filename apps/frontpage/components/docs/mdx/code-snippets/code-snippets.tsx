@@ -7,6 +7,7 @@ import { getVersion, type CodeSnippetsProps, latestVersion } from '@repo/utils';
 import { Button, CodeSnippetsWrapper, mdxComponents } from '@repo/ui';
 import { CloseIcon, InfoIcon } from '@storybook/icons';
 import { useDocs } from '../../../../app/docs/provider';
+import { remapCsfTabTitle } from '../../../../app/docs/remap-csf-tab-titles';
 import { buildPathWithVersion } from '../../../../lib/build-path-with-version';
 import { getFilters } from './utils/get-filters';
 import {
@@ -198,7 +199,18 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
       tabs &&
       tabs.length > 0
     ) {
-      const initialTab = activeSnippetTabs.length > 0 ? getInitialTab(tabs, activeSnippetTabs) : undefined;
+      // Readers with a saved tab preference may carry pre-rename titles (the titles
+      // changed at the source in storybookjs/storybook). Remap them conservatively:
+      // only when the current page offers the target tab, so pages on older docs
+      // versions keep matching their stored titles untouched.
+      const tabIds = tabs.map((tab) => tab.id);
+      const initialTab =
+        activeSnippetTabs.length > 0
+          ? getInitialTab(
+              tabs,
+              activeSnippetTabs.map((storedTab) => remapCsfTabTitle(storedTab, tabIds)),
+            )
+          : undefined;
       if (initialTab) {
         setActiveTab(initialTab.id);
       } else if (!activeTab) {
