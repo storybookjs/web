@@ -10,6 +10,7 @@ import {
 } from '@storybook/icons';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { SubHeader } from '@repo/ui';
 import { cn } from '@repo/utils';
 import { fetchSearchData } from '../lib/fetch-search-data';
 import type { Addon, Recipe } from '../types';
@@ -31,12 +32,12 @@ const categories = [
   { name: 'Organize', href: '/tag/organize' },
 ];
 
-const navSections: { links: { name: string; href: string }[]; rel?: string }[] =
-  [
-    { links: categories, rel: 'nofollow' },
-    // Not a tag, so it sits apart from the categories and is followed for SEO
-    { links: [{ name: 'Third-party tools', href: '/integrations' }] },
-  ];
+const toolsHref = '/integrations';
+
+const tabs = [
+  { label: 'Addons', href: '/' },
+  { label: 'Third-party tools', href: toolsHref },
+];
 
 export const HomeWrapper = ({ children }: HomeProps) => {
   const [search, setSearch] = useState('');
@@ -46,6 +47,7 @@ export const HomeWrapper = ({ children }: HomeProps) => {
     recipes: Recipe[];
   }>({ addons: [], recipes: [] });
   const pathname = usePathname();
+  const isToolsPage = pathname === toolsHref;
 
   useEffect(() => {
     setLoading(true);
@@ -66,7 +68,12 @@ export const HomeWrapper = ({ children }: HomeProps) => {
 
   return (
     <>
-      <div className="mb-8 mt-12 flex items-start justify-between">
+      <SubHeader
+        label="Integrations"
+        tabs={tabs}
+        activeHref={isToolsPage ? toolsHref : '/'}
+      />
+      <div className="mb-8 flex items-start justify-between">
         <div>
           <h1 className="mb-4 text-4xl font-bold">Integrations</h1>
           <p className="text-black dark:text-slate-400">
@@ -75,7 +82,7 @@ export const HomeWrapper = ({ children }: HomeProps) => {
           </p>
         </div>
         {/* Third-party tools are hand-picked, so there is nothing to submit */}
-        {pathname !== '/integrations' && (
+        {!isToolsPage && (
           <a
             href="/docs/addons/integration-catalog"
             className="hidden h-10 flex-shrink-0 items-center gap-2 rounded-full bg-blue-500 px-5 text-sm font-bold text-white md:flex"
@@ -86,86 +93,88 @@ export const HomeWrapper = ({ children }: HomeProps) => {
         )}
       </div>
       <div className="mb-24">
-        <div className="mb-12 flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
-          <div className="relative flex h-10 w-full flex-shrink-0 items-center rounded-full border border-zinc-300 md:w-[250px] dark:border-slate-700">
-            <SearchIcon className="absolute left-4 dark:text-slate-500" />
-            <input
-              className="h-full w-full rounded-full bg-transparent pl-10 placeholder:text-slate-500 dark:placeholder:text-slate-400"
-              placeholder="Search integrations"
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-            />
-            {search.length > 0 && (
-              <div
-                className="absolute right-2 top-1/2 flex h-7 w-7 -translate-y-1/2 cursor-pointer items-center justify-center"
-                onClick={() => {
-                  setSearch('');
-                }}
-                onKeyUp={(e) => {
-                  if (e.key === 'Enter') {
-                    setSearch('');
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-                aria-label="Clear search"
-              >
-                <CloseIcon />
-              </div>
-            )}
-          </div>
-        </div>
-        {search ? (
-          <SearchResults
-            search={search}
-            loading={loading}
-            searchResults={searchResults}
-          />
-        ) : null}
-        {!search && (
-          <div className="flex flex-col gap-12 md:flex-row">
-            <div className="hidden flex-shrink-0 md:block md:w-[250px]">
-              <h3 className="mb-6 text-2xl font-bold">Categories</h3>
-              {navSections.map(({ links, rel }) => (
-                <ul
-                  key={links[0].href}
-                  className="-ml-2 border-b border-b-zinc-300 py-6 first-of-type:pt-0 dark:border-b-slate-700"
-                >
-                  {links.map(({ name, href }) => (
-                    <li key={name}>
-                      <Link
-                        href={href}
-                        rel={rel}
-                        className={cn(
-                          'flex items-center px-2 py-[5px] text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500',
-                          pathname === href && 'text-blue-500',
-                        )}
-                      >
-                        {name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              ))}
-              <div className="mt-6 flex flex-col gap-4">
-                <a
-                  href="/docs/addons/install-addons"
-                  className="flex items-center gap-2 text-sm transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
-                >
-                  <BookIcon /> How to install addons
-                </a>
-                <a
-                  href="/docs/addons/writing-addons"
-                  className="flex items-center gap-2 text-sm transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
-                >
-                  <EditIcon /> Create an addon
-                </a>
+        {/* Search and categories only cover addons and recipes */}
+        {isToolsPage ? (
+          children
+        ) : (
+          <>
+            <div className="mb-12 flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
+              <div className="relative flex h-10 w-full flex-shrink-0 items-center rounded-full border border-zinc-300 md:w-[250px] dark:border-slate-700">
+                <SearchIcon className="absolute left-4 dark:text-slate-500" />
+                <input
+                  className="h-full w-full rounded-full bg-transparent pl-10 placeholder:text-slate-500 dark:placeholder:text-slate-400"
+                  placeholder="Search integrations"
+                  value={search}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                />
+                {search.length > 0 && (
+                  <div
+                    className="absolute right-2 top-1/2 flex h-7 w-7 -translate-y-1/2 cursor-pointer items-center justify-center"
+                    onClick={() => {
+                      setSearch('');
+                    }}
+                    onKeyUp={(e) => {
+                      if (e.key === 'Enter') {
+                        setSearch('');
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Clear search"
+                  >
+                    <CloseIcon />
+                  </div>
+                )}
               </div>
             </div>
-            <div className="flex-1">{children}</div>
-          </div>
+            {search ? (
+              <SearchResults
+                search={search}
+                loading={loading}
+                searchResults={searchResults}
+              />
+            ) : null}
+            {!search && (
+              <div className="flex flex-col gap-12 md:flex-row">
+                <div className="hidden flex-shrink-0 md:block md:w-[250px]">
+                  <h3 className="mb-6 text-2xl font-bold">Categories</h3>
+                  <ul className="-ml-2 border-b border-b-zinc-300 pb-6 dark:border-b-slate-700">
+                    {categories.map(({ name, href }) => (
+                      <li key={name}>
+                        <Link
+                          href={href}
+                          rel="nofollow"
+                          className={cn(
+                            'flex items-center px-2 py-[5px] text-sm text-zinc-600 transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500',
+                            pathname === href && 'text-blue-500',
+                          )}
+                        >
+                          {name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-6 flex flex-col gap-4">
+                    <a
+                      href="/docs/addons/install-addons"
+                      className="flex items-center gap-2 text-sm transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
+                    >
+                      <BookIcon /> How to install addons
+                    </a>
+                    <a
+                      href="/docs/addons/writing-addons"
+                      className="flex items-center gap-2 text-sm transition-colors hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-500"
+                    >
+                      <EditIcon /> Create an addon
+                    </a>
+                  </div>
+                </div>
+                <div className="flex-1">{children}</div>
+              </div>
+            )}
+          </>
         )}
       </div>
     </>
