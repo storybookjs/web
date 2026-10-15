@@ -5,8 +5,7 @@ import { Preview } from '../../components/preview';
 export const revalidate = 86400;
 
 export default async function Page() {
-  const { popularAddons = [], popularRecipes = [] } =
-    (await fetchHomeData()) || {};
+  const { popularAddons = [] } = (await fetchHomeData()) || {};
 
   return (
     <>
@@ -18,17 +17,6 @@ export default async function Page() {
             orientation="vertical"
             element={addon}
             type="addon"
-          />
-        ))}
-      </div>
-      <h3 className="mb-8 mt-12 text-2xl font-bold">Popular recipes</h3>
-      <div className="flex flex-col gap-6">
-        {popularRecipes.map((recipe) => (
-          <Preview
-            key={recipe.name}
-            orientation="horizontal"
-            element={recipe}
-            type="recipe"
           />
         ))}
       </div>

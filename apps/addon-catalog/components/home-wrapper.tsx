@@ -32,10 +32,12 @@ const categories = [
   { name: 'Organize', href: '/tag/organize' },
 ];
 
+const addonsHref = '/';
 const toolsHref = '/integrations';
 
 const tabs = [
-  { label: 'Addons', href: '/' },
+  { label: 'Addons', href: addonsHref },
+  { label: 'Recipes', href: '/recipes' },
   { label: 'Third-party tools', href: toolsHref },
 ];
 
@@ -47,7 +49,10 @@ export const HomeWrapper = ({ children }: HomeProps) => {
     recipes: Recipe[];
   }>({ addons: [], recipes: [] });
   const pathname = usePathname();
-  const isToolsPage = pathname === toolsHref;
+  // Home and tag pages belong to the Addons tab
+  const activeHref =
+    tabs.find(({ href }) => href === pathname)?.href ?? addonsHref;
+  const isAddonsTab = activeHref === addonsHref;
 
   useEffect(() => {
     setLoading(true);
@@ -68,11 +73,7 @@ export const HomeWrapper = ({ children }: HomeProps) => {
 
   return (
     <>
-      <SubHeader
-        label="Integrations"
-        tabs={tabs}
-        activeHref={isToolsPage ? toolsHref : '/'}
-      />
+      <SubHeader label="Integrations" tabs={tabs} activeHref={activeHref} />
       <div className="mb-8 flex items-start justify-between">
         <div>
           <h1 className="mb-4 text-4xl font-bold">Integrations</h1>
@@ -82,7 +83,7 @@ export const HomeWrapper = ({ children }: HomeProps) => {
           </p>
         </div>
         {/* Third-party tools are hand-picked, so there is nothing to submit */}
-        {!isToolsPage && (
+        {activeHref !== toolsHref && (
           <a
             href="/docs/addons/integration-catalog"
             className="hidden h-10 flex-shrink-0 items-center gap-2 rounded-full bg-blue-500 px-5 text-sm font-bold text-white md:flex"
@@ -93,8 +94,8 @@ export const HomeWrapper = ({ children }: HomeProps) => {
         )}
       </div>
       <div className="mb-24">
-        {/* Search and categories only cover addons and recipes */}
-        {isToolsPage ? (
+        {/* Search and categories are for browsing addons */}
+        {!isAddonsTab ? (
           children
         ) : (
           <>
