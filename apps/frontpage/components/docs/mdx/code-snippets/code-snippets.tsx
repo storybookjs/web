@@ -36,6 +36,26 @@ const getInitialTab = (tabs: Tab[], activeSnippetTabs: string[]) => {
   return initialTab;
 };
 
+/**
+ * Exact-title precedence for the renamed CSF snippet tabs: the current syntax (`CSF`)
+ * displays before the legacy one (`CSF (Legacy)`). Titles change at the source in
+ * storybookjs/storybook — this only orders the displayed tabs, matching exact titles
+ * so pre-rename versions and other tabs (e.g. `Svelte CSF`) keep their content order.
+ */
+const CSF_TAB_TITLE_PRECEDENCE: readonly string[] = ['CSF', 'CSF (Legacy)'];
+
+const byCsfTabTitlePrecedence = (
+  a: { id: string | undefined },
+  b: { id: string | undefined },
+) => {
+  const precedence = (id: string | undefined) => {
+    const index = id === undefined ? -1 : CSF_TAB_TITLE_PRECEDENCE.indexOf(id);
+    return index === -1 ? CSF_TAB_TITLE_PRECEDENCE.length : index;
+  };
+
+  return precedence(a.id) - precedence(b.id);
+};
+
 function Error() {
   return (
     <div>
@@ -166,7 +186,8 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
         id: item.tabTitle,
         title: tabTitle,
       };
-    }) as Tab[] | undefined;
+    })
+    .sort(byCsfTabTitlePrecedence) as Tab[] | undefined;
 
   useEffect(() => {
     if (

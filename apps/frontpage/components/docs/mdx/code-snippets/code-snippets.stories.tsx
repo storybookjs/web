@@ -1,5 +1,5 @@
 import { useArgs } from 'storybook/preview-api';
-import { fn } from 'storybook/test';
+import { expect, fn, waitFor, within } from 'storybook/test';
 import preview from '../../../../.storybook/preview';
 import { DocsContext } from '../../../../app/docs/provider';
 import { CodeSnippetsClient } from './code-snippets';
@@ -12,6 +12,29 @@ import { contentMultiTabVue3OnlySuffix } from './mocked-data/content-multiple-ta
 import { contentMultiTabVue2And3 } from './mocked-data/content-multiple-tabs-vue-2-and-3';
 import { contentMultiTabVue2And3Suffix } from './mocked-data/content-multiple-tabs-vue-2-and-3-suffix';
 import { contentCSFNext } from './mocked-data/content-csf-next';
+import { contentCSFRenamed } from './mocked-data/content-csf-renamed';
+
+/**
+ * Snippet tabs render as buttons; the selected one carries the `filled` active variant.
+ * These helpers pin the displayed tab order and the active selection in play functions.
+ */
+const SNIPPET_TAB_TITLES = [
+  'CSF',
+  'CSF (Legacy)',
+  'CSF 3',
+  'CSF Next 🧪',
+  'Story File',
+];
+
+const getSnippetTabButtons = (canvasElement: HTMLElement) =>
+  within(canvasElement)
+    .getAllByRole('button')
+    .filter((button) => SNIPPET_TAB_TITLES.includes(button.textContent ?? ''));
+
+const getActiveTabTitle = (canvasElement: HTMLElement) =>
+  getSnippetTabButtons(canvasElement).find((button) =>
+    button.classList.contains('ui-bg-slate-500'),
+  )?.textContent;
 
 const meta = preview.meta({
   title: 'Docs/MDX/CodeSnippets',
@@ -212,6 +235,41 @@ export const CSFNextInfo = meta.story({
     content: contentCSFNext,
     activeRenderer: 'react',
     activeSnippetTabs: ['CSF Next 🧪'],
+  },
+});
+
+export const CSFRenamedTabOrder = meta.story({
+  args: {
+    content: contentCSFRenamed,
+  },
+  play: async ({ canvasElement }) => {
+    // Renamed titles: CSF (current) displays first and is the default, CSF (Legacy)
+    // second — even though the content order is the reverse — and every other tab
+    // keeps its content order.
+    const tabTitles = getSnippetTabButtons(canvasElement).map(
+      (button) => button.textContent,
+    );
+    await expect(tabTitles).toEqual(['CSF', 'CSF (Legacy)', 'Story File']);
+    await waitFor(async () => {
+      await expect(getActiveTabTitle(canvasElement)).toBe('CSF');
+    });
+  },
+});
+
+export const CSFPreRenameTabOrder = meta.story({
+  args: {
+    content: contentCSFNext,
+  },
+  play: async ({ canvasElement }) => {
+    // Old-title fixtures (pre-11 docs versions) keep today's order untouched: the
+    // precedence sort matches exact titles only.
+    const tabTitles = getSnippetTabButtons(canvasElement).map(
+      (button) => button.textContent,
+    );
+    await expect(tabTitles).toEqual(['CSF 3', 'CSF Next 🧪']);
+    await waitFor(async () => {
+      await expect(getActiveTabTitle(canvasElement)).toBe('CSF 3');
+    });
   },
 });
 
