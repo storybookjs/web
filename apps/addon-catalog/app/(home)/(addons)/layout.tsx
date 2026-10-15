@@ -16,7 +16,14 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
-      <PageHeader title="Addons" description={description} showAddButton />
+      <PageHeader
+        title="Addons"
+        description={description}
+        action={{
+          label: 'Add your addon',
+          href: '/docs/addons/integration-catalog',
+        }}
+      />
       <Search kind="addons">
         <div className="flex flex-col gap-12 md:flex-row">
           <AddonsSidebar />

@@ -20,7 +20,15 @@ export default async function Page() {
 
   return (
     <>
-      <PageHeader title="Recipes" description={description} showAddButton />
+      {/* The Storybook team writes recipes, so users request them */}
+      <PageHeader
+        title="Recipes"
+        description={description}
+        action={{
+          label: 'Request a recipe',
+          href: '/docs/addons/integration-catalog#request-a-recipe',
+        }}
+      />
       <Search kind="recipes">
         <div className="flex flex-col gap-6">
           {recipes.map((recipe) => (
