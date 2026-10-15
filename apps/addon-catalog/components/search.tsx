@@ -74,11 +74,9 @@ export const Search = ({ kind, children }: SearchProps) => {
         <SearchResults
           search={search}
           loading={loading}
-          searchResults={
-            kind === 'addons'
-              ? { addons: searchResults.addons, recipes: [] }
-              : { addons: [], recipes: searchResults.recipes }
-          }
+          {...(kind === 'addons'
+            ? { kind, results: searchResults.addons }
+            : { kind, results: searchResults.recipes })}
         />
       ) : (
         children
