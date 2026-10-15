@@ -3,9 +3,10 @@ import { notFound } from 'next/navigation';
 // eslint-disable-next-line -- the variable is camelCase
 import { unstable_cache } from 'next/cache';
 import { fetchTagsData } from '@repo/utils/fetch-addons-query';
-import { Preview } from '../../../../components/preview';
-import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
-import type { Tag } from '../../../../types';
+import { Preview } from '../../../../../components/preview';
+import { fetchTagDetailsData } from '../../../../../lib/fetch-tag-details-data';
+import { openGraph } from '../../../../../lib/open-graph';
+import type { Tag } from '../../../../../types';
 
 // 60*60*24 = 24 hrs
 export const revalidate = 86400;
@@ -42,7 +43,7 @@ const getCachedCategoryTags = unstable_cache(
 export const generateMetadata: GenerateMetaData = async ({ params }) => {
   const tagName = (await params).name.join('/');
   const data = await getCachedTagFromName([tagName]);
-  const categoryTags = await getCachedCategoryTags() || [];
+  const categoryTags = (await getCachedCategoryTags()) || [];
 
   const isCategoryTag = categoryTags.includes(tagName);
 
@@ -59,6 +60,7 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
     robots: {
       index: isCategoryTag,
     },
+    openGraph: openGraph(`/tag/${tagName}`),
   };
 };
 
@@ -71,9 +73,7 @@ export default async function TagDetails({
 
   return (
     <>
-      <h3 className="mb-8 text-2xl font-bold">
-        {data.displayName} integrations
-      </h3>
+      <h3 className="mb-8 text-2xl font-bold">{data.displayName} addons</h3>
       <div className="flex flex-col gap-6">
         {data.topIntegrations?.addons?.map((addon) => (
           <Preview

@@ -1,6 +1,11 @@
 import { type ReactNode } from 'react';
-import { HomeWrapper } from '../../components/home-wrapper';
+import { CatalogTabs } from '../../components/catalog-tabs';
 
 export default function Layout({ children }: { children: ReactNode }) {
-  return <HomeWrapper>{children}</HomeWrapper>;
+  return (
+    <>
+      <CatalogTabs />
+      <div className="mb-24">{children}</div>
+    </>
+  );
 }

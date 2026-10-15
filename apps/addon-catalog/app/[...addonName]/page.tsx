@@ -6,6 +6,7 @@ import { cn } from '@repo/utils';
 import { unstable_cache } from 'next/cache';
 import { fetchAddonsData } from '@repo/utils/fetch-addons-query';
 import { fetchAddonDetailsData } from '../../lib/fetch-addon-details-data';
+import { openGraph } from '../../lib/open-graph';
 import { AddonHero } from '../../components/addon/addon-hero';
 import { AddonSidebar } from '../../components/addon/addon-sidebar';
 import { Highlight } from '../../components/highlight';
@@ -51,6 +52,7 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
           title: `${title} | Storybook integrations`,
         }
       : undefined),
+    ...(addon?.name ? { openGraph: openGraph(`/${addon.name}`) } : undefined),
   };
 };
 
