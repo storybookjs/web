@@ -35,14 +35,14 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
         )}
       >
         {!isRecipe && (
-          <div className="relative flex items-center justify-center flex-shrink-0 w-16 h-16">
+          <div className="relative flex h-16 w-16 flex-shrink-0 items-center justify-center">
             {element.icon ? (
               <div
                 style={{ backgroundImage: `url('${element.icon}')` }}
-                className="w-16 h-16 bg-center bg-no-repeat bg-contain"
+                className="h-16 w-16 bg-contain bg-center bg-no-repeat"
               />
             ) : (
-              <div className="flex items-center justify-center w-full h-full rounded-md bg-zinc-50 dark:bg-slate-800">
+              <div className="flex h-full w-full items-center justify-center rounded-md bg-zinc-50 dark:bg-slate-800">
                 <StorybookIcon className="h-10 w-10 text-[#FF4785]" />
               </div>
             )}
@@ -50,14 +50,14 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
         )}
         {'accentColor' in element && (
           <div
-            className="relative flex items-center justify-center flex-shrink-0 w-16 h-16 rounded-md"
+            className="relative flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-md"
             style={{ backgroundColor: element.accentColor ?? 'transparent' }}
           >
             {element.icon ? (
               <img
                 src={element.icon}
                 alt={element.name}
-                className="w-10 h-10"
+                className="h-10 w-10"
               />
             ) : null}
           </div>
@@ -79,7 +79,7 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between flex-shrink-0 gap-12">
+      <div className="flex flex-shrink-0 items-center justify-between gap-12">
         <div className="flex flex-col">
           <div className="font-bold">
             {'weeklyDownloads' in element &&
@@ -102,7 +102,7 @@ export const Preview = ({ element, orientation, type }: PreviewProps) => {
             {element.authors.slice(0, 3).map((author) => (
               <div
                 key={author.username}
-                className="relative w-8 h-8 -ml-2 overflow-hidden rounded-full"
+                className="relative -ml-2 h-8 w-8 overflow-hidden rounded-full"
               >
                 {author.gravatarUrl ? (
                   <Image

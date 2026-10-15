@@ -3,9 +3,9 @@ import { notFound } from 'next/navigation';
 // eslint-disable-next-line -- the variable is camelCase
 import { unstable_cache } from 'next/cache';
 import { fetchTagsData } from '@repo/utils/fetch-addons-query';
-import { Preview } from '../../../../components/preview';
-import { fetchTagDetailsData } from '../../../../lib/fetch-tag-details-data';
-import type { Tag } from '../../../../types';
+import { Preview } from '../../../../../components/preview';
+import { fetchTagDetailsData } from '../../../../../lib/fetch-tag-details-data';
+import type { Tag } from '../../../../../types';
 
 // 60*60*24 = 24 hrs
 export const revalidate = 86400;
@@ -42,7 +42,7 @@ const getCachedCategoryTags = unstable_cache(
 export const generateMetadata: GenerateMetaData = async ({ params }) => {
   const tagName = (await params).name.join('/');
   const data = await getCachedTagFromName([tagName]);
-  const categoryTags = await getCachedCategoryTags() || [];
+  const categoryTags = (await getCachedCategoryTags()) || [];
 
   const isCategoryTag = categoryTags.includes(tagName);
 
