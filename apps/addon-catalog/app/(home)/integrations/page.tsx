@@ -1,6 +1,7 @@
 import { type Metadata } from 'next';
 import { IntegrationCard } from '../../../components/integration-card';
 import { PageHeader } from '../../../components/page-header';
+import { openGraph } from '../../../lib/open-graph';
 import { integrations } from './data';
 
 const description =
@@ -9,11 +10,7 @@ const description =
 export const metadata: Metadata = {
   title: 'Third-party tools | Storybook integrations',
   description,
-  // Replaces the root openGraph, whose url redirects to /addons
-  openGraph: {
-    url: 'https://storybook.js.org/addons/integrations',
-    siteName: 'Storybook',
-  },
+  openGraph: openGraph('/integrations'),
 };
 
 export default function Page() {

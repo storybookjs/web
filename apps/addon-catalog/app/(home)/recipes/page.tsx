@@ -3,6 +3,7 @@ import { PageHeader } from '../../../components/page-header';
 import { Preview } from '../../../components/preview';
 import { Search } from '../../../components/search';
 import { fetchRecipesData } from '../../../lib/fetch-recipes-data';
+import { openGraph } from '../../../lib/open-graph';
 
 // 60*60*24 = 24 hrs
 export const revalidate = 86400;
@@ -13,6 +14,7 @@ const description =
 export const metadata: Metadata = {
   title: 'Recipes | Storybook integrations',
   description,
+  openGraph: openGraph('/recipes'),
 };
 
 export default async function Page() {

@@ -5,6 +5,7 @@ import { unstable_cache } from 'next/cache';
 import { fetchTagsData } from '@repo/utils/fetch-addons-query';
 import { Preview } from '../../../../../components/preview';
 import { fetchTagDetailsData } from '../../../../../lib/fetch-tag-details-data';
+import { openGraph } from '../../../../../lib/open-graph';
 import type { Tag } from '../../../../../types';
 
 // 60*60*24 = 24 hrs
@@ -59,6 +60,7 @@ export const generateMetadata: GenerateMetaData = async ({ params }) => {
     robots: {
       index: isCategoryTag,
     },
+    openGraph: openGraph(`/tag/${tagName}`),
   };
 };
 
