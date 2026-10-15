@@ -7,8 +7,8 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <PageHeader
-        title="Integrations"
-        description="Integrate your tools with Storybook to connect workflows and unlock advanced features."
+        title="Addons"
+        description="Extend Storybook with new features and connect it to the tools you use."
         showAddButton
       />
       <Search kind="addons">

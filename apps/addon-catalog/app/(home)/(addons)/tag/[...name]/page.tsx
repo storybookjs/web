@@ -71,9 +71,7 @@ export default async function TagDetails({
 
   return (
     <>
-      <h3 className="mb-8 text-2xl font-bold">
-        {data.displayName} integrations
-      </h3>
+      <h3 className="mb-8 text-2xl font-bold">{data.displayName} addons</h3>
       <div className="flex flex-col gap-6">
         {data.topIntegrations?.addons?.map((addon) => (
           <Preview
