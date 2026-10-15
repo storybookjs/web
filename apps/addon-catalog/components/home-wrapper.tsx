@@ -33,11 +33,12 @@ const categories = [
 ];
 
 const addonsHref = '/';
+const recipesHref = '/recipes';
 const toolsHref = '/integrations';
 
 const tabs = [
   { label: 'Addons', href: addonsHref },
-  { label: 'Recipes', href: '/recipes' },
+  { label: 'Recipes', href: recipesHref },
   { label: 'Third-party tools', href: toolsHref },
 ];
 
@@ -53,6 +54,12 @@ export const HomeWrapper = ({ children }: HomeProps) => {
   const activeHref =
     tabs.find(({ href }) => href === pathname)?.href ?? addonsHref;
   const isAddonsTab = activeHref === addonsHref;
+  const isRecipesTab = activeHref === recipesHref;
+
+  // Each tab searches its own kind of integration, so start fresh on switch
+  useEffect(() => {
+    setSearch('');
+  }, [activeHref]);
 
   useEffect(() => {
     setLoading(true);
@@ -94,8 +101,8 @@ export const HomeWrapper = ({ children }: HomeProps) => {
         )}
       </div>
       <div className="mb-24">
-        {/* Search and categories are for browsing addons */}
-        {!isAddonsTab ? (
+        {/* Third-party tools are not in the backend, so search can't find them */}
+        {!isAddonsTab && !isRecipesTab ? (
           children
         ) : (
           <>
@@ -104,7 +111,7 @@ export const HomeWrapper = ({ children }: HomeProps) => {
                 <SearchIcon className="absolute left-4 dark:text-slate-500" />
                 <input
                   className="h-full w-full rounded-full bg-transparent pl-10 placeholder:text-slate-500 dark:placeholder:text-slate-400"
-                  placeholder="Search integrations"
+                  placeholder={isAddonsTab ? 'Search addons' : 'Search recipes'}
                   value={search}
                   onChange={(e) => {
                     setSearch(e.target.value);
@@ -134,10 +141,15 @@ export const HomeWrapper = ({ children }: HomeProps) => {
               <SearchResults
                 search={search}
                 loading={loading}
-                searchResults={searchResults}
+                searchResults={
+                  isAddonsTab
+                    ? { addons: searchResults.addons, recipes: [] }
+                    : { addons: [], recipes: searchResults.recipes }
+                }
               />
             ) : null}
-            {!search && (
+            {!search && isRecipesTab ? children : null}
+            {!search && isAddonsTab ? (
               <div className="flex flex-col gap-12 md:flex-row">
                 <div className="hidden flex-shrink-0 md:block md:w-[250px]">
                   <h3 className="mb-6 text-2xl font-bold">Categories</h3>
@@ -174,7 +186,7 @@ export const HomeWrapper = ({ children }: HomeProps) => {
                 </div>
                 <div className="flex-1">{children}</div>
               </div>
-            )}
+            ) : null}
           </>
         )}
       </div>
