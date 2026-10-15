@@ -9,6 +9,11 @@ const description =
 export const metadata: Metadata = {
   title: 'Third-party tools | Storybook integrations',
   description,
+  // Replaces the root openGraph, whose url redirects to /addons
+  openGraph: {
+    url: 'https://storybook.js.org/addons/integrations',
+    siteName: 'Storybook',
+  },
 };
 
 export default function Page() {
