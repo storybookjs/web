@@ -13,7 +13,7 @@ export async function fetchHomeData() {
     const data = await fetchAddonsQuery<AddonsHomeData>(
       gql`
         query AddonsHome {
-          popular: topIntegrations(sort: featuredMonthly, limit: 9) {
+          popular: topIntegrations(sort: featuredMonthly, limit: 12) {
             addons {
               ${addonFragment}
               tags {
