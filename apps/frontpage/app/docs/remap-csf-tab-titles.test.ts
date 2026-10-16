@@ -32,6 +32,61 @@ describe('remapCsfTabTitle', () => {
     expect(remapCsfTabTitle('CSF (Legacy)')).toBe('CSF (Legacy)');
   });
 
+  describe('reverse direction (page offers the pre-rename titles)', () => {
+    it('remaps the plain legacy title back to CSF 3', () => {
+      expect(
+        remapCsfTabTitle('CSF (Legacy)', ['CSF 3', 'CSF Next 🧪']),
+      ).toBe('CSF 3');
+    });
+
+    it('remaps the plain current title back to CSF Next 🧪, not CSF 3', () => {
+      expect(remapCsfTabTitle('CSF', ['CSF 3', 'CSF Next 🧪'])).toBe(
+        'CSF Next 🧪',
+      );
+    });
+
+    it('remaps compound titles back to their pre-rename forms', () => {
+      expect(
+        remapCsfTabTitle('Head (CSF)', ['Head (CSF 3)', 'Head (CSF Next 🧪)']),
+      ).toBe('Head (CSF Next 🧪)');
+      expect(
+        remapCsfTabTitle('Head (CSF Legacy)', [
+          'Head (CSF 3)',
+          'Head (CSF Next 🧪)',
+        ]),
+      ).toBe('Head (CSF 3)');
+    });
+
+    it('never corrupts values through substring inversion', () => {
+      // 'CSF 3' contains 'CSF' and '(CSF Legacy)' contains 'CSF', so a naive
+      // replaceAll in this direction would yield e.g. 'CSF Next 🧪 3'.
+      expect(remapCsfTabTitle('CSF 3', ['CSF 3', 'CSF Next 🧪'])).toBe('CSF 3');
+      expect(
+        remapCsfTabTitle('CSF Next 🧪', ['CSF 3', 'CSF Next 🧪']),
+      ).toBe('CSF Next 🧪');
+      expect(remapCsfTabTitle('Svelte CSF', ['CSF 3', 'CSF Next 🧪'])).toBe(
+        'Svelte CSF',
+      );
+    });
+
+    it('passes through when the page offers no pre-rename target', () => {
+      expect(remapCsfTabTitle('CSF (Legacy)', ['CSF Next 🧪'])).toBe(
+        'CSF (Legacy)',
+      );
+      expect(remapCsfTabTitle('CSF', ['CSF 3'])).toBe('CSF');
+      expect(remapCsfTabTitle('Head (CSF)', ['Head (CSF 3)'])).toBe(
+        'Head (CSF)',
+      );
+    });
+
+    it('leaves values untouched on pages offering neither title generation', () => {
+      expect(remapCsfTabTitle('CSF (Legacy)', ['vite-env'])).toBe(
+        'CSF (Legacy)',
+      );
+      expect(remapCsfTabTitle('CSF', ['Svelte CSF'])).toBe('CSF');
+    });
+  });
+
   it('only remaps when the page offers the target tab', () => {
     expect(remapCsfTabTitle('CSF 3', ['CSF'])).toBe('CSF 3');
     expect(remapCsfTabTitle('CSF 3', ['CSF (Legacy)'])).toBe('CSF (Legacy)');
@@ -66,6 +121,26 @@ describe('migrateStoredSnippetTabs', () => {
     expect(tabs).toEqual(['CSF 3', 'CSF Next 🧪']);
     expect(changed).toBe(false);
   });
+
+  it('remaps stored new-title values back on a pre-rename page, preserving MRU order', () => {
+    const { tabs, changed } = migrateStoredSnippetTabs(
+      ['CSF', 'vite-env', 'CSF (Legacy)'],
+      ['CSF 3', 'CSF Next 🧪'],
+    );
+    expect(tabs).toEqual(['CSF Next 🧪', 'vite-env', 'CSF 3']);
+    expect(changed).toBe(true);
+  });
+
+  it('changes nothing on a pre-rename page whose offered tabs miss the targets', () => {
+    expect(migrateStoredSnippetTabs(['CSF (Legacy)'], ['CSF Next 🧪'])).toEqual({
+      tabs: ['CSF (Legacy)'],
+      changed: false,
+    });
+    expect(migrateStoredSnippetTabs(['CSF'], ['CSF 3'])).toEqual({
+      tabs: ['CSF'],
+      changed: false,
+    });
+  });
 });
 
 describe('migrateStoredSnippetTabsCookie', () => {
@@ -92,6 +167,39 @@ describe('migrateStoredSnippetTabsCookie', () => {
 
     expect(result).toEqual({ tabs: ['CSF 3', 'vite-env'], changed: false });
     expect(getCookie(cookieSnippetTabsId)).toBe('CSF 3,vite-env');
+  });
+
+  it('rewrites the stored cookie back to the pre-rename titles the page offers', () => {
+    setCookie(cookieSnippetTabsId, 'CSF (Legacy),CSF,vite-env');
+
+    const result = migrateStoredSnippetTabsCookie(['CSF 3', 'CSF Next 🧪']);
+
+    expect(result).toEqual({
+      tabs: ['CSF 3', 'CSF Next 🧪', 'vite-env'],
+      changed: true,
+    });
+    expect(getCookie(cookieSnippetTabsId)).toBe('CSF 3,CSF Next 🧪,vite-env');
+  });
+
+  it('leaves the stored cookie untouched when the page offers no pre-rename target', () => {
+    setCookie(cookieSnippetTabsId, 'CSF (Legacy),vite-env');
+
+    const result = migrateStoredSnippetTabsCookie(['CSF Next 🧪']);
+
+    expect(result).toEqual({
+      tabs: ['CSF (Legacy)', 'vite-env'],
+      changed: false,
+    });
+    expect(getCookie(cookieSnippetTabsId)).toBe('CSF (Legacy),vite-env');
+  });
+
+  it('leaves the stored cookie untouched when only unoffered reverse targets apply', () => {
+    setCookie(cookieSnippetTabsId, 'CSF,vite-env');
+
+    const result = migrateStoredSnippetTabsCookie(['CSF 3']);
+
+    expect(result).toEqual({ tabs: ['CSF', 'vite-env'], changed: false });
+    expect(getCookie(cookieSnippetTabsId)).toBe('CSF,vite-env');
   });
 
   it('does nothing when no cookie is stored', () => {
