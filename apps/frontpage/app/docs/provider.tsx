@@ -1,7 +1,8 @@
 'use client';
 
-import { languages, packageManagers, renderers } from '@repo/utils';
+import { getVersion, languages, packageManagers, renderers } from '@repo/utils';
 import { getCookie, setCookie } from 'cookies-next';
+import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
 import {
@@ -11,6 +12,10 @@ import {
   cookieSnippetTabsId,
   cookieDismissalsId,
 } from '../../constants';
+import {
+  docsVersionOffersRenamedCsfTabs,
+  remapCsfTabTitle,
+} from './remap-csf-tab-titles';
 
 export interface DocsContextProps {
   activeRenderer: null | string;
@@ -42,6 +47,8 @@ export function DocsProvider({ children }: { children: ReactNode }) {
   const [activeSnippetTabs, setActiveSnippetTabs] = useState<string[]>([]);
   const [activeDismissals, setActiveDismissals] = useState<string[]>([]);
 
+  const pathname = usePathname();
+
   useEffect(() => {
     const cookieRenderer = getCookie(cookieRenderId);
     const cookieLanguage = getCookie(cookieLanguageId);
@@ -68,7 +75,21 @@ export function DocsProvider({ children }: { children: ReactNode }) {
     }
 
     if (cookieSnippetTabs) {
-      setActiveSnippetTabs(cookieSnippetTabs.split(',').map(decodeURIComponent));
+      const storedTabs = cookieSnippetTabs.split(',').map(decodeURIComponent);
+      // The snippet-tabs cookie is site-wide, but tab titles are per docs version: the
+      // CSF tab rename only exists on versions whose content ships the new titles
+      // (version 11 and later; older pinned versions keep the pre-rename titles).
+      // Remap the in-memory values for such pages; the durable cookie write-back
+      // happens where the page's offered tabs are known (the snippet-tab resolution),
+      // so the cookie is only ever rewritten when the page offers the target tab.
+      const pageOffersRenamedTabs = docsVersionOffersRenamedCsfTabs(
+        getVersion(pathname ? pathname.replace('/docs/', '').split('/') : []),
+      );
+      const remappedTabs = storedTabs.map((tab) =>
+        pageOffersRenamedTabs ? remapCsfTabTitle(tab) : tab,
+      );
+
+      setActiveSnippetTabs(remappedTabs);
     } else {
       setCookie(cookieSnippetTabsId, '');
     }
@@ -76,7 +97,9 @@ export function DocsProvider({ children }: { children: ReactNode }) {
     if (cookieDismissals) {
       setActiveDismissals(cookieDismissals.split(',').map(decodeURIComponent));
     }
-  }, []);
+    // Re-runs on client-side navigation between docs pages, so the gate above tracks
+    // the page currently being viewed.
+  }, [pathname]);
 
   const setRenderer = (id: string) => {
     setActiveRenderer(id);

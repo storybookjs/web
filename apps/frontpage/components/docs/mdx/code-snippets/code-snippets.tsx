@@ -7,6 +7,10 @@ import { getVersion, type CodeSnippetsProps, latestVersion } from '@repo/utils';
 import { Button, CodeSnippetsWrapper, mdxComponents } from '@repo/ui';
 import { CloseIcon, InfoIcon } from '@storybook/icons';
 import { useDocs } from '../../../../app/docs/provider';
+import {
+  migrateStoredSnippetTabsCookie,
+  remapCsfTabTitle,
+} from '../../../../app/docs/remap-csf-tab-titles';
 import { buildPathWithVersion } from '../../../../lib/build-path-with-version';
 import { getFilters } from './utils/get-filters';
 import {
@@ -34,6 +38,26 @@ const getInitialTab = (tabs: Tab[], activeSnippetTabs: string[]) => {
     initialTab ??= tabs.find((tab) => tab.id.includes(localTab) || localTab.includes(tab.id));
   });
   return initialTab;
+};
+
+/**
+ * Exact-title precedence for the renamed CSF snippet tabs: the current syntax (`CSF`)
+ * displays before the legacy one (`CSF (Legacy)`). Titles change at the source in
+ * storybookjs/storybook — this only orders the displayed tabs, matching exact titles
+ * so pre-rename versions and other tabs (e.g. `Svelte CSF`) keep their content order.
+ */
+const CSF_TAB_TITLE_PRECEDENCE: readonly string[] = ['CSF', 'CSF (Legacy)'];
+
+const byCsfTabTitlePrecedence = (
+  a: { id: string | undefined },
+  b: { id: string | undefined },
+) => {
+  const precedence = (id: string | undefined) => {
+    const index = id === undefined ? -1 : CSF_TAB_TITLE_PRECEDENCE.indexOf(id);
+    return index === -1 ? CSF_TAB_TITLE_PRECEDENCE.length : index;
+  };
+
+  return precedence(a.id) - precedence(b.id);
 };
 
 function Error() {
@@ -166,7 +190,8 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
         id: item.tabTitle,
         title: tabTitle,
       };
-    }) as Tab[] | undefined;
+    })
+    .sort(byCsfTabTitlePrecedence) as Tab[] | undefined;
 
   useEffect(() => {
     if (
@@ -177,7 +202,22 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
       tabs &&
       tabs.length > 0
     ) {
-      const initialTab = activeSnippetTabs.length > 0 ? getInitialTab(tabs, activeSnippetTabs) : undefined;
+      // Readers with a saved tab preference may carry pre-rename titles (the titles
+      // changed at the source in storybookjs/storybook). Remap them conservatively:
+      // only when the current page offers the target tab, so pages on older docs
+      // versions keep matching their stored titles untouched.
+      const tabIds = tabs.map((tab) => tab.id);
+      // Migrate the stored cookie only when this page actually offers the target tab
+      // of a remapped value — pages on older docs versions (and pages that offer no
+      // renamed tab) keep their stored titles untouched. MRU order is preserved.
+      migrateStoredSnippetTabsCookie(tabIds);
+      const initialTab =
+        activeSnippetTabs.length > 0
+          ? getInitialTab(
+              tabs,
+              activeSnippetTabs.map((storedTab) => remapCsfTabTitle(storedTab, tabIds)),
+            )
+          : undefined;
       if (initialTab) {
         setActiveTab(initialTab.id);
       } else if (!activeTab) {
