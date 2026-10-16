@@ -20,19 +20,106 @@ export const CSF_TAB_TITLE_RENAMES: readonly (readonly [string, string])[] = [
 ];
 
 /**
- * Remap a stored snippet-tab title through the ordered {@link CSF_TAB_TITLE_RENAMES} list.
- *
- * Replacements are exact-string replaces inside the full stored title: values that
- * match no entry (e.g. `Svelte CSF`) pass through untouched, and already-renamed
- * titles are left as they are.
- *
- * When `availableTabTitles` is given (the tabs the current page actually offers), a
- * rename is only adopted when the target tab exists there — docs versions pinned to
- * pre-rename refs keep the old titles, and the cookie is site-wide.
+ * A tab title that only exists on pages carrying the renamed (v11+) CSF tab
+ * titles: the plain forms (`CSF`, `CSF (Legacy)`) or a parenthesized-qualifier
+ * compound (`Head (CSF)`, `Head (CSF Legacy)`). Matching is whole-title, so
+ * unrelated titles (`Svelte CSF`) never count.
  */
-export function remapCsfTabTitle(
-  tabTitle: string,
+const RENAMED_CSF_TAB_TITLE_PATTERN =
+  /(?:^CSF$|^CSF \(Legacy\)$)| \(CSF(?: Legacy)?\)$/;
+
+/**
+ * A tab title that only exists on pages carrying the pre-rename CSF tab titles:
+ * the plain forms (`CSF 3`, `CSF Next 🧪`) or a parenthesized-qualifier compound
+ * (`Head (CSF 3)`, `Head (CSF Next 🧪)`).
+ */
+const PRE_RENAME_CSF_TAB_TITLE_PATTERN =
+  /(?:^CSF 3$|^CSF Next 🧪$)| \(CSF(?: 3| Next 🧪)\)$/;
+
+/**
+ * Which way stored snippet-tab preferences should be remapped, derived from the
+ * tabs the current page actually offers: pages carrying the renamed titles remap
+ * old→new, pages carrying the pre-rename titles remap new→old, and pages
+ * carrying neither keep every stored value untouched. Without the offered tabs
+ * (`undefined`) the pre-existing forward behavior applies.
+ */
+function deriveCsfTabMigrationDirection(
   availableTabTitles?: readonly string[],
+): 'forward' | 'reverse' | 'none' {
+  if (availableTabTitles === undefined) return 'forward';
+
+  if (
+    availableTabTitles.some((title) => RENAMED_CSF_TAB_TITLE_PATTERN.test(title))
+  ) {
+    return 'forward';
+  }
+
+  if (
+    availableTabTitles.some((title) =>
+      PRE_RENAME_CSF_TAB_TITLE_PATTERN.test(title),
+    )
+  ) {
+    return 'reverse';
+  }
+
+  return 'none';
+}
+
+/**
+ * Whole-title inverses of the {@link CSF_TAB_TITLE_RENAMES} entries, applied in
+ * reverse order. Plain titles match by exact equality and compound titles by
+ * the parenthesized-qualifier suffix the forward rename produced — substring
+ * inversion is deliberately not used, because it is unsafe in this direction
+ * (`CSF 3` contains `CSF`, `(CSF Legacy)` contains `CSF`).
+ */
+const CSF_TAB_TITLE_RENAMES_REVERSE: readonly {
+  matches: (tabTitle: string) => boolean;
+  target: (tabTitle: string) => string;
+}[] = [
+  // Inverse of ['CSF 3', 'CSF (Legacy)'] — plain titles only.
+  {
+    matches: (tabTitle) => tabTitle === 'CSF (Legacy)',
+    target: () => 'CSF 3',
+  },
+  // Inverse of ['CSF Next 🧪', 'CSF'] — plain titles, plus the compound forms
+  // the parenthesized qualifier produced (`Head (CSF Next 🧪)` → `Head (CSF)`).
+  {
+    matches: (tabTitle) => tabTitle === 'CSF' || tabTitle.endsWith(' (CSF)'),
+    target: (tabTitle) =>
+      tabTitle === 'CSF'
+        ? 'CSF Next 🧪'
+        : `${tabTitle.slice(0, -' (CSF)'.length)} (CSF Next 🧪)`,
+  },
+  // Inverse of ['(CSF 3)', '(CSF Legacy)'] — the parenthesized qualifiers.
+  {
+    matches: (tabTitle) => tabTitle.endsWith(' (CSF Legacy)'),
+    target: (tabTitle) =>
+      `${tabTitle.slice(0, -' (CSF Legacy)'.length)} (CSF 3)`,
+  },
+];
+
+function remapCsfTabTitleReverse(
+  tabTitle: string,
+  availableTabTitles: readonly string[] | undefined,
+): string {
+  for (const { matches, target } of CSF_TAB_TITLE_RENAMES_REVERSE) {
+    if (!matches(tabTitle)) continue;
+
+    const remapped = target(tabTitle);
+    const isTargetOffered =
+      availableTabTitles === undefined || availableTabTitles.includes(remapped);
+
+    if (!isTargetOffered) continue;
+
+    return remapped;
+  }
+
+  return tabTitle;
+}
+
+function remapCsfTabTitleForward(
+  tabTitle: string,
+  availableTabTitles: readonly string[] | undefined,
 ): string {
   let result = tabTitle;
 
@@ -49,6 +136,33 @@ export function remapCsfTabTitle(
   }
 
   return result;
+}
+
+/**
+ * Remap a stored snippet-tab title through the CSF rename migration, in the
+ * direction the current page dictates: pages offering the renamed titles apply
+ * the forward {@link CSF_TAB_TITLE_RENAMES} (old→new), pages offering the
+ * pre-rename titles apply its inverse (new→old) — so a reader keeps their tab
+ * whichever generation of titles the page carries, and the stored cookie is
+ * rewritten to the title the page actually offers.
+ *
+ * Matching is whole-title, and every remap is conservative: values that match
+ * no entry (e.g. `Svelte CSF`) pass through untouched, and a remap is only
+ * adopted when the target tab exists on the page — docs versions pinned to
+ * other refs keep the titles they have, and the cookie is site-wide.
+ */
+export function remapCsfTabTitle(
+  tabTitle: string,
+  availableTabTitles?: readonly string[],
+): string {
+  switch (deriveCsfTabMigrationDirection(availableTabTitles)) {
+    case 'reverse':
+      return remapCsfTabTitleReverse(tabTitle, availableTabTitles);
+    case 'none':
+      return tabTitle;
+    default:
+      return remapCsfTabTitleForward(tabTitle, availableTabTitles);
+  }
 }
 
 /**
