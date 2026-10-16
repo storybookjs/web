@@ -7,7 +7,10 @@ import { getVersion, type CodeSnippetsProps, latestVersion } from '@repo/utils';
 import { Button, CodeSnippetsWrapper, mdxComponents } from '@repo/ui';
 import { CloseIcon, InfoIcon } from '@storybook/icons';
 import { useDocs } from '../../../../app/docs/provider';
-import { remapCsfTabTitle } from '../../../../app/docs/remap-csf-tab-titles';
+import {
+  migrateStoredSnippetTabsCookie,
+  remapCsfTabTitle,
+} from '../../../../app/docs/remap-csf-tab-titles';
 import { buildPathWithVersion } from '../../../../lib/build-path-with-version';
 import { getFilters } from './utils/get-filters';
 import {
@@ -204,6 +207,10 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
       // only when the current page offers the target tab, so pages on older docs
       // versions keep matching their stored titles untouched.
       const tabIds = tabs.map((tab) => tab.id);
+      // Migrate the stored cookie only when this page actually offers the target tab
+      // of a remapped value — pages on older docs versions (and pages that offer no
+      // renamed tab) keep their stored titles untouched. MRU order is preserved.
+      migrateStoredSnippetTabsCookie(tabIds);
       const initialTab =
         activeSnippetTabs.length > 0
           ? getInitialTab(

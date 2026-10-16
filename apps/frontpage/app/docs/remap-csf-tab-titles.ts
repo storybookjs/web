@@ -1,4 +1,6 @@
+import { getCookie, setCookie } from 'cookies-next';
 import type { DocsVersion } from '@repo/utils';
+import { cookieSnippetTabsId } from '../../constants';
 
 /**
  * Ordered old→new mappings for the CSF snippet tab rename.
@@ -65,4 +67,48 @@ const CSF_TAB_RENAME_MAJOR_VERSION = 11;
 export function docsVersionOffersRenamedCsfTabs(version: DocsVersion): boolean {
   const [major] = version.id.split('.').map(Number);
   return Number.isInteger(major) && major >= CSF_TAB_RENAME_MAJOR_VERSION;
+}
+
+/**
+ * Migrate stored snippet-tab preferences through the RENAMES list, conservatively: a
+ * value is only remapped when `availableTabTitles` — the tabs the current page
+ * actually offers — contains its target. MRU order is preserved and unmatched values
+ * pass through untouched. `changed` says whether any stored value was rewritten, i.e.
+ * whether the store should be written back.
+ */
+export function migrateStoredSnippetTabs(
+  storedTabs: readonly string[],
+  availableTabTitles?: readonly string[],
+): { tabs: string[]; changed: boolean } {
+  const tabs = storedTabs.map((tab) => remapCsfTabTitle(tab, availableTabTitles));
+  return {
+    tabs,
+    changed: tabs.some((tab, index) => tab !== storedTabs[index]),
+  };
+}
+
+/**
+ * Read-migrate-write for the site-wide `sb-docs-snippet-tabs` cookie: reads the
+ * stored values, migrates them conservatively against `availableTabTitles` (the tabs
+ * the current page offers), writes the cookie back only when a value actually
+ * changed, and returns the migrated MRU list. Callers that hold the tabs the current
+ * page offers must decide when to invoke this — a page that offers no renamed tab
+ * leaves the cookie untouched.
+ */
+export function migrateStoredSnippetTabsCookie(
+  availableTabTitles?: readonly string[],
+): { tabs: string[]; changed: boolean } | null {
+  const cookie = getCookie(cookieSnippetTabsId);
+  if (!cookie) return null;
+
+  const { tabs, changed } = migrateStoredSnippetTabs(
+    cookie.split(',').map(decodeURIComponent),
+    availableTabTitles,
+  );
+
+  if (changed) {
+    setCookie(cookieSnippetTabsId, tabs.join(','));
+  }
+
+  return { tabs, changed };
 }

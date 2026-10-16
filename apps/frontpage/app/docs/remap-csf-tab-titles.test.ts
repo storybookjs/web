@@ -1,6 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, beforeEach } from 'vitest';
+import { deleteCookie, getCookie, setCookie } from 'cookies-next';
+import { cookieSnippetTabsId } from '../../constants';
 import {
   docsVersionOffersRenamedCsfTabs,
+  migrateStoredSnippetTabs,
+  migrateStoredSnippetTabsCookie,
   remapCsfTabTitle,
 } from './remap-csf-tab-titles';
 
@@ -41,6 +45,60 @@ describe('remapCsfTabTitle', () => {
     expect(
       remapCsfTabTitle('Head (CSF 3)', ['Head (CSF Legacy)']),
     ).toBe('Head (CSF Legacy)');
+  });
+});
+
+describe('migrateStoredSnippetTabs', () => {
+  it('remaps only values whose target the page offers, preserving MRU order', () => {
+    const { tabs, changed } = migrateStoredSnippetTabs(
+      ['CSF 3', 'vite-env', 'CSF Next 🧪'],
+      ['CSF (Legacy)', 'CSF'],
+    );
+    expect(tabs).toEqual(['CSF (Legacy)', 'vite-env', 'CSF']);
+    expect(changed).toBe(true);
+  });
+
+  it('changes nothing when the page offers no target tab', () => {
+    const { tabs, changed } = migrateStoredSnippetTabs(
+      ['CSF 3', 'CSF Next 🧪'],
+      ['vite-env'],
+    );
+    expect(tabs).toEqual(['CSF 3', 'CSF Next 🧪']);
+    expect(changed).toBe(false);
+  });
+});
+
+describe('migrateStoredSnippetTabsCookie', () => {
+  beforeEach(() => {
+    deleteCookie(cookieSnippetTabsId);
+  });
+
+  it('rewrites the stored cookie when the page offers the target tab', () => {
+    setCookie(cookieSnippetTabsId, 'CSF 3,vite-env');
+
+    const result = migrateStoredSnippetTabsCookie(['CSF (Legacy)', 'CSF']);
+
+    expect(result).toEqual({
+      tabs: ['CSF (Legacy)', 'vite-env'],
+      changed: true,
+    });
+    expect(getCookie(cookieSnippetTabsId)).toBe('CSF (Legacy),vite-env');
+  });
+
+  it('leaves the stored cookie untouched when the page offers no target tab', () => {
+    setCookie(cookieSnippetTabsId, 'CSF 3,vite-env');
+
+    const result = migrateStoredSnippetTabsCookie(['vite-env']);
+
+    expect(result).toEqual({ tabs: ['CSF 3', 'vite-env'], changed: false });
+    expect(getCookie(cookieSnippetTabsId)).toBe('CSF 3,vite-env');
+  });
+
+  it('does nothing when no cookie is stored', () => {
+    const result = migrateStoredSnippetTabsCookie(['CSF']);
+
+    expect(result).toBeNull();
+    expect(getCookie(cookieSnippetTabsId)).toBeUndefined();
   });
 });
 

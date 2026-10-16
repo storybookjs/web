@@ -78,9 +78,10 @@ export function DocsProvider({ children }: { children: ReactNode }) {
       const storedTabs = cookieSnippetTabs.split(',').map(decodeURIComponent);
       // The snippet-tabs cookie is site-wide, but tab titles are per docs version: the
       // CSF tab rename only exists on versions whose content ships the new titles
-      // (version 11 and later; older pinned versions keep the pre-rename titles). Only
-      // remap stored values when the current page is on such a version, preserve the
-      // MRU order, and write back only when a value actually changed.
+      // (version 11 and later; older pinned versions keep the pre-rename titles).
+      // Remap the in-memory values for such pages; the durable cookie write-back
+      // happens where the page's offered tabs are known (the snippet-tab resolution),
+      // so the cookie is only ever rewritten when the page offers the target tab.
       const pageOffersRenamedTabs = docsVersionOffersRenamedCsfTabs(
         getVersion(pathname ? pathname.replace('/docs/', '').split('/') : []),
       );
@@ -89,10 +90,6 @@ export function DocsProvider({ children }: { children: ReactNode }) {
       );
 
       setActiveSnippetTabs(remappedTabs);
-
-      if (remappedTabs.some((tab, index) => tab !== storedTabs[index])) {
-        setCookie(cookieSnippetTabsId, remappedTabs.join(','));
-      }
     } else {
       setCookie(cookieSnippetTabsId, '');
     }
@@ -100,6 +97,8 @@ export function DocsProvider({ children }: { children: ReactNode }) {
     if (cookieDismissals) {
       setActiveDismissals(cookieDismissals.split(',').map(decodeURIComponent));
     }
+    // Re-runs on client-side navigation between docs pages, so the gate above tracks
+    // the page currently being viewed.
   }, [pathname]);
 
   const setRenderer = (id: string) => {
