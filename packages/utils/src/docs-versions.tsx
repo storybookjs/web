@@ -33,10 +33,10 @@ export const docsVersions: DocsVersion[] = [
     branch: 'main',
   },
   {
-    label: 'Version 11 (alpha)',
+    label: 'Version 11 (demo)',
     id: '11.0',
     inSlug: '11',
-    branch: 'next',
+    branch: 'docs/csf-snippet-tab-rename',
     preRelease: true,
   },
   {
