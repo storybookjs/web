@@ -7,11 +7,8 @@ import { getVersion, type CodeSnippetsProps, latestVersion } from '@repo/utils';
 import { Button, CodeSnippetsWrapper, mdxComponents } from '@repo/ui';
 import { CloseIcon, InfoIcon } from '@storybook/icons';
 import { useDocs } from '../../../../app/docs/provider';
-import {
-  migrateStoredSnippetTabsCookie,
-  remapCsfTabTitle,
-} from '../../../../app/docs/remap-csf-tab-titles';
 import { buildPathWithVersion } from '../../../../lib/build-path-with-version';
+import { getCsfTabTitleAlias } from './utils/csf-tab-title-aliases';
 import { getFilters } from './utils/get-filters';
 import {
   getActiveContentTabs,
@@ -35,6 +32,9 @@ const getInitialTab = (tabs: Tab[], activeSnippetTabs: string[]) => {
 
   activeSnippetTabs.forEach((localTab) => {
     initialTab ??= tabs.find((tab) => tab.id === localTab);
+    // Check renamed CSF titles before the fuzzy match, which would resolve a stored
+    // `CSF 3` to `CSF`.
+    initialTab ??= tabs.find((tab) => tab.id === getCsfTabTitleAlias(localTab));
     initialTab ??= tabs.find((tab) => tab.id.includes(localTab) || localTab.includes(tab.id));
   });
   return initialTab;
@@ -202,22 +202,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
       tabs &&
       tabs.length > 0
     ) {
-      // Readers with a saved tab preference may carry pre-rename titles (the titles
-      // changed at the source in storybookjs/storybook). Remap them conservatively:
-      // only when the current page offers the target tab, so pages on older docs
-      // versions keep matching their stored titles untouched.
-      const tabIds = tabs.map((tab) => tab.id);
-      // Migrate the stored cookie only when this page actually offers the target tab
-      // of a remapped value — pages on older docs versions (and pages that offer no
-      // renamed tab) keep their stored titles untouched. MRU order is preserved.
-      migrateStoredSnippetTabsCookie(tabIds);
-      const initialTab =
-        activeSnippetTabs.length > 0
-          ? getInitialTab(
-              tabs,
-              activeSnippetTabs.map((storedTab) => remapCsfTabTitle(storedTab, tabIds)),
-            )
-          : undefined;
+      const initialTab = activeSnippetTabs.length > 0 ? getInitialTab(tabs, activeSnippetTabs) : undefined;
       if (initialTab) {
         setActiveTab(initialTab.id);
       } else if (!activeTab) {

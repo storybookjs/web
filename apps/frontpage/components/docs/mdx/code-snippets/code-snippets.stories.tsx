@@ -14,8 +14,8 @@ import { contentMultiTabVue2And3Suffix } from './mocked-data/content-multiple-ta
 import { contentCSFNext } from './mocked-data/content-csf-next';
 import { contentCSFRenamed } from './mocked-data/content-csf-renamed';
 
-// Pre-rename compound titles (`Head (CSF 3)`, `Head (CSF Next 🧪)`): derived from
-// the base fixture so the reverse-compound story has a page that offers them.
+// Pre-rename compound titles (`Head (CSF 3)`, `Head (CSF Next 🧪)`), derived from
+// the base fixture.
 const contentCSFNextCompound = contentCSFNext.map((tab) => ({
   ...tab,
   tabTitle: `Head (${tab.tabTitle})`,
@@ -246,9 +246,8 @@ export const CSFNextInfo = meta.story({
     activeSnippetTabs: ['CSF Next 🧪'],
   },
   play: async ({ canvasElement }) => {
-    // Pre-11 display behavior: the stored pre-rename title still selects its own tab
-    // (the migration only applies when the page offers the target tab), and the
-    // "Learn more about CSF Next" banner keeps displaying.
+    // Pre-rename titles: the stored title selects its own tab, and the
+    // "Learn more about CSF Next" banner still displays.
     await waitFor(async () => {
       await expect(getActiveTabTitle(canvasElement)).toBe('CSF Next 🧪');
     });
@@ -265,9 +264,8 @@ export const CSFRenamedTabOrder = meta.story({
     content: contentCSFRenamed,
   },
   play: async ({ canvasElement }) => {
-    // Renamed titles: CSF (current) displays first and is the default, CSF (Legacy)
-    // second — even though the content order is the reverse — and every other tab
-    // keeps its content order.
+    // CSF displays first and is the default, then CSF (Legacy), although the content
+    // order is the reverse. Other tabs keep their content order.
     const tabTitles = getSnippetTabButtons(canvasElement).map(
       (button) => button.textContent,
     );
@@ -283,8 +281,7 @@ export const CSFPreRenameTabOrder = meta.story({
     content: contentCSFNext,
   },
   play: async ({ canvasElement }) => {
-    // Old-title fixtures (pre-11 docs versions) keep today's order untouched: the
-    // precedence sort matches exact titles only.
+    // Pre-rename titles keep their content order: the sort matches exact titles only.
     const tabTitles = getSnippetTabButtons(canvasElement).map(
       (button) => button.textContent,
     );
@@ -295,85 +292,78 @@ export const CSFPreRenameTabOrder = meta.story({
   },
 });
 
-export const CSFCookieMigratesLegacyTab = meta.story({
+export const CSFStoredPreRenameLegacyTab = meta.story({
   args: {
     content: contentCSFRenamed,
     activeSnippetTabs: ['CSF 3'],
   },
   play: async ({ canvasElement }) => {
-    // A stored "CSF 3" preference lands on "CSF (Legacy)" — not on "CSF", which the
-    // fuzzy matcher would otherwise resolve it to.
+    // A stored "CSF 3" selects "CSF (Legacy)", not "CSF" (the fuzzy match).
     await waitFor(async () => {
       await expect(getActiveTabTitle(canvasElement)).toBe('CSF (Legacy)');
     });
   },
 });
 
-export const CSFCookieMigratesCurrentTab = meta.story({
+export const CSFStoredPreRenameCurrentTab = meta.story({
   args: {
     content: contentCSFRenamed,
     activeSnippetTabs: ['CSF Next 🧪'],
   },
   play: async ({ canvasElement }) => {
-    // A stored "CSF Next 🧪" preference lands on "CSF".
+    // A stored "CSF Next 🧪" selects "CSF".
     await waitFor(async () => {
       await expect(getActiveTabTitle(canvasElement)).toBe('CSF');
     });
   },
 });
 
-export const CSFCookieUnknownUnchanged = meta.story({
+export const CSFStoredUnknownTab = meta.story({
   args: {
     content: contentCSFRenamed,
     activeSnippetTabs: ['vite-env'],
   },
   play: async ({ canvasElement }) => {
-    // Unknown stored values pass through untouched: no tab matches, so the default
-    // (first displayed) tab is selected, exactly as before the migration.
+    // No tab matches an unknown stored value, so the first displayed tab is selected.
     await waitFor(async () => {
       await expect(getActiveTabTitle(canvasElement)).toBe('CSF');
     });
   },
 });
 
-export const CSFCookieReverseMigratesLegacyTab = meta.story({
+export const CSFStoredRenamedLegacyTab = meta.story({
   args: {
     content: contentCSFNext,
     activeSnippetTabs: ['CSF (Legacy)'],
   },
   play: async ({ canvasElement }) => {
-    // On a pre-11 page (pre-rename titles), a stored "CSF (Legacy)" preference —
-    // written on a renamed page — migrates back to "CSF 3", the title this page
-    // actually offers, and the cookie is rewritten to it.
+    // On a page with pre-rename titles, a stored "CSF (Legacy)" selects "CSF 3".
     await waitFor(async () => {
       await expect(getActiveTabTitle(canvasElement)).toBe('CSF 3');
     });
   },
 });
 
-export const CSFCookieReverseMigratesCurrentTab = meta.story({
+export const CSFStoredRenamedCurrentTab = meta.story({
   args: {
     content: contentCSFNext,
     activeSnippetTabs: ['CSF'],
   },
   play: async ({ canvasElement }) => {
-    // A stored "CSF" preference on a pre-11 page lands on "CSF Next 🧪" — not on
-    // "CSF 3", which the fuzzy fallback would otherwise resolve first — and the
-    // cookie is rewritten to "CSF Next 🧪".
+    // A stored "CSF" selects "CSF Next 🧪", not "CSF 3" (the fuzzy match).
     await waitFor(async () => {
       await expect(getActiveTabTitle(canvasElement)).toBe('CSF Next 🧪');
     });
   },
 });
 
-export const CSFCookieReverseMigratesCompoundTab = meta.story({
+export const CSFStoredRenamedCompoundTab = meta.story({
   args: {
     content: contentCSFNextCompound,
     activeSnippetTabs: ['Head (CSF)'],
   },
   play: async ({ canvasElement }) => {
-    // Compound titles migrate back the same way: a stored "Head (CSF)" — written
-    // on a renamed page — lands on "Head (CSF Next 🧪)" on a pre-11 page.
+    // A stored "Head (CSF)" selects "Head (CSF Next 🧪)".
     await waitFor(async () => {
       await expect(getActiveTabTitle(canvasElement)).toBe(
         'Head (CSF Next 🧪)',
@@ -382,15 +372,14 @@ export const CSFCookieReverseMigratesCompoundTab = meta.story({
   },
 });
 
-export const CSFCookieReverseNoTarget = meta.story({
+export const CSFStoredAliasNotOffered = meta.story({
   args: {
     content: contentCSFNextCompound,
     activeSnippetTabs: ['CSF (Legacy)'],
   },
   play: async ({ canvasElement }) => {
-    // A stored "CSF (Legacy)" on a page offering no "CSF 3" tab passes through
-    // untouched — no migration, no cookie write-back — so the default (first
-    // displayed) tab is selected, exactly as before the migration.
+    // The alias of a stored "CSF (Legacy)" is "CSF 3", which this page doesn't offer,
+    // so the first displayed tab is selected.
     await waitFor(async () => {
       await expect(getActiveTabTitle(canvasElement)).toBe('Head (CSF 3)');
     });
