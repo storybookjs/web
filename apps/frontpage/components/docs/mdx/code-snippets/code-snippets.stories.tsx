@@ -260,6 +260,7 @@ export const CSFNextInfo = meta.story({
 });
 
 export const CSFRenamedTabOrder = meta.story({
+  parameters: { chromatic: { disableSnapshot: true } },
   args: {
     content: contentCSFRenamed,
   },
@@ -277,6 +278,7 @@ export const CSFRenamedTabOrder = meta.story({
 });
 
 export const CSFPreRenameTabOrder = meta.story({
+  parameters: { chromatic: { disableSnapshot: true } },
   args: {
     content: contentCSFNext,
   },
@@ -293,6 +295,7 @@ export const CSFPreRenameTabOrder = meta.story({
 });
 
 export const CSFStoredPreRenameLegacyTab = meta.story({
+  parameters: { chromatic: { disableSnapshot: true } },
   args: {
     content: contentCSFRenamed,
     activeSnippetTabs: ['CSF 3'],
@@ -306,6 +309,7 @@ export const CSFStoredPreRenameLegacyTab = meta.story({
 });
 
 export const CSFStoredPreRenameCurrentTab = meta.story({
+  parameters: { chromatic: { disableSnapshot: true } },
   args: {
     content: contentCSFRenamed,
     activeSnippetTabs: ['CSF Next 🧪'],
@@ -319,6 +323,7 @@ export const CSFStoredPreRenameCurrentTab = meta.story({
 });
 
 export const CSFStoredUnknownTab = meta.story({
+  parameters: { chromatic: { disableSnapshot: true } },
   args: {
     content: contentCSFRenamed,
     activeSnippetTabs: ['vite-env'],
@@ -332,6 +337,7 @@ export const CSFStoredUnknownTab = meta.story({
 });
 
 export const CSFStoredRenamedLegacyTab = meta.story({
+  parameters: { chromatic: { disableSnapshot: true } },
   args: {
     content: contentCSFNext,
     activeSnippetTabs: ['CSF (Legacy)'],
@@ -345,6 +351,7 @@ export const CSFStoredRenamedLegacyTab = meta.story({
 });
 
 export const CSFStoredRenamedCurrentTab = meta.story({
+  parameters: { chromatic: { disableSnapshot: true } },
   args: {
     content: contentCSFNext,
     activeSnippetTabs: ['CSF'],
@@ -358,6 +365,7 @@ export const CSFStoredRenamedCurrentTab = meta.story({
 });
 
 export const CSFStoredRenamedCompoundTab = meta.story({
+  parameters: { chromatic: { disableSnapshot: true } },
   args: {
     content: contentCSFNextCompound,
     activeSnippetTabs: ['Head (CSF)'],
@@ -373,6 +381,7 @@ export const CSFStoredRenamedCompoundTab = meta.story({
 });
 
 export const CSFStoredAliasNotOffered = meta.story({
+  parameters: { chromatic: { disableSnapshot: true } },
   args: {
     content: contentCSFNextCompound,
     activeSnippetTabs: ['CSF (Legacy)'],
