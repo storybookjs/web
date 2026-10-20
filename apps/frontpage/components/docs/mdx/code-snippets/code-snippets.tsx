@@ -15,6 +15,7 @@ import {
 } from './utils/get-active-content';
 import { Dropdown } from './dropdown';
 import { transformVueTabTitle } from './utils/transform-vue-tab-title';
+import { getTabVariants } from './utils/get-tab-variants';
 import { type Tab, Tabs } from './tabs';
 
 const Link = mdxComponents.A;
@@ -30,8 +31,12 @@ const getInitialTab = (tabs: Tab[], activeSnippetTabs: string[]) => {
   let initialTab: Tab | undefined;
 
   activeSnippetTabs.forEach((localTab) => {
+    const variants = getTabVariants(localTab);
     initialTab ??= tabs.find((tab) => tab.id === localTab);
-    initialTab ??= tabs.find((tab) => tab.id.includes(localTab) || localTab.includes(tab.id));
+    initialTab ??= tabs.find((tab) => variants.includes(tab.id));
+    initialTab ??= tabs.find((tab) =>
+      variants.some((variant) => tab.id.includes(variant) || variant.includes(tab.id)),
+    );
   });
   return initialTab;
 };
