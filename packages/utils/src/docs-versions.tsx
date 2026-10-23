@@ -36,7 +36,7 @@ export const docsVersions: DocsVersion[] = [
     label: 'Version 11 (alpha)',
     id: '11.0',
     inSlug: '11',
-    branch: 'next',
+    branch: 'kylegach/snippet-csf3-deprecation',
     preRelease: true,
   },
   {
