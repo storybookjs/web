@@ -1,5 +1,5 @@
 import { useArgs } from 'storybook/preview-api';
-import { fn } from 'storybook/test';
+import { expect, fn } from 'storybook/test';
 import preview from '../../../../.storybook/preview';
 import { DocsContext } from '../../../../app/docs/provider';
 import { CodeSnippetsClient } from './code-snippets';
@@ -215,32 +215,72 @@ export const CSFNextInfo = meta.story({
   },
 });
 
-// TODO: Couldn't get this working, something with `setArgs`?
-// export const DismissCSFNextInfo: Story = {
-//   parameters: {
-//     chromatic: {
-//       disableSnapshot: true,
-//     },
-//   },
-//   args: {
-//     content: contentCSFNext,
-//     activeRenderer: 'react',
-//     activeSnippetTabs: ['CSF Next 🧪'],
-//     activeDismissals: [],
-//   },
-//   async play({ canvasElement }) {
-//     const canvas = within(canvasElement);
-//     await waitFor(async () => {
-//       await canvas.findByText(/Learn more about CSF Next/i);
-//     });
-//     const dismissButton = canvas.getByRole('button', { name: /dismiss/i });
-//     await userEvent.click(dismissButton);
+export const CSFNextInfoDismissed = meta.story({
+  parameters: {
+    nextjs: { navigation: { pathname: '/docs/11/writing-stories' } },
+    chromatic: { disableSnapshot: true },
+  },
+  args: {
+    content: contentCSFNext,
+    activeRenderer: 'react',
+    activeSnippetTabs: ['CSF Next 🧪'],
+    activeDismissals: ['csf-next-info'],
+  },
+  async play({ canvas }) {
+    await canvas.findByRole('button', { name: 'CSF Next 🧪' });
+    await expect(canvas.queryByText('Learn more about CSF Next')).not.toBeInTheDocument();
+  },
+});
 
-//     await expect(
-//       canvas.queryByText(/Learn more about CSF Next/i)
-//     ).not.toBeInTheDocument();
-//   },
-// }
+const CSF3Message = /^CSF 3 is still supported/;
+
+export const CSF3Info = meta.story({
+  parameters: {
+    nextjs: { navigation: { pathname: '/docs/11/writing-stories' } },
+    chromatic: { disableSnapshot: true },
+  },
+  args: {
+    content: contentCSFNext,
+    activeRenderer: 'react',
+    activeSnippetTabs: ['CSF 3'],
+  },
+  async play({ canvas }) {
+    await expect(await canvas.findByText(CSF3Message)).toBeInTheDocument();
+  },
+});
+
+export const CSF3InfoBefore11 = meta.story({
+  name: 'CSF 3 info hidden before 11',
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
+  args: {
+    content: contentCSFNext,
+    activeRenderer: 'react',
+    activeSnippetTabs: ['CSF 3'],
+  },
+  async play({ canvas }) {
+    await canvas.findByRole('button', { name: 'CSF 3' });
+    await expect(canvas.queryByText(CSF3Message)).not.toBeInTheDocument();
+  },
+});
+
+export const CSF3InfoDismissed = meta.story({
+  parameters: {
+    nextjs: { navigation: { pathname: '/docs/11/writing-stories' } },
+    chromatic: { disableSnapshot: true },
+  },
+  args: {
+    content: contentCSFNext,
+    activeRenderer: 'react',
+    activeSnippetTabs: ['CSF 3'],
+    activeDismissals: ['csf-3-warning'],
+  },
+  async play({ canvas }) {
+    await canvas.findByRole('button', { name: 'CSF 3' });
+    await expect(canvas.queryByText(CSF3Message)).not.toBeInTheDocument();
+  },
+});
 
 export const NoRenderer = meta.story({
   args: {

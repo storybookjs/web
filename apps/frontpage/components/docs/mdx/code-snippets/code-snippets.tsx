@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary -- TODO: Refactor */
 'use client';
 
-import { useEffect, useState, type FC } from 'react';
+import { useEffect, useState, type FC, type ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import { getVersion, type CodeSnippetsProps, latestVersion } from '@repo/utils';
 import { Button, CodeSnippetsWrapper, mdxComponents } from '@repo/ui';
@@ -77,13 +77,12 @@ const getActiveRenderer = (activeRendererIn: string | null, pathname: string) =>
   return  map[frameworkOrRendererPortion] ?? frameworkOrRendererPortion;
 }
 
-function ActiveInfo({ activeTab }: { activeTab: string | null }) {
+function ActiveInfo({ activeTab, pathname }: { activeTab: string | null, pathname: string }) {
   const {
     activeDismissals,
     setDismissals,
   } = useDocs();
 
-  const pathname = usePathname();
   const slug: string[] = pathname ? pathname.replace('/docs/', '').split('/') : [];
   const activeVersion = getVersion(slug);
 
@@ -93,26 +92,60 @@ function ActiveInfo({ activeTab }: { activeTab: string | null }) {
       : buildPathWithVersion(path, activeVersion.inSlug ?? activeVersion.id);
   }
 
+  const majorVersion = parseInt(activeVersion.id, 10);
+
   if (activeTab?.includes('CSF Next') && !activeDismissals?.includes('csf-next-info')) {
     return (
-      <div className="flex items-center gap-2 px-4 py-1 text-sm border-t border-zinc-300 dark:border-slate-700">
-        <InfoIcon color="#029cfd" /> {/* color-blue-500, to match the link */}
+      <InfoBanner
+        dismissLabel="Dismiss all CSF Next messages"
+        onDismiss={() => {
+          setDismissals('csf-next-info');
+        }}
+      >
         <Link href={getVersionedPath('/docs/api/csf/csf-next')} className="text-blue-500 hover:underline">Learn more about CSF Next</Link>
-        <Button
-          variant="ghost"
-          size="md"
-          className="ml-auto !text-slate-600 hover:!bg-slate-200 hover:!text-slate-900 dark:!text-slate-400 dark:hover:!bg-slate-800"
-          onClick={() => {
-            setDismissals('csf-next-info');
-          }}
-          type="button"
-          aria-label="Dismiss all CSF Next messages"
-        >
-          <CloseIcon />
-        </Button>
-      </div>
+      </InfoBanner>
     );
   }
+
+  if (majorVersion >= 11 && activeTab?.includes('CSF 3') && !activeDismissals?.includes('csf-3-warning')) {
+    return (
+      <InfoBanner
+        dismissLabel="Dismiss all CSF 3 messages"
+        onDismiss={() => {
+          setDismissals('csf-3-warning');
+        }}
+      >
+        CSF 3 is still supported in Storybook {activeVersion.id}, but no longer recommended. <Link href={getVersionedPath('/docs/writing-stories/csf')} className="text-blue-500 hover:underline">Upgrade to CSF 4.</Link>
+      </InfoBanner>
+    );
+  }
+}
+
+function InfoBanner({
+  children,
+  dismissLabel,
+  onDismiss,
+}: {
+  children: ReactNode;
+  dismissLabel: string;
+  onDismiss: () => void;
+}) {
+  return (
+    <div className="flex items-center gap-2 px-4 py-1 text-sm border-t border-zinc-300 dark:border-slate-700">
+      <InfoIcon color="#029cfd" /> {/* color-blue-500, to match the link */}
+      {children}
+      <Button
+        variant="ghost"
+        size="md"
+        className="ml-auto !text-slate-600 hover:!bg-slate-200 hover:!text-slate-900 dark:!text-slate-400 dark:hover:!bg-slate-800"
+        onClick={onDismiss}
+        type="button"
+        aria-label={dismissLabel}
+      >
+        <CloseIcon />
+      </Button>
+    </div>
+  );
 }
 
 export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
@@ -221,7 +254,7 @@ export const CodeSnippetsClient: FC<CodeSnippetsClientProps> = ({
           <Tabs activeTab={activeTab} onTabChange={handleTabChange} tabs={tabs} />
         ) : null
       }
-      bottom={<ActiveInfo activeTab={activeTab} />}
+      bottom={<ActiveInfo {...{ activeTab, pathname }} />}
       options={
         <>
           {filters && filters.languages.length > 1 ? (
