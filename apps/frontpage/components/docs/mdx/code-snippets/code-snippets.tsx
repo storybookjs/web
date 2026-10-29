@@ -115,7 +115,7 @@ function ActiveInfo({ activeTab, pathname }: { activeTab: string | null, pathnam
           setDismissals('csf-3-warning');
         }}
       >
-        CSF 3 is still supported in Storybook {activeVersion.id}, but no longer recommended. <Link href={getVersionedPath('/docs/writing-stories/csf')} className="text-blue-500 hover:underline">Upgrade to CSF 4.</Link>
+        CSF 3 is still supported in Storybook {activeVersion.id.split('.')[0]}, but no longer recommended. <Link href={getVersionedPath('/docs/writing-stories/csf/upgrade')} className="text-blue-500 hover:underline">Upgrade to CSF 4.</Link>
       </InfoBanner>
     );
   }
