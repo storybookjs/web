@@ -1,11 +1,10 @@
-import { addonFragment, recipeFragment, validateResponse } from '@repo/utils';
+import { addonFragment, validateResponse } from '@repo/utils';
 import { fetchAddonsQuery, gql } from '@repo/utils/fetch-addons-query';
-import type { Addon, Recipe } from '../types';
+import type { Addon } from '../types';
 
 interface AddonsHomeData {
   popular: {
     addons: Addon[];
-    recipes: Recipe[];
   };
 }
 
@@ -14,7 +13,7 @@ export async function fetchHomeData() {
     const data = await fetchAddonsQuery<AddonsHomeData>(
       gql`
         query AddonsHome {
-          popular: topIntegrations(sort: featuredMonthly, limit: 9) {
+          popular: topIntegrations(sort: featuredMonthly, limit: 12) {
             addons {
               ${addonFragment}
               tags {
@@ -26,27 +25,17 @@ export async function fetchHomeData() {
               repositoryUrl
               npmUrl
             }
-            recipes {
-              ${recipeFragment}
-              tags {
-                name
-                displayName
-                description
-                icon
-              }
-            }
           }
         }
       `,
     );
 
-validateResponse(() => data.popular?.addons && data.popular?.recipes);
+    validateResponse(() => data.popular?.addons);
 
     const { popular } = data;
 
     return {
       popularAddons: popular.addons,
-      popularRecipes: popular.recipes,
     };
   } catch (error) {
     throw new Error(`Failed to fetch home data: ${(error as Error).message}`);
