@@ -1,15 +1,21 @@
+import Link from 'next/link';
 import { cn } from '@repo/utils';
 import type { PageDataProps } from '../../lib/get-page';
-import { A } from './mdx/a';
+import { getSlug } from '../../lib/get-slug';
 
-type PageTabsProps = Pick<PageDataProps, 'tabs' | 'path' | 'isIndexPage'>;
+type PageTabsProps = Pick<PageDataProps, 'tabs' | 'path'>;
 
-export function PageTabs({ tabs, path, isIndexPage }: PageTabsProps) {
+export function PageTabs({ tabs, path }: PageTabsProps) {
+  // Compare URLs, not file paths, so a directory tab matches its index page
+  const currentSlug = getSlug(path);
+
   return (
     <div className="mb-8 flex items-center gap-8 border-b border-zinc-200">
       {tabs.map((tab) => {
         const tabTitle = tab.tab?.title ?? tab.title;
-        const isActive = tab.pathSegment === path;
+        // Each tab's file path includes its version, so its URL does too
+        const href = getSlug(tab.pathSegment);
+        const isActive = href === currentSlug;
         const className = cn(
           '-mb-px border-b px-2 pb-2 text-sm capitalize transition-colors hover:text-blue-500',
           isActive && 'border-b border-blue-500 text-blue-500',
@@ -17,34 +23,16 @@ export function PageTabs({ tabs, path, isIndexPage }: PageTabsProps) {
 
         if (isActive) {
           return (
-            <span className={className} key={tab.name}>
+            <span aria-current="page" className={className} key={tab.name}>
               {tabTitle}
             </span>
           );
         }
 
-        // Convert the path and tab's pathSegment to a pagePath and href for the A component
-
-        const pagePath = path
-          .replace('content/docs/', '')
-          .replace(/\.mdx$/, '')
-          .replace(/\/index$/, '')
-          .split('/');
-
-        const href = tab.pathSegment.endsWith('index.mdx')
-          ? './'
-          : `./${tab.pathSegment.split('/').at(-1)!}`;
-
         return (
-          <A
-            className={className}
-            href={href}
-            isIndexPage={isIndexPage}
-            pagePath={pagePath}
-            key={tab.name}
-          >
+          <Link className={className} href={href} key={tab.name}>
             {tabTitle}
-          </A>
+          </Link>
         );
       })}
     </div>
