@@ -40,7 +40,7 @@ export function getFrameworks() {
           },
           {
             name: 'Controls',
-            supported: ['react', 'vue', 'angular', 'web-components', 'ember'],
+            supported: ['react', 'vue', 'angular', 'web-components', 'ember', 'solid'],
             path: 'essentials/controls',
           },
           {
@@ -73,6 +73,7 @@ export function getFrameworks() {
               'html',
               'svelte',
               'preact',
+              'solid',
             ],
             unsupported: ['ember', 'qwik'],
           },
@@ -87,6 +88,7 @@ export function getFrameworks() {
               'html',
               'svelte',
               'preact',
+              'solid',
             ],
             unsupported: ['ember'],
             path: 'writing-tests/integrations/test-runner',
@@ -102,6 +104,7 @@ export function getFrameworks() {
               'html',
               'svelte',
               'preact',
+              'solid',
             ],
             unsupported: ['ember'],
             path: 'writing-tests/test-coverage',
@@ -167,6 +170,7 @@ export function getFrameworks() {
               'html',
               'svelte',
               'preact',
+              'solid',
             ],
           },
           {
@@ -283,6 +287,7 @@ export function getFrameworks() {
               'html',
               'svelte',
               'angular',
+              'solid',
             ],
           },
         ],
