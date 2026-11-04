@@ -40,6 +40,12 @@ export function CommunityRenderers() {
         title="Web Components"
         subtitle="with Rspack / Rsbuild"
       />
+      <Card
+        href="https://ember-integrations.github.io/ember-storybook/"
+        logo="logo-ember.svg"
+        title="Ember"
+        subtitle="with Vite"
+      />
     </div>
   );
 }
