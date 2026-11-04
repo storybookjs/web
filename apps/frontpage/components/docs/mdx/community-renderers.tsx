@@ -11,16 +11,16 @@ export function CommunityRenderers() {
         subtitle="with Vite"
       />
       <Card
-        href="https://storybook.nuxtjs.org/"
-        logo="logo-nuxt.svg"
-        title="Nuxt"
-        subtitle="with Vite"
-      />
-      <Card
         href="https://storybook-astro.org/"
         logo="logo-astro.svg"
         darkLogo="logo-astro-dark.svg"
         title="Astro"
+        subtitle="with Vite"
+      />
+      <Card
+        href="https://storybook.nuxtjs.org/"
+        logo="logo-nuxt.svg"
+        title="Nuxt"
         subtitle="with Vite"
       />
       <Card
