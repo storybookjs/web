@@ -17,6 +17,13 @@ export function CommunityRenderers() {
         subtitle="with Vite"
       />
       <Card
+        href="https://storybook-astro.org/"
+        logo="logo-astro.svg"
+        darkLogo="logo-astro-dark.svg"
+        title="Astro"
+        subtitle="with Vite"
+      />
+      <Card
         href="https://github.com/solidjs-community/storybook"
         logo="logo-solidjs.svg"
         title="SolidJS"
@@ -47,11 +54,13 @@ export function CommunityRenderers() {
 function Card({
   href,
   logo,
+  darkLogo,
   title,
   subtitle,
 }: {
   href: string;
   logo: string;
+  darkLogo?: string;
   title: string;
   subtitle?: string;
 }) {
@@ -62,10 +71,20 @@ function Card({
     >
       <Image
         alt=""
+        className={darkLogo ? 'dark:hidden' : undefined}
         height="28"
         src={`/images/logos/renderers/${logo}`}
         width="28"
       />
+      {darkLogo ? (
+        <Image
+          alt=""
+          className="hidden dark:block"
+          height="28"
+          src={`/images/logos/renderers/${darkLogo}`}
+          width="28"
+        />
+      ) : null}
       {subtitle ? (
         <div>
           <p className="text-md font-bold text-black dark:text-white">
