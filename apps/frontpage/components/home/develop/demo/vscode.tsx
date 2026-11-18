@@ -16,14 +16,14 @@ export function VSCode({
   return (
     <>
       <motion.img
-        className="block h-auto absolute w-[97.2%] top-[-2.2%] left-[50%] md:w-[101%] md:top-[-5%]"
+        className="absolute left-[50%] top-[-2.2%] block h-auto w-[97.2%] md:top-[-5%] md:w-[101%]"
         height="993"
         src="/home/develop/vscode.svg"
         style={{ x, opacity }}
         width="1280"
       />
       <motion.div
-        className="bg-[#232a35] absolute top-[9%] left-[75%] w-[50%] h-[89.9%] md:top-[5%] md:left-[76%] md:w-[60%] md:h-[96.1%]"
+        className="absolute left-[75%] top-[9%] h-[89.9%] w-[50%] bg-[#232a35] md:left-[76%] md:top-[5%] md:h-[96.1%] md:w-[60%]"
         style={{ transformOrigin: 'center bottom', x, opacity, scaleY }}
       />
     </>

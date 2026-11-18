@@ -9,7 +9,7 @@ const meta = preview.meta({
   parameters: { layout: 'centered' },
   decorators: [
     (Story) => (
-      <div className="relative w-[600px] h-[400px] bg-zinc-200">
+      <div className="relative h-[400px] w-[600px] bg-zinc-200">
         <Story />
       </div>
     ),

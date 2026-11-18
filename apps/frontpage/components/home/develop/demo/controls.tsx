@@ -27,16 +27,16 @@ export function Controls({
 }: ControlsProps) {
   return (
     <motion.div
-      className="absolute top-0 left-0 bottom-0 w-full [clip-path: polygon(20%_50%,100%_50%,100%_92%,20%_92%)]"
+      className="[clip-path: polygon(20%_50%,100%_50%,100%_92%,20%_92%)] absolute bottom-0 left-0 top-0 w-full"
       {...props}
     >
       <motion.img
         alt=""
-        className="absolute top-0 left-0 w-full"
+        className="absolute left-0 top-0 w-full"
         src="/home/develop/time-frame-controls.svg"
       />
       <motion.svg
-        className="absolute text-[11px] top-[79.7%] left-[81.7%] w-[13.6%] h-auto"
+        className="absolute left-[81.7%] top-[79.7%] h-auto w-[13.6%] text-[11px]"
         viewBox="0 0 140 24"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -67,7 +67,7 @@ export function Controls({
       </motion.svg>
       <motion.svg
         animate={endTimeControls}
-        className="absolute text-[11px] top-[86.7%] left-[81.7%] w-[13.6%] h-auto"
+        className="absolute left-[81.7%] top-[86.7%] h-auto w-[13.6%] text-[11px]"
         initial="initial"
         transition={{ duration: 0.1, delay: 0.4 }}
         variants={bgVariants}

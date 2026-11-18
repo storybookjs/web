@@ -8,7 +8,7 @@ const meta = preview.meta({
   parameters: { layout: 'centered' },
   decorators: [
     (Story) => (
-      <div className="relative w-[260px] h-[600px] bg-white">
+      <div className="relative h-[600px] w-[260px] bg-white">
         <Story />
       </div>
     ),
@@ -24,4 +24,6 @@ const meta = preview.meta({
 
 export const Default = meta.story({ args: { activeStory: 'default' } });
 export const InputRange = meta.story({ args: { activeStory: 'input-range' } });
-export const NoSelection = meta.story({ args: { activeStory: 'no-selection' } });
+export const NoSelection = meta.story({
+  args: { activeStory: 'no-selection' },
+});

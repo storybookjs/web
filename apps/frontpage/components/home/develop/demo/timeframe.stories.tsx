@@ -7,7 +7,7 @@ const meta = preview.meta({
   parameters: { layout: 'centered' },
   decorators: [
     (Story) => (
-      <div className="relative w-[800px] h-[500px] bg-white">
+      <div className="relative h-[500px] w-[800px] bg-white">
         <Story />
       </div>
     ),
@@ -15,12 +15,21 @@ const meta = preview.meta({
   argTypes: {
     activeStory: {
       control: 'select',
-      options: ['no-selection', 'all-day', 'last-hour', 'start-time', 'end-time', 'overview'],
+      options: [
+        'no-selection',
+        'all-day',
+        'last-hour',
+        'start-time',
+        'end-time',
+        'overview',
+      ],
     },
   },
 });
 
-export const NoSelection = meta.story({ args: { activeStory: 'no-selection' } });
+export const NoSelection = meta.story({
+  args: { activeStory: 'no-selection' },
+});
 export const AllDay = meta.story({ args: { activeStory: 'all-day' } });
 export const LastHour = meta.story({ args: { activeStory: 'last-hour' } });
 export const StartTime = meta.story({ args: { activeStory: 'start-time' } });

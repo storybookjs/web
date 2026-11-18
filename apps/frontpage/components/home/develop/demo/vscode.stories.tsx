@@ -9,7 +9,7 @@ const meta = preview.meta({
   parameters: { layout: 'centered' },
   decorators: [
     (Story) => (
-      <div className="relative w-[1000px] h-[600px] bg-zinc-900">
+      <div className="relative h-[600px] w-[1000px] bg-zinc-900">
         <Story />
       </div>
     ),
@@ -17,7 +17,9 @@ const meta = preview.meta({
   render: function Render() {
     const scrollProgress = useMotionValue(0);
     const appearProgress = useMotionValue(1);
-    return <VSCode appearProgress={appearProgress} scrollProgress={scrollProgress} />;
+    return (
+      <VSCode appearProgress={appearProgress} scrollProgress={scrollProgress} />
+    );
   },
   args: {} as ComponentProps<typeof VSCode>,
 });

@@ -10,7 +10,7 @@ const meta = preview.meta({
   parameters: { layout: 'fullscreen' },
   decorators: [
     (Story) => (
-      <div className="bg-homeBackground p-12 w-full max-w-[920px] mx-auto">
+      <div className="bg-homeBackground mx-auto w-full max-w-[920px] p-12">
         <Story />
       </div>
     ),

@@ -3,7 +3,7 @@ import React from 'react';
 export function LogoEu() {
   return (
     <svg
-      className="w-full h-full"
+      className="h-full w-full"
       fill="currentColor"
       viewBox="0 0 48 31"
       xmlns="http://www.w3.org/2000/svg"
