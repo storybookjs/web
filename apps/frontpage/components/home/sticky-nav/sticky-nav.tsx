@@ -14,10 +14,12 @@ interface StickyNavProps {
     | 'document'
     | 'test'
     | 'develop'
+    | 'agents'
     | null;
 }
 
 const items = [
+  { id: 'agents', label: 'Agents', href: '#agents' },
   { id: 'develop', label: 'Develop', href: '#develop' },
   { id: 'test', label: 'Test', href: '#test' },
   { id: 'document', label: 'Document', href: '#document' },

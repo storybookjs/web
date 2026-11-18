@@ -17,8 +17,8 @@ const meta = preview.meta({
 
 export const Default = meta.story({
   args: {
-    link: '/ai',
-    children: 'Introducing MCP for React',
+    link: '/blog/storybook-11/',
+    children: 'Storybook 11 is here',
     icon: <WandIcon />,
   },
   name: 'GradientBadge',

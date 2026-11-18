@@ -21,7 +21,6 @@ const integrations = [
     name: 'Gemini',
     logo: '/images/logos/integrations/integrations-gemini.svg',
   },
-  { name: 'Meta', logo: '/images/logos/integrations/integrations-meta.svg' },
   {
     name: 'VS Code',
     logo: '/images/logos/integrations/integrations-vscode.svg',
@@ -30,13 +29,14 @@ const integrations = [
     name: 'JetBrains',
     logo: '/images/logos/integrations/integrations-jetbrains.svg',
   },
-  { name: 'AWS', logo: '/images/logos/integrations/integrations-aws.svg' },
 ];
 
 export function IntegrationLogos() {
   return (
     <div className="flex flex-col items-center gap-7 pt-12 md:pt-16">
-      <span className="text-sm text-white/60">Works with MCP tools</span>
+      <span className="text-sm text-white/60">
+        Works with your coding agent
+      </span>
       <div className="flex w-full flex-wrap items-center justify-center gap-6 md:justify-between">
         {integrations.map((integration) => (
           <Image

@@ -1,9 +1,9 @@
-import preview from '../../.storybook/preview';
-import { Document } from '../home/test/icons';
+import preview from '../../../.storybook/preview';
+import { Document } from '../test/icons';
 import { FeatureCard } from './feature-card';
 
 const meta = preview.meta({
-  title: 'AI/FeatureCard',
+  title: 'Home/Agents/FeatureCard',
   component: FeatureCard,
   globals: { backgrounds: { value: 'dark' } },
 });

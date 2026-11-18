@@ -2,7 +2,7 @@ import preview from '../../../.storybook/preview';
 import { IntegrationLogos } from './integration-logos';
 
 const meta = preview.meta({
-  title: 'AI/Hero/IntegrationLogos',
+  title: 'Home/Agents/IntegrationLogos',
   component: IntegrationLogos,
   globals: { backgrounds: { value: 'dark' } },
   parameters: {
@@ -18,4 +18,4 @@ const meta = preview.meta({
   ],
 });
 
-export const Default = meta.story({ name: 'IntegrationLogos' });
+export const Default = meta.story({});

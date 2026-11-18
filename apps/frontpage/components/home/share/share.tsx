@@ -30,8 +30,14 @@ export function Share() {
             <p className="text-md leading-7">
               Publish Storybook as a website for stakeholders to reference. Your
               team can check that the UI looks right without touching code.
-              Publishing also hosts your MCP server, giving your entire
-              organization access to validated patterns for their coding agents.
+              <a
+                className="underline"
+                href="https://www.chromatic.com/?ref=storybook"
+              >
+                Chromatic
+              </a>{' '}
+              also hosts your Storybook&apos;s MCP server, so every coding agent
+              in your organization works from the same components and docs.
             </p>
             <Link
               className="flex items-center gap-2 font-bold text-blue-500"

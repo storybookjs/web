@@ -94,7 +94,8 @@ export const Test: FC = () => {
           <p className="mb-6 leading-7">
             Stories capture the “known good” states of UI components.
             They&apos;re a pragmatic, reproducible way to keep track of UI edge
-            cases. Storybook uses them to power automated tests.
+            cases. Storybook uses them to power automated tests. Coding agents
+            run the same tests to check their work.
           </p>
         </div>
       </Container>

@@ -1,9 +1,9 @@
-import preview from '../../.storybook/preview';
-import { GenerateUI } from './generate-ui';
+import preview from '../../../.storybook/preview';
+import { AgentStats } from './agent-stats';
 
 const meta = preview.meta({
-  title: 'AI/GenerateUI',
-  component: GenerateUI,
+  title: 'Home/Agents/AgentStats',
+  component: AgentStats,
   globals: { backgrounds: { value: 'dark' } },
   parameters: {
     layout: 'fullscreen',
@@ -11,11 +11,11 @@ const meta = preview.meta({
   },
   decorators: [
     (Story) => (
-      <div className="bg-homeBackground">
+      <div className="bg-homeBackground p-12">
         <Story />
       </div>
     ),
   ],
 });
 
-export const Default = meta.story({ name: 'GenerateUI' });
+export const Default = meta.story({});

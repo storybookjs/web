@@ -4,6 +4,7 @@ import { Header, Footer, Container } from '@repo/ui';
 import { useMemo, useRef } from 'react';
 import { useInView } from 'framer-motion';
 import { Hero } from './hero';
+import { Agents } from './agents/agents';
 import { Develop } from './develop/develop';
 import { StickyNav } from './sticky-nav/sticky-nav';
 import { Test } from './test/test';
@@ -25,8 +26,11 @@ export function Home({
   contributorCount,
   discordMembers,
 }: HomeProps) {
+  const agentsRef = useRef(null);
+  const agentsInView = useInView(agentsRef, { margin: '0px 0px -100% 0px' });
+
   const developRef = useRef(null);
-  const developInView = useInView(developRef, { margin: '0px 0px -100% 0px' });
+  const developInView = useInView(developRef);
 
   const testRef = useRef(null);
   const testInView = useInView(testRef);
@@ -50,8 +54,10 @@ export function Home({
     if (documentInView) return 'document';
     if (testInView) return 'test';
     if (developInView) return 'develop';
+    if (agentsInView) return 'agents';
     return null;
   }, [
+    agentsInView,
     developInView,
     testInView,
     documentInView,
@@ -73,6 +79,9 @@ export function Home({
           activeSection={activeSection}
           isVisible={Boolean(activeSection)}
         />
+        <div id="agents" ref={agentsRef}>
+          <Agents />
+        </div>
         <div id="develop" ref={developRef} style={{ contain: 'paint' }}>
           <Develop />
         </div>

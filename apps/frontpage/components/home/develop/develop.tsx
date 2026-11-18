@@ -7,7 +7,7 @@ import { ChevronSmallRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
 import { Integrations } from '../integrations/integrations';
 import { Testimonial } from '../testimonial';
-import { Angular, Vue, WebComponents, HTML5, ReactLogo } from './logos';
+import { Angular, Vue, WebComponents, HTML5, ReactLogo, Svelte } from './logos';
 import { ScrollDemo } from './demo/scroll-demo';
 import { LogoAtomicDesign } from './logo-atomic-design';
 
@@ -50,7 +50,7 @@ export function Develop() {
   );
 
   return (
-    <section className="border-b border-zinc-700 pt-[calc(3rem-40px)] sm:pt-[calc(5rem-40px)] md:pt-[calc(7rem-72px)]">
+    <section className="border-b border-zinc-700 pt-12 sm:pt-20 md:pt-28">
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
         <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
           Develop durable user interfaces
@@ -66,22 +66,28 @@ export function Develop() {
               Made for
             </div>
             <div className="flex items-center gap-4">
-              {['react', 'vue', 'angular', 'web-components', 'html'].map(
-                (i) => (
-                  <Link
-                    className="flex h-10 w-10 items-center justify-center rounded border border-zinc-700 transition-all hover:-translate-y-1 hover:border-zinc-400"
-                    href={`/docs/get-started/install/?renderer=${i}`}
-                    key={i}
-                  >
-                    {i === 'react' && <ReactLogo />}
-                    {i === 'vue' && <Vue />}
-                    {i === 'angular' && <Angular />}
-                    {i === 'web-components' && <WebComponents />}
-                    {i === 'html' && <HTML5 />}
-                  </Link>
-                ),
-              )}
-              <div className="text-zinc-400">+ 7</div>
+              {[
+                'react',
+                'vue',
+                'angular',
+                'svelte',
+                'web-components',
+                'html',
+              ].map((i) => (
+                <Link
+                  className="flex h-10 w-10 items-center justify-center rounded border border-zinc-700 transition-all hover:-translate-y-1 hover:border-zinc-400"
+                  href={`/docs/get-started/install/?renderer=${i}`}
+                  key={i}
+                >
+                  {i === 'react' && <ReactLogo />}
+                  {i === 'vue' && <Vue />}
+                  {i === 'angular' && <Angular />}
+                  {i === 'svelte' && <Svelte />}
+                  {i === 'web-components' && <WebComponents />}
+                  {i === 'html' && <HTML5 />}
+                </Link>
+              ))}
+              <div className="text-zinc-400">+ 6</div>
             </div>
           </div>
         </div>

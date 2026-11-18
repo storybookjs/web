@@ -1,15 +1,13 @@
 import preview from '../../../.storybook/preview';
-import { ShareContext } from './share-context';
+import { Agents } from './agents';
 
 const meta = preview.meta({
-  title: 'AI/ShareContext',
-  component: ShareContext,
+  title: 'Home/Agents/Agents',
+  component: Agents,
   globals: { backgrounds: { value: 'dark' } },
   parameters: {
     layout: 'fullscreen',
-    chromatic: {
-      viewports: [320, 768, 1200],
-    },
+    chromatic: { viewports: [320, 768, 1200] },
   },
   decorators: [
     (Story) => (
@@ -20,4 +18,4 @@ const meta = preview.meta({
   ],
 });
 
-export const Default = meta.story({ name: 'ShareContext' });
+export const Default = meta.story({});

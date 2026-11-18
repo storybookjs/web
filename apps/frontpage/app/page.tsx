@@ -1,9 +1,26 @@
+import type { Metadata } from 'next';
 import {
   fetchDiscordMembers,
   fetchGithubCount,
   fetchNpmDownloads,
 } from '@repo/utils';
 import { Home } from '../components/home/home';
+
+const title = 'Storybook: Build UI with agents, using your components';
+const description =
+  "Storybook is a frontend workshop for building, testing, and documenting UI. Coding agents use it too: they reuse your components, write stories for what's new, and fix test failures before you review. It's open source and free.";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    url: 'https://storybook.js.org',
+    siteName: 'Storybook',
+    type: 'website',
+    title,
+    description,
+  },
+};
 
 export default async function Page() {
   const { number: githubCount } = await fetchGithubCount();
