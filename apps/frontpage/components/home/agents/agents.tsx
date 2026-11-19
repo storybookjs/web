@@ -14,7 +14,7 @@ export function Agents({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">
-            In our tests, agents with Storybook skills spent less time searching
+            In our benchmarks, agents with Storybook skills spent less time searching
             the codebase and more time reading the design system.
           </p>
           {studyUrl ? (

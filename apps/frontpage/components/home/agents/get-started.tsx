@@ -1,11 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronSmallRightIcon, StorybookIcon } from '@storybook/icons';
+import { ChevronSmallRightIcon } from '@storybook/icons';
+import { StorybookIcon } from '@repo/ui';
 
 const options = [
-  { name: 'Agent skills', icon: <StorybookIcon className="text-[#FF4785]" /> },
+  {
+    name: 'Agent skills',
+    href: '/docs/ai',
+    icon: <StorybookIcon size={20} />,
+  },
   {
     name: 'Claude Code plugin',
+    href: 'https://github.com/storybookjs/storybook/tree/next/code/lib/claude-plugin#readme',
     icon: (
       <Image
         alt=""
@@ -18,6 +24,7 @@ const options = [
   },
   {
     name: 'Codex plugin',
+    href: 'https://github.com/storybookjs/storybook/tree/next/code/lib/codex-plugin#readme',
     icon: (
       <Image
         alt=""
@@ -43,7 +50,7 @@ export function GetStarted() {
             <li key={option.name}>
               <Link
                 className="flex h-10 items-center gap-2 rounded-full border border-zinc-600 pl-3 pr-4 text-sm font-bold text-white transition-colors hover:border-blue-500 focus-visible:border-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-homeBackground"
-                href="/docs/ai"
+                href={option.href}
               >
                 {option.icon}
                 {option.name}
