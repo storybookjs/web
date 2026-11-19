@@ -65,7 +65,7 @@ export function Develop() {
     <section className="border-b border-zinc-700 pt-12 sm:pt-20 md:pt-28">
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
         <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
-          Develop durable user interfaces
+          Develop every state in isolation
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">
@@ -169,7 +169,7 @@ export function Develop() {
             </p>
             <Link
               className="flex items-center gap-2 font-bold text-blue-500"
-              href="/docs/ai"
+              href="/docs/ai/skills/write-stories"
             >
               How agents write stories
               <ChevronSmallRightIcon />
