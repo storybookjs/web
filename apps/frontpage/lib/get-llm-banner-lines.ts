@@ -3,7 +3,7 @@ import { type DocsVersion } from '@repo/utils';
 export const getLlmsBannerLines = ({ baseUrl, version }: { baseUrl: string; version: DocsVersion }) => [
   '# Storybook',
   '',
-  '> Storybook is a frontend workshop for building UI components and pages in isolation. It helps with UI development, testing, and documentation.',
+  '> Storybook is a frontend workshop for building UI components and pages in isolation. It helps with UI development, testing, documentation, and review.',
   '',
   `Current version: ${version.label} (${version.id})`,
   '',
