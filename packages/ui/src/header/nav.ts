@@ -4,6 +4,10 @@ export const nav = [
     href: '/docs',
   },
   {
+    title: 'AI',
+    href: '/ai',
+  },
+  {
     title: 'Addons',
     href: '/addons',
   },
