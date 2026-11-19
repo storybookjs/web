@@ -23,5 +23,5 @@ export const InteractionsActive = meta.story({
 });
 
 export const VisualTestsTab = meta.story({
-  args: { active: 1, slide: 4 },
+  args: { active: 1, tabs: ['Controls', 'Visual tests'] },
 });

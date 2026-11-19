@@ -14,43 +14,45 @@ import {
 import type { FC, ReactNode } from 'react';
 import { cn } from '@repo/utils';
 
-export const Toolbar: FC<{ slide: number }> = ({ slide }) => {
+/** `docs` swaps the canvas tools for the docs-page tools and spans the full width */
+export const Toolbar: FC<{ variant?: 'canvas' | 'docs' }> = ({
+  variant = 'canvas',
+}) => {
+  const isDocs = variant === 'docs';
   return (
     <div
       className={cn(
         'absolute left-0 right-0 top-0 z-10 flex h-10 items-center justify-between overflow-hidden border-b border-b-[#D9E0E6] bg-white px-2 lg:right-[400px]',
-        slide === 4 && 'lg:right-0',
+        isDocs && 'lg:right-0',
       )}
     >
       <div className="mr-2 flex">
-        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
+        <ToolbarButton className={cn(isDocs && 'hidden')}>
           <SyncIcon />
         </ToolbarButton>
-        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
+        <ToolbarButton className={cn(isDocs && 'hidden')}>
           <ZoomIcon />
         </ToolbarButton>
-        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
+        <ToolbarButton className={cn(isDocs && 'hidden')}>
           <ZoomOutIcon />
         </ToolbarButton>
-        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
+        <ToolbarButton className={cn(isDocs && 'hidden')}>
           <ZoomResetIcon />
         </ToolbarButton>
-        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
+        <ToolbarButton className={cn(isDocs && 'hidden')}>
           <GrowIcon />
         </ToolbarButton>
-        <div
-          className={cn('mx-2 h-6 w-px bg-[#D9E0E6]', slide === 4 && 'hidden')}
-        />
-        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
+        <div className={cn('mx-2 h-6 w-px bg-[#D9E0E6]', isDocs && 'hidden')} />
+        <ToolbarButton className={cn(isDocs && 'hidden')}>
           <RulerIcon />
         </ToolbarButton>
-        <ToolbarButton className={cn(slide === 4 && 'hidden')}>
+        <ToolbarButton className={cn(isDocs && 'hidden')}>
           <GridAltIcon />
         </ToolbarButton>
-        <ToolbarButton className={cn(slide !== 4 && 'hidden')}>
+        <ToolbarButton className={cn(!isDocs && 'hidden')}>
           <PhotoIcon />
         </ToolbarButton>
-        <ToolbarButton className={cn(slide !== 4 && 'hidden')}>
+        <ToolbarButton className={cn(!isDocs && 'hidden')}>
           <GridIcon />
         </ToolbarButton>
         <ToolbarButton>

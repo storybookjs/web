@@ -7,7 +7,7 @@ const meta = preview.meta({
   parameters: { layout: 'fullscreen' },
   decorators: [
     (Story) => (
-      <div className="relative w-full h-10 bg-white">
+      <div className="relative h-10 w-full bg-white">
         <Story />
       </div>
     ),
@@ -15,9 +15,9 @@ const meta = preview.meta({
 });
 
 export const Default = meta.story({
-  args: { slide: 0 },
+  args: { variant: 'canvas' },
 });
 
-export const VisualTestsSlide = meta.story({
-  args: { slide: 4 },
+export const Docs = meta.story({
+  args: { variant: 'docs' },
 });

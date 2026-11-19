@@ -27,7 +27,7 @@ export function SlideDocs() {
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
     >
-      <Toolbar slide={4} />
+      <Toolbar variant="docs" />
       <motion.div
         animate={{
           x: '-50%',
