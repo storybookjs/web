@@ -2,11 +2,13 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
+import type { FeatureItem } from '../illustrated-feature-list';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
 import { Accessibility, Code, Eye, Interact, Pixel, Document } from './icons';
 import { LogoAirbnb } from './logo-airbnb';
+import { AgentTest, TestAgentMedia } from './agent-media';
 
-const features = [
+const features: FeatureItem[] = [
   {
     icon: <Eye />,
     title: 'Spot test',
@@ -73,19 +75,32 @@ const features = [
     media: '/home/test/homepage-snapshot-testing-lg.mp4',
     poster: '/home/test/homepage-snapshot-testing-poster-lg.jpg',
   },
+  {
+    icon: <AgentTest />,
+    title: 'Agents check their own work',
+    description:
+      'Coding agents run the same tests and fix failures before you review.',
+    link: {
+      label: 'Learn about Storybook for AI',
+      href: '/docs/ai',
+    },
+    illustration: <TestAgentMedia />,
+  },
 ];
 
 export const Test: FC = () => {
   return (
     <div className="border-b border-zinc-600 pt-12 sm:pt-20 md:pt-28">
-      {features.map((feature) => (
-        <Link
-          as="video"
-          href={feature.media}
-          key={feature.title}
-          rel="preload"
-        />
-      ))}
+      {features.map((feature) =>
+        feature.media ? (
+          <Link
+            as="video"
+            href={feature.media}
+            key={feature.title}
+            rel="preload"
+          />
+        ) : null,
+      )}
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
         <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
           Test UIs with less effort and no flake
@@ -96,13 +111,6 @@ export const Test: FC = () => {
             They&apos;re a pragmatic, reproducible way to keep track of UI edge
             cases. Storybook uses them to power automated tests.
           </p>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-2xl font-bold">Agents check their own work</h3>
-            <p className="text-md leading-7">
-              Coding agents run the same tests and fix failures before you
-              review.
-            </p>
-          </div>
         </div>
       </Container>
       <IllustratedFeatureList bgColor="#FDDD9C" features={features} />

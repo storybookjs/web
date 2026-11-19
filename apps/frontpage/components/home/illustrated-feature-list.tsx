@@ -19,7 +19,7 @@ interface FeatureBase {
 /**
  * An item shows either a looping video with its poster, or a coded
  * illustration. Illustrations are authored on a square stage of
- * `ILLUSTRATION_SIZE` px and scaled down to fit the media frame.
+ * `ILLUSTRATION_SIZE` px and scaled to fit the media frame.
  */
 type FeatureMedia =
   | { media: string; poster: string; illustration?: never }
@@ -28,6 +28,8 @@ type FeatureMedia =
 export type FeatureItem = FeatureBase & FeatureMedia;
 
 export const ILLUSTRATION_SIZE = 480;
+/** Lets the stage grow to fill the desktop panel the way the videos do, without blowing up its type */
+const MAX_ILLUSTRATION_SCALE = 1.4;
 
 interface IllustratedFeatureListProps {
   features: FeatureItem[];
@@ -182,9 +184,12 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
                       style={{ backgroundColor: bgColor }}
                     >
                       {feature.illustration ? (
-                        <IllustrationStage>
-                          {feature.illustration}
-                        </IllustrationStage>
+                        // Fills the square like the videos do, so the link below stays clipped the same way
+                        <div className="relative aspect-square w-full">
+                          <IllustrationStage>
+                            {feature.illustration}
+                          </IllustrationStage>
+                        </div>
                       ) : (
                         <video
                           autoPlay
@@ -215,9 +220,8 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
 };
 
 /**
- * Centers an illustration in the media frame and scales its square stage down
- * when the frame is smaller than the stage, so one composition serves the
- * desktop panel and the mobile square.
+ * Centers an illustration in the media frame and scales its square stage to
+ * fit, so one composition serves the desktop panel and the mobile square.
  */
 const IllustrationStage: FC<{ children: ReactNode }> = ({ children }) => {
   const frameRef = useRef<HTMLDivElement>(null);
@@ -229,7 +233,11 @@ const IllustrationStage: FC<{ children: ReactNode }> = ({ children }) => {
     const fit = () => {
       const { width, height } = frame.getBoundingClientRect();
       setScale(
-        Math.min(1, width / ILLUSTRATION_SIZE, height / ILLUSTRATION_SIZE),
+        Math.min(
+          MAX_ILLUSTRATION_SCALE,
+          width / ILLUSTRATION_SIZE,
+          height / ILLUSTRATION_SIZE,
+        ),
       );
     };
     fit();
