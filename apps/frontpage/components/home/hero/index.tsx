@@ -6,11 +6,12 @@ import Link from 'next/link';
 import { cn, latestVersion } from '@repo/utils';
 import { useAnalytics } from '@repo/utils/analytics';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon, WandIcon } from '@storybook/icons';
 import { Container, GradientBadge } from '@repo/ui';
-import { Manager } from '../manager';
+import { Manager, SLIDES } from '../manager';
+import { AgentChat } from '../manager/agent-chat';
 import { InitCommand } from './init-command';
 import { Chrome } from './chrome';
 import SocialProof from './social-proof';
@@ -211,8 +212,26 @@ export function Hero({
           ))}
         </div>
       </div>
-      <Chrome />
-      <Manager slide={slide} />
+      <div className="relative lg:flex">
+        {/* The agent's chat is its own app window: left of the browser on
+            large screens, floating over its lower half on small ones */}
+        <div
+          className={cn(
+            'absolute inset-x-0 bottom-0 z-30 h-1/2 transition-all duration-500 sm:h-[40%] lg:static lg:h-auto lg:flex-shrink-0 lg:translate-y-0 lg:overflow-hidden',
+            slide === SLIDES.agents
+              ? 'opacity-100 lg:mr-4 lg:w-[30%]'
+              : 'pointer-events-none translate-y-8 opacity-0 lg:mr-0 lg:w-0',
+          )}
+        >
+          <AnimatePresence>
+            {slide === SLIDES.agents ? <AgentChat /> : null}
+          </AnimatePresence>
+        </div>
+        <div className="min-w-0 flex-1">
+          <Chrome />
+          <Manager slide={slide} />
+        </div>
+      </div>
       <SocialProof />
     </Container>
   );

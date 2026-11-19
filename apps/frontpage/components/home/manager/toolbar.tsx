@@ -14,16 +14,20 @@ import {
 import type { FC, ReactNode } from 'react';
 import { cn } from '@repo/utils';
 
-/** `docs` swaps the canvas tools for the docs-page tools and spans the full width */
-export const Toolbar: FC<{ variant?: 'canvas' | 'docs' }> = ({
-  variant = 'canvas',
-}) => {
+/**
+ * `docs` swaps the canvas tools for the docs-page tools and spans the full
+ * width. `fullWidth` spans the full width when no addon panel is shown.
+ */
+export const Toolbar: FC<{
+  variant?: 'canvas' | 'docs';
+  fullWidth?: boolean;
+}> = ({ variant = 'canvas', fullWidth = false }) => {
   const isDocs = variant === 'docs';
   return (
     <div
       className={cn(
         'absolute left-0 right-0 top-0 z-10 flex h-10 items-center justify-between overflow-hidden border-b border-b-[#D9E0E6] bg-white px-2 lg:right-[400px]',
-        isDocs && 'lg:right-0',
+        (isDocs || fullWidth) && 'lg:right-0',
       )}
     >
       <div className="mr-2 flex">
