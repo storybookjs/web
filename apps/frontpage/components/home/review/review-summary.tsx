@@ -52,10 +52,10 @@ export const ReviewSummary: FC = () => {
               title="Pages"
             >
               <div className="grid grid-cols-2 gap-2">
-                <Thumbnail label="Checkout" title="Pages">
+                <Thumbnail label="Checkout" tall title="Pages">
                   <FakeCheckoutPage />
                 </Thumbnail>
-                <Thumbnail label="Sign in" title="Pages">
+                <Thumbnail label="Sign in" tall title="Pages">
                   <FakeSignInPage />
                 </Thumbnail>
               </div>
@@ -110,10 +110,17 @@ const Group: FC<{
 const Thumbnail: FC<{
   label: string;
   title?: string;
+  // Page thumbnails fill the height of the two-row Button grid on desktop
+  tall?: boolean;
   children: ReactNode;
-}> = ({ label, title = 'Button', children }) => (
+}> = ({ label, title = 'Button', tall, children }) => (
   <div className="flex min-w-0 flex-col gap-1.5">
-    <div className="flex h-24 items-center justify-center overflow-hidden rounded border border-[#D9E0E6] bg-white sm:h-32 md:h-36">
+    <div
+      className={cn(
+        'flex h-24 items-center justify-center overflow-hidden rounded border border-[#D9E0E6] bg-white sm:h-32 md:h-36',
+        tall && 'md:h-[322px]',
+      )}
+    >
       {children}
     </div>
     <div className="truncate px-1 text-xs">
@@ -157,7 +164,7 @@ const FakeCheckoutPage: FC = () => (
     </div>
     <div className="flex flex-1 gap-1.5">
       <div className="flex flex-1 flex-col gap-1 rounded bg-white p-1.5">
-        <div className="h-5 rounded-sm bg-[#E3E8EC] sm:h-8" />
+        <div className="h-5 rounded-sm bg-[#E3E8EC] sm:h-8 md:h-24" />
         <Line className="w-3/4" />
         <Line className="w-1/2" />
       </div>
