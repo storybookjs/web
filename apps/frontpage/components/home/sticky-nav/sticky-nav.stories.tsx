@@ -29,3 +29,7 @@ export const TestActive = meta.story({
 export const Hidden = meta.story({
   args: { isVisible: false, activeSection: null },
 });
+
+export const ReviewActive = meta.story({
+  args: { isVisible: true, activeSection: 'review' },
+});

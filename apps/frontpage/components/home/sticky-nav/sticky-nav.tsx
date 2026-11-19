@@ -11,18 +11,20 @@ interface StickyNavProps {
     | 'who'
     | 'automate'
     | 'share'
+    | 'agents'
+    | 'review'
     | 'document'
     | 'test'
     | 'develop'
-    | 'agents'
     | null;
 }
 
 const items = [
-  { id: 'agents', label: 'Agents', href: '#agents' },
   { id: 'develop', label: 'Develop', href: '#develop' },
   { id: 'test', label: 'Test', href: '#test' },
   { id: 'document', label: 'Document', href: '#document' },
+  { id: 'review', label: 'Review', href: '#review' },
+  { id: 'agents', label: 'Agents', href: '#agents' },
   { id: 'share', label: 'Share', href: '#share' },
   { id: 'automate', label: 'Automate', href: '#automate' },
   { id: 'who', label: "Who's it for", href: '#who' },

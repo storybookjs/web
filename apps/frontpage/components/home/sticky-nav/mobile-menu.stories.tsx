@@ -6,6 +6,8 @@ const items = [
   { id: 'develop', label: 'Develop', href: '#develop' },
   { id: 'test', label: 'Test', href: '#test' },
   { id: 'document', label: 'Document', href: '#document' },
+  { id: 'review', label: 'Review', href: '#review' },
+  { id: 'agents', label: 'Agents', href: '#agents' },
   { id: 'share', label: 'Share', href: '#share' },
   { id: 'automate', label: 'Automate', href: '#automate' },
   { id: 'who', label: "Who's it for", href: '#who' },

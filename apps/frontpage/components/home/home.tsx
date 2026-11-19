@@ -9,6 +9,7 @@ import { Develop } from './develop/develop';
 import { StickyNav } from './sticky-nav/sticky-nav';
 import { Test } from './test/test';
 import { Document } from './document/document';
+import { Review } from './review/review';
 import { Share } from './share/share';
 import { Automate } from './automate/automate';
 import { SocialValidation } from './social-validation/social-validation';
@@ -26,17 +27,20 @@ export function Home({
   contributorCount,
   discordMembers,
 }: HomeProps) {
-  const agentsRef = useRef(null);
-  const agentsInView = useInView(agentsRef, { margin: '0px 0px -100% 0px' });
-
   const developRef = useRef(null);
-  const developInView = useInView(developRef);
+  const developInView = useInView(developRef, { margin: '0px 0px -100% 0px' });
 
   const testRef = useRef(null);
   const testInView = useInView(testRef);
 
   const documentRef = useRef(null);
   const documentInView = useInView(documentRef);
+
+  const reviewRef = useRef(null);
+  const reviewInView = useInView(reviewRef);
+
+  const agentsRef = useRef(null);
+  const agentsInView = useInView(agentsRef);
 
   const shareRef = useRef(null);
   const shareInView = useInView(shareRef);
@@ -51,16 +55,18 @@ export function Home({
     if (whoInView) return 'who';
     if (automateInView) return 'automate';
     if (shareInView) return 'share';
+    if (agentsInView) return 'agents';
+    if (reviewInView) return 'review';
     if (documentInView) return 'document';
     if (testInView) return 'test';
     if (developInView) return 'develop';
-    if (agentsInView) return 'agents';
     return null;
   }, [
-    agentsInView,
     developInView,
     testInView,
     documentInView,
+    reviewInView,
+    agentsInView,
     shareInView,
     automateInView,
     whoInView,
@@ -79,9 +85,6 @@ export function Home({
           activeSection={activeSection}
           isVisible={Boolean(activeSection)}
         />
-        <div id="agents" ref={agentsRef}>
-          <Agents />
-        </div>
         <div id="develop" ref={developRef} style={{ contain: 'paint' }}>
           <Develop />
         </div>
@@ -90,6 +93,13 @@ export function Home({
         </div>
         <div id="document" ref={documentRef}>
           <Document />
+        </div>
+        <div id="review" ref={reviewRef}>
+          <Review />
+        </div>
+        {/* Keep the #agents anchor: the /ai redirect points to it */}
+        <div id="agents" ref={agentsRef}>
+          <Agents />
         </div>
         <div id="share" ref={shareRef}>
           <Share />
