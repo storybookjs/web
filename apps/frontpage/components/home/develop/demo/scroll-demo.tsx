@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import type { MotionValue } from 'framer-motion';
 import { motion, useTransform } from 'framer-motion';
 import { useMediaQuery } from '../../../../hooks/use-media-query';
-import { Sidebar } from './sidebar';
+import { Sidebar, agentStories } from './sidebar';
 import { RangeSlider } from './range-slider';
 import { VSCode } from './vscode';
 
@@ -10,6 +10,11 @@ interface ScrollDemoProps {
   appearProgress: MotionValue<number>;
   isolationProgress: MotionValue<number>;
   storyIndex: MotionValue<number>;
+  /**
+   * Which agent-written story is showing: 0 before the agent step, then
+   * 1, 2… for each story in `agentStories`.
+   */
+  agentStep?: MotionValue<number>;
 }
 
 const rangeSlider = {
@@ -17,13 +22,31 @@ const rangeSlider = {
   addons: ['controls', 'interactions', 'design', 'a11y', 'controls'],
 };
 
+function agentStoryAt(step: number) {
+  return step > 0
+    ? agentStories[Math.min(step, agentStories.length) - 1].id
+    : null;
+}
+
 export function ScrollDemo({
   appearProgress,
   isolationProgress,
   storyIndex,
+  agentStep,
   ...props
 }: ScrollDemoProps) {
   const [activeStory, setActiveStory] = useState('default');
+  const [agentStory, setAgentStory] = useState(() =>
+    agentStoryAt(agentStep?.get() ?? 0),
+  );
+
+  useEffect(() => {
+    if (!agentStep) return;
+    setAgentStory(agentStoryAt(agentStep.get()));
+    return agentStep.on('change', (step) => {
+      setAgentStory(agentStoryAt(step));
+    });
+  }, [agentStep]);
 
   useEffect(() => {
     function updateId() {
@@ -74,8 +97,15 @@ export function ScrollDemo({
         className="absolute left-0 top-0 block h-auto w-full"
         src="/home/develop/storybook-frame.svg"
       />
-      <Sidebar activeStory={activeStory} type="rangeSlider" />
-      <RangeSlider activeStory={activeStory} appearProgress={appearProgress} />
+      <Sidebar
+        activeStory={agentStory ?? activeStory}
+        showAgentStories={agentStory !== null}
+        type="rangeSlider"
+      />
+      <RangeSlider
+        activeStory={agentStory ?? activeStory}
+        appearProgress={appearProgress}
+      />
       <VSCode
         appearProgress={appearProgress}
         scrollProgress={isolationProgress}

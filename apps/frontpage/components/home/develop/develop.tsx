@@ -43,6 +43,18 @@ export function Develop() {
     Math.floor(value * 3),
   );
 
+  // Step 3
+  const agentRef = useRef(null);
+  const { scrollYProgress: agentProgress } = useScroll({
+    target: agentRef,
+    offset: ['0 0.5', '1 0.5'],
+  });
+  // 0 until the step arrives, then one step per agent-written story.
+  const agentStep = useTransform(agentProgress, (value): number => {
+    if (value <= 0.02) return 0;
+    return value < 0.35 ? 1 : 2;
+  });
+
   const y = useTransform(
     smoothAppearProgress,
     [0, 1],
@@ -90,15 +102,6 @@ export function Develop() {
               <div className="text-zinc-400">+ 6</div>
             </div>
           </div>
-          <div className="mt-10 flex flex-col gap-4">
-            <h3 className="text-2xl font-bold">
-              Agents write stories for what they build
-            </h3>
-            <p className="text-md leading-7">
-              Every new or changed state gets a story, so you can see what the
-              agent made.
-            </p>
-          </div>
         </div>
       </Container>
       <Container className="grid grid-flow-dense justify-items-center gap-24 pt-28 md:grid-cols-[minmax(max-content,_320px)_1fr] md:justify-items-start md:pt-[27rem]">
@@ -109,6 +112,7 @@ export function Develop() {
           <ScrollDemo
             appearProgress={smoothAppearProgress}
             isolationProgress={smoothIsolationProgress}
+            agentStep={agentStep}
             storyIndex={activeStory}
           />
         </motion.figure>
@@ -152,6 +156,26 @@ export function Develop() {
             </Link>
           </div>
           <div className="hidden h-[96rem] md:block" />
+        </div>
+        <div className="col-[1/2] w-full" ref={agentRef}>
+          <div className="h-[64rem] md:hidden" />
+          <div className="sticky bottom-8 flex flex-col gap-6 text-white md:bottom-0 md:top-[50vh] md:max-w-[320px] md:translate-y-[-50%]">
+            <h3 className="text-2xl font-bold">
+              Agents write stories for what they build
+            </h3>
+            <p className="text-md leading-7">
+              Every new or changed state gets a story, so you can see what the
+              agent made.
+            </p>
+            <Link
+              className="flex items-center gap-2 font-bold text-blue-500"
+              href="/docs/ai"
+            >
+              How agents write stories
+              <ChevronSmallRightIcon />
+            </Link>
+          </div>
+          <div className="hidden h-[64rem] md:block" />
         </div>
       </Container>
       <Container className="grid grid-flow-dense grid-cols-1 items-center justify-items-center gap-12 pt-28 md:grid-cols-[minmax(max-content,_320px)_1fr] md:justify-items-start md:gap-24">
