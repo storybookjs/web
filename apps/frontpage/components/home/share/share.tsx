@@ -29,7 +29,7 @@ export function Share() {
             </h3>
             <p className="text-md leading-7">
               Publish Storybook as a website for stakeholders to reference. Your
-              team can check that the UI looks right without touching code.
+              team can check that the UI looks right without touching code.{' '}
               <a
                 className="underline"
                 href="https://www.chromatic.com/?ref=storybook"

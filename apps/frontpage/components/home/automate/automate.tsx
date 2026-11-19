@@ -15,19 +15,17 @@ export const Automate: FC = () => {
           Add Storybook as a CI step to automate the UI development workflow.
           That helps you and your team ship faster with less manual work.
         </p>
-        <div className="mt-5 text-center">
           <Button
             asChild
-            className="inline-flex"
+            className="mt-5 mx-auto inline-flex max-w-[280px]"
             jumpOnHover
             rounded="full"
             variant="outlineHome"
           >
             <a href="/tutorials/ui-testing-handbook/react/en/automate/">
-              Learn how to setup Storybook in CI
+              Learn how to set up Storybook in CI
             </a>
           </Button>
-        </div>
         <Image src={AutomateSvg} alt="Automate" className="mx-auto mt-16" />
       </Container>
     </div>
