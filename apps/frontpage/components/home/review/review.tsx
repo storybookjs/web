@@ -9,11 +9,11 @@ export function Review() {
     <section className="overflow-hidden border-b border-zinc-600 pt-12 sm:pt-20 md:pt-28">
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
         <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
-          Review what changed, not the diff
+          Review the changes, not the diff
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">
-            When an agent finishes, Storybook shows the key states of the
+            When an agent finishes its work, Storybook shows the key states of the
             components it changed and the pages they affect.
           </p>
           <Link
