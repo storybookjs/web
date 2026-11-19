@@ -4,7 +4,7 @@ import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
 import type { FeatureItem } from '../illustrated-feature-list';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
-import { Accessibility, Code, Eye, Interact, Pixel, Document } from './icons';
+import { Accessibility, Eye, Interact, Pixel, Document } from './icons';
 import { LogoAirbnb } from './logo-airbnb';
 import { AgentTest, TestAgentMedia } from './agent-media';
 
@@ -65,21 +65,10 @@ const features: FeatureItem[] = [
     poster: '/home/test/homepage-test-coverage-poster-lg.jpg',
   },
   {
-    icon: <Code />,
-    title: 'Snapshot test markup',
-    description: 'Detect regressions in DOM markup.',
-    link: {
-      label: 'Learn about snapshot tests',
-      href: '/docs/writing-tests/snapshot-testing',
-    },
-    media: '/home/test/homepage-snapshot-testing-lg.mp4',
-    poster: '/home/test/homepage-snapshot-testing-poster-lg.jpg',
-  },
-  {
     icon: <AgentTest />,
     title: 'Agents check their own work',
     description:
-      'Coding agents run the same tests and fix failures before you review.',
+      'Run component and a11y tests, then fix failures before you review.',
     link: {
       label: 'Learn about Storybook for AI',
       href: '/docs/ai',
