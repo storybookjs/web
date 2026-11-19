@@ -102,7 +102,7 @@ export function Hero({
         Storybook 11 is here
       </GradientBadge>
       <h1 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
-        Build UI with agents, using your components
+        Build UI that holds up, whoever writes the code.
       </h1>
       <div className="mb-8 flex-1 pt-4 md:mb-20">
         <p className="mb-8 max-w-[545px] leading-7 sm:mb-12">
@@ -154,16 +154,16 @@ export function Hero({
             Version
             <div className="relative mx-3">
               <Image
-                alt="Storybook 9"
+                alt="Storybook 11"
                 height={39}
                 // Generated using Noto Sans font in Figma
                 src="/home/version.svg"
-                width={52}
+                width={46}
               />
               <Star delay={1} x={-36} y={-10} />
               <Star delay={0.2} w={7} x={-16} y={-20} />
               <Star delay={2} x={24} y={-34} />
-              <Star delay={0.4} w={7} x={52} y={28} />
+              <Star delay={0.4} w={7} x={46} y={28} />
             </div>
           </a>
         </div>
