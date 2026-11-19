@@ -101,14 +101,14 @@ export function Hero({
         Storybook 11 is here
       </GradientBadge>
       <h1 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
-        Build UI that holds up, whoever writes the code.
+        Build UI you can trust, whoever writes the code
       </h1>
-      <div className="mb-8 flex-1 pt-4 md:mb-20">
-        <p className="mb-8 max-w-[545px] leading-7 sm:mb-12">
-          Storybook is a frontend workshop for building, testing, and
-          documenting UI. Coding agents use it too: they reuse your components,
-          write stories for what&apos;s new, and fix test failures before you
-          review. It&apos;s open source and free.
+      <div className="mb-8 flex-1 pt-6 md:mb-20">
+        <p className="mb-8 max-w-[500px] leading-7 sm:mb-12">
+          Storybook is a free, open source frontend workshop for building,
+          testing, and documenting UI. The components and stories you build
+          become context your agent can read to reuse your components, write
+          stories, and run your tests before you review.
         </p>
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-8 sm:flex-row">
