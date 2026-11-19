@@ -7,7 +7,7 @@ const meta = preview.meta({
   globals: { backgrounds: { value: 'dark' } },
   parameters: {
     layout: 'fullscreen',
-    chromatic: { viewports: [320, 768, 1200] },
+    chromatic: { viewports: [320, 768, 1200], pauseAnimationAtEnd: true },
   },
   decorators: [
     (Story) => (
