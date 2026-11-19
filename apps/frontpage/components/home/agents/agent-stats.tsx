@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 
-// TODO: Replace with the study URL once it's published
-const STUDY_URL = '#';
+// Set this to the study URL once it's published. While it's undefined, the
+// "See the study" link stays hidden.
+export const STUDY_URL: string | undefined = undefined;
 
 const stats = [
   {
@@ -15,9 +16,9 @@ const stats = [
   },
 ];
 
-export function AgentStats() {
+export function AgentStats({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
   return (
-    <div className="mt-12 rounded-lg bg-white/[0.03] p-6 sm:mt-16 sm:p-8">
+    <div className="rounded-lg bg-white/[0.03] p-6 sm:p-8">
       <div className="grid gap-8 sm:grid-cols-2 sm:gap-16">
         {stats.map((stat) => (
           <div key={stat.headline}>
@@ -30,14 +31,19 @@ export function AgentStats() {
       </div>
       <p className="max-w-[640px] pt-6 leading-7 text-white">
         In our tests, agents with Storybook skills spent less time searching the
-        codebase and more time reading the design system.{' '}
-        <Link
-          className="inline-flex items-center gap-1 font-bold text-blue-500"
-          href={STUDY_URL}
-        >
-          See the study
-          <ChevronSmallRightIcon aria-hidden />
-        </Link>
+        codebase and more time reading the design system.
+        {studyUrl ? (
+          <>
+            {' '}
+            <Link
+              className="inline-flex items-center gap-1 font-bold text-blue-500"
+              href={studyUrl}
+            >
+              See the study
+              <ChevronSmallRightIcon aria-hidden />
+            </Link>
+          </>
+        ) : null}
       </p>
     </div>
   );

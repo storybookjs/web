@@ -18,4 +18,10 @@ const meta = preview.meta({
   ],
 });
 
+/** The study isn't published yet, so the link is hidden. */
 export const Default = meta.story({});
+
+/** How the stats look once `STUDY_URL` is set. */
+export const WithStudyLink = meta.story({
+  args: { studyUrl: 'https://storybook.js.org/blog' },
+});
