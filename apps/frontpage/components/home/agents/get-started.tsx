@@ -40,12 +40,14 @@ export function GetStarted() {
       <div className="flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:items-center">
         <ul className="m-0 flex list-none flex-wrap gap-3 p-0">
           {options.map((option) => (
-            <li
-              className="flex h-10 items-center gap-2 rounded-full border border-zinc-600 pl-3 pr-4 text-sm font-bold text-white"
-              key={option.name}
-            >
-              {option.icon}
-              {option.name}
+            <li key={option.name}>
+              <Link
+                className="flex h-10 items-center gap-2 rounded-full border border-zinc-600 pl-3 pr-4 text-sm font-bold text-white transition-colors hover:border-blue-500 focus-visible:border-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-homeBackground"
+                href="/docs/ai"
+              >
+                {option.icon}
+                {option.name}
+              </Link>
             </li>
           ))}
         </ul>
