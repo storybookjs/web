@@ -90,6 +90,15 @@ export function Develop() {
               <div className="text-zinc-400">+ 6</div>
             </div>
           </div>
+          <div className="mt-10 flex flex-col gap-4">
+            <h3 className="text-2xl font-bold">
+              Agents write stories for what they build
+            </h3>
+            <p className="text-md leading-7">
+              Every new or changed state gets a story, so you can see what the
+              agent made.
+            </p>
+          </div>
         </div>
       </Container>
       <Container className="grid grid-flow-dense justify-items-center gap-24 pt-28 md:grid-cols-[minmax(max-content,_320px)_1fr] md:justify-items-start md:pt-[27rem]">

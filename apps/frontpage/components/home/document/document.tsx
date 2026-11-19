@@ -75,6 +75,15 @@ export const Document: FC = () => {
             place. That helps your team and AI agents adopt existing UI
             patterns.
           </p>
+          <div className="flex flex-col gap-4">
+            <h3 className="text-2xl font-bold">
+              Agents reuse what you already have
+            </h3>
+            <p className="text-md leading-7">
+              Agents read your components, APIs, and examples before they write
+              code.
+            </p>
+          </div>
         </div>
       </Container>
       <IllustratedFeatureList
