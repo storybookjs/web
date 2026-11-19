@@ -33,11 +33,11 @@ const integrations = [
 
 export function IntegrationLogos() {
   return (
-    <div className="flex flex-col items-center gap-7 pt-12 md:pt-16">
+    <div className="flex flex-col items-center gap-6 pt-12 md:pt-16">
       <span className="text-sm text-white/60">
         Works with your coding agent
       </span>
-      <div className="flex w-full flex-wrap items-center justify-center gap-6 md:justify-between">
+      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 md:gap-12">
         {integrations.map((integration) => (
           <Image
             alt={integration.name}
