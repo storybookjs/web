@@ -2,11 +2,13 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
+import type { FeatureItem } from '../illustrated-feature-list';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
 import { Branch, Document as Doc, Overlap, Search } from './icons';
 import { LogoGitlab } from './logo-gitlab';
+import { AgentReuse, DocumentAgentMedia } from './agent-media';
 
-const features = [
+const features: FeatureItem[] = [
   {
     icon: <Search />,
     title: 'Find any component or page in your app',
@@ -52,19 +54,32 @@ const features = [
     media: '/home/document/homepage-component-history-lg.mp4',
     poster: '/home/document/homepage-component-history-poster-lg.jpg',
   },
+  {
+    icon: <AgentReuse />,
+    title: 'Agents reuse what you already have',
+    description:
+      'Agents read your components, APIs, and examples before they write code.',
+    link: {
+      label: 'Learn about Storybook for AI',
+      href: '/docs/ai',
+    },
+    illustration: <DocumentAgentMedia />,
+  },
 ];
 
 export const Document: FC = () => {
   return (
     <div className="overflow-hidden border-b border-zinc-600 pt-12 sm:pt-20 md:pt-28">
-      {features.map((feature) => (
-        <Link
-          as="video"
-          href={feature.media}
-          key={feature.title}
-          rel="preload"
-        />
-      ))}
+      {features.map((feature) =>
+        feature.media ? (
+          <Link
+            as="video"
+            href={feature.media}
+            key={feature.title}
+            rel="preload"
+          />
+        ) : null,
+      )}
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
         <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
           Document UI for your team to reuse
@@ -75,15 +90,6 @@ export const Document: FC = () => {
             place. That helps your team and AI agents adopt existing UI
             patterns.
           </p>
-          <div className="flex flex-col gap-4">
-            <h3 className="text-2xl font-bold">
-              Agents reuse what you already have
-            </h3>
-            <p className="text-md leading-7">
-              Agents read your components, APIs, and examples before they write
-              code.
-            </p>
-          </div>
         </div>
       </Container>
       <IllustratedFeatureList
