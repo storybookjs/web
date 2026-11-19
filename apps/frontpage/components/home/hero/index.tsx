@@ -15,13 +15,13 @@ import { InitCommand } from './init-command';
 import { Chrome } from './chrome';
 import SocialProof from './social-proof';
 
-// The Agents slide is index 0, so the rest line up with the Manager's slides
+// Labels line up with the Manager's SLIDES indices
 const features = [
-  'Agents',
   'Development',
   'Interaction testing',
   'Visual testing',
   'Documentation',
+  'Agents',
 ];
 
 function Star({ x = 0, y = 0, w = 14, delay = 0 }) {
@@ -76,9 +76,8 @@ export function Hero({
   const nextSlide = (s: number) => (s === features.length - 1 ? 0 : s + 1);
   const prevSlide = (s: number) => (s === 0 ? features.length - 1 : s - 1);
 
-  // The Agents slide advances when its video ends, not on a timer
   useEffect(() => {
-    if (!autoplay || slide === 0) return;
+    if (!autoplay) return;
     const timeoutId = window.setTimeout(() => {
       setSlide(nextSlide);
     }, 4500);
@@ -212,28 +211,8 @@ export function Hero({
           ))}
         </div>
       </div>
-      {slide === 0 ? (
-        <div className="flex h-[656px] items-center overflow-hidden rounded-md bg-black/40 ring-1 ring-white/10 sm:h-[756px]">
-          <video
-            autoPlay
-            className="w-full"
-            loop={!autoplay}
-            muted
-            onEnded={() => {
-              setSlide(1);
-            }}
-            playsInline
-            poster="/home/agents-hero.png"
-          >
-            <source src="/home/agents-hero.m4v" type="video/mp4" />
-          </video>
-        </div>
-      ) : (
-        <>
-          <Chrome />
-          <Manager slide={slide} />
-        </>
-      )}
+      <Chrome />
+      <Manager slide={slide} />
       <SocialProof />
     </Container>
   );
