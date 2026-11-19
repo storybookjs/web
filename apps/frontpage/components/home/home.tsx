@@ -14,6 +14,9 @@ import { Share } from './share/share';
 import { Automate } from './automate/automate';
 import { SocialValidation } from './social-validation/social-validation';
 
+// Keeps a section's top clear of the sticky nav when jumping to its anchor
+const sectionClassName = 'scroll-mt-10 md:scroll-mt-18';
+
 interface HomeProps {
   githubCount: number;
   npmDownloads: string;
@@ -85,29 +88,39 @@ export function Home({
           activeSection={activeSection}
           isVisible={Boolean(activeSection)}
         />
-        <div id="develop" ref={developRef} style={{ contain: 'paint' }}>
+        <div
+          className={sectionClassName}
+          id="develop"
+          ref={developRef}
+          style={{ contain: 'paint' }}
+        >
           <Develop />
         </div>
-        <div id="test" ref={testRef}>
+        <div className={sectionClassName} id="test" ref={testRef}>
           <Test />
         </div>
-        <div id="document" ref={documentRef}>
+        <div className={sectionClassName} id="document" ref={documentRef}>
           <Document />
         </div>
-        <div id="review" ref={reviewRef}>
+        <div className={sectionClassName} id="review" ref={reviewRef}>
           <Review />
         </div>
         {/* Keep the #agents anchor: the /ai redirect points to it */}
-        <div id="agents" ref={agentsRef}>
+        <div className={sectionClassName} id="agents" ref={agentsRef}>
           <Agents />
         </div>
-        <div id="share" ref={shareRef}>
+        <div className={sectionClassName} id="share" ref={shareRef}>
           <Share />
         </div>
-        <div id="automate" ref={automateRef} style={{ contain: 'paint' }}>
+        <div
+          className={sectionClassName}
+          id="automate"
+          ref={automateRef}
+          style={{ contain: 'paint' }}
+        >
           <Automate />
         </div>
-        <div id="who" ref={whoRef}>
+        <div className={sectionClassName} id="who" ref={whoRef}>
           <SocialValidation
             contributorCount={contributorCount}
             discordMembers={discordMembers}

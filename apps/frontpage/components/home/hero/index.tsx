@@ -8,7 +8,12 @@ import { useAnalytics } from '@repo/utils/analytics';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { ChevronLeftIcon, ChevronRightIcon, WandIcon } from '@storybook/icons';
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronSmallDownIcon,
+  WandIcon,
+} from '@storybook/icons';
 import { Container, GradientBadge } from '@repo/ui';
 import { Manager, SLIDES } from '../manager';
 import { AgentChat } from '../manager/agent-chat';
@@ -167,6 +172,20 @@ export function Hero({
             </div>
           </a>
         </div>
+        {/* Keep the number in sync with the Agents section stats */}
+        <p className="mt-10 text-sm leading-6 text-white/70">
+          Agents finish UI tasks 23% faster with Storybook.{' '}
+          <a
+            className="inline-flex items-center gap-1 font-bold text-blue-500"
+            href="#agents"
+            onClick={() => {
+              track('AgentsAnchorClick', { location: 'hero' });
+            }}
+          >
+            See how
+            <ChevronSmallDownIcon />
+          </a>
+        </p>
       </div>
       <div className="flex select-none justify-between border-t border-t-white/20 md:justify-center">
         <div className="flex h-20 w-full items-center justify-between md:hidden">
