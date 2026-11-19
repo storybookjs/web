@@ -19,7 +19,7 @@ export const Content: FC<{ page: PageDataProps }> = ({ page }) => {
           >
             {page.title ?? 'Title is missing'}
           </h1>
-          <div className="mb-8 flex flex-col items-start gap-2 min-[430px]:flex-row min-[430px]:justify-between">
+          <div className="mb-8 flex flex-col items-start gap-2 min-[430px]:flex-row min-[430px]:flex-wrap min-[430px]:justify-between">
             {!page.hideRendererSelector && <Renderers />}
             <CopyMarkdownButton />
           </div>
