@@ -9,7 +9,6 @@ import { Community } from '../../community';
 import { Youtube } from '../../logos/youtube';
 import BlueskySvg from '../share/images/bluesky.svg';
 import XSvg from '../share/images/x.svg';
-import { ClosingCta } from './closing-cta';
 
 const projects = [
   {
@@ -358,7 +357,6 @@ export function SocialValidation({
           </div>
         </div>
       </Container>
-      <ClosingCta />
     </section>
   );
 }
