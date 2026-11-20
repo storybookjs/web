@@ -48,7 +48,7 @@ export const IntegrationsCarousel: FC<IntegrationsCarouselProps> = ({
             <Image alt={name ?? ''} src={image} />
           </button>
         ))}
-        <div className="ml-2 text-slate-500">+ and more</div>
+        <div className="ml-2 text-zinc-400">+ and more</div>
       </div>
     </div>
   );

@@ -5,31 +5,34 @@ import { Testimonial } from '../testimonial';
 import { LogoCloudbees } from './logo-cloudbee';
 import { PublishIntegrations } from './publish-integrations';
 import { EmbedIntegrations } from './embed-integrations';
+import { ShareContextAnimation } from './share-context-animation';
 
 export function Share() {
   return (
     <div className="overflow-hidden border-b border-zinc-600 pt-12 sm:pt-20 md:pt-28">
       <Container className="justify-between gap-20 text-white md:flex">
         <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
-          Share how the UI actually works
+          Share UI context across teams
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 max-w-[520px] leading-7">
-            Stories show how UIs actually work not just a static design of how
-            they&apos;re supposed to work. That keeps everyone aligned on
-            what&apos;s currently in production.
+            Stories show how the UI actually works, not just a static design of
+            how it&apos;s supposed to work. Publish your Storybook so teammates,
+            agents, and CI all work from the same reviewed context. Humans still
+            decide what enters it.
           </p>
         </div>
       </Container>
       <Container>
-        <div className="flex flex-col gap-8 pt-12 sm:gap-16 md:flex-row md:items-center md:gap-24 md:pt-40">
+        <ShareContextAnimation />
+        <div className="flex flex-col gap-8 pt-4 sm:gap-16 md:flex-row md:items-center md:gap-24 md:pt-16">
           <div className="flex max-w-[520px] flex-shrink-0 flex-col gap-6 text-white md:max-w-[320px]">
             <h3 className="text-2xl font-bold">
-              Publish Storybook to get sign off from teammates
+              Publish one reviewed source of UI context
             </h3>
             <p className="text-md leading-7">
-              Publish Storybook as a website for stakeholders to reference. Your
-              team can check that the UI looks right without touching code.{' '}
+              Publish Storybook as a website so teammates can check that the UI
+              looks right without touching code.{' '}
               <a
                 className="underline"
                 href="https://www.chromatic.com/?ref=storybook"
@@ -38,6 +41,7 @@ export function Share() {
               </a>{' '}
               also hosts your Storybook&apos;s MCP server, so every coding agent
               in your organization works from the same components and docs.
+              Updates stay reviewable, with permissions and history.
             </p>
             <Link
               className="flex items-center gap-2 font-bold text-blue-500"
