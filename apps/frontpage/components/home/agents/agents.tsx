@@ -77,8 +77,42 @@ function BenchmarkReadout() {
           benchmark results
         </span>
       </div>
-      <div className="overflow-x-auto bg-[#282C34] px-6 py-7 font-mono text-sm/[1.6]">
-        <table className="w-full min-w-[420px] border-collapse">
+      <div className="bg-[#282C34] px-5 py-6 font-mono text-sm/[1.6] sm:px-6 sm:py-7">
+        {/* Narrow screens: one block per metric, so the result stays visible */}
+        <dl className="m-0 grid gap-6 sm:hidden">
+          {agentStatRows.map((stat, index) => (
+            <div className="grid gap-3" key={stat.metric}>
+              <dt className="border-b border-dashed border-[#3f4652] pb-2 text-zinc-400">
+                {stat.metric}
+              </dt>
+              <dd className="m-0 flex items-baseline gap-3">
+                <span className="text-[28px]/none font-bold tabular-nums text-[#66BF3C]">
+                  {stat.value}
+                </span>
+                <span className="text-[13px] text-zinc-400">{stat.label}</span>
+              </dd>
+              <dd className="m-0 grid grid-cols-[auto_1fr_auto] items-center gap-x-3 gap-y-2 text-[13px] tabular-nums">
+                <span className="text-zinc-400">Without Storybook</span>
+                <MiniBar
+                  color="#FC521F"
+                  delay={index * 150}
+                  filled={inView}
+                  percent={100}
+                />
+                <span>100%</span>
+                <span className="text-zinc-400">With Storybook</span>
+                <MiniBar
+                  color="#66BF3C"
+                  delay={index * 150 + 200}
+                  filled={inView}
+                  percent={stat.withStorybook}
+                />
+                <span>{stat.withStorybook}%</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <table className="hidden w-full border-collapse sm:table">
           <thead>
             <tr>
               {['Metric', 'Without Storybook', 'With Storybook', 'Result'].map(
