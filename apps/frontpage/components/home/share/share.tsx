@@ -1,11 +1,31 @@
-import Link from 'next/link';
-import { ChevronSmallRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
 import { LogoCloudbees } from './logo-cloudbee';
-import { PublishIntegrations } from './publish-integrations';
-import { EmbedIntegrations } from './embed-integrations';
 import { ShareContextAnimation } from './share-context-animation';
+
+const features = [
+  {
+    title: 'Publish a single canonical UI context',
+    description: (
+      <>
+        Publish your Storybook using{' '}
+        <a
+          className="text-blue-500"
+          href="https://www.chromatic.com/?ref=storybook"
+        >
+          Chromatic
+        </a>{' '}
+        so agents, tools, and CI reference the same UI context. AI never
+        operates against stale or invalid context.
+      </>
+    ),
+  },
+  {
+    title: 'Control updates to UI context',
+    description:
+      'Changes to UI context are explicit and human reviewable. Chromatic tracks updates, enforces permissions, and preserves history so agents operate against approved context.',
+  },
+];
 
 export function Share() {
   return (
@@ -25,52 +45,13 @@ export function Share() {
       </Container>
       <Container>
         <ShareContextAnimation />
-        <div className="flex flex-col gap-8 pt-4 sm:gap-16 md:flex-row md:items-center md:gap-24 md:pt-16">
-          <div className="flex max-w-[520px] flex-shrink-0 flex-col gap-6 text-white md:max-w-[320px]">
-            <h3 className="text-2xl font-bold">
-              Publish one reviewed source of UI context
-            </h3>
-            <p className="text-md leading-7">
-              Publish Storybook as a website so teammates can check that the UI
-              looks right without touching code.{' '}
-              <a
-                className="underline"
-                href="https://www.chromatic.com/?ref=storybook"
-              >
-                Chromatic
-              </a>{' '}
-              also hosts your Storybook&apos;s MCP server, so every coding agent
-              in your organization works from the same components and docs.
-              Updates stay reviewable, with permissions and history.
-            </p>
-            <Link
-              className="flex items-center gap-2 font-bold text-blue-500"
-              href="/docs/sharing/publish-storybook"
-            >
-              Publish Storybook
-              <ChevronSmallRightIcon />
-            </Link>
-          </div>
-          <PublishIntegrations />
-        </div>
-        <div className="flex flex-col gap-8 pt-12 sm:gap-16 md:flex-row md:items-center md:gap-24 md:pt-48">
-          <div className="flex max-w-[520px] flex-shrink-0 flex-col gap-6 text-white md:max-w-[320px]">
-            <h3 className="text-2xl font-bold">
-              Embed stories in wikis, Markdown, and Figma
-            </h3>
-            <p className="text-md leading-7">
-              Embed stories to showcase your work to teammates and the developer
-              community. Works with the oEmbed standard.
-            </p>
-            <Link
-              className="flex items-center gap-2 font-bold text-blue-500"
-              href="/docs/sharing/embed"
-            >
-              Embed stories
-              <ChevronSmallRightIcon />
-            </Link>
-          </div>
-          <EmbedIntegrations />
+        <div className="mx-auto grid gap-12 pb-12 text-white md:grid-cols-2 md:pb-20 lg:gap-20">
+          {features.map((feature) => (
+            <div key={feature.title}>
+              <h3 className="mb-2 font-bold">{feature.title}</h3>
+              <p className="leading-relaxed">{feature.description}</p>
+            </div>
+          ))}
         </div>
       </Container>
       <Testimonial
