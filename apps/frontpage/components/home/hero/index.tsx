@@ -3,7 +3,7 @@
 'use client';
 
 import Link from 'next/link';
-import { cn, latestVersion } from '@repo/utils';
+import { cn } from '@repo/utils';
 import { useAnalytics } from '@repo/utils/analytics';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -15,6 +15,11 @@ import { AgentChat } from '../manager/agent-chat';
 import { InitCommand } from './init-command';
 import { Chrome } from './chrome';
 import SocialProof from './social-proof';
+
+// The major version the home page shows. Hard-coded to 11 to match the badge
+// and the desktop version art while 11 is in beta. Switch back to
+// `latestVersion.id.split('.')[0]` once 11 is the latest docs version.
+const displayedMajorVersion = '11';
 
 // Labels line up with the Manager's SLIDES indices
 const features = [
@@ -131,7 +136,7 @@ export function Hero({
                 href="https://github.com/storybookjs/storybook/releases"
               >
                 <div className="text-md text-white">
-                  v{latestVersion.id.split('.')[0]}
+                  v{displayedMajorVersion}
                 </div>
                 <div className="text-sm text-white/60">Latest version</div>
               </a>
@@ -154,7 +159,7 @@ export function Hero({
             Version
             <div className="relative mx-3">
               <Image
-                alt="Storybook 11"
+                alt={`Storybook ${displayedMajorVersion}`}
                 height={39}
                 // Generated using Noto Sans font in Figma
                 src="/home/version.svg"
