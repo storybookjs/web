@@ -20,6 +20,7 @@ const meta = preview.meta({
 
 export const Benchmark = meta.story({});
 
-export const Skills = meta.story({
+// The "Works with your coding agent" row from the section header
+export const CodingAgents = meta.story({
   render: () => <AgentSkills />,
 });

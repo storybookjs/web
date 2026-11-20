@@ -2,9 +2,7 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useInView } from 'framer-motion';
-import { ChevronSmallRightIcon } from '@storybook/icons';
 
 // Set this to the study URL once it's published. While it's undefined, the
 // "See the study" link stays hidden.
@@ -187,39 +185,30 @@ export function BenchmarkReadout() {
   );
 }
 
-/** The docs link and the agents Storybook works with */
+/** The coding agents Storybook works with */
 export function AgentSkills() {
   return (
-    <div className="flex flex-col gap-10">
-      <Link
-        className="flex w-fit items-center gap-2 font-bold text-blue-500"
-        href="/docs/ai"
-      >
-        Read the docs
-        <ChevronSmallRightIcon />
-      </Link>
-      {/* Same label and icon squares as the Context section's "Made for" row */}
-      <div className="flex flex-col gap-4">
-        <div className="text-xs font-bold uppercase tracking-widest text-zinc-300">
-          Works with your coding agent
-        </div>
-        {/* Seven squares fit one row at 375px with the tighter mobile gap */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-4">
-          {agentLogos.map((logo) => (
-            <div
-              className="flex h-10 w-10 items-center justify-center rounded border border-zinc-700"
-              key={logo.name}
-            >
-              <Image
-                alt={logo.name}
-                className="h-6 w-6 rounded-sm"
-                height={24}
-                src={logo.logo}
-                width={24}
-              />
-            </div>
-          ))}
-        </div>
+    // Same label and icon squares as the Context section's "Made for" row
+    <div className="flex flex-col gap-4">
+      <div className="text-xs font-bold uppercase tracking-widest text-zinc-300">
+        Works with your coding agent
+      </div>
+      {/* Seven squares fit one row at 375px with the tighter mobile gap */}
+      <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+        {agentLogos.map((logo) => (
+          <div
+            className="flex h-10 w-10 items-center justify-center rounded border border-zinc-700"
+            key={logo.name}
+          >
+            <Image
+              alt={logo.name}
+              className="h-6 w-6 rounded-sm"
+              height={24}
+              src={logo.logo}
+              width={24}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
