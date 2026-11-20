@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
 import { AgentSkills, BenchmarkReadout, STUDY_URL } from './agent-proof';
-import { GenerateUIAnimation } from './generate-ui-animation';
+import { Skills } from './skills';
 
 const subsectionClassName =
   'justify-between gap-20 border-t border-zinc-700 pt-16 md:flex md:pt-24';
@@ -40,33 +40,16 @@ export function Generate({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
       <Container className="mt-16 text-white md:mt-24 lg:px-8">
         <div className={subsectionClassName}>
           <h3 className={subheadingClassName}>Agent skills</h3>
-          <div className="flex-1 pt-2">
-            <p className="mb-8 leading-7">
-              Storybook includes agent skills that teach coding agents your UI
-              workflow and force them to reuse existing components instead of
-              inventing new ones or hallucinating.
-            </p>
-            <AgentSkills />
-          </div>
+          <p className="m-0 flex-1 pt-2 leading-7">
+            Storybook includes agent skills that teach coding agents your UI
+            workflow and force them to reuse existing components instead of
+            inventing new ones or hallucinating.
+          </p>
         </div>
       </Container>
-      <Container className="mt-16 text-white md:mt-24 lg:px-8">
-        <div className={subsectionClassName}>
-          <h3 className={subheadingClassName}>
-            Generate UI from your components
-          </h3>
-          <div className="flex-1 pt-2">
-            <p className="leading-7">
-              Teams only merge code that conforms to their codebase. You or your
-              agent assemble UI from the components you already have, instead of
-              inventing new ones. This speeds up review and avoids pattern
-              drift.
-            </p>
-          </div>
-        </div>
-      </Container>
-      <Container className="mt-12 md:mt-16 lg:px-8">
-        <GenerateUIAnimation />
+      <Skills />
+      <Container className="mt-12 text-white md:mt-16 lg:px-8">
+        <AgentSkills />
       </Container>
     </section>
   );
