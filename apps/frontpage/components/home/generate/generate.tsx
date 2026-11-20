@@ -41,13 +41,15 @@ export function Generate({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
           <h3 className={subheadingClassName}>
             Storybook equips agents with skills that teach them your UI workflow
           </h3>
-          <p className="m-0 flex-1 pt-2 leading-7">
-            They force agents to reuse existing components instead of inventing
-            new ones or hallucinating.
-          </p>
-        </div>
-        <div className="mt-12 md:mt-16">
-          <AgentSkills />
+          <div className="flex-1 pt-2">
+            <p className="m-0 leading-7">
+              They force agents to reuse existing components instead of
+              inventing new ones or hallucinating.
+            </p>
+            <div className="mt-10">
+              <AgentSkills />
+            </div>
+          </div>
         </div>
       </Container>
       <Skills />

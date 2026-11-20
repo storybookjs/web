@@ -19,8 +19,9 @@ const meta = preview.meta({
 });
 
 /**
- * The benchmark leads, then the skills title and paragraph, the install row
- * (skill links, docs link, supported agents) and the five-skill block. The
+ * The benchmark leads, then the skills title on the left with the paragraph
+ * and install row (skill links, docs link, supported agents) on the right,
+ * then the five-skill block. The
  * study isn't published yet, so its link is hidden.
  */
 export const Default = meta.story({});
