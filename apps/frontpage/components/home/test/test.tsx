@@ -6,7 +6,7 @@ import type { FeatureItem } from '../illustrated-feature-list';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
 import { Accessibility, Eye, Interact, Pixel, Document } from './icons';
 import { LogoAirbnb } from './logo-airbnb';
-import { AgentTest, TestAgentMedia } from './agent-media';
+import { EnforceQualityAnimation } from './enforce-quality-animation';
 
 const features: FeatureItem[] = [
   {
@@ -34,7 +34,8 @@ const features: FeatureItem[] = [
   {
     icon: <Interact />,
     title: 'Interaction test behavior',
-    description: 'Simulate user behavior and assert in the browser.',
+    description:
+      'Simulate user behavior and assert in the browser. Failures point to the story and assertion that broke.',
     link: {
       label: 'Learn about interaction tests',
       href: '/docs/writing-tests/interaction-testing',
@@ -45,7 +46,7 @@ const features: FeatureItem[] = [
   {
     icon: <Accessibility />,
     title: 'Accessibility tests',
-    description: 'Check stories for WCAG and ARIA issues.',
+    description: 'Check every story for WCAG and ARIA issues.',
     link: {
       label: 'Learn about accessibility tests',
       href: '/docs/writing-tests/accessibility-testing',
@@ -64,22 +65,11 @@ const features: FeatureItem[] = [
     media: '/home/test/homepage-test-coverage-lg.mp4',
     poster: '/home/test/homepage-test-coverage-poster-lg.jpg',
   },
-  {
-    icon: <AgentTest />,
-    title: 'Agents check their own work',
-    description:
-      'Run component and a11y tests, then fix failures before you review.',
-    link: {
-      label: 'Learn about Storybook for AI',
-      href: '/docs/ai',
-    },
-    illustration: <TestAgentMedia />,
-  },
 ];
 
 export const Test: FC = () => {
   return (
-    <div className="border-b border-zinc-600 pt-12 sm:pt-20 md:pt-28">
+    <div className="overflow-x-clip border-b border-zinc-600 pt-12 sm:pt-20 md:pt-28">
       {features.map((feature) =>
         feature.media ? (
           <Link
@@ -96,12 +86,20 @@ export const Test: FC = () => {
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">
-            Stories capture the “known good” states of UI components.
-            They&apos;re a pragmatic, reproducible way to keep track of UI edge
-            cases. Storybook uses them to power automated tests.
+            Stories capture the “known good” states of UI components.{' '}
+            <Link className="text-blue-500" href="/docs/writing-tests">
+              Storybook Test
+            </Link>{' '}
+            runs them in a real browser as interaction and accessibility tests,
+            with fast feedback on every change.
+          </p>
+          <p className="mb-6 leading-7">
+            Failures go back to whoever wrote the code, you or your agent, to
+            fix and re-run until tests pass. You step in once they do.
           </p>
         </div>
       </Container>
+      <EnforceQualityAnimation />
       <IllustratedFeatureList bgColor="#FDDD9C" features={features} />
       <Testimonial
         avatarUrl="https://avatars2.githubusercontent.com/u/1247751?s=100&v=4"

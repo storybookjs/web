@@ -74,9 +74,9 @@ export function EnforceQualityAnimation() {
         data-chromatic="ignore"
       >
         <figcaption className="sr-only">
-          Illustration of Storybook Test feedback loop: Agents generate code,
-          Storybook runs tests to validate the code and results are sent back to
-          agents to iterate until tests pass.
+          Illustration of the Storybook Test feedback loop: code from you or
+          your agent goes to Storybook, which runs the tests and sends failures
+          back to fix until the tests pass.
         </figcaption>
         <Image
           className="absolute left-0 top-10 block w-full -translate-y-1/4"
