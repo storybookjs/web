@@ -5,7 +5,7 @@ import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
 import { LogoAirbnb } from './logo-airbnb';
 import { EnforceQualityAnimation } from './enforce-quality-animation';
-import { FeatureGridWithUrlSwitch } from './feature-grid/feature-grid';
+import { FeatureGrid } from './feature-grid';
 
 export const Test: FC = () => {
   return (
@@ -38,7 +38,7 @@ export const Test: FC = () => {
       </Container>
       <EnforceQualityAnimation />
       <Container className="pb-12 pt-12 text-white sm:pt-16 md:pb-20 lg:px-8">
-        <FeatureGridWithUrlSwitch />
+        <FeatureGrid />
       </Container>
       <Testimonial
         avatarUrl="https://avatars2.githubusercontent.com/u/1247751?s=100&v=4"
