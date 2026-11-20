@@ -3,7 +3,14 @@ import Link from 'next/link';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
-import { Accessibility, Eye, Interact, Pixel, Document } from './icons';
+import {
+  Accessibility,
+  Eye,
+  Interact,
+  Pixel,
+  Document,
+  Pipeline,
+} from './icons';
 import { LogoAirbnb } from './logo-airbnb';
 import { EnforceQualityAnimation } from './enforce-quality-animation';
 
@@ -39,6 +46,12 @@ const features: Feature[] = [
     icon: <Document />,
     title: 'Coverage Reports',
     description: 'Track how much of your frontend code is tested.',
+  },
+  {
+    icon: <Pipeline />,
+    title: 'Test in CI',
+    description:
+      'Run the same story tests in CI and see the results as a status check on each pull request.',
   },
 ];
 
