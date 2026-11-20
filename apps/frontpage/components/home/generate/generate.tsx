@@ -39,7 +39,7 @@ export function Generate({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
       <Container className="mt-24 text-white md:mt-40 lg:px-8">
         <div className={subsectionClassName}>
           <h3 className={subheadingClassName}>
-            Storybook equips agents with skills that teach them your UI workflow
+            Skills that teach agents your UI workflow
           </h3>
           <div className="flex-1 pt-2">
             <p className="m-0 leading-7">
