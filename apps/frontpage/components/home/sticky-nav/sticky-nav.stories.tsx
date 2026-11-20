@@ -19,11 +19,11 @@ const meta = preview.meta({
 });
 
 export const Visible = meta.story({
-  args: { isVisible: true, activeSection: 'develop' },
+  args: { isVisible: true, activeSection: 'context' },
 });
 
-export const TestActive = meta.story({
-  args: { isVisible: true, activeSection: 'test' },
+export const VerifyActive = meta.story({
+  args: { isVisible: true, activeSection: 'verify' },
 });
 
 export const Hidden = meta.story({

@@ -3,10 +3,9 @@ import preview from '../../../.storybook/preview';
 import { MobileMenu } from './mobile-menu';
 
 const items = [
-  { id: 'develop', label: 'Develop', href: '#develop' },
-  { id: 'agents', label: 'Agents', href: '#agents' },
-  { id: 'test', label: 'Test', href: '#test' },
-  { id: 'document', label: 'Document', href: '#document' },
+  { id: 'context', label: 'Context', href: '#context' },
+  { id: 'generate', label: 'Generate', href: '#generate' },
+  { id: 'verify', label: 'Verify', href: '#verify' },
   { id: 'review', label: 'Review', href: '#review' },
   { id: 'share', label: 'Share', href: '#share' },
   { id: 'automate', label: 'Automate', href: '#automate' },
@@ -16,8 +15,12 @@ const items = [
 const meta = preview.meta({
   title: 'Home/StickyNav/MobileMenu',
   component: MobileMenu,
-  globals: { backgrounds: { value: 'dark' } },
-  parameters: { layout: 'centered' },
+  // The menu only shows below the md breakpoint
+  globals: {
+    backgrounds: { value: 'dark' },
+    viewport: { value: 'mobile1', isRotated: false },
+  },
+  parameters: { layout: 'centered', chromatic: { viewports: [320] } },
   decorators: [
     (Story) => (
       <div className="bg-homeBackground p-4">
@@ -28,16 +31,16 @@ const meta = preview.meta({
 });
 
 export const Closed = meta.story({
-  args: { items, label: 'Develop' },
+  args: { items, label: 'Context' },
 });
 
 export const Open = meta.story({
-  args: { items, label: 'Develop' },
+  args: { items, label: 'Context' },
   play: async ({ canvas }) => {
-    await userEvent.click(canvas.getByRole('button', { name: /Develop/ }));
+    await userEvent.click(canvas.getByRole('button', { name: /Context/ }));
     const body = within(document.body);
     await expect(
-      await body.findByRole('menuitem', { name: 'Test' }),
+      await body.findByRole('menuitem', { name: 'Verify' }),
     ).toBeInTheDocument();
   },
 });

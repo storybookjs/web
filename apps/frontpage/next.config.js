@@ -115,7 +115,7 @@ module.exports = withBundleAnalyzer(
         // The AI landing page was folded into the homepage for Storybook 11
         {
           source: '/ai{/}?',
-          destination: '/#agents',
+          destination: '/#generate',
           permanent: true,
         },
       ];

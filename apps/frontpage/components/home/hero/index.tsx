@@ -177,7 +177,7 @@ export function Hero({
           Agents finish UI tasks 23% faster with Storybook.{' '}
           <a
             className="inline-flex items-center gap-1 font-bold text-blue-500"
-            href="#agents"
+            href="#generate"
             onClick={() => {
               track('AgentsAnchorClick', { location: 'hero' });
             }}

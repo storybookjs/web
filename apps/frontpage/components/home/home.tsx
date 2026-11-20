@@ -4,11 +4,10 @@ import { Header, Footer, Container } from '@repo/ui';
 import { useMemo, useRef } from 'react';
 import { useInView } from 'framer-motion';
 import { Hero } from './hero';
-import { Agents } from './agents/agents';
 import { Develop } from './develop/develop';
+import { Generate } from './generate/generate';
 import { StickyNav } from './sticky-nav/sticky-nav';
 import { Test } from './test/test';
-import { Document } from './document/document';
 import { Review } from './review/review';
 import { Share } from './share/share';
 import { Automate } from './automate/automate';
@@ -16,6 +15,10 @@ import { SocialValidation } from './social-validation/social-validation';
 
 // Keeps a section's top clear of the sticky nav when jumping to its anchor
 const sectionClassName = 'scroll-mt-10 md:scroll-mt-18';
+
+// useInView margin that shrinks the viewport to a thin line 30% from the top,
+// so the highlighted section is the one under that line, however short it is
+const navLine = '-30% 0px -69% 0px';
 
 interface HomeProps {
   githubCount: number;
@@ -30,48 +33,45 @@ export function Home({
   contributorCount,
   discordMembers,
 }: HomeProps) {
-  const developRef = useRef(null);
-  const developInView = useInView(developRef, { margin: '0px 0px -100% 0px' });
+  // Context sets the nav's visibility, so it only counts once its top
+  // reaches the top 10% of the viewport (the hero has scrolled away). That
+  // band is deeper than the scroll margin, so jumping to #context keeps the nav
+  const contextRef = useRef(null);
+  const contextInView = useInView(contextRef, { margin: '0px 0px -90% 0px' });
 
-  const agentsRef = useRef(null);
-  const agentsInView = useInView(agentsRef);
+  // Every other section is active while it crosses the nav line
+  const generateRef = useRef(null);
+  const generateInView = useInView(generateRef, { margin: navLine });
 
-  // Agents is shorter than most viewports, so Test only takes over once its
-  // top reaches the upper half of the viewport; otherwise Agents never highlights
-  const testRef = useRef(null);
-  const testInView = useInView(testRef, { margin: '0px 0px -50% 0px' });
-
-  const documentRef = useRef(null);
-  const documentInView = useInView(documentRef);
+  const verifyRef = useRef(null);
+  const verifyInView = useInView(verifyRef, { margin: navLine });
 
   const reviewRef = useRef(null);
-  const reviewInView = useInView(reviewRef);
+  const reviewInView = useInView(reviewRef, { margin: navLine });
 
   const shareRef = useRef(null);
-  const shareInView = useInView(shareRef);
+  const shareInView = useInView(shareRef, { margin: navLine });
 
   const automateRef = useRef(null);
-  const automateInView = useInView(automateRef);
+  const automateInView = useInView(automateRef, { margin: navLine });
 
   const whoRef = useRef(null);
-  const whoInView = useInView(whoRef);
+  const whoInView = useInView(whoRef, { margin: navLine });
 
   const activeSection = useMemo(() => {
     if (whoInView) return 'who';
     if (automateInView) return 'automate';
     if (shareInView) return 'share';
     if (reviewInView) return 'review';
-    if (documentInView) return 'document';
-    if (testInView) return 'test';
-    if (agentsInView) return 'agents';
-    if (developInView) return 'develop';
+    if (verifyInView) return 'verify';
+    if (generateInView) return 'generate';
+    if (contextInView) return 'context';
     return null;
   }, [
-    developInView,
-    testInView,
-    documentInView,
+    contextInView,
+    generateInView,
+    verifyInView,
     reviewInView,
-    agentsInView,
     shareInView,
     automateInView,
     whoInView,
@@ -92,21 +92,18 @@ export function Home({
         />
         <div
           className={sectionClassName}
-          id="develop"
-          ref={developRef}
+          id="context"
+          ref={contextRef}
           style={{ contain: 'paint' }}
         >
           <Develop />
         </div>
-        {/* Keep the #agents anchor: the /ai redirect and the hero link point to it */}
-        <div className={sectionClassName} id="agents" ref={agentsRef}>
-          <Agents />
+        {/* The /ai redirect and the hero "See how" link point to #generate */}
+        <div className={sectionClassName} id="generate" ref={generateRef}>
+          <Generate />
         </div>
-        <div className={sectionClassName} id="test" ref={testRef}>
+        <div className={sectionClassName} id="verify" ref={verifyRef}>
           <Test />
-        </div>
-        <div className={sectionClassName} id="document" ref={documentRef}>
-          <Document />
         </div>
         <div className={sectionClassName} id="review" ref={reviewRef}>
           <Review />
