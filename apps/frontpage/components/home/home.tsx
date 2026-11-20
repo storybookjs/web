@@ -30,6 +30,11 @@ export function Home({
   contributorCount,
   discordMembers,
 }: HomeProps) {
+  // Agents sits first, so it also waits until its top reaches the viewport
+  // top before showing the sticky nav
+  const agentsRef = useRef(null);
+  const agentsInView = useInView(agentsRef, { margin: '0px 0px -100% 0px' });
+
   const developRef = useRef(null);
   const developInView = useInView(developRef, { margin: '0px 0px -100% 0px' });
 
@@ -41,9 +46,6 @@ export function Home({
 
   const reviewRef = useRef(null);
   const reviewInView = useInView(reviewRef);
-
-  const agentsRef = useRef(null);
-  const agentsInView = useInView(agentsRef);
 
   const shareRef = useRef(null);
   const shareInView = useInView(shareRef);
@@ -58,11 +60,11 @@ export function Home({
     if (whoInView) return 'who';
     if (automateInView) return 'automate';
     if (shareInView) return 'share';
-    if (agentsInView) return 'agents';
     if (reviewInView) return 'review';
     if (documentInView) return 'document';
     if (testInView) return 'test';
     if (developInView) return 'develop';
+    if (agentsInView) return 'agents';
     return null;
   }, [
     developInView,
@@ -88,6 +90,10 @@ export function Home({
           activeSection={activeSection}
           isVisible={Boolean(activeSection)}
         />
+        {/* Keep the #agents anchor: the /ai redirect and the hero link point to it */}
+        <div className={sectionClassName} id="agents" ref={agentsRef}>
+          <Agents />
+        </div>
         <div
           className={sectionClassName}
           id="develop"
@@ -104,10 +110,6 @@ export function Home({
         </div>
         <div className={sectionClassName} id="review" ref={reviewRef}>
           <Review />
-        </div>
-        {/* Keep the #agents anchor: the /ai redirect points to it */}
-        <div className={sectionClassName} id="agents" ref={agentsRef}>
-          <Agents />
         </div>
         <div className={sectionClassName} id="share" ref={shareRef}>
           <Share />
