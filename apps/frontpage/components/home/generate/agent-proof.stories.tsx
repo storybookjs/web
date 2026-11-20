@@ -1,9 +1,9 @@
 import preview from '../../../.storybook/preview';
-import { AgentProof } from './agent-proof';
+import { AgentSkills, BenchmarkReadout } from './agent-proof';
 
 const meta = preview.meta({
   title: 'Home/Generate/AgentProof',
-  component: AgentProof,
+  component: BenchmarkReadout,
   globals: { backgrounds: { value: 'dark' } },
   parameters: {
     layout: 'fullscreen',
@@ -18,4 +18,8 @@ const meta = preview.meta({
   ],
 });
 
-export const Default = meta.story({});
+export const Benchmark = meta.story({});
+
+export const Skills = meta.story({
+  render: () => <AgentSkills />,
+});

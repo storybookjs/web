@@ -12,7 +12,7 @@ interface StickyNavProps {
 
 type SectionId =
   | 'context'
-  | 'generate'
+  | 'agents'
   | 'verify'
   | 'review'
   | 'share'
@@ -21,7 +21,7 @@ type SectionId =
 
 const items: { id: SectionId; label: string; href: string }[] = [
   { id: 'context', label: 'Context', href: '#context' },
-  { id: 'generate', label: 'Generate', href: '#generate' },
+  { id: 'agents', label: 'Agents', href: '#agents' },
   { id: 'verify', label: 'Verify', href: '#verify' },
   { id: 'review', label: 'Review', href: '#review' },
   { id: 'share', label: 'Share', href: '#share' },
