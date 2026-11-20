@@ -44,16 +44,15 @@ export function Develop() {
   );
 
   // Step 3
-  const agentRef = useRef(null);
-  const { scrollYProgress: agentProgress } = useScroll({
-    target: agentRef,
+  const docsRef = useRef(null);
+  const { scrollYProgress: docsProgress } = useScroll({
+    target: docsRef,
     offset: ['0 0.5', '1 0.5'],
   });
-  // 0 until the step arrives, then one step per agent-written story.
-  const agentStep = useTransform(agentProgress, (value): number => {
-    if (value <= 0.02) return 0;
-    return value < 0.35 ? 1 : 2;
-  });
+  // 0 until the step arrives, then the docs page is open.
+  const docsStep = useTransform(docsProgress, (value): number =>
+    value > 0.02 ? 1 : 0,
+  );
 
   const y = useTransform(
     smoothAppearProgress,
@@ -64,14 +63,14 @@ export function Develop() {
   return (
     <section className="border-b border-zinc-700 pt-12 sm:pt-20 md:pt-28">
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
-        <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
-          Develop every state in isolation
+        <h2 className="flex-1 text-balance text-4xl font-bold md:text-[56px]/[70px]">
+          Build the context your team and agents work from
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">
-            Storybook provides a workshop to build UIs in isolation. It helps
-            you develop hard-to-reach states and edge cases without needing to
-            run the whole app.
+            Storybook is a workshop for building UI in isolation. The
+            components, stories, and docs you make there become a single source
+            of truth for UI, whether you or your agent is writing the code.
           </p>
           <div className="flex flex-col gap-4">
             <div className="text-xs font-bold uppercase tracking-widest text-zinc-300">
@@ -104,7 +103,7 @@ export function Develop() {
           </div>
         </div>
       </Container>
-      <Container className="grid grid-flow-dense justify-items-center gap-24 pt-28 md:grid-cols-[minmax(max-content,_320px)_1fr] md:justify-items-start md:pt-[27rem]">
+      <Container className="grid grid-flow-dense justify-items-center gap-24 pt-28 md:grid-cols-[minmax(max-content,_320px)_1fr] md:justify-items-start md:pt-[20rem]">
         <motion.figure
           className="sticky top-[34%] z-[999] -order-1 m-0 w-full translate-y-[var(--mobile-y)] self-start md:top-[50vh] md:col-[2/3] md:w-[150%] md:max-w-[920px] md:translate-y-[calc(-50%+36px)]"
           style={{ '--mobile-y': y } as React.CSSProperties}
@@ -112,12 +111,12 @@ export function Develop() {
           <ScrollDemo
             appearProgress={smoothAppearProgress}
             isolationProgress={smoothIsolationProgress}
-            agentStep={agentStep}
+            docsStep={docsStep}
             storyIndex={activeStory}
           />
         </motion.figure>
         <div className="col-[1/2] w-full" ref={isolationRef}>
-          <div className="h-[64rem] md:hidden" />
+          <div className="h-[40rem] md:hidden" />
           <div className="sticky bottom-8 flex flex-col gap-6 text-white md:bottom-0 md:top-[50vh] md:max-w-[320px] md:translate-y-[-50%]">
             <h3 className="text-2xl font-bold">
               Build UI components and pages in isolation
@@ -134,10 +133,10 @@ export function Develop() {
               <ChevronSmallRightIcon />
             </Link>
           </div>
-          <div className="hidden h-[64rem] md:block" />
+          <div className="hidden h-[36rem] md:block" />
         </div>
         <div className="col-[1/2] w-full" ref={storiesRef}>
-          <div className="h-[64rem] md:hidden" />
+          <div className="h-[40rem] md:hidden" />
           <div className="sticky bottom-8 flex flex-col gap-6 text-white md:bottom-0 md:top-[50vh] md:max-w-[320px] md:translate-y-[-50%]">
             <h3 className="text-2xl font-bold">
               Mock hard-to-reach edge cases as stories
@@ -155,27 +154,28 @@ export function Develop() {
               <ChevronSmallRightIcon />
             </Link>
           </div>
-          <div className="hidden h-[96rem] md:block" />
+          <div className="hidden h-[60rem] md:block" />
         </div>
-        <div className="col-[1/2] w-full" ref={agentRef}>
-          <div className="h-[64rem] md:hidden" />
+        <div className="col-[1/2] w-full" ref={docsRef}>
+          <div className="h-[40rem] md:hidden" />
           <div className="sticky bottom-8 flex flex-col gap-6 text-white md:bottom-0 md:top-[50vh] md:max-w-[320px] md:translate-y-[-50%]">
             <h3 className="text-2xl font-bold">
-              Agents write stories for what they build
+              Generate UI docs automatically
             </h3>
             <p className="text-md leading-7">
-              Every new or changed state gets a story, so you can see what the
-              agent made.
+              Docs come from your components and stories, so they update as the
+              UI changes. You and your agents always work from the current state
+              of the UI.
             </p>
             <Link
               className="flex items-center gap-2 font-bold text-blue-500"
-              href="/docs/ai/skills/write-stories"
+              href="/docs/writing-docs/introduction"
             >
-              How agents write stories
+              Learn about docs
               <ChevronSmallRightIcon />
             </Link>
           </div>
-          <div className="hidden h-[64rem] md:block" />
+          <div className="hidden h-[36rem] md:block" />
         </div>
       </Container>
       <Container className="grid grid-flow-dense grid-cols-1 items-center justify-items-center gap-12 pt-28 md:grid-cols-[minmax(max-content,_320px)_1fr] md:justify-items-start md:gap-24">

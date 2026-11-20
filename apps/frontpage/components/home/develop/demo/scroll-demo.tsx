@@ -5,6 +5,7 @@ import { useMediaQuery } from '../../../../hooks/use-media-query';
 import { Sidebar, agentStories } from './sidebar';
 import { RangeSlider } from './range-slider';
 import { VSCode } from './vscode';
+import { DocsPage } from './docs-page';
 
 interface ScrollDemoProps {
   appearProgress: MotionValue<number>;
@@ -15,6 +16,11 @@ interface ScrollDemoProps {
    * 1, 2… for each story in `agentStories`.
    */
   agentStep?: MotionValue<number>;
+  /**
+   * Show the generated docs page for RangeSlider: 0 hides it, 1 opens
+   * Overview in the sidebar and the docs page in the canvas.
+   */
+  docsStep?: MotionValue<number>;
 }
 
 const rangeSlider = {
@@ -33,12 +39,23 @@ export function ScrollDemo({
   isolationProgress,
   storyIndex,
   agentStep,
+  docsStep,
   ...props
 }: ScrollDemoProps) {
   const [activeStory, setActiveStory] = useState('default');
   const [agentStory, setAgentStory] = useState(() =>
     agentStoryAt(agentStep?.get() ?? 0),
   );
+
+  const [showDocs, setShowDocs] = useState(() => (docsStep?.get() ?? 0) > 0);
+
+  useEffect(() => {
+    if (!docsStep) return;
+    setShowDocs(docsStep.get() > 0);
+    return docsStep.on('change', (step) => {
+      setShowDocs(step > 0);
+    });
+  }, [docsStep]);
 
   useEffect(() => {
     if (!agentStep) return;
@@ -98,13 +115,17 @@ export function ScrollDemo({
         src="/home/develop/storybook-frame.svg"
       />
       <Sidebar
-        activeStory={agentStory ?? activeStory}
+        activeStory={agentStory ?? (showDocs ? 'overview' : activeStory)}
         showAgentStories={agentStory !== null}
         type="rangeSlider"
       />
       <RangeSlider
         activeStory={agentStory ?? activeStory}
         appearProgress={appearProgress}
+      />
+      <DocsPage
+        visible={showDocs ? agentStory === null : false}
+        zoomed={stacked}
       />
       <VSCode
         appearProgress={appearProgress}

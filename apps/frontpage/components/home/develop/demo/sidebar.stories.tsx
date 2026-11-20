@@ -23,6 +23,7 @@ const meta = preview.meta({
         'all-day',
         'loading',
         'disabled',
+        'overview',
       ],
     },
   },
@@ -38,3 +39,5 @@ export const NoSelection = meta.story({
 export const AgentStories = meta.story({
   args: { activeStory: 'loading', showAgentStories: true },
 });
+
+export const Overview = meta.story({ args: { activeStory: 'overview' } });

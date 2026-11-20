@@ -17,13 +17,16 @@ const meta = preview.meta({
   ],
   render: function Render(_args, { parameters }) {
     const step = (parameters.agentStep as number | undefined) ?? 0;
+    const docs = (parameters.docsStep as number | undefined) ?? 0;
     const appearProgress = useMotionValue(1);
-    const isolationProgress = useMotionValue(step > 0 ? 1 : 0);
+    const isolationProgress = useMotionValue(step > 0 || docs > 0 ? 1 : 0);
     const storyIndex = useMotionValue(0);
     const agentStep = useMotionValue(step);
+    const docsStep = useMotionValue(docs);
     return (
       <ScrollDemo
         agentStep={agentStep}
+        docsStep={docsStep}
         appearProgress={appearProgress}
         isolationProgress={isolationProgress}
         storyIndex={storyIndex}
@@ -35,8 +38,16 @@ const meta = preview.meta({
 
 export const Default = meta.story({});
 
-/** Third Develop step: the agent has added stories and Loading is open. */
+/** Third Context step: the generated RangeSlider docs page is open. */
+export const Docs = meta.story({ parameters: { docsStep: 1 } });
+
+/*
+ * Agent-written stories. Not used in the Context section any more; the Review
+ * section reuses this state through the `agentStep` prop.
+ */
+
+/** The agent has added stories and Loading is open. */
 export const AgentLoading = meta.story({ parameters: { agentStep: 1 } });
 
-/** Third Develop step, later in the scroll: Disabled is open. */
+/** Later in the scroll: Disabled is open. */
 export const AgentDisabled = meta.story({ parameters: { agentStep: 2 } });

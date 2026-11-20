@@ -8,7 +8,7 @@ import {
   useTransform,
 } from 'framer-motion';
 
-/** Stories an agent adds to the RangeSlider during the third Develop step. */
+/** Stories an agent adds to the RangeSlider (the agent-written stories demo). */
 export const agentStories = [
   { id: 'loading', name: 'Loading' },
   { id: 'disabled', name: 'Disabled' },
@@ -36,6 +36,8 @@ const ART = { width: 250, height: 830 };
 const ROW = 28;
 /** Bottom edge of the "Input Range" row, the last RangeSlider story. */
 const INSERT_AT = 592;
+/** Top edge of the "Overview" docs entry under RangeSlider. */
+const OVERVIEW_AT = 480;
 /** Top edge of the pinned "Run tests" panel and its gutter. */
 const PANEL_TOP = 776;
 const SHIFT = ROW * agentStories.length;
@@ -158,6 +160,66 @@ function AgentRow({
   );
 }
 
+/** Page icon for a docs entry, matching the sidebar's story icon size. */
+function DocsIcon() {
+  return (
+    <svg
+      aria-hidden
+      className="absolute"
+      fill="none"
+      style={{ left: u(60), top: u(7), width: u(10), height: u(14) }}
+      viewBox="0 0 10 14"
+    >
+      <path
+        d="M1 .5h5.5L9.5 3.5v9.5a.5.5 0 0 1-.5.5H1a.5.5 0 0 1-.5-.5V1A.5.5 0 0 1 1 .5Z"
+        stroke="#fff"
+      />
+      <path d="M2.5 6h5M2.5 8.5h5M2.5 11h3" stroke="#fff" />
+    </svg>
+  );
+}
+
+/**
+ * The RangeSlider docs page is open: nothing else under RangeSlider is
+ * selected and the Overview row takes the selection.
+ */
+function OverviewSelected() {
+  return (
+    <motion.div
+      animate={{ opacity: 1 }}
+      className="absolute inset-0"
+      exit={{ opacity: 0 }}
+      initial={{ opacity: 0 }}
+      transition={{ duration: 0.1 }}
+    >
+      <Art id="no-selection" style={{ clipPath: band(0, 536) }} />
+      <Art id="default" style={{ clipPath: band(536, ART.height) }} />
+      <div
+        className="absolute bg-[#F6F9FC]"
+        style={{ left: 0, right: 0, top: y(534), height: y(4) }}
+      />
+      <div
+        className="absolute bg-[#029CFD]"
+        style={{
+          left: x(12),
+          width: x(226),
+          top: y(OVERVIEW_AT),
+          height: y(ROW),
+          borderRadius: u(4),
+        }}
+      >
+        <DocsIcon />
+        <span
+          className="absolute font-bold leading-none text-white"
+          style={{ left: u(78.3), top: u(9), fontSize: u(14) }}
+        >
+          Overview
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
 /**
  * Rebuilds the sidebar with room for the agent's stories: the artwork above
  * the insertion point stays put, everything below slides down two rows, and
@@ -169,9 +231,7 @@ function AgentStories({ activeStory }: { activeStory: string }) {
     shift.set(SHIFT);
   }, [shift]);
   const translateY = useTransform(shift, (v) => y(v));
-  const lowerClip = useTransform(shift, (v) =>
-    band(INSERT_AT, PANEL_TOP - v),
-  );
+  const lowerClip = useTransform(shift, (v) => band(INSERT_AT, PANEL_TOP - v));
 
   return (
     <motion.div
@@ -241,6 +301,11 @@ export function Sidebar({
             transition={{ duration: 0.1 }}
           />
         ))}
+        <AnimatePresence>
+          {activeStory === 'overview' && !showAgentStories ? (
+            <OverviewSelected key="overview" />
+          ) : null}
+        </AnimatePresence>
         <AnimatePresence>
           {showAgentStories ? (
             <AgentStories activeStory={activeStory} key="agent-stories" />
