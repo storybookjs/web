@@ -18,7 +18,11 @@ const meta = preview.meta({
   ],
 });
 
-/** The study isn't published yet, so the link is hidden. */
+/**
+ * The benchmark leads, then the skills title and paragraph, the install row
+ * (skill links, docs link, supported agents) and the five-skill block. The
+ * study isn't published yet, so its link is hidden.
+ */
 export const Default = meta.story({});
 
 /** How the proof block looks once `STUDY_URL` is set. */

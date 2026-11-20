@@ -4,8 +4,7 @@ import { Container } from '@repo/ui';
 import { AgentSkills, BenchmarkReadout, STUDY_URL } from './agent-proof';
 import { Skills } from './skills';
 
-const subsectionClassName =
-  'justify-between gap-20 border-t border-zinc-700 pt-16 md:flex md:pt-24';
+const subsectionClassName = 'justify-between gap-20 md:flex';
 
 const subheadingClassName =
   'mb-6 flex-1 text-balance text-3xl font-bold md:mb-0 md:text-[40px]/[52px]';
@@ -37,20 +36,21 @@ export function Generate({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
           <BenchmarkReadout />
         </div>
       </Container>
-      <Container className="mt-16 text-white md:mt-24 lg:px-8">
+      <Container className="mt-24 text-white md:mt-40 lg:px-8">
         <div className={subsectionClassName}>
-          <h3 className={subheadingClassName}>Agent skills</h3>
+          <h3 className={subheadingClassName}>
+            Storybook equips agents with skills that teach them your UI workflow
+          </h3>
           <p className="m-0 flex-1 pt-2 leading-7">
-            Storybook includes agent skills that teach coding agents your UI
-            workflow and force them to reuse existing components instead of
-            inventing new ones or hallucinating.
+            They force agents to reuse existing components instead of inventing
+            new ones or hallucinating.
           </p>
+        </div>
+        <div className="mt-12 md:mt-16">
+          <AgentSkills />
         </div>
       </Container>
       <Skills />
-      <Container className="mt-12 text-white md:mt-16 lg:px-8">
-        <AgentSkills />
-      </Container>
     </section>
   );
 }
