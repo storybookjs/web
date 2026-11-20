@@ -19,14 +19,14 @@ const meta = preview.meta({
 });
 
 /**
- * The benchmark leads, then the skills title on the left with the paragraph
- * and install row (skill links, docs link, supported agents) on the right,
- * then the five-skill block. The
+ * The skills title leads on the left, with the paragraph and install row
+ * (skill links, docs link, supported agents) on the right. The five-skill
+ * block follows, and the section ends on the centred benchmark payoff. The
  * study isn't published yet, so its link is hidden.
  */
 export const Default = meta.story({});
 
-/** How the proof block looks once `STUDY_URL` is set. */
+/** How the centred payoff looks once `STUDY_URL` is set. */
 export const WithStudyLink = meta.story({
   args: { studyUrl: 'https://storybook.js.org/blog' },
 });
