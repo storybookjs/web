@@ -5,7 +5,6 @@ import { useScroll, useTransform, useSpring, motion } from 'framer-motion';
 import Link from 'next/link';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
-import { Integrations } from '../integrations/integrations';
 import { Testimonial } from '../testimonial';
 import { Angular, Vue, WebComponents, HTML5, ReactLogo, Svelte } from './logos';
 import { ScrollDemo } from './demo/scroll-demo';
@@ -177,42 +176,6 @@ export function Develop() {
           </div>
           <div className="hidden h-[36rem] md:block" />
         </div>
-      </Container>
-      <Container className="grid grid-flow-dense grid-cols-1 items-center justify-items-center gap-12 pt-28 md:grid-cols-[minmax(max-content,_320px)_1fr] md:justify-items-start md:gap-24">
-        <div className="flex flex-col gap-6 self-center text-white md:max-w-[320px]">
-          <h3 className="text-2xl font-bold">
-            Integrate with the tools you already use
-          </h3>
-          <p className="text-md leading-7">
-            Storybook is incrementally adoptable and integrates with
-            industry-standard tools. That means your team doesn&apos;t have to
-            change their workflow.
-          </p>
-          <Link
-            className="flex items-center gap-2 font-bold text-blue-500"
-            href="/addons"
-          >
-            Browse integrations
-            <ChevronSmallRightIcon />
-          </Link>
-          <div className="mt-5">
-            <div className="flex gap-8">
-              <div className="flex gap-10">
-                <div>
-                  <div className="text-sm text-white">400+</div>
-                  <div className="text-sm text-zinc-500">Integrations</div>
-                </div>
-                <div>
-                  <div className="text-sm text-white">35M</div>
-                  <div className="text-sm text-zinc-500">
-                    Downloads per week
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <Integrations />
       </Container>
       <Testimonial
         avatarUrl="https://avatars3.githubusercontent.com/u/383701?s=460&v=4"
