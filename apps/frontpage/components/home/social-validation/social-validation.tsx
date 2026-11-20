@@ -292,7 +292,7 @@ export function SocialValidation({
           </Button>
           <div>
             <div className="text-sm text-white">{contributorCount}</div>
-            <div className="text-sm text-zinc-500">Contributors</div>
+            <div className="text-sm text-zinc-400">Contributors</div>
           </div>
         </div>
         <div className={cn(socialCard)}>
@@ -309,7 +309,7 @@ export function SocialValidation({
           </Button>
           <div>
             <div className="text-sm text-white">{discordMembers}</div>
-            <div className="text-sm text-zinc-500">Server members</div>
+            <div className="text-sm text-zinc-400">Server members</div>
           </div>
         </div>
         <div className={cn(socialCard)}>
@@ -330,7 +330,7 @@ export function SocialValidation({
           </Button>
           <div>
             <div className="text-sm text-white">8,320+</div>
-            <div className="text-sm text-zinc-500">Subscribers</div>
+            <div className="text-sm text-zinc-400">Subscribers</div>
           </div>
         </div>
         <div className={cn(socialCard)}>
@@ -357,7 +357,7 @@ export function SocialValidation({
           </div>
           <div>
             <div className="text-sm text-white">24,200+</div>
-            <div className="text-sm text-zinc-500">Followers</div>
+            <div className="text-sm text-zinc-400">Followers</div>
           </div>
         </div>
       </Container>
