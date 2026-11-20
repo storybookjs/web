@@ -79,7 +79,7 @@ export function EnforceQualityAnimation() {
           back to fix until the tests pass.
         </figcaption>
         <Image
-          className="absolute left-0 top-10 block w-full -translate-y-1/4"
+          className="pointer-events-none absolute left-0 top-10 block w-full -translate-y-1/4"
           src="/home/test/graph-grad.svg"
           alt=""
           width={1200}
