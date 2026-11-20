@@ -39,11 +39,11 @@ export function Home({
   const contextInView = useInView(contextRef, { margin: '0px 0px -90% 0px' });
 
   // Every other section is active while it crosses the nav line
-  const agentsRef = useRef(null);
-  const agentsInView = useInView(agentsRef, { margin: navLine });
-
   const verifyRef = useRef(null);
   const verifyInView = useInView(verifyRef, { margin: navLine });
+
+  const agentsRef = useRef(null);
+  const agentsInView = useInView(agentsRef, { margin: navLine });
 
   const shareRef = useRef(null);
   const shareInView = useInView(shareRef, { margin: navLine });
@@ -58,14 +58,14 @@ export function Home({
     if (whoInView) return 'who';
     if (automateInView) return 'automate';
     if (shareInView) return 'share';
-    if (verifyInView) return 'verify';
     if (agentsInView) return 'agents';
+    if (verifyInView) return 'verify';
     if (contextInView) return 'context';
     return null;
   }, [
     contextInView,
-    agentsInView,
     verifyInView,
+    agentsInView,
     shareInView,
     automateInView,
     whoInView,
@@ -92,12 +92,12 @@ export function Home({
         >
           <Develop />
         </div>
+        <div className={sectionClassName} id="verify" ref={verifyRef}>
+          <Test />
+        </div>
         {/* The /ai redirect and the hero "See how" link point to #agents */}
         <div className={sectionClassName} id="agents" ref={agentsRef}>
           <Generate />
-        </div>
-        <div className={sectionClassName} id="verify" ref={verifyRef}>
-          <Test />
         </div>
         <div className={sectionClassName} id="share" ref={shareRef}>
           <Share />

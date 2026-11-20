@@ -4,8 +4,8 @@ import { MobileMenu } from './mobile-menu';
 
 const items = [
   { id: 'context', label: 'Context', href: '#context' },
-  { id: 'agents', label: 'Agents', href: '#agents' },
   { id: 'verify', label: 'Verify', href: '#verify' },
+  { id: 'agents', label: 'Agents', href: '#agents' },
   { id: 'share', label: 'Share', href: '#share' },
   { id: 'automate', label: 'Automate', href: '#automate' },
   { id: 'who', label: "Who's it for", href: '#who' },

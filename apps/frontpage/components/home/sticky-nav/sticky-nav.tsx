@@ -12,16 +12,16 @@ interface StickyNavProps {
 
 type SectionId =
   | 'context'
-  | 'agents'
   | 'verify'
+  | 'agents'
   | 'share'
   | 'automate'
   | 'who';
 
 const items: { id: SectionId; label: string; href: string }[] = [
   { id: 'context', label: 'Context', href: '#context' },
-  { id: 'agents', label: 'Agents', href: '#agents' },
   { id: 'verify', label: 'Verify', href: '#verify' },
+  { id: 'agents', label: 'Agents', href: '#agents' },
   { id: 'share', label: 'Share', href: '#share' },
   { id: 'automate', label: 'Automate', href: '#automate' },
   { id: 'who', label: "Who's it for", href: '#who' },
