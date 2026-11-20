@@ -19,8 +19,8 @@ const meta = preview.meta({
 });
 
 /**
- * The skills title leads on the left, with the paragraph and install row
- * (skill links, docs link, supported agents) on the right. The five-skill
+ * The skills title leads on the left, with the paragraph, the docs link and
+ * the supported agents on the right. The five-skill
  * block follows, and the section ends on the centred benchmark payoff. The
  * study isn't published yet, so its link is hidden.
  */

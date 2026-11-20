@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useInView } from 'framer-motion';
 import { ChevronSmallRightIcon } from '@storybook/icons';
-import { StorybookIcon } from '@repo/ui';
 
 // Set this to the study URL once it's published. While it's undefined, the
 // "See the study" link stays hidden.
@@ -23,20 +22,6 @@ const agentStatRows = [
     label: 'Fewer tokens',
     metric: 'Token usage',
     withStorybook: 82,
-  },
-];
-
-const skillLinks: { name: string; href: string; icon: string | null }[] = [
-  { name: 'Agent skills', href: '/docs/ai', icon: null },
-  {
-    name: 'Claude Code plugin',
-    href: 'https://github.com/storybookjs/storybook/tree/next/code/lib/claude-plugin#readme',
-    icon: '/images/logos/integrations/integrations-claude.svg',
-  },
-  {
-    name: 'Codex plugin',
-    href: 'https://github.com/storybookjs/storybook/tree/next/code/lib/codex-plugin#readme',
-    icon: '/images/logos/integrations/integrations-openai.svg',
   },
 ];
 
@@ -202,16 +187,24 @@ export function BenchmarkReadout() {
   );
 }
 
-/** Skill links, the docs link and the agents Storybook works with */
+/** The docs link and the agents Storybook works with */
 export function AgentSkills() {
   return (
-    <div className="grid gap-8">
+    <div className="flex flex-col gap-10">
+      <Link
+        className="flex w-fit items-center gap-2 font-bold text-blue-500"
+        href="/docs/ai"
+      >
+        Read the docs
+        <ChevronSmallRightIcon />
+      </Link>
       {/* Same label and icon squares as the Context section's "Made for" row */}
       <div className="flex flex-col gap-4">
         <div className="text-xs font-bold uppercase tracking-widest text-zinc-300">
           Works with your coding agent
         </div>
-        <div className="flex flex-wrap items-center gap-4">
+        {/* Seven squares fit one row at 375px with the tighter mobile gap */}
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4">
           {agentLogos.map((logo) => (
             <div
               className="flex h-10 w-10 items-center justify-center rounded border border-zinc-700"
@@ -228,36 +221,6 @@ export function AgentSkills() {
           ))}
         </div>
       </div>
-      <ul className="m-0 flex list-none flex-wrap gap-3 p-0">
-        {skillLinks.map((skill) => (
-          <li key={skill.name}>
-            <Link
-              className="focus-visible:ring-offset-homeBackground flex h-10 items-center gap-2 rounded-full border border-zinc-600 pl-3 pr-4 text-sm font-bold text-white transition-colors hover:border-blue-500 focus-visible:border-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-              href={skill.href}
-            >
-              {skill.icon ? (
-                <Image
-                  alt=""
-                  className="h-5 w-5 rounded"
-                  height={20}
-                  src={skill.icon}
-                  width={20}
-                />
-              ) : (
-                <StorybookIcon size={20} />
-              )}
-              {skill.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <Link
-        className="flex items-center gap-2 font-bold text-blue-500"
-        href="/docs/ai"
-      >
-        Read the docs
-        <ChevronSmallRightIcon />
-      </Link>
     </div>
   );
 }
