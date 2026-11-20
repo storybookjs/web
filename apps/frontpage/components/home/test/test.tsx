@@ -1,85 +1,61 @@
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 import Link from 'next/link';
+import { ChevronSmallRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
-import type { FeatureItem } from '../illustrated-feature-list';
-import { IllustratedFeatureList } from '../illustrated-feature-list';
 import { Accessibility, Eye, Interact, Pixel, Document } from './icons';
 import { LogoAirbnb } from './logo-airbnb';
 import { EnforceQualityAnimation } from './enforce-quality-animation';
 
-const features: FeatureItem[] = [
+interface Feature {
+  icon: ReactNode;
+  title: string;
+  description: string;
+}
+
+const features: Feature[] = [
   {
     icon: <Eye />,
     title: 'Spot test',
     description: 'Stories are tests you can debug in dev and QA.',
-    link: {
-      label: 'Learn about UI tests',
-      href: '/docs/writing-tests',
-    },
-    media: '/home/test/homepage-spot-testing-lg.mp4',
-    poster: '/home/test/homepage-spot-testing-poster-lg.jpg',
   },
   {
     icon: <Pixel />,
     title: 'Visual test appearance',
     description: 'Pinpoint UI changes down to the pixel.',
-    link: {
-      label: 'Learn about visual tests',
-      href: '/docs/writing-tests/visual-testing',
-    },
-    media: '/home/test/homepage-visual-testing-lg.mp4',
-    poster: '/home/test/homepage-visual-testing-poster-lg.jpg',
   },
   {
     icon: <Interact />,
     title: 'Interaction test behavior',
     description:
       'Simulate user behavior and assert in the browser. Failures point to the story and assertion that broke.',
-    link: {
-      label: 'Learn about interaction tests',
-      href: '/docs/writing-tests/interaction-testing',
-    },
-    media: '/home/test/homepage-component-testing-lg.mp4',
-    poster: '/home/test/homepage-component-testing-poster-lg.jpg',
   },
   {
     icon: <Accessibility />,
     title: 'Accessibility tests',
     description: 'Check every story for WCAG and ARIA issues.',
-    link: {
-      label: 'Learn about accessibility tests',
-      href: '/docs/writing-tests/accessibility-testing',
-    },
-    media: '/home/test/homepage-accessibility-testing-lg.mp4',
-    poster: '/home/test/homepage-accessibility-testing-poster-lg.jpg',
   },
   {
     icon: <Document />,
     title: 'Coverage Reports',
     description: 'Track how much of your frontend code is tested.',
-    link: {
-      label: 'Learn about coverage reports',
-      href: '/docs/writing-tests/test-coverage',
-    },
-    media: '/home/test/homepage-test-coverage-lg.mp4',
-    poster: '/home/test/homepage-test-coverage-poster-lg.jpg',
   },
 ];
+
+/** Same shape as the feature cards on the old /ai page */
+const FeatureCard: FC<Feature> = ({ icon, title, description }) => {
+  return (
+    <div>
+      <div className="mb-5 h-8 w-8 sm:h-10 sm:w-10">{icon}</div>
+      <h3 className="mb-2 font-bold text-white">{title}</h3>
+      <p className="leading-relaxed text-white">{description}</p>
+    </div>
+  );
+};
 
 export const Test: FC = () => {
   return (
     <div className="overflow-x-clip border-b border-zinc-600 pt-12 sm:pt-20 md:pt-28">
-      {features.map((feature) =>
-        feature.media ? (
-          <Link
-            as="video"
-            href={feature.media}
-            key={feature.title}
-            rel="preload"
-          />
-        ) : null,
-      )}
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
         <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
           Test UIs with less effort and no flake
@@ -100,7 +76,20 @@ export const Test: FC = () => {
         </div>
       </Container>
       <EnforceQualityAnimation />
-      <IllustratedFeatureList bgColor="#FDDD9C" features={features} />
+      <Container className="pb-12 pt-12 text-white sm:pt-16 md:pb-20 lg:px-8">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-20 lg:gap-y-16">
+          {features.map((feature) => (
+            <FeatureCard key={feature.title} {...feature} />
+          ))}
+        </div>
+        <Link
+          className="mt-12 inline-flex items-center gap-2 font-bold text-blue-500"
+          href="/docs/writing-tests"
+        >
+          Learn about UI tests
+          <ChevronSmallRightIcon />
+        </Link>
+      </Container>
       <Testimonial
         avatarUrl="https://avatars2.githubusercontent.com/u/1247751?s=100&v=4"
         jobTitle="Tech lead"
