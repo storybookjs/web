@@ -236,14 +236,15 @@ export function EnforceQualityAnimation() {
           className="pointer-events-none absolute left-0 top-0 block w-full"
         >
           <path
-            fill="#6F2CAC"
+            fill="#475569"
             d="M155.98 130h56v64h-56a8 8 0 0 1-8-8v-48a8 8 0 0 1 8-8z"
           />
           <path
             fill="#F0EEE7"
             d="M211.98 130h56a8 8 0 0 1 8 8v48a8 8 0 0 1-8 8h-56z"
           />
-          {/* UserAltIcon from @storybook/icons, scaled to match the Claude mark */}
+          {/* UserAltIcon from @storybook/icons, scaled to match the Claude mark.
+              White icon on slate-600: 7.58:1. */}
           <path
             fill="#fff"
             transform="translate(160.74 142.31) scale(2.75)"
