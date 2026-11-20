@@ -140,10 +140,17 @@ export function Agents({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
             <h2 className="text-4xl font-bold md:text-[56px]/[70px]">
               Agents work faster with Storybook
             </h2>
-            <p className="m-0 max-w-[56ch] leading-7 text-white/80">
-              In our benchmarks, agents with Storybook skills spent less time
-              searching the codebase and more time reading the design system.
-            </p>
+            <div className="grid max-w-[56ch] gap-4 text-lg/8">
+              <p className="m-0 text-white">
+                Storybook includes agent skills that teach coding agents your UI
+                workflow and force them to reuse existing components instead of
+                inventing new ones or hallucinating.
+              </p>
+              <p className="m-0 text-white/75">
+                In our benchmarks, agents with Storybook skills spent less time
+                searching the codebase and more time reading the design system.
+              </p>
+            </div>
             {studyUrl ? (
               <Link
                 className="flex items-center gap-2 font-bold text-blue-500"
@@ -153,11 +160,7 @@ export function Agents({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
                 <ChevronSmallRightIcon />
               </Link>
             ) : null}
-            <div className="mt-4 grid gap-5 border-t border-zinc-600 pt-7">
-              <p className="m-0 max-w-[46ch] text-lg/[1.6] font-bold">
-                Storybook includes agent skills that teach coding agents your UI
-                workflow, also available as Claude Code and Codex plugins.
-              </p>
+            <div className="mt-2 grid gap-5">
               <ul className="m-0 flex list-none flex-wrap gap-3 p-0">
                 {skillLinks.map((skill) => (
                   <li key={skill.name}>
