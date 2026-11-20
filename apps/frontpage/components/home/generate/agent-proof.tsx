@@ -5,12 +5,25 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useInView } from 'framer-motion';
 import { ChevronSmallRightIcon } from '@storybook/icons';
-import { Container, StorybookIcon } from '@repo/ui';
-import { STUDY_URL } from './agent-stats';
+import { StorybookIcon } from '@repo/ui';
+
+// Set this to the study URL once it's published. While it's undefined, the
+// "See the study" link stays hidden.
+export const STUDY_URL: string | undefined = undefined;
 
 const agentStatRows = [
-  { value: '23%', label: 'Faster tasks', metric: 'Task time', withStorybook: 77 },
-  { value: '18%', label: 'Fewer tokens', metric: 'Token usage', withStorybook: 82 },
+  {
+    value: '23%',
+    label: 'Faster tasks',
+    metric: 'Task time',
+    withStorybook: 77,
+  },
+  {
+    value: '18%',
+    label: 'Fewer tokens',
+    metric: 'Token usage',
+    withStorybook: 82,
+  },
 ];
 
 const skillLinks: { name: string; href: string; icon: string | null }[] = [
@@ -28,13 +41,34 @@ const skillLinks: { name: string; href: string; icon: string | null }[] = [
 ];
 
 const agentLogos = [
-  { name: 'Cursor', logo: '/images/logos/integrations/integrations-cursor.svg' },
-  { name: 'OpenAI', logo: '/images/logos/integrations/integrations-openai.svg' },
-  { name: 'Copilot', logo: '/images/logos/integrations/integrations-copilot.svg' },
-  { name: 'Claude', logo: '/images/logos/integrations/integrations-claude.svg' },
-  { name: 'Gemini', logo: '/images/logos/integrations/integrations-gemini.svg' },
-  { name: 'VS Code', logo: '/images/logos/integrations/integrations-vscode.svg' },
-  { name: 'JetBrains', logo: '/images/logos/integrations/integrations-jetbrains.svg' },
+  {
+    name: 'Cursor',
+    logo: '/images/logos/integrations/integrations-cursor.svg',
+  },
+  {
+    name: 'OpenAI',
+    logo: '/images/logos/integrations/integrations-openai.svg',
+  },
+  {
+    name: 'Copilot',
+    logo: '/images/logos/integrations/integrations-copilot.svg',
+  },
+  {
+    name: 'Claude',
+    logo: '/images/logos/integrations/integrations-claude.svg',
+  },
+  {
+    name: 'Gemini',
+    logo: '/images/logos/integrations/integrations-gemini.svg',
+  },
+  {
+    name: 'VS Code',
+    logo: '/images/logos/integrations/integrations-vscode.svg',
+  },
+  {
+    name: 'JetBrains',
+    logo: '/images/logos/integrations/integrations-jetbrains.svg',
+  },
 ];
 
 function MiniBar({
@@ -135,7 +169,10 @@ function BenchmarkReadout() {
                 <td className="pr-3 pt-4 align-top tabular-nums">100%</td>
                 <td className="pr-3 pt-4 align-top tabular-nums">
                   {stat.withStorybook}%
-                  <span aria-hidden="true" className="mt-2 grid w-[120px] gap-[5px]">
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 grid w-[120px] gap-[5px]"
+                  >
                     <MiniBar
                       color="#FC521F"
                       delay={index * 150}
@@ -165,86 +202,77 @@ function BenchmarkReadout() {
   );
 }
 
-export function Agents({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
+export function AgentProof({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
   return (
-    <section className="overflow-hidden border-b border-zinc-600 py-[72px] text-white min-[960px]:py-28">
-      <Container className="lg:px-8">
-        <div className="grid items-center gap-12 min-[960px]:grid-cols-[5fr_6fr] min-[960px]:gap-[72px]">
-          <div className="grid content-start gap-6">
-            <h2 className="text-4xl font-bold md:text-[56px]/[70px]">
-              Agents work faster with Storybook
-            </h2>
-            <div className="grid max-w-[56ch] gap-4 text-lg/8">
-              <p className="m-0 text-white">
-                Storybook includes agent skills that teach coding agents your UI
-                workflow and force them to reuse existing components instead of
-                inventing new ones or hallucinating.
-              </p>
-              <p className="m-0 text-white/75">
-                In our benchmarks, agents with Storybook skills spent less time
-                searching the codebase and more time reading the design system.
-              </p>
-            </div>
-            {studyUrl ? (
-              <Link
-                className="flex items-center gap-2 font-bold text-blue-500"
-                href={studyUrl}
-              >
-                See the study
-                <ChevronSmallRightIcon />
-              </Link>
-            ) : null}
-            <div className="mt-2 grid gap-5">
-              <ul className="m-0 flex list-none flex-wrap gap-3 p-0">
-                {skillLinks.map((skill) => (
-                  <li key={skill.name}>
-                    <Link
-                      className="flex h-10 items-center gap-2 rounded-full border border-zinc-600 pl-3 pr-4 text-sm font-bold text-white transition-colors hover:border-blue-500 focus-visible:border-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-homeBackground"
-                      href={skill.href}
-                    >
-                      {skill.icon ? (
-                        <Image
-                          alt=""
-                          className="h-5 w-5 rounded"
-                          height={20}
-                          src={skill.icon}
-                          width={20}
-                        />
-                      ) : (
-                        <StorybookIcon size={20} />
-                      )}
-                      {skill.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                className="flex items-center gap-2 font-bold text-blue-500"
-                href="/docs/ai"
-              >
-                Read the docs
-                <ChevronSmallRightIcon />
-              </Link>
-            </div>
+    <div className="border-t border-zinc-700 pt-16 md:pt-24">
+      <div className="grid items-center gap-12 min-[960px]:grid-cols-[5fr_6fr] min-[960px]:gap-[72px]">
+        <div className="grid content-start gap-6">
+          <h3 className="text-balance text-3xl font-bold md:text-[40px]/[52px]">
+            Agents work faster with Storybook
+          </h3>
+          <p className="m-0 max-w-[56ch] text-lg/8 text-white/75">
+            In our benchmarks, agents with Storybook skills spent less time
+            searching the codebase and more time reading the design system.
+          </p>
+          {studyUrl ? (
+            <Link
+              className="flex items-center gap-2 font-bold text-blue-500"
+              href={studyUrl}
+            >
+              See the study
+              <ChevronSmallRightIcon />
+            </Link>
+          ) : null}
+          <div className="mt-2 grid gap-5">
+            <ul className="m-0 flex list-none flex-wrap gap-3 p-0">
+              {skillLinks.map((skill) => (
+                <li key={skill.name}>
+                  <Link
+                    className="focus-visible:ring-offset-homeBackground flex h-10 items-center gap-2 rounded-full border border-zinc-600 pl-3 pr-4 text-sm font-bold text-white transition-colors hover:border-blue-500 focus-visible:border-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                    href={skill.href}
+                  >
+                    {skill.icon ? (
+                      <Image
+                        alt=""
+                        className="h-5 w-5 rounded"
+                        height={20}
+                        src={skill.icon}
+                        width={20}
+                      />
+                    ) : (
+                      <StorybookIcon size={20} />
+                    )}
+                    {skill.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link
+              className="flex items-center gap-2 font-bold text-blue-500"
+              href="/docs/ai"
+            >
+              Read the docs
+              <ChevronSmallRightIcon />
+            </Link>
           </div>
-          <BenchmarkReadout />
         </div>
-        <div className="mt-14 flex flex-wrap items-center justify-center gap-x-7 gap-y-4">
-          <span className="w-full text-center text-sm text-white/60">
-            Works with your coding agent
-          </span>
-          {agentLogos.map((logo) => (
-            <Image
-              alt={logo.name}
-              className="h-9 w-9 rounded-md ring-1 ring-white/10"
-              height={36}
-              key={logo.name}
-              src={logo.logo}
-              width={36}
-            />
-          ))}
-        </div>
-      </Container>
-    </section>
+        <BenchmarkReadout />
+      </div>
+      <div className="mt-14 flex flex-wrap items-center justify-center gap-x-7 gap-y-4">
+        <span className="w-full text-center text-sm text-white/60">
+          Works with your coding agent
+        </span>
+        {agentLogos.map((logo) => (
+          <Image
+            alt={logo.name}
+            className="h-9 w-9 rounded-md ring-1 ring-white/10"
+            height={36}
+            key={logo.name}
+            src={logo.logo}
+            width={36}
+          />
+        ))}
+      </div>
+    </div>
   );
 }

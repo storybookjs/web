@@ -1,9 +1,9 @@
 import preview from '../../../.storybook/preview';
-import { Agents } from './agents';
+import { AgentProof } from './agent-proof';
 
 const meta = preview.meta({
-  title: 'Home/Agents/Agents',
-  component: Agents,
+  title: 'Home/Generate/AgentProof',
+  component: AgentProof,
   globals: { backgrounds: { value: 'dark' } },
   parameters: {
     layout: 'fullscreen',
@@ -11,17 +11,11 @@ const meta = preview.meta({
   },
   decorators: [
     (Story) => (
-      <div className="bg-homeBackground">
+      <div className="bg-homeBackground px-5 py-12 text-white md:px-8">
         <Story />
       </div>
     ),
   ],
 });
 
-/** The study isn't published yet, so the link is hidden. */
 export const Default = meta.story({});
-
-/** How the intro looks once `STUDY_URL` is set. */
-export const WithStudyLink = meta.story({
-  args: { studyUrl: 'https://storybook.js.org/blog' },
-});
