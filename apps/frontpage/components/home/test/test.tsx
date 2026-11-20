@@ -86,6 +86,13 @@ export const Test: FC = () => {
             Failures go back to whoever wrote the code, you or your agent, to
             fix and re-run until tests pass. You step in once they do.
           </p>
+          <Link
+            className="flex w-fit items-center gap-2 font-bold text-blue-500"
+            href="/docs/writing-tests"
+          >
+            Learn about UI tests
+            <ChevronSmallRightIcon />
+          </Link>
         </div>
       </Container>
       <EnforceQualityAnimation />
@@ -95,13 +102,6 @@ export const Test: FC = () => {
             <FeatureCard key={feature.title} {...feature} />
           ))}
         </div>
-        <Link
-          className="mt-12 inline-flex items-center gap-2 font-bold text-blue-500"
-          href="/docs/writing-tests"
-        >
-          Learn about UI tests
-          <ChevronSmallRightIcon />
-        </Link>
       </Container>
       <Testimonial
         avatarUrl="https://avatars2.githubusercontent.com/u/1247751?s=100&v=4"
