@@ -12,13 +12,11 @@ export function Generate({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
           Skills that teach agents your UI workflow
         </h2>
         <div className="flex-1 pt-4">
-          <p className="m-0 leading-7">
+          <p className="mb-6 leading-7">
             They force agents to reuse existing components instead of
             inventing new ones or hallucinating.
           </p>
-          <div className="mt-10">
-            <AgentSkills />
-          </div>
+          <AgentSkills />
         </div>
       </Container>
       <Skills />

@@ -206,6 +206,28 @@ export function BenchmarkReadout() {
 export function AgentSkills() {
   return (
     <div className="grid gap-8">
+      {/* Same label and icon squares as the Context section's "Made for" row */}
+      <div className="flex flex-col gap-4">
+        <div className="text-xs font-bold uppercase tracking-widest text-zinc-300">
+          Works with your coding agent
+        </div>
+        <div className="flex flex-wrap items-center gap-4">
+          {agentLogos.map((logo) => (
+            <div
+              className="flex h-10 w-10 items-center justify-center rounded border border-zinc-700"
+              key={logo.name}
+            >
+              <Image
+                alt={logo.name}
+                className="h-6 w-6 rounded-sm"
+                height={24}
+                src={logo.logo}
+                width={24}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
       <ul className="m-0 flex list-none flex-wrap gap-3 p-0">
         {skillLinks.map((skill) => (
           <li key={skill.name}>
@@ -236,23 +258,6 @@ export function AgentSkills() {
         Read the docs
         <ChevronSmallRightIcon />
       </Link>
-      <div className="grid gap-4">
-        <span className="text-sm text-white/60">
-          Works with your coding agent
-        </span>
-        <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
-          {agentLogos.map((logo) => (
-            <Image
-              alt={logo.name}
-              className="h-9 w-9 rounded-md ring-1 ring-white/10"
-              height={36}
-              key={logo.name}
-              src={logo.logo}
-              width={36}
-            />
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
