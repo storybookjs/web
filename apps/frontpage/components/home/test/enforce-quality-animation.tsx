@@ -221,13 +221,21 @@ export function EnforceQualityAnimation() {
               clipRule="evenodd"
             />
           </g>
-          <rect
-            width="64"
-            height="64"
-            x="179.98"
-            y="130"
+          {/* Author node: Claude on the left half (centred on the loop's
+              start point), a developer on the right half. */}
+          <path
             fill="#F0EEE7"
-            rx="8"
+            d="M187.98 130h56v64h-56a8 8 0 0 1-8-8v-48a8 8 0 0 1 8-8z"
+          />
+          <path
+            fill="#6F2CAC"
+            d="M243.98 130h56a8 8 0 0 1 8 8v48a8 8 0 0 1-8 8h-56z"
+          />
+          {/* UserAltIcon from @storybook/icons, scaled to match the Claude mark */}
+          <path
+            fill="#fff"
+            transform="translate(256.74 142.31) scale(2.75)"
+            d="M7.275 13.16a11.388 11.388 0 005.175-1.232v-.25c0-1.566-3.237-2.994-4.104-3.132-.27-.043-.276-.783-.276-.783s.791-.783.964-1.836c.463 0 .75-1.119.286-1.513C9.34 4 9.916 1.16 6.997 1.16c-2.92 0-2.343 2.84-2.324 3.254-.463.394-.177 1.513.287 1.513.172 1.053.963 1.836.963 1.836s-.006.74-.275.783c-.858.136-4.036 1.536-4.103 3.082a11.388 11.388 0 005.73 1.532z"
           />
           <path
             fill="#D97757"
