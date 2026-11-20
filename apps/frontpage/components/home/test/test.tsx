@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 import Link from 'next/link';
-import { ChevronSmallRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
 import { LogoAirbnb } from './logo-airbnb';
@@ -23,17 +22,10 @@ export const Test: FC = () => {
             runs them in a real browser as interaction and accessibility tests,
             with fast feedback on every change.
           </p>
-          <p className="mb-6 leading-7">
+          <p className="leading-7">
             Failures go back to whoever wrote the code, you or your agent, to
             fix and re-run until tests pass. You step in once they do.
           </p>
-          <Link
-            className="flex w-fit items-center gap-2 font-bold text-blue-500"
-            href="/docs/writing-tests"
-          >
-            Learn about UI tests
-            <ChevronSmallRightIcon />
-          </Link>
         </div>
       </Container>
       <EnforceQualityAnimation />
