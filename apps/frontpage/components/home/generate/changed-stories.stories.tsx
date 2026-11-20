@@ -2,7 +2,7 @@ import preview from '../../../.storybook/preview';
 import { ChangedStories } from './changed-stories';
 
 const meta = preview.meta({
-  title: 'Home/Review/ChangedStories',
+  title: 'Home/Generate/ChangedStories',
   component: ChangedStories,
   globals: { backgrounds: { value: 'dark' } },
   parameters: {

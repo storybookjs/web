@@ -2,7 +2,7 @@ import preview from '../../../.storybook/preview';
 import { ReviewSummary } from './review-summary';
 
 const meta = preview.meta({
-  title: 'Home/Review/ReviewSummary',
+  title: 'Home/Generate/ReviewSummary',
   component: ReviewSummary,
   globals: { backgrounds: { value: 'dark' } },
   parameters: {

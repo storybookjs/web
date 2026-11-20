@@ -2,9 +2,9 @@ import type { FC } from 'react';
 import type { FeatureItem } from '../illustrated-feature-list';
 import { IllustratedFeatureList } from '../illustrated-feature-list';
 import { AgentReuse, DocumentAgentMedia } from '../document/agent-media';
-import { ChangedStories } from '../review/changed-stories';
-import { ReviewSummary } from '../review/review-summary';
 import { Code, Eye, Projects } from '../test/icons';
+import { ChangedStories } from './changed-stories';
+import { ReviewSummary } from './review-summary';
 import { FitWindow } from './fit-window';
 import { GenerateUIAnimation } from './generate-ui-animation';
 import { AgentTest, TestStoriesMedia } from './test-stories-media';
@@ -70,7 +70,7 @@ export const skills: FeatureItem[] = [
     icon: <Eye />,
     title: 'UI review',
     description:
-      'A review groups the stories a change affects, so you can check them in one place.',
+      'Review the changes, not the diff. A review groups the stories a change affects, so you can check them in one place.',
     link: {
       label: 'Learn about UI review',
       href: '/docs/ai/skills/ui-review',

@@ -30,6 +30,6 @@ export const Hidden = meta.story({
   args: { isVisible: false, activeSection: null },
 });
 
-export const ReviewActive = meta.story({
-  args: { isVisible: true, activeSection: 'review' },
+export const ShareActive = meta.story({
+  args: { isVisible: true, activeSection: 'share' },
 });

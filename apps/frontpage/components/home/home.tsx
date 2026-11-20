@@ -8,7 +8,6 @@ import { Develop } from './develop/develop';
 import { Generate } from './generate/generate';
 import { StickyNav } from './sticky-nav/sticky-nav';
 import { Test } from './test/test';
-import { Review } from './review/review';
 import { Share } from './share/share';
 import { Automate } from './automate/automate';
 import { SocialValidation } from './social-validation/social-validation';
@@ -46,9 +45,6 @@ export function Home({
   const verifyRef = useRef(null);
   const verifyInView = useInView(verifyRef, { margin: navLine });
 
-  const reviewRef = useRef(null);
-  const reviewInView = useInView(reviewRef, { margin: navLine });
-
   const shareRef = useRef(null);
   const shareInView = useInView(shareRef, { margin: navLine });
 
@@ -62,7 +58,6 @@ export function Home({
     if (whoInView) return 'who';
     if (automateInView) return 'automate';
     if (shareInView) return 'share';
-    if (reviewInView) return 'review';
     if (verifyInView) return 'verify';
     if (agentsInView) return 'agents';
     if (contextInView) return 'context';
@@ -71,7 +66,6 @@ export function Home({
     contextInView,
     agentsInView,
     verifyInView,
-    reviewInView,
     shareInView,
     automateInView,
     whoInView,
@@ -104,9 +98,6 @@ export function Home({
         </div>
         <div className={sectionClassName} id="verify" ref={verifyRef}>
           <Test />
-        </div>
-        <div className={sectionClassName} id="review" ref={reviewRef}>
-          <Review />
         </div>
         <div className={sectionClassName} id="share" ref={shareRef}>
           <Share />

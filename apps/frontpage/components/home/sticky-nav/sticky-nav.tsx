@@ -14,7 +14,6 @@ type SectionId =
   | 'context'
   | 'agents'
   | 'verify'
-  | 'review'
   | 'share'
   | 'automate'
   | 'who';
@@ -23,7 +22,6 @@ const items: { id: SectionId; label: string; href: string }[] = [
   { id: 'context', label: 'Context', href: '#context' },
   { id: 'agents', label: 'Agents', href: '#agents' },
   { id: 'verify', label: 'Verify', href: '#verify' },
-  { id: 'review', label: 'Review', href: '#review' },
   { id: 'share', label: 'Share', href: '#share' },
   { id: 'automate', label: 'Automate', href: '#automate' },
   { id: 'who', label: "Who's it for", href: '#who' },
