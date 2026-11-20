@@ -30,16 +30,16 @@ export function Home({
   contributorCount,
   discordMembers,
 }: HomeProps) {
-  // Agents sits first, so it also waits until its top reaches the viewport
-  // top before showing the sticky nav
-  const agentsRef = useRef(null);
-  const agentsInView = useInView(agentsRef, { margin: '0px 0px -100% 0px' });
-
   const developRef = useRef(null);
   const developInView = useInView(developRef, { margin: '0px 0px -100% 0px' });
 
+  const agentsRef = useRef(null);
+  const agentsInView = useInView(agentsRef);
+
+  // Agents is shorter than most viewports, so Test only takes over once its
+  // top reaches the upper half of the viewport; otherwise Agents never highlights
   const testRef = useRef(null);
-  const testInView = useInView(testRef);
+  const testInView = useInView(testRef, { margin: '0px 0px -50% 0px' });
 
   const documentRef = useRef(null);
   const documentInView = useInView(documentRef);
@@ -63,8 +63,8 @@ export function Home({
     if (reviewInView) return 'review';
     if (documentInView) return 'document';
     if (testInView) return 'test';
-    if (developInView) return 'develop';
     if (agentsInView) return 'agents';
+    if (developInView) return 'develop';
     return null;
   }, [
     developInView,
@@ -90,10 +90,6 @@ export function Home({
           activeSection={activeSection}
           isVisible={Boolean(activeSection)}
         />
-        {/* Keep the #agents anchor: the /ai redirect and the hero link point to it */}
-        <div className={sectionClassName} id="agents" ref={agentsRef}>
-          <Agents />
-        </div>
         <div
           className={sectionClassName}
           id="develop"
@@ -101,6 +97,10 @@ export function Home({
           style={{ contain: 'paint' }}
         >
           <Develop />
+        </div>
+        {/* Keep the #agents anchor: the /ai redirect and the hero link point to it */}
+        <div className={sectionClassName} id="agents" ref={agentsRef}>
+          <Agents />
         </div>
         <div className={sectionClassName} id="test" ref={testRef}>
           <Test />

@@ -3,8 +3,8 @@ import preview from '../../../.storybook/preview';
 import { MobileMenu } from './mobile-menu';
 
 const items = [
-  { id: 'agents', label: 'Agents', href: '#agents' },
   { id: 'develop', label: 'Develop', href: '#develop' },
+  { id: 'agents', label: 'Agents', href: '#agents' },
   { id: 'test', label: 'Test', href: '#test' },
   { id: 'document', label: 'Document', href: '#document' },
   { id: 'review', label: 'Review', href: '#review' },
