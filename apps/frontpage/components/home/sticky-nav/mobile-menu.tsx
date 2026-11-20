@@ -18,13 +18,15 @@ interface MenuProps {
 export const MobileMenu: FC<MenuProps> = ({ items, label }) => {
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
+      {/* The wrapper hides the trigger on desktop: Button's own display
+          class (ui-flex) wins over a md:hidden passed to it */}
+      <div className="md:hidden">
         <DropdownMenu.Trigger asChild>
-          <Button className="md:hidden" size="sm" variant="ghostHome">
+          <Button size="sm" variant="ghostHome">
             {label} <ChevronSmallDownIcon />
           </Button>
         </DropdownMenu.Trigger>
-      </DropdownMenu.Trigger>
+      </div>
       <DropdownMenu.Portal>
         <DropdownMenu.Content
           align="start"

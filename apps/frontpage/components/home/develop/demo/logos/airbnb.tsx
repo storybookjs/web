@@ -3,7 +3,7 @@ import React from 'react';
 export function LogoAirbnb() {
   return (
     <svg
-      className="w-full h-full"
+      className="h-full w-full"
       viewBox="0 0 320.1 99.9"
       xmlns="http://www.w3.org/2000/svg"
     >

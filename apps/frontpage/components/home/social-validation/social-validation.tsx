@@ -39,11 +39,11 @@ const projects = [
     projectUrl: 'https://storybook.js.org/showcase/audi-ui-react',
   },
   {
-    name: 'Fluent UI Web Compnents',
+    name: 'Fluent UI Web Components',
     bgColor: '#0078d4',
     width: 40,
     height: 70,
-    logoAlt: 'Fluent UI Web Compnents',
+    logoAlt: 'Fluent UI Web Components',
     logoUrl: '/home/community/logos/fluent.svg',
     projectUrl:
       'https://storybook.js.org/showcase/microsoft-fluent-ui-web-components',
@@ -188,7 +188,7 @@ export function SocialValidation({
     >
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
         <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
-          Made for frontend developers
+          Made for frontend developers and their agents
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">
@@ -281,7 +281,7 @@ export function SocialValidation({
       </Container>
       <Container className="grid grid-cols-[1fr] gap-8 pb-12 md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(4,_1fr)]">
         <div className={cn(socialCard)}>
-          <GithubIcon aria-label="Discord" className="text-white" size={48} />
+          <GithubIcon aria-label="GitHub" className="text-white" size={48} />
           <div className="text-md text-white">
             {`Join ${contributorCount} contributors building the future of UI development.`}
           </div>
@@ -292,7 +292,7 @@ export function SocialValidation({
           </Button>
           <div>
             <div className="text-sm text-white">{contributorCount}</div>
-            <div className="text-sm text-zinc-500">Contributors</div>
+            <div className="text-sm text-zinc-400">Contributors</div>
           </div>
         </div>
         <div className={cn(socialCard)}>
@@ -309,11 +309,15 @@ export function SocialValidation({
           </Button>
           <div>
             <div className="text-sm text-white">{discordMembers}</div>
-            <div className="text-sm text-zinc-500">Server members</div>
+            <div className="text-sm text-zinc-400">Server members</div>
           </div>
         </div>
         <div className={cn(socialCard)}>
-          <div className="flex h-12 w-12 items-center justify-center">
+          <div
+            aria-label="YouTube"
+            className="flex h-12 w-12 items-center justify-center"
+            role="img"
+          >
             <Youtube />
           </div>
           <div className="text-md text-white">
@@ -326,7 +330,7 @@ export function SocialValidation({
           </Button>
           <div>
             <div className="text-sm text-white">8,320+</div>
-            <div className="text-sm text-zinc-500">Subscribers</div>
+            <div className="text-sm text-zinc-400">Subscribers</div>
           </div>
         </div>
         <div className={cn(socialCard)}>
@@ -353,7 +357,7 @@ export function SocialValidation({
           </div>
           <div>
             <div className="text-sm text-white">24,200+</div>
-            <div className="text-sm text-zinc-500">Followers</div>
+            <div className="text-sm text-zinc-400">Followers</div>
           </div>
         </div>
       </Container>

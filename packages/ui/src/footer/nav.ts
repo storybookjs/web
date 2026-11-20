@@ -8,11 +8,6 @@ export const footerNav = [
         href: 'https://componentdriven.org/',
         isExternal: true,
       },
-      {
-        title: 'AI',
-        href: '/ai',
-        isExternal: false,
-      },
     ],
   },
   {

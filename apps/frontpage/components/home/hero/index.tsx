@@ -3,23 +3,31 @@
 'use client';
 
 import Link from 'next/link';
-import { cn, latestVersion } from '@repo/utils';
+import { cn } from '@repo/utils';
 import { useAnalytics } from '@repo/utils/analytics';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon, WandIcon } from '@storybook/icons';
 import { Container, GradientBadge } from '@repo/ui';
-import { Manager } from '../manager';
+import { Manager, SLIDES } from '../manager';
+import { AgentChat } from '../manager/agent-chat';
 import { InitCommand } from './init-command';
 import { Chrome } from './chrome';
 import SocialProof from './social-proof';
 
+// The major version the home page shows. Hard-coded to 11 to match the badge
+// and the desktop version art while 11 is in beta. Switch back to
+// `latestVersion.id.split('.')[0]` once 11 is the latest docs version.
+const displayedMajorVersion = '11';
+
+// Labels line up with the Manager's SLIDES indices
 const features = [
   'Development',
   'Interaction testing',
   'Visual testing',
   'Documentation',
+  'Agents',
 ];
 
 function Star({ x = 0, y = 0, w = 14, delay = 0 }) {
@@ -67,53 +75,46 @@ export function Hero({
   npmDownloads: string;
   contributorCount: string;
 }) {
-  const [slide, setSlide] = useState(1);
-  const intervalId = useRef<number | null>(null);
+  const [slide, setSlide] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
   const track = useAnalytics();
 
-  const setSlideInterval = () => {
-    if (intervalId.current !== null) {
-      window.clearInterval(intervalId.current);
-    }
-
-    intervalId.current = window.setInterval(() => {
-      setSlide((s) => (s === 4 ? 1 : s + 1));
-    }, 4500);
-  };
+  const nextSlide = (s: number) => (s === features.length - 1 ? 0 : s + 1);
+  const prevSlide = (s: number) => (s === 0 ? features.length - 1 : s - 1);
 
   useEffect(() => {
-    setSlideInterval();
+    if (!autoplay) return;
+    const timeoutId = window.setTimeout(() => {
+      setSlide(nextSlide);
+    }, 4500);
     return () => {
-      if (intervalId.current) {
-        clearInterval(intervalId.current);
-      }
+      window.clearTimeout(timeoutId);
     };
-  }, []);
+  }, [autoplay, slide]);
 
   const handleSlideChange = (newSlide: number) => {
     setSlide(newSlide);
-    if (intervalId.current) {
-      clearInterval(intervalId.current);
-    }
+    setAutoplay(false);
   };
 
   return (
     <Container className="relative z-20 justify-between gap-20 overflow-hidden pt-12 text-white md:pt-16 lg:px-8 lg:pt-24">
       <GradientBadge
-        link="/ai"
+        link="/blog/storybook-11/"
         icon={<WandIcon aria-hidden />}
         className="mb-8"
       >
-        Introducing MCP for React
+        Storybook 11 is here
       </GradientBadge>
       <h1 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
-        Build, test & document components
+        Build UI you can trust, whoever writes the code
       </h1>
-      <div className="mb-8 flex-1 pt-4 md:mb-20">
+      <div className="mb-8 flex-1 pt-6 md:mb-20">
         <p className="mb-8 max-w-[500px] leading-7 sm:mb-12">
-          Storybook is a frontend workshop for building UI components and pages
-          in isolation. Thousands of teams use it for UI development, testing,
-          and documentation. It&apos;s open source and free.
+          Storybook is a free, open source frontend workshop for building,
+          testing, and documenting UI. The components and stories you build
+          become context your agent can read to reuse your components, write
+          stories, and run your tests before you review.
         </p>
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-8 sm:flex-row">
@@ -135,7 +136,7 @@ export function Hero({
                 href="https://github.com/storybookjs/storybook/releases"
               >
                 <div className="text-md text-white">
-                  v{latestVersion.id.split('.')[0]}
+                  v{displayedMajorVersion}
                 </div>
                 <div className="text-sm text-white/60">Latest version</div>
               </a>
@@ -158,16 +159,16 @@ export function Hero({
             Version
             <div className="relative mx-3">
               <Image
-                alt="Storybook 9"
+                alt={`Storybook ${displayedMajorVersion}`}
                 height={39}
                 // Generated using Noto Sans font in Figma
                 src="/home/version.svg"
-                width={52}
+                width={46}
               />
               <Star delay={1} x={-36} y={-10} />
               <Star delay={0.2} w={7} x={-16} y={-20} />
               <Star delay={2} x={24} y={-34} />
-              <Star delay={0.4} w={7} x={52} y={28} />
+              <Star delay={0.4} w={7} x={46} y={28} />
             </div>
           </a>
         </div>
@@ -177,50 +178,65 @@ export function Hero({
           <div
             className="flex h-10 w-10 items-center justify-center rounded-full text-white"
             onClick={() => {
-              handleSlideChange(slide === 1 ? 4 : slide - 1);
+              handleSlideChange(prevSlide(slide));
             }}
           >
             <ChevronLeftIcon />
           </div>
-          <div className="text-md">{features[slide - 1]}</div>
+          <div className="text-md">{features[slide]}</div>
           <div
             className="flex h-10 w-10 items-center justify-center rounded-full text-white"
             onClick={() => {
-              handleSlideChange(slide === 4 ? 1 : slide + 1);
+              handleSlideChange(nextSlide(slide));
             }}
           >
             <ChevronRightIcon />
           </div>
         </div>
-        <div className="relative hidden h-20 gap-12 md:flex">
-          <div
-            className={cn(
-              'absolute top-0 h-0.5 bg-white transition-all',
-              slide === 1 && 'left-0 w-[96px]',
-              slide === 2 && 'left-[144px] w-[132px]',
-              slide === 3 && 'left-[324px] w-[101px]',
-              slide === 4 && 'left-[474px] w-[110px]',
-            )}
-          />
+        <div className="hidden h-20 gap-12 md:flex">
           {features.map((label, i) => (
             <button
               className={cn(
-                'text-white/60 transition-colors hover:text-white',
-                i === slide - 1 && 'text-white',
+                'relative text-white/60 transition-colors hover:text-white',
+                i === slide && 'text-white',
               )}
               key={label}
               onClick={() => {
-                handleSlideChange(i + 1);
+                handleSlideChange(i);
               }}
               type="button"
             >
+              {i === slide ? (
+                <motion.div
+                  className="absolute left-0 top-0 h-0.5 w-full bg-white"
+                  layoutId="hero-slide-indicator"
+                />
+              ) : null}
               {label}
             </button>
           ))}
         </div>
       </div>
-      <Chrome />
-      <Manager slide={slide} />
+      <div className="relative lg:flex">
+        {/* The agent's chat is its own app window: left of the browser on
+            large screens, floating over its lower half on small ones */}
+        <div
+          className={cn(
+            'absolute inset-x-0 bottom-0 z-30 h-1/2 transition-all duration-500 sm:h-[40%] lg:static lg:h-auto lg:flex-shrink-0 lg:translate-y-0 lg:overflow-hidden',
+            slide === SLIDES.agents
+              ? 'opacity-100 lg:mr-4 lg:w-[30%]'
+              : 'pointer-events-none translate-y-8 opacity-0 lg:mr-0 lg:w-0',
+          )}
+        >
+          <AnimatePresence>
+            {slide === SLIDES.agents ? <AgentChat /> : null}
+          </AnimatePresence>
+        </div>
+        <div className="min-w-0 flex-1">
+          <Chrome />
+          <Manager slide={slide} />
+        </div>
+      </div>
       <SocialProof />
     </Container>
   );

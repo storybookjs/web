@@ -8,7 +8,7 @@ const meta = preview.meta({
   parameters: { layout: 'centered' },
   decorators: [
     (Story) => (
-      <div className="relative w-[260px] h-[600px] bg-white">
+      <div className="relative h-[600px] w-[260px] bg-white">
         <Story />
       </div>
     ),
@@ -16,7 +16,15 @@ const meta = preview.meta({
   argTypes: {
     activeStory: {
       control: 'select',
-      options: ['default', 'input-range', 'no-selection', 'all-day'],
+      options: [
+        'default',
+        'input-range',
+        'no-selection',
+        'all-day',
+        'loading',
+        'disabled',
+        'overview',
+      ],
     },
   },
   args: { type: 'rangeSlider' } as ComponentProps<typeof Sidebar>,
@@ -24,4 +32,12 @@ const meta = preview.meta({
 
 export const Default = meta.story({ args: { activeStory: 'default' } });
 export const InputRange = meta.story({ args: { activeStory: 'input-range' } });
-export const NoSelection = meta.story({ args: { activeStory: 'no-selection' } });
+export const NoSelection = meta.story({
+  args: { activeStory: 'no-selection' },
+});
+
+export const AgentStories = meta.story({
+  args: { activeStory: 'loading', showAgentStories: true },
+});
+
+export const Overview = meta.story({ args: { activeStory: 'overview' } });

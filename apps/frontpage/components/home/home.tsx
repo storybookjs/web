@@ -5,12 +5,19 @@ import { useMemo, useRef } from 'react';
 import { useInView } from 'framer-motion';
 import { Hero } from './hero';
 import { Develop } from './develop/develop';
+import { Generate } from './generate/generate';
 import { StickyNav } from './sticky-nav/sticky-nav';
 import { Test } from './test/test';
-import { Document } from './document/document';
 import { Share } from './share/share';
 import { Automate } from './automate/automate';
 import { SocialValidation } from './social-validation/social-validation';
+
+// Keeps a section's top clear of the sticky nav when jumping to its anchor
+const sectionClassName = 'scroll-mt-10 md:scroll-mt-18';
+
+// useInView margin that shrinks the viewport to a thin line 30% from the top,
+// so the highlighted section is the one under that line, however short it is
+const navLine = '-30% 0px -69% 0px';
 
 interface HomeProps {
   githubCount: number;
@@ -25,36 +32,40 @@ export function Home({
   contributorCount,
   discordMembers,
 }: HomeProps) {
-  const developRef = useRef(null);
-  const developInView = useInView(developRef, { margin: '0px 0px -100% 0px' });
+  // Context sets the nav's visibility, so it only counts once its top
+  // reaches the top 10% of the viewport (the hero has scrolled away). That
+  // band is deeper than the scroll margin, so jumping to #context keeps the nav
+  const contextRef = useRef(null);
+  const contextInView = useInView(contextRef, { margin: '0px 0px -90% 0px' });
 
-  const testRef = useRef(null);
-  const testInView = useInView(testRef);
+  // Every other section is active while it crosses the nav line
+  const verifyRef = useRef(null);
+  const verifyInView = useInView(verifyRef, { margin: navLine });
 
-  const documentRef = useRef(null);
-  const documentInView = useInView(documentRef);
+  const agentsRef = useRef(null);
+  const agentsInView = useInView(agentsRef, { margin: navLine });
 
   const shareRef = useRef(null);
-  const shareInView = useInView(shareRef);
+  const shareInView = useInView(shareRef, { margin: navLine });
 
   const automateRef = useRef(null);
-  const automateInView = useInView(automateRef);
+  const automateInView = useInView(automateRef, { margin: navLine });
 
   const whoRef = useRef(null);
-  const whoInView = useInView(whoRef);
+  const whoInView = useInView(whoRef, { margin: navLine });
 
   const activeSection = useMemo(() => {
     if (whoInView) return 'who';
     if (automateInView) return 'automate';
     if (shareInView) return 'share';
-    if (documentInView) return 'document';
-    if (testInView) return 'test';
-    if (developInView) return 'develop';
+    if (agentsInView) return 'agents';
+    if (verifyInView) return 'verify';
+    if (contextInView) return 'context';
     return null;
   }, [
-    developInView,
-    testInView,
-    documentInView,
+    contextInView,
+    verifyInView,
+    agentsInView,
     shareInView,
     automateInView,
     whoInView,
@@ -73,22 +84,33 @@ export function Home({
           activeSection={activeSection}
           isVisible={Boolean(activeSection)}
         />
-        <div id="develop" ref={developRef} style={{ contain: 'paint' }}>
+        <div
+          className={sectionClassName}
+          id="context"
+          ref={contextRef}
+          style={{ contain: 'paint' }}
+        >
           <Develop />
         </div>
-        <div id="test" ref={testRef}>
+        <div className={sectionClassName} id="verify" ref={verifyRef}>
           <Test />
         </div>
-        <div id="document" ref={documentRef}>
-          <Document />
+        {/* The /ai redirect and the hero "See how" link point to #agents */}
+        <div className={sectionClassName} id="agents" ref={agentsRef}>
+          <Generate />
         </div>
-        <div id="share" ref={shareRef}>
+        <div className={sectionClassName} id="share" ref={shareRef}>
           <Share />
         </div>
-        <div id="automate" ref={automateRef} style={{ contain: 'paint' }}>
+        <div
+          className={sectionClassName}
+          id="automate"
+          ref={automateRef}
+          style={{ contain: 'paint' }}
+        >
           <Automate />
         </div>
-        <div id="who" ref={whoRef}>
+        <div className={sectionClassName} id="who" ref={whoRef}>
           <SocialValidation
             contributorCount={contributorCount}
             discordMembers={discordMembers}

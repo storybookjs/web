@@ -9,14 +9,16 @@ const meta = preview.meta({
   parameters: { layout: 'centered' },
   decorators: [
     (Story) => (
-      <div className="relative w-[800px] h-[500px] bg-white">
+      <div className="relative h-[500px] w-[800px] bg-white">
         <Story />
       </div>
     ),
   ],
   render: function Render({ activeStory }) {
     const appearProgress = useMotionValue(1);
-    return <RangeSlider activeStory={activeStory} appearProgress={appearProgress} />;
+    return (
+      <RangeSlider activeStory={activeStory} appearProgress={appearProgress} />
+    );
   },
   argTypes: {
     activeStory: {
@@ -29,4 +31,6 @@ const meta = preview.meta({
 
 export const Default = meta.story({ args: { activeStory: 'default' } });
 export const InputRange = meta.story({ args: { activeStory: 'input-range' } });
-export const NoSelection = meta.story({ args: { activeStory: 'no-selection' } });
+export const NoSelection = meta.story({
+  args: { activeStory: 'no-selection' },
+});

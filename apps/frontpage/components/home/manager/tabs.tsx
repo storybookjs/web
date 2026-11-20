@@ -6,12 +6,10 @@ import {
 } from '@storybook/icons';
 import { cn } from '@repo/utils';
 
-export const Tabs: FC<{ active?: number; slide?: number }> = ({
+export const Tabs: FC<{ active?: number; tabs?: string[] }> = ({
   active = 0,
-  slide,
+  tabs = ['Controls', 'Interactions'],
 }) => {
-  let tabs = ['Controls', 'Interactions'];
-  if (slide === 4) tabs = ['Controls', 'Visual tests'];
 
   return (
     <div className="w-full h-10 flex flex-shrink-0 border-b border-b-[#D9E0E6] justify-between items-center">

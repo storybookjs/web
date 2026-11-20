@@ -69,9 +69,9 @@ export function SlideVisualTesting() {
         <ComponentVTA />
         <ComponentSmall className="max-h-full sm:hidden" />
       </div>
-      <Toolbar slide={1} />
+      <Toolbar />
       <div className="absolute bottom-0 left-0 flex h-[55%] w-full flex-col border-t border-t-[#D9E0E6] sm:h-[40%] lg:bottom-auto lg:left-auto lg:right-0 lg:top-0 lg:h-full lg:w-[400px] lg:border-l lg:border-t-0 lg:border-l-[#D9E0E6]">
-        <Tabs active={1} slide={4} />
+        <Tabs active={1} tabs={['Controls', 'Visual tests']} />
         <motion.div
           animate={{
             height: [null, 40, 40, 0],
