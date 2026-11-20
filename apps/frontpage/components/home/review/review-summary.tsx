@@ -28,7 +28,7 @@ export const ReviewSummary: FC = () => {
           <div className="grid gap-3 sm:gap-4 md:grid-cols-[2fr_3fr]">
             <Group
               count={4}
-              description="The component the agent changed"
+              description="The component that changed"
               title="Button"
             >
               <div className="grid grid-cols-2 gap-2">
@@ -130,7 +130,7 @@ const Thumbnail: FC<{
   </div>
 );
 
-const FakeButton: FC<{
+export const FakeButton: FC<{
   variant?: 'primary' | 'secondary';
   size?: 'medium' | 'small';
   disabled?: boolean;

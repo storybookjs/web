@@ -1,0 +1,20 @@
+import preview from '../../../.storybook/preview';
+import { ChangedStories } from './changed-stories';
+
+const meta = preview.meta({
+  title: 'Home/Review/ChangedStories',
+  component: ChangedStories,
+  globals: { backgrounds: { value: 'dark' } },
+  parameters: {
+    chromatic: { viewports: [320, 768, 1200] },
+  },
+  decorators: [
+    (Story) => (
+      <div className="bg-homeBackground p-4 sm:p-8">
+        <Story />
+      </div>
+    ),
+  ],
+});
+
+export const Default = meta.story({});
