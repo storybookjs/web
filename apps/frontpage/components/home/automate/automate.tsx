@@ -12,8 +12,9 @@ export const Automate: FC = () => {
           Automate UI workflows
         </h2>
         <p className="mx-auto mb-0 mt-5 max-w-[510px] text-center text-white md:mt-2">
-          Add Storybook as a CI step to automate the UI development workflow.
-          That helps you and your team ship faster with less manual work.
+          Add Storybook as a CI step so every pull request runs the same
+          checks, whether a developer or an agent opened it. Your team ships
+          faster with less manual work.
         </p>
           <Button
             asChild

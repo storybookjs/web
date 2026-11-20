@@ -9,6 +9,7 @@ import { Community } from '../../community';
 import { Youtube } from '../../logos/youtube';
 import BlueskySvg from '../share/images/bluesky.svg';
 import XSvg from '../share/images/x.svg';
+import { ClosingCta } from './closing-cta';
 
 const projects = [
   {
@@ -188,7 +189,7 @@ export function SocialValidation({
     >
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
         <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
-          Made for frontend developers
+          Made for frontend developers and their agents
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">
@@ -357,6 +358,7 @@ export function SocialValidation({
           </div>
         </div>
       </Container>
+      <ClosingCta />
     </section>
   );
 }
