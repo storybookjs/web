@@ -1,70 +1,11 @@
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 import Link from 'next/link';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
 import { Testimonial } from '../testimonial';
-import {
-  Accessibility,
-  Eye,
-  Interact,
-  Pixel,
-  Document,
-  Pipeline,
-} from './icons';
 import { LogoAirbnb } from './logo-airbnb';
 import { EnforceQualityAnimation } from './enforce-quality-animation';
-
-interface Feature {
-  icon: ReactNode;
-  title: string;
-  description: string;
-}
-
-const features: Feature[] = [
-  {
-    icon: <Eye />,
-    title: 'Spot test',
-    description: 'Stories are tests you can debug in dev and QA.',
-  },
-  {
-    icon: <Pixel />,
-    title: 'Visual test appearance',
-    description: 'Pinpoint UI changes down to the pixel.',
-  },
-  {
-    icon: <Interact />,
-    title: 'Interaction test behavior',
-    description:
-      'Simulate user behavior and assert in the browser. Failures point to the story and assertion that broke.',
-  },
-  {
-    icon: <Accessibility />,
-    title: 'Accessibility tests',
-    description: 'Check every story for WCAG and ARIA issues.',
-  },
-  {
-    icon: <Document />,
-    title: 'Coverage Reports',
-    description: 'Track how much of your frontend code is tested.',
-  },
-  {
-    icon: <Pipeline />,
-    title: 'Test in CI',
-    description:
-      'Run the same story tests in CI and see the results as a status check on each pull request.',
-  },
-];
-
-/** Same shape as the feature cards on the old /ai page */
-const FeatureCard: FC<Feature> = ({ icon, title, description }) => {
-  return (
-    <div>
-      <div className="mb-5 h-8 w-8 sm:h-10 sm:w-10">{icon}</div>
-      <h3 className="mb-2 font-bold text-white">{title}</h3>
-      <p className="leading-relaxed text-white">{description}</p>
-    </div>
-  );
-};
+import { FeatureGridWithUrlSwitch } from './feature-grid/feature-grid';
 
 export const Test: FC = () => {
   return (
@@ -97,11 +38,7 @@ export const Test: FC = () => {
       </Container>
       <EnforceQualityAnimation />
       <Container className="pb-12 pt-12 text-white sm:pt-16 md:pb-20 lg:px-8">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-20 lg:gap-y-16">
-          {features.map((feature) => (
-            <FeatureCard key={feature.title} {...feature} />
-          ))}
-        </div>
+        <FeatureGridWithUrlSwitch />
       </Container>
       <Testimonial
         avatarUrl="https://avatars2.githubusercontent.com/u/1247751?s=100&v=4"
