@@ -60,19 +60,26 @@ const features: Feature[] = [
  * Outlined facet cards with the icon beside the text. Borrows the Visual ·
  * Accessibility · Interaction facet row on /features/test (1px white/10
  * outline, 5px radius, 40px icon on the left). Each card links to its docs
- * page.
+ * page, named by its title, and lifts on hover like the Develop framework
+ * tiles.
  */
 export const FeatureGrid: FC = () => (
   <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-    {features.map(({ icon, title, description, href }) => (
+    {features.map(({ icon, title, description, href }, index) => (
       <li className="flex" key={title}>
         <Link
-          className="flex w-full items-start gap-5 rounded-[5px] border border-white/10 p-5 transition-colors hover:border-white/25 hover:bg-white/[0.03] focus-visible:border-blue-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 sm:p-6"
+          className="flex w-full items-start gap-5 rounded-[5px] border border-white/10 p-5 transition-[transform,border-color] hover:-translate-y-1 hover:border-zinc-400 focus-visible:border-blue-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:p-6"
+          aria-labelledby={`verify-feature-${String(index)}`}
           href={href}
         >
           <div className="h-10 w-10 shrink-0">{icon}</div>
           <div>
-            <h3 className="font-bold leading-6 text-white">{title}</h3>
+            <h3
+              className="font-bold leading-6 text-white"
+              id={`verify-feature-${String(index)}`}
+            >
+              {title}
+            </h3>
             <p className="mt-1 leading-6 text-white/80">{description}</p>
           </div>
         </Link>
