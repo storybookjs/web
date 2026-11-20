@@ -281,7 +281,7 @@ export function SocialValidation({
       </Container>
       <Container className="grid grid-cols-[1fr] gap-8 pb-12 md:grid-cols-[repeat(2,_1fr)] lg:grid-cols-[repeat(4,_1fr)]">
         <div className={cn(socialCard)}>
-          <GithubIcon aria-label="Discord" className="text-white" size={48} />
+          <GithubIcon aria-label="GitHub" className="text-white" size={48} />
           <div className="text-md text-white">
             {`Join ${contributorCount} contributors building the future of UI development.`}
           </div>
@@ -313,7 +313,11 @@ export function SocialValidation({
           </div>
         </div>
         <div className={cn(socialCard)}>
-          <div className="flex h-12 w-12 items-center justify-center">
+          <div
+            aria-label="YouTube"
+            className="flex h-12 w-12 items-center justify-center"
+            role="img"
+          >
             <Youtube />
           </div>
           <div className="text-md text-white">
