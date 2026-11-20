@@ -39,11 +39,11 @@ const projects = [
     projectUrl: 'https://storybook.js.org/showcase/audi-ui-react',
   },
   {
-    name: 'Fluent UI Web Compnents',
+    name: 'Fluent UI Web Components',
     bgColor: '#0078d4',
     width: 40,
     height: 70,
-    logoAlt: 'Fluent UI Web Compnents',
+    logoAlt: 'Fluent UI Web Components',
     logoUrl: '/home/community/logos/fluent.svg',
     projectUrl:
       'https://storybook.js.org/showcase/microsoft-fluent-ui-web-components',
