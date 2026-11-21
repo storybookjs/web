@@ -19,9 +19,9 @@ interface Feature {
 const features: Feature[] = [
   {
     icon: <Eye />,
-    title: 'Spot test',
-    href: '/docs/writing-tests',
-    description: 'Stories are tests you can debug in dev and QA.',
+    title: 'Track edge cases',
+    href: '/docs/writing-stories',
+    description: 'Stories are reproductions you can debug in dev and QA.',
   },
   {
     icon: <Pixel />,
@@ -43,16 +43,16 @@ const features: Feature[] = [
   },
   {
     icon: <Document />,
-    title: 'Coverage Reports',
+    title: 'Coverage reports',
     href: '/docs/writing-tests/test-coverage',
-    description: 'Track how much of your frontend code is tested.',
+    description: 'Find which parts of your UI need tested.',
   },
   {
     icon: <Pipeline />,
     title: 'Test in CI',
     href: '/docs/writing-tests/in-ci',
     description:
-      'Run the same story tests in CI and see the results as a status check on each pull request.',
+      'Run story tests in CI and see the results as a status check on each pull request.',
   },
 ];
 
@@ -72,7 +72,9 @@ export const FeatureGrid: FC = () => (
           aria-labelledby={`verify-feature-${String(index)}`}
           href={href}
         >
-          <div className="h-10 w-10 shrink-0">{icon}</div>
+          <div aria-hidden className="h-10 w-10 shrink-0 relative top-[2px]">
+            {icon}
+          </div>
           <div>
             <h3
               className="font-bold leading-6 text-white"

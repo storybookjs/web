@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ChevronSmallRightIcon } from '@storybook/icons';
 import { Container } from '@repo/ui';
-import { AgentSkills, BenchmarkReadout, STUDY_URL } from './agent-proof';
+import { Agents, BenchmarkReadout, STUDY_URL } from './agent-proof';
 import { Skills } from './skills';
 
 export function Generate({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
@@ -13,10 +13,11 @@ export function Generate({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">
-            They force agents to reuse existing components instead of
-            inventing new ones or hallucinating.
+            Storybook helps agents understand your components, write stories
+            to reproduce UI states, and run tests before you review
+            their work.
           </p>
-          <AgentSkills />
+          <Agents />
         </div>
       </Container>
       <Skills />

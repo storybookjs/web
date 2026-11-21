@@ -186,7 +186,7 @@ export function BenchmarkReadout() {
 }
 
 /** The coding agents Storybook works with */
-export function AgentSkills() {
+export function Agents() {
   return (
     // Same label and icon squares as the Context section's "Made for" row
     <div className="flex flex-col gap-4">

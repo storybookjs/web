@@ -8,14 +8,14 @@ const features = [
     title: 'Publish a single canonical UI context',
     description: (
       <>
-        Publish your Storybook using{' '}
+        Publish your Storybook and its context using{' '}
         <a
           className="text-blue-500"
           href="https://www.chromatic.com/?ref=storybook"
         >
           Chromatic
         </a>{' '}
-        so agents, tools, and CI reference the same UI context. AI never
+        so agents and other tools reference the same UI context. AI never
         operates against stale or invalid context.
       </>
     ),
@@ -37,9 +37,8 @@ export function Share() {
         <div className="flex-1 pt-4">
           <p className="mb-6 max-w-[520px] leading-7">
             Stories show how the UI actually works, not just a static design of
-            how it&apos;s supposed to work. Publish your Storybook so teammates,
-            agents, and CI all work from the same reviewed context. Humans still
-            decide what enters it.
+            how it&apos;s supposed to work. Publish your Storybook as a reference
+            so teammates and agents all work from the same reviewed context.
           </p>
         </div>
       </Container>

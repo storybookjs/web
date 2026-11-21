@@ -67,9 +67,9 @@ export function Develop() {
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">
-            Storybook is a workshop for building UI in isolation. The
-            components, stories, and docs you make there become a single source
-            of truth for UI, whether you or your agent is writing the code.
+            Storybook helps you build UI components and pages in isolation. Those components,
+            stories, and docs become a single source of truth for your UI, ensuring consistency
+            for your team and agents.
           </p>
           <div className="flex flex-col gap-4">
             <div className="text-xs font-bold uppercase tracking-widest text-zinc-300">
@@ -77,24 +77,19 @@ export function Develop() {
             </div>
             <div className="flex items-center gap-4">
               {[
-                'react',
-                'vue',
-                'angular',
-                'svelte',
-                'web-components',
-                'html',
-              ].map((i) => (
+                { name: 'react', icon: <ReactLogo /> },
+                { name: 'vue', icon: <Vue /> },
+                { name: 'angular', icon: <Angular /> },
+                { name: 'svelte', icon: <Svelte /> },
+                { name: 'web-components', icon: <WebComponents /> },
+                { name: 'html', icon: <HTML5 /> },
+              ].map(({ name, icon }) => (
                 <Link
                   className="flex h-10 w-10 items-center justify-center rounded border border-zinc-700 transition-all hover:-translate-y-1 hover:border-zinc-400"
-                  href={`/docs/get-started/install/?renderer=${i}`}
-                  key={i}
+                  href={`/docs/get-started/install/?renderer=${name}`}
+                  key={name}
                 >
-                  {i === 'react' && <ReactLogo />}
-                  {i === 'vue' && <Vue />}
-                  {i === 'angular' && <Angular />}
-                  {i === 'svelte' && <Svelte />}
-                  {i === 'web-components' && <WebComponents />}
-                  {i === 'html' && <HTML5 />}
+                  {icon}
                 </Link>
               ))}
               <div className="text-zinc-400">+ 6</div>

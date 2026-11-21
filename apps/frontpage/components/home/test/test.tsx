@@ -11,20 +11,20 @@ export const Test: FC = () => {
     <div className="overflow-x-clip border-b border-zinc-600 pt-12 sm:pt-20 md:pt-28">
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
         <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
-          Test UIs with less effort and no flake
+          Test throughout your UI workflow
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">
-            Stories capture the “known good” states of UI components.{' '}
+            Stories capture the various states of UI components.{' '}
             <Link className="text-blue-500" href="/docs/writing-tests">
               Storybook Test
             </Link>{' '}
             runs them in a real browser as interaction and accessibility tests,
             with fast feedback on every change.
           </p>
-          <p className="leading-7">
-            Failures go back to whoever wrote the code, you or your agent, to
-            fix and re-run until tests pass. You step in once they do.
+          <p className="mb-6 leading-7">
+            Failures are reported to whoever wrote the code, you or your agent, to
+            fix and re-run until tests pass.
           </p>
         </div>
       </Container>

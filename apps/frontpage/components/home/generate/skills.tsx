@@ -18,7 +18,7 @@ export const skills: FeatureItem[] = [
     icon: <Projects />,
     title: 'UI workflow',
     description:
-      'Looks up existing components, writes or updates stories for each change, runs story tests with accessibility checks, and publishes a review.',
+      'Looks up existing components, writes or updates stories for each change, runs story tests, and publishes a review.',
     link: {
       label: 'Learn about the UI workflow',
       href: '/docs/ai/skills/ui-workflow',
@@ -33,7 +33,7 @@ export const skills: FeatureItem[] = [
     icon: <AgentReuse />,
     title: 'Component docs',
     description:
-      'Chooses the right component and uses only the props it documents.',
+      'Chooses the right component and uses only correct props.',
     link: {
       label: 'Learn about component docs',
       href: '/docs/ai/skills/component-docs',
@@ -44,7 +44,7 @@ export const skills: FeatureItem[] = [
     icon: <Code />,
     title: 'Write stories',
     description:
-      'Writes a story for each state a component can reach, such as variants, loading, empty, error, and disabled.',
+      'Writes a story for each state a component can reach, such as loading, empty, error, and disabled.',
     link: {
       label: 'Learn about writing stories',
       href: '/docs/ai/skills/write-stories',
@@ -59,7 +59,7 @@ export const skills: FeatureItem[] = [
     icon: <AgentTest />,
     title: 'Test stories',
     description:
-      'Runs the tests of the stories it changed, fixes what fails, and runs them again.',
+      'Runs the tests with accessibility checks of the stories it changed, fixes what fails, and runs them again.',
     link: {
       label: 'Learn about testing stories',
       href: '/docs/ai/skills/test-stories',

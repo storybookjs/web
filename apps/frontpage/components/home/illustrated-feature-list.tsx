@@ -151,7 +151,9 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
               }}
               type="button"
             >
-              <div className="h-10 w-10 flex-shrink-0">{feature.icon}</div>
+              <div aria-hidden className="h-10 w-10 flex-shrink-0">
+                {feature.icon}
+              </div>
               <div>
                 <div className="text-md font-bold text-white">
                   {feature.title}
