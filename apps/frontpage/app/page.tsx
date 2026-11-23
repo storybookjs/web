@@ -8,7 +8,7 @@ import { Home } from '../components/home/home';
 
 const title = 'Storybook: Frontend workshop for UI development';
 const description =
-  "Storybook is a free, open source frontend workshop for building, testing, and documenting UI. The components and stories you build become context your agent can read to reuse your components, write stories, and run your tests before you review.";
+  "Storybook is a free, open source workshop for building, testing, and documenting UI. The components and stories you build become context your agent can read to reuse your components, write stories, and run your tests before you review.";
 
 export const metadata: Metadata = {
   title,

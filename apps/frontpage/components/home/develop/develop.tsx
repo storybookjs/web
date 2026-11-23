@@ -63,7 +63,7 @@ export function Develop() {
     <section className="border-b border-zinc-700 pt-12 sm:pt-20 md:pt-28">
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
         <h2 className="flex-1 text-balance text-4xl font-bold md:text-[56px]/[70px]">
-          Build the context your team and agents use
+          Shared context for your team and agents
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">

@@ -111,7 +111,7 @@ export function Hero({
       </h1>
       <div className="mb-8 flex-1 pt-6 md:mb-20">
         <p className="mb-8 max-w-[500px] leading-7 sm:mb-12">
-          Storybook is a free, open source frontend workshop for building,
+          Storybook is a free, open source workshop for building,
           testing, and documenting UI. The components and stories you build
           become context your agent can read to reuse your components, write
           stories, and run your tests before you review.
