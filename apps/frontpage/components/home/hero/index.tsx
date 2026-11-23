@@ -69,7 +69,7 @@ function Star({ x = 0, y = 0, w = 14, delay = 0 }) {
 
 function NewBadge() {
   return (
-    <span className="ui-gradient-badge rounded-full px-2 py-0.5 text-xs text-white">
+    <span className="rounded-full border border-current px-2 py-0.5 text-xs">
       New
     </span>
   );
