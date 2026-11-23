@@ -67,6 +67,14 @@ function Star({ x = 0, y = 0, w = 14, delay = 0 }) {
   );
 }
 
+function NewBadge() {
+  return (
+    <span className="ui-gradient-badge rounded-full px-2 py-0.5 text-xs text-white">
+      New
+    </span>
+  );
+}
+
 export function Hero({
   npmDownloads,
   contributorCount,
@@ -185,7 +193,10 @@ export function Hero({
           >
             <ChevronLeftIcon />
           </div>
-          <div className="text-md">{features[slide]}</div>
+          <div className="text-md flex items-center gap-2">
+            {features[slide]}
+            {slide === SLIDES.agents ? <NewBadge /> : null}
+          </div>
           <div
             className="flex h-10 w-10 items-center justify-center rounded-full text-white"
             onClick={() => {
@@ -199,7 +210,7 @@ export function Hero({
           {features.map((label, i) => (
             <button
               className={cn(
-                'relative text-white/60 transition-colors hover:text-white',
+                'relative flex items-center gap-2 text-white/60 transition-colors hover:text-white',
                 i === slide && 'text-white',
               )}
               key={label}
@@ -215,6 +226,7 @@ export function Hero({
                 />
               ) : null}
               {label}
+              {i === SLIDES.agents ? <NewBadge /> : null}
             </button>
           ))}
         </div>
