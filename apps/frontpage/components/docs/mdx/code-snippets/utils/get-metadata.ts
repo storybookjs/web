@@ -6,6 +6,7 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import { rehypePrettyCodeOptions } from '@repo/ui';
+import { removeCsfWarning } from './remove-csf-warning';
 
 interface MetadataProps {
   path: string | undefined;
@@ -40,8 +41,9 @@ export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
   // Transform the code blocks using remarkRehype
   const content: CodeSnippetsProps[] = await Promise.all(
     codeBlocks.map(async (block) => {
+      const code = removeCsfWarning(block.value);
       // We are bringing back the necessary values to render the code block
-      const valueWithBackticks = `\`\`\`${block.lang ?? 'unknown'}\n${block.value}\n\`\`\``;
+      const valueWithBackticks = `\`\`\`${block.lang ?? 'unknown'}\n${code}\n\`\`\``;
       const result = await unified()
         .use(remarkParse)
         .use(remarkRehype)
@@ -69,7 +71,7 @@ export const getMetadata = async ({ path, activeVersion }: MetadataProps) => {
       return {
         language: block.lang ?? undefined,
         ...metadata,
-        raw: block.value,
+        raw: code,
         content: result.value,
       };
     }),

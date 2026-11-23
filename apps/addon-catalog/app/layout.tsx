@@ -3,6 +3,7 @@ import { cn, fetchGithubCount } from '@repo/utils';
 import { Nunito_Sans as nunitoSans } from 'next/font/google';
 import { Header, Footer, Container } from '@repo/ui';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { openGraph } from '../lib/open-graph';
 import { Providers } from './providers';
 
 import '@docsearch/css';
@@ -17,14 +18,12 @@ const fontSans = nunitoSans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://storybook.js.org/integrations'),
+  // Next resolves relative metadata URLs, including /addons/opengraph-image.jpg, against this
+  metadataBase: new URL('https://storybook.js.org'),
   title: 'Storybook integrations',
   description:
     'Integrations enable advanced functionality and unlock new workflows. Contributed by core maintainers and the amazing developer community.',
-  openGraph: {
-    url: 'https://storybook.js.org/integrations',
-    siteName: 'Storybook',
-  },
+  openGraph: openGraph(),
 };
 
 export default async function RootLayout({

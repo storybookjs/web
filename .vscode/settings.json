@@ -1,0 +1,11 @@
+{
+  // Build output changes constantly while dev servers run. Watching it makes
+  // VS Code refresh git state often, which holds .git/index.lock.
+  "files.watcherExclude": {
+    "**/.next/**": true,
+    "**/.turbo/**": true,
+    "**/.swc/**": true,
+    "**/storybook-static/**": true,
+    "**/node_modules/**": true
+  }
+}

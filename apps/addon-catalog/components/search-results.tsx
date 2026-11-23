@@ -1,34 +1,42 @@
 import type { Addon, Recipe } from '../types';
 import { Preview } from './preview';
 
-interface SearchResultsProps {
+type SearchResultsProps = {
   search: string;
   loading: boolean;
-  searchResults: {
-    addons: Addon[];
-    recipes: Recipe[];
-  };
-}
+} & (
+  | { kind: 'addons'; results: Addon[] }
+  | { kind: 'recipes'; results: Recipe[] }
+);
 
 export const SearchResults = ({
   search,
   loading,
-  searchResults: { addons, recipes },
+  kind,
+  results,
 }: SearchResultsProps) => {
-  const searchResults = [...recipes, ...addons];
+  const isRecipes = kind === 'recipes';
+
   return (
     <div>
       <h3 className="mb-8 text-2xl font-bold">Search Results for {search}</h3>
       {loading ? <div>Loading...</div> : null}
-      {!loading && searchResults.length === 0 && <div>No results found</div>}
-      {!loading && searchResults.length > 0 && (
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
-          {searchResults.map((item) => (
+      {!loading && results.length === 0 && <div>No results found</div>}
+      {!loading && results.length > 0 && (
+        // Match the layout of the list each tab shows when not searching
+        <div
+          className={
+            isRecipes
+              ? 'flex flex-col gap-6'
+              : 'grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3'
+          }
+        >
+          {results.map((item) => (
             <Preview
               key={item.name}
-              orientation="vertical"
+              orientation={isRecipes ? 'horizontal' : 'vertical'}
               element={item}
-              type={item.type === 'Recipe' ? 'recipe' : 'addon'}
+              type={isRecipes ? 'recipe' : 'addon'}
             />
           ))}
         </div>
