@@ -58,6 +58,10 @@ interface NamesPage {
   tags?: { name: string }[];
 }
 
+// Addon names that collide with addon catalog pages (/addons/recipes,
+// /addons/integrations). Callers use these names to build addon page URLs.
+const reservedAddonNames = ['recipes', 'integrations'];
+
 export async function fetchAddonsData(): Promise<string[]> {
   const value: string[] = [];
   async function fetchPage(skip = 0): Promise<void> {
@@ -78,7 +82,7 @@ export async function fetchAddonsData(): Promise<string[]> {
   }
   try {
     await fetchPage();
-    return value;
+    return value.filter((name) => !reservedAddonNames.includes(name));
   } catch (error) {
     throw new Error(`Failed to fetch addons data: ${(error as Error).message}`);
   }
