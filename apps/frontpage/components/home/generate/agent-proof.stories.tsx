@@ -1,5 +1,5 @@
 import preview from '../../../.storybook/preview';
-import { AgentSkills, BenchmarkReadout } from './agent-proof';
+import { Agents, BenchmarkReadout } from './agent-proof';
 
 const meta = preview.meta({
   title: 'Home/Generate/AgentProof',
@@ -22,5 +22,5 @@ export const Benchmark = meta.story({});
 
 // The "Works with your coding agent" row from the section header
 export const CodingAgents = meta.story({
-  render: () => <AgentSkills />,
+  render: () => <Agents />,
 });
