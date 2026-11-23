@@ -10,7 +10,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon, WandIcon } from '@storybook/icons';
 import { Container, GradientBadge } from '@repo/ui';
-import { Manager, SLIDES } from '../manager';
+import {
+  Manager,
+  SLIDE_DURATION,
+  SLIDES,
+  TESTING_SLIDE_DURATION,
+} from '../manager';
 import { AgentChat } from '../manager/agent-chat';
 import { InitCommand } from './init-command';
 import { Chrome } from './chrome';
@@ -22,13 +27,7 @@ import SocialProof from './social-proof';
 const displayedMajorVersion = '11';
 
 // Labels line up with the Manager's SLIDES indices
-const features = [
-  'Development',
-  'Interaction testing',
-  'Visual testing',
-  'Documentation',
-  'Agents',
-];
+const features = ['Development', 'Testing', 'Documentation', 'Agents'];
 
 function Star({ x = 0, y = 0, w = 14, delay = 0 }) {
   return (
@@ -84,9 +83,12 @@ export function Hero({
 
   useEffect(() => {
     if (!autoplay) return;
-    const timeoutId = window.setTimeout(() => {
-      setSlide(nextSlide);
-    }, 4500);
+    const timeoutId = window.setTimeout(
+      () => {
+        setSlide(nextSlide);
+      },
+      slide === SLIDES.testing ? TESTING_SLIDE_DURATION : SLIDE_DURATION,
+    );
     return () => {
       window.clearTimeout(timeoutId);
     };

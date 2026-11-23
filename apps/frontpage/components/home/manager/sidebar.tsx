@@ -76,9 +76,7 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
         />
       )}
       <SidebarLine
-        active={
-          slide === SLIDES.interactions || slide === SLIDES.visualTesting
-        }
+        active={slide === SLIDES.testing}
         ic="story"
         label="Added to cart"
         lvl={2}

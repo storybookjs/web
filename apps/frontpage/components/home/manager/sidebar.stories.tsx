@@ -20,7 +20,7 @@ export const ExpandedStory = meta.story({
 });
 
 export const AddedToCartStory = meta.story({
-  args: { slide: SLIDES.interactions },
+  args: { slide: SLIDES.testing },
 });
 
 export const DocumentationActive = meta.story({

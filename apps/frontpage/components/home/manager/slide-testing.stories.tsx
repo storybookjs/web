@@ -1,9 +1,9 @@
 import preview from '../../../.storybook/preview';
-import { SlideVisualTesting } from './slide-visual-testing';
+import { SlideTesting } from './slide-testing';
 
 const meta = preview.meta({
-  title: 'Home/Manager/SlideVisualTesting',
-  component: SlideVisualTesting,
+  title: 'Home/Manager/SlideTesting',
+  component: SlideTesting,
   parameters: {
     layout: 'fullscreen',
     chromatic: { viewports: [320, 768, 1200] },
@@ -18,3 +18,7 @@ const meta = preview.meta({
 });
 
 export const Default = meta.story({});
+
+export const VisualTests = meta.story({
+  args: { initialPhase: 'visualTests' },
+});
