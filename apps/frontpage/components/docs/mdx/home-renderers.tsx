@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import type { DocsVersion } from '@repo/utils';
+import type { DocsVersion } from "@repo/utils";
+import Image from "next/image";
+import Link from "next/link";
 
 interface HomeRenderersProps {
   activeVersion: DocsVersion;
@@ -68,8 +68,15 @@ export function HomeRenderers({ activeVersion }: HomeRenderersProps) {
         title="Vue"
       />
       <Card
+        href="/docs/get-started/frameworks/angular-vite/?renderer=angular"
+        logo="logo-angular.svg"
+        subtitle="with Vite"
+        title="Angular"
+      />
+      <Card
         href="/docs/get-started/frameworks/angular/?renderer=angular"
         logo="logo-angular.svg"
+        subtitle="with Webpack"
         title="Angular"
       />
       <Card
@@ -109,20 +116,11 @@ function Card({
       className="flex h-20 items-center gap-3 rounded-md border border-slate-200 pl-5 transition-all hover:-translate-y-px hover:border-slate-300 dark:border-slate-700 dark:hover:border-slate-600"
       href={href}
     >
-      <Image
-        alt=""
-        height="28"
-        src={`/images/logos/renderers/${logo}`}
-        width="28"
-      />
+      <Image alt="" height="28" src={`/images/logos/renderers/${logo}`} width="28" />
       {subtitle ? (
         <div>
-          <p className="text-md font-bold text-black dark:text-white">
-            {title}
-          </p>
-          <p className="text-sm text-slate-600 dark:text-slate-400">
-            {subtitle}
-          </p>
+          <p className="text-md font-bold text-black dark:text-white">{title}</p>
+          <p className="text-sm text-slate-600 dark:text-slate-400">{subtitle}</p>
         </div>
       ) : (
         <p className="text-md font-bold text-black dark:text-white">{title}</p>
