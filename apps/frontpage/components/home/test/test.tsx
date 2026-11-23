@@ -11,7 +11,7 @@ export const Test: FC = () => {
     <div className="overflow-x-clip border-b border-zinc-600 pt-12 sm:pt-20 md:pt-28">
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
         <h2 className="flex-1 text-4xl font-bold md:text-[56px]/[70px]">
-          Test throughout your UI workflow
+          Test every component state
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">

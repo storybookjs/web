@@ -9,7 +9,7 @@ export const Automate: FC = () => {
     <div className="border-b border-zinc-600 py-12 sm:py-20 md:pt-28">
       <Container>
         <h2 className="flex-1 text-center text-4xl font-bold text-white md:text-[56px]/[70px]">
-          Automate UI workflows
+          Automate UI checks
         </h2>
         <p className="mx-auto mb-0 mt-5 max-w-[510px] text-center text-white md:mt-2">
           Add Storybook as a CI step so every pull request runs the same
