@@ -4,10 +4,10 @@ import { IllustratedFeatureList } from '../illustrated-feature-list';
 import { AgentReuse, DocumentAgentMedia } from '../document/agent-media';
 import { Code, Eye, Projects } from '../test/icons';
 import { ChangedStories } from './changed-stories';
-import { ReviewSummary } from './review-summary';
 import { FitWindow } from './fit-window';
 import { GenerateUIAnimation } from './generate-ui-animation';
 import { AgentTest, TestStoriesMedia } from './test-stories-media';
+import { UIReviewMedia } from './ui-review-media';
 
 /** Panel color behind every skill's visual */
 export const SKILLS_PANEL_COLOR = '#6F2CAC';
@@ -75,11 +75,7 @@ export const skills: FeatureItem[] = [
       label: 'Learn about UI review',
       href: '/docs/ai/skills/ui-review',
     },
-    illustration: (
-      <FitWindow mobileWidth={520} width={760}>
-        <ReviewSummary />
-      </FitWindow>
-    ),
+    illustration: <UIReviewMedia />,
   },
 ];
 
