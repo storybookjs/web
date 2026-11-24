@@ -35,7 +35,11 @@ export const SkillStage: FC<{
     role="img"
   >
     <div className="absolute left-[20px] top-[52px] w-[384px]">{window}</div>
-    <div className="absolute bottom-[20px] right-[16px] w-[224px]">{agent}</div>
+    {/*
+      Sits 10px from the stage's foot so none of the card's dividers line up
+      with the bottom edge of a window (several windows end at 352px)
+    */}
+    <div className="absolute bottom-[10px] right-[16px] w-[224px]">{agent}</div>
   </div>
 );
 
