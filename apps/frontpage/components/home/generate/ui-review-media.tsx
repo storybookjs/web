@@ -31,7 +31,6 @@ const STATUS: Record<Beat, string> = {
 
 export const UIReviewMedia: FC<{ beat?: Beat }> = ({ beat: heldBeat }) => {
   const beat = useBeat(heldBeat);
-  const published = beat !== 'act';
   const settled = beat === 'settle';
 
   return (
@@ -49,12 +48,20 @@ export const UIReviewMedia: FC<{ beat?: Beat }> = ({ beat: heldBeat }) => {
       label="An agent lightens the Button's background and publishes a review. Storybook's review page shows the changed Button stories and the Checkout page that uses it."
       window={
         <StorybookWindow>
-          <ReviewPage published={published} settled={settled} />
+          <UIReviewWindow beat={beat} />
         </StorybookWindow>
       }
     />
   );
 };
+
+/**
+ * What the Storybook window shows at a beat: the review page. The UI
+ * workflow recap reuses it.
+ */
+export const UIReviewWindow: FC<{ beat: Beat }> = ({ beat }) => (
+  <ReviewPage published={beat !== 'act'} settled={beat === 'settle'} />
+);
 
 const Diff: FC = () => (
   <div className="overflow-hidden rounded border border-zinc-700 font-mono text-[11px] leading-5">

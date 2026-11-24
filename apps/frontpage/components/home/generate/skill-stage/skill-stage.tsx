@@ -60,12 +60,12 @@ export const AgentCard: FC<{
   children: ReactNode;
 }> = ({ file, status, statusKey, done, children }) => (
   <div className="overflow-hidden rounded-md border border-zinc-700 bg-zinc-900 text-zinc-100 shadow-[0_24px_48px_-16px_rgba(10,4,20,0.75)] ring-1 ring-white/10">
-    <div className="flex h-10 items-center gap-2 border-b border-zinc-700 bg-zinc-800 px-3">
-      <span className="flex items-center gap-1 rounded-full bg-[#B57EE5]/[0.18] px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#D9B8F5] ring-1 ring-inset ring-[#B57EE5]/40">
+    <div className="flex h-10 items-center gap-1.5 border-b border-zinc-700 bg-zinc-800 px-3">
+      <span className="flex shrink-0 items-center gap-1 rounded-full bg-[#B57EE5]/[0.18] px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-[0.1em] text-[#D9B8F5] ring-1 ring-inset ring-[#B57EE5]/40">
         <WandIcon className="shrink-0" size={10} />
         Agent
       </span>
-      <span className="truncate font-mono text-[12px] text-zinc-400">
+      <span className="min-w-0 truncate font-mono text-[11px] text-zinc-400">
         {file}
       </span>
     </div>

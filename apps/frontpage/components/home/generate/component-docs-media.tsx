@@ -53,7 +53,6 @@ export const ComponentDocsMedia: FC<{ beat?: Beat }> = ({
   beat: heldBeat,
 }) => {
   const beat = useBeat(heldBeat);
-  const loaded = beat !== 'act';
 
   return (
     <SkillStage
@@ -70,15 +69,27 @@ export const ComponentDocsMedia: FC<{ beat?: Beat }> = ({
       label="An agent looks up the Button in Storybook, reads its usage example and props on the docs page, then reuses that Button in the checkout form with documented props only."
       window={
         <StorybookWindow>
-          <div className="flex h-[264px]">
-            <Sidebar />
-            <DocsPage beat={beat} loaded={loaded} />
-          </div>
+          <ComponentDocsWindow beat={beat} />
         </StorybookWindow>
       }
     />
   );
 };
+
+/**
+ * What the Storybook window shows at a beat: the sidebar and the Button's
+ * docs page. The UI workflow recap reuses it.
+ */
+export const ComponentDocsWindow: FC<{
+  beat: Beat;
+  /** Overrides the height, for a taller window */
+  className?: string;
+}> = ({ beat, className }) => (
+  <div className={cn('flex h-[264px]', className)}>
+    <Sidebar />
+    <DocsPage beat={beat} loaded={beat !== 'act'} />
+  </div>
+);
 
 /** The docs lookup while the agent reads, then the line it writes */
 const AgentWork: FC<{ beat: Beat }> = ({ beat }) => (

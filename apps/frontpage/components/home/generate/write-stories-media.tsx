@@ -51,9 +51,6 @@ export const WriteStoriesMedia: FC<{ beat?: Beat }> = ({ beat: heldBeat }) => {
   const beat = useBeat(heldBeat);
   const written = beat !== 'act';
   const settled = beat === 'settle';
-  // Primary while the agent writes, then each new story as it lands
-  let selected: NewStory | 'Primary' = 'Primary';
-  if (written) selected = settled ? 'Disabled' : 'Loading';
 
   return (
     <SkillStage
@@ -71,13 +68,31 @@ export const WriteStoriesMedia: FC<{ beat?: Beat }> = ({ beat: heldBeat }) => {
       label="An agent writes Loading and Disabled stories for the Button. They appear in Storybook's sidebar marked New, and the canvas shows each one."
       window={
         <StorybookWindow>
-          <div className="flex h-[292px]">
-            <Sidebar selected={selected} written={written} />
-            <Canvas story={selected} />
-          </div>
+          <WriteStoriesWindow beat={beat} />
         </StorybookWindow>
       }
     />
+  );
+};
+
+/**
+ * What the Storybook window shows at a beat: the sidebar with the new
+ * stories and the canvas. The UI workflow recap reuses it.
+ */
+export const WriteStoriesWindow: FC<{
+  beat: Beat;
+  /** Overrides the height, for a taller window */
+  className?: string;
+}> = ({ beat, className }) => {
+  const written = beat !== 'act';
+  // Primary while the agent writes, then each new story as it lands
+  let selected: NewStory | 'Primary' = 'Primary';
+  if (written) selected = beat === 'settle' ? 'Disabled' : 'Loading';
+  return (
+    <div className={cn('flex h-[292px]', className)}>
+      <Sidebar selected={selected} written={written} />
+      <Canvas story={selected} />
+    </div>
   );
 };
 

@@ -34,7 +34,7 @@ type Mark = 'running' | 'pass' | 'fail';
  * Where the test run is: the first run, its failure, the re-run at the start
  * of the settle beat, then the green result
  */
-type Run = 'running' | 'failed' | 'rerun' | 'passed';
+export type Run = 'running' | 'failed' | 'rerun' | 'passed';
 
 const STATUS: Record<Run, string> = {
   running: 'Running story tests',
@@ -81,12 +81,6 @@ export const TestStoriesRunMedia: FC<{ beat?: Beat }> = ({
   const run = runFor(beat, rerunning);
   const fixed = run === 'passed';
 
-  const markFor = (story: string): Mark => {
-    if (run === 'running' || run === 'rerun') return 'running';
-    if (run === 'failed' && story === FAILING) return 'fail';
-    return 'pass';
-  };
-
   return (
     <SkillStage
       agent={
@@ -102,13 +96,33 @@ export const TestStoriesRunMedia: FC<{ beat?: Beat }> = ({
       label="An agent runs the Button's story tests with accessibility checks. The Secondary story fails color contrast, the agent darkens its text, and all four stories pass on the re-run."
       window={
         <StorybookWindow>
-          <div className="flex h-[264px]">
-            <Sidebar markFor={markFor} run={run} />
-            <Main run={run} />
-          </div>
+          <TestStoriesWindow run={run} />
         </StorybookWindow>
       }
     />
+  );
+};
+
+/**
+ * What the Storybook window shows for a test run: the sidebar with each
+ * story's status mark, and the Accessibility panel. The UI workflow recap
+ * reuses it.
+ */
+export const TestStoriesWindow: FC<{
+  run: Run;
+  /** Overrides the height, for a taller window */
+  className?: string;
+}> = ({ run, className }) => {
+  const markFor = (story: string): Mark => {
+    if (run === 'running' || run === 'rerun') return 'running';
+    if (run === 'failed' && story === FAILING) return 'fail';
+    return 'pass';
+  };
+  return (
+    <div className={cn('flex h-[264px]', className)}>
+      <Sidebar markFor={markFor} run={run} />
+      <Main run={run} />
+    </div>
   );
 };
 
