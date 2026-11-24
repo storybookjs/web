@@ -52,7 +52,7 @@ const features: Feature[] = [
     title: 'Test in CI',
     href: '/docs/writing-tests/in-ci',
     description:
-      'Run story tests in CI and see the results as a status check on each pull request.',
+      'Run story tests in CI and see results as a status check on your pull request.',
   },
 ];
 
