@@ -1,8 +1,12 @@
 import type { FC, ReactNode } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@repo/utils';
-import { WandIcon } from '@storybook/icons';
-import { Chrome } from '../../hero/chrome';
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  RefreshIcon,
+  WandIcon,
+} from '@storybook/icons';
 
 /**
  * The shared layout for the skill visuals in the Agents section.
@@ -35,14 +39,43 @@ export const SkillStage: FC<{
   </div>
 );
 
-/**
- * The hero's browser frame around a white Storybook page, without the
- * navigation icons so the address sits centred on the narrow window
- */
+/** A white Storybook page in a browser window, styled like the hero's */
 export const StorybookWindow: FC<{ children: ReactNode }> = ({ children }) => (
   <div className="rounded-md shadow-[0_24px_48px_-20px_rgba(26,6,48,0.55)]">
-    <Chrome navigation={false} />
+    <TitleBar />
     <div className="overflow-hidden rounded-b-md bg-white">{children}</div>
+  </div>
+);
+
+/** The width of the window controls, matched by the right-hand spacer */
+const SIDE = 'w-[120px] shrink-0';
+
+/**
+ * The hero's title bar (hero/chrome.tsx), laid out like a real browser
+ * toolbar for the narrow skill window: the window controls on the left, an
+ * empty spacer of the same width on the right, and the address centred
+ * between them. The address shrinks before it can reach the controls.
+ */
+const TitleBar: FC = () => (
+  <div className="flex h-9 items-center rounded-t-md border-x border-t border-white/30 bg-white/20 text-white">
+    <div className={cn(SIDE, 'flex items-center gap-3.5 pl-3')}>
+      <div className="flex gap-1.5">
+        <div className="size-[10px] rounded-full bg-red-500" />
+        <div className="size-[10px] rounded-full bg-yellow-500" />
+        <div className="size-[10px] rounded-full bg-green-500" />
+      </div>
+      <div className="flex gap-2">
+        <ArrowLeftIcon size={12} />
+        <ArrowRightIcon size={12} />
+        <RefreshIcon size={12} />
+      </div>
+    </div>
+    <div className="flex min-w-0 flex-1 justify-center px-3">
+      <div className="flex h-6 w-full min-w-0 max-w-52 items-center justify-center rounded bg-white/20 px-2 text-[12px] font-medium leading-none">
+        <span className="truncate">localhost:6006</span>
+      </div>
+    </div>
+    <div aria-hidden className={SIDE} />
   </div>
 );
 
