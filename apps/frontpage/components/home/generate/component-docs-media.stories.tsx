@@ -7,8 +7,8 @@ const meta = preview.meta({
   component: ComponentDocsMedia,
   parameters: {
     layout: 'centered',
-    // The loop runs about 7.6 seconds; this lands on the reused Button
-    chromatic: { delay: 5000 },
+    // The loop runs 12 seconds; this lands on the reused Button
+    chromatic: { delay: 9000 },
   },
   decorators: [
     (Story) => (

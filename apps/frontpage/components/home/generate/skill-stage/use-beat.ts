@@ -9,11 +9,14 @@ import { useReducedMotion } from 'framer-motion';
 export const BEATS = ['act', 'respond', 'settle'] as const;
 export type Beat = (typeof BEATS)[number];
 
-/** How long each beat holds, in ms. Visuals can pass their own. */
+/**
+ * How long each beat holds, in ms: a 12 second loop, slow enough to read
+ * every step. All five skill visuals share this pace.
+ */
 export const BEAT_DURATION: Record<Beat, number> = {
-  act: 2000,
-  respond: 2200,
-  settle: 3400,
+  act: 3200,
+  respond: 3800,
+  settle: 5000,
 };
 
 /** Shared ease for anything that moves inside a skill visual */
