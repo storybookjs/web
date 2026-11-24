@@ -35,10 +35,13 @@ export const SkillStage: FC<{
   </div>
 );
 
-/** The hero's browser frame around a white Storybook page */
+/**
+ * The hero's browser frame around a white Storybook page, without the
+ * navigation icons so the address sits centred on the narrow window
+ */
 export const StorybookWindow: FC<{ children: ReactNode }> = ({ children }) => (
   <div className="rounded-md shadow-[0_24px_48px_-20px_rgba(26,6,48,0.55)]">
-    <Chrome />
+    <Chrome navigation={false} />
     <div className="overflow-hidden rounded-b-md bg-white">{children}</div>
   </div>
 );
