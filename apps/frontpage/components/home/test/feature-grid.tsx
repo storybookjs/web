@@ -2,11 +2,11 @@ import type { FC, ReactNode } from 'react';
 import Link from 'next/link';
 import {
   Accessibility,
+  CheckCircle,
   Document,
   Eye,
   Interact,
   Pixel,
-  TrafficLight,
 } from './icons';
 
 interface Feature {
@@ -48,7 +48,7 @@ const features: Feature[] = [
     description: 'Find which parts of your UI need tested.',
   },
   {
-    icon: <TrafficLight />,
+    icon: <CheckCircle />,
     title: 'Test in CI',
     href: '/docs/writing-tests/in-ci',
     description:
