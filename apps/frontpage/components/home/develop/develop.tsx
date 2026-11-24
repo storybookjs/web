@@ -60,7 +60,7 @@ export function Develop() {
   );
 
   return (
-    <section className="border-b border-zinc-700 pt-12 sm:pt-20 md:pt-28">
+    <section className="border-b border-zinc-700 pt-[calc(3rem-40px)] sm:pt-[calc(5rem-40px)] md:pt-[calc(7rem-72px)]">
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
         <h2 className="flex-1 text-balance text-4xl font-bold md:text-[56px]/[70px]">
           Capture context for your team and agents
