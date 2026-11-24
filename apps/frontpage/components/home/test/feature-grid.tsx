@@ -51,8 +51,7 @@ const features: Feature[] = [
     icon: <CheckCircle />,
     title: 'Test in CI',
     href: '/docs/writing-tests/in-ci',
-    description:
-      'Run story tests in CI and see results as a status check on your pull request.',
+    description: 'Run story tests in CI and show results as a PR status check.',
   },
 ];
 
