@@ -14,7 +14,8 @@ import { Chrome } from '../../hero/chrome';
  * To build one: call `useBeat()` for the current beat (act, respond,
  * settle), pass a `StorybookWindow` as `window` and an `AgentCard` as
  * `agent`, and drive both from that beat. Give the AgentCard the beat as
- * its `statusKey`, and set `done` on the settle beat. See
+ * its `statusKey`, and set `done` on the settle beat. Use `Skeleton` for
+ * the parts of the window that are still loading. See
  * ui-review-media.tsx for a complete example.
  */
 export const SkillStage: FC<{

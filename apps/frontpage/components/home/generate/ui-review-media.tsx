@@ -9,6 +9,7 @@ import {
 import type { Beat } from './skill-stage';
 import {
   AgentCard,
+  Skeleton,
   SkillStage,
   StorybookWindow,
   beatEase,
@@ -84,7 +85,7 @@ const ReviewPage: FC<{ published: boolean; settled: boolean }> = ({
         </Reveal>
         <Reveal
           delay={0.05}
-          placeholder={<Bar className="h-2 w-36" line="h-4" />}
+          placeholder={<Bar className="h-2 w-36" delay={0.08} line="h-4" />}
           shown={published}
         >
           <div className="text-[11.5px] leading-4 text-[#5C6570]">
@@ -97,7 +98,9 @@ const ReviewPage: FC<{ published: boolean; settled: boolean }> = ({
     <div className="flex flex-col gap-2 bg-[#F7FAFC] p-2.5">
       <Reveal
         delay={0.1}
-        placeholder={<div className="h-8 rounded border border-[#E3E6E8]" />}
+        placeholder={
+          <Skeleton className="h-8 rounded bg-[#F0F2F4]" delay={0.16} />
+        }
         shown={published}
       >
         <div className="flex h-8 items-center gap-1.5 rounded border border-[#E1D2EF] bg-[#F5F0FA] px-2.5 text-[12px]">
@@ -111,7 +114,7 @@ const ReviewPage: FC<{ published: boolean; settled: boolean }> = ({
         <div className="flex h-9 items-center justify-between pl-3 pr-2">
           <Reveal
             delay={0.15}
-            placeholder={<Bar className="h-2.5 w-40" />}
+            placeholder={<Bar className="h-2.5 w-40" delay={0.24} />}
             shown={published}
           >
             <div className="text-[13px] font-bold">
@@ -182,12 +185,13 @@ const Reveal: FC<{
     <>{placeholder}</>
   );
 
-/** A grey text placeholder, centered in a `line` the height of the real text */
-const Bar: FC<{ className?: string; line?: string }> = ({
+/** A text placeholder, centered in a `line` the height of the real text */
+const Bar: FC<{ className?: string; line?: string; delay?: number }> = ({
   className,
   line,
+  delay,
 }) => {
-  const bar = <div className={cn('rounded-full bg-[#E8ECEF]', className)} />;
+  const bar = <Skeleton className={className} delay={delay} />;
   return line ? <div className={cn('flex items-center', line)}>{bar}</div> : bar;
 };
 
@@ -243,7 +247,9 @@ const Tile: FC<{
           <span className="text-[#5C6570]"> / {story}</span>
         </motion.span>
       ) : null}
-      {component && !published ? <Bar className="h-2 w-24" /> : null}
+      {component && !published ? (
+        <Bar className="h-2 w-24" delay={delay + 0.12} />
+      ) : null}
     </div>
   </div>
 );
