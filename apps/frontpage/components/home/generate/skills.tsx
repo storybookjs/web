@@ -12,23 +12,8 @@ import { UIReviewMedia } from './ui-review-media';
 /** Panel color behind every skill's visual */
 export const SKILLS_PANEL_COLOR = '#6F2CAC';
 
-/** The five Storybook agent skills, in the order the UI workflow runs them */
+/** The five Storybook agent skills. UI workflow runs the other four, so it comes last */
 export const skills: FeatureItem[] = [
-  {
-    icon: <Projects />,
-    title: 'UI workflow',
-    description:
-      'Looks up existing components, writes or updates stories for each change, runs story tests, and publishes a review.',
-    link: {
-      label: 'Learn about the UI workflow',
-      href: '/docs/ai/skills/ui-workflow',
-    },
-    illustration: (
-      <FitWindow width={760}>
-        <GenerateUIAnimation />
-      </FitWindow>
-    ),
-  },
   {
     icon: <AgentReuse />,
     title: 'Component docs',
@@ -76,6 +61,21 @@ export const skills: FeatureItem[] = [
       href: '/docs/ai/skills/ui-review',
     },
     illustration: <UIReviewMedia />,
+  },
+  {
+    icon: <Projects />,
+    title: 'UI workflow',
+    description:
+      'Looks up existing components, writes or updates stories for each change, runs story tests, and publishes a review.',
+    link: {
+      label: 'Learn about the UI workflow',
+      href: '/docs/ai/skills/ui-workflow',
+    },
+    illustration: (
+      <FitWindow width={760}>
+        <GenerateUIAnimation />
+      </FitWindow>
+    ),
   },
 ];
 

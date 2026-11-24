@@ -19,7 +19,7 @@ const meta = preview.meta({
   ],
 });
 
-/** UI workflow is selected first */
+/** Component docs is selected first */
 export const Default = meta.story({});
 
 /** Each skill swaps in its own visual */
