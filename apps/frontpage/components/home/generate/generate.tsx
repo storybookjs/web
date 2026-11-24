@@ -9,7 +9,7 @@ export function Generate({ studyUrl = STUDY_URL }: { studyUrl?: string }) {
     <section className="overflow-hidden border-b border-zinc-600 py-12 sm:py-20 md:py-28">
       <Container className="justify-between gap-20 text-white md:flex lg:px-8">
         <h2 className="mb-6 flex-1 text-balance text-4xl font-bold md:mb-0 md:text-[56px]/[70px]">
-          Skills to teach agents your UI
+          Skills to teach agents your UI workflow
         </h2>
         <div className="flex-1 pt-4">
           <p className="mb-6 leading-7">
