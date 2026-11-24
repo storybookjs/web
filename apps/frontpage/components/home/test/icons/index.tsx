@@ -5,4 +5,4 @@ export { Interact } from './interact';
 export { Accessibility } from './accessibility';
 export { Projects } from './projects';
 export { Document } from './document';
-export { Pipeline } from './pipeline';
+export { TrafficLight } from './traffic-light';

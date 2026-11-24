@@ -5,8 +5,8 @@ import {
   Document,
   Eye,
   Interact,
-  Pipeline,
   Pixel,
+  TrafficLight,
 } from './icons';
 
 interface Feature {
@@ -48,7 +48,7 @@ const features: Feature[] = [
     description: 'Find which parts of your UI need tested.',
   },
   {
-    icon: <Pipeline />,
+    icon: <TrafficLight />,
     title: 'Test in CI',
     href: '/docs/writing-tests/in-ci',
     description:
