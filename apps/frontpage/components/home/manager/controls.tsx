@@ -4,6 +4,7 @@ import type { ValueAnimationTransition } from 'framer-motion';
 import { motion, useAnimate } from 'framer-motion';
 import Image from 'next/image';
 import { useMediaQuery } from '../../../hooks/use-media-query';
+import { useSvgId } from '../../../hooks/use-svg-id';
 import hand from './hand.svg';
 
 export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
@@ -13,6 +14,7 @@ export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
   const [scope, animate] = useAnimate();
   const [hex, setHex] = useState('#D8DDDD');
   const [isMobile] = useMediaQuery('(max-width: 640px)');
+  const svgId = useSvgId();
 
   useEffect(() => {
     let isCancelled = false;
@@ -117,11 +119,11 @@ export const Controls: FC<{ isPanel?: boolean; isAnimated?: boolean }> = ({
               width="12"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g clipPath="url(#a)" fill="#73828C">
+              <g clipPath={`url(#${svgId}-code-icon)`} fill="#73828C">
                 <path d="M7.7 1.399a.429.429 0 0 0-.828-.226l-2.571 9.429a.429.429 0 0 0 .827.225L7.699 1.4ZM2.846 3.1a.429.429 0 0 1 .055.603L.986 6l1.915 2.297a.429.429 0 0 1-.659.549L.1 6.274a.429.429 0 0 1 0-.548l2.143-2.572a.429.429 0 0 1 .604-.055ZM9.154 3.1a.429.429 0 0 0-.055.603L11.014 6 9.099 8.297a.429.429 0 0 0 .659.549L11.9 6.274a.429.429 0 0 0 0-.548L9.758 3.154a.429.429 0 0 0-.604-.055Z" />
               </g>
               <defs>
-                <clipPath id="a">
+                <clipPath id={`${svgId}-code-icon`}>
                   <path d="M0 0h12v12H0z" fill="#fff" />
                 </clipPath>
               </defs>

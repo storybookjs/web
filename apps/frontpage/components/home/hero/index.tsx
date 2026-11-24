@@ -10,6 +10,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon, WandIcon } from '@storybook/icons';
 import { Container, GradientBadge } from '@repo/ui';
+import { useSvgId } from '../../../hooks/use-svg-id';
 import { Manager, SLIDES, slideDuration } from '../manager';
 import { AgentChat } from '../manager/agent-chat';
 import { InitCommand } from './init-command';
@@ -25,6 +26,7 @@ const displayedMajorVersion = '11';
 const features = ['Development', 'Testing', 'Documentation', 'Agents'];
 
 function Star({ x = 0, y = 0, w = 14, delay = 0 }) {
+  const svgId = useSvgId();
   return (
     <motion.svg
       animate={{ rotate: 360, opacity: 1, scale: 1 }}
@@ -43,12 +45,12 @@ function Star({ x = 0, y = 0, w = 14, delay = 0 }) {
     >
       <path
         d="M7 0L8.89064 5.10936L14 7L8.89064 8.89064L7 14L5.10936 8.89064L0 7L5.10936 5.10936L7 0Z"
-        fill="url(#paint0_linear_195_11225)"
+        fill={`url(#${svgId}-fill)`}
       />
       <defs>
         <linearGradient
           gradientUnits="userSpaceOnUse"
-          id="paint0_linear_195_11225"
+          id={`${svgId}-fill`}
           x1="7"
           x2="7"
           y1="0"
