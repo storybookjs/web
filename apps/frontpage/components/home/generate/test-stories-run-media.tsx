@@ -16,6 +16,7 @@ import {
   AgentCard,
   Skeleton,
   SkillStage,
+  PACE,
   StorybookWindow,
   beatEase,
   useBeat,
@@ -67,8 +68,12 @@ function runFor(beat: Beat, rerunning: boolean): Run {
 const STORIES = ['Primary', 'Secondary', 'Large', 'Small'];
 const FAILING = 'Secondary';
 
-/** How long the re-run spins at the start of the settle beat, in ms */
-const RERUN = 800;
+/**
+ * How long the re-run spins at the start of the settle beat, in ms. Scaled
+ * with the shared pace so it's on screen for about 2 seconds, like the
+ * other steps.
+ */
+const RERUN = 1300 * PACE;
 
 const FAIL_COLOR = '#5AB8FB';
 const FIXED_COLOR = '#0077C2';

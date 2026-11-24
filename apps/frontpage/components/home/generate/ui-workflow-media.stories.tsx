@@ -7,7 +7,7 @@ const meta = preview.meta({
   component: UIWorkflowMedia,
   parameters: {
     layout: 'centered',
-    // Four steps of 2.25 seconds each; this lands on the finished checklist
+    // Four steps of 2.1 seconds each; this lands on the finished checklist
     chromatic: { delay: 10000 },
   },
   decorators: [

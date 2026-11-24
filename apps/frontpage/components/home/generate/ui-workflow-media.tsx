@@ -8,6 +8,7 @@ import {
   AgentCard,
   BEATS,
   BEAT_DURATION,
+  PACE,
   SkillStage,
   StorybookWindow,
   beatEase,
@@ -41,8 +42,12 @@ const DONE: Phase = STEPS.length;
 
 /** The same loop length as the other skill visuals */
 const LOOP = BEATS.reduce((total, b) => total + BEAT_DURATION[b], 0);
-/** How long the finished checklist holds before the loop restarts, in ms */
-const HOLD = 3000;
+/**
+ * How long the finished checklist holds before the loop restarts, in ms.
+ * Scaled with the shared pace; the four steps share the rest of the loop,
+ * about 2 seconds each.
+ */
+const HOLD = 2400 * PACE;
 /** Each step gets an equal share of the rest of the loop */
 const STEP = (LOOP - HOLD) / STEPS.length;
 

@@ -21,6 +21,7 @@ import {
   AgentCard,
   Skeleton,
   SkillStage,
+  PACE,
   StorybookWindow,
   beatEase,
   useBeat,
@@ -45,7 +46,7 @@ const NEW_STORIES = ['Loading', 'Disabled'] as const;
 type NewStory = (typeof NEW_STORIES)[number];
 
 /** Seconds between the new stories landing in the sidebar */
-const STORY_STAGGER = 0.5;
+const STORY_STAGGER = 0.5 * PACE;
 
 export const WriteStoriesMedia: FC<{ beat?: Beat }> = ({ beat: heldBeat }) => {
   const beat = useBeat(heldBeat);
@@ -141,7 +142,7 @@ const StoryCode: FC<{ typing: boolean }> = ({ typing }) => (
         transition={{
           duration: 0.3,
           // A beat between the two stories, as if the agent moves on
-          delay: 0.2 + i * 0.18 + (i >= 3 ? 0.2 : 0),
+          delay: (0.2 + i * 0.18 + (i >= 3 ? 0.2 : 0)) * PACE,
           ease: beatEase,
         }}
       >

@@ -10,13 +10,20 @@ export const BEATS = ['act', 'respond', 'settle'] as const;
 export type Beat = (typeof BEATS)[number];
 
 /**
- * How long each beat holds, in ms: a 12 second loop, slow enough to read
- * every step. All five skill visuals share this pace.
+ * How much slower than the first cut (2, 2.2 and 3.4 second beats) the
+ * skill visuals run. Visuals multiply their own inner timings by it, so
+ * every step stretches with the beats and all five stay in step.
+ */
+export const PACE = 1.5;
+
+/**
+ * How long each beat holds, in ms: a 12 second loop. The settle beat gets
+ * an extra 0.6 seconds so the green result holds a little longer.
  */
 export const BEAT_DURATION: Record<Beat, number> = {
-  act: 3200,
-  respond: 3800,
-  settle: 5000,
+  act: 2000 * PACE,
+  respond: 2200 * PACE,
+  settle: 3400 * PACE + 600,
 };
 
 /** Shared ease for anything that moves inside a skill visual */

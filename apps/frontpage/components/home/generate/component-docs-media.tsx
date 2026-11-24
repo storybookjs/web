@@ -15,6 +15,7 @@ import {
   AgentCard,
   Skeleton,
   SkillStage,
+  PACE,
   StorybookWindow,
   beatEase,
   useBeat,
@@ -45,7 +46,7 @@ const PROPS = [
  * Seconds into the respond beat when the highlight moves from the usage
  * example to the props table
  */
-const TO_PROPS = 1.2;
+const TO_PROPS = PACE; // 1 second at the original pace
 
 const HIGHLIGHT_COLOR = '#0069E0';
 
