@@ -6,7 +6,7 @@ const meta = preview.meta({
   component: AgentChat,
   parameters: {
     layout: 'fullscreen',
-    chromatic: { viewports: [320, 1200], delay: 4000 },
+    chromatic: { viewports: [320, 1200], delay: 6000 },
   },
   decorators: [
     (Story) => (
@@ -17,4 +17,11 @@ const meta = preview.meta({
   ],
 });
 
+/** Plays the agent's steps, ending on the published review */
 export const Default = meta.story({});
+
+/** Every step shown at once, as under reduced motion */
+export const Settled = meta.story({
+  args: { settled: true },
+  parameters: { chromatic: { delay: 0 } },
+});

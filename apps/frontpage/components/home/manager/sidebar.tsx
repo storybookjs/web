@@ -13,12 +13,13 @@ import {
   SearchIcon,
 } from '@storybook/icons';
 import type { FC } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { StorybookLogo } from '../../logos/storybook';
 import { AGENT_STORY_DELAY } from './slide-agents';
 import { SLIDES } from './slides';
 
 export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
+  const reduceMotion = useReducedMotion();
   return (
     <div className="hidden sm:block w-[230px] h-full bg-[#F7F9FC] border-r border-r-[#D9E0E6] px-3">
       <div className="flex items-center justify-between pt-5 pb-4 pl-2">
@@ -62,7 +63,7 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
         <motion.div
           animate={{ height: 28, opacity: 1 }}
           className="overflow-hidden"
-          initial={{ height: 0, opacity: 0 }}
+          initial={reduceMotion ? false : { height: 0, opacity: 0 }}
           transition={{ delay: AGENT_STORY_DELAY, duration: 0.3 }}
         >
           <SidebarLine active ic="story" label="Expanded" lvl={2} />

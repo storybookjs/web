@@ -5,9 +5,21 @@ import { SlideAgents } from './slide-agents';
 import { SlideControls } from './slide-controls';
 import { SlideDocs } from './slide-docs';
 import { SlideTesting } from './slide-testing';
-import { SLIDE_DURATION, SLIDES, TESTING_SLIDE_DURATION } from './slides';
+import {
+  AGENTS_SLIDE_DURATION,
+  SLIDE_DURATION,
+  SLIDES,
+  TESTING_SLIDE_DURATION,
+  slideDuration,
+} from './slides';
 
-export { SLIDE_DURATION, SLIDES, TESTING_SLIDE_DURATION };
+export {
+  AGENTS_SLIDE_DURATION,
+  SLIDE_DURATION,
+  SLIDES,
+  TESTING_SLIDE_DURATION,
+  slideDuration,
+};
 
 export const Manager: FC<{ slide: number }> = ({ slide }) => {
   return (
