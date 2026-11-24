@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@repo/utils';
+import { WandIcon } from '@storybook/icons';
 import { Chrome } from '../../hero/chrome';
 
 /**
@@ -43,8 +44,11 @@ export const StorybookWindow: FC<{ children: ReactNode }> = ({ children }) => (
 );
 
 /**
- * The agent's working card: the AGENT pill and the file or task it's on,
- * its content, and a status line that swaps with each beat.
+ * The agent's working card: a dark coding-agent panel in the style of the
+ * hero's AgentChat window (manager/agent-chat.tsx), so it never reads as
+ * Storybook UI. The AGENT pill and the file or task it's on, its content,
+ * and a status line that swaps with each beat. Content sits on zinc-900;
+ * use light text and monospace for code.
  */
 export const AgentCard: FC<{
   file: string;
@@ -55,20 +59,23 @@ export const AgentCard: FC<{
   done?: boolean;
   children: ReactNode;
 }> = ({ file, status, statusKey, done, children }) => (
-  <div className="overflow-hidden rounded-md bg-white shadow-[0_24px_48px_-16px_rgba(26,6,48,0.6)]">
-    <div className="flex h-10 items-center gap-2 border-b border-[#E3E6E8] px-3">
-      <span className="rounded-full bg-[#6F2CAC] px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-white">
+  <div className="overflow-hidden rounded-md border border-zinc-700 bg-zinc-900 text-zinc-100 shadow-[0_24px_48px_-16px_rgba(10,4,20,0.75)] ring-1 ring-white/10">
+    <div className="flex h-10 items-center gap-2 border-b border-zinc-700 bg-zinc-800 px-3">
+      <span className="flex items-center gap-1 rounded-full bg-[#B57EE5]/[0.18] px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#D9B8F5] ring-1 ring-inset ring-[#B57EE5]/40">
+        <WandIcon className="shrink-0" size={10} />
         Agent
       </span>
-      <span className="truncate font-mono text-[12px] text-[#5C6570]">
+      <span className="truncate font-mono text-[12px] text-zinc-400">
         {file}
       </span>
     </div>
     <div className="p-3">{children}</div>
     <div
       className={cn(
-        'flex h-10 items-center border-t border-[#E3E6E8] px-3 text-[13px] font-bold transition-colors duration-300',
-        done ? 'bg-[#F1FAEC] text-[#2E7D0F]' : 'text-[#6F2CAC]',
+        'flex h-10 items-center border-t px-3 text-[13px] font-bold transition-colors duration-300',
+        done
+          ? 'border-[#3B5A27] bg-[#1F2A1A] text-[#8FD14F]'
+          : 'border-zinc-700 text-[#C9A2EE]',
       )}
     >
       <AnimatePresence initial={false} mode="wait">

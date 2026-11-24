@@ -57,11 +57,11 @@ export const UIReviewMedia: FC<{ beat?: Beat }> = ({ beat: heldBeat }) => {
 };
 
 const Diff: FC = () => (
-  <div className="overflow-hidden rounded border border-[#E3E6E8] font-mono text-[11px] leading-5">
-    <div className="bg-[#FDF0EE] px-2 text-[#B3261E]">
+  <div className="overflow-hidden rounded border border-zinc-700 font-mono text-[11px] leading-5">
+    <div className="bg-[#3A1F22] px-2 text-[#FCA5A5]">
       - background: &apos;#0B6BCB&apos;
     </div>
-    <div className="bg-[#EEF8E8] px-2 text-[#2E7D0F]">
+    <div className="bg-[#1F2A1A] px-2 text-[#9AD66B]">
       + background: &apos;#029CFD&apos;
     </div>
   </div>

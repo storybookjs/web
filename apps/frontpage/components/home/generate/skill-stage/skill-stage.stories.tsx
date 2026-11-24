@@ -27,7 +27,7 @@ const meta = preview.meta({
     ),
     agent: (
       <AgentCard file="Button.tsx" status="Working on it" statusKey="act">
-        <div className="h-12 rounded bg-[#F7FAFC]" />
+        <div className="h-12 rounded border border-zinc-700 bg-zinc-800" />
       </AgentCard>
     ),
   },
@@ -41,7 +41,7 @@ export const Done = meta.story({
   args: {
     agent: (
       <AgentCard done file="Button.tsx" status="All done" statusKey="settle">
-        <div className="h-12 rounded bg-[#F7FAFC]" />
+        <div className="h-12 rounded border border-zinc-700 bg-zinc-800" />
       </AgentCard>
     ),
   },
