@@ -1,6 +1,5 @@
 # The redirects here will have an appropriate version (and sometimes renderer) added to the `from` (first path in the line)
 # They are broken down by the version at which the `to` (second path in the line) was added
-# Add `keep-latest` after the status when the `from` path is a live page again in the latest docs. It skips the unversioned redirect.
 
 # 6.4
 /docs/workflows/testing-with-storybook                                  /docs/writing-tests                                                     301
@@ -16,7 +15,7 @@
 /docs/workflows/faq                                                     /docs/faq                                                               301
 
 # 6.5
-/docs/configure/webpack                                                 /docs/builders/webpack                                                  301 keep-latest
+/docs/configure/webpack                                                 /docs/builders/webpack                                                  301
 /docs/api/addons                                                        /docs/addons                                                            301
 /docs/api/addons-api                                                    /docs/addons/addons-api                                                 301
 /docs/api/presets                                                       /docs/addons/writing-presets                                            301
@@ -85,7 +84,7 @@
 /docs/configure/sidebar-and-urls                                        /docs/configure/user-interface/sidebar-and-urls                         301
 /docs/configure/storybook-addons                                        /docs/configure/user-interface/storybook-addons                         301
 
-/docs/api/main-config                                                   /docs/api/main-config/main-config                                       301 keep-latest
+/docs/api/main-config                                                   /docs/api/main-config/main-config                                       301
 /docs/api/main-config-framework                                         /docs/api/main-config/main-config-framework                             301
 /docs/api/main-config-stories                                           /docs/api/main-config/main-config-stories                               301
 /docs/api/main-config-addons                                            /docs/api/main-config/main-config-addons                                301

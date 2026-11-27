@@ -227,35 +227,6 @@ describe('generateRedirects', () => {
         ['/docs/next/the/from/path', '/docs/11/the/to/path', '302'],
       ]);
     });
-
-    test('keep-latest flag leaves the unversioned path alone', () => {
-      const result = generateSpecificPathRedirects({
-        rawRedirects: `# 6.4\n/docs/the/from/path /docs/the/to/path 301 keep-latest`,
-        renderers,
-        historicalVersions: defaultHistorical,
-        supportedVersions: ['10.3', '9.1', '8.6'],
-        latestVersion: '10.3',
-        nextVersion: null,
-      });
-
-      expect(result).toEqual([
-        ['/docs/react/the/from/path', '/docs/the/to/path', '301'],
-        ['/docs/vue/the/from/path', '/docs/the/to/path', '301'],
-      ]);
-    });
-
-    test('throws on an unknown rule flag', () => {
-      expect(() =>
-        generateSpecificPathRedirects({
-          rawRedirects: `# 6.4\n/docs/the/from/path /docs/the/to/path 301 keep-lastest`,
-          renderers,
-          historicalVersions: defaultHistorical,
-          supportedVersions: ['10.3', '9.1', '8.6'],
-          latestVersion: '10.3',
-          nextVersion: null,
-        })
-      ).toThrow('Unknown redirect rule flag');
-    });
   });
 
   describe('Wildcard Redirects', () => {

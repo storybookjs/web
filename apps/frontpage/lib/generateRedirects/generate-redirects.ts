@@ -80,11 +80,7 @@ interface Rule {
   from: string;
   to: string;
   status: string;
-  /** The `from` path is a live page in the latest docs, so don't redirect it there */
-  keepLatest: boolean;
 }
-
-const KEEP_LATEST_FLAG = 'keep-latest';
 
 function parseRawRedirects(raw: string): Rule[] {
   const lines = raw.split('\n');
@@ -113,16 +109,11 @@ function parseRawRedirects(raw: string): Rule[] {
 
     const parts = trimmed.split(/\s+/).filter(Boolean);
     if (parts.length >= 3) {
-      const flag = parts[3];
-      if (flag !== undefined && flag !== KEEP_LATEST_FLAG) {
-        throw new Error(`Unknown redirect rule flag "${flag}": "${trimmed}"`);
-      }
       rules.push({
         headerVersion: currentVersion,
         from: parts[0],
         to: parts[1],
         status: parts[2],
-        keepLatest: flag === KEEP_LATEST_FLAG,
       });
     }
   }
@@ -138,7 +129,7 @@ function generateSpecificRedirectsForRule(
   latestVersion: string,
   nextVersion: string | null | undefined,
 ): string[][] {
-  const { headerVersion, from: rawFrom, to: rawTo, status, keepLatest } = rule;
+  const { headerVersion, from: rawFrom, to: rawTo, status } = rule;
   const fromSuffix = getSuffix(rawFrom);
   const entries: string[][] = [];
 
@@ -156,9 +147,7 @@ function generateSpecificRedirectsForRule(
   }
 
   // Unversioned path, which serves the latest docs
-  if (!keepLatest) {
-    entries.push([`/docs/${fromSuffix}`, rawTo, status]);
-  }
+  entries.push([`/docs/${fromSuffix}`, rawTo, status]);
 
   const beforeHeader = historicalVersions.filter(
     (v) => compareVersions(v, headerVersion) < 0,
