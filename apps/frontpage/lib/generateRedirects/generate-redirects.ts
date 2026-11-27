@@ -105,27 +105,35 @@ interface Rule {
  * earlier rule can keep the target it had when it was written.
  */
 function resolveTo(to: string, servingVersion: string, rules: Rule[]) {
-  let current = to;
   const visited = new Set<string>();
-  for (;;) {
-    if (hasHardcodedVersion(current)) return current;
-    const from = current;
-    const next = rules
-      .filter(
-        (r) =>
-          r.from === from &&
-          compareVersions(r.headerVersion, servingVersion) <= 0,
-      )
-      .sort((a, b) => compareVersions(b.headerVersion, a.headerVersion))[0];
-    if (!next) return current;
+  let current = to;
+  let move = findMove(current, servingVersion, rules);
+  while (move) {
     if (visited.has(current)) {
       throw new Error(
         `Redirect chain loops at "${current}" (in the docs for ${servingVersion}).`,
       );
     }
     visited.add(current);
-    current = next.to;
+    current = move.to;
+    move = findMove(current, servingVersion, rules);
   }
+  return current;
+}
+
+/**
+ * The latest rule that moves `path` in the docs for `servingVersion`, if any.
+ * A path with a version in it is final, so it never moves.
+ */
+function findMove(path: string, servingVersion: string, rules: Rule[]) {
+  if (hasHardcodedVersion(path)) return undefined;
+  return rules
+    .filter(
+      (r) =>
+        r.from === path &&
+        compareVersions(r.headerVersion, servingVersion) <= 0,
+    )
+    .sort((a, b) => compareVersions(b.headerVersion, a.headerVersion))[0];
 }
 
 /** The docs version a target for `version` lands on (see getToForVersion) */
