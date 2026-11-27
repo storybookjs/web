@@ -45,18 +45,29 @@ This will run a configuration script that will walk you through setting up the a
 
 Now you can import the `tailwind.css` file into your `.storybook/preview.js` file. This will make Tailwind’s style classes available to all of your stories.
 
-```js
-// .storybook/preview.js
-
+```js title=".storybook/preview.js"
 import '../src/tailwind.css'; // replace with the name of your tailwind css file
 ```
 
-### 2.1. Angular
+### 2.1. Provide stories to Tailwind
+
+Depending on your project's structure, the `stories/` directory may be outside the rest of your app, meaning Tailwind styles won't apply to them. Make sure your stories are listed inside your Tailwind config's `content` array. 
+
+```js title="tailwind.config.js"
+export default {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx,mdx}', // your project's other code
+    './path/to/stories/**/*.{js,ts,jsx,tsx,mdx}', // necessary if stories are outside regular app structure.
+  ],
+// other config settings
+}
+```
+
+### 2.2. Angular
 
 If you are using Angular, you will need to add the `tailwind.css` file to your `angular.json` file instead. This will make sure your styles are processed with PostCSS and are injected into the preview iframe where your stories are rendered.
 
-```jsonc
-// angular.json
+```jsonc title="angular.json"
 {
  "storybook": {
     "builder": "@storybook/angular:start-storybook",
@@ -76,11 +87,12 @@ Tailwind comes out of the box with a light and dark theme. You can override thos
 
 First of all, update your `tailwind.config.js` file to [change themes based on a class or data-attribute](https://tailwindcss.com/docs/dark-mode#customizing-the-class-name). This example uses a data-attribute.
 
-```js
-// tailwind.config.js
-
+```js title="tailwind.config.js"
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+ content: [
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    './path/to/stories/**/*.{js,ts,jsx,tsx,mdx}', // optional, see step 2.1
+  ],
   // Toggle dark-mode based on .dark class or data-mode="dark"
   darkMode: ['class', '[data-mode="dark"]'],
   theme: {
@@ -109,8 +121,7 @@ This will run a configuration script that will walk you through setting up the a
 
 Add the [`withThemeByClassName`](https://github.com/storybookjs/storybook/blob/next/code/addons/themes/docs/api.md#withthemebyclassname) decorator to your Storybook from `@storybook/addon-themes`.
 
-```js
-// .storybook/preview.js
+```js title=".storybook/preview.js"
 import { withThemeByClassName } from '@storybook/addon-themes';
 
 /* snipped for brevity */
@@ -130,8 +141,7 @@ export const decorators = [
 
 Add the [`withThemeByDataAttribute`](https://github.com/storybookjs/storybook/blob/next/code/addons/themes/docs/api.md#withthemebydataattribute) decorator to your Storybook from `@storybook/addon-themes`.
 
-```js
-// .storybook/preview.js
+```js title=".storybook/preview.js"
 import { withThemeByDataAttribute } from '@storybook/addon-themes';
 
 /* snipped for brevity */
