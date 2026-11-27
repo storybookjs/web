@@ -14,11 +14,27 @@ interface PreviewProps {
 
 export const Preview = ({ element, orientation, type }: PreviewProps) => {
   const isRecipe = type === 'recipe';
-  const Comp = isRecipe ? 'a' : Link;
+  // Determine if the link should be local or external
+  let href = '';
+  let isExternal = false;
+  if (isRecipe) {
+    href = `/recipes/${element.name ?? ''}`;
+  } else {
+    // For addons, check if the name starts with '@' (scoped package) or contains a slash
+    // If so, assume it's not handled locally and link to the external Storybook site
+    if (element.name && (element.name.startsWith('@') || element.name.includes('/'))) {
+      href = `https://storybook.js.org/addons/${element.name}`;
+      isExternal = true;
+    } else {
+      href = `/${element.name ?? ''}`;
+    }
+  }
+  const Comp = isExternal ? 'a' : Link;
 
   return (
     <Comp
-      href={`${isRecipe ? '/recipes' : ''}/${element.name ?? ''}`}
+      href={href}
+      {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       className={cn(
         'flex justify-between rounded border border-zinc-300 p-6 transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:border-blue-500 dark:border-slate-800 dark:hover:border-blue-500',
         orientation === 'horizontal'
