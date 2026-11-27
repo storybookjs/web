@@ -96,6 +96,49 @@ interface Rule {
   status: string;
 }
 
+/**
+ * Finds the final target of `to` in the docs served for `servingVersion`.
+ *
+ * When a later rule moves `to` again (e.g. A to B under # 8.1, then B to C
+ * under # 9.0), docs of 9.0 and up need C, but 8.x docs still have B. This
+ * follows the chain only through rules that apply to `servingVersion`, so an
+ * earlier rule can keep the target it had when it was written.
+ */
+function resolveTo(to: string, servingVersion: string, rules: Rule[]) {
+  let current = to;
+  const visited = new Set<string>();
+  for (;;) {
+    if (hasHardcodedVersion(current)) return current;
+    const from = current;
+    const next = rules
+      .filter(
+        (r) =>
+          r.from === from &&
+          compareVersions(r.headerVersion, servingVersion) <= 0,
+      )
+      .sort((a, b) => compareVersions(b.headerVersion, a.headerVersion))[0];
+    if (!next) return current;
+    if (visited.has(current)) {
+      throw new Error(
+        `Redirect chain loops at "${current}" (in the docs for ${servingVersion}).`,
+      );
+    }
+    visited.add(current);
+    current = next.to;
+  }
+}
+
+/** The docs version a target for `version` lands on (see getToForVersion) */
+function getServingVersion(
+  version: string,
+  supportedVersions: string[],
+  latestVersion: string,
+) {
+  const major = getMajor(version);
+  if (major === getMajor(latestVersion)) return latestVersion;
+  return supportedVersions.find((sv) => getMajor(sv) === major) ?? latestVersion;
+}
+
 function parseRawRedirects(raw: string): Rule[] {
   const lines = raw.split('\n');
   let currentVersion: string | null = null;
@@ -137,6 +180,7 @@ function parseRawRedirects(raw: string): Rule[] {
 
 function generateSpecificRedirectsForRule(
   rule: Rule,
+  allRules: Rule[],
   renderers: string[],
   historicalVersions: string[],
   supportedVersions: string[],
@@ -147,6 +191,23 @@ function generateSpecificRedirectsForRule(
   const fromSuffix = getSuffix(rawFrom);
   const entries: string[][] = [];
 
+  const toFor = (version: string) =>
+    getToForVersion(
+      resolveTo(
+        rawTo,
+        getServingVersion(version, supportedVersions, latestVersion),
+        allRules,
+      ),
+      version,
+      supportedVersions,
+      latestVersion,
+    );
+  const nextTo = getNextTo(
+    resolveTo(rawTo, nextVersion ?? latestVersion, allRules),
+    nextVersion,
+    latestVersion,
+  );
+
   // The move isn't released yet (e.g. a 11.0 rule while 10.x is latest). The
   // old page still exists in the latest docs, so only the pre-release docs
   // get a redirect.
@@ -154,14 +215,14 @@ function generateSpecificRedirectsForRule(
     return [
       [
         `/docs/next/${fromSuffix}`,
-        getNextTo(rawTo, nextVersion, latestVersion),
+        nextTo,
         '302',
       ],
     ];
   }
 
   // Unversioned path, which serves the latest docs
-  entries.push([`/docs/${fromSuffix}`, rawTo, status]);
+  entries.push([`/docs/${fromSuffix}`, toFor(latestVersion), status]);
 
   const beforeHeader = historicalVersions.filter(
     (v) => compareVersions(v, headerVersion) < 0,
@@ -182,7 +243,7 @@ function generateSpecificRedirectsForRule(
     for (const r of renderers) {
       entries.push([
         `/docs/${r}/${fromSuffix}`,
-        getToForVersion(rawTo, '6.0', supportedVersions, latestVersion),
+        toFor('6.0'),
         status,
       ]);
     }
@@ -195,7 +256,7 @@ function generateSpecificRedirectsForRule(
     for (const r of renderers) {
       entries.push([
         `/docs/${v}/${r}/${fromSuffix}`,
-        getToForVersion(rawTo, v, supportedVersions, latestVersion),
+        toFor(v),
         status,
       ]);
     }
@@ -205,7 +266,7 @@ function generateSpecificRedirectsForRule(
       for (const r of renderers) {
         entries.push([
           `/docs/7/${r}/${fromSuffix}`,
-          getToForVersion(rawTo, '7.0', supportedVersions, latestVersion),
+          toFor('7.0'),
           status,
         ]);
       }
@@ -215,7 +276,7 @@ function generateSpecificRedirectsForRule(
   // next with renderer (only when there are versioned entries)
   if (hasVersioned) {
     for (const r of renderers) {
-      entries.push([`/docs/next/${r}/${fromSuffix}`, rawTo, '302']);
+      entries.push([`/docs/next/${r}/${fromSuffix}`, toFor(latestVersion), '302']);
     }
   }
 
@@ -240,19 +301,14 @@ function generateSpecificRedirectsForRule(
       }
       entries.push([
         `/docs/${v}/${fromSuffix}`,
-        getToForVersion(rawTo, v, supportedVersions, latestVersion),
+        toFor(v),
         status,
       ]);
       // Alias after first version of each unsupported major >= 8
       if (major >= 8 && !seenMajors.has(major) && !supportedMajors.has(major)) {
         entries.push([
           `/docs/${String(major)}/${fromSuffix}`,
-          getToForVersion(
-            rawTo,
-            `${String(major)}.0`,
-            supportedVersions,
-            latestVersion,
-          ),
+          toFor(`${String(major)}.0`),
           status,
         ]);
       }
@@ -263,22 +319,12 @@ function generateSpecificRedirectsForRule(
     if (isLatestMajorCase) {
       entries.push([
         `/docs/${headerVersion}/${fromSuffix}`,
-        getToForVersion(
-          rawTo,
-          headerVersion,
-          supportedVersions,
-          latestVersion,
-        ),
+        toFor(headerVersion),
         status,
       ]);
       entries.push([
         `/docs/${String(headerMajor)}/${fromSuffix}`,
-        getToForVersion(
-          rawTo,
-          headerVersion,
-          supportedVersions,
-          latestVersion,
-        ),
+        toFor(headerVersion),
         status,
       ]);
     }
@@ -286,7 +332,7 @@ function generateSpecificRedirectsForRule(
     // next without renderer
     entries.push([
       `/docs/next/${fromSuffix}`,
-      getNextTo(rawTo, nextVersion, latestVersion),
+      nextTo,
       '302',
     ]);
   }
@@ -317,6 +363,7 @@ export function generateSpecificPathRedirects(options: Options) {
     result.push(
       ...generateSpecificRedirectsForRule(
         rule,
+        rules,
         renderers,
         historicalVersions,
         supportedVersions,
