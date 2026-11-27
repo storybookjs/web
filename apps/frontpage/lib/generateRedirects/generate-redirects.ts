@@ -43,6 +43,20 @@ function hasHardcodedVersion(toPath: string) {
   return /^\/docs\/\d+(?:\.\d+)?\//.test(toPath);
 }
 
+/**
+ * A `to` path with a version (e.g. /docs/8/...) only works while the site
+ * serves that major. Fail the build when it doesn't, so the rule gets updated.
+ */
+function assertHardcodedVersionIsServed(rule: Rule, supportedVersions: string[]) {
+  if (!hasHardcodedVersion(rule.to)) return;
+  const major = getMajor(getSuffix(rule.to).split('/')[0]);
+  if (!supportedVersions.some((v) => getMajor(v) === major)) {
+    throw new Error(
+      `Redirect target "${rule.to}" (from "${rule.from}", under # ${rule.headerVersion}) uses version ${String(major)}, which the site no longer serves. Point it to a page that exists.`,
+    );
+  }
+}
+
 function getSuffix(path: string) {
   return path.replace(/^\/docs\//, '');
 }
@@ -133,6 +147,22 @@ function generateSpecificRedirectsForRule(
   const fromSuffix = getSuffix(rawFrom);
   const entries: string[][] = [];
 
+  // The move isn't released yet (e.g. a 11.0 rule while 10.x is latest). The
+  // old page still exists in the latest docs, so only the pre-release docs
+  // get a redirect.
+  if (compareVersions(headerVersion, latestVersion) > 0) {
+    return [
+      [
+        `/docs/next/${fromSuffix}`,
+        getNextTo(rawTo, nextVersion, latestVersion),
+        '302',
+      ],
+    ];
+  }
+
+  // Unversioned path, which serves the latest docs
+  entries.push([`/docs/${fromSuffix}`, rawTo, status]);
+
   const beforeHeader = historicalVersions.filter(
     (v) => compareVersions(v, headerVersion) < 0,
   );
@@ -202,6 +232,12 @@ function generateSpecificRedirectsForRule(
 
     for (const v of nonRenderer) {
       const major = getMajor(v);
+      // A supported major older than the move still has the old page, and the
+      // wildcard sends /docs/{v}/* there. Its docs don't have the new page.
+      if (major < headerMajor && supportedMajors.has(major)) {
+        seenMajors.add(major);
+        continue;
+      }
       entries.push([
         `/docs/${v}/${fromSuffix}`,
         getToForVersion(rawTo, v, supportedVersions, latestVersion),
@@ -277,6 +313,7 @@ export function generateSpecificPathRedirects(options: Options) {
   const result: string[][] = [];
   const rules = parseRawRedirects(rawRedirects);
   for (const rule of rules) {
+    assertHardcodedVersionIsServed(rule, supportedVersions);
     result.push(
       ...generateSpecificRedirectsForRule(
         rule,
@@ -288,7 +325,8 @@ export function generateSpecificPathRedirects(options: Options) {
       ),
     );
   }
-  return result;
+  // A redirect to itself would loop
+  return result.filter(([from, to]) => from !== to);
 }
 
 export function generateInstallRedirects(options: Options) {

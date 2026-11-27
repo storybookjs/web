@@ -70,8 +70,8 @@
 
 /docs/writing-tests/storyshots-migration-guide                          /docs/8/writing-tests/snapshot-testing/storyshots-migration-guide       301
 
-/docs/writing-tests/stories-in-end-to-end-tests                         /docs/writing-tests/integrations/stories-in-end-to-end-tests            301
-/docs/writing-tests/stories-in-unit-tests                               /docs/writing-tests/integrations/stories-in-unit-tests                  301
+/docs/writing-tests/stories-in-end-to-end-tests                         /docs/writing-tests/import-stories-in-tests/stories-in-end-to-end-tests 301
+/docs/writing-tests/stories-in-unit-tests                               /docs/writing-tests/import-stories-in-tests/stories-in-unit-tests       301
 
 /docs/configure/frameworks                                              /docs/configure/integration/frameworks                                  301
 /docs/configure/frameworks-feature-support                              /docs/configure/integration/frameworks-feature-support                  301
@@ -96,7 +96,7 @@
 /docs/api/main-config-env                                               /docs/api/main-config/main-config-env                                   301
 /docs/api/main-config-features                                          /docs/api/main-config/main-config-features                              301
 /docs/api/main-config-indexers                                          /docs/api/main-config/main-config-indexers                              301
-/docs/api/main-config-logLevel                                          /docs/api/main-config/main-config-logLevel                              301
+/docs/api/main-config-logLevel                                          /docs/api/main-config/main-config-log-level                             301
 /docs/api/main-config-manager-head                                      /docs/api/main-config/main-config-manager-head                          301
 /docs/api/main-config-preview-annotations                               /docs/api/main-config/main-config-preview-annotations                   301
 /docs/api/main-config-preview-body                                      /docs/api/main-config/main-config-preview-body                          301
@@ -132,7 +132,7 @@
 /docs/contribute/new-snippets                                           /docs/contribute/documentation/new-snippets                             301
 
 # 8.4
-/docs/writing-tests/vitest-plugin                                       /docs/writing-tests/integrations/vitest-addon                           301
+/docs/writing-tests/vitest-plugin                                       /docs/writing-tests/test-addon                                          301
 
 # 9.0
 /docs/essentials/interactions                                           /docs/writing-tests/interaction-testing                                 301
@@ -151,3 +151,6 @@
 /docs/migration-guide/from-older-version                                /docs/releases/migration-guide-from-older-version                       301
 /docs/contribute/roadmap                                                /docs/releases/roadmap                                                  301
 /docs/configure/upgrading                                               /docs/releases/upgrading                                                301
+
+# 10.6
+/docs/api/portable-stories/portable-stories-playwright                  /docs/9/api/portable-stories/portable-stories-playwright                301
