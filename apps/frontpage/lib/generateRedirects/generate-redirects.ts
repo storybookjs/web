@@ -43,6 +43,20 @@ function hasHardcodedVersion(toPath: string) {
   return /^\/docs\/\d+(?:\.\d+)?\//.test(toPath);
 }
 
+/**
+ * A `to` path with a version (e.g. /docs/8/...) only works while the site
+ * serves that major. Fail the build when it doesn't, so the rule gets updated.
+ */
+function assertHardcodedVersionIsServed(rule: Rule, supportedVersions: string[]) {
+  if (!hasHardcodedVersion(rule.to)) return;
+  const major = getMajor(getSuffix(rule.to).split('/')[0]);
+  if (!supportedVersions.some((v) => getMajor(v) === major)) {
+    throw new Error(
+      `Redirect target "${rule.to}" (from "${rule.from}", under # ${rule.headerVersion}) uses version ${String(major)}, which the site no longer serves. Point it to a page that exists.`,
+    );
+  }
+}
+
 function getSuffix(path: string) {
   return path.replace(/^\/docs\//, '');
 }
@@ -299,6 +313,7 @@ export function generateSpecificPathRedirects(options: Options) {
   const result: string[][] = [];
   const rules = parseRawRedirects(rawRedirects);
   for (const rule of rules) {
+    assertHardcodedVersionIsServed(rule, supportedVersions);
     result.push(
       ...generateSpecificRedirectsForRule(
         rule,
@@ -310,7 +325,8 @@ export function generateSpecificPathRedirects(options: Options) {
       ),
     );
   }
-  return result;
+  // A redirect to itself would loop
+  return result.filter(([from, to]) => from !== to);
 }
 
 export function generateInstallRedirects(options: Options) {

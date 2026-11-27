@@ -212,6 +212,37 @@ describe('generateRedirects', () => {
       }
     });
 
+    test('throws when a hardcoded target version is no longer served', () => {
+      expect(() =>
+        generateSpecificPathRedirects({
+          rawRedirects: `# 9.0\n/docs/the/from/path /docs/8/the/to/path 301`,
+          renderers,
+          historicalVersions: defaultHistorical,
+          supportedVersions: ['10.3', '9.1'],
+          latestVersion: '10.3',
+          nextVersion: null,
+        })
+      ).toThrow('uses version 8, which the site no longer serves');
+    });
+
+    test('never redirects a path to itself', () => {
+      // The latest-major alias (/docs/10/the/from/path) matches the to path
+      const result = generateSpecificPathRedirects({
+        rawRedirects: `# 10.3\n/docs/the/from/path /docs/10/the/from/path 301`,
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
+
+      expect(result.length).toBeGreaterThan(0);
+      expect(result.map(([from]) => from)).not.toContain('/docs/10/the/from/path');
+      for (const [from, to] of result) {
+        expect(from).not.toBe(to);
+      }
+    });
+
     test('SP-5: Header at a pre-release major (11.0, latest 10.3) only redirects next', () => {
       const result = generateSpecificPathRedirects({
         rawRedirects: `# 11.0\n/docs/the/from/path /docs/the/to/path 301`,
