@@ -52,6 +52,9 @@ export function NewsletterForm({
           ref={formRef}
           onSubmit={handleSubmit}
         >
+          <label htmlFor="email" className="ui-sr-only">
+            Email address
+          </label>
           <input
             className={cn(
               'ui-rounded-md ui-w-full ui-h-full ui-transition-color ui-text-zinc-800 ui-border dark:ui-text-white',
