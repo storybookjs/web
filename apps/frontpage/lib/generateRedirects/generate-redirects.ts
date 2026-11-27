@@ -80,7 +80,11 @@ interface Rule {
   from: string;
   to: string;
   status: string;
+  /** The `from` path is a live page in the latest docs, so don't redirect it there */
+  keepLatest: boolean;
 }
+
+const KEEP_LATEST_FLAG = 'keep-latest';
 
 function parseRawRedirects(raw: string): Rule[] {
   const lines = raw.split('\n');
@@ -109,11 +113,16 @@ function parseRawRedirects(raw: string): Rule[] {
 
     const parts = trimmed.split(/\s+/).filter(Boolean);
     if (parts.length >= 3) {
+      const flag = parts[3];
+      if (flag !== undefined && flag !== KEEP_LATEST_FLAG) {
+        throw new Error(`Unknown redirect rule flag "${flag}": "${trimmed}"`);
+      }
       rules.push({
         headerVersion: currentVersion,
         from: parts[0],
         to: parts[1],
         status: parts[2],
+        keepLatest: flag === KEEP_LATEST_FLAG,
       });
     }
   }
@@ -129,9 +138,27 @@ function generateSpecificRedirectsForRule(
   latestVersion: string,
   nextVersion: string | null | undefined,
 ): string[][] {
-  const { headerVersion, from: rawFrom, to: rawTo, status } = rule;
+  const { headerVersion, from: rawFrom, to: rawTo, status, keepLatest } = rule;
   const fromSuffix = getSuffix(rawFrom);
   const entries: string[][] = [];
+
+  // The move isn't released yet (e.g. a 11.0 rule while 10.x is latest). The
+  // old page still exists in the latest docs, so only the pre-release docs
+  // get a redirect.
+  if (compareVersions(headerVersion, latestVersion) > 0) {
+    return [
+      [
+        `/docs/next/${fromSuffix}`,
+        getNextTo(rawTo, nextVersion, latestVersion),
+        '302',
+      ],
+    ];
+  }
+
+  // Unversioned path, which serves the latest docs
+  if (!keepLatest) {
+    entries.push([`/docs/${fromSuffix}`, rawTo, status]);
+  }
 
   const beforeHeader = historicalVersions.filter(
     (v) => compareVersions(v, headerVersion) < 0,
@@ -202,6 +229,12 @@ function generateSpecificRedirectsForRule(
 
     for (const v of nonRenderer) {
       const major = getMajor(v);
+      // A supported major older than the move still has the old page, and the
+      // wildcard sends /docs/{v}/* there. Its docs don't have the new page.
+      if (major < headerMajor && supportedMajors.has(major)) {
+        seenMajors.add(major);
+        continue;
+      }
       entries.push([
         `/docs/${v}/${fromSuffix}`,
         getToForVersion(rawTo, v, supportedVersions, latestVersion),

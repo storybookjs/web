@@ -37,6 +37,7 @@ describe('generateRedirects', () => {
       });
 
       expect(result).toEqual([
+        ['/docs/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/react/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/vue/the/from/path', '/docs/the/to/path', '301'],
       ]);
@@ -53,6 +54,7 @@ describe('generateRedirects', () => {
       });
 
       expect(result).toEqual([
+        ['/docs/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/react/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/vue/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/6.4/react/the/from/path', '/docs/the/to/path', '301'],
@@ -77,6 +79,7 @@ describe('generateRedirects', () => {
       });
 
       expect(result).toEqual([
+        ['/docs/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/react/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/vue/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/6.4/react/the/from/path', '/docs/the/to/path', '301'],
@@ -105,6 +108,7 @@ describe('generateRedirects', () => {
       });
 
       expect(result).toEqual([
+        ['/docs/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/react/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/vue/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/6.4/react/the/from/path', '/docs/the/to/path', '301'],
@@ -150,6 +154,7 @@ describe('generateRedirects', () => {
       });
 
       expect(result).toEqual([
+        ['/docs/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/react/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/vue/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/6.4/react/the/from/path', '/docs/the/to/path', '301'],
@@ -166,10 +171,8 @@ describe('generateRedirects', () => {
         ['/docs/8.0/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/8/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/8.6/the/from/path', '/docs/the/to/path', '301'],
-        ['/docs/9.0/the/from/path', '/docs/9/the/to/path', '301'],
-        ['/docs/9.1/the/from/path', '/docs/9/the/to/path', '301'],
-        ['/docs/10.0/the/from/path', '/docs/10/the/to/path', '301'],
-        ['/docs/10.2/the/from/path', '/docs/10/the/to/path', '301'],
+        // No 9.x or 10.x entries: those docs still have the old page, and
+        // don't have the new one. The wildcard sends them to /docs/9 or /docs/10.
         ['/docs/11.0/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/11/the/from/path', '/docs/the/to/path', '301'],
         ['/docs/next/the/from/path', '/docs/the/to/path', '302'],
@@ -187,6 +190,7 @@ describe('generateRedirects', () => {
       });
 
       expect(result).toEqual([
+        ['/docs/the/from/path', '/docs/the/to/path', '308'],
         ['/docs/react/the/from/path', '/docs/the/to/path', '308'],
         ['/docs/vue/the/from/path', '/docs/the/to/path', '308'],
       ]);
@@ -206,6 +210,51 @@ describe('generateRedirects', () => {
       for (const entry of result) {
         expect(entry[1]).toBe('/docs/8/writing-tests/storyshots-migration-guide');
       }
+    });
+
+    test('SP-5: Header at a pre-release major (11.0, latest 10.3) only redirects next', () => {
+      const result = generateSpecificPathRedirects({
+        rawRedirects: `# 11.0\n/docs/the/from/path /docs/the/to/path 301`,
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: '11.0',
+      });
+
+      // The old page still exists in the latest (10.3) docs
+      expect(result).toEqual([
+        ['/docs/next/the/from/path', '/docs/11/the/to/path', '302'],
+      ]);
+    });
+
+    test('keep-latest flag leaves the unversioned path alone', () => {
+      const result = generateSpecificPathRedirects({
+        rawRedirects: `# 6.4\n/docs/the/from/path /docs/the/to/path 301 keep-latest`,
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+        nextVersion: null,
+      });
+
+      expect(result).toEqual([
+        ['/docs/react/the/from/path', '/docs/the/to/path', '301'],
+        ['/docs/vue/the/from/path', '/docs/the/to/path', '301'],
+      ]);
+    });
+
+    test('throws on an unknown rule flag', () => {
+      expect(() =>
+        generateSpecificPathRedirects({
+          rawRedirects: `# 6.4\n/docs/the/from/path /docs/the/to/path 301 keep-lastest`,
+          renderers,
+          historicalVersions: defaultHistorical,
+          supportedVersions: ['10.3', '9.1', '8.6'],
+          latestVersion: '10.3',
+          nextVersion: null,
+        })
+      ).toThrow('Unknown redirect rule flag');
     });
   });
 
@@ -548,8 +597,8 @@ describe('generateRedirects', () => {
         from.includes('path-b')
       );
 
-      expect(pathAEntries.length).toBe(2); // react + vue
-      expect(pathBEntries.length).toBe(2);
+      expect(pathAEntries.length).toBe(3); // unversioned + react + vue
+      expect(pathBEntries.length).toBe(3);
 
       // Status codes preserved independently
       for (const entry of pathAEntries) {
@@ -587,8 +636,8 @@ describe('generateRedirects', () => {
         from.includes('old-b')
       );
 
-      // Rule A (header 6.4): only unversioned entries (2 renderers)
-      expect(entriesA.length).toBe(2);
+      // Rule A (header 6.4): unversioned entries (latest + 2 renderers)
+      expect(entriesA.length).toBe(3);
 
       // Rule B (header 7.6): unversioned + versioned renderer entries + non-renderer + next entries
       // Should be significantly more than Rule A
@@ -624,7 +673,7 @@ describe('generateRedirects', () => {
       });
 
       // Both redirect lines should use 6.4 as the header version,
-      // producing unversioned-era entries (one per renderer)
+      // producing unversioned-era entries (latest + one per renderer)
       const pathEntries = result.filter(([from]) =>
         from.includes('old/path')
       );
@@ -633,10 +682,12 @@ describe('generateRedirects', () => {
       );
 
       expect(pathEntries).toEqual([
+        ['/docs/old/path', '/docs/new/path', '301'],
         ['/docs/react/old/path', '/docs/new/path', '301'],
         ['/docs/vue/old/path', '/docs/new/path', '301'],
       ]);
       expect(anotherEntries).toEqual([
+        ['/docs/another/old', '/docs/another/new', '301'],
         ['/docs/react/another/old', '/docs/another/new', '301'],
         ['/docs/vue/another/old', '/docs/another/new', '301'],
       ]);
