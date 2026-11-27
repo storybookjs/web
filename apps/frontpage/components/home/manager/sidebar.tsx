@@ -13,9 +13,13 @@ import {
   SearchIcon,
 } from '@storybook/icons';
 import type { FC } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { StorybookLogo } from '../../logos/storybook';
+import { AGENT_STORY_DELAY } from './slide-agents';
+import { SLIDES } from './slides';
 
 export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
+  const reduceMotion = useReducedMotion();
   return (
     <div className="hidden sm:block w-[230px] h-full bg-[#F7F9FC] border-r border-r-[#D9E0E6] px-3">
       <div className="flex items-center justify-between pt-5 pb-4 pl-2">
@@ -48,15 +52,32 @@ export const Sidebar: FC<{ slide: number }> = ({ slide }) => {
       </div>
       <SidebarLine ar="right" ic="component" label="ProductCard" />
       <SidebarLine
-        active={slide === 4}
+        active={slide === SLIDES.docs}
         ic="docs"
         label="Documentation"
         lvl={2}
       />
       <SidebarLine ic="story" label="Default" lvl={2} />
-      <SidebarLine active={slide === 1} ic="story" label="Expanded" lvl={2} />
+      {slide === SLIDES.agents ? (
+        // The agent writes this story, so it appears in the tree mid-slide
+        <motion.div
+          animate={{ height: 28, opacity: 1 }}
+          className="overflow-hidden"
+          initial={reduceMotion ? false : { height: 0, opacity: 0 }}
+          transition={{ delay: AGENT_STORY_DELAY, duration: 0.3 }}
+        >
+          <SidebarLine active ic="story" label="Expanded" lvl={2} />
+        </motion.div>
+      ) : (
+        <SidebarLine
+          active={slide === SLIDES.development}
+          ic="story"
+          label="Expanded"
+          lvl={2}
+        />
+      )}
       <SidebarLine
-        active={slide === 2 || slide === 3}
+        active={slide === SLIDES.testing}
         ic="story"
         label="Added to cart"
         lvl={2}

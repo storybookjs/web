@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export function Vue() {
   return (
@@ -19,12 +19,12 @@ export function Vue() {
           <polygon
             id="Fill-1"
             points="58.5 2.3 48 20.4 37.5 2.3 2.7 2.3 48 80.7 93.3 2.3"
-            style={{ fill: "#4dba87" }}
+            style={{ fill: '#4dba87' }}
           />
           <polygon
             id="Fill-2"
             points="58.5 2.3 48 20.5 37.5 2.3 20.6 2.3 48 49.5 75.4 2.3"
-            style={{ fill: "#435466" }}
+            style={{ fill: '#435466' }}
           />
         </g>
       </g>

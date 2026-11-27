@@ -110,6 +110,16 @@ module.exports = withBundleAnalyzer(
       },
     },
     skipTrailingSlashRedirect: true,
+    async redirects() {
+      return [
+        // The AI landing page was folded into the homepage for Storybook 11
+        {
+          source: '/ai{/}?',
+          destination: '/#agents',
+          permanent: true,
+        },
+      ];
+    },
     async rewrites() {
       return [
         // The blog (storybook.js.org/blog, hosted separately on Netlify) loads

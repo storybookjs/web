@@ -1,5 +1,6 @@
 import preview from '../../../.storybook/preview';
 import { Sidebar } from './sidebar';
+import { SLIDES } from './slides';
 
 const meta = preview.meta({
   title: 'Home/Manager/Sidebar',
@@ -7,25 +8,26 @@ const meta = preview.meta({
   parameters: { layout: 'fullscreen' },
   decorators: [
     (Story) => (
-      <div className="w-[230px] h-[800px] bg-white">
+      <div className="h-[800px] w-[230px] bg-white">
         <Story />
       </div>
     ),
   ],
 });
 
-export const Default = meta.story({
-  args: { slide: 0 },
-});
-
 export const ExpandedStory = meta.story({
-  args: { slide: 1 },
+  args: { slide: SLIDES.development },
 });
 
 export const AddedToCartStory = meta.story({
-  args: { slide: 2 },
+  args: { slide: SLIDES.testing },
 });
 
 export const DocumentationActive = meta.story({
-  args: { slide: 4 },
+  args: { slide: SLIDES.docs },
+});
+
+export const AgentAddsStory = meta.story({
+  args: { slide: SLIDES.agents },
+  parameters: { chromatic: { delay: 2500 } },
 });

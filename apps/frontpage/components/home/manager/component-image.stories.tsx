@@ -14,4 +14,4 @@ const meta = preview.meta({
   ],
 });
 
-export const Default = meta.story({});
+export const Default = meta.story({ args: { id: 'sb-product-image' } });

@@ -1,21 +1,35 @@
-import type { FC } from 'react';
-import { useState } from 'react';
+import type { FC, ReactNode } from 'react';
+import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@repo/utils';
 import { ArrowRightIcon, ChevronSmallRightIcon } from '@storybook/icons';
 import Link from 'next/link';
 import { Container, Button } from '@repo/ui';
+import { useIsomorphicLayoutEffect } from '../../hooks/use-isomorphic-layout-effect';
 
 type Alignment = 'left' | 'right';
 
-interface FeatureItem {
-  media: string;
-  poster: string;
-  icon: React.ReactNode;
+interface FeatureBase {
+  icon: ReactNode;
   title: string;
   description: string;
   link: { label: string; href: string; LinkWrapper?: React.ComponentType };
 }
+
+/**
+ * An item shows either a looping video with its poster, or a coded
+ * illustration. Illustrations are authored on a square stage of
+ * `ILLUSTRATION_SIZE` px and scaled to fit the media frame.
+ */
+type FeatureMedia =
+  | { media: string; poster: string; illustration?: never }
+  | { illustration: ReactNode; media?: never; poster?: never };
+
+export type FeatureItem = FeatureBase & FeatureMedia;
+
+export const ILLUSTRATION_SIZE = 480;
+/** Lets the stage grow to fill the desktop panel the way the videos do, without blowing up its type */
+const MAX_ILLUSTRATION_SCALE = 1.4;
 
 interface IllustratedFeatureListProps {
   features: FeatureItem[];
@@ -58,50 +72,58 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
 
   return (
     <Container
-      className="flex items-center flex-col pb-0 pt-12 sm:pt-20 md:grid md:justify-center md:items-start md:grid-cols-[repeat(2,_minmax(auto,_1fr))] md:grid-rows-[minmax(50vh,_max-content)] md:gap-20 md:pt-28 lg:grid-cols-[repeat(2,_minmax(auto,_1fr))] min-[1416px]:grid-cols-[repeat(2,_1fr)]"
+      className="flex flex-col items-center pb-0 pt-12 sm:pt-20 md:grid md:grid-cols-[repeat(2,_minmax(auto,_1fr))] md:grid-rows-[minmax(50vh,_max-content)] md:items-start md:justify-center md:gap-20 md:pt-28 lg:grid-cols-[repeat(2,_minmax(auto,_1fr))] min-[1416px]:grid-cols-[repeat(2,_1fr)]"
       {...props}
     >
       {/* Desktop video */}
       <div
         className={cn(
-          'rounded-lg relative overflow-hidden hidden h-full min-h-[640px] md:block lg:max-h-[640px] min-[1416px]:ml-0 min-[1416px]:mr-0 min-[1416px]:rounded-lg',
+          'relative hidden h-full min-h-[640px] overflow-hidden rounded-lg md:block lg:max-h-[640px] min-[1416px]:ml-0 min-[1416px]:mr-0 min-[1416px]:rounded-lg',
           alignment === 'left'
-            ? 'order-1 md:-ml-12 md:rounded-tl-none md:-border-bl-none'
-            : 'order-2 md:-mr-12 md:rounded-tr-none md:-border-br-none',
+            ? 'md:-border-bl-none order-1 md:-ml-12 md:rounded-tl-none'
+            : 'md:-border-br-none order-2 md:-mr-12 md:rounded-tr-none',
         )}
         style={{ backgroundColor: bgColor }}
       >
         <AnimatePresence custom={direction} initial={false}>
           <motion.div
             animate="center"
-            className="absolute top-0 bottom-0 left-0 right-0"
+            className="absolute bottom-0 left-0 right-0 top-0"
             custom={direction}
             exit="exit"
             initial="enter"
             key={activeFeature.title}
             variants={variants}
           >
-            <video
-              className="absolute top-0 w-full scale-125 pointer-events-none select-none blur"
-              playsInline
-              src={activeFeature.media}
-            >
-              <track kind="captions" />
-            </video>
-            <video
-              autoPlay
-              className="relative"
-              loop
-              muted
-              playsInline
-              poster={activeFeature.poster}
-              src={activeFeature.media}
-            />
+            {activeFeature.illustration ? (
+              <IllustrationStage>
+                {activeFeature.illustration}
+              </IllustrationStage>
+            ) : (
+              <>
+                <video
+                  className="pointer-events-none absolute top-0 w-full scale-125 select-none blur"
+                  playsInline
+                  src={activeFeature.media}
+                >
+                  <track kind="captions" />
+                </video>
+                <video
+                  autoPlay
+                  className="relative"
+                  loop
+                  muted
+                  playsInline
+                  poster={activeFeature.poster}
+                  src={activeFeature.media}
+                />
+              </>
+            )}
           </motion.div>
         </AnimatePresence>
         <Link
           className={cn(
-            'absolute top-5 z-10 flex gap-2 items-center bg-black/50 text-white pl-4 pr-3 rounded-full text-xs font-bold h-7 hover:bg-black/60 transition-all hover:-translate-y-0.5',
+            'absolute top-5 z-10 flex h-7 items-center gap-2 rounded-full bg-black/50 pl-4 pr-3 text-xs font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-black/60',
             alignment === 'left' ? 'right-5' : 'left-5',
           )}
           href={activeFeature.link.href || ''}
@@ -111,7 +133,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
       </div>
       <ul
         className={cn(
-          'flex flex-col gap-5 p-0 m-0 w-full min-w-0',
+          'm-0 flex w-full min-w-0 flex-col gap-5 p-0',
           alignment === 'left' ? 'order-2' : 'order-1',
         )}
       >
@@ -120,7 +142,7 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
             <button
               aria-pressed={index === activeIndex ? 'true' : 'false'}
               className={cn(
-                'border border-zinc-600 rounded text-left flex w-full p-5 items-center cursor-pointer transition-all duration-200 ease-in-out outline-0 gap-5 hover:border-blue-500 hover:-translate-y-1',
+                'flex w-full cursor-pointer items-center gap-5 rounded border border-zinc-600 p-5 text-left outline-0 transition-all duration-200 ease-in-out hover:-translate-y-1 hover:border-blue-500',
                 activeIndex === index && 'border-blue-500',
               )}
               onClick={() => {
@@ -129,9 +151,11 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
               }}
               type="button"
             >
-              <div className="w-10 h-10">{feature.icon}</div>
+              <div aria-hidden className="h-10 w-10 flex-shrink-0">
+                {feature.icon}
+              </div>
               <div>
-                <div className="font-bold text-white text-md">
+                <div className="text-md font-bold text-white">
                   {feature.title}
                 </div>
                 <div className="text-sm text-white">{feature.description}</div>
@@ -158,19 +182,28 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
                     }}
                   >
                     <div
-                      className="relative block overflow-hidden rounded aspect-square md:hidden"
+                      className="relative block aspect-square overflow-hidden rounded md:hidden"
                       style={{ backgroundColor: bgColor }}
                     >
-                      <video
-                        autoPlay
-                        loop
-                        playsInline
-                        poster={feature.poster}
-                        preload="auto"
-                        src={feature.media}
-                      >
-                        <track kind="captions" />
-                      </video>
+                      {feature.illustration ? (
+                        // Fills the square like the videos do, so the link below stays clipped the same way
+                        <div className="relative aspect-square w-full">
+                          <IllustrationStage>
+                            {feature.illustration}
+                          </IllustrationStage>
+                        </div>
+                      ) : (
+                        <video
+                          autoPlay
+                          loop
+                          playsInline
+                          poster={feature.poster}
+                          preload="auto"
+                          src={feature.media}
+                        >
+                          <track kind="captions" />
+                        </video>
+                      )}
                       <Button size="sm">
                         <Link href={feature.link.href}>
                           {feature.link.label} <ArrowRightIcon />
@@ -185,5 +218,53 @@ export const IllustratedFeatureList: FC<IllustratedFeatureListProps> = ({
         ))}
       </ul>
     </Container>
+  );
+};
+
+/**
+ * Centers an illustration in the media frame and scales its square stage to
+ * fit, so one composition serves the desktop panel and the mobile square.
+ */
+const IllustrationStage: FC<{ children: ReactNode }> = ({ children }) => {
+  const frameRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+
+  useIsomorphicLayoutEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return;
+    const fit = () => {
+      const { width, height } = frame.getBoundingClientRect();
+      setScale(
+        Math.min(
+          MAX_ILLUSTRATION_SCALE,
+          width / ILLUSTRATION_SIZE,
+          height / ILLUSTRATION_SIZE,
+        ),
+      );
+    };
+    fit();
+    const observer = new ResizeObserver(fit);
+    observer.observe(frame);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return (
+    <div
+      className="absolute inset-0 flex items-center justify-center overflow-hidden"
+      ref={frameRef}
+    >
+      <div
+        className="flex-shrink-0"
+        style={{
+          width: ILLUSTRATION_SIZE,
+          height: ILLUSTRATION_SIZE,
+          transform: `scale(${String(scale)})`,
+        }}
+      >
+        {children}
+      </div>
+    </div>
   );
 };

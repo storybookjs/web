@@ -7,20 +7,21 @@ import { MobileMenu } from './mobile-menu';
 
 interface StickyNavProps {
   isVisible?: boolean;
-  activeSection:
-    | 'who'
-    | 'automate'
-    | 'share'
-    | 'document'
-    | 'test'
-    | 'develop'
-    | null;
+  activeSection: SectionId | null;
 }
 
-const items = [
-  { id: 'develop', label: 'Develop', href: '#develop' },
-  { id: 'test', label: 'Test', href: '#test' },
-  { id: 'document', label: 'Document', href: '#document' },
+type SectionId =
+  | 'context'
+  | 'verify'
+  | 'agents'
+  | 'share'
+  | 'automate'
+  | 'who';
+
+const items: { id: SectionId; label: string; href: string }[] = [
+  { id: 'context', label: 'Context', href: '#context' },
+  { id: 'verify', label: 'Verify', href: '#verify' },
+  { id: 'agents', label: 'Agents', href: '#agents' },
   { id: 'share', label: 'Share', href: '#share' },
   { id: 'automate', label: 'Automate', href: '#automate' },
   { id: 'who', label: "Who's it for", href: '#who' },
@@ -66,12 +67,16 @@ export function StickyNav({
                 ))}
               </div>
               <div className="flex items-center gap-5">
-                <Button asChild size="md" variant="ghostHome">
-                  <a className="items-center hidden md:flex" href="#page-top">
-                    <ArrowUpIcon />
-                    Jump to top
-                  </a>
-                </Button>
+                {/* Hidden on mobile by the wrapper: Button's own display class
+                    wins over a hidden passed to it */}
+                <div className="hidden md:block">
+                  <Button asChild size="md" variant="ghostHome">
+                    <a href="#page-top">
+                      <ArrowUpIcon />
+                      Jump to top
+                    </a>
+                  </Button>
+                </div>
                 <Button asChild rounded="full" size="sm" variant="solid">
                   <Link href="/docs">Get started</Link>
                 </Button>

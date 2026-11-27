@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://storybook.js.org'),
   title: 'Storybook: Frontend workshop for UI development',
   description:
-    "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
+    "Storybook is a free, open source workshop where developers and agents build, test, and document UI. The components and stories you build become context your agent can read to reuse your components, write stories, and run tests before you review.",
   icons: {
     icon: {
       url: '/icon.svg',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: 'website',
     title: 'Storybook: Frontend workshop for UI development',
     description:
-      "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
+      "Storybook is a free, open source workshop where developers and agents build, test, and document UI. The components and stories you build become context your agent can read to reuse your components, write stories, and run tests before you review.",
   },
   other: {
     // Set the docsearch index facets defaults
