@@ -258,6 +258,72 @@ describe('generateRedirects', () => {
         ['/docs/next/the/from/path', '/docs/11/the/to/path', '302'],
       ]);
     });
+
+    describe('Redirect chains', () => {
+      const chainOptions = {
+        renderers,
+        historicalVersions: defaultHistorical,
+        supportedVersions: ['10.3', '9.1', '8.6'],
+        latestVersion: '10.3',
+      };
+
+      test('follows a later move only in the docs that have it', () => {
+        const result = generateSpecificPathRedirects({
+          ...chainOptions,
+          rawRedirects: `# 8.1\n/docs/a /docs/b 301\n\n# 9.0\n/docs/b /docs/c 301`,
+          nextVersion: null,
+        });
+        const fromA = new Map(
+          result.filter(([from]) => from.endsWith('/a')).map(([f, t]) => [f, t]),
+        );
+
+        // Latest and unsupported versions skip the middle hop
+        expect(fromA.get('/docs/a')).toBe('/docs/c');
+        expect(fromA.get('/docs/7.5/a')).toBe('/docs/c');
+        expect(fromA.get('/docs/next/a')).toBe('/docs/c');
+        // 8.x docs (served as 8.6) still have b
+        expect(fromA.get('/docs/8.0/a')).toBe('/docs/8/b');
+      });
+
+      test('follows a pre-release move only in the next docs', () => {
+        const result = generateSpecificPathRedirects({
+          ...chainOptions,
+          rawRedirects: `# 9.0\n/docs/a /docs/b 301\n\n# 11.0\n/docs/b /docs/c 301`,
+          nextVersion: '11.0',
+        });
+        const fromA = new Map(
+          result.filter(([from]) => from.endsWith('/a')).map(([f, t]) => [f, t]),
+        );
+
+        expect(fromA.get('/docs/a')).toBe('/docs/b');
+        expect(fromA.get('/docs/7.5/a')).toBe('/docs/b');
+        expect(fromA.get('/docs/next/a')).toBe('/docs/11/c');
+      });
+
+      test('stops at a target with a hardcoded version', () => {
+        const result = generateSpecificPathRedirects({
+          ...chainOptions,
+          rawRedirects: `# 8.1\n/docs/a /docs/b 301\n\n# 10.3\n/docs/b /docs/9/b 301`,
+          nextVersion: null,
+        });
+        const fromA = new Map(
+          result.filter(([from]) => from.endsWith('/a')).map(([f, t]) => [f, t]),
+        );
+
+        expect(fromA.get('/docs/a')).toBe('/docs/9/b');
+        expect(fromA.get('/docs/8.0/a')).toBe('/docs/8/b');
+      });
+
+      test('throws when a chain loops', () => {
+        expect(() =>
+          generateSpecificPathRedirects({
+            ...chainOptions,
+            rawRedirects: `# 8.1\n/docs/a /docs/b 301\n\n# 9.0\n/docs/b /docs/a 301`,
+            nextVersion: null,
+          }),
+        ).toThrow('Redirect chain loops');
+      });
+    });
   });
 
   describe('Wildcard Redirects', () => {
